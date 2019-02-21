@@ -1,0 +1,89 @@
+name: ${name}
+version: ${version}
+description: ${description}
+load: POSTWORLD
+author: ${author}
+website: ${url}
+main: ${mainClass}
+depend: [Vault]
+database: false
+commands:
+  zap:
+    aliases: zapooey
+    description: Zap someone! Like Zeus!
+    permission: tfcplugin.zap
+    permission-message: You don't have permission!
+    usage: /<command> [player]
+  launch:
+    description: Launch someone! Also.. like Zeus?
+    permission: tfcplugin.launch
+    permission-message: You don't have permission!
+    usage: /<command> [player]
+  blame:
+    aliases: blames
+    description: They did something wrong. Blame them!
+    permission: tfcplugin.blame
+    permission-message: You don't have permission!
+    usage: /<command> <thing>
+  shrug:
+    description: You don't know. THEY don't know.
+    permission: tfcplugin.shrug
+    permission-message: You don't have permission!
+    usage: /<command>
+  sue:
+    description: It fixes everything.
+    permission: tfcplugin.sue
+    permission-message: You don't have permission!
+    usage: /<command> <thing>
+  hat:
+    description: That's a fancy hat, m'lad.
+    permission: tfcplugin.hat
+    permission-message: You don't have permission!
+    usage: /<command>
+  poke:
+    aliases: slap
+    description: Poked! Get poked! Or poke someone!
+    permission: tfcplugin.poke
+    permission-message: You don't have permission!
+    usage: /<command> [player]
+permissions:
+  tfcplugin.zap:
+    description: Permission to use /zap.
+    default: op
+  tfcplugin.launch:
+    description: Permission to use /launch.
+    default: op
+  tfcplugin.blame:
+    description: Permission to use /blame.
+    default: op
+  tfcplugin.shrug:
+    description: Permission to use /shrug.
+    default: op
+  tfcplugin.sue:
+    description: Permission to use /sue.
+    default: op
+  tfcplugin.hat:
+    description: Permission to use /hat.
+    default: op
+  tfcplugin.poke:
+    description: Permission to use /poke.
+    default: op
+  tfcplugin.chatcolor:
+    description: Permission to color chat text.
+    default: op
+  tfcplugin.signcolor:
+    description: Permission to color sign text.
+    default: op
+  tfcplugin.*:
+    description: Complete permission to all of tfcplugin.
+    default: op
+    children:
+      tfcplugin.zap: true
+      tfcplugin.launch: true
+      tfcplugin.blame: true
+      tfcplugin.shrug: true
+      tfcplugin.sue: true
+      tfcplugin.hat: true
+      tfcplugin.poke: true
+      tfcplugin.chatcolor: true
+      tfcplugin.signcolor: true

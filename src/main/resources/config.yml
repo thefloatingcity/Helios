@@ -1,0 +1,43 @@
+prefix-long: "&8-*-*-*-*-*-*-*-*- &7-=[ &fThe &bFloating &aCity &7]=- &8-*-*-*-*-*-*-*-*-"
+prefix: "&7[&fT&bF&aC&7]&r "
+motd: "&fWelcome back! The last time you were on was &e%s &f%s ago."
+spawn:
+  X: 0.5
+  Y: 60
+  Z: 0.5
+
+msg_join: "&f%s joined the game."
+msg_leave: "&f%s left the game."
+
+msg_not_online: "&fThat player is not online."
+msg_player_only: "&fYou must be a player to use this command."
+
+msg_set_hat: "&fNow that's a fancy hat!"
+msg_removed_hat: "&fGot your hat! I removed it. That's what I did."
+msg_no_hat: "&fTo put on a hat, hold what you want to wear!"
+
+msg_shrug: "&f%s &ashrugs \\_o¬o_/"
+msg_blame: "&f%s &cblames &f%s"
+msg_sue: "&f%s &cis suing &f%s"
+
+msg_zap: "&f%s &czapped &f%s"
+msg_zap_themself: "&f%s &czapped &fthemself"
+msg_zap_everyone: "&f%s &czapped &feveryone"
+
+msg_launch: "&f%s &alaunched &f%s"
+msg_launch_themself: "&f%s &alaunched &fthemselves"
+msg_launch_everyone: "&f%s &alaunched &feveryone"
+
+msg_poke: "&f%s &cpoked &f%s"
+msg_poke_themself: "&f%s &cpoked &fthemselves"
+msg_poke_everyone: "&f%s &cpoked &feveryone"
+poke_force:
+  maxY: 0.8
+  minY: 0.2
+  maxXZ: 0.8
+  minXZ: -0.8
+
+first_warp_speed: "&fReaching maximum &6warp speed&f.."
+second_warp_speed: "&fReaching maximum &cwarp speed&f.."
+maximum_warp_speed: "&fMaximum &4warp speed &freached!"
+
