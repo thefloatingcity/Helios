@@ -2,9 +2,9 @@ package com.outlook.tehbrian.tfcplugin;
 
 import com.outlook.tehbrian.tfcplugin.commands.*;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.ChatColor;
 
 public final class Main extends JavaPlugin {
 
@@ -28,7 +28,7 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        this.getLogger().info("I hope to see you again soon!");
+        getLogger().info("I hope to see you again soon!");
     }
 
     public String formatChat(Boolean prefix, String configkey, Object... formats) {

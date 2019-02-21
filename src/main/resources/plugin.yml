@@ -75,7 +75,7 @@ permissions:
     description: Permission to color sign text.
     default: op
   tfcplugin.*:
-    description: Complete permission to all of tfcplugin.
+    description: Complete permission to all of TFCPlugin.
     default: op
     children:
       tfcplugin.zap: true
