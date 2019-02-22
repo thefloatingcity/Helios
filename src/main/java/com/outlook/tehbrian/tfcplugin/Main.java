@@ -57,7 +57,7 @@ public final class Main extends JavaPlugin {
     }
 
     public void setPlayerCanFly(Player player, Boolean bool) {
-        if (bool) {
+        if (bool && player.hasPermission("tfcplugin.fly")) {
             playerCanFly.add(player.getUniqueId());
             enableFlight(player);
         } else {
@@ -67,16 +67,16 @@ public final class Main extends JavaPlugin {
     }
 
     public void disableFlight(Player player) {
-        if (!getPlayerCanFly(player)) {
+        if (!getPlayerCanFly(player) || !player.hasPermission("tfcplugin.fly")) {
             player.setAllowFlight(false);
             player.setFlying(false);
         }
     }
 
     public void enableFlight(Player player) {
-        if (getPlayerCanFly(player)) {
+        if (getPlayerCanFly(player) && player.hasPermission("tfcplugin.fly")) {
             player.setAllowFlight(true);
-            player.setFlying(true);
+             player.setFlying(true);
         }
     }
 }
