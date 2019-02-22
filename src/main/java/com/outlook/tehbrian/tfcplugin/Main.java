@@ -59,8 +59,10 @@ public final class Main extends JavaPlugin {
     public void setPlayerCanFly(Player player, Boolean bool) {
         if (bool) {
             playerCanFly.add(player.getUniqueId());
+            enableFlight(player);
         } else {
             playerCanFly.remove(player.getUniqueId());
+            disableFlight(player);
         }
     }
 
@@ -68,6 +70,13 @@ public final class Main extends JavaPlugin {
         if (!getPlayerCanFly(player)) {
             player.setAllowFlight(false);
             player.setFlying(false);
+        }
+    }
+
+    public void enableFlight(Player player) {
+        if (getPlayerCanFly(player)) {
+            player.setAllowFlight(true);
+            player.setFlying(true);
         }
     }
 }
