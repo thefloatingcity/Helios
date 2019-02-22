@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public final class Main extends JavaPlugin {
 
@@ -51,17 +52,24 @@ public final class Main extends JavaPlugin {
         return new Location(Bukkit.getWorlds().get(0), getConfig().getDouble("spawn.X"), getConfig().getDouble("spawn.Y"), getConfig().getDouble("spawn.Z"));
     }
 
-    public List<Player> playerCanFly = new ArrayList<>();
+    public List<UUID> playerCanFly = new ArrayList<>();
 
     public boolean getPlayerCanFly(Player player) {
-        return playerCanFly.contains(player);
+        return playerCanFly.contains(player.getUniqueId());
     }
 
-    public void addPlayerCanFly(Player player) {
-        playerCanFly.add(player);
+    public void setPlayerCanFly(Player player, Boolean bool) {
+        if (bool) {
+            playerCanFly.add(player.getUniqueId());
+        } else {
+            playerCanFly.remove(player.getUniqueId());
+        }
     }
 
-    public void removePlayerCanFly(Player player) {
-        playerCanFly.remove(player);
+    public void disableFlight(Player player) {
+        if (!getPlayerCanFly(player)) {
+            player.setAllowFlight(false);
+            player.setFlying(false);
+        }
     }
 }

@@ -112,13 +112,6 @@ public class EventsHandler implements Listener {
         }
     }
 
-    public void disableFlight(Player player) {
-        if (!plugin.getPlayerCanFly(player)) {
-            player.setAllowFlight(false);
-            player.setFlying(false);
-        }
-    }
-
     public void oldPlayer(Player player) {
         Date date = new Date();
         long secondsSinceLastPlayed = TimeUnit.MILLISECONDS.toSeconds(date.getTime() - player.getLastPlayed());
@@ -157,7 +150,7 @@ public class EventsHandler implements Listener {
         Player player = event.getPlayer();
         event.setJoinMessage(plugin.formatChat("msg_join", player.getName()));
         player.sendMessage(plugin.formatChat(false, "msg_long_prefix"));
-        disableFlight(player);
+        plugin.disableFlight(player);
         if (player.hasPlayedBefore()) {
             oldPlayer(player);
         } else {
@@ -172,12 +165,12 @@ public class EventsHandler implements Listener {
 
     @EventHandler
     public void onToggleFlight(PlayerToggleFlightEvent event) {
-        disableFlight(event.getPlayer());
+        plugin.disableFlight(event.getPlayer());
     }
 
     @EventHandler
     public void onGamemodeChange(PlayerGameModeChangeEvent event) {
-        disableFlight(event.getPlayer());
+        plugin.disableFlight(event.getPlayer());
     }
 
     public void maximumWarp(Player player) {
