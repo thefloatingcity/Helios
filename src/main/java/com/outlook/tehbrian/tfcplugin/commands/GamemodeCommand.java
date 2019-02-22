@@ -17,21 +17,25 @@ public class GamemodeCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (command.getName() == "gms") {
-                player.sendMessage(plugin.formatChat("msg_gamemode_change", "survival"));
+            if (label.equalsIgnoreCase("gm")) {
+                player.sendMessage(plugin.formatChat("msg_gamemode"));
+            } else if (label.equalsIgnoreCase("gms")) {
+                player.sendMessage(plugin.formatChat("msg_gamemode_change", "Survival"));
                 player.setGameMode(GameMode.SURVIVAL);
-            } else if (command.getName() == "gmc") {
-                player.sendMessage(plugin.formatChat("msg_gamemode_change", "creative"));
+            } else if (label.equalsIgnoreCase("gmc")) {
+                player.sendMessage(plugin.formatChat("msg_gamemode_change", "Creative"));
                 player.setGameMode(GameMode.CREATIVE);
-            } else if (command.getName() == "gma") {
-                player.sendMessage(plugin.formatChat("msg_gamemode_change", "adventure"));
+            } else if (label.equalsIgnoreCase("gma")) {
+                player.sendMessage(plugin.formatChat("msg_gamemode_change", "Adventure"));
                 player.setGameMode(GameMode.ADVENTURE);
             }
         } else {
             sender.sendMessage(plugin.formatChat("player_only"));
         }
+
         return true;
     }
 }

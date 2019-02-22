@@ -17,6 +17,7 @@ public class HatCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (player.getInventory().getItemInMainHand().getType() == Material.AIR) {
@@ -33,6 +34,7 @@ public class HatCommand implements CommandExecutor {
         } else {
             sender.sendMessage(plugin.formatChat("msg_player_only"));
         }
+
         return true;
     }
 }

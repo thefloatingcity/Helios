@@ -15,6 +15,7 @@ public class FlyCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (plugin.getPlayerCanFly(player)) {
@@ -27,6 +28,7 @@ public class FlyCommand implements CommandExecutor {
         } else {
             sender.sendMessage(plugin.formatChat("msg_player_only"));
         }
+
         return true;
     }
 }
