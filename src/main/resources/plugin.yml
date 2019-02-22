@@ -46,6 +46,12 @@ commands:
     permission: tfcplugin.poke
     permission-message: You don't have permission!
     usage: /<command> [player]
+  fly:
+    aliases: togglefly
+    description: Toggle your fly. Only for staff!
+    permission: tfcplugin.fly
+    permission-message: You don't have permission!
+    usage: /<command>
 permissions:
   tfcplugin.zap:
     description: Permission to use /zap.
