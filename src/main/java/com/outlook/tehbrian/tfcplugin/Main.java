@@ -7,9 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public final class Main extends JavaPlugin {
 
@@ -52,7 +50,7 @@ public final class Main extends JavaPlugin {
         return new Location(Bukkit.getWorlds().get(0), getConfig().getDouble("spawn.X"), getConfig().getDouble("spawn.Y"), getConfig().getDouble("spawn.Z"));
     }
 
-    public List<UUID> playerCanFly = new ArrayList<>();
+    public Set<UUID> playerCanFly = new HashSet<>();
 
     public boolean getPlayerCanFly(Player player) {
         return playerCanFly.contains(player.getUniqueId());
