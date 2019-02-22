@@ -27,6 +27,7 @@ public class GamemodeCommand implements CommandExecutor {
                 player.setGameMode(GameMode.SURVIVAL);
             } else if (label.equalsIgnoreCase("gmc")) {
                 player.sendMessage(plugin.formatChat("msg_gamemode_change", "Creative"));
+                plugin.disableFlight(player);
                 player.setGameMode(GameMode.CREATIVE);
             } else if (label.equalsIgnoreCase("gma")) {
                 player.sendMessage(plugin.formatChat("msg_gamemode_change", "Adventure"));
