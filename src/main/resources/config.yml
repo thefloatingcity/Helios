@@ -1,10 +1,17 @@
-prefix-long: "&8-*-*-*-*-*-*-*-*- &7-=[ &fThe &bFloating &aCity &7]=- &8-*-*-*-*-*-*-*-*-"
-prefix: "&7[&fT&bF&aC&7]&r "
-motd: "&fWelcome back! The last time you were on was &e%s &f%s ago."
+msg_long_prefix: "&8-*-*-*-*-*-*-*-*- &7-=[ &fThe &bFloating &aCity &7]=- &8-*-*-*-*-*-*-*-*-"
+msg_prefix: "&7[&fT&bF&aC&7]&r "
+msg_motd: "&fWelcome back! The last time you were on was &e%s &f%s ago."
+msg_welcome: "&fWelcome to the server, %s! Let me give you a quick tour."
+
 spawn:
   X: 0.5
   Y: 60
   Z: 0.5
+
+msg_no_build: "&fYou aren't allowed to build! Please accept the rules first via &e/rules&f!"
+
+msg_fly_enablde: "&fYou can now fly! Remember, only for emergencies. If you're using it outside of an emergency I will personally smite you, you hear me? GOT IT?"
+msg_fly_disabled: "&fThanks for disabling it. It's disabled."
 
 msg_join: "&f%s joined the game."
 msg_leave: "&f%s left the game."
@@ -12,9 +19,9 @@ msg_leave: "&f%s left the game."
 msg_not_online: "&fThat player is not online."
 msg_player_only: "&fYou must be a player to use this command."
 
-msg_set_hat: "&fNow that's a fancy hat!"
-msg_removed_hat: "&fGot your hat! I removed it. That's what I did."
-msg_no_hat: "&fTo put on a hat, hold what you want to wear!"
+msg_hat_set: "&fNow that's a fancy hat!"
+msg_hat_removed: "&fGot your hat! I removed it. That's what I did."
+msg_hat_none: "&fTo put on a hat, hold what you want to wear!"
 
 msg_shrug: "&f%s &ashrugs \\_o¬o_/"
 msg_blame: "&f%s &cblames &f%s"
@@ -37,7 +44,9 @@ poke_force:
   maxXZ: 0.8
   minXZ: -0.8
 
-first_warp_speed: "&fReaching maximum &6warp speed&f.."
-second_warp_speed: "&fReaching maximum &cwarp speed&f.."
-maximum_warp_speed: "&fMaximum &4warp speed &freached!"
+msg_warp_first: "&fReaching maximum &6warp speed&f.."
+msg_warp_second: "&fReaching maximum &cwarp speed&f.."
+msg_warp_max: "&fMaximum &4warp speed &freached!"
+
+
 

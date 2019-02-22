@@ -1,12 +1,18 @@
 package com.outlook.tehbrian.tfcplugin;
 
 import org.bukkit.*;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.hanging.HangingBreakByEntityEvent;
+import org.bukkit.event.hanging.HangingPlaceEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.meta.FireworkMeta;
 
@@ -20,37 +26,143 @@ public class EventsHandler implements Listener {
         this.plugin = plugin;
     }
 
+    @EventHandler
+    public void onBlockPlace(BlockPlaceEvent event) {
+        if (!event.getPlayer().hasPermission("tfcplugin.build")) {
+            event.getPlayer().sendMessage(plugin.formatChat("msg_no_build"));
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onBlockBreak(BlockBreakEvent event) {
+        if (!event.getPlayer().hasPermission("tfcplugin.build")) {
+            event.getPlayer().sendMessage(plugin.formatChat("msg_no_build"));
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onBucketEmpty(PlayerBucketEmptyEvent event) {
+        if (!event.getPlayer().hasPermission("tfcplugin.build")) {
+            event.getPlayer().sendMessage(plugin.formatChat("msg_no_build"));
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onBucketFill(PlayerBucketFillEvent event) {
+        if (!event.getPlayer().hasPermission("tfcplugin.build")) {
+            event.getPlayer().sendMessage(plugin.formatChat("msg_no_build"));
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onHangingBreak(HangingBreakByEntityEvent event) {
+        if (event.getRemover().getType() == EntityType.PLAYER) {
+            Player player = (Player) event.getRemover();
+            if (!player.hasPermission("tfcplugin.build")) {
+                player.sendMessage(plugin.formatChat("msg_no_build"));
+                event.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onHangingPlace(HangingPlaceEvent event) {
+        if (!event.getPlayer().hasPermission("tfcplugin.build")) {
+            event.getPlayer().sendMessage(plugin.formatChat("msg_no_build"));
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerInteract(PlayerInteractEvent event) {
+        if (!event.getPlayer().hasPermission("tfcplugin.build")) {
+            event.getPlayer().sendMessage(plugin.formatChat("msg_no_build"));
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onInventoryOpen(InventoryOpenEvent event) {
+        if (event.getPlayer() instanceof Player) {
+            Player player = (Player) event.getPlayer();
+            if (!player.hasPermission("tfcplugin.build")) {
+                player.sendMessage(plugin.formatChat("msg_no_build"));
+                event.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onItemDrop(PlayerDropItemEvent event) {
+        if (!event.getPlayer().hasPermission("tfcplugin.build")) {
+            event.getPlayer().sendMessage(plugin.formatChat("msg_no_build"));
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onItemPickup(PlayerAttemptPickupItemEvent event) {
+        if (!event.getPlayer().hasPermission("tfcplugin.build")) {
+            event.getPlayer().sendMessage(plugin.formatChat("msg_no_build"));
+            event.setCancelled(true);
+        }
+    }
+
     public void disableFlight(Player player) {
-        player.setAllowFlight(false);
-        player.setFlying(false);
+        if (!plugin.getPlayerCanFly(player)) {
+            player.setAllowFlight(false);
+            player.setFlying(false);
+        }
+    }
+
+    public void oldPlayer(Player player) {
+        Date date = new Date();
+        long secondsSinceLastPlayed = TimeUnit.MILLISECONDS.toSeconds(date.getTime() - player.getLastPlayed());
+        if (secondsSinceLastPlayed >= 86400) {
+            long daysSinceLastPlayed = TimeUnit.SECONDS.toDays(secondsSinceLastPlayed);
+            player.sendMessage(plugin.formatChat("msg_motd", daysSinceLastPlayed, "days"));
+        } else if (secondsSinceLastPlayed >= 3600) {
+            long hoursSinceLastPlayed = TimeUnit.SECONDS.toHours(secondsSinceLastPlayed);
+            player.sendMessage(plugin.formatChat("msg_motd", hoursSinceLastPlayed, "hours"));
+        } else if (secondsSinceLastPlayed >= 60) {
+            long minutesSinceLastPlayed = TimeUnit.SECONDS.toMinutes(secondsSinceLastPlayed);
+            player.sendMessage(plugin.formatChat("msg_motd", minutesSinceLastPlayed, "minutes"));
+        } else {
+            player.sendMessage(plugin.formatChat("msg_motd", secondsSinceLastPlayed, "seconds"));
+        }
+
+        Firework f = player.getWorld().spawn(player.getLocation(), Firework.class);
+        FireworkMeta fm = f.getFireworkMeta();
+        fm.addEffect(FireworkEffect.builder()
+                .flicker(true)
+                .trail(false)
+                .with(FireworkEffect.Type.BALL_LARGE)
+                .withColor(Color.WHITE, Color.BLUE, Color.GREEN)
+                .withFade(Color.GREEN, Color.BLUE, Color.WHITE)
+                .build());
+        fm.setPower(2);
+        f.setFireworkMeta(fm);
+    }
+
+    public void newPlayer(Player player) {
+        player.sendMessage(plugin.formatChat("msg_welcome", player.getName()));
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        event.setJoinMessage(plugin.formatChat("msg_join", event.getPlayer().getName()));
-        event.getPlayer().sendMessage(plugin.formatChat(false, "prefix-long"));
-        disableFlight(event.getPlayer());
-
-        Date date = new Date();
-        long secondsSinceLastPlayed = TimeUnit.MILLISECONDS.toSeconds(date.getTime() - event.getPlayer().getLastPlayed());
-        if (secondsSinceLastPlayed >= 86400) {
-            long daysSinceLastPlayed = TimeUnit.SECONDS.toDays(secondsSinceLastPlayed);
-            event.getPlayer().sendMessage(plugin.formatChat("motd", daysSinceLastPlayed, "days"));
-        } else if (secondsSinceLastPlayed >= 3600) {
-            long hoursSinceLastPlayed = TimeUnit.SECONDS.toHours(secondsSinceLastPlayed);
-            event.getPlayer().sendMessage(plugin.formatChat("motd", hoursSinceLastPlayed, "hours"));
-        } else if (secondsSinceLastPlayed >= 60) {
-            long minutesSinceLastPlayed = TimeUnit.SECONDS.toMinutes(secondsSinceLastPlayed);
-            event.getPlayer().sendMessage(plugin.formatChat("motd", minutesSinceLastPlayed, "minutes"));
+        Player player = event.getPlayer();
+        event.setJoinMessage(plugin.formatChat("msg_join", player.getName()));
+        player.sendMessage(plugin.formatChat(false, "msg_long_prefix"));
+        disableFlight(player);
+        if (player.hasPlayedBefore()) {
+            oldPlayer(player);
         } else {
-            event.getPlayer().sendMessage(plugin.formatChat("motd", secondsSinceLastPlayed, "seconds"));
+            newPlayer(player);
         }
-
-        Firework f = event.getPlayer().getWorld().spawn(event.getPlayer().getLocation(), Firework.class);
-        FireworkMeta fm = f.getFireworkMeta();
-        fm.addEffect(FireworkEffect.builder().flicker(true).trail(false).with(FireworkEffect.Type.BALL_LARGE).withColor(Color.WHITE, Color.BLUE, Color.GREEN).withFade(Color.GREEN, Color.BLUE, Color.WHITE).build());
-        fm.setPower(2);
-        f.setFireworkMeta(fm);
     }
 
     @EventHandler
@@ -70,16 +182,15 @@ public class EventsHandler implements Listener {
 
     public void maximumWarp(Player player) {
         if (player.getFallDistance() >= 1000) {
-            player.sendMessage(plugin.formatChat("maximum_warp_speed"));
+            player.sendMessage(plugin.formatChat("msg_warp_max"));
             player.teleport(plugin.getSpawn());
             player.getWorld().strikeLightningEffect(plugin.getSpawn());
             player.playSound(plugin.getSpawn(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 3, 1);
             player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, plugin.getSpawn(), 1);
-
         } else if (player.getFallDistance() >= 750) {
-            player.sendMessage(plugin.formatChat("second_warp_speed"));
+            player.sendMessage(plugin.formatChat("msg_warp_second"));
         } else if (player.getFallDistance() >= 500) {
-            player.sendMessage(plugin.formatChat("first_warp_speed"));
+            player.sendMessage(plugin.formatChat("msg_warp_first"));
         }
     }
 

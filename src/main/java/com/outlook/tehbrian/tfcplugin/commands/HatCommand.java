@@ -21,13 +21,13 @@ public class HatCommand implements CommandExecutor {
             Player player = (Player) sender;
             if (player.getInventory().getItemInMainHand().getType() == Material.AIR) {
                 if (player.getInventory().getHelmet() == null) {
-                    player.sendMessage(plugin.formatChat("msg_no_hat"));
+                    player.sendMessage(plugin.formatChat("msg_hat_none"));
                 } else {
-                    player.sendMessage(plugin.formatChat("msg_removed_hat"));
+                    player.sendMessage(plugin.formatChat("msg_hat_removed"));
                     player.getInventory().setHelmet(new ItemStack(Material.AIR));
                 }
             } else {
-                player.sendMessage(plugin.formatChat("msg_set_hat"));
+                player.sendMessage(plugin.formatChat("msg_hat_set"));
                 player.getInventory().setHelmet(player.getInventory().getItemInMainHand());
             }
         } else {

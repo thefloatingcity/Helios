@@ -4,7 +4,11 @@ import com.outlook.tehbrian.tfcplugin.commands.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class Main extends JavaPlugin {
 
@@ -24,6 +28,7 @@ public final class Main extends JavaPlugin {
         getCommand("sue").setExecutor(new SueCommand(this));
         getCommand("hat").setExecutor(new HatCommand(this));
         getCommand("poke").setExecutor(new PokeCommand(this));
+        getCommand("fly").setExecutor(new FlyCommand(this));
     }
 
     @Override
@@ -33,16 +38,30 @@ public final class Main extends JavaPlugin {
 
     public String formatChat(Boolean prefix, String configkey, Object... formats) {
         if (prefix) {
-            return ChatColor.translateAlternateColorCodes('&', getConfig().getString("prefix") + String.format(getConfig().getString(configkey), formats));
+            return ChatColor.translateAlternateColorCodes('&', getConfig().getString("msg_prefix") + String.format(getConfig().getString(configkey), formats));
         }
         return ChatColor.translateAlternateColorCodes('&', String.format(getConfig().getString(configkey), formats));
     }
 
     public String formatChat(String configkey, Object... formats) {
-        return ChatColor.translateAlternateColorCodes('&', getConfig().getString("prefix") + String.format(getConfig().getString(configkey), formats));
+        return ChatColor.translateAlternateColorCodes('&', getConfig().getString("msg_prefix") + String.format(getConfig().getString(configkey), formats));
     }
 
     public Location getSpawn() {
         return new Location(Bukkit.getWorlds().get(0), getConfig().getDouble("spawn.X"), getConfig().getDouble("spawn.Y"), getConfig().getDouble("spawn.Z"));
+    }
+
+    public List<Player> playerCanFly = new ArrayList<>();
+
+    public boolean getPlayerCanFly(Player player) {
+        return playerCanFly.contains(player);
+    }
+
+    public void addPlayerCanFly(Player player) {
+        playerCanFly.add(player);
+    }
+
+    public void removePlayerCanFly(Player player) {
+        playerCanFly.remove(player);
     }
 }

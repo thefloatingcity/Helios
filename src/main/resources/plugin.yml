@@ -74,6 +74,9 @@ permissions:
   tfcplugin.signcolor:
     description: Permission to color sign text.
     default: op
+  tfcplugin.build:
+    description: Permission to interact with the world.
+    default: op
   tfcplugin.*:
     description: Complete permission to all of TFCPlugin.
     default: op
@@ -87,3 +90,4 @@ permissions:
       tfcplugin.poke: true
       tfcplugin.chatcolor: true
       tfcplugin.signcolor: true
+      tfcplugin.build: true
