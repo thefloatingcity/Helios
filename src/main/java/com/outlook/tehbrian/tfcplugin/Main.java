@@ -29,6 +29,8 @@ public final class Main extends JavaPlugin {
         getCommand("poke").setExecutor(new PokeCommand(this));
         getCommand("fly").setExecutor(new FlyCommand(this));
         getCommand("gm").setExecutor(new GamemodeCommand(this));
+        getCommand("rules").setExecutor(new RulesCommand(this));
+        getCommand("help").setExecutor(new HelpCommand(this));
     }
 
     @Override

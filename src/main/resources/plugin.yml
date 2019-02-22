@@ -58,6 +58,16 @@ commands:
     permission: tfcplugin.gm
     permission-message: You don't have permission!
     usage: /<command>
+  rules:
+    description: Read them please!
+    permission: tfcplugin.rules
+    permission-message: You don't have permission!
+    usage: /<command> [accept]
+  help:
+    description: We've got your back.
+    permission: tfcplugin.help
+    permission-message: You don't have permission!
+    usage: /<command> [page]
 permissions:
   tfcplugin.zap:
     description: Permission to use /zap.
@@ -84,7 +94,13 @@ permissions:
     description: Permission to use /fly.
     default: op
   tfcplugin.gm:
-    Description: Permission to use /gm.
+    description: Permission to use /gm.
+    default: op
+  tfcplugin.rules:
+    description: Permission to use /rules.
+    default: op
+  tfcplugin.help:
+    description: Permission to use /help.
     default: op
   tfcplugin.chatcolor:
     description: Permission to color chat text.
@@ -108,6 +124,8 @@ permissions:
       tfcplugin.poke: true
       tfcplugin.fly: true
       tfcplugin.gm: true
+      tfcplugin.rules: true
+      tfcplugin.help: true
       tfcplugin.chatcolor: true
       tfcplugin.signcolor: true
       tfcplugin.build: true
