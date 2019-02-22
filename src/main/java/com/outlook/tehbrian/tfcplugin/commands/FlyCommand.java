@@ -19,10 +19,10 @@ public class FlyCommand implements CommandExecutor {
             Player player = (Player) sender;
             if (plugin.getPlayerCanFly(player)) {
                 plugin.setPlayerCanFly(player, false);
-                sender.sendMessage(plugin.formatChat("msg_fly_disabled"));
+                player.sendMessage(plugin.formatChat("msg_fly_disabled"));
             } else {
                 plugin.setPlayerCanFly(player, true);
-                sender.sendMessage(plugin.formatChat("msg_fly_enabled"));
+                player.sendMessage(plugin.formatChat("msg_fly_enabled"));
             }
         } else {
             sender.sendMessage(plugin.formatChat("msg_player_only"));

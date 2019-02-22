@@ -10,6 +10,8 @@ spawn:
 
 msg_no_build: "&fYou aren't allowed to build! Please accept the rules first via &e/rules&f!"
 
+msg_gamemode_change: "&fYour gamemode has been changed to &e%s&f!"
+
 msg_fly_enabled: "&fYou can now fly! Remember, only for super emergencies. If you're using it outside of an emergency I will &oPERSONALLY SMITE YOU, &c&lYOU HEAR ME? &rOkay thank you!"
 msg_fly_disabled: "&fThanks for disabling it. It's disabled."
 

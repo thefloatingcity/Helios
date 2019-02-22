@@ -52,6 +52,21 @@ commands:
     permission: tfcplugin.fly
     permission-message: You don't have permission!
     usage: /<command>
+  gms:
+      description: Change your gamemode to survival.
+      permission: tfcplugin.gms
+      permission-message: You don't have permission!
+      usage: /<command>
+  gmc:
+    description: Change your gamemode to creative.
+    permission: tfcplugin.gmc
+    permission-message: You don't have permission!
+    usage: /<command>
+  gma:
+    description: Change your gamemode to adventure.
+    permission: tfcplugin.gma
+    permission-message: You don't have permission!
+    usage: /<command>
 permissions:
   tfcplugin.zap:
     description: Permission to use /zap.
@@ -77,6 +92,15 @@ permissions:
   tfcplugin.fly:
     description: Permission to use /fly.
     default: op
+  tfcplugin.gms:
+    Description: Permission to use /gms.
+    default: op
+  tfcplugin.gmc:
+    Description: Permission to use /gmc.
+    default: op
+  tfcplugin.gma:
+    Description: Permission to use /gma.
+    default: op
   tfcplugin.chatcolor:
     description: Permission to color chat text.
     default: op
@@ -98,6 +122,9 @@ permissions:
       tfcplugin.hat: true
       tfcplugin.poke: true
       tfcplugin.fly: true
+      tfcplugin.gms: true
+      tfcplugin.gmc: true
+      tfcplugin.gma: true
       tfcplugin.chatcolor: true
       tfcplugin.signcolor: true
       tfcplugin.build: true
