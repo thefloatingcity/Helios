@@ -68,6 +68,10 @@ commands:
     permission: tfcplugin.help
     permission-message: You don't have permission!
     usage: /<command> [page]
+  piano:
+    description: It sounds so lovely!
+    permission: tfcplugin.piano
+    permission-message: You don't have permission!
 permissions:
   tfcplugin.zap:
     description: Permission to use /zap.
@@ -102,6 +106,9 @@ permissions:
   tfcplugin.help:
     description: Permission to use /help.
     default: op
+  tfcplugin.piano:
+    description: Permission to use /piano.
+    default: op
   tfcplugin.chatcolor:
     description: Permission to color chat text.
     default: op
@@ -126,6 +133,7 @@ permissions:
       tfcplugin.gm: true
       tfcplugin.rules: true
       tfcplugin.help: true
+      tfcplugin.piano: true
       tfcplugin.chatcolor: true
       tfcplugin.signcolor: true
       tfcplugin.build: true

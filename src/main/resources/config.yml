@@ -20,6 +20,9 @@ msg_gamemode_change: "&fYour gamemode has been changed to &e%s&f!"
 msg_fly_enabled: "&fYou can now fly! Remember, only for super emergencies. If you're using it outside of an emergency I will &oPERSONALLY SMITE YOU, &c&l&oYOU HEAR ME? &rOkay thank you!"
 msg_fly_disabled: "&fThanks for disabling it. It's disabled."
 
+msg_piano_enabled: "&fYou can now use your &ehotbar keys &fto play the &eF# Major &fscale! Have fun!"
+msg_piano_disabled: "&fHope you enjoyed!"
+
 msg_join: "&f%s joined the game."
 msg_leave: "&f%s left the game."
 

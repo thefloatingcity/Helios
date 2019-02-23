@@ -31,6 +31,7 @@ public final class Main extends JavaPlugin {
         getCommand("gm").setExecutor(new GamemodeCommand(this));
         getCommand("rules").setExecutor(new RulesCommand(this));
         getCommand("help").setExecutor(new HelpCommand(this));
+        getCommand("piano").setExecutor(new PianoCommand(this));
     }
 
     @Override
@@ -69,6 +70,13 @@ public final class Main extends JavaPlugin {
         }
     }
 
+    public void enableFlight(Player player) {
+        if (getPlayerCanFly(player) && player.hasPermission("tfcplugin.fly")) {
+            player.setAllowFlight(true);
+            player.setFlying(true);
+        }
+    }
+
     public void disableFlight(Player player) {
         if (!getPlayerCanFly(player) || !player.hasPermission("tfcplugin.fly")) {
             player.setAllowFlight(false);
@@ -76,10 +84,15 @@ public final class Main extends JavaPlugin {
         }
     }
 
-    public void enableFlight(Player player) {
-        if (getPlayerCanFly(player) && player.hasPermission("tfcplugin.fly")) {
-            player.setAllowFlight(true);
-             player.setFlying(true);
+    public Set<UUID> playerPlaysPiano = new HashSet<>();
+
+    public boolean getPlayerPlaysPiano(Player player) { return playerPlaysPiano.contains(player.getUniqueId()); }
+
+    public void setPlayerPlaysPiano(Player player, Boolean bool) {
+        if (bool && player.hasPermission("tfcplugin.piano")) {
+            playerPlaysPiano.add(player.getUniqueId());
+        } else {
+            playerPlaysPiano.remove(player.getUniqueId());
         }
     }
 }

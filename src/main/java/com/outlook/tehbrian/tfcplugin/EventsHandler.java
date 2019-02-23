@@ -218,4 +218,30 @@ public class EventsHandler implements Listener {
             }
         }
     }
+
+    @EventHandler
+    public void playPiano(PlayerItemHeldEvent event) {
+        Player player = event.getPlayer();
+        if (plugin.getPlayerPlaysPiano(player) && player.hasPermission("tfcplugin.piano")) {
+            if (event.getNewSlot() == 0) {
+                player.getWorld().playSound(player.getLocation(), Sound.BLOCK_NOTE_HARP, 10, 0.5F);
+            } else if (event.getNewSlot() == 1) {
+                player.getWorld().playSound(player.getLocation(), Sound.BLOCK_NOTE_HARP, 10, 0.561231F);
+            } else if (event.getNewSlot() == 2) {
+                player.getWorld().playSound(player.getLocation(), Sound.BLOCK_NOTE_HARP, 10, 0.629961F);
+            } else if (event.getNewSlot() == 3) {
+                player.getWorld().playSound(player.getLocation(), Sound.BLOCK_NOTE_HARP, 10, 0.667420F);
+            } else if (event.getNewSlot() == 4) {
+                player.getWorld().playSound(player.getLocation(), Sound.BLOCK_NOTE_HARP, 10, 0.749154F);
+            } else if (event.getNewSlot() == 5) {
+                player.getWorld().playSound(player.getLocation(), Sound.BLOCK_NOTE_HARP, 10, 0.840896F);
+            } else if (event.getNewSlot() == 6) {
+                player.getWorld().playSound(player.getLocation(), Sound.BLOCK_NOTE_HARP, 10, 0.943874F);
+            } else if (event.getNewSlot() == 7) {
+                player.getWorld().playSound(player.getLocation(), Sound.BLOCK_NOTE_HARP, 10, 1F);
+            } else if (event.getNewSlot() == 8) {
+                player.getWorld().playSound(player.getLocation(), Sound.BLOCK_NOTE_HARP, 10, 1.122462F);
+            }
+        }
+    }
 }

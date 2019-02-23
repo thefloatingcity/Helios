@@ -6,7 +6,7 @@
 <groupId>com.outlook.tehbrian</groupId>
 <artifactId>TFCPlugin</artifactId>
 <!-- Version is used in plugin.yml -->
-<version>1.0.5.15</version>
+<version>1.0.5.19</version>
 <packaging>jar</packaging>
 
 <!-- Name, Description, and URL are used in plugin.yml -->
