@@ -3,6 +3,8 @@ msg_prefix: "&7[&fT&bF&aC&7]&r "
 msg_motd: "&fWelcome back! The last time you were on was &e%s &f%s ago."
 msg_welcome: "&fWelcome to the server, %s! Let me give you a quick tour."
 
+golden_rule: "The holy &eGolden Rule&f!"
+
 spawn:
   X: 0.5
   Y: 60

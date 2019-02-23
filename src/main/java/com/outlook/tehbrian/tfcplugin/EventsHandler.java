@@ -12,6 +12,8 @@ import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.hanging.HangingPlaceEvent;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.meta.FireworkMeta;
@@ -161,6 +163,19 @@ public class EventsHandler implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         event.setQuitMessage(plugin.formatChat("msg_leave", event.getPlayer().getName()));
+    }
+
+    @EventHandler
+    public void onInventoryClick(InventoryClickEvent event) {
+        if (event.getInventory().getName().equals("Rules | The Floating City")) {
+            if (event.getRawSlot() == 8) {
+                if (event.getWhoClicked() instanceof Player) {
+                    Player player = (Player) event.getWhoClicked();
+                    player.sendMessage(plugin.formatChat("golden_rule"));
+                }
+            }
+            event.setCancelled(true);
+        }
     }
 
     @EventHandler

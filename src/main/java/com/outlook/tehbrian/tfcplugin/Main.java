@@ -4,7 +4,11 @@ import com.outlook.tehbrian.tfcplugin.commands.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
@@ -94,5 +98,14 @@ public final class Main extends JavaPlugin {
         } else {
             playerPlaysPiano.remove(player.getUniqueId());
         }
+    }
+
+    public ItemStack createItem(String name, ArrayList<String> lore, Material material) {
+        ItemStack itemstack = new ItemStack(material, 1);
+        ItemMeta iMeta = itemstack.getItemMeta();
+        iMeta.setDisplayName(name);
+        iMeta.setLore(lore);
+        itemstack.setItemMeta(iMeta);
+        return itemstack;
     }
 }
