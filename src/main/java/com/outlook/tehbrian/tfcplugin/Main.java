@@ -6,7 +6,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,10 +16,10 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
         getConfig().options().copyDefaults(true);
         getConfig().options().copyHeader(true);
         saveDefaultConfig();
-        saveConfig();
 
         getServer().getPluginManager().registerEvents(new EventsHandler(this), this);
 

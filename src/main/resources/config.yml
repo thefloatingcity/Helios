@@ -3,7 +3,12 @@ msg_prefix: "&7[&fT&bF&aC&7]&r "
 msg_motd: "&fWelcome back! The last time you were on was &e%s &f%s ago."
 msg_welcome: "&fWelcome to the server, %s! Let me give you a quick tour."
 
+
 golden_rule: "The holy &eGolden Rule&f!"
+rules:
+  rule1:
+    name: "Rule 1 | Griefing"
+    text: ["No touching other people's stuff without their permission.", "This includes placing or breaking blocks,", "taking or placing items in their chests, taking or placing items in their itemframes,", "trampling their crops, killing their animals.. You get the idea.", "Please use common sense. If it isn't yours, leave it be."]
 
 spawn:
   X: 0.5
