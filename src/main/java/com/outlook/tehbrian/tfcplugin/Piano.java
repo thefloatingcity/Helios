@@ -68,9 +68,13 @@ public class Piano {
 
     public static void play(Player player, ItemStack item) {
         if (getPlayerEnabledPiano(player) && player.hasPermission("tfcplugin.piano")) {
-            if (item.getType().equals(Material.STAINED_GLASS_PANE) && item.getLore().get(1).equals("[Piano]")) {
-                player.getWorld().playSound(player.getLocation(), getPlayerPianoInstrument(player), SoundCategory.MASTER, 3, Float.parseFloat(item.getLore().get(2)));
+            if (item.getType() == Material.STAINED_GLASS) {
+                player.sendMessage(item.getLore().get(0));
+                player.sendMessage(item.getLore().get(1));
+                player.sendMessage(item.getLore().get(2));
             }
+            //&& item.getLore().get(0).equals("[Piano]"))
+            // { player.getWorld().playSound(player.getLocation(), getPlayerPianoInstrument(player), SoundCategory.MASTER, 3, Float.parseFloat(item.getLore().get(1)));
         }
     }
 }
