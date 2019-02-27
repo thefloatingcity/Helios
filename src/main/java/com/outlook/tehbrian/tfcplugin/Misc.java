@@ -92,7 +92,7 @@ public class Misc {
         }
     }
 
-    public static ItemStack createItem(String name, ArrayList<String> lore, Material material, int amount) {
+    public static ItemStack createItem(String name, ArrayList<String> lore, Material material, int amount, int data) {
         ItemStack i = new ItemStack(material, amount);
         ItemMeta im = i.getItemMeta();
         for (int x = 0; x < lore.size(); x++) {
@@ -100,6 +100,7 @@ public class Misc {
         }
         im.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
         im.setLore(lore);
+        i.setDurability((short) data);
         i.setItemMeta(im);
         return i;
     }

@@ -46,9 +46,6 @@ public class Piano {
             if (item != null) {
                 if (item.getType() == Material.STAINED_GLASS_PANE && item.getItemMeta().hasLore()) {
                     if (item.getLore().get(0).equals(ChatColor.GRAY + "[Piano]")) {
-                        player.sendMessage("Got to the point!");
-                        player.sendMessage(item.getLore().get(1));
-                        player.sendMessage(String.valueOf(Float.parseFloat(item.getLore().get(1))));
                         player.getWorld().playSound(player.getLocation(), getPlayerPianoInstrument(player), SoundCategory.MASTER, 3, Float.parseFloat(item.getLore().get(1)));
                     }
                 }
