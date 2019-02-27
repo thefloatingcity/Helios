@@ -45,8 +45,8 @@ public class Piano {
         if (getPlayerEnabledPiano(player) && player.hasPermission("tfcplugin.piano")) {
             if (item != null) {
                 if (item.getType() == Material.STAINED_GLASS_PANE && item.getItemMeta().hasLore()) {
-                    if (item.getLore().get(0).equals(ChatColor.GRAY + "[Piano]")) {
-                        player.getWorld().playSound(player.getLocation(), getPlayerPianoInstrument(player), SoundCategory.MASTER, 3, Float.parseFloat(item.getLore().get(1)));
+                    if (item.getLore().get(1).equals(ChatColor.DARK_GRAY + "[Note]")) {
+                        player.getWorld().playSound(player.getLocation(), getPlayerPianoInstrument(player), SoundCategory.MASTER, 3, Float.parseFloat(item.getLore().get(2)));
                     }
                 }
             }
