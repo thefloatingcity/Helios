@@ -42,7 +42,7 @@ public class PianoCommand implements CommandExecutor {
                     pianoNotesInventory.addItem(Misc.createItem("&rD♯/E♭ [&bOctave 1&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major&f]", "&8[Note]", "0.840896")), Material.STAINED_GLASS_PANE, 1, 8));
                     pianoNotesInventory.addItem(Misc.createItem("&rE [&bOctave 1&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Minor&f]", "&8[Note]", "0.890899")), Material.STAINED_GLASS_PANE, 1, 0));
                     pianoNotesInventory.addItem(Misc.createItem("&rF [&bOctave 1&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major&f]", "&8[Note]", "0.943874")), Material.STAINED_GLASS_PANE, 1, 0));
-                    pianoNotesInventory.addItem(Misc.createItem("&rF♯/G♭ [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major&f]", "&8[Note]", "1")), Material.STAINED_GLASS_PANE, 1, 8));
+                    pianoNotesInventory.addItem(Misc.createItem("&rF♯/G♭ [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "1")), Material.STAINED_GLASS_PANE, 1, 8));
                     pianoNotesInventory.addItem(Misc.createItem("&rG [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[]", "&8[Note]", "1.059463")), Material.STAINED_GLASS_PANE, 1, 0));
                     pianoNotesInventory.addItem(Misc.createItem("&rG♯/A♭ [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "1.122462")), Material.STAINED_GLASS_PANE, 1, 8));
                     pianoNotesInventory.addItem(Misc.createItem("&rA [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Minor&f]", "&8[Note]", "1.189207")), Material.STAINED_GLASS_PANE, 1, 0));
