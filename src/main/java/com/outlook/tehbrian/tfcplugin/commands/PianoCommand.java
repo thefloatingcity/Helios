@@ -30,8 +30,8 @@ public class PianoCommand implements CommandExecutor {
             } else if (args.length >= 1) {
                 if (args[0].equals("menu")) {
                     Inventory pianoNotesInventory = Bukkit.createInventory(null, 27, plugin.getConfig().getString("piano_menu_inventory_name"));
-                    pianoNotesInventory.addItem(Misc.createItem("&rF#/Gb", new ArrayList<>(Arrays.asList("&7[Piano]", "&80.5")), Material.STAINED_GLASS_PANE, 1));
-                    pianoNotesInventory.addItem(Misc.createItem("&rG", new ArrayList<>(Arrays.asList("&7[Piano]", "&80.529732")), Material.STAINED_GLASS_PANE, 1));
+                    pianoNotesInventory.addItem(Misc.createItem("&rF#/Gb", new ArrayList<>(Arrays.asList("&7[Piano]", "0.5")), Material.STAINED_GLASS_PANE, 1));
+                    pianoNotesInventory.addItem(Misc.createItem("&rG", new ArrayList<>(Arrays.asList("&7[Piano]", "0.529732")), Material.STAINED_GLASS_PANE, 1));
                     player.openInventory(pianoNotesInventory);
                 } else if (args[0].equals("instrument")) {
 
