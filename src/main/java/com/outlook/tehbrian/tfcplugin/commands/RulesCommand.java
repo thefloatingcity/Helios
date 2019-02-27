@@ -23,7 +23,7 @@ public class RulesCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            sender.sendMessage(Misc.formatConfig("rules_prefix", "msg_rules"));
+            sender.sendMessage(Misc.formatConfig("msg_rules"));
             Inventory rulesInventory = Bukkit.createInventory(null, 9, plugin.getConfig().getString("rules_inventory_name"));
             rulesInventory.addItem(Misc.createItem(plugin.getConfig().getString("rules.rule1.name"), new ArrayList<>(plugin.getConfig().getStringList("rules.rule1.text")), Material.WRITTEN_BOOK, 1));
             rulesInventory.addItem(Misc.createItem(plugin.getConfig().getString("rules.rule2.name"), new ArrayList<>(plugin.getConfig().getStringList("rules.rule2.text")), Material.WRITTEN_BOOK, 1));

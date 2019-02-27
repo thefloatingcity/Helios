@@ -51,10 +51,6 @@ public class Misc {
         return ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("msg_prefix") + String.format(main.getConfig().getString(configkey), formats));
     }
 
-    public static String formatConfig(String prefixkey, String configkey, Object... formats) {
-        return ChatColor.translateAlternateColorCodes('&', main.getConfig().getString(prefixkey) + String.format(main.getConfig().getString(configkey), formats));
-    }
-
     public static String formatConfig(Boolean useprefix, String configkey, Object... formats) {
         if (useprefix) {
             return ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("msg_prefix") + String.format(main.getConfig().getString(configkey), formats));

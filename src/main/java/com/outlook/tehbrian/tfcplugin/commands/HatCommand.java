@@ -21,7 +21,7 @@ public class HatCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (player.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
-                if (player.getInventory().getHelmet().equals(Material.AIR)) {
+                if (player.getInventory().getHelmet() == null) {
                     player.sendMessage(Misc.formatConfig("msg_hat_none"));
                 } else {
                     player.sendMessage(Misc.formatConfig("msg_hat_removed"));

@@ -4,7 +4,6 @@ msg_motd: "&fWelcome back! The last time you were on was &e%s &f%s ago."
 msg_welcome: "&fWelcome to the server, %s! Let me give you a quick tour."
 
 golden_rule: "The holy &eGolden Rule&f!"
-rules_prefix: "&7[&cRules&7]&r "
 rules_prefix_long: "-*-*-*-*-*-*-*-*-*-* -=[ The Rules ]=- *-*-*-*-*-*-*-*-*-*-"
 rules_inventory_name: "Rules | The Floating City"
 msg_rules: "This is a test message. Rules are coming soon! :)"
@@ -37,6 +36,8 @@ rules:
     name: "Rule 9 | Golden Rule"
     text: ["If you forget even everything, remember this golden rule.", "Don't be a jerk, and use common sense. This one golden rule", "will happily keep you playing on the server.", "As long as you're not a jerk towards anyone, and you use common sense,", "like not griefing builds, not spamming chat, etc, you'll be golden!"]
 
+piano_menu_inventory_name: "Notes | The Floating City"
+
 spawn:
   world: world
   x: 0.5
@@ -57,8 +58,6 @@ msg_piano_help: "&fFirst do &e/piano menu &fand put the notes you would like to 
 msg_piano_enabled: "&fThe piano has been enabled!"
 msg_piano_disabled: "&fThe piano has been disabled! Hope you enjoyed!"
 piano_menu_inventory-name: "Piano | The Floating City"
-piano_notes:
-
 
 msg_join: "&f%s joined the game."
 msg_leave: "&f%s left the game."
