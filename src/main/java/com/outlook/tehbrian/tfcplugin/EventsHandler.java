@@ -186,6 +186,6 @@ public class EventsHandler implements Listener {
 
     @EventHandler
     public void onHeldItemChange(PlayerItemHeldEvent event) {
-        Piano.play(event.getPlayer(), event.getPlayer().getInventory().getItemInMainHand());
+        Piano.play(event.getPlayer(), event.getPlayer().getInventory().getItem(event.getNewSlot()));
     }
 }
