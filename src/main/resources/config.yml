@@ -10,7 +10,7 @@ msg_rules: "This is a test message. Rules are coming soon! :)"
 rules:
   rule1:
     name: "Rule 1 | Griefing"
-    text: ["No touching other people's stuff without their permission.", "This includes placing or breaking blocks,", "taking or placing items in their chests, taking or placing items in their itemframes,", "trampling their crops, killing their animals.. You get the idea.", "Please use common sense. If it isn't yours, leave it be."]
+    text: ["&rNo touching other people's stuff without their permission.", "This includes placing or breaking blocks,", "taking or placing items in their chests, taking or placing items in their itemframes,", "trampling their crops, killing their animals.. You get the idea.", "Please use common sense. If it isn't yours, leave it be."]
   rule2:
     name: "Rule 2 | Swearing"
     text: ["Swearing is allowed but please try to be courteous.", "Remember, as much as you may think otherwise, Minecraft is", "a kids game and there are kids who play it.", "So please just don't fill up the chat with a bunch of swearing."]
@@ -36,7 +36,7 @@ rules:
     name: "Rule 9 | Golden Rule"
     text: ["If you forget even everything, remember this golden rule.", "Don't be a jerk, and use common sense. This one golden rule", "will happily keep you playing on the server.", "As long as you're not a jerk towards anyone, and you use common sense,", "like not griefing builds, not spamming chat, etc, you'll be golden!"]
 
-piano_menu_inventory_name: "Notes | The Floating City"
+piano_menu_inventory_name: "Menu | The Floating City"
 
 spawn:
   world: world
@@ -54,10 +54,9 @@ msg_gamemode_change: "&fYour gamemode has been changed to &e%s&f!"
 msg_fly_enabled: "&fYou can now fly! Remember, only for super emergencies. If you're using it outside of an emergency I will &oPERSONALLY SMITE YOU, &c&l&oYOU HEAR ME? &rOkay thank you!"
 msg_fly_disabled: "&fThanks for disabling it. It's disabled."
 
-msg_piano_help: "&fFirst do &e/piano menu &fand put the notes you would like to play into your hotbar. Then you can do &e/piano instrument &fand change your instrument! Finally, do &e/piano toggle &fto turn on the piano, then when you change your selected slot to whatever note is in the slot, it'll play that note!"
+msg_piano_help: "&fFirst do &e/piano menu &fand put the notes you would like to play into your hotbar. Then you can do &e/piano instrument &fand change your instrument! Finally, do &e/piano toggle &fto turn on the piano. Change your hotbar slot to the note you want to play!"
 msg_piano_enabled: "&fThe piano has been enabled!"
 msg_piano_disabled: "&fThe piano has been disabled! Hope you enjoyed!"
-piano_menu_inventory-name: "Piano | The Floating City"
 
 msg_join: "&f%s joined the game."
 msg_leave: "&f%s left the game."
