@@ -6,7 +6,7 @@
 <groupId>com.outlook.tehbrian</groupId>
 <artifactId>TFCPlugin</artifactId>
 <!-- Version is used in plugin.yml -->
-<version>1.0.5.47</version>
+<version>1.0.5.50</version>
 <packaging>jar</packaging>
 
 <!-- Name, Description, and URL are used in plugin.yml -->
@@ -18,7 +18,7 @@
     <license>
         <name>MIT License</name>
         <url>https://opensource.org/licenses/MIT</url>
-        <comments>Copyright (c) 2018 TehBrian
+        <comments>Copyright (c) 2019 TehBrian
 
             Permission is hereby granted, free of charge, to any person obtaining a copy
             of this software and associated documentation files (the "Software"), to deal
