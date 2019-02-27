@@ -1,5 +1,6 @@
 package com.outlook.tehbrian.tfcplugin;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -44,7 +45,7 @@ public class Piano {
         if (getPlayerEnabledPiano(player) && player.hasPermission("tfcplugin.piano")) {
             if (item != null) {
                 if (item.getType() == Material.STAINED_GLASS_PANE && item.getItemMeta().hasLore()) {
-                    if (item.getLore().get(0).equals("[Piano]")) {
+                    if (item.getLore().get(0).equals(ChatColor.GRAY + "[Piano]")) {
                         player.getWorld().playSound(player.getLocation(), getPlayerPianoInstrument(player), SoundCategory.MASTER, 3, Float.parseFloat(item.getLore().get(1)));
                     }
                 }
