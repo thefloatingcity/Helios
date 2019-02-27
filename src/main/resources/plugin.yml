@@ -5,7 +5,7 @@ load: POSTWORLD
 author: ${author}
 website: ${url}
 main: ${mainClass}
-depend: [Vault]
+depend: []
 database: false
 commands:
   zap:
@@ -64,7 +64,7 @@ commands:
     permission-message: You don't have permission!
     usage: /<command> [accept]
   help:
-    description: We've got your back.
+    description: We all need it now and then.
     permission: tfcplugin.help
     permission-message: You don't have permission!
     usage: /<command> [page]

@@ -1,6 +1,7 @@
 package com.outlook.tehbrian.tfcplugin.commands;
 
 import com.outlook.tehbrian.tfcplugin.Main;
+import com.outlook.tehbrian.tfcplugin.Misc;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -19,7 +20,6 @@ public class LaunchCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
         if (args.length == 0) {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
@@ -27,9 +27,9 @@ public class LaunchCommand implements CommandExecutor {
                 player.setVelocity(new Vector(0, 10, 0));
                 player.playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 100000, 0.75F);
 
-                Bukkit.broadcastMessage(plugin.formatChat("msg_launch_themself", sender.getName()));
+                Bukkit.broadcastMessage(Misc.formatConfig("msg_launch_themself", sender.getName()));
             } else {
-                sender.sendMessage(plugin.formatChat("msg_player_only"));
+                sender.sendMessage(Misc.formatConfig("msg_player_only"));
             }
         } else if (args.length >= 1) {
             Player target = Bukkit.getPlayer(args[0]);
@@ -38,17 +38,16 @@ public class LaunchCommand implements CommandExecutor {
                     player.setVelocity(new Vector(0, 10, 0));
                     player.playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 100000, 0.75F);
                 }
-                Bukkit.broadcastMessage(plugin.formatChat("msg_launch_everyone", sender.getName()));
+                Bukkit.broadcastMessage(Misc.formatConfig("msg_launch_everyone", sender.getName()));
             } else if (target != null) {
                 target.setVelocity(new Vector(0, 10, 0));
                 target.playSound(target.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 100000, 0.75F);
 
-                Bukkit.broadcastMessage(plugin.formatChat("msg_launch", sender.getName(), target.getName()));
+                Bukkit.broadcastMessage(Misc.formatConfig("msg_launch", sender.getName(), target.getName()));
             } else {
-                sender.sendMessage(plugin.formatChat("msg_not_online"));
+                sender.sendMessage(Misc.formatConfig("msg_not_online"));
             }
         }
-
         return true;
     }
 }

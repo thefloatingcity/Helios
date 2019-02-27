@@ -1,6 +1,7 @@
 package com.outlook.tehbrian.tfcplugin.commands;
 
 import com.outlook.tehbrian.tfcplugin.Main;
+import com.outlook.tehbrian.tfcplugin.Misc;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,7 +16,6 @@ public class SueCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
         if (args.length == 0) {
             return false;
         } else if (args.length >= 1) {
@@ -25,9 +25,8 @@ public class SueCommand implements CommandExecutor {
             }
             String fullArgs = sb.toString();
 
-            Bukkit.broadcastMessage(plugin.formatChat("msg_sue", sender.getName(), fullArgs));
+            Bukkit.broadcastMessage(Misc.formatConfig("msg_sue", sender.getName(), fullArgs));
         }
-
         return true;
     }
 }

@@ -1,7 +1,7 @@
 package com.outlook.tehbrian.tfcplugin.commands;
 
 import com.outlook.tehbrian.tfcplugin.Main;
-import org.bukkit.Bukkit;
+import com.outlook.tehbrian.tfcplugin.Misc;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,26 +17,24 @@ public class GamemodeCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (label.equalsIgnoreCase("gm")) {
-                player.sendMessage(plugin.formatChat("msg_gamemode"));
+                player.sendMessage(Misc.formatConfig("msg_gamemode"));
             } else if (label.equalsIgnoreCase("gms")) {
-                player.sendMessage(plugin.formatChat("msg_gamemode_change", "Survival"));
+                player.sendMessage(Misc.formatConfig("msg_gamemode_change", "Survival"));
                 player.setGameMode(GameMode.SURVIVAL);
             } else if (label.equalsIgnoreCase("gmc")) {
-                player.sendMessage(plugin.formatChat("msg_gamemode_change", "Creative"));
-                plugin.disableFlight(player);
+                player.sendMessage(Misc.formatConfig("msg_gamemode_change", "Creative"));
+                Misc.disableFlight(player);
                 player.setGameMode(GameMode.CREATIVE);
             } else if (label.equalsIgnoreCase("gma")) {
-                player.sendMessage(plugin.formatChat("msg_gamemode_change", "Adventure"));
+                player.sendMessage(Misc.formatConfig("msg_gamemode_change", "Adventure"));
                 player.setGameMode(GameMode.ADVENTURE);
             }
         } else {
-            sender.sendMessage(plugin.formatChat("player_only"));
+            sender.sendMessage(Misc.formatConfig("player_only"));
         }
-
         return true;
     }
 }

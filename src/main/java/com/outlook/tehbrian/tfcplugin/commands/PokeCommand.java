@@ -1,6 +1,7 @@
 package com.outlook.tehbrian.tfcplugin.commands;
 
 import com.outlook.tehbrian.tfcplugin.Main;
+import com.outlook.tehbrian.tfcplugin.Misc;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -36,9 +37,9 @@ public class PokeCommand implements CommandExecutor {
 
                 player.setVelocity(randomVector);
 
-                Bukkit.broadcastMessage(plugin.formatChat("msg_poke_themself", sender.getName()));
+                Bukkit.broadcastMessage(Misc.formatConfig("msg_poke_themself", sender.getName()));
             } else {
-                sender.sendMessage(plugin.formatChat("msg_player_only"));
+                sender.sendMessage(Misc.formatConfig("msg_player_only"));
             }
         } else if (args.length >= 1) {
             Player target = Bukkit.getPlayer(args[0]);
@@ -46,16 +47,15 @@ public class PokeCommand implements CommandExecutor {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     player.setVelocity(randomVector);
                 }
-                Bukkit.broadcastMessage(plugin.formatChat("msg_poke_everyone", sender.getName()));
+                Bukkit.broadcastMessage(Misc.formatConfig("msg_poke_everyone", sender.getName()));
             } else if (target != null) {
                 target.setVelocity(randomVector);
 
-                Bukkit.broadcastMessage(plugin.formatChat("msg_poke", sender.getName(), target.getName()));
+                Bukkit.broadcastMessage(Misc.formatConfig("msg_poke", sender.getName(), target.getName()));
             } else {
-                sender.sendMessage(plugin.formatChat("msg_not_online"));
+                sender.sendMessage(Misc.formatConfig("msg_not_online"));
             }
         }
-
         return true;
     }
 }

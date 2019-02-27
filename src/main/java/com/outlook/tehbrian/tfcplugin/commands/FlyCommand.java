@@ -1,6 +1,7 @@
 package com.outlook.tehbrian.tfcplugin.commands;
 
 import com.outlook.tehbrian.tfcplugin.Main;
+import com.outlook.tehbrian.tfcplugin.Misc;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,20 +16,18 @@ public class FlyCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (plugin.getPlayerCanFly(player)) {
-                plugin.setPlayerCanFly(player, false);
-                player.sendMessage(plugin.formatChat("msg_fly_disabled"));
+            if (Misc.getPlayerCanFly(player)) {
+                Misc.setPlayerCanFly(player, false);
+                player.sendMessage(Misc.formatConfig("msg_fly_disabled"));
             } else {
-                plugin.setPlayerCanFly(player, true);
-                player.sendMessage(plugin.formatChat("msg_fly_enabled"));
+                Misc.setPlayerCanFly(player, true);
+                player.sendMessage(Misc.formatConfig("msg_fly_enabled"));
             }
         } else {
-            sender.sendMessage(plugin.formatChat("msg_player_only"));
+            sender.sendMessage(Misc.formatConfig("msg_player_only"));
         }
-
         return true;
     }
 }
