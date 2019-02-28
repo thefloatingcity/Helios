@@ -44,7 +44,7 @@ spawn:
   y: 60
   z: 0.5
 
-msg_no_build: "&fYou can't build! Please accept the rules first via &e/rules&f!"
+msg_no_build: "&fYou can't build! Please accept the rules first by doing &e/rules&f!"
 
 msg_help: "This is a test message. Help is coming soon! :)"
 

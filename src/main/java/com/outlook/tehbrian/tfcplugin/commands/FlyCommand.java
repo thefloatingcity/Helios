@@ -19,11 +19,11 @@ public class FlyCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (Flight.getPlayerCanFly(player)) {
-                Flight.setPlayerCanFly(player, false);
+            if (Flight.getCanBypassFly(player)) {
+                Flight.setCanBypassFly(player, false);
                 player.sendMessage(Misc.formatConfig("msg_fly_disabled"));
             } else {
-                Flight.setPlayerCanFly(player, true);
+                Flight.setCanBypassFly(player, true);
                 player.sendMessage(Misc.formatConfig("msg_fly_enabled"));
             }
         } else {

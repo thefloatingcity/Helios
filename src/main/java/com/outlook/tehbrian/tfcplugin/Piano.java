@@ -13,8 +13,6 @@ public class Piano {
 
     private Piano() {}
 
-    private static Main main = Main.getInstance();
-
     private static Set<UUID> playerEnabledPiano = new HashSet<>();
     private static Map<UUID, Sound> playerPianoInstrument = new HashMap<>();
 
