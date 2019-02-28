@@ -1,10 +1,7 @@
 package com.outlook.tehbrian.tfcplugin.commands;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.CommandPermission;
-import co.aikar.commands.annotation.Default;
-import co.aikar.commands.annotation.Subcommand;
+import co.aikar.commands.annotation.*;
 import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Misc;
 import org.bukkit.Bukkit;
@@ -17,16 +14,17 @@ import org.bukkit.util.Vector;
 import java.util.Random;
 
 @CommandAlias("action")
-public class ActionsCommand extends BaseCommand {
+public class ActionCommand extends BaseCommand {
 
     private final Main main;
 
-    public ActionsCommand(Main main) {
+    public ActionCommand(Main main) {
         this.main = main;
     }
 
     @Default
-    @CommandAlias("emotes")
+    @CatchUnknown
+    @CommandAlias("actions")
     @Subcommand("list")
     public void onList(CommandSender sender) {
 
@@ -65,7 +63,7 @@ public class ActionsCommand extends BaseCommand {
         }
     }
 
-    @CommandAlias("launch")
+    @CommandAlias("zap")
     @CommandPermission("tfcplugin.zap")
     public void onZap(CommandSender sender, String[] args) {
         if (args.length == 0) {
@@ -97,7 +95,7 @@ public class ActionsCommand extends BaseCommand {
 
     @CommandAlias("poke")
     @CommandPermission("tfcplugin.poke")
-    public boolean onPoke(CommandSender sender, String[] args) {
+    public void onPoke(CommandSender sender, String[] args) {
 
         double maxY = main.getConfig().getDouble("poke_force.maxY");
         double minY = main.getConfig().getDouble("poke_force.minY");
@@ -134,6 +132,5 @@ public class ActionsCommand extends BaseCommand {
                 sender.sendMessage(Misc.formatConfig("msg_not_online"));
             }
         }
-        return true;
     }
 }

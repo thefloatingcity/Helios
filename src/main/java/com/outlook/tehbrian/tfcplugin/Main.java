@@ -27,8 +27,10 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EventsHandler(this), this);
 
         manager.registerCommand(new EmoteCommand(this));
-        manager.registerCommand(new ActionsCommand(this));
+        manager.registerCommand(new ActionCommand(this));
         manager.registerCommand(new UtilCommand(this));
+        manager.registerCommand(new GamemodeCommand(this));
+        manager.registerCommand(new PianoCommand(this));
     }
 
     @Override

@@ -7,7 +7,7 @@ website: ${url}
 main: ${mainClass}
 depend: []
 database: false
-commands: {}
+commands: {} # Special thanks to ACF for making this empty!
 permissions:
   tfcplugin.zap:
     description: Permission to use /zap.
