@@ -7,6 +7,7 @@ import com.outlook.tehbrian.tfcplugin.Misc;
 import com.outlook.tehbrian.tfcplugin.Piano;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -30,41 +31,41 @@ public class PianoCommand extends BaseCommand {
     }
 
     @Subcommand("menu")
-    @Description("Pick your items here!")
+    @Description("Pick your notes here!")
     public void onMenu(Player player) {
         Inventory pianoNotesInventory = Bukkit.createInventory(null, 27, main.getConfig().getString("piano_menu_inventory_name"));
-        pianoNotesInventory.addItem(Misc.createItem("&rF♯/G♭ [&bOctave 1&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "0.5")), Material.STAINED_GLASS_PANE, 1, 8));
-        pianoNotesInventory.addItem(Misc.createItem("&rG [&bOctave 1&f]", new ArrayList<>(Arrays.asList("&7Part of &f[]", "&8[Note]", "0.529732")), Material.STAINED_GLASS_PANE, 1, 0));
+        pianoNotesInventory.addItem(Misc.createItem("&rF♯/G♭ [&bOctave 1&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "0.5")),      Material.STAINED_GLASS_PANE, 1, 8));
+        pianoNotesInventory.addItem(Misc.createItem("&rG [&bOctave 1&f]",     new ArrayList<>(Arrays.asList("&7Part of &f[]", "&8[Note]", "0.529732")),                       Material.STAINED_GLASS_PANE, 1, 0));
         pianoNotesInventory.addItem(Misc.createItem("&rG♯/A♭ [&bOctave 1&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "0.561231")), Material.STAINED_GLASS_PANE, 1, 8));
-        pianoNotesInventory.addItem(Misc.createItem("&rA [&bOctave 1&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Minor&f]", "&8[Note]", "0.594604")), Material.STAINED_GLASS_PANE, 1, 0));
-        pianoNotesInventory.addItem(Misc.createItem("&rA♯/B♭ [&bOctave 1&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major&f]", "&8[Note]", "0.629961")), Material.STAINED_GLASS_PANE, 1, 8));
-        pianoNotesInventory.addItem(Misc.createItem("&rB [&bOctave 1&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "0.667420")), Material.STAINED_GLASS_PANE, 1, 0));
-        pianoNotesInventory.addItem(Misc.createItem("&rC [&bOctave 1&f]", new ArrayList<>(Arrays.asList("&7Part of &f[]", "&8[Note]", "0.707107")), Material.STAINED_GLASS_PANE, 1, 0));
+        pianoNotesInventory.addItem(Misc.createItem("&rA [&bOctave 1&f]",     new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Minor&f]", "&8[Note]", "0.594604")),           Material.STAINED_GLASS_PANE, 1, 0));
+        pianoNotesInventory.addItem(Misc.createItem("&rA♯/B♭ [&bOctave 1&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major&f]", "&8[Note]", "0.629961")),           Material.STAINED_GLASS_PANE, 1, 8));
+        pianoNotesInventory.addItem(Misc.createItem("&rB [&bOctave 1&f]",     new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "0.667420")), Material.STAINED_GLASS_PANE, 1, 0));
+        pianoNotesInventory.addItem(Misc.createItem("&rC [&bOctave 1&f]",     new ArrayList<>(Arrays.asList("&7Part of &f[]", "&8[Note]", "0.707107")),                       Material.STAINED_GLASS_PANE, 1, 0));
         pianoNotesInventory.addItem(Misc.createItem("&rC♯/D♭ [&bOctave 1&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "0.749154")), Material.STAINED_GLASS_PANE, 1, 8));
-        pianoNotesInventory.addItem(Misc.createItem("&rD [&bOctave 1&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Minor&f]", "&8[Note]", "0.793701")), Material.STAINED_GLASS_PANE, 1, 0));
-        pianoNotesInventory.addItem(Misc.createItem("&rD♯/E♭ [&bOctave 1&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major&f]", "&8[Note]", "0.840896")), Material.STAINED_GLASS_PANE, 1, 8));
-        pianoNotesInventory.addItem(Misc.createItem("&rE [&bOctave 1&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Minor&f]", "&8[Note]", "0.890899")), Material.STAINED_GLASS_PANE, 1, 0));
-        pianoNotesInventory.addItem(Misc.createItem("&rF [&bOctave 1&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major&f]", "&8[Note]", "0.943874")), Material.STAINED_GLASS_PANE, 1, 0));
-        pianoNotesInventory.addItem(Misc.createItem("&rF♯/G♭ [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "1")), Material.STAINED_GLASS_PANE, 1, 8));
-        pianoNotesInventory.addItem(Misc.createItem("&rG [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[]", "&8[Note]", "1.059463")), Material.STAINED_GLASS_PANE, 1, 0));
+        pianoNotesInventory.addItem(Misc.createItem("&rD [&bOctave 1&f]",     new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Minor&f]", "&8[Note]", "0.793701")),           Material.STAINED_GLASS_PANE, 1, 0));
+        pianoNotesInventory.addItem(Misc.createItem("&rD♯/E♭ [&bOctave 1&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major&f]", "&8[Note]", "0.840896")),           Material.STAINED_GLASS_PANE, 1, 8));
+        pianoNotesInventory.addItem(Misc.createItem("&rE [&bOctave 1&f]",     new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Minor&f]", "&8[Note]", "0.890899")),           Material.STAINED_GLASS_PANE, 1, 0));
+        pianoNotesInventory.addItem(Misc.createItem("&rF [&bOctave 1&f]",     new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major&f]", "&8[Note]", "0.943874")),           Material.STAINED_GLASS_PANE, 1, 0));
+        pianoNotesInventory.addItem(Misc.createItem("&rF♯/G♭ [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "1")),        Material.STAINED_GLASS_PANE, 1, 8));
+        pianoNotesInventory.addItem(Misc.createItem("&rG [&bOctave 2&f]",     new ArrayList<>(Arrays.asList("&7Part of &f[]", "&8[Note]", "1.059463")),                       Material.STAINED_GLASS_PANE, 1, 0));
         pianoNotesInventory.addItem(Misc.createItem("&rG♯/A♭ [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "1.122462")), Material.STAINED_GLASS_PANE, 1, 8));
-        pianoNotesInventory.addItem(Misc.createItem("&rA [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Minor&f]", "&8[Note]", "1.189207")), Material.STAINED_GLASS_PANE, 1, 0));
-        pianoNotesInventory.addItem(Misc.createItem("&rA#/B♭ [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major&f]", "&8[Note]", "1.259921")), Material.STAINED_GLASS_PANE, 1, 8));
-        pianoNotesInventory.addItem(Misc.createItem("&rB [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "1.334840")), Material.STAINED_GLASS_PANE, 1, 0));
-        pianoNotesInventory.addItem(Misc.createItem("&rC [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[]", "&8[Note]", "1.414214")), Material.STAINED_GLASS_PANE, 1, 0));
+        pianoNotesInventory.addItem(Misc.createItem("&rA [&bOctave 2&f]",     new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Minor&f]", "&8[Note]", "1.189207")),           Material.STAINED_GLASS_PANE, 1, 0));
+        pianoNotesInventory.addItem(Misc.createItem("&rA#/B♭ [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major&f]", "&8[Note]", "1.259921")),           Material.STAINED_GLASS_PANE, 1, 8));
+        pianoNotesInventory.addItem(Misc.createItem("&rB [&bOctave 2&f]",     new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "1.334840")), Material.STAINED_GLASS_PANE, 1, 0));
+        pianoNotesInventory.addItem(Misc.createItem("&rC [&bOctave 2&f]",     new ArrayList<>(Arrays.asList("&7Part of &f[]", "&8[Note]", "1.414214")),                       Material.STAINED_GLASS_PANE, 1, 0));
         pianoNotesInventory.addItem(Misc.createItem("&rC♯/D♭ [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "1.498307")), Material.STAINED_GLASS_PANE, 1, 8));
-        pianoNotesInventory.addItem(Misc.createItem("&rD [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Minor&f]", "&8[Note]", "1.587401")), Material.STAINED_GLASS_PANE, 1, 0));
-        pianoNotesInventory.addItem(Misc.createItem("&rD♯/E♭ [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major&f]", "&8[Note]", "1.681793")), Material.STAINED_GLASS_PANE, 1, 8));
-        pianoNotesInventory.addItem(Misc.createItem("&rE [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Minor&f]", "&8[Note]", "1.781797")), Material.STAINED_GLASS_PANE, 1, 0));
-        pianoNotesInventory.addItem(Misc.createItem("&rF [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major&f]", "&8[Note]", "1.887749")), Material.STAINED_GLASS_PANE, 1, 0));
-        pianoNotesInventory.addItem(Misc.createItem("&rF♯/G♭ [&bOctave 3&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "2")), Material.STAINED_GLASS_PANE, 1, 8));
+        pianoNotesInventory.addItem(Misc.createItem("&rD [&bOctave 2&f]",     new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Minor&f]", "&8[Note]", "1.587401")),           Material.STAINED_GLASS_PANE, 1, 0));
+        pianoNotesInventory.addItem(Misc.createItem("&rD♯/E♭ [&bOctave 2&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major&f]", "&8[Note]", "1.681793")),           Material.STAINED_GLASS_PANE, 1, 8));
+        pianoNotesInventory.addItem(Misc.createItem("&rE [&bOctave 2&f]",     new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Minor&f]", "&8[Note]", "1.781797")),           Material.STAINED_GLASS_PANE, 1, 0));
+        pianoNotesInventory.addItem(Misc.createItem("&rF [&bOctave 2&f]",     new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major&f]", "&8[Note]", "1.887749")),           Material.STAINED_GLASS_PANE, 1, 0));
+        pianoNotesInventory.addItem(Misc.createItem("&rF♯/G♭ [&bOctave 3&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "2")),        Material.STAINED_GLASS_PANE, 1, 8));
         player.openInventory(pianoNotesInventory);
     }
 
     @Subcommand("instrument")
     @Description("Pick your instrument! Any sound!")
-    public void onInstrument(Player player) {
-
+    public void onInstrument(Player player, Sound sound) {
+        Piano.setPlayerPianoInstrument(player, sound);
     }
 
     @Subcommand("toggle")

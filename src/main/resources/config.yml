@@ -47,8 +47,11 @@ spawn:
 msg_no_build: "&fYou can't build! Please accept the rules first by doing &e/rules&f!"
 
 msg_help: "This is a test message. Help is coming soon! :)"
+msg_action_help: "This is a test message. Help is coming soon! :)"
+msg_emote_help: "This is a test message. Help is coming soon! :)"
+msg_util_help: "This is a test message. Help is coming soon! :)"
 
-msg_gamemode: "&fChange your gamemode! You can use /gmc or /gamemode 1/c/creative for creative, and so on for the rest.!"
+msg_gamemode_help: "&fChange your gamemode! You can use /gmc or /gamemode 1/c/creative for creative, and so on for the rest.!"
 msg_gamemode_change: "&fYour gamemode has been changed to &e%s&f!"
 
 msg_fly_enabled: "&fYou can now fly! Remember, only for super emergencies. If you're using it outside of an emergency I will &oPERSONALLY SMITE YOU, &c&l&oYOU HEAR ME? &rOkay thank you!"
