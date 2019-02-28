@@ -39,8 +39,8 @@ public class Piano {
         }
     }
 
-    public static void play(Player player, ItemStack item) {
-        if (getPlayerEnabledPiano(player) && player.hasPermission("tfcplugin.piano")) {
+    public static void play(Player player, ItemStack item, boolean requireToggle) {
+        if ((!requireToggle || getPlayerEnabledPiano(player)) && player.hasPermission("tfcplugin.piano")) {
             if (item != null) {
                 if (item.getType() == Material.STAINED_GLASS_PANE && item.getItemMeta().hasLore()) {
                     if (item.getLore().get(1).equals(ChatColor.DARK_GRAY + "[Note]")) {

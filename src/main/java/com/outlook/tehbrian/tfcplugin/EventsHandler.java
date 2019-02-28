@@ -130,8 +130,9 @@ public class EventsHandler implements Listener {
         if (event.getWhoClicked() instanceof Player) {
             Player player = (Player) event.getWhoClicked();
             if (event.getClickedInventory().getName().equals(plugin.getConfig().getString("piano_menu_inventory_name"))) {
-                if (event.isLeftClick()) {
-                    Piano.play(player, event.getCurrentItem());
+                if (event.getClick() == ClickType.LEFT) {
+                    event.setCancelled(true);
+                    Piano.play(player, event.getCurrentItem(), false);
                 }
             } else if (event.getClickedInventory().getName().equals(plugin.getConfig().getString("rules_inventory_name"))) {
                 player.sendMessage(Misc.formatConfig("golden_rule"));
@@ -141,7 +142,7 @@ public class EventsHandler implements Listener {
 
     @EventHandler
     public void onHeldItemChange(PlayerItemHeldEvent event) {
-        Piano.play(event.getPlayer(), event.getPlayer().getInventory().getItem(event.getNewSlot()));
+        Piano.play(event.getPlayer(), event.getPlayer().getInventory().getItem(event.getNewSlot()), true);
     }
 
     @EventHandler
