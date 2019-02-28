@@ -7,6 +7,7 @@ import com.outlook.tehbrian.tfcplugin.Misc;
 import com.outlook.tehbrian.tfcplugin.Piano;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
@@ -24,11 +25,12 @@ public class PianoCommand extends BaseCommand {
     }
 
     @HelpCommand
-    public void onHelp(Player player) {
-        player.sendMessage(Misc.formatConfig("msg_piano_help"));
+    public void onHelp(CommandSender sender) {
+        sender.sendMessage(Misc.formatConfig("msg_piano_help"));
     }
 
     @Subcommand("menu")
+    @Description("Pick your items here!")
     public void onMenu(Player player) {
         Inventory pianoNotesInventory = Bukkit.createInventory(null, 27, main.getConfig().getString("piano_menu_inventory_name"));
         pianoNotesInventory.addItem(Misc.createItem("&rF♯/G♭ [&bOctave 1&f]", new ArrayList<>(Arrays.asList("&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "0.5")), Material.STAINED_GLASS_PANE, 1, 8));
@@ -60,11 +62,13 @@ public class PianoCommand extends BaseCommand {
     }
 
     @Subcommand("instrument")
+    @Description("Pick your instrument! Any sound!")
     public void onInstrument(Player player) {
 
     }
 
     @Subcommand("toggle")
+    @Description("Toggle your piano on and off.")
     public void onToggle(Player player) {
         if (Piano.getPlayerEnabledPiano(player)) {
             Piano.setPlayerEnabledPiano(player, false);

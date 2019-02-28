@@ -23,15 +23,14 @@ public class ActionCommand extends BaseCommand {
     }
 
     @HelpCommand
-    public void onList(CommandSender sender) {
-
+    public void onHelp(CommandSender sender) {
+        sender.sendMessage(Misc.formatConfig("msg_action_help"));
     }
 
     @CommandAlias("launch")
     @CommandPermission("tfcplugin.launch")
-    @Description("Wow. Much fly!")
-    @Syntax("lolololtesting")
-    @CommandCompletion("players")
+    @Description("Up you go!")
+    @CommandCompletion("@players")
     public void onLaunch(CommandSender sender, String[] args) {
         if (args.length == 0) {
             if (sender instanceof Player) {
@@ -65,6 +64,8 @@ public class ActionCommand extends BaseCommand {
 
     @CommandAlias("zap")
     @CommandPermission("tfcplugin.zap")
+    @Description("Zap them! Like Zeus!")
+    @CommandCompletion("@players")
     public void onZap(CommandSender sender, String[] args) {
         if (args.length == 0) {
             if (sender instanceof Player) {
@@ -95,6 +96,8 @@ public class ActionCommand extends BaseCommand {
 
     @CommandAlias("poke")
     @CommandPermission("tfcplugin.poke")
+    @Description("Just a little push.")
+    @CommandCompletion("@players")
     public void onPoke(CommandSender sender, String[] args) {
 
         double maxY = main.getConfig().getDouble("poke_force.maxY");

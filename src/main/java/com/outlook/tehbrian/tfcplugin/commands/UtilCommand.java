@@ -3,18 +3,21 @@ package com.outlook.tehbrian.tfcplugin.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
+import co.aikar.commands.annotation.Description;
+import co.aikar.commands.annotation.HelpCommand;
 import com.outlook.tehbrian.tfcplugin.Flight;
 import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Misc;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 
-@CommandAlias("util")
+@CommandAlias("util|utils")
 public class UtilCommand extends BaseCommand {
 
     private final Main main;
@@ -23,8 +26,14 @@ public class UtilCommand extends BaseCommand {
         this.main = main;
     }
 
+    @HelpCommand
+    public void onHelp(CommandSender sender) {
+        sender.sendMessage(Misc.formatConfig("msg_util_help"));
+    }
+
     @CommandAlias("fly")
     @CommandPermission("tfcplugin.fly")
+    @Description("Like the birds in the sky..")
     public void onFly(Player player) {
         if (Flight.getCanBypassFly(player)) {
             Flight.setCanBypassFly(player, false);
@@ -35,8 +44,9 @@ public class UtilCommand extends BaseCommand {
         }
     }
 
-    @CommandAlias("fly")
+    @CommandAlias("rules")
     @CommandPermission("tfcplugin.rules")
+    @Description("Please read them!")
     public void onRules(Player player) {
         player.sendMessage(Misc.formatConfig("msg_rules"));
         Inventory rulesInventory = Bukkit.createInventory(null, 9, main.getConfig().getString("rules_inventory_name"));
@@ -54,6 +64,7 @@ public class UtilCommand extends BaseCommand {
 
     @CommandAlias("hat")
     @CommandPermission("tfcplugin.hat")
+    @Description("Put things on your head!")
     public void onHat(Player player) {
         if (player.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
             if (player.getInventory().getHelmet() == null) {

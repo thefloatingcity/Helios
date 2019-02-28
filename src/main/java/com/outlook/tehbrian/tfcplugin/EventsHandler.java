@@ -135,7 +135,10 @@ public class EventsHandler implements Listener {
                     Piano.play(player, event.getCurrentItem(), false);
                 }
             } else if (event.getClickedInventory().getName().equals(plugin.getConfig().getString("rules_inventory_name"))) {
-                player.sendMessage(Misc.formatConfig("golden_rule"));
+                event.setCancelled(true);
+                if (event.getSlot() == 8 ) {
+                    player.sendMessage(Misc.formatConfig("golden_rule"));
+                }
             }
         }
     }

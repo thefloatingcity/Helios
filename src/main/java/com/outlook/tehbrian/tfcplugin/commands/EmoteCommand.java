@@ -17,20 +17,20 @@ public class EmoteCommand extends BaseCommand {
     }
 
     @HelpCommand
-    public void onList(CommandSender sender) {
-        sender.sendMessage("Testing! :D");
+    public void onHelp(CommandSender sender) {
+        sender.sendMessage(Misc.formatConfig("msg_emote_help"));
     }
 
     @CommandAlias("shrug")
     @CommandPermission("tfcplugin.shrug")
     @Description("You don't know. They don't know.")
-    @Syntax("/shrug")
     public void onShrug(CommandSender sender) {
         Bukkit.broadcastMessage(Misc.formatConfig("msg_shrug", sender.getName()));
     }
 
     @CommandAlias("blame")
     @CommandPermission("tfcplugin.blame")
+    @Description("They did something wrong. Blame them!")
     public void onBlame(CommandSender sender, String args) {
         Bukkit.broadcastMessage(Misc.formatConfig("msg_blame", sender.getName(), args));
     }
@@ -38,7 +38,6 @@ public class EmoteCommand extends BaseCommand {
     @CommandAlias("sue")
     @CommandPermission("tfcplugin.sue")
     @Description("Sue them! It fixes everything.")
-    @Syntax("what's up woofe woofe")
     public void onSue(CommandSender sender, String args) {
         Bukkit.broadcastMessage(Misc.formatConfig("msg_sue", sender.getName(), args));
     }

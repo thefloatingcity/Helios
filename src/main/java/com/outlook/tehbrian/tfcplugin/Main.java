@@ -26,6 +26,16 @@ public final class Main extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new EventsHandler(this), this);
 
+        // HelpCommand
+        // Default
+        // CatchUnknown
+        // Subcommand
+        // CommandAlias
+        // CommandPermission
+        // Description
+        // Syntax
+        // CommandCompletion
+
         manager.registerCommand(new EmoteCommand(this));
         manager.registerCommand(new ActionCommand(this));
         manager.registerCommand(new UtilCommand(this));
