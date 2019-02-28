@@ -6,7 +6,7 @@
 <groupId>com.outlook.tehbrian</groupId>
 <artifactId>TFCPlugin</artifactId>
 <!-- Version is used in plugin.yml -->
-<version>1.0.6.3</version>
+<version>1.0.6.4</version>
 <packaging>jar</packaging>
 
 <!-- Name, Description, and URL are used in plugin.yml -->
@@ -59,6 +59,10 @@
         <id>papermc</id>
         <url>https://papermc.io/repo/repository/maven-public/</url>
     </repository>
+    <repository>
+        <id>aikar</id>
+        <url>https://repo.aikar.co/content/groups/aikar/</url>
+    </repository>
 </repositories>
 
 <dependencies>
@@ -67,6 +71,11 @@
         <artifactId>paper-api</artifactId>
         <version>1.12.2-R0.1-SNAPSHOT</version>
         <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>co.aikar</groupId>
+        <artifactId>acf-paper</artifactId>
+        <version>0.5.0-SNAPSHOT</version>
     </dependency>
 </dependencies>
 
@@ -99,7 +108,32 @@
             <configuration>
                 <source>1.8</source>
                 <target>1.8</target>
+                <compilerArgs>
+                    <arg>-parameters</arg>
+                </compilerArgs>
             </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>3.2.1</version>
+            <configuration>
+                <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
+                <relocations>
+                    <relocation>
+                        <pattern>co.aikar.commands</pattern>
+                        <shadedPattern>com.tehbrian.outlook.acf</shadedPattern> <!-- Replace this -->
+                    </relocation>
+                </relocations>
+            </configuration>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>shade</goal>
+                    </goals>
+                </execution>
+            </executions>
         </plugin>
     </plugins>
 </build>

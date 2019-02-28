@@ -19,22 +19,6 @@ commands:
     permission: tfcplugin.launch
     permission-message: You don't have permission!
     usage: /<command> [player]
-  blame:
-    aliases: blames
-    description: They did something wrong. Blame them!
-    permission: tfcplugin.blame
-    permission-message: You don't have permission!
-    usage: /<command> <thing>
-  shrug:
-    description: You don't know. THEY don't know.
-    permission: tfcplugin.shrug
-    permission-message: You don't have permission!
-    usage: /<command>
-  sue:
-    description: It fixes everything.
-    permission: tfcplugin.sue
-    permission-message: You don't have permission!
-    usage: /<command> <thing>
   hat:
     description: That's a fancy hat, m'lad.
     permission: tfcplugin.hat
