@@ -25,11 +25,6 @@ public class PianoCommand extends BaseCommand {
         this.main = main;
     }
 
-    @HelpCommand
-    public void onHelp(CommandSender sender) {
-        sender.sendMessage(Misc.formatConfig("msg_piano_help"));
-    }
-
     @Subcommand("menu")
     @Description("Pick your notes here!")
     public void onMenu(Player player) {
@@ -78,5 +73,10 @@ public class PianoCommand extends BaseCommand {
             Piano.setPlayerEnabledPiano(player, true);
             player.sendMessage(Misc.formatConfig("msg_piano_enabled"));
         }
+    }
+
+    @HelpCommand
+    public void onHelp(CommandSender sender) {
+        sender.sendMessage(Misc.formatConfig("msg_piano_help"));
     }
 }

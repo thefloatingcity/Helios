@@ -22,11 +22,6 @@ public class ActionCommand extends BaseCommand {
         this.main = main;
     }
 
-    @HelpCommand
-    public void onHelp(CommandSender sender) {
-        sender.sendMessage(Misc.formatConfig("msg_action_help"));
-    }
-
     @CommandAlias("launch")
     @CommandPermission("tfcplugin.launch")
     @Description("Up you go!")
@@ -135,5 +130,10 @@ public class ActionCommand extends BaseCommand {
                 sender.sendMessage(Misc.formatConfig("msg_not_online"));
             }
         }
+    }
+
+    @HelpCommand
+    public void onHelp(CommandSender sender) {
+        sender.sendMessage(Misc.formatConfig("msg_action_help"));
     }
 }

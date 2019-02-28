@@ -18,11 +18,6 @@ public class GamemodeCommand extends BaseCommand {
         this.main = main;
     }
 
-    @HelpCommand
-    public void onHelp(CommandSender sender) {
-        sender.sendMessage(Misc.formatConfig("msg_gamemode_help"));
-    }
-
     @Subcommand("survival|s|0")
     @CommandAlias("gms")
     @Description("Change your gamemode to Survival!")
@@ -45,5 +40,10 @@ public class GamemodeCommand extends BaseCommand {
     public void onAdventure(Player player) {
         player.setGameMode(GameMode.ADVENTURE);
         player.sendMessage(Misc.formatConfig("msg_gamemode_change", "Adventure"));
+    }
+
+    @HelpCommand
+    public void onHelp(CommandSender sender) {
+        sender.sendMessage(Misc.formatConfig("msg_gamemode_help"));
     }
 }

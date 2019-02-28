@@ -3,10 +3,18 @@ msg_prefix: "&7[&fT&bF&aC&7]&r "
 msg_motd: "&fWelcome back! The last time you were on was &e%s &f%s ago."
 msg_welcome: "&fWelcome to the server, %s! Let me give you a quick tour."
 
+spawn:
+  world: world
+  x: 0.5
+  y: 60
+  z: 0.5
+
 golden_rule: "The holy &eGolden Rule&f!"
 rules_prefix_long: "-*-*-*-*-*-*-*-*-*-* -=[ The Rules ]=- *-*-*-*-*-*-*-*-*-*-"
 rules_inventory_name: "Rules | The Floating City"
-msg_rules: "This is a test message. Rules are coming soon! :)"
+msg_rules: "&fThis is a test message. Rules are coming soon! :)"
+msg_rules_help: "&fThis is a test message. Help is coming soon! :)"
+msg_rules_accept: "&fThanks! You can now build. Go have fun! :D"
 rules:
   rule1:
     name: "Rule 1 | Griefing"
@@ -36,20 +44,12 @@ rules:
     name: "Rule 9 | Golden Rule"
     text: ["If you forget even everything, remember this golden rule.", "Don't be a jerk, and use common sense. This one golden rule", "will happily keep you playing on the server.", "As long as you're not a jerk towards anyone, and you use common sense,", "like not griefing builds, not spamming chat, etc, you'll be golden!"]
 
-piano_menu_inventory_name: "Menu | The Floating City"
-
-spawn:
-  world: world
-  x: 0.5
-  y: 60
-  z: 0.5
-
 msg_no_build: "&fYou can't build! Please accept the rules first by doing &e/rules&f!"
 
-msg_help: "This is a test message. Help is coming soon! :)"
-msg_action_help: "This is a test message. Help is coming soon! :)"
-msg_emote_help: "This is a test message. Help is coming soon! :)"
-msg_util_help: "This is a test message. Help is coming soon! :)"
+msg_help: "&fThis is a test message. Help is coming soon! :)"
+msg_action_help: "&fThis is a test message. Help is coming soon! :)"
+msg_emote_help: "&fThis is a test message. Help is coming soon! :)"
+msg_util_help: "&fThis is a test message. Help is coming soon! :)"
 
 msg_gamemode_help: "&fChange your gamemode! You can use /gmc or /gamemode 1/c/creative for creative, and so on for the rest.!"
 msg_gamemode_change: "&fYour gamemode has been changed to &e%s&f!"
@@ -60,6 +60,7 @@ msg_fly_disabled: "&fThanks for disabling it. It's disabled."
 msg_piano_help: "&fFirst do &e/piano menu &fand put the notes you would like to play into your hotbar. Then you can do &e/piano instrument &fand change your instrument! Finally, do &e/piano toggle &fto turn on the piano. Change your hotbar slot to the note you want to play!"
 msg_piano_enabled: "&fThe piano has been enabled!"
 msg_piano_disabled: "&fThe piano has been disabled! Hope you enjoyed!"
+piano_menu_inventory_name: "Menu | The Floating City"
 
 msg_join: "&f%s joined the game."
 msg_leave: "&f%s left the game."

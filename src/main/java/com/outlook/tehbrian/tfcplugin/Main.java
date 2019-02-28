@@ -41,6 +41,7 @@ public final class Main extends JavaPlugin {
         manager.registerCommand(new UtilCommand(this));
         manager.registerCommand(new GamemodeCommand(this));
         manager.registerCommand(new PianoCommand(this));
+        manager.registerCommand(new RulesCommand(this));
     }
 
     @Override
