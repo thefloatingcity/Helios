@@ -7,55 +7,7 @@ website: ${url}
 main: ${mainClass}
 depend: []
 database: false
-commands:
-  zap:
-    aliases: zapooey
-    description: Zap someone! Like Zeus!
-    permission: tfcplugin.zap
-    permission-message: You don't have permission!
-    usage: /<command> [player]
-  launch:
-    description: Launch someone! Also.. like Zeus?
-    permission: tfcplugin.launch
-    permission-message: You don't have permission!
-    usage: /<command> [player]
-  hat:
-    description: That's a fancy hat, m'lad.
-    permission: tfcplugin.hat
-    permission-message: You don't have permission!
-    usage: /<command>
-  poke:
-    aliases: slap
-    description: Poked! Get poked! Or poke someone!
-    permission: tfcplugin.poke
-    permission-message: You don't have permission!
-    usage: /<command> [player]
-  fly:
-    aliases: togglefly
-    description: Toggle your fly. Only for staff!
-    permission: tfcplugin.fly
-    permission-message: You don't have permission!
-    usage: /<command>
-  gm:
-    aliases: [gmc, gms, gma]
-    description: Change your gamemode!
-    permission: tfcplugin.gm
-    permission-message: You don't have permission!
-    usage: /<command>
-  rules:
-    description: Read them please!
-    permission: tfcplugin.rules
-    permission-message: You don't have permission!
-    usage: /<command> [accept]
-  help:
-    description: We all need it now and then.
-    permission: tfcplugin.help
-    permission-message: You don't have permission!
-    usage: /<command> [page]
-  piano:
-    description: It sounds so lovely!
-    permission: tfcplugin.piano
-    permission-message: You don't have permission!
+commands: {}
 permissions:
   tfcplugin.zap:
     description: Permission to use /zap.
@@ -81,8 +33,8 @@ permissions:
   tfcplugin.fly:
     description: Permission to use /fly.
     default: op
-  tfcplugin.gm:
-    description: Permission to use /gm.
+  tfcplugin.gamemode:
+    description: Permission to use /gamemode.
     default: op
   tfcplugin.rules:
     description: Permission to use /rules.
@@ -114,7 +66,7 @@ permissions:
       tfcplugin.hat: true
       tfcplugin.poke: true
       tfcplugin.fly: true
-      tfcplugin.gm: true
+      tfcplugin.gamemode: true
       tfcplugin.rules: true
       tfcplugin.help: true
       tfcplugin.piano: true

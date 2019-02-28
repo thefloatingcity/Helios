@@ -6,7 +6,7 @@
 <groupId>com.outlook.tehbrian</groupId>
 <artifactId>TFCPlugin</artifactId>
 <!-- Version is used in plugin.yml -->
-<version>1.0.6.4</version>
+<version>1.0.7.0</version>
 <packaging>jar</packaging>
 
 <!-- Name, Description, and URL are used in plugin.yml -->
@@ -122,7 +122,7 @@
                 <relocations>
                     <relocation>
                         <pattern>co.aikar.commands</pattern>
-                        <shadedPattern>com.tehbrian.outlook.acf</shadedPattern> <!-- Replace this -->
+                        <shadedPattern>com.tehbrian.outlook.acf</shadedPattern>
                     </relocation>
                 </relocations>
             </configuration>
