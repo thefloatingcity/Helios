@@ -113,12 +113,8 @@ public class EventsHandler implements Listener {
 
     @EventHandler
     public void onToggleFlight(PlayerToggleFlightEvent event) {
-        Misc.disableFlight(event.getPlayer());
-    }
-
-    @EventHandler
-    public void onGamemodeChange(PlayerGameModeChangeEvent event) {
-        Misc.disableFlight(event.getPlayer());
+        event.setCancelled(true);
+        Flight.disableFlight(event.getPlayer());
     }
 
     @EventHandler
@@ -126,7 +122,7 @@ public class EventsHandler implements Listener {
         Player player = event.getPlayer();
         event.setJoinMessage(Misc.formatConfig("msg_join", player.getName()));
         player.sendMessage(Misc.formatConfig(false, "msg_prefix_long"));
-        Misc.disableFlight(player);
+        Flight.disableFlight(event.getPlayer());
         if (player.hasPlayedBefore()) {
             Misc.oldPlayerJoin(player);
         } else {
@@ -157,7 +153,7 @@ public class EventsHandler implements Listener {
         if (event.getCause() == EntityDamageEvent.DamageCause.VOID) {
             event.setDamage(0);
             Location location = event.getEntity().getLocation();
-            location.setY(360);
+            location.setY(520);
             event.getEntity().teleport(location);
             if (event.getEntity() instanceof Player) {
                 Player player = (Player) event.getEntity();

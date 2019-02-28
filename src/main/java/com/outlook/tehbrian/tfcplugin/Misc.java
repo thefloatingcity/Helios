@@ -62,36 +62,6 @@ public class Misc {
         return new Location(Bukkit.getWorld(main.getConfig().getString("spawn.world")), main.getConfig().getDouble("spawn.x"), main.getConfig().getDouble("spawn.y"), main.getConfig().getDouble("spawn.z"));
     }
 
-    private static Set<UUID> playerCanFly = new HashSet<>();
-
-    public static boolean getPlayerCanFly(Player player) {
-        return playerCanFly.contains(player.getUniqueId());
-    }
-
-    public static void setPlayerCanFly(Player player, Boolean bool) {
-        if (bool && player.hasPermission("tfcplugin.fly")) {
-            playerCanFly.add(player.getUniqueId());
-            enableFlight(player);
-        } else {
-            playerCanFly.remove(player.getUniqueId());
-            disableFlight(player);
-        }
-    }
-
-    public static void enableFlight(Player player) {
-        if (getPlayerCanFly(player) && player.hasPermission("tfcplugin.fly")) {
-            player.setAllowFlight(true);
-            player.setFlying(true);
-        }
-    }
-
-    public static void disableFlight(Player player) {
-        if (!getPlayerCanFly(player) || !player.hasPermission("tfcplugin.fly")) {
-            player.setAllowFlight(false);
-            player.setFlying(false);
-        }
-    }
-
     public static ItemStack createItem(String name, ArrayList<String> lore, Material material, int amount, int data) {
         ItemStack i = new ItemStack(material, amount);
         ItemMeta im = i.getItemMeta();
