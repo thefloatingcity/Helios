@@ -1,12 +1,11 @@
 package com.outlook.tehbrian.tfcplugin.commands;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.CommandPermission;
-import co.aikar.commands.annotation.Subcommand;
+import co.aikar.commands.annotation.*;
 import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Misc;
 import org.bukkit.GameMode;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandAlias("gm|gamemode")
@@ -17,6 +16,11 @@ public class GamemodeCommand extends BaseCommand {
 
     public GamemodeCommand(Main main) {
         this.main = main;
+    }
+
+    @HelpCommand
+    public void onList(CommandSender sender) {
+        sender.sendMessage("Testing! :D");
     }
 
     @Subcommand("survival|s|0")

@@ -67,6 +67,4 @@ public class UtilCommand extends BaseCommand {
             player.getInventory().setHelmet(player.getInventory().getItemInMainHand());
         }
     }
-
-
 }

@@ -7,7 +7,7 @@ import com.outlook.tehbrian.tfcplugin.Misc;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
-@CommandAlias("emote")
+@CommandAlias("emote|emotes")
 public class EmoteCommand extends BaseCommand {
 
     private final Main main;
@@ -16,11 +16,9 @@ public class EmoteCommand extends BaseCommand {
         this.main = main;
     }
 
-    @Default
-    @CommandAlias("emotes")
-    @Subcommand("list")
+    @HelpCommand
     public void onList(CommandSender sender) {
-
+        sender.sendMessage("Testing! :D");
     }
 
     @CommandAlias("shrug")
@@ -39,6 +37,8 @@ public class EmoteCommand extends BaseCommand {
 
     @CommandAlias("sue")
     @CommandPermission("tfcplugin.sue")
+    @Description("Sue them! It fixes everything.")
+    @Syntax("what's up woofe woofe")
     public void onSue(CommandSender sender, String args) {
         Bukkit.broadcastMessage(Misc.formatConfig("msg_sue", sender.getName(), args));
     }

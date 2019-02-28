@@ -13,7 +13,7 @@ import org.bukkit.util.Vector;
 
 import java.util.Random;
 
-@CommandAlias("action")
+@CommandAlias("action|actions")
 public class ActionCommand extends BaseCommand {
 
     private final Main main;
@@ -22,16 +22,16 @@ public class ActionCommand extends BaseCommand {
         this.main = main;
     }
 
-    @Default
-    @CatchUnknown
-    @CommandAlias("actions")
-    @Subcommand("list")
+    @HelpCommand
     public void onList(CommandSender sender) {
 
     }
 
     @CommandAlias("launch")
     @CommandPermission("tfcplugin.launch")
+    @Description("Wow. Much fly!")
+    @Syntax("lolololtesting")
+    @CommandCompletion("players")
     public void onLaunch(CommandSender sender, String[] args) {
         if (args.length == 0) {
             if (sender instanceof Player) {
