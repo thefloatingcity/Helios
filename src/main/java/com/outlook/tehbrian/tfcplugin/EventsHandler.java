@@ -130,7 +130,7 @@ public class EventsHandler implements Listener {
         if (event.getWhoClicked() instanceof Player) {
             Player player = (Player) event.getWhoClicked();
             if (event.getClickedInventory().getName().equals(plugin.getConfig().getString("piano_menu_inventory_name"))) {
-                if (event.getClick() == ClickType.LEFT) {
+                if (event.isRightClick()) {
                     event.setCancelled(true);
                     Piano.play(player, event.getCurrentItem(), false);
                 }
