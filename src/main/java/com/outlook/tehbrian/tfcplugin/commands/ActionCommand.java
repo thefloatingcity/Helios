@@ -38,7 +38,7 @@ public class ActionCommand extends BaseCommand {
             } else {
                 sender.sendMessage(Misc.formatConfig("msg_player_only"));
             }
-        } else if (args.length >= 1) {
+        } else {
             Player target = Bukkit.getPlayer(args[0]);
             if (args[0].equals("everyone")) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
@@ -72,7 +72,7 @@ public class ActionCommand extends BaseCommand {
             } else {
                 sender.sendMessage(Misc.formatConfig("msg_player_only"));
             }
-        } else if (args.length >= 1) {
+        } else {
             Player target = Bukkit.getPlayer(args[0]);
             if (args[0].equals("everyone")) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
@@ -115,7 +115,7 @@ public class ActionCommand extends BaseCommand {
             } else {
                 sender.sendMessage(Misc.formatConfig("msg_player_only"));
             }
-        } else if (args.length >= 1) {
+        } else {
             Player target = Bukkit.getPlayer(args[0]);
             if (args[0].equals("everyone")) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
