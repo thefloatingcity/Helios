@@ -51,7 +51,7 @@ msg_action_help: "&fThis is a test message. Help is coming soon! :)"
 msg_emote_help: "&fThis is a test message. Help is coming soon! :)"
 msg_util_help: "&fThis is a test message. Help is coming soon! :)"
 
-msg_gamemode_help: "&fChange your gamemode! You can use /gmc or /gamemode 1/c/creative for creative, and so on for the rest.!"
+msg_gamemode_help: "&fChange your gamemode!"
 msg_gamemode_change: "&fYour gamemode has been changed to &e%s&f!"
 
 msg_fly_enabled: "&fYou can now fly! Remember, only for super emergencies. If you're using it outside of an emergency I will &oPERSONALLY SMITE YOU, &c&l&oYOU HEAR ME? &rOkay thank you!"

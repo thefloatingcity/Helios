@@ -129,15 +129,17 @@ public class EventsHandler implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getWhoClicked() instanceof Player) {
             Player player = (Player) event.getWhoClicked();
-            if (event.getClickedInventory().getName().equals(plugin.getConfig().getString("piano_menu_inventory_name"))) {
-                if (event.isRightClick()) {
+            if (event.getClickedInventory() != null) {
+                if (event.getClickedInventory().getName().equals(plugin.getConfig().getString("piano_menu_inventory_name"))) {
+                    if (event.isRightClick()) {
+                        event.setCancelled(true);
+                        Piano.play(player, event.getCurrentItem(), false);
+                    }
+                } else if (event.getClickedInventory().getName().equals(plugin.getConfig().getString("rules_inventory_name"))) {
                     event.setCancelled(true);
-                    Piano.play(player, event.getCurrentItem(), false);
-                }
-            } else if (event.getClickedInventory().getName().equals(plugin.getConfig().getString("rules_inventory_name"))) {
-                event.setCancelled(true);
-                if (event.getSlot() == 8 ) {
-                    player.sendMessage(Misc.formatConfig("golden_rule"));
+                    if (event.getSlot() == 8 ) {
+                        player.sendMessage(Misc.formatConfig("golden_rule"));
+                    }
                 }
             }
         }
