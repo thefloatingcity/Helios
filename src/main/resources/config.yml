@@ -61,6 +61,7 @@ msg_piano_help: "&fFirst do &e/piano menu &fand put the notes you would like to 
 msg_piano_enabled: "&fThe piano has been enabled!"
 msg_piano_disabled: "&fThe piano has been disabled! Hope you enjoyed!"
 piano_menu_inventory_name: "Menu | The Floating City"
+msg_piano_instrument_change: "&fYour piano instrument is now &e%s&f!"
 
 msg_join: "&f%s joined the game."
 msg_leave: "&f%s left the game."

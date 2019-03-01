@@ -26,15 +26,15 @@ public class EmoteCommand extends BaseCommand {
     @CommandAlias("blame")
     @CommandPermission("tfcplugin.blame")
     @Description("They did something wrong. Blame them!")
-    public void onBlame(CommandSender sender, String args) {
-        Bukkit.broadcastMessage(Misc.formatConfig("msg_blame", sender.getName(), args));
+    public void onBlame(CommandSender sender, String thing) {
+        Bukkit.broadcastMessage(Misc.formatConfig("msg_blame", sender.getName(), thing));
     }
 
     @CommandAlias("sue")
     @CommandPermission("tfcplugin.sue")
     @Description("Sue them! It fixes everything.")
-    public void onSue(CommandSender sender, String args) {
-        Bukkit.broadcastMessage(Misc.formatConfig("msg_sue", sender.getName(), args));
+    public void onSue(CommandSender sender, String thing) {
+        Bukkit.broadcastMessage(Misc.formatConfig("msg_sue", sender.getName(), thing));
     }
 
     @HelpCommand
