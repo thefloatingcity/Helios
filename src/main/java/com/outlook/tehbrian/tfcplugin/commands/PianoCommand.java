@@ -59,7 +59,7 @@ public class PianoCommand extends BaseCommand {
 
     @Subcommand("instrument")
     @Description("Pick your instrument! Any sound!")
-    @CommandCompletion("@sounds")
+    @CommandCompletion("@pianosounds")
     public void onInstrument(Player player, Sound sound) {
         Piano.setPlayerPianoInstrument(player, sound);
         player.sendMessage(Misc.formatConfig("msg_piano_instrument_change", sound.toString()));

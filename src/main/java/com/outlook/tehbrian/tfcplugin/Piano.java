@@ -39,6 +39,20 @@ public class Piano {
         }
     }
 
+    public enum PianoSounds {
+        BLOCK_NOTE_BASEDRUM,
+        BLOCK_NOTE_BASS,
+        BLOCK_NOTE_BELL,
+        BLOCK_NOTE_CHIME,
+        BLOCK_NOTE_FLUTE,
+        BLOCK_NOTE_GUITAR,
+        BLOCK_NOTE_HARP,
+        BLOCK_NOTE_HAT,
+        BLOCK_NOTE_PLING,
+        BLOCK_NOTE_SNARE,
+        BLOCK_NOTE_XYLOPHONE,
+    }
+
     public static void play(Player player, ItemStack item, boolean requireToggle) {
         if ((!requireToggle || getPlayerEnabledPiano(player)) && player.hasPermission("tfcplugin.piano")) {
             if (item != null) {

@@ -3,7 +3,6 @@ package com.outlook.tehbrian.tfcplugin;
 import co.aikar.commands.ACFUtil;
 import co.aikar.commands.PaperCommandManager;
 import com.outlook.tehbrian.tfcplugin.commands.*;
-import org.bukkit.Sound;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
@@ -38,7 +37,7 @@ public final class Main extends JavaPlugin {
         // Syntax
         // CommandCompletion
 
-        manager.getCommandCompletions().registerAsyncCompletion("sounds", c -> ACFUtil.enumNames(Sound.values()));
+        manager.getCommandCompletions().registerAsyncCompletion("pianosounds", c -> ACFUtil.enumNames(Piano.PianoSounds.values()));
 
         manager.registerCommand(new EmoteCommand(this));
         manager.registerCommand(new ActionCommand(this));
