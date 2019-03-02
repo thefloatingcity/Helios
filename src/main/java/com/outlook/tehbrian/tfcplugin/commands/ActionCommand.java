@@ -89,6 +89,39 @@ public class ActionCommand extends BaseCommand {
         }
     }
 
+    @CommandAlias("boost")
+    @CommandPermission("tfcplugin.boost")
+    @Description("Faster! Faster!")
+    @CommandCompletion("@players")
+    public void onBoost(CommandSender sender, String[] args) {
+
+        if (args.length == 0) {
+            if (sender instanceof Player) {
+                Player player = (Player) sender;
+
+                player.setVelocity(player.getVelocity().multiply(3));
+
+                Bukkit.broadcastMessage(Misc.formatConfig("msg_boost_themself", sender.getName()));
+            } else {
+                sender.sendMessage(Misc.formatConfig("msg_player_only"));
+            }
+        } else {
+            Player target = Bukkit.getPlayer(args[0]);
+            if (args[0].equals("everyone")) {
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    player.setVelocity(player.getVelocity().multiply(3));
+                }
+                Bukkit.broadcastMessage(Misc.formatConfig("msg_boost_everyone", sender.getName()));
+            } else if (target != null) {
+                target.setVelocity(target.getVelocity().multiply(3));
+
+                Bukkit.broadcastMessage(Misc.formatConfig("msg_boost", sender.getName(), target.getName()));
+            } else {
+                sender.sendMessage(Misc.formatConfig("msg_not_online"));
+            }
+        }
+    }
+
     @CommandAlias("poke")
     @CommandPermission("tfcplugin.poke")
     @Description("Just a little push.")

@@ -85,6 +85,10 @@ msg_launch: "&f%s &alaunched &f%s"
 msg_launch_themself: "&f%s &alaunched &fthemselves"
 msg_launch_everyone: "&f%s &alaunched &feveryone"
 
+msg_boost: "&f%s &aboosted &f%s"
+msg_boost_themself: "&f%s &aboosted &fthemselves"
+msg_boost_everyone: "&f%s &aboosted &feveryone"
+
 msg_poke: "&f%s &cpoked &f%s"
 msg_poke_themself: "&f%s &cpoked &fthemselves"
 msg_poke_everyone: "&f%s &cpoked &feveryone"
