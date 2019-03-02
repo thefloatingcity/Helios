@@ -89,6 +89,7 @@ public class ActionCommand extends BaseCommand {
         }
     }
 
+    /*
     @CommandAlias("boost")
     @CommandPermission("tfcplugin.boost")
     @Description("Faster! Faster!")
@@ -121,6 +122,7 @@ public class ActionCommand extends BaseCommand {
             }
         }
     }
+    */
 
     @CommandAlias("poke")
     @CommandPermission("tfcplugin.poke")
