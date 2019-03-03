@@ -94,7 +94,6 @@ public class ActionCommand extends BaseCommand {
     @Description("Faster! Faster!")
     @CommandCompletion("@players")
     public void onBoost(CommandSender sender, String[] args) {
-
         if (args.length == 0) {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
