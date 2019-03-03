@@ -28,6 +28,9 @@ permissions:
   tfcplugin.hat:
     description: Permission to use /hat.
     default: op
+  tfcplugin.boost:
+    description: Permission to use /boost.
+    default: op
   tfcplugin.poke:
     description: Permission to use /poke.
     default: op
@@ -65,6 +68,7 @@ permissions:
       tfcplugin.shrug: true
       tfcplugin.sue: true
       tfcplugin.hat: true
+      tfcplugin.boost: true
       tfcplugin.poke: true
       tfcplugin.fly: true
       tfcplugin.gamemode: true

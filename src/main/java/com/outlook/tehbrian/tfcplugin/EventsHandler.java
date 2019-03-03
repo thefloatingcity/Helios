@@ -1,10 +1,8 @@
 package com.outlook.tehbrian.tfcplugin;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
+import org.bukkit.*;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,9 +12,9 @@ import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.hanging.HangingPlaceEvent;
-import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.inventory.meta.FireworkMeta;
 
 public class EventsHandler implements Listener {
 
@@ -110,9 +108,24 @@ public class EventsHandler implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+
         event.setJoinMessage(Misc.formatConfig("msg_join", player.getDisplayName()));
         player.sendMessage(Misc.formatConfig(false, "msg_prefix_long"));
+
         Flight.disableFlight(player);
+
+        Firework f = player.getWorld().spawn(player.getLocation(), Firework.class);
+        FireworkMeta fm = f.getFireworkMeta();
+        fm.addEffect(FireworkEffect.builder()
+                .flicker(true)
+                .trail(false)
+                .with(FireworkEffect.Type.BALL_LARGE)
+                .withColor(Color.WHITE, Color.BLUE, Color.GREEN)
+                .withFade(Color.GREEN, Color.BLUE, Color.WHITE)
+                .build());
+        fm.setPower(2);
+        f.setFireworkMeta(fm);
+
         if (player.hasPlayedBefore()) {
             Misc.oldPlayerJoin(player);
         } else {
