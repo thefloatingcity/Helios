@@ -89,7 +89,6 @@ public class ActionCommand extends BaseCommand {
         }
     }
 
-    /*
     @CommandAlias("boost")
     @CommandPermission("tfcplugin.boost")
     @Description("Faster! Faster!")
@@ -100,7 +99,7 @@ public class ActionCommand extends BaseCommand {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
 
-                player.setVelocity(player.getVelocity().multiply(3));
+                player.setVelocity(player.getLocation().getDirection().multiply(3));
 
                 Bukkit.broadcastMessage(Misc.formatConfig("msg_boost_themself", sender.getName()));
             } else {
@@ -110,11 +109,11 @@ public class ActionCommand extends BaseCommand {
             Player target = Bukkit.getPlayer(args[0]);
             if (args[0].equals("everyone")) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    player.setVelocity(player.getVelocity().multiply(3));
+                    player.setVelocity(player.getLocation().getDirection().multiply(3));
                 }
                 Bukkit.broadcastMessage(Misc.formatConfig("msg_boost_everyone", sender.getName()));
             } else if (target != null) {
-                target.setVelocity(target.getVelocity().multiply(3));
+                target.setVelocity(target.getLocation().getDirection().multiply(3));
 
                 Bukkit.broadcastMessage(Misc.formatConfig("msg_boost", sender.getName(), target.getName()));
             } else {
@@ -122,7 +121,6 @@ public class ActionCommand extends BaseCommand {
             }
         }
     }
-    */
 
     @CommandAlias("poke")
     @CommandPermission("tfcplugin.poke")
