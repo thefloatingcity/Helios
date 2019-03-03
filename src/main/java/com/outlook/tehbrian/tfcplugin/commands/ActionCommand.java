@@ -32,7 +32,7 @@ public class ActionCommand extends BaseCommand {
                 Player player = (Player) sender;
 
                 player.setVelocity(new Vector(0, 10, 0));
-                player.playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 100000, 0.75F);
+                player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
 
                 Bukkit.broadcastMessage(Misc.formatConfig("msg_launch_themself", sender.getName()));
             } else {
@@ -43,12 +43,12 @@ public class ActionCommand extends BaseCommand {
             if (args[0].equals("everyone")) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     player.setVelocity(new Vector(0, 10, 0));
-                    player.playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 100000, 0.75F);
+                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
                 }
                 Bukkit.broadcastMessage(Misc.formatConfig("msg_launch_everyone", sender.getName()));
             } else if (target != null) {
                 target.setVelocity(new Vector(0, 10, 0));
-                target.playSound(target.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 100000, 0.75F);
+                target.getWorld().playSound(target.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
 
                 Bukkit.broadcastMessage(Misc.formatConfig("msg_launch", sender.getName(), target.getName()));
             } else {
@@ -100,6 +100,7 @@ public class ActionCommand extends BaseCommand {
                 Player player = (Player) sender;
 
                 player.setVelocity(player.getLocation().getDirection().multiply(4));
+                player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
 
                 Bukkit.broadcastMessage(Misc.formatConfig("msg_boost_themself", sender.getName()));
             } else {
@@ -110,10 +111,12 @@ public class ActionCommand extends BaseCommand {
             if (args[0].equals("everyone")) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     player.setVelocity(player.getLocation().getDirection().multiply(4));
+                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
                 }
                 Bukkit.broadcastMessage(Misc.formatConfig("msg_boost_everyone", sender.getName()));
             } else if (target != null) {
                 target.setVelocity(target.getLocation().getDirection().multiply(4));
+                target.getWorld().playSound(target.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
 
                 Bukkit.broadcastMessage(Misc.formatConfig("msg_boost", sender.getName(), target.getName()));
             } else {
