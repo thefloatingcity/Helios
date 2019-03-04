@@ -11,7 +11,8 @@ import java.util.*;
 
 public class Piano {
 
-    private Piano() {}
+    private Piano() {
+    }
 
     private static Set<UUID> playerEnabledPiano = new HashSet<>();
     private static Map<UUID, Sound> playerPianoInstrument = new HashMap<>();

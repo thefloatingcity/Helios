@@ -10,7 +10,8 @@ import java.util.concurrent.TimeUnit;
 
 public class Misc {
 
-    private Misc() {}
+    private Misc() {
+    }
 
     private static Main main = Main.getInstance();
 
@@ -36,7 +37,7 @@ public class Misc {
             player.sendMessage(formatConfig("msg_motd", TimeUnit.MILLISECONDS.toHours(millisSinceLastPlayed), "hours"));
         } else if (millisSinceLastPlayed >= 60000) {
             player.sendMessage(formatConfig("msg_motd", TimeUnit.MILLISECONDS.toMinutes(millisSinceLastPlayed), "minutes"));
-        } else if (millisSinceLastPlayed >= 1000){
+        } else if (millisSinceLastPlayed >= 1000) {
             player.sendMessage(formatConfig("msg_motd", TimeUnit.MILLISECONDS.toSeconds(millisSinceLastPlayed), "seconds"));
         } else {
             player.sendMessage(formatConfig("msg_motd", millisSinceLastPlayed, "milliseconds"));
