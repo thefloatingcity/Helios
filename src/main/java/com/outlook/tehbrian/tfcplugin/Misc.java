@@ -63,7 +63,7 @@ public class Misc {
         return new Location(Bukkit.getWorld(main.getConfig().getString("spawn.world")), main.getConfig().getDouble("spawn.x"), main.getConfig().getDouble("spawn.y"), main.getConfig().getDouble("spawn.z"));
     }
 
-    public static ItemStack createItem(String name, ArrayList<String> lore, Material material, int amount, int data) {
+    public static ItemStack createItem(String name, List<String> lore, Material material, int amount, int data) {
         ItemStack i = new ItemStack(material, amount);
         ItemMeta im = i.getItemMeta();
         for (int x = 0; x < lore.size(); x++) {
