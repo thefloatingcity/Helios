@@ -13,8 +13,6 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-import java.util.List;
-
 @CommandAlias("piano")
 @CommandPermission("tfcplugin.piano")
 public class PianoCommand extends BaseCommand {
@@ -29,11 +27,9 @@ public class PianoCommand extends BaseCommand {
     @Description("Pick your notes here!")
     public void onMenu(Player player) {
         Inventory pianoNotesInventory = Bukkit.createInventory(null, 27, main.getConfig().getString("piano_notes_inventory_name"));
-        for (ConfigurationSection rule : (List<ConfigurationSection>) main.getConfig().getList("piano_notes")) {
-            String name = rule.getString("name");
-            List lore = rule.getStringList("lore");
-            int data = rule.getInt("data");
-            pianoNotesInventory.addItem(Misc.createItem(name, lore, Material.STAINED_GLASS_PANE, 1, data));
+        for (String key : main.getConfig().getConfigurationSection("piano_notes").getKeys(false)) {
+            ConfigurationSection rule = main.getConfig().getConfigurationSection("piano_notes." + key);
+            pianoNotesInventory.addItem(Misc.createItem(rule.getString("name"), rule.getStringList("lore"), Material.WRITTEN_BOOK, 1, rule.getInt("data")));
         }
         player.openInventory(pianoNotesInventory);
     }

@@ -34,57 +34,66 @@ msg_rules_accept: "&fStill being worked on, sorry! Bug Brian on Discord to get P
 msg_golden_rule: "&fThe holy &eGolden Rule&f!"
 rules_inventory_name: "Rules | The Floating City"
 rules:
-  - name: "&fRule 1 &7| &eGriefing"
+  rule1:
+    name: "&fRule 1 &7| &eGriefing"
     lore:
       - "&fNo touching other people's stuff without their permission."
       - "&fThis includes placing or breaking blocks,"
       - "&ftaking or placing items in their chests, taking or placing items in their itemframes,"
       - "&ftrampling their crops, killing their animals.. You get the idea."
       - "&fPlease use common sense. If it isn't yours, leave it be."
-  - name: "&fRule 2 &7| &eSwearing"
+  rule2:
+    name: "&fRule 2 &7| &eSwearing"
     lore:
       - "&fSwearing is allowed but please try to be courteous."
       - "&fRemember, as much as you may think otherwise, Minecraft is"
       - "&fa kids game and there are kids who play it."
       - "&fSo please just don't fill up the chat with a bunch of swearing."
-  - name: "&fRule 3 &7| &eSpamming"
+  rule3:
+    name: "&fRule 3 &7| &eSpamming"
     lore:
       - "&fHaving long messages and lots of them is fine, but please"
       - "&fdon't fill up chat with meaningless gibberish,"
       - "&for repeat the same messages over and over. Again, please"
       - "&fbe courteous and mindful of other people."
-  - name: "&fRule 4 &7| &eAdvertising"
+  rule4:
+    name: "&fRule 4 &7| &eAdvertising"
     lore:
       - "&fWe're a pretty unconvential server! Talking about servers,"
       - "&fsaying their names, even putting their IPs is fine."
       - "&fJust no advertising any servers trying to get random people on it,"
       - "&fThere are websites for that, you know. If you're asking a friend if they wanna go on"
       - "&fthis server and they forgot the IP, it's fine."
-  - name: "&fRule 5 &7| &eHurtful Speech"
+  rule5:
+    name: "&fRule 5 &7| &eHurtful Speech"
     lore:
       - "&fNo hate speech or discrimination or insults against anyone."
       - "&fWe're not a politically correct server but don't be a jerk."
       - "&fIf something you say might hurt someone, don't say it."
-  - name: "&fRule 6 &7| &eFlamewars"
+  rule6:
+    name: "&fRule 6 &7| &eFlamewars"
     lore:
       - "&fHaving discussions about things are fine! Religion, politics, so be it."
       - "&fHowever, keep it cool and a debate, not a flamewar."
       - "&fAlso, be mindful of Rule 5. If you feel like talking about something"
       - "&fthat might hurt someone, don't talk about it with them."
       - "&fBut if you both want to talk about it and engage in discussion, it's fine!"
-  - name: "&fRule 7 &7| &ePG-13"
+  rule7:
+    name: "&fRule 7 &7| &ePG-13"
     lore:
       - "&fWe're a pretty relaxed server. But keep it PG-13."
       - "&fNo builds or chat that has a lot of gore or sexual content."
       - "&fIf you wouldn't see it in Avengers, don't make it please."
-  - name: "&fRule 8 &7| &eLag, Bugs, and Glitches"
+  rule8:
+    name: "&fRule 8 &7| &eLag, Bugs, and Glitches"
     lore:
       - "&fPlease don't try to break a server. It's not funny."
       - "&fYou're not a hacker, it just ruins the game we're all trying to"
       - "&fhave fun and play on. This means no lag machines or"
       - "&fgiant super big repeating complex redstone, and if you find"
       - "&fany bugs or glitches, please report them to staff! Thanks!"
-  - name: "&fRule 9 &7| &eGolden Rule"
+  rule9:
+    name: "&fRule 9 &7| &eGolden Rule"
     lore:
       - "&fIf you forget even everything, remember this golden rule."
       - "&fDon't be a jerk, and use common sense. This one golden rule"
@@ -103,151 +112,176 @@ msg_piano_disabled: "&fThe piano has been disabled! Hope you enjoyed!"
 msg_piano_instrument_change: "&fYour piano instrument is now set to &e%s&f!"
 piano_notes_inventory_name: "Piano Menu | The Floating City"
 piano_notes:
-  - name: "&fF♯/G♭ [&bOctave 1&f]"
+  piano_note1:
+    name: "&fF♯/G♭ [&bOctave 1&f]"
     lore:
       - "&7Part of &f[&eF# Major, F# Minor&f]"
       - "&8[Note]"
       - "0.5"
     data: 8
-  - name: "&fG [&bOctave 1&f]"
+  piano_note2:
+    name: "&fG [&bOctave 1&f]"
     lore:
       - "&7Part of &f[]"
       - "&8[Note]"
       - "0.529732"
     data: 0
-  - name: "&fG♯/A♭ [&bOctave 1&f]"
+  piano_note3:
+    name: "&fG♯/A♭ [&bOctave 1&f]"
     lore:
       - "&7Part of &f[&eF# Major, F# Minor&f]"
       - "&8[Note]"
       - "0.561231"
     data: 8
-  - name: "&fA [&bOctave 1&f]"
+  piano_note4:
+    name: "&fA [&bOctave 1&f]"
     lore:
       - "&7Part of &f[&eF# Minor&f]"
       - "&8[Note]"
       - "0.594604"
     data: 0
-  - name: "&fA♯/B♭ [&bOctave 1&f]"
+  piano_note5:
+    name: "&fA♯/B♭ [&bOctave 1&f]"
     lore:
       - "&7Part of &f[&eF# Major&f]"
       - "&8[Note]"
       - "0.629961"
     data: 8
-  - name: "&fB [&bOctave 1&f]"
+  piano_note6:
+    name: "&fB [&bOctave 1&f]"
     lore:
       - "&7Part of &f[&eF# Major, F# Minor&f]"
       - "&8[Note]"
       - "0.667420"
     data: 0
-  - name: "&fC [&bOctave 1&f]"
+  piano_note7:
+    name: "&fC [&bOctave 1&f]"
     lore:
       - "&7Part of &f[]"
       - "&8[Note]"
       - "0.707107"
     data: 0
-  - name: "&fC♯/D♭ [&bOctave 1&f]"
+  piano_note8:
+    name: "&fC♯/D♭ [&bOctave 1&f]"
     lore:
       - "&7Part of &f[&eF# Major, F# Minor&f]"
       - "&8[Note]"
       - "0.749154"
     data: 8
-  - name: "&fD [&bOctave 1&f]"
+  piano_note9:
+    name: "&fD [&bOctave 1&f]"
     lore:
       - "&7Part of &f[&eF# Minor&f]"
       - "&8[Note]"
       - "0.793701"
     data: 0
-  - name: "&fD♯/E♭ [&bOctave 1&f]"
+  piano_note10:
+    name: "&fD♯/E♭ [&bOctave 1&f]"
     lore:
       - "&7Part of &f[&eF# Major&f]"
       - "&8[Note]"
       - "0.840896"
     data: 8
-  - name: "&fE [&bOctave 1&f]"
+  piano_note11:
+    name: "&fE [&bOctave 1&f]"
     lore:
       - "&7Part of &f[&eF# Minor&f]"
       - "&8[Note]"
       - "0.890899"
     data: 0
-  - name: "&fF [&bOctave 1&f]"
+  piano_note12:
+    nname: "&fF [&bOctave 1&f]"
     lore:
       - "&7Part of &f[&eF# Major&f]"
       - "&8[Note]"
       - "0.943874"
     data: 0
-  - name: "&fF♯/G♭ [&bOctave 2&f]"
+  piano_note13:
+    name: "&fF♯/G♭ [&bOctave 2&f]"
     lore:
       - "&7Part of &f[&eF# Major, F# Minor&f]"
       - "&8[Note]"
       - "1"
     data: 8
-  - name: "&fG [&bOctave 2&f]"
+  piano_note14:
+    name: "&fG [&bOctave 2&f]"
     lore:
       - "&7Part of &f[]"
       - "&8[Note]"
       - "1.059463"
     data: 0
-  - name: "&fG♯/A♭ [&bOctave 2&f]"
+  piano_note15:
+    name: "&fG♯/A♭ [&bOctave 2&f]"
     lore:
       - "&7Part of &f[&eF# Major, F# Minor&f]"
       - "&8[Note]"
       - "1.122462"
     data: 8
-  - name: "&fA [&bOctave 2&f]"
+  piano_note16:
+    name: "&fA [&bOctave 2&f]"
     lore:
       - "&7Part of &f[&eF# Minor&f]"
       - "&8[Note]"
       - "1.189207"
     data: 0
-  - name: "&fA#/B♭ [&bOctave 2&f]"
+  piano_note17:
+    name: "&fA#/B♭ [&bOctave 2&f]"
     lore:
       - "&7Part of &f[&eF# Major&f]"
       - "&8[Note]"
       - "1.259921"
     data: 8
-  - name: "&fB [&bOctave 2&f]"
+  piano_note18:
+    name: "&fB [&bOctave 2&f]"
     lore:
       - "&7Part of &f[&eF# Major, F# Minor&f]"
       - "&8[Note]"
       - "1.334840"
     data: 0
-  - name: "&fC [&bOctave 2&f]"
+  piano_note19:
+    name: "&fC [&bOctave 2&f]"
     lore:
       - "&7Part of &f[]"
       - "&8[Note]"
       - "1.414214"
     data: 0
-  - name: "&fC♯/D♭ [&bOctave 2&f]"
+  piano_note20:
+    name: "&fC♯/D♭ [&bOctave 2&f]"
     lore:
       - "&7Part of &f[&eF# Major, F# Minor&f]"
       - "&8[Note]"
       - "1.498307"
     data: 8
-  - name:
+  piano_note21:
+  name:
     lore:
       - "&7Part of &f[&eF# Minor&f]"
       - "&8[Note]"
       - "1.587401"
     data: 0
-  - name: "&fD♯/E♭ [&bOctave 2&f]"
+  piano_note22:
+    name: "&fD♯/E♭ [&bOctave 2&f]"
     lore:
       - "&7Part of &f[&eF# Major&f]"
       - "&8[Note]"
       - "1.681793"
     data: 8
-  - name: "&fE [&bOctave 2&f]"
+  piano_note23:
+    name: "&fE [&bOctave 2&f]"
     lore:
       - "&7Part of &f[&eF# Minor&f]"
       - "&8[Note]"
       - "1.781797"
     data: 0
-  - name: "&fF [&bOctave 2&f]"
+  piano_note24:
+    name: "&fF [&bOctave 2&f]"
     lore:
       - "&7Part of &f[&eF# Major&f]"
       - "&8[Note]"
       - "1.887749"
     data: 0
-  - name: "&fF♯/G♭ [&bOctave 3&f]"
+  piano_note25:
+    name: "&fF♯/G♭ [&bOctave 3&f]"
     lore:
       - "&7Part of &f[&eF# Major, F# Minor&f]"
       - "&8[Note]"
