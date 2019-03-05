@@ -29,7 +29,7 @@ public class PianoCommand extends BaseCommand {
         Inventory pianoNotesInventory = Bukkit.createInventory(null, 27, main.getConfig().getString("piano_notes_inventory_name"));
         for (String key : main.getConfig().getConfigurationSection("piano_notes").getKeys(false)) {
             ConfigurationSection piano_note = main.getConfig().getConfigurationSection("piano_notes." + key);
-            pianoNotesInventory.addItem(Misc.createItem(piano_note.getString("name"), piano_note.getStringList("lore"), Material.WRITTEN_BOOK, 1, piano_note.getInt("data")));
+            pianoNotesInventory.addItem(Misc.createItem(piano_note.getString("name"), piano_note.getStringList("lore"), Material.STAINED_GLASS_PANE, 1, piano_note.getInt("data")));
         }
         player.openInventory(pianoNotesInventory);
     }

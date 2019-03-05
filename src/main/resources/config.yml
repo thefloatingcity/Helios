@@ -190,7 +190,7 @@ piano_notes:
       - "0.890899"
     data: 0
   piano_note12:
-    nname: "&fF [&bOctave 1&f]"
+    name: "&fF [&bOctave 1&f]"
     lore:
       - "&7Part of &f[&eF# Major&f]"
       - "&8[Note]"
@@ -253,7 +253,7 @@ piano_notes:
       - "1.498307"
     data: 8
   piano_note21:
-  name:
+    name: "&fD [&bOctave 2&f]"
     lore:
       - "&7Part of &f[&eF# Minor&f]"
       - "&8[Note]"
