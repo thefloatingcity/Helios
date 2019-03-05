@@ -104,107 +104,154 @@ msg_piano_instrument_change: "&fYour piano instrument is now set to &e%s&f!"
 piano_notes_inventory_name: "Piano Menu | The Floating City"
 piano_notes:
   - name: "&fF♯/G♭ [&bOctave 1&f]"
-    # "&fF♯/G♭ [&bOctave 1&f]", "&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "0.5"),
     lore:
       - "&7Part of &f[&eF# Major, F# Minor&f]"
       - "&8[Note]"
       - "0.5"
     data: 8
-  - name: ""
-    # "&fG [&bOctave 1&f]",     "&7Part of &f[]", "&8[Note]", "0.529732"),
+  - name: "&fG [&bOctave 1&f]"
     lore:
+      - "&7Part of &f[]"
+      - "&8[Note]"
+      - "0.529732"
     data: 0
-  - name: ""
-    # "&fG♯/A♭ [&bOctave 1&f]", "&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "0.561231"),
+  - name: "&fG♯/A♭ [&bOctave 1&f]"
     lore:
+      - "&7Part of &f[&eF# Major, F# Minor&f]"
+      - "&8[Note]"
+      - "0.561231"
     data: 8
-  - name: ""
-    # "&fA [&bOctave 1&f]",     "&7Part of &f[&eF# Minor&f]", "&8[Note]", "0.594604"),
+  - name: "&fA [&bOctave 1&f]"
     lore:
+      - "&7Part of &f[&eF# Minor&f]"
+      - "&8[Note]"
+      - "0.594604"
     data: 0
-  - name: ""
-    # "&fA♯/B♭ [&bOctave 1&f]", "&7Part of &f[&eF# Major&f]", "&8[Note]", "0.629961"),
+  - name: "&fA♯/B♭ [&bOctave 1&f]"
     lore:
+      - "&7Part of &f[&eF# Major&f]"
+      - "&8[Note]"
+      - "0.629961"
     data: 8
-  - name: ""
-    # "&fB [&bOctave 1&f]",     "&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "0.667420"),
+  - name: "&fB [&bOctave 1&f]"
     lore:
+      - "&7Part of &f[&eF# Major, F# Minor&f]"
+      - "&8[Note]"
+      - "0.667420"
     data: 0
-  - name: ""
-    # "&fC [&bOctave 1&f]",     "&7Part of &f[]", "&8[Note]", "0.707107"),
+  - name: "&fC [&bOctave 1&f]"
     lore:
+      - "&7Part of &f[]"
+      - "&8[Note]"
+      - "0.707107"
     data: 0
-  - name: ""
-    # "&fC♯/D♭ [&bOctave 1&f]", "&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "0.749154"),
+  - name: "&fC♯/D♭ [&bOctave 1&f]"
     lore:
+      - "&7Part of &f[&eF# Major, F# Minor&f]"
+      - "&8[Note]"
+      - "0.749154"
     data: 8
-  - name: ""
-    # "&fD [&bOctave 1&f]",     "&7Part of &f[&eF# Minor&f]", "&8[Note]", "0.793701"),
+  - name: "&fD [&bOctave 1&f]"
     lore:
+      - "&7Part of &f[&eF# Minor&f]"
+      - "&8[Note]"
+      - "0.793701"
     data: 0
-  - name: ""
-    # "&fD♯/E♭ [&bOctave 1&f]", "&7Part of &f[&eF# Major&f]", "&8[Note]", "0.840896"),
+  - name: "&fD♯/E♭ [&bOctave 1&f]"
     lore:
+      - "&7Part of &f[&eF# Major&f]"
+      - "&8[Note]"
+      - "0.840896"
     data: 8
-  - name: ""
-    # "&fE [&bOctave 1&f]",     "&7Part of &f[&eF# Minor&f]", "&8[Note]", "0.890899"),
+  - name: "&fE [&bOctave 1&f]"
     lore:
+      - "&7Part of &f[&eF# Minor&f]"
+      - "&8[Note]"
+      - "0.890899"
     data: 0
-  - name: ""
-    # "&fF [&bOctave 1&f]",     "&7Part of &f[&eF# Major&f]", "&8[Note]", "0.943874"),
+  - name: "&fF [&bOctave 1&f]"
     lore:
+      - "&7Part of &f[&eF# Major&f]"
+      - "&8[Note]"
+      - "0.943874"
     data: 0
-  - name: ""
-    # "&fF♯/G♭ [&bOctave 2&f]", "&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "1"),
+  - name: "&fF♯/G♭ [&bOctave 2&f]"
     lore:
+      - "&7Part of &f[&eF# Major, F# Minor&f]"
+      - "&8[Note]"
+      - "1"
     data: 8
-  - name: ""
-    # "&fG [&bOctave 2&f]",     "&7Part of &f[]", "&8[Note]", "1.059463"),
+  - name: "&fG [&bOctave 2&f]"
     lore:
+      - "&7Part of &f[]"
+      - "&8[Note]"
+      - "1.059463"
     data: 0
-  - name: ""
-    # "&fG♯/A♭ [&bOctave 2&f]", "&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "1.122462"),
+  - name: "&fG♯/A♭ [&bOctave 2&f]"
     lore:
+      - "&7Part of &f[&eF# Major, F# Minor&f]"
+      - "&8[Note]"
+      - "1.122462"
     data: 8
-  - name: ""
-    # "&fA [&bOctave 2&f]",     "&7Part of &f[&eF# Minor&f]", "&8[Note]", "1.189207"),
+  - name: "&fA [&bOctave 2&f]"
     lore:
+      - "&7Part of &f[&eF# Minor&f]"
+      - "&8[Note]"
+      - "1.189207"
     data: 0
-  - name: ""
-    # "&fA#/B♭ [&bOctave 2&f]", "&7Part of &f[&eF# Major&f]", "&8[Note]", "1.259921"),
+  - name: "&fA#/B♭ [&bOctave 2&f]"
     lore:
+      - "&7Part of &f[&eF# Major&f]"
+      - "&8[Note]"
+      - "1.259921"
     data: 8
-  - name: ""
-    # "&fB [&bOctave 2&f]",     "&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "1.334840"),
+  - name: "&fB [&bOctave 2&f]"
     lore:
+      - "&7Part of &f[&eF# Major, F# Minor&f]"
+      - "&8[Note]"
+      - "1.334840"
     data: 0
-  - name: ""
-    # "&fC [&bOctave 2&f]",     "&7Part of &f[]", "&8[Note]", "1.414214"),
+  - name: "&fC [&bOctave 2&f]"
     lore:
+      - "&7Part of &f[]"
+      - "&8[Note]"
+      - "1.414214"
     data: 0
-  - name: ""
-    # "&fC♯/D♭ [&bOctave 2&f]", "&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "1.498307"),
+  - name: "&fC♯/D♭ [&bOctave 2&f]"
     lore:
+      - "&7Part of &f[&eF# Major, F# Minor&f]"
+      - "&8[Note]"
+      - "1.498307"
     data: 8
-  - name: ""
-    # "&fD [&bOctave 2&f]",     "&7Part of &f[&eF# Minor&f]", "&8[Note]", "1.587401"),
+  - name:
     lore:
+      - "&7Part of &f[&eF# Minor&f]"
+      - "&8[Note]"
+      - "1.587401"
     data: 0
-  - name: ""
-    # "&fD♯/E♭ [&bOctave 2&f]", "&7Part of &f[&eF# Major&f]", "&8[Note]", "1.681793"),
+  - name: "&fD♯/E♭ [&bOctave 2&f]"
     lore:
+      - "&7Part of &f[&eF# Major&f]"
+      - "&8[Note]"
+      - "1.681793"
     data: 8
-  - name: ""
-    # "&fE [&bOctave 2&f]",     "&7Part of &f[&eF# Minor&f]", "&8[Note]", "1.781797"),
+  - name: "&fE [&bOctave 2&f]"
     lore:
+      - "&7Part of &f[&eF# Minor&f]"
+      - "&8[Note]"
+      - "1.781797"
     data: 0
-  - name: ""
-    # "&fF [&bOctave 2&f]",     "&7Part of &f[&eF# Major&f]", "&8[Note]", "1.887749"),
+  - name: "&fF [&bOctave 2&f]"
     lore:
+      - "&7Part of &f[&eF# Major&f]"
+      - "&8[Note]"
+      - "1.887749"
     data: 0
-  - name: ""
-    # "&fF♯/G♭ [&bOctave 3&f]", "&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "2"),
+  - name: "&fF♯/G♭ [&bOctave 3&f]"
     lore:
+      - "&7Part of &f[&eF# Major, F# Minor&f]"
+      - "&8[Note]"
+      - "2"
     data: 8
 
 ############
