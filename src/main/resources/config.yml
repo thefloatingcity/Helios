@@ -304,7 +304,7 @@ msg_hat_none: "&fTo put on a hat, hold what you want to wear!"
 msg_emote_help: "&fThis is a test message. Help is coming soon! :)"
 
 msg_shrug: "&f%s &ashrugs \\_o¬o_/"
-msg_doubt: "&f%s &cdoubts that."
+msg_doubt: "&f%s &9doubts &fthat."
 msg_blame: "&f%s &cblames &f%s"
 msg_sue: "&f%s &cis suing &f%s"
 
