@@ -98,7 +98,7 @@ public class ActionCommand extends BaseCommand {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
 
-                player.setVelocity(player.getLocation().getDirection().multiply(4));
+                player.setVelocity(player.getLocation().getDirection().multiply(3));
                 player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
 
                 Bukkit.broadcastMessage(Misc.formatConfig("msg_boost_themself", sender.getName()));
@@ -109,12 +109,12 @@ public class ActionCommand extends BaseCommand {
             Player target = Bukkit.getPlayer(args[0]);
             if (args[0].equals("everyone")) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    player.setVelocity(player.getLocation().getDirection().multiply(4));
+                    player.setVelocity(player.getLocation().getDirection().multiply(3));
                     player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
                 }
                 Bukkit.broadcastMessage(Misc.formatConfig("msg_boost_everyone", sender.getName()));
             } else if (target != null) {
-                target.setVelocity(target.getLocation().getDirection().multiply(4));
+                target.setVelocity(target.getLocation().getDirection().multiply(3));
                 target.getWorld().playSound(target.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
 
                 Bukkit.broadcastMessage(Misc.formatConfig("msg_boost", sender.getName(), target.getName()));

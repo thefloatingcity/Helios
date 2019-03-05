@@ -1,7 +1,12 @@
+##########
+#        #
+#  MAIN  #
+#        #
+##########
 msg_prefix_long: "&8-*-*-*-*-*-*-*-*- &7-=[ &fThe &bFloating &aCity &7]=- &8-*-*-*-*-*-*-*-*-"
-msg_prefix: "&7[&fT&bF&aC&7]&r "
+msg_prefix: "&7[&fT&bF&aC&7]&f "
 msg_motd: "&fWelcome back! The last time you were on was &e%s &f%s ago."
-msg_welcome: "&fWelcome to the server, %s! Let me give you a quick tour."
+msg_welcome: "&fWelcome to the server, &e%s&f!"
 
 spawn:
   world: world
@@ -9,59 +14,7 @@ spawn:
   y: 60
   z: 0.5
 
-golden_rule: "The holy &eGolden Rule&f!"
-rules_prefix_long: "-*-*-*-*-*-*-*-*-*-* -=[ The Rules ]=- *-*-*-*-*-*-*-*-*-*-"
-rules_inventory_name: "Rules | The Floating City"
-msg_rules: "&fThis is a test message. Rules are coming soon! :)"
-msg_rules_help: "&fThis is a test message. Help is coming soon! :)"
-msg_rules_accept: "&fThanks! You can now build. Go have fun! :D"
-rules:
-  rule1:
-    name: "Rule 1 | Griefing"
-    text: ["&rNo touching other people's stuff without their permission.", "This includes placing or breaking blocks,", "taking or placing items in their chests, taking or placing items in their itemframes,", "trampling their crops, killing their animals.. You get the idea.", "Please use common sense. If it isn't yours, leave it be."]
-  rule2:
-    name: "Rule 2 | Swearing"
-    text: ["Swearing is allowed but please try to be courteous.", "Remember, as much as you may think otherwise, Minecraft is", "a kids game and there are kids who play it.", "So please just don't fill up the chat with a bunch of swearing."]
-  rule3:
-    name: "Rule 3 | Spamming"
-    text: ["Having long messages and lots of them is fine, but please", "don't fill up chat with meaningless gibberish,", "or repeat the same messages over and over. Again, please", "be courteous and mindful of other people."]
-  rule4:
-    name: "Rule 4 | Advertising"
-    text: ["We're a pretty unconvential server! Talking about servers,", "saying their names, even putting their IPs is fine.", "Just no advertising any servers trying to get random people on it,", "There are websites for that, you know. If you're asking a friend if they wanna go on", "this server and they forgot the IP, it's fine."]
-  rule5:
-    name: "Rule 5 | Hurtful Speech"
-    text: ["No hate speech or discrimination or insults against anyone.", "We're not a politically correct server but don't be a jerk.", "If something you say might hurt someone, don't say it."]
-  rule6:
-    name: "Rule 6 | Flamewars"
-    text: ["Having discussions about things are fine! Religion, politics, so be it.", "However, keep it cool and a debate, not a flamewar.", "Also, be mindful of Rule 5. If you feel like talking about something", "that might hurt someone, don't talk about it with them.", "But if you both want to talk about it and engage in discussion, it's fine!"]
-  rule7:
-    name: "Rule 7 | PG-13"
-    text: ["We're a pretty relaxed server. But keep it PG-13.", "No builds or chat that has a lot of gore or sexual content.", "If you wouldn't see it in Avengers, don't make it please."]
-  rule8:
-    name: "Rule 8 | Lag, Bugs, and Glitches"
-    text: ["Please don't try to break a server. It's not funny.", "You're not a hacker, it just ruins the game we're all trying to", "have fun and play on. This means no lag machines or", "giant super big repeating complex redstone, and if you find", "any bugs or glitches, please report them to staff! Thanks!"]
-  rule9:
-    name: "Rule 9 | Golden Rule"
-    text: ["If you forget even everything, remember this golden rule.", "Don't be a jerk, and use common sense. This one golden rule", "will happily keep you playing on the server.", "As long as you're not a jerk towards anyone, and you use common sense,", "like not griefing builds, not spamming chat, etc, you'll be golden!"]
-
-msg_no_build: "&fYou can't build! Please accept the rules first by doing &e/rules&f!"
-
-msg_help: "&fThis is a test message. Help is coming soon! :)"
-msg_action_help: "&fThis is a test message. Help is coming soon! :)"
-msg_emote_help: "&fThis is a test message. Help is coming soon! :)"
-msg_util_help: "&fThis is a test message. Help is coming soon! :)"
-
-msg_gamemode_help: "&fChange your gamemode!"
-msg_gamemode_change: "&fYour gamemode has been changed to &e%s&f!"
-
-msg_fly_enabled: "&fYou can now fly! Remember, only for super emergencies. If you're using it outside of an emergency I will &oPERSONALLY SMITE YOU, &c&l&oYOU HEAR ME? &rOkay thank you!"
-msg_fly_disabled: "&fThanks for disabling it. It's disabled."
-
-msg_piano_help: "&fFirst do &e/piano menu &fand put the notes you would like to play into your hotbar. Then you can do &e/piano instrument &fand change your instrument! Finally, do &e/piano toggle &fto turn on the piano. Change your hotbar slot to the note you want to play!"
-msg_piano_enabled: "&fThe piano has been enabled!"
-msg_piano_disabled: "&fThe piano has been disabled! Hope you enjoyed!"
-piano_menu_inventory_name: "Menu | The Floating City"
-msg_piano_instrument_change: "&fYour piano instrument is now &e%s&f!"
+msg_help: "&fHelp is currently being added!"
 
 msg_join: "&f%s joined the game."
 msg_leave: "&f%s left the game."
@@ -69,13 +22,197 @@ msg_leave: "&f%s left the game."
 msg_not_online: "&fThat player is not online."
 msg_player_only: "&fYou must be a player to use this command."
 
-msg_hat_set: "&fNow that's a fancy hat!"
-msg_hat_removed: "&fGot your hat! I removed it. That's what I did."
-msg_hat_none: "&fTo put on a hat, hold what you want to wear!"
+###########
+#         #
+#  RULES  #
+#         #
+###########
+rules_prefix_long: "&8-*-*-*-*-*-*-*-*-*-* &7-=[ &cThe Rules &7]=- &8*-*-*-*-*-*-*-*-*-*-"
+msg_rules: "&fThese are temporary rules and still being worked on."
+msg_rules_help: "&fTo read the rules, type &erules&f, and to accept them, type &e/rules accept&f!"
+msg_rules_accept: "&fStill being worked on, sorry! Bug Brian on Discord to get Passenger rank! :)"
+msg_golden_rule: "&fThe holy &eGolden Rule&f!"
+rules_inventory_name: "Rules | The Floating City"
+rules:
+  - name: "&fRule 1 &7| &eGriefing"
+    lore:
+      - "&fNo touching other people's stuff without their permission."
+      - "&fThis includes placing or breaking blocks,"
+      - "&ftaking or placing items in their chests, taking or placing items in their itemframes,"
+      - "&ftrampling their crops, killing their animals.. You get the idea."
+      - "&fPlease use common sense. If it isn't yours, leave it be."
+  - name: "&fRule 2 &7| &eSwearing"
+    lore:
+      - "&fSwearing is allowed but please try to be courteous."
+      - "&fRemember, as much as you may think otherwise, Minecraft is"
+      - "&fa kids game and there are kids who play it."
+      - "&fSo please just don't fill up the chat with a bunch of swearing."
+  - name: "&fRule 3 &7| &eSpamming"
+    lore:
+      - "&fHaving long messages and lots of them is fine, but please"
+      - "&fdon't fill up chat with meaningless gibberish,"
+      - "&for repeat the same messages over and over. Again, please"
+      - "&fbe courteous and mindful of other people."
+  - name: "&fRule 4 &7| &eAdvertising"
+    lore:
+      - "&fWe're a pretty unconvential server! Talking about servers,"
+      - "&fsaying their names, even putting their IPs is fine."
+      - "&fJust no advertising any servers trying to get random people on it,"
+      - "&fThere are websites for that, you know. If you're asking a friend if they wanna go on"
+      - "&fthis server and they forgot the IP, it's fine."
+  - name: "&fRule 5 &7| &eHurtful Speech"
+    lore:
+      - "&fNo hate speech or discrimination or insults against anyone."
+      - "&fWe're not a politically correct server but don't be a jerk."
+      - "&fIf something you say might hurt someone, don't say it."
+  - name: "&fRule 6 &7| &eFlamewars"
+    lore:
+      - "&fHaving discussions about things are fine! Religion, politics, so be it."
+      - "&fHowever, keep it cool and a debate, not a flamewar."
+      - "&fAlso, be mindful of Rule 5. If you feel like talking about something"
+      - "&fthat might hurt someone, don't talk about it with them."
+      - "&fBut if you both want to talk about it and engage in discussion, it's fine!"
+  - name: "&fRule 7 &7| &ePG-13"
+    lore:
+      - "&fWe're a pretty relaxed server. But keep it PG-13."
+      - "&fNo builds or chat that has a lot of gore or sexual content."
+      - "&fIf you wouldn't see it in Avengers, don't make it please."
+  - name: "&fRule 8 &7| &eLag, Bugs, and Glitches"
+    lore:
+      - "&fPlease don't try to break a server. It's not funny."
+      - "&fYou're not a hacker, it just ruins the game we're all trying to"
+      - "&fhave fun and play on. This means no lag machines or"
+      - "&fgiant super big repeating complex redstone, and if you find"
+      - "&fany bugs or glitches, please report them to staff! Thanks!"
+  - name: "&fRule 9 &7| &eGolden Rule"
+    lore:
+      - "&fIf you forget even everything, remember this golden rule."
+      - "&fDon't be a jerk, and use common sense. This one golden rule"
+      - "&fwill happily keep you playing on the server."
+      - "&fAs long as you're not a jerk towards anyone, and you use common sense,"
+      - "&flike not griefing builds, not spamming chat, etc, you'll be golden!"
 
-msg_shrug: "&f%s &ashrugs \\_o¬o_/"
-msg_blame: "&f%s &cblames &f%s"
-msg_sue: "&f%s &cis suing &f%s"
+###########
+#         #
+#  PIANO  #
+#         #
+###########
+msg_piano_help: "&fFirst, do &e/piano menu &fand pick out any notes you would like to play, and put them into your hotbar. Right clicking the notes while in the menu plays them! If you want a nice selection of notes, pick all of them that are marked as &eF# Major&f! Next, if you want to change the default instrument, you can use &e/piano instrument &fto pick an instrument you would like. Tab completion works too! Finally, do &e/piano toggle &fand then if you change your selected hotbar item to the slot the note is on, it'll play that note! Have fun!"
+msg_piano_enabled: "&fThe piano has been enabled!"
+msg_piano_disabled: "&fThe piano has been disabled! Hope you enjoyed!"
+msg_piano_instrument_change: "&fYour piano instrument is now set to &e%s&f!"
+piano_notes_inventory_name: "Piano Menu | The Floating City"
+piano_notes:
+  - name: "&fF♯/G♭ [&bOctave 1&f]"
+    # "&fF♯/G♭ [&bOctave 1&f]", "&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "0.5"),
+    lore:
+      - "&7Part of &f[&eF# Major, F# Minor&f]"
+      - "&8[Note]"
+      - "0.5"
+    data: 8
+  - name: ""
+    # "&fG [&bOctave 1&f]",     "&7Part of &f[]", "&8[Note]", "0.529732"),
+    lore:
+    data: 0
+  - name: ""
+    # "&fG♯/A♭ [&bOctave 1&f]", "&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "0.561231"),
+    lore:
+    data: 8
+  - name: ""
+    # "&fA [&bOctave 1&f]",     "&7Part of &f[&eF# Minor&f]", "&8[Note]", "0.594604"),
+    lore:
+    data: 0
+  - name: ""
+    # "&fA♯/B♭ [&bOctave 1&f]", "&7Part of &f[&eF# Major&f]", "&8[Note]", "0.629961"),
+    lore:
+    data: 8
+  - name: ""
+    # "&fB [&bOctave 1&f]",     "&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "0.667420"),
+    lore:
+    data: 0
+  - name: ""
+    # "&fC [&bOctave 1&f]",     "&7Part of &f[]", "&8[Note]", "0.707107"),
+    lore:
+    data: 0
+  - name: ""
+    # "&fC♯/D♭ [&bOctave 1&f]", "&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "0.749154"),
+    lore:
+    data: 8
+  - name: ""
+    # "&fD [&bOctave 1&f]",     "&7Part of &f[&eF# Minor&f]", "&8[Note]", "0.793701"),
+    lore:
+    data: 0
+  - name: ""
+    # "&fD♯/E♭ [&bOctave 1&f]", "&7Part of &f[&eF# Major&f]", "&8[Note]", "0.840896"),
+    lore:
+    data: 8
+  - name: ""
+    # "&fE [&bOctave 1&f]",     "&7Part of &f[&eF# Minor&f]", "&8[Note]", "0.890899"),
+    lore:
+    data: 0
+  - name: ""
+    # "&fF [&bOctave 1&f]",     "&7Part of &f[&eF# Major&f]", "&8[Note]", "0.943874"),
+    lore:
+    data: 0
+  - name: ""
+    # "&fF♯/G♭ [&bOctave 2&f]", "&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "1"),
+    lore:
+    data: 8
+  - name: ""
+    # "&fG [&bOctave 2&f]",     "&7Part of &f[]", "&8[Note]", "1.059463"),
+    lore:
+    data: 0
+  - name: ""
+    # "&fG♯/A♭ [&bOctave 2&f]", "&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "1.122462"),
+    lore:
+    data: 8
+  - name: ""
+    # "&fA [&bOctave 2&f]",     "&7Part of &f[&eF# Minor&f]", "&8[Note]", "1.189207"),
+    lore:
+    data: 0
+  - name: ""
+    # "&fA#/B♭ [&bOctave 2&f]", "&7Part of &f[&eF# Major&f]", "&8[Note]", "1.259921"),
+    lore:
+    data: 8
+  - name: ""
+    # "&fB [&bOctave 2&f]",     "&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "1.334840"),
+    lore:
+    data: 0
+  - name: ""
+    # "&fC [&bOctave 2&f]",     "&7Part of &f[]", "&8[Note]", "1.414214"),
+    lore:
+    data: 0
+  - name: ""
+    # "&fC♯/D♭ [&bOctave 2&f]", "&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "1.498307"),
+    lore:
+    data: 8
+  - name: ""
+    # "&fD [&bOctave 2&f]",     "&7Part of &f[&eF# Minor&f]", "&8[Note]", "1.587401"),
+    lore:
+    data: 0
+  - name: ""
+    # "&fD♯/E♭ [&bOctave 2&f]", "&7Part of &f[&eF# Major&f]", "&8[Note]", "1.681793"),
+    lore:
+    data: 8
+  - name: ""
+    # "&fE [&bOctave 2&f]",     "&7Part of &f[&eF# Minor&f]", "&8[Note]", "1.781797"),
+    lore:
+    data: 0
+  - name: ""
+    # "&fF [&bOctave 2&f]",     "&7Part of &f[&eF# Major&f]", "&8[Note]", "1.887749"),
+    lore:
+    data: 0
+  - name: ""
+    # "&fF♯/G♭ [&bOctave 3&f]", "&7Part of &f[&eF# Major, F# Minor&f]", "&8[Note]", "2"),
+    lore:
+    data: 8
+
+############
+#          #
+#  ACTION  #
+#          #
+############
+msg_action_help: "&fThis is a test message. Help is coming soon! :)"
 
 msg_zap: "&f%s &czapped &f%s"
 msg_zap_themself: "&f%s &czapped &fthemself"
@@ -98,9 +235,42 @@ poke_force:
   maxXZ: 0.8
   minXZ: -0.8
 
+##########
+#        #
+#  UTIL  #
+#        #
+##########
+msg_util_help: "&fThis is a test message. Help is coming soon! :)"
+
+msg_fly_enabled: "&fYou can now fly! Please only use this in emergencies when you need to get somewhere high up."
+msg_fly_disabled: "&fYou can no longer fly. Thanks for disabling it!"
+
+msg_hat_set: "&fNow that's a fancy hat!"
+msg_hat_removed: "&fAww, there goes your fancy hat."
+msg_hat_none: "&fTo put on a hat, hold what you want to wear!"
+
+###########
+#         #
+#  EMOTE  #
+#         #
+###########
+msg_emote_help: "&fThis is a test message. Help is coming soon! :)"
+
+msg_shrug: "&f%s &ashrugs \\_o¬o_/"
+msg_doubt: "&f%s &cdoubts that."
+msg_blame: "&f%s &cblames &f%s"
+msg_sue: "&f%s &cis suing &f%s"
+
+##########
+#        #
+#  MISC  #
+#        #
+##########
 msg_warp_first: "&fReaching maximum &6warp speed&f.."
 msg_warp_second: "&fReaching maximum &cwarp speed&f.."
 msg_warp_max: "&fMaximum &4warp speed &freached!"
+
+msg_no_build: "&fYou can't build! Please read our rules first by doing &e/rules&f!"
 
 
 

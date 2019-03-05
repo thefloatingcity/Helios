@@ -22,6 +22,9 @@ permissions:
   tfcplugin.shrug:
     description: Permission to use /shrug.
     default: op
+  tfcplugin.doubt:
+    description: Permission to use /doubt.
+    default: op
   tfcplugin.sue:
     description: Permission to use /sue.
     default: op
@@ -66,6 +69,7 @@ permissions:
       tfcplugin.launch: true
       tfcplugin.blame: true
       tfcplugin.shrug: true
+      tfcplugin.doubt: true
       tfcplugin.sue: true
       tfcplugin.hat: true
       tfcplugin.boost: true

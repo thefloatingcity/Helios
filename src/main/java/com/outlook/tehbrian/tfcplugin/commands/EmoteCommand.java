@@ -23,6 +23,13 @@ public class EmoteCommand extends BaseCommand {
         Bukkit.broadcastMessage(Misc.formatConfig("msg_shrug", sender.getName()));
     }
 
+    @CommandAlias("doubt")
+    @CommandPermission("tfcplugin.doubt")
+    @Description("Press X to doubt.")
+    public void onDoubt(CommandSender sender) {
+        Bukkit.broadcastMessage(Misc.formatConfig("msg_doubt", sender.getName()));
+    }
+
     @CommandAlias("blame")
     @CommandPermission("tfcplugin.blame")
     @Description("They did something wrong. Blame them!")

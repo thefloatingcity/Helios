@@ -151,7 +151,7 @@ public class EventsHandler implements Listener {
                 } else if (event.getClickedInventory().getName().equals(plugin.getConfig().getString("rules_inventory_name"))) {
                     event.setCancelled(true);
                     if (event.getSlot() == 8) {
-                        player.sendMessage(Misc.formatConfig("golden_rule"));
+                        player.sendMessage(Misc.formatConfig("msg_golden_rule"));
                     }
                 }
             }
