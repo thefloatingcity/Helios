@@ -14,7 +14,7 @@ spawn:
   y: 60
   z: 0.5
 
-msg_help: "&fIf you would like to see a list of available commands to you, simply do &e/bukkit:help&f! Some main commands we have can be found by doing &e/emotes&f, &e/actions&f, and &e/utils&f."
+msg_help: "&fIf you would like to see a list of available commands to you, simply do &e/bukkit:help&f! Some main commands we have can be found by doing &e/emotes&f, &e/actions&f, and &e/utils&f!"
 
 msg_join: "&f%s joined the game."
 msg_leave: "&f%s left the game."
@@ -353,5 +353,7 @@ msg_warp_max: "&fMaximum &4warp speed &freached!"
 
 msg_no_build: "&fYou can't build! Please read our rules first by doing &e/rules&f!"
 
+msg_gamemode_help: "&fChange your gamemode!"
+msg_gamemode_change: "&fYour gamemode has been changed to &e%s&f!"
 
 
