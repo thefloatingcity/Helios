@@ -1,5 +1,6 @@
 package com.outlook.tehbrian.tfcplugin;
 
+import com.destroystokyo.paper.event.server.PaperServerListPingEvent;
 import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
@@ -16,12 +17,14 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.meta.FireworkMeta;
 
+import java.util.Random;
+
 public class EventsHandler implements Listener {
 
-    private final Main plugin;
+    private final Main main;
 
-    public EventsHandler(Main plugin) {
-        this.plugin = plugin;
+    public EventsHandler(Main main) {
+        this.main = main;
     }
 
     @EventHandler
@@ -143,12 +146,12 @@ public class EventsHandler implements Listener {
         if (event.getWhoClicked() instanceof Player) {
             Player player = (Player) event.getWhoClicked();
             if (event.getClickedInventory() != null) {
-                if (event.getClickedInventory().getName().equals(plugin.getConfig().getString("piano_menu_inventory_name"))) {
+                if (event.getClickedInventory().getName().equals(main.getConfig().getString("piano_menu_inventory_name"))) {
                     if (event.isRightClick()) {
                         event.setCancelled(true);
                         Piano.play(player, event.getCurrentItem(), false);
                     }
-                } else if (event.getClickedInventory().getName().equals(plugin.getConfig().getString("rules_inventory_name"))) {
+                } else if (event.getClickedInventory().getName().equals(main.getConfig().getString("rules_inventory_name"))) {
                     event.setCancelled(true);
                     if (event.getSlot() == 8) {
                         player.sendMessage(Misc.formatConfig("msg_golden_rule"));
@@ -193,5 +196,11 @@ public class EventsHandler implements Listener {
                 event.setLine(l, ChatColor.translateAlternateColorCodes('&', lines[l]));
             }
         }
+    }
+
+    @EventHandler
+    public void onServerListRefresh(PaperServerListPingEvent event) {
+        Random random = new Random();
+        event.setMotd(main.getConfig().getString("server_motd_" + random.nextInt(3)));
     }
 }
