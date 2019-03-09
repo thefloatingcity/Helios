@@ -36,8 +36,12 @@ public class RulesCommand extends BaseCommand {
     @Subcommand("accept")
     @Description("Once you're done!")
     public void onAccept(Player player) {
-        player.sendMessage(Misc.formatConfig("msg_rules_accept"));
-        // LuckPerms Promote
+        if (main.getVaultPerms().getPrimaryGroup(player).equalsIgnoreCase("illiterate")) {
+            player.sendMessage(Misc.formatConfig("msg_rules_already_accepted"));
+        } else {
+            player.sendMessage(Misc.formatConfig("msg_rules_accept"));
+            main.getVaultPerms().playerAddGroup(player, "passenger");
+        }
     }
 
     @HelpCommand
