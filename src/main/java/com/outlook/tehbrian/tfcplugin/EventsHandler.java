@@ -197,10 +197,4 @@ public class EventsHandler implements Listener {
             }
         }
     }
-
-    @EventHandler
-    public void onServerListRefresh(PaperServerListPingEvent event) {
-        Random random = new Random();
-        event.setMotd(main.getConfig().getString("server_motd_" + random.nextInt(3)));
-    }
 }

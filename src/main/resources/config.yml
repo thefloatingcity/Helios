@@ -8,12 +8,6 @@ msg_prefix: "&7[&fT&bF&aC&7]&f "
 msg_motd: "&fWelcome back! The last time you were on was &e%s &f%s ago."
 msg_welcome: "&fWelcome to the server, &e%s&f!"
 
-server_motd_0: "§7                -\\=[ §fThe §bFloating §aCity §7]\\=-\\n      §7Creative building in a void world with no fly."
-server_motd_1: "§7                -\\=[ §fThe §bFloating §aCity §7]\\=-\\n      §cCreative building in a void world with no fly."
-server_motd_2: "§7                -\\=[ §fThe §bFloating §aCity §7]\\=-\\n      §aCreative building in a void world with no fly."
-server_motd_3: "§7                -\\=[ §fThe §bFloating §aCity §7]\\=-\\n      §bCreative building in a void world with no fly."
-
-
 spawn:
   world: world
   x: 0.5
