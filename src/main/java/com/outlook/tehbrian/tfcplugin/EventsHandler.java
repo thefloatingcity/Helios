@@ -1,6 +1,5 @@
 package com.outlook.tehbrian.tfcplugin;
 
-import com.destroystokyo.paper.event.server.PaperServerListPingEvent;
 import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
@@ -16,8 +15,6 @@ import org.bukkit.event.hanging.HangingPlaceEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.meta.FireworkMeta;
-
-import java.util.Random;
 
 public class EventsHandler implements Listener {
 
