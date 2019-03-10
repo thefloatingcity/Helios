@@ -36,11 +36,11 @@ public class RulesCommand extends BaseCommand {
     @Subcommand("accept")
     @Description("Once you're done!")
     public void onAccept(Player player) {
-        if (main.getVaultPerms().getPrimaryGroup(player).equalsIgnoreCase("illiterate")) {
+        if (main.getLuckPermsApi().getUser(player.getUniqueId()).getPrimaryGroup() == "default") {
             player.sendMessage(Misc.formatConfig("msg_rules_already_accepted"));
         } else {
             player.sendMessage(Misc.formatConfig("msg_rules_accept"));
-            main.getVaultPerms().playerAddGroup(player, "passenger");
+            main.getLuckPermsApi().getUser(player.getUniqueId()).setPrimaryGroup("passenger");
         }
     }
 
