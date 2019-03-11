@@ -43,6 +43,7 @@ public final class Main extends JavaPlugin {
         manager.getCommandCompletions().registerAsyncCompletion("pianosounds", c -> ACFUtil.enumNames(Piano.PianoSounds.values()));
 
         manager.registerCommand(new ActionCommand(this));
+        manager.registerCommand(new CustomHelpCommand(this));
         manager.registerCommand(new EmoteCommand(this));
         manager.registerCommand(new GamemodeCommand(this));
         manager.registerCommand(new PianoCommand(this));
