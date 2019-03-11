@@ -6,6 +6,7 @@ import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Misc;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 @CommandAlias("emote|emotes")
 public class EmoteCommand extends BaseCommand {
@@ -41,7 +42,18 @@ public class EmoteCommand extends BaseCommand {
     @CommandPermission("tfcplugin.sue")
     @Description("Sue them! It fixes everything.")
     public void onSue(CommandSender sender, String thing) {
-        Bukkit.broadcastMessage(Misc.formatConfig("msg_sue", sender.getName(), thing));
+        Player player = (Player) sender;
+        Bukkit.broadcastMessage(Misc.formatConfig("msg_sue", main.getVaultChat().getPlayerSuffix(player), sender.getName(), thing));
+    }
+
+    @CommandAlias("me")
+    @CommandPermission("tfcplugin.me")
+    @Description ("A replacement for regular /me.")
+    public void onMe(Player player, String text) {
+        if (player.hasPermission("tfcplugin.chatcolor")) {
+            text = Misc.colorString(text);
+        }
+        Bukkit.broadcastMessage(Misc.formatConfig("msg_me", main.getVaultChat().getPlayerSuffix(player), player.getDisplayName(), text));
     }
 
     @HelpCommand
