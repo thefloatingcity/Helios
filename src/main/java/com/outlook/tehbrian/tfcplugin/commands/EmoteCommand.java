@@ -43,7 +43,7 @@ public class EmoteCommand extends BaseCommand {
     @Description("Sue them! It fixes everything.")
     public void onSue(CommandSender sender, String thing) {
         Player player = (Player) sender;
-        Bukkit.broadcastMessage(Misc.formatConfig("msg_sue", main.getVaultChat().getPlayerSuffix(player), sender.getName(), thing));
+        Bukkit.broadcastMessage(Misc.formatConfig("msg_sue", main.getVaultChat().getPlayerPrefix(player), sender.getName(), thing));
     }
 
     @CommandAlias("me")
@@ -53,7 +53,7 @@ public class EmoteCommand extends BaseCommand {
         if (player.hasPermission("tfcplugin.chatcolor")) {
             text = Misc.colorString(text);
         }
-        Bukkit.broadcastMessage(Misc.formatConfig("msg_me", main.getVaultChat().getPlayerSuffix(player), player.getDisplayName(), text));
+        Bukkit.broadcastMessage(Misc.formatConfig(false, "msg_me", main.getVaultChat().getPlayerPrefix(player), player.getDisplayName(), text));
     }
 
     @HelpCommand
