@@ -6,6 +6,7 @@ import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Misc;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -36,11 +37,11 @@ public class RulesCommand extends BaseCommand {
     @Subcommand("accept")
     @Description("Once you're done!")
     public void onAccept(Player player) {
-        if (main.getLuckPermsApi().getUser(player.getUniqueId()).getPrimaryGroup() == "default") {
-            player.sendMessage(Misc.formatConfig("msg_rules_already_accepted"));
-        } else {
+        if (main.getVaultPerms().getPrimaryGroup(player.getWorld().getName(), player).equals("default")) {
             player.sendMessage(Misc.formatConfig("msg_rules_accept"));
-            main.getLuckPermsApi().getUser(player.getUniqueId()).setPrimaryGroup("passenger");
+            main.getVaultPerms().playerAddGroup(null, player, "passenger");
+        } else {
+            player.sendMessage(Misc.formatConfig("msg_rules_already_accepted"));
         }
     }
 

@@ -13,6 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Main extends JavaPlugin {
 
     private static Main instance = null;
+    private static Permission vaultPerms = null;
     private static Chat vaultChat = null;
     private static LuckPermsApi luckPermsApi = null;
 
@@ -39,11 +40,12 @@ public final class Main extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
-        if (!setupVaultChat()) {
+        if (!setupVaultPerms()) {
             getLogger().severe("No Vault dependency found! Disabling plugin..");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+        setupVaultChat();
 
         manager.getCommandCompletions().registerAsyncCompletion("pianosounds", c -> ACFUtil.enumNames(Piano.PianoSounds.values()));
 
@@ -72,20 +74,30 @@ public final class Main extends JavaPlugin {
         return luckPermsApi != null;
     }
 
-    public boolean setupVaultChat() {
+    private boolean setupVaultPerms() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
             return false;
         }
-        RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
+        RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
         if (rsp == null) {
             return false;
         }
+        vaultPerms = rsp.getProvider();
+        return vaultPerms != null;
+    }
+
+    public boolean setupVaultChat() {
+        RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
         vaultChat = rsp.getProvider();
         return vaultChat != null;
     }
 
     public LuckPermsApi getLuckPermsApi() {
         return luckPermsApi;
+    }
+
+    public Permission getVaultPerms() {
+        return vaultPerms;
     }
 
     public Chat getVaultChat() {
