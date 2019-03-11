@@ -39,7 +39,7 @@ public class UtilCommand extends BaseCommand {
     @CommandPermission("tfcplugin.hat")
     @Description("Put things on your head!")
     public void onHat(Player player) {
-        if (player.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
+        if (player.getInventory().getItemInMainHand().getType() == Material.AIR) {
             if (player.getInventory().getHelmet() == null) {
                 player.sendMessage(Misc.formatConfig("msg_hat_none"));
             } else {

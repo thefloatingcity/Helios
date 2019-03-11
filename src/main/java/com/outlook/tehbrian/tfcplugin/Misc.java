@@ -16,13 +16,13 @@ public class Misc {
     private static Main main = Main.getInstance();
 
     public static void maximumWarp(Player player) {
-        if (player.getFallDistance() >= 1000) {
+        if (player.getFallDistance() >= 1500) {
             player.sendMessage(formatConfig("msg_warp_max"));
             player.teleport(getSpawn());
             player.getWorld().strikeLightningEffect(getSpawn());
             player.getWorld().playSound(getSpawn(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 3, 1);
             player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, getSpawn(), 1);
-        } else if (player.getFallDistance() >= 750) {
+        } else if (player.getFallDistance() >= 1000) {
             player.sendMessage(formatConfig("msg_warp_second"));
         } else if (player.getFallDistance() >= 500) {
             player.sendMessage(formatConfig("msg_warp_first"));

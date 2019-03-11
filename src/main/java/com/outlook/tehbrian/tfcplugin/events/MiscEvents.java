@@ -97,7 +97,7 @@ public class MiscEvents implements Listener {
             if (event.getEntity() instanceof Player) {
                 Player player = (Player) event.getEntity();
                 Misc.maximumWarp(player);
-                player.playSound(location, Sound.ENTITY_ENDERMEN_TELEPORT, SoundCategory.MASTER, 100000, 1);
+                player.getWorld().playSound(location, Sound.ENTITY_ENDERMEN_TELEPORT, SoundCategory.MASTER, 4, 1);
             }
         }
     }
