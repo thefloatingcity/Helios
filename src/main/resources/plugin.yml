@@ -10,48 +10,6 @@ database: false
 api-version: 1.12
 commands: {} # Special thanks to ACF for making this empty!
 permissions:
-  tfcplugin.zap:
-    description: Permission to use /zap.
-    default: op
-  tfcplugin.launch:
-    description: Permission to use /launch.
-    default: op
-  tfcplugin.blame:
-    description: Permission to use /blame.
-    default: op
-  tfcplugin.shrug:
-    description: Permission to use /shrug.
-    default: op
-  tfcplugin.doubt:
-    description: Permission to use /doubt.
-    default: op
-  tfcplugin.sue:
-    description: Permission to use /sue.
-    default: op
-  tfcplugin.hat:
-    description: Permission to use /hat.
-    default: op
-  tfcplugin.boost:
-    description: Permission to use /boost.
-    default: op
-  tfcplugin.poke:
-    description: Permission to use /poke.
-    default: op
-  tfcplugin.fly:
-    description: Permission to use /fly.
-    default: op
-  tfcplugin.gamemode:
-    description: Permission to use /gamemode.
-    default: op
-  tfcplugin.rules:
-    description: Permission to use /rules.
-    default: op
-  tfcplugin.help:
-    description: Permission to use /help.
-    default: op
-  tfcplugin.piano:
-    description: Permission to use /piano.
-    default: op
   tfcplugin.chatcolor:
     description: Permission to color chat text.
     default: op
