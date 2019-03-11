@@ -186,7 +186,7 @@ public class EventsHandler implements Listener {
         }
         event.setFormat(Misc.colorString(main.getConfig().getString("chat_format")
                 .replace("{prefix}", main.getVaultChat().getPlayerPrefix(player))
-                .replace("{suffix}", main.getVaultChat().getPlayerPrefix(player))));
+                .replace("{suffix}", main.getVaultChat().getPlayerSuffix(player))));
     }
 
     @EventHandler
