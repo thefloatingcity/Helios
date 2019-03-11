@@ -59,6 +59,10 @@ public class Misc {
         return ChatColor.translateAlternateColorCodes('&', String.format(main.getConfig().getString(configkey), formats));
     }
 
+    public static String colorString(String string) {
+        return string == null ? null : ChatColor.translateAlternateColorCodes('&', string);
+    }
+
     public static Location getSpawn() {
         return new Location(Bukkit.getWorld(main.getConfig().getString("spawn.world")), main.getConfig().getDouble("spawn.x"), main.getConfig().getDouble("spawn.y"), main.getConfig().getDouble("spawn.z"));
     }

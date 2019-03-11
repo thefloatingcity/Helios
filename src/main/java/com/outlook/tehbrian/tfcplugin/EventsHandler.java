@@ -180,9 +180,13 @@ public class EventsHandler implements Listener {
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event) {
-        if (event.getPlayer().hasPermission("tfcplugin.chatcolor")) {
-            event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
+        Player player = event.getPlayer();
+        if (player.hasPermission("tfcplugin.chatcolor")) {
+            event.setMessage(Misc.colorString(event.getMessage()));
         }
+        event.setFormat(Misc.colorString(main.getConfig().getString("chat_format")
+                .replace("{prefix}", main.getVaultChat().getPlayerPrefix(player))
+                .replace("{suffix}", main.getVaultChat().getPlayerPrefix(player))));
     }
 
     @EventHandler

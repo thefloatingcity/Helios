@@ -14,6 +14,10 @@ spawn:
   y: 60
   z: 0.5
 
+# You can use these substitutions:
+# $1%s for player, $2%s for message, {prefix}, {suffix}
+chat_format: "&r{prefix}&r&7$1%s&r{suffix}&r: $2%s"
+
 msg_help: "&fIf you would like to see a list of available commands to you, simply do &e/bukkit:help&f! Some main commands we have can be found by doing &e/emotes&f, &e/actions&f, and &e/utils&f!"
 
 msg_join: "&f%s joined the game."
