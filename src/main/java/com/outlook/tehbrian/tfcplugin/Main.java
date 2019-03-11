@@ -3,6 +3,7 @@ package com.outlook.tehbrian.tfcplugin;
 import co.aikar.commands.ACFUtil;
 import co.aikar.commands.PaperCommandManager;
 import com.outlook.tehbrian.tfcplugin.commands.*;
+import com.outlook.tehbrian.tfcplugin.events.*;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -30,7 +31,8 @@ public final class Main extends JavaPlugin {
         getConfig().options().copyHeader(true);
         saveDefaultConfig();
 
-        getServer().getPluginManager().registerEvents(new EventsHandler(this), this);
+        getServer().getPluginManager().registerEvents(new MiscEvents(this), this);
+        getServer().getPluginManager().registerEvents(new AntiBuildEvents(this), this);
 
         if (!setupVaultPerms()) {
             getLogger().severe("No Vault dependency found! Disabling plugin..");
