@@ -19,14 +19,12 @@ public final class Main extends JavaPlugin {
         instance = this;
     }
 
-    public static Main getInstance() {
+    static Main getInstance() {
         return instance;
     }
 
     @Override
     public void onEnable() {
-        PaperCommandManager manager = new PaperCommandManager(this);
-
         getConfig().options().copyDefaults(true);
         getConfig().options().copyHeader(true);
         saveDefaultConfig();
@@ -34,12 +32,13 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new MiscEvents(this), this);
         getServer().getPluginManager().registerEvents(new AntiBuildEvents(this), this);
 
-        if (!setupVaultPerms()) {
+        if (!setupVault()) {
             getLogger().severe("No Vault dependency found! Disabling plugin..");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
-        setupVaultChat();
+
+        PaperCommandManager manager = new PaperCommandManager(this);
 
         manager.getCommandCompletions().registerAsyncCompletion("pianosounds", c -> ACFUtil.enumNames(Piano.PianoSounds.values()));
 
@@ -56,22 +55,21 @@ public final class Main extends JavaPlugin {
         getLogger().info("I hope to see you again soon!");
     }
 
-    private boolean setupVaultPerms() {
+    private boolean setupVault() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
             return false;
         }
-        RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
-        if (rsp == null) {
+        RegisteredServiceProvider<Permission> prsp = getServer().getServicesManager().getRegistration(Permission.class);
+        if (prsp == null) {
             return false;
         }
-        vaultPerms = rsp.getProvider();
-        return vaultPerms != null;
-    }
-
-    public boolean setupVaultChat() {
-        RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
-        vaultChat = rsp.getProvider();
-        return vaultChat != null;
+        vaultPerms = prsp.getProvider();
+        RegisteredServiceProvider<Chat> crsp = getServer().getServicesManager().getRegistration(Chat.class);
+        if (crsp == null) {
+            return false;
+        }
+        vaultChat = crsp.getProvider();
+        return (vaultPerms != null && vaultChat != null);
     }
 
     public Permission getVaultPerms() {
