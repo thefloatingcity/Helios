@@ -34,8 +34,6 @@ permissions:
       tfcplugin.poke: true
       tfcplugin.fly: true
       tfcplugin.gamemode: true
-      tfcplugin.rules: true
-      tfcplugin.help: true
       tfcplugin.piano: true
       tfcplugin.chatcolor: true
       tfcplugin.signcolor: true
