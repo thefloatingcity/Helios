@@ -13,7 +13,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 @CommandAlias("rules")
-@CommandPermission("tfcplugin.rules")
 public class RulesCommand extends BaseCommand {
 
     private final Main main;

@@ -7,7 +7,6 @@ import com.outlook.tehbrian.tfcplugin.Misc;
 import org.bukkit.command.CommandSender;
 
 @CommandAlias("help")
-@CommandPermission("tfcplugin.help")
 public class CustomHelpCommand extends BaseCommand {
 
     private final Main main;
