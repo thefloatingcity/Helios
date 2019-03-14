@@ -1,10 +1,7 @@
 package com.outlook.tehbrian.tfcplugin.commands;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.CommandPermission;
-import co.aikar.commands.annotation.Description;
-import co.aikar.commands.annotation.Subcommand;
+import co.aikar.commands.annotation.*;
 import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Misc;
 import org.bukkit.command.CommandSender;
@@ -26,6 +23,7 @@ public class CoreCommand extends BaseCommand {
         sender.sendMessage(Misc.formatConfig("msg_reloaded"));
     }
 
+    @HelpCommand
     public void onHelp(CommandSender sender) {
         sender.sendMessage(Misc.formatConfig("msg_core_help"));
     }
