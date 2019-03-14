@@ -37,7 +37,7 @@ public class RulesCommand extends BaseCommand {
     @CommandAlias("acceptrules")
     @Description("Thanks for reading them!")
     public void onAccept(Player player) {
-        if (!player.hasPermission("tfcplugin.rulesaccepted")) {
+        if (player.hasPermission("tfcplugin.rulesaccepted")) {
             player.sendMessage(Misc.formatConfig("msg_rules_already_accepted"));
         } else {
             player.sendMessage(Misc.formatConfig("msg_rules_accept"));
