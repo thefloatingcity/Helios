@@ -4,7 +4,7 @@
 #        #
 ##########
 msg_prefix_long: "&8-*-*-*-*-*-*-*-*- &7-=[ &fThe &bFloating &aCity &7]=- &8-*-*-*-*-*-*-*-*-"
-msg_prefix: "&7[&fT&bF&aC&7]&f "
+msg_prefix: "&7[&fT&bF&aC&7]&f"
 msg_motd: "&fWelcome back! The last time you were on was &e%s &f%s ago."
 msg_welcome: "&fWelcome to the server, &e%s&f!"
 
@@ -344,11 +344,13 @@ msg_hat_none: "&fTo put on a hat, hold what you want to wear!"
 ###########
 msg_emote_help: "&fThis is a test message. Help is coming soon! :)"
 
+msg_emote_server: "&f%s &f%s"
+msg_emote_player: "&f%s &f%s &f%s"
 msg_me: "&f%s &f%s &f%s"
-msg_shrug: "&f%s &ashrugs \\_o¬o_/"
-msg_doubt: "&f%s &9doubts that."
-msg_blame: "&f%s &cblames &f%s"
-msg_sue: "&f%s &f%s &cis suing &f%s"
+msg_shrug: "&ashrugs \\_o¬o_/"
+msg_doubt: "&9doubts that."
+msg_blame: "&cblames &f%s"
+msg_sue: "&cis suing &f%s"
 
 ##########
 #        #

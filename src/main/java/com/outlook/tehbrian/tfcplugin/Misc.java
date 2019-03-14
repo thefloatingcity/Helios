@@ -1,6 +1,7 @@
 package com.outlook.tehbrian.tfcplugin;
 
 import org.bukkit.*;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -49,14 +50,14 @@ public class Misc {
     }
 
     public static String formatConfig(String configkey, Object... formats) {
-        return ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("msg_prefix") + String.format(main.getConfig().getString(configkey), formats));
+        return colorString(main.getConfig().getString("msg_prefix") + " " + String.format(main.getConfig().getString(configkey), formats));
     }
 
     public static String formatConfig(Boolean useprefix, String configkey, Object... formats) {
         if (useprefix) {
-            return ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("msg_prefix") + String.format(main.getConfig().getString(configkey), formats));
+            return colorString(main.getConfig().getString("msg_prefix") + " " + String.format(main.getConfig().getString(configkey), formats));
         }
-        return ChatColor.translateAlternateColorCodes('&', String.format(main.getConfig().getString(configkey), formats));
+        return colorString(String.format(main.getConfig().getString(configkey), formats));
     }
 
     public static String colorString(String string) {
@@ -67,16 +68,25 @@ public class Misc {
         return new Location(Bukkit.getWorld(main.getConfig().getString("spawn.world")), main.getConfig().getDouble("spawn.x"), main.getConfig().getDouble("spawn.y"), main.getConfig().getDouble("spawn.z"));
     }
 
-    public static ItemStack createItem(String name, List<String> lore, Material material, int amount, int data) {
+    public static ItemStack createItem(String name, List<String> lore, Material material, int amount, short data) {
         ItemStack i = new ItemStack(material, amount);
         ItemMeta im = i.getItemMeta();
         for (int x = 0; x < lore.size(); x++) {
-            lore.set(x, ChatColor.translateAlternateColorCodes('&', lore.get(x)));
+            lore.set(x, colorString(lore.get(x)));
         }
-        im.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
+        im.setDisplayName(colorString(name));
         im.setLore(lore);
-        i.setDurability((short) data);
+        i.setDurability(data);
         i.setItemMeta(im);
         return i;
+    }
+
+    public static String emote(CommandSender sender, String text) {
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+            return Misc.formatConfig(false, "msg_emote_player", main.getVaultChat().getPlayerPrefix(player), player.getDisplayName(), text);
+        } else {
+            return Misc.formatConfig(true, "msg_emote_server", sender.getName(), text);
+        }
     }
 }

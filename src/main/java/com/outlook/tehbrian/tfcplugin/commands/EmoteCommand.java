@@ -6,7 +6,6 @@ import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Misc;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 @CommandAlias("emote|emotes")
 public class EmoteCommand extends BaseCommand {
@@ -21,39 +20,28 @@ public class EmoteCommand extends BaseCommand {
     @CommandPermission("tfcplugin.shrug")
     @Description("You don't know. They don't know.")
     public void onShrug(CommandSender sender) {
-        Bukkit.broadcastMessage(Misc.formatConfig("msg_shrug", sender.getName()));
+        Bukkit.broadcastMessage(Misc.emote(sender, Misc.formatConfig("msg_shrug")));
     }
 
     @CommandAlias("doubt")
     @CommandPermission("tfcplugin.doubt")
     @Description("Press X to doubt.")
     public void onDoubt(CommandSender sender) {
-        Bukkit.broadcastMessage(Misc.formatConfig("msg_doubt", sender.getName()));
+        Bukkit.broadcastMessage(Misc.emote(sender, Misc.formatConfig("msg_doubt")));
     }
 
     @CommandAlias("blame")
     @CommandPermission("tfcplugin.blame")
     @Description("They did something wrong. Blame them!")
-    public void onBlame(CommandSender sender, String thing) {
-        Bukkit.broadcastMessage(Misc.formatConfig("msg_blame", sender.getName(), thing));
+    public void onBlame(CommandSender sender, String text) {
+        Bukkit.broadcastMessage(Misc.emote(sender, Misc.formatConfig("msg_blame", text)));
     }
 
     @CommandAlias("sue")
     @CommandPermission("tfcplugin.sue")
     @Description("Sue them! It fixes everything.")
-    public void onSue(CommandSender sender, String thing) {
-        Player player = (Player) sender;
-        Bukkit.broadcastMessage(Misc.formatConfig("msg_sue", main.getVaultChat().getPlayerPrefix(player), sender.getName(), thing));
-    }
-
-    @CommandAlias("me")
-    @CommandPermission("tfcplugin.me")
-    @Description ("A replacement for regular /me.")
-    public void onMe(Player player, String text) {
-        if (player.hasPermission("tfcplugin.chatcolor")) {
-            text = Misc.colorString(text);
-        }
-        Bukkit.broadcastMessage(Misc.formatConfig(false, "msg_me", main.getVaultChat().getPlayerPrefix(player), player.getDisplayName(), text));
+    public void onSue(CommandSender sender, String text) {
+        Bukkit.broadcastMessage(Misc.emote(sender, Misc.formatConfig("msg_sue", text)));
     }
 
     @HelpCommand
