@@ -46,6 +46,6 @@ public class EmoteCommand extends BaseCommand {
 
     @HelpCommand
     public void onHelp(CommandSender sender) {
-        sender.sendMessage(Misc.formatConfig(false, "msg_emote_help"));
+        sender.sendMessage(Misc.formatConfig("msg_emote_help"));
     }
 }

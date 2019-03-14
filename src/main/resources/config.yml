@@ -337,6 +337,15 @@ msg_hat_set: "&fNow that's a fancy hat!"
 msg_hat_removed: "&fAww, there goes your fancy hat."
 msg_hat_none: "&fTo put on a hat, hold what you want to wear!"
 
+##########
+#        #
+#  CORE  #
+#        #
+##########
+msg_core_help: "&fThis is a test message. Help is coming soon! :)"
+
+msg_reloaded: "&fPlugin reloaded successfully!"
+
 ###########
 #         #
 #  EMOTE  #
