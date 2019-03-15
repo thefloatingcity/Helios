@@ -40,8 +40,6 @@ public final class Main extends JavaPlugin {
 
         PaperCommandManager manager = new PaperCommandManager(this);
 
-        manager.getCommandCompletions().registerAsyncCompletion("pianosounds", c -> ACFUtil.enumNames(Piano.PianoSounds.values()));
-
         manager.registerCommand(new ActionCommand(this));
         manager.registerCommand(new CoreCommand(this));
         manager.registerCommand(new CustomHelpCommand(this));
