@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 @CommandAlias("util|utils")
+@Description("Various utilities.")
 public class UtilCommand extends BaseCommand {
 
     private final Main main;
@@ -24,7 +25,7 @@ public class UtilCommand extends BaseCommand {
 
     @CommandAlias("fly")
     @CommandPermission("tfcplugin.fly")
-    @Description("Like the birds in the sky..")
+    @Description("Fly, like the birds in the sky.")
     public void onFly(Player player) {
         if (Flight.getCanBypassFly(player)) {
             Flight.setCanBypassFly(player, false);

@@ -16,6 +16,7 @@ import org.bukkit.inventory.Inventory;
 
 @CommandAlias("piano")
 @CommandPermission("tfcplugin.piano")
+@Description("A playable piano in your inventory!")
 public class PianoCommand extends BaseCommand {
 
     private final Main main;
@@ -25,7 +26,7 @@ public class PianoCommand extends BaseCommand {
     }
 
     @Subcommand("menu")
-    @Description("Pick your notes here!")
+    @Description("Pick your notes!")
     public void onMenu(Player player) {
         Inventory pianoNotesInventory = Bukkit.createInventory(null, 27, main.getConfig().getString("piano_notes_inventory_name"));
         for (String key : main.getConfig().getConfigurationSection("piano_notes").getKeys(false)) {
@@ -36,7 +37,8 @@ public class PianoCommand extends BaseCommand {
     }
 
     @Subcommand("instrument")
-    @Description("Pick your instrument! Any sound!")
+    @Description("Pick any sound as your instrument!")
+    @CommandCompletion("*")
     public void onInstrument(Player player, Sound sound) {
         Piano.setPlayerPianoInstrument(player, sound);
         player.sendMessage(Misc.formatConfig("msg_piano_instrument_change", sound.toString()));

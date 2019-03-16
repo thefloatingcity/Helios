@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
 @CommandAlias("emote|emotes")
+@Description("Various fun chat emotes.")
 public class EmoteCommand extends BaseCommand {
 
     private final Main main;

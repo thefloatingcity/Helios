@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 @CommandAlias("gm|gamemode")
 @CommandPermission("tfcplugin.gamemode")
+@Description("Change your gamemode.")
 public class GamemodeCommand extends BaseCommand {
 
     private final Main main;
@@ -20,7 +21,7 @@ public class GamemodeCommand extends BaseCommand {
 
     @Subcommand("survival|s|0")
     @CommandAlias("gms")
-    @Description("Change your gamemode to Survival!")
+    @Description("Change your gamemode to Survival.")
     public void onSurvival(Player player) {
         player.setGameMode(GameMode.SURVIVAL);
         player.sendMessage(Misc.formatConfig("msg_gamemode_change", "Survival"));
@@ -28,7 +29,7 @@ public class GamemodeCommand extends BaseCommand {
 
     @Subcommand("creative|c|1")
     @CommandAlias("gmc")
-    @Description("Change your gamemode to Creative!")
+    @Description("Change your gamemode to Creative.")
     public void onCreative(Player player) {
         player.setGameMode(GameMode.CREATIVE);
         player.sendMessage(Misc.formatConfig("msg_gamemode_change", "Creative"));
@@ -36,7 +37,7 @@ public class GamemodeCommand extends BaseCommand {
 
     @Subcommand("adventure|a|2")
     @CommandAlias("gma")
-    @Description("Change your gamemode to Adventure!")
+    @Description("Change your gamemode to Adventure.")
     public void onAdventure(Player player) {
         player.setGameMode(GameMode.ADVENTURE);
         player.sendMessage(Misc.formatConfig("msg_gamemode_change", "Adventure"));

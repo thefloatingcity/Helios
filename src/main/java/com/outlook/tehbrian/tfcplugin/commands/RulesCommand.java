@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 @CommandAlias("rules")
+@Description("Rules for everything The Floating City.")
 public class RulesCommand extends BaseCommand {
 
     private final Main main;
@@ -22,7 +23,6 @@ public class RulesCommand extends BaseCommand {
     }
 
     @Default
-    @Description("Please read them!")
     public void onRules(Player player) {
         player.sendMessage(Misc.formatConfig("msg_rules"));
         Inventory rulesInventory = Bukkit.createInventory(null, 9, main.getConfig().getString("rules_inventory_name"));
@@ -35,7 +35,7 @@ public class RulesCommand extends BaseCommand {
 
     @Subcommand("accept")
     @CommandAlias("acceptrules")
-    @Description("Thanks for reading them!")
+    @Description("Accept and agree with the rules.")
     public void onAccept(Player player) {
         if (player.hasPermission("tfcplugin.rulesaccepted")) {
             player.sendMessage(Misc.formatConfig("msg_rules_already_accepted"));

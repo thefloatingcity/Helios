@@ -14,6 +14,7 @@ import org.bukkit.util.Vector;
 import java.util.Random;
 
 @CommandAlias("action|actions")
+@Description("Various world-changing actions.")
 public class ActionCommand extends BaseCommand {
 
     private final Main main;
@@ -24,7 +25,7 @@ public class ActionCommand extends BaseCommand {
 
     @CommandAlias("launch")
     @CommandPermission("tfcplugin.launch")
-    @Description("Up you go!")
+    @Description("Launch someone sky-high!")
     @CommandCompletion("@players")
     public void onLaunch(CommandSender sender, String[] args) {
         if (args.length == 0) {
@@ -59,7 +60,7 @@ public class ActionCommand extends BaseCommand {
 
     @CommandAlias("zap")
     @CommandPermission("tfcplugin.zap")
-    @Description("Zap them! Like Zeus!")
+    @Description("Zap someone! Like Zeus!")
     @CommandCompletion("@players")
     public void onZap(CommandSender sender, String[] args) {
         if (args.length == 0) {
@@ -91,7 +92,7 @@ public class ActionCommand extends BaseCommand {
 
     @CommandAlias("boost")
     @CommandPermission("tfcplugin.boost")
-    @Description("Faster! Faster!")
+    @Description("Make someone go super fast.")
     @CommandCompletion("@players")
     public void onBoost(CommandSender sender, String[] args) {
         if (args.length == 0) {

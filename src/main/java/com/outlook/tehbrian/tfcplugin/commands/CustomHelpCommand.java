@@ -7,6 +7,7 @@ import com.outlook.tehbrian.tfcplugin.Misc;
 import org.bukkit.command.CommandSender;
 
 @CommandAlias("help")
+@Description("Custom /help for the server.")
 public class CustomHelpCommand extends BaseCommand {
 
     private final Main main;
@@ -16,13 +17,12 @@ public class CustomHelpCommand extends BaseCommand {
     }
 
     @Default
-    @Description("Some commands and server info!")
     public void onHelp(CommandSender sender) {
         sender.sendMessage(Misc.formatConfig("msg_help"));
     }
 
-    @CommandAlias("vote")
-    @Description("It helps out the server!")
+    @CommandAlias("vote|voting")
+    @Description("Vote for us and help us grow!")
     public void onHelpVote(CommandSender sender) {
         sender.sendMessage(Misc.formatConfig("msg_help_vote"));
     }
