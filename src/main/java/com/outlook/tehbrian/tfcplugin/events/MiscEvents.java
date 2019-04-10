@@ -4,6 +4,8 @@ import com.outlook.tehbrian.tfcplugin.Flight;
 import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Misc;
 import com.outlook.tehbrian.tfcplugin.Piano;
+import com.vexsoftware.votifier.model.Vote;
+import com.vexsoftware.votifier.model.VotifierEvent;
 import org.bukkit.*;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
@@ -21,6 +23,12 @@ public class MiscEvents implements Listener {
 
     public MiscEvents(Main main) {
         this.main = main;
+    }
+
+    @EventHandler
+    public void onVotifierEvent(VotifierEvent event) {
+        Vote vote = event.getVote();
+        Bukkit.broadcastMessage(Misc.formatConfig("msg_voted", vote.getServiceName(), vote.getUsername()));
     }
 
     @EventHandler
