@@ -5,7 +5,7 @@
 ##########
 msg_prefix_long: "&8-*-*-*-*-*-*-*-*- &7-=[ &fThe &bFloating &aCity &7]=- &8-*-*-*-*-*-*-*-*-"
 msg_prefix: "&7[&fT&bF&aC&7]&f"
-msg_motd: "&fWelcome back! The last time you were on was &e%s &f%s ago."
+msg_motd: "&fWelcome back! You were last on &e%s &f%s ago."
 msg_welcome: "&fWelcome to the server, &e%s&f!"
 
 spawn:

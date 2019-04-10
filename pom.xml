@@ -6,7 +6,7 @@
     <groupId>com.outlook.tehbrian</groupId>
     <artifactId>tfcplugin</artifactId>
     <!-- Version is used in plugin.yml -->
-    <version>1.0.9.5</version>
+    <version>1.0.9.6</version>
     <packaging>jar</packaging>
 
     <!-- Name, Description, and URL are used in plugin.yml -->
@@ -88,15 +88,10 @@
             <version>1.7</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>me.lucko.luckperms</groupId>
-            <artifactId>luckperms-api</artifactId>
-            <version>4.3</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
     <build>
+        <finalName>${project.name}-${version}</finalName>
         <sourceDirectory>src/main/java</sourceDirectory>
         <defaultGoal>clean install</defaultGoal>
         <resources>
