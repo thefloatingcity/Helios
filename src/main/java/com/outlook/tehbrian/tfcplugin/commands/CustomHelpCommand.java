@@ -21,12 +21,6 @@ public class CustomHelpCommand extends BaseCommand {
         sender.sendMessage(Misc.formatConfig("msg_help"));
     }
 
-    @CommandAlias("vote|voting")
-    @Description("Vote for us and help us grow!")
-    public void onHelpVote(CommandSender sender) {
-        sender.sendMessage(Misc.formatConfig("msg_help_vote"));
-    }
-
     @HelpCommand
     public void onHelpUnknown(CommandSender sender) {
         sender.sendMessage(Misc.formatConfig("msg_help_unknown"));
