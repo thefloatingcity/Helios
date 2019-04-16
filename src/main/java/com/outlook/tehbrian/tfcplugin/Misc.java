@@ -1,19 +1,21 @@
 package com.outlook.tehbrian.tfcplugin;
 
-import org.bukkit.*;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 import static com.outlook.tehbrian.tfcplugin.Utils.getSpawn;
 
 public class Misc {
 
+    private static Main main = Main.getInstance();
+
     private Misc() {
     }
-
-    private static Main main = Main.getInstance();
 
     public static void maximumWarp(Player player) {
         if (player.getFallDistance() >= 1500) {

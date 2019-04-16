@@ -1,9 +1,12 @@
 package com.outlook.tehbrian.tfcplugin.commands;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.annotation.*;
-import com.outlook.tehbrian.tfcplugin.Utils;
+import co.aikar.commands.annotation.CommandAlias;
+import co.aikar.commands.annotation.Default;
+import co.aikar.commands.annotation.Description;
+import co.aikar.commands.annotation.HelpCommand;
 import com.outlook.tehbrian.tfcplugin.Main;
+import com.outlook.tehbrian.tfcplugin.Utils;
 import org.bukkit.command.CommandSender;
 
 @CommandAlias("help")

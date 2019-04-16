@@ -14,24 +14,18 @@ import java.util.List;
 
 public class Utils {
 
+    private static Main main = Main.getInstance();
+
     private Utils() {
     }
-
-    private static Main main = Main.getInstance();
 
     public static String emote(CommandSender sender, String text) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             return format("msg_emote_player", main.getVaultChat().getPlayerPrefix(player), player.getDisplayName(), text);
         } else {
-            return format( "msg_emote_server", sender.getName(), text);
+            return format("msg_emote_server", sender.getName(), text);
         }
-    }
-
-    public enum PrefixType {
-        PREFIX,
-        MULTI,
-        NONE
     }
 
     public static String format(String configKey, Object... replacements) {
@@ -78,5 +72,11 @@ public class Utils {
         i.setDurability((short) data);
         i.setItemMeta(im);
         return i;
+    }
+
+    public enum PrefixType {
+        PREFIX,
+        MULTI,
+        NONE
     }
 }

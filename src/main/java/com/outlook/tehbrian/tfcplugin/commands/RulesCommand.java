@@ -2,10 +2,8 @@ package com.outlook.tehbrian.tfcplugin.commands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
-import co.aikar.commands.annotation.HelpCommand;
-import com.outlook.tehbrian.tfcplugin.Utils;
 import com.outlook.tehbrian.tfcplugin.Main;
-import com.outlook.tehbrian.tfcplugin.Misc;
+import com.outlook.tehbrian.tfcplugin.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;

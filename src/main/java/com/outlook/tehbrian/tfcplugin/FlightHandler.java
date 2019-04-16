@@ -8,10 +8,10 @@ import java.util.UUID;
 
 public class FlightHandler {
 
+    private static Set<UUID> canBypassFly = new HashSet<>();
+
     private FlightHandler() {
     }
-
-    private static Set<UUID> canBypassFly = new HashSet<>();
 
     public static boolean getCanBypassFly(Player player) {
         return canBypassFly.contains(player.getUniqueId());

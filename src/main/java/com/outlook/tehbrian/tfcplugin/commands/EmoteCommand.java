@@ -1,10 +1,12 @@
 package com.outlook.tehbrian.tfcplugin.commands;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.annotation.*;
-import com.outlook.tehbrian.tfcplugin.Utils;
+import co.aikar.commands.annotation.CommandAlias;
+import co.aikar.commands.annotation.CommandPermission;
+import co.aikar.commands.annotation.Description;
+import co.aikar.commands.annotation.HelpCommand;
 import com.outlook.tehbrian.tfcplugin.Main;
-import com.outlook.tehbrian.tfcplugin.Misc;
+import com.outlook.tehbrian.tfcplugin.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
@@ -22,7 +24,7 @@ public class EmoteCommand extends BaseCommand {
     @CommandPermission("tfcplugin.shrug")
     @Description("You don't know. They don't know.")
     public void onShrug(CommandSender sender) {
-        Bukkit.broadcastMessage(Utils.emote(sender, Utils.format(Utils.PrefixType.NONE,"msg_shrug")));
+        Bukkit.broadcastMessage(Utils.emote(sender, Utils.format(Utils.PrefixType.NONE, "msg_shrug")));
     }
 
     @CommandAlias("doubt")

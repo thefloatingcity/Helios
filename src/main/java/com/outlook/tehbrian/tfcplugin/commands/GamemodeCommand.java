@@ -2,8 +2,8 @@ package com.outlook.tehbrian.tfcplugin.commands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
-import com.outlook.tehbrian.tfcplugin.Utils;
 import com.outlook.tehbrian.tfcplugin.Main;
+import com.outlook.tehbrian.tfcplugin.Utils;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
