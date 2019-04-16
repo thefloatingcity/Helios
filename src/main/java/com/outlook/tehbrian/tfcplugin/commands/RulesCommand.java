@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 @CommandAlias("rules")
-@Description("Rules for everything The Floating City.")
+@Description("Server and Discord rules.")
 public class RulesCommand extends BaseCommand {
 
     private final Main main;
@@ -34,7 +34,7 @@ public class RulesCommand extends BaseCommand {
 
     @Subcommand("accept")
     @CommandAlias("acceptrules")
-    @Description("Accept and agree with the rules.")
+    @Description("Accept the rules.")
     public void onAccept(Player player) {
         if (player.hasPermission("tfcplugin.rulesaccepted")) {
             player.sendMessage(Utils.format("msg_rules_already_accepted"));

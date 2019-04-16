@@ -8,6 +8,7 @@ import co.aikar.commands.annotation.HelpCommand;
 import com.outlook.tehbrian.tfcplugin.Flight;
 import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Utils;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -34,6 +35,13 @@ public class UtilCommand extends BaseCommand {
             Flight.setCanBypassFly(player, true);
             player.sendMessage(Utils.format("msg_fly_enabled"));
         }
+    }
+
+    @CommandAlias("broadcast")
+    @CommandPermission("tfcplugin.broadcast")
+    @Description("Broadcast a message to the server.")
+    public void onBroadcast(CommandSender commandSender, String text) {
+        Bukkit.broadcastMessage(Utils.colorString(text));
     }
 
     @CommandAlias("hat")
