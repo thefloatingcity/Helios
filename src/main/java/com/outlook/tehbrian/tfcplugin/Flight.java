@@ -6,11 +6,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public class FlightHandler {
+public class Flight {
 
     private static Set<UUID> canBypassFly = new HashSet<>();
 
-    private FlightHandler() {
+    private Flight() {
     }
 
     public static boolean getCanBypassFly(Player player) {

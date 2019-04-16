@@ -6,7 +6,7 @@
     <groupId>com.outlook.tehbrian</groupId>
     <artifactId>tfcplugin</artifactId>
     <!-- Version is used in plugin.yml -->
-    <version>1.0.10.1</version>
+    <version>1.0.10.12</version>
     <packaging>jar</packaging>
 
     <!-- Name, Description, and URL are used in plugin.yml -->

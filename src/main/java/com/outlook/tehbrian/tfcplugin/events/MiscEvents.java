@@ -12,6 +12,11 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.meta.FireworkMeta;
 
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
+
+import static com.outlook.tehbrian.tfcplugin.Utils.getSpawn;
+
 public class MiscEvents implements Listener {
 
     private final Main main;
@@ -23,7 +28,7 @@ public class MiscEvents implements Listener {
     @EventHandler
     public void onToggleFlight(PlayerToggleFlightEvent event) {
         event.setCancelled(true);
-        FlightHandler.disableFlight(event.getPlayer());
+        Flight.disableFlight(event.getPlayer());
     }
 
     @EventHandler
@@ -33,7 +38,7 @@ public class MiscEvents implements Listener {
         event.setJoinMessage(Utils.format("msg_join", player.getDisplayName()));
         player.sendMessage(Utils.format(Utils.PrefixType.NONE, "tfc_banner"));
 
-        FlightHandler.disableFlight(player);
+        Flight.disableFlight(player);
 
         Firework f = player.getWorld().spawn(player.getLocation(), Firework.class);
         FireworkMeta fm = f.getFireworkMeta();
@@ -48,9 +53,20 @@ public class MiscEvents implements Listener {
         f.setFireworkMeta(fm);
 
         if (player.hasPlayedBefore()) {
-            Misc.oldPlayerJoin(player);
+            long millisSinceLastPlayed = Calendar.getInstance().getTimeInMillis() - player.getLastPlayed();
+            if (millisSinceLastPlayed >= 86400000) {
+                player.sendMessage(Utils.format("msg_motd", TimeUnit.MILLISECONDS.toDays(millisSinceLastPlayed), "days"));
+            } else if (millisSinceLastPlayed >= 3600000) {
+                player.sendMessage(Utils.format("msg_motd", TimeUnit.MILLISECONDS.toHours(millisSinceLastPlayed), "hours"));
+            } else if (millisSinceLastPlayed >= 60000) {
+                player.sendMessage(Utils.format("msg_motd", TimeUnit.MILLISECONDS.toMinutes(millisSinceLastPlayed), "minutes"));
+            } else if (millisSinceLastPlayed >= 1000) {
+                player.sendMessage(Utils.format("msg_motd", TimeUnit.MILLISECONDS.toSeconds(millisSinceLastPlayed), "seconds"));
+            } else {
+                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed, "milliseconds"));
+            }
         } else {
-            Misc.newPlayerJoin(player);
+            player.sendMessage(Utils.format("msg_welcome", player.getName()));
         }
     }
 
@@ -93,7 +109,17 @@ public class MiscEvents implements Listener {
             event.getEntity().teleport(location);
             if (event.getEntity() instanceof Player) {
                 Player player = (Player) event.getEntity();
-                Misc.maximumWarp(player);
+                if (player.getFallDistance() >= 1500) {
+                    player.sendMessage(Utils.format("msg_warp_max"));
+                    player.teleport(getSpawn());
+                    player.getWorld().strikeLightningEffect(getSpawn());
+                    player.getWorld().playSound(getSpawn(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 3, 1);
+                    player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, getSpawn(), 1);
+                } else if (player.getFallDistance() >= 1000) {
+                    player.sendMessage(Utils.format("msg_warp_second"));
+                } else if (player.getFallDistance() >= 500) {
+                    player.sendMessage(Utils.format("msg_warp_first"));
+                }
                 player.getWorld().playSound(location, Sound.ENTITY_ENDERMEN_TELEPORT, SoundCategory.MASTER, 4, 1);
             }
         }

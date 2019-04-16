@@ -5,7 +5,7 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.HelpCommand;
-import com.outlook.tehbrian.tfcplugin.FlightHandler;
+import com.outlook.tehbrian.tfcplugin.Flight;
 import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Utils;
 import org.bukkit.Material;
@@ -27,11 +27,11 @@ public class UtilCommand extends BaseCommand {
     @CommandPermission("tfcplugin.fly")
     @Description("Fly, like the birds in the sky.")
     public void onFly(Player player) {
-        if (FlightHandler.getCanBypassFly(player)) {
-            FlightHandler.setCanBypassFly(player, false);
+        if (Flight.getCanBypassFly(player)) {
+            Flight.setCanBypassFly(player, false);
             player.sendMessage(Utils.format("msg_fly_disabled"));
         } else {
-            FlightHandler.setCanBypassFly(player, true);
+            Flight.setCanBypassFly(player, true);
             player.sendMessage(Utils.format("msg_fly_enabled"));
         }
     }
