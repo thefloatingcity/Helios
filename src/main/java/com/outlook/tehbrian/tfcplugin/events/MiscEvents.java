@@ -1,6 +1,9 @@
 package com.outlook.tehbrian.tfcplugin.events;
 
-import com.outlook.tehbrian.tfcplugin.*;
+import com.outlook.tehbrian.tfcplugin.Flight;
+import com.outlook.tehbrian.tfcplugin.Main;
+import com.outlook.tehbrian.tfcplugin.Piano;
+import com.outlook.tehbrian.tfcplugin.Utils;
 import org.bukkit.*;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
