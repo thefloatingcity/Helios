@@ -1,7 +1,7 @@
 package com.outlook.tehbrian.tfcplugin.events;
 
 import com.outlook.tehbrian.tfcplugin.Main;
-import com.outlook.tehbrian.tfcplugin.Misc;
+import com.outlook.tehbrian.tfcplugin.Utils;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,7 +24,7 @@ public class AntiBuildEvents implements Listener {
     public void onBlockPlace(BlockPlaceEvent event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
-            event.getPlayer().sendMessage(Misc.formatConfig("msg_no_build"));
+            event.getPlayer().sendMessage(Utils.format("msg_no_build"));
         }
     }
 
@@ -32,7 +32,7 @@ public class AntiBuildEvents implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
-            event.getPlayer().sendMessage(Misc.formatConfig("msg_no_build"));
+            event.getPlayer().sendMessage(Utils.format("msg_no_build"));
         }
     }
 
@@ -40,7 +40,7 @@ public class AntiBuildEvents implements Listener {
     public void onBucketEmpty(PlayerBucketEmptyEvent event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
-            event.getPlayer().sendMessage(Misc.formatConfig("msg_no_build"));
+            event.getPlayer().sendMessage(Utils.format("msg_no_build"));
         }
     }
 
@@ -48,7 +48,7 @@ public class AntiBuildEvents implements Listener {
     public void onBucketFill(PlayerBucketFillEvent event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
-            event.getPlayer().sendMessage(Misc.formatConfig("msg_no_build"));
+            event.getPlayer().sendMessage(Utils.format("msg_no_build"));
         }
     }
 
@@ -58,7 +58,7 @@ public class AntiBuildEvents implements Listener {
             Player player = (Player) event.getRemover();
             if (!player.hasPermission("tfcplugin.build")) {
                 event.setCancelled(true);
-                player.sendMessage(Misc.formatConfig("msg_no_build"));
+                player.sendMessage(Utils.format("msg_no_build"));
             }
         }
     }
@@ -67,7 +67,7 @@ public class AntiBuildEvents implements Listener {
     public void onHangingPlace(HangingPlaceEvent event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
-            event.getPlayer().sendMessage(Misc.formatConfig("msg_no_build"));
+            event.getPlayer().sendMessage(Utils.format("msg_no_build"));
         }
     }
 
@@ -75,7 +75,7 @@ public class AntiBuildEvents implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
-            event.getPlayer().sendMessage(Misc.formatConfig("msg_no_build"));
+            event.getPlayer().sendMessage(Utils.format("msg_no_build"));
         }
     }
 
@@ -83,7 +83,7 @@ public class AntiBuildEvents implements Listener {
     public void onItemDrop(PlayerDropItemEvent event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
-            event.getPlayer().sendMessage(Misc.formatConfig("msg_no_build"));
+            event.getPlayer().sendMessage(Utils.format("msg_no_build"));
         }
     }
 
@@ -91,7 +91,7 @@ public class AntiBuildEvents implements Listener {
     public void onItemPickup(PlayerAttemptPickupItemEvent event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
-            event.getPlayer().sendMessage(Misc.formatConfig("msg_no_build"));
+            event.getPlayer().sendMessage(Utils.format("msg_no_build"));
         }
     }
 }

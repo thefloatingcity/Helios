@@ -5,9 +5,9 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.HelpCommand;
-import com.outlook.tehbrian.tfcplugin.Flight;
+import com.outlook.tehbrian.tfcplugin.Utils;
+import com.outlook.tehbrian.tfcplugin.FlightHandler;
 import com.outlook.tehbrian.tfcplugin.Main;
-import com.outlook.tehbrian.tfcplugin.Misc;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -27,12 +27,12 @@ public class UtilCommand extends BaseCommand {
     @CommandPermission("tfcplugin.fly")
     @Description("Fly, like the birds in the sky.")
     public void onFly(Player player) {
-        if (Flight.getCanBypassFly(player)) {
-            Flight.setCanBypassFly(player, false);
-            player.sendMessage(Misc.formatConfig("msg_fly_disabled"));
+        if (FlightHandler.getCanBypassFly(player)) {
+            FlightHandler.setCanBypassFly(player, false);
+            player.sendMessage(Utils.format("msg_fly_disabled"));
         } else {
-            Flight.setCanBypassFly(player, true);
-            player.sendMessage(Misc.formatConfig("msg_fly_enabled"));
+            FlightHandler.setCanBypassFly(player, true);
+            player.sendMessage(Utils.format("msg_fly_enabled"));
         }
     }
 
@@ -42,19 +42,19 @@ public class UtilCommand extends BaseCommand {
     public void onHat(Player player) {
         if (player.getInventory().getItemInMainHand().getType() == Material.AIR) {
             if (player.getInventory().getHelmet() == null) {
-                player.sendMessage(Misc.formatConfig("msg_hat_none"));
+                player.sendMessage(Utils.format("msg_hat_none"));
             } else {
-                player.sendMessage(Misc.formatConfig("msg_hat_removed"));
+                player.sendMessage(Utils.format("msg_hat_removed"));
                 player.getInventory().setHelmet(new ItemStack(Material.AIR));
             }
         } else {
-            player.sendMessage(Misc.formatConfig("msg_hat_set"));
+            player.sendMessage(Utils.format("msg_hat_set"));
             player.getInventory().setHelmet(player.getInventory().getItemInMainHand());
         }
     }
 
     @HelpCommand
     public void onHelp(CommandSender sender) {
-        sender.sendMessage(Misc.formatConfig("msg_util_help"));
+        sender.sendMessage(Utils.format("msg_util_help"));
     }
 }

@@ -8,7 +8,7 @@ main: ${mainClass}
 depend: []
 database: false
 api-version: 1.12
-commands: {} # Special thanks to ACF for making this empty!
+commands: {} # Thanks, ACF!
 permissions:
   tfcplugin.chatcolor:
     description: Permission to color chat text.
@@ -23,18 +23,6 @@ permissions:
     description: Complete permission to all of TFCPlugin.
     default: op
     children:
-      tfcplugin.zap: true
-      tfcplugin.launch: true
-      tfcplugin.blame: true
-      tfcplugin.shrug: true
-      tfcplugin.doubt: true
-      tfcplugin.sue: true
-      tfcplugin.hat: true
-      tfcplugin.boost: true
-      tfcplugin.poke: true
-      tfcplugin.fly: true
-      tfcplugin.gamemode: true
-      tfcplugin.piano: true
       tfcplugin.chatcolor: true
       tfcplugin.signcolor: true
       tfcplugin.build: true

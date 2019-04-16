@@ -3,8 +3,10 @@
 #  MAIN  #
 #        #
 ##########
-msg_prefix_long: "&8-*-*-*-*-*-*-*-*- &7-=[ &fThe &bFloating &aCity &7]=- &8-*-*-*-*-*-*-*-*-"
-msg_prefix: "&7[&fT&bF&aC&7]&f"
+tfc_banner: "&8-*-*-*-*-*-*-*-*- &7-=[ &fThe &bFloating &aCity &7]=- &8-*-*-*-*-*-*-*-*-"
+tfc_prefix: "&7[&fT&bF&aC&7]&f"
+tfc_color: "&b"
+
 msg_motd: "&fWelcome back! You were last on &e%s &f%s ago."
 msg_welcome: "&fWelcome to the server, &e%s&f!"
 
@@ -16,12 +18,9 @@ spawn:
 
 # You can use these substitutions:
 # %1$s for player, %2$s for message, {prefix}, {suffix}
-chat_format: "&r{prefix} &r&7%1$s&r{suffix}&r: %2$s"
-
-msg_voted: "&fThank you for voting through &c%s&f, &e%s&f!"
+chat_format: "&r{prefix}&r &7%1$s&r{suffix}&r: %2$s"
 
 msg_help: "&fPlease use /bukkit:help for now."
-msg_help_vote: "&fWe're currently adding voting! :)"
 msg_help_unknown: "&fWe couldn't find that help page.."
 
 msg_join: "&f%s joined the game."
@@ -30,12 +29,16 @@ msg_leave: "&f%s left the game."
 msg_not_online: "&fThat player is not online."
 msg_player_only: "&fYou must be a player to use this command."
 
+msg_no_build: "&fYou can't build! Please read our rules first by doing &e/rules&f!"
+
 ###########
 #         #
 #  RULES  #
 #         #
 ###########
-rules_prefix_long: "&8-*-*-*-*-*-*-*-*-*-* &7-=[ &cThe Rules &7]=- &8*-*-*-*-*-*-*-*-*-*-"
+rules_prefix: "&7[&cRules&7]&f"
+rules_color: "&c"
+
 msg_rules: "&fThese are temporary rules and still being worked on."
 msg_rules_help: "&fTo read the rules, type &erules&f, and to accept them, type &e/rules accept&f!"
 msg_rules_accept: "&fThanks for reading the rules! Here's your passenger!"
@@ -115,6 +118,10 @@ rules:
 #  PIANO  #
 #         #
 ###########
+piano_prefix: "&7[&3Piano&7]&f"
+piano_color: "&3"
+
+
 msg_piano_help: "&fFirst, do &e/piano menu &fand pick out any notes you would like to play, and put them into your hotbar. Right clicking the notes while in the menu plays them! If you want a nice selection of notes, pick all of them that are marked as &eF# Major&f! Next, if you want to change the default instrument, you can use &e/piano instrument &fto pick an instrument you would like. Tab completion works too! Finally, do &e/piano toggle &fand then if you change your selected hotbar item to the slot the note is on, it'll play that note! Have fun!"
 msg_piano_enabled: "&fThe piano has been enabled!"
 msg_piano_disabled: "&fThe piano has been disabled! Hope you enjoyed!"
@@ -371,8 +378,6 @@ msg_sue: "&cis suing &f%s"
 msg_warp_first: "&fReaching maximum &6warp speed&f.."
 msg_warp_second: "&fReaching maximum &cwarp speed&f.."
 msg_warp_max: "&fMaximum &4warp speed &freached!"
-
-msg_no_build: "&fYou can't build! Please read our rules first by doing &e/rules&f!"
 
 msg_gamemode_help: "&fChange your gamemode!"
 msg_gamemode_change: "&fYour gamemode has been changed to &e%s&f!"

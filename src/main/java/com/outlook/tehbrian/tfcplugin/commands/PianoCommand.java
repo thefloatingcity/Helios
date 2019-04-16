@@ -3,6 +3,7 @@ package com.outlook.tehbrian.tfcplugin.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import co.aikar.commands.annotation.HelpCommand;
+import com.outlook.tehbrian.tfcplugin.Utils;
 import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Misc;
 import com.outlook.tehbrian.tfcplugin.Piano;
@@ -31,7 +32,7 @@ public class PianoCommand extends BaseCommand {
         Inventory pianoNotesInventory = Bukkit.createInventory(null, 27, main.getConfig().getString("piano_notes_inventory_name"));
         for (String key : main.getConfig().getConfigurationSection("piano_notes").getKeys(false)) {
             ConfigurationSection piano_note = main.getConfig().getConfigurationSection("piano_notes." + key);
-            pianoNotesInventory.addItem(Misc.createItem(piano_note.getString("name"), piano_note.getStringList("lore"), Material.STAINED_GLASS_PANE, 1, piano_note.getInt("data")));
+            pianoNotesInventory.addItem(Utils.createItem(piano_note.getString("name"), piano_note.getStringList("lore"), Material.STAINED_GLASS_PANE, 1, piano_note.getInt("data")));
         }
         player.openInventory(pianoNotesInventory);
     }
@@ -41,7 +42,7 @@ public class PianoCommand extends BaseCommand {
     @CommandCompletion("@pianosounds")
     public void onInstrument(Player player, Sound sound) {
         Piano.setPlayerPianoInstrument(player, sound);
-        player.sendMessage(Misc.formatConfig("msg_piano_instrument_change", sound.toString()));
+        player.sendMessage(Utils.format("msg_piano_instrument_change", sound.toString()));
     }
 
     @Subcommand("toggle")
@@ -49,15 +50,15 @@ public class PianoCommand extends BaseCommand {
     public void onToggle(Player player) {
         if (Piano.getPlayerEnabledPiano(player)) {
             Piano.setPlayerEnabledPiano(player, false);
-            player.sendMessage(Misc.formatConfig("msg_piano_disabled"));
+            player.sendMessage(Utils.format("msg_piano_disabled"));
         } else {
             Piano.setPlayerEnabledPiano(player, true);
-            player.sendMessage(Misc.formatConfig("msg_piano_enabled"));
+            player.sendMessage(Utils.format("msg_piano_enabled"));
         }
     }
 
     @HelpCommand
     public void onHelp(CommandSender sender) {
-        sender.sendMessage(Misc.formatConfig("msg_piano_help"));
+        sender.sendMessage(Utils.format("msg_piano_help"));
     }
 }

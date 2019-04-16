@@ -1,9 +1,6 @@
 package com.outlook.tehbrian.tfcplugin.events;
 
-import com.outlook.tehbrian.tfcplugin.Flight;
-import com.outlook.tehbrian.tfcplugin.Main;
-import com.outlook.tehbrian.tfcplugin.Misc;
-import com.outlook.tehbrian.tfcplugin.Piano;
+import com.outlook.tehbrian.tfcplugin.*;
 import org.bukkit.*;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
@@ -26,17 +23,17 @@ public class MiscEvents implements Listener {
     @EventHandler
     public void onToggleFlight(PlayerToggleFlightEvent event) {
         event.setCancelled(true);
-        Flight.disableFlight(event.getPlayer());
+        FlightHandler.disableFlight(event.getPlayer());
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        event.setJoinMessage(Misc.formatConfig("msg_join", player.getDisplayName()));
-        player.sendMessage(Misc.formatConfig(false, "msg_prefix_long"));
+        event.setJoinMessage(Utils.format("msg_join", player.getDisplayName()));
+        player.sendMessage(Utils.format(Utils.PrefixType.NONE, "tfc_banner"));
 
-        Flight.disableFlight(player);
+        FlightHandler.disableFlight(player);
 
         Firework f = player.getWorld().spawn(player.getLocation(), Firework.class);
         FireworkMeta fm = f.getFireworkMeta();
@@ -59,7 +56,7 @@ public class MiscEvents implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        event.setQuitMessage(Misc.formatConfig("msg_leave", event.getPlayer().getDisplayName()));
+        event.setQuitMessage(Utils.format("msg_leave", event.getPlayer().getDisplayName()));
     }
 
     @EventHandler
@@ -75,7 +72,7 @@ public class MiscEvents implements Listener {
                 } else if (event.getClickedInventory().getName().equals(main.getConfig().getString("rules_inventory_name"))) {
                     event.setCancelled(true);
                     if (event.getSlot() == 8) {
-                        player.sendMessage(Misc.formatConfig("msg_golden_rule"));
+                        player.sendMessage(Utils.format("msg_golden_rule"));
                     }
                 }
             }
@@ -106,9 +103,9 @@ public class MiscEvents implements Listener {
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         if (player.hasPermission("tfcplugin.chatcolor")) {
-            event.setMessage(Misc.colorString(event.getMessage()));
+            event.setMessage(Utils.colorString(event.getMessage()));
         }
-        event.setFormat(Misc.colorString(main.getConfig().getString("chat_format")
+        event.setFormat(Utils.colorString(main.getConfig().getString("chat_format")
                 .replace("{prefix}", main.getVaultChat().getPlayerPrefix(player))
                 .replace("{suffix}", main.getVaultChat().getPlayerSuffix(player))));
     }

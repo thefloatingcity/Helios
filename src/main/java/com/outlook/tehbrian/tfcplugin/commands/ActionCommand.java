@@ -2,8 +2,8 @@ package com.outlook.tehbrian.tfcplugin.commands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
+import com.outlook.tehbrian.tfcplugin.Utils;
 import com.outlook.tehbrian.tfcplugin.Main;
-import com.outlook.tehbrian.tfcplugin.Misc;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -35,9 +35,9 @@ public class ActionCommand extends BaseCommand {
                 player.setVelocity(new Vector(0, 10, 0));
                 player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
 
-                Bukkit.broadcastMessage(Misc.formatConfig("msg_launch_themself", sender.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_launch_themself", sender.getName()));
             } else {
-                sender.sendMessage(Misc.formatConfig("msg_player_only"));
+                sender.sendMessage(Utils.format("msg_player_only"));
             }
         } else {
             Player target = Bukkit.getPlayer(args[0]);
@@ -46,14 +46,14 @@ public class ActionCommand extends BaseCommand {
                     player.setVelocity(new Vector(0, 10, 0));
                     player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
                 }
-                Bukkit.broadcastMessage(Misc.formatConfig("msg_launch_everyone", sender.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_launch_everyone", sender.getName()));
             } else if (target != null) {
                 target.setVelocity(new Vector(0, 10, 0));
                 target.getWorld().playSound(target.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
 
-                Bukkit.broadcastMessage(Misc.formatConfig("msg_launch", sender.getName(), target.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_launch", sender.getName(), target.getName()));
             } else {
-                sender.sendMessage(Misc.formatConfig("msg_not_online"));
+                sender.sendMessage(Utils.format("msg_not_online"));
             }
         }
     }
@@ -69,9 +69,9 @@ public class ActionCommand extends BaseCommand {
 
                 player.getWorld().strikeLightning(player.getLocation());
 
-                Bukkit.broadcastMessage(Misc.formatConfig("msg_zap_themself", sender.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_zap_themself", sender.getName()));
             } else {
-                sender.sendMessage(Misc.formatConfig("msg_player_only"));
+                sender.sendMessage(Utils.format("msg_player_only"));
             }
         } else {
             Player target = Bukkit.getPlayer(args[0]);
@@ -79,13 +79,13 @@ public class ActionCommand extends BaseCommand {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     player.getWorld().strikeLightning(player.getLocation());
                 }
-                Bukkit.broadcastMessage(Misc.formatConfig("msg_zap_everyone", sender.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_zap_everyone", sender.getName()));
             } else if (target != null) {
                 target.getWorld().strikeLightning(target.getLocation());
 
-                Bukkit.broadcastMessage(Misc.formatConfig("msg_zap", sender.getName(), target.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_zap", sender.getName(), target.getName()));
             } else {
-                sender.sendMessage(Misc.formatConfig("msg_not_online"));
+                sender.sendMessage(Utils.format("msg_not_online"));
             }
         }
     }
@@ -102,9 +102,9 @@ public class ActionCommand extends BaseCommand {
                 player.setVelocity(player.getLocation().getDirection().multiply(3));
                 player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
 
-                Bukkit.broadcastMessage(Misc.formatConfig("msg_boost_themself", sender.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_boost_themself", sender.getName()));
             } else {
-                sender.sendMessage(Misc.formatConfig("msg_player_only"));
+                sender.sendMessage(Utils.format("msg_player_only"));
             }
         } else {
             Player target = Bukkit.getPlayer(args[0]);
@@ -113,14 +113,14 @@ public class ActionCommand extends BaseCommand {
                     player.setVelocity(player.getLocation().getDirection().multiply(3));
                     player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
                 }
-                Bukkit.broadcastMessage(Misc.formatConfig("msg_boost_everyone", sender.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_boost_everyone", sender.getName()));
             } else if (target != null) {
                 target.setVelocity(target.getLocation().getDirection().multiply(3));
                 target.getWorld().playSound(target.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
 
-                Bukkit.broadcastMessage(Misc.formatConfig("msg_boost", sender.getName(), target.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_boost", sender.getName(), target.getName()));
             } else {
-                sender.sendMessage(Misc.formatConfig("msg_not_online"));
+                sender.sendMessage(Utils.format("msg_not_online"));
             }
         }
     }
@@ -147,9 +147,9 @@ public class ActionCommand extends BaseCommand {
 
                 player.setVelocity(randomVector);
 
-                Bukkit.broadcastMessage(Misc.formatConfig("msg_poke_themself", sender.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_poke_themself", sender.getName()));
             } else {
-                sender.sendMessage(Misc.formatConfig("msg_player_only"));
+                sender.sendMessage(Utils.format("msg_player_only"));
             }
         } else {
             Player target = Bukkit.getPlayer(args[0]);
@@ -157,19 +157,19 @@ public class ActionCommand extends BaseCommand {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     player.setVelocity(randomVector);
                 }
-                Bukkit.broadcastMessage(Misc.formatConfig("msg_poke_everyone", sender.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_poke_everyone", sender.getName()));
             } else if (target != null) {
                 target.setVelocity(randomVector);
 
-                Bukkit.broadcastMessage(Misc.formatConfig("msg_poke", sender.getName(), target.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_poke", sender.getName(), target.getName()));
             } else {
-                sender.sendMessage(Misc.formatConfig("msg_not_online"));
+                sender.sendMessage(Utils.format("msg_not_online"));
             }
         }
     }
 
     @HelpCommand
     public void onHelp(CommandSender sender) {
-        sender.sendMessage(Misc.formatConfig("msg_action_help"));
+        sender.sendMessage(Utils.format("msg_action_help"));
     }
 }

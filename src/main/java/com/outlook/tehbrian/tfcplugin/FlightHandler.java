@@ -6,9 +6,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public class Flight {
+public class FlightHandler {
 
-    private Flight() {
+    private FlightHandler() {
     }
 
     private static Set<UUID> canBypassFly = new HashSet<>();

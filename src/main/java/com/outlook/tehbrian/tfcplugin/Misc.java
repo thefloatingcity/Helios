@@ -1,13 +1,12 @@
 package com.outlook.tehbrian.tfcplugin;
 
 import org.bukkit.*;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+
+import static com.outlook.tehbrian.tfcplugin.Utils.getSpawn;
 
 public class Misc {
 
@@ -18,75 +17,34 @@ public class Misc {
 
     public static void maximumWarp(Player player) {
         if (player.getFallDistance() >= 1500) {
-            player.sendMessage(formatConfig("msg_warp_max"));
+            player.sendMessage(Utils.format("msg_warp_max"));
             player.teleport(getSpawn());
             player.getWorld().strikeLightningEffect(getSpawn());
             player.getWorld().playSound(getSpawn(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 3, 1);
             player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, getSpawn(), 1);
         } else if (player.getFallDistance() >= 1000) {
-            player.sendMessage(formatConfig("msg_warp_second"));
+            player.sendMessage(Utils.format("msg_warp_second"));
         } else if (player.getFallDistance() >= 500) {
-            player.sendMessage(formatConfig("msg_warp_first"));
+            player.sendMessage(Utils.format("msg_warp_first"));
         }
     }
 
     public static void oldPlayerJoin(Player player) {
         long millisSinceLastPlayed = Calendar.getInstance().getTimeInMillis() - player.getLastPlayed();
         if (millisSinceLastPlayed >= 86400000) {
-            player.sendMessage(formatConfig("msg_motd", TimeUnit.MILLISECONDS.toDays(millisSinceLastPlayed), "days"));
+            player.sendMessage(Utils.format("msg_motd", TimeUnit.MILLISECONDS.toDays(millisSinceLastPlayed), "days"));
         } else if (millisSinceLastPlayed >= 3600000) {
-            player.sendMessage(formatConfig("msg_motd", TimeUnit.MILLISECONDS.toHours(millisSinceLastPlayed), "hours"));
+            player.sendMessage(Utils.format("msg_motd", TimeUnit.MILLISECONDS.toHours(millisSinceLastPlayed), "hours"));
         } else if (millisSinceLastPlayed >= 60000) {
-            player.sendMessage(formatConfig("msg_motd", TimeUnit.MILLISECONDS.toMinutes(millisSinceLastPlayed), "minutes"));
+            player.sendMessage(Utils.format("msg_motd", TimeUnit.MILLISECONDS.toMinutes(millisSinceLastPlayed), "minutes"));
         } else if (millisSinceLastPlayed >= 1000) {
-            player.sendMessage(formatConfig("msg_motd", TimeUnit.MILLISECONDS.toSeconds(millisSinceLastPlayed), "seconds"));
+            player.sendMessage(Utils.format("msg_motd", TimeUnit.MILLISECONDS.toSeconds(millisSinceLastPlayed), "seconds"));
         } else {
-            player.sendMessage(formatConfig("msg_motd", millisSinceLastPlayed, "milliseconds"));
+            player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed, "milliseconds"));
         }
     }
 
     public static void newPlayerJoin(Player player) {
-        player.sendMessage(formatConfig("msg_welcome", player.getName()));
-    }
-
-    public static String formatConfig(String configkey, Object... formats) {
-        return colorString(main.getConfig().getString("msg_prefix") + " " + String.format(main.getConfig().getString(configkey), formats));
-    }
-
-    public static String formatConfig(Boolean useprefix, String configkey, Object... formats) {
-        if (useprefix) {
-            return colorString(main.getConfig().getString("msg_prefix") + " " + String.format(main.getConfig().getString(configkey), formats));
-        }
-        return colorString(String.format(main.getConfig().getString(configkey), formats));
-    }
-
-    public static String colorString(String string) {
-        return string == null ? null : ChatColor.translateAlternateColorCodes('&', string);
-    }
-
-    public static Location getSpawn() {
-        return new Location(Bukkit.getWorld(main.getConfig().getString("spawn.world")), main.getConfig().getDouble("spawn.x"), main.getConfig().getDouble("spawn.y"), main.getConfig().getDouble("spawn.z"));
-    }
-
-    public static ItemStack createItem(String name, List<String> lore, Material material, int amount, int data) {
-        ItemStack i = new ItemStack(material, amount);
-        ItemMeta im = i.getItemMeta();
-        for (int x = 0; x < lore.size(); x++) {
-            lore.set(x, colorString(lore.get(x)));
-        }
-        im.setDisplayName(colorString(name));
-        im.setLore(lore);
-        i.setDurability((short) data);
-        i.setItemMeta(im);
-        return i;
-    }
-
-    public static String emote(CommandSender sender, String text) {
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            return Misc.formatConfig(false, "msg_emote_player", main.getVaultChat().getPlayerPrefix(player), player.getDisplayName(), text);
-        } else {
-            return Misc.formatConfig(true, "msg_emote_server", sender.getName(), text);
-        }
+        player.sendMessage(Utils.format("msg_welcome", player.getName()));
     }
 }
