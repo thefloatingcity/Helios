@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Utils {
 
-    private static Main main = Main.getInstance();
+    private static final Main main = Main.getInstance();
 
     private Utils() {
     }
