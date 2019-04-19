@@ -22,9 +22,9 @@ public class Utils {
     public static String emote(CommandSender sender, String configKey) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            return Utils.format("msg_winkwonk", player.getDisplayName());
+            return Utils.format(configKey, player.getDisplayName());
         } else {
-            return Utils.format("msg_winkwonk", sender.getName());
+            return Utils.format(configKey, sender.getName());
         }
     }
 
@@ -39,6 +39,10 @@ public class Utils {
 
     public static String format(String configKey, Object... replacements) {
         return format("tfc", PrefixType.NONE, configKey, replacements);
+    }
+
+    public static String format(PrefixType prefixType, String configKey, Object... replacements) {
+        return format("tfc", prefixType, configKey, replacements);
     }
 
     public static String format(String category, PrefixType prefixType, String configKey, Object... replacements) {
