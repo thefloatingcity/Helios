@@ -15,7 +15,7 @@ import org.bukkit.inventory.Inventory;
 
 @CommandAlias("piano")
 @CommandPermission("tfcplugin.piano")
-@Description("A playable piano in your inventory!")
+@Description("A playable piano!")
 public class PianoCommand extends BaseCommand {
 
     private final Main main;
@@ -36,11 +36,11 @@ public class PianoCommand extends BaseCommand {
     }
 
     @Subcommand("instrument")
-    @Description("Pick any sound as your instrument!")
+    @Description("Pick any instrument!")
     @CommandCompletion("@pianosounds")
     public void onInstrument(Player player, Sound sound) {
         Piano.setPlayerPianoInstrument(player, sound);
-        player.sendMessage(Utils.format("msg_piano_instrument_change", sound.toString()));
+        player.sendMessage(Utils.formatC("piano_prefix", "msg_piano_instrument_change", sound.toString()));
     }
 
     @Subcommand("toggle")
@@ -48,15 +48,15 @@ public class PianoCommand extends BaseCommand {
     public void onToggle(Player player) {
         if (Piano.getPlayerEnabledPiano(player)) {
             Piano.setPlayerEnabledPiano(player, false);
-            player.sendMessage(Utils.format("msg_piano_disabled"));
+            player.sendMessage(Utils.formatC("piano_prefix", "msg_piano_disabled"));
         } else {
             Piano.setPlayerEnabledPiano(player, true);
-            player.sendMessage(Utils.format("msg_piano_enabled"));
+            player.sendMessage(Utils.formatC("piano_prefix", "msg_piano_enabled"));
         }
     }
 
     @HelpCommand
     public void onHelp(CommandSender sender) {
-        sender.sendMessage(Utils.format("msg_piano_help"));
+        sender.sendMessage(Utils.formatC("piano_prefix", "msg_piano_help"));
     }
 }

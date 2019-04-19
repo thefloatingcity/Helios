@@ -23,7 +23,7 @@ public class RulesCommand extends BaseCommand {
 
     @Default
     public void onRules(Player player) {
-        player.sendMessage(Utils.format("rules", "msg_rules"));
+        player.sendMessage(Utils.format("rules_prefix", "msg_rules"));
         Inventory rulesInventory = Bukkit.createInventory(null, 9, main.getConfig().getString("rules_inventory_name"));
         for (String key : main.getConfig().getConfigurationSection("rules").getKeys(false)) {
             ConfigurationSection rule = main.getConfig().getConfigurationSection("rules." + key);
@@ -34,18 +34,18 @@ public class RulesCommand extends BaseCommand {
 
     @Subcommand("accept")
     @CommandAlias("acceptrules")
-    @Description("Accept the rules.")
+    @Description("Accept the rules and get building perms!")
     public void onAccept(Player player) {
         if (player.hasPermission("tfcplugin.rulesaccepted")) {
-            player.sendMessage(Utils.format("msg_rules_already_accepted"));
+            player.sendMessage(Utils.formatC("rules_prefix", "msg_rules_already_accepted"));
         } else {
-            player.sendMessage(Utils.format("msg_rules_accept"));
+            player.sendMessage(Utils.formatC("rules_prefix", "msg_rules_accept"));
             main.getVaultPerms().playerAddGroup(null, player, "passenger");
         }
     }
 
     @HelpCommand
     public void onHelp(CommandSender sender) {
-        sender.sendMessage(Utils.format("msg_rules_help"));
+        sender.sendMessage(Utils.formatC("rules_prefix", "msg_rules_help"));
     }
 }

@@ -5,7 +5,7 @@
 ##########
 tfc_banner: "&8-*-*-*-*-*-*-*-*- &7-=[&f The &bFloating &aCity &7]=- &8-*-*-*-*-*-*-*-*-"
 tfc_prefix: "&7[&fT&bF&aC&7]&f"
-tfc_color: "&b"
+tfc_multi: "&b&l>"
 
 msg_motd: "&fWelcome back! You were last on &e%s&f %s ago."
 msg_welcome: "&fWelcome to the server, &e%s&f!"
@@ -21,7 +21,7 @@ spawn:
 
 chat_format: "&f{prefix}&f &7%1$s&f{suffix}&f: %2$s"
 
-msg_not_online: "&fThat player is not online."
+msg_not_online: "&fThat player isn't online."
 msg_player_only: "&fYou must be a player to use this command."
 
 msg_no_build: "&fYou can't build! Please read our rules first by doing &e/rules&f!"
@@ -32,14 +32,14 @@ msg_no_build: "&fYou can't build! Please read our rules first by doing &e/rules&
 #         #
 ###########
 rules_prefix: "&7[&cRules&7]&f"
-rules_color: "&c"
+rules_multi: "&c&l>"
 
 msg_rules: "&fThese are temporary rules and still being worked on."
 msg_rules_help: "&fTo read the rules, type &erules&f, and to accept them, type &e/rules accept&f!"
 msg_rules_accept: "&fThanks for reading the rules! Here's your passenger!"
 msg_rules_already_accepted: "&fLooks like you already read the rules, thanks!"
 msg_golden_rule: "&fThe holy &eGolden Rule&f!"
-rules_inventory_name: "Rules | The Floating City"
+rules_inventory_name: "The Floating City's Rules"
 rules:
   rule1:
     name: "&fRule 1 &7| &eGriefing"
@@ -114,13 +114,13 @@ rules:
 #         #
 ###########
 piano_prefix: "&7[&3Piano&7]&f"
-piano_color: "&3"
+piano_multi: "&3&l>"
 
-msg_piano_help: "&fFirst, do &e/piano menu&f and pick out any notes you would like to play, and put them into your hotbar. Right clicking the notes while in the menu plays them! If you want a nice selection of notes, pick all of them that are marked as &eF# Major&f! Next, if you want to change the default instrument, you can use &e/piano instrument&f to pick an instrument you would like. Tab completion works too! Finally, do &e/piano toggle&f and then if you change your selected hotbar item to the slot the note is on, it'll play that note! Have fun!"
+msg_piano_help: "&fFirst, do &e/piano menu&f and pick out any notes you would like to play, and put them into your hotbar. Right clicking the notes while in the menu plays them. If you want a nice selection of notes, pick all of them that are marked as &eF# Major&f! Next, if you want to change the default instrument, you can use &e/piano instrument&f to pick an instrument you would like. Tab completion works too! Finally, do &e/piano toggle&f and then if you change your selected hotbar item to the slot the note is on, it'll play that note! Have fun!"
 msg_piano_enabled: "&fThe piano has been enabled!"
 msg_piano_disabled: "&fThe piano has been disabled! Hope you enjoyed!"
 msg_piano_instrument_change: "&fYour piano instrument is now set to &e%s&f!"
-piano_notes_inventory_name: "Piano Menu | The Floating City"
+piano_notes_inventory_name: "Piano Notes Menu"
 piano_notes:
   piano_note1:
     name: "&fF♯/G♭ [&bOctave 1&f]"
@@ -303,23 +303,19 @@ piano_notes:
 #  ACTION  #
 #          #
 ############
-msg_action_help: "&fThis is a test message. Help is coming soon! :)"
+msg_action_help: "&fActions: &e/zap&f, &e/launch&f, &e/boost&f, and &e/poke&f."
 
 msg_zap: "&f%s &czapped&f %s"
 msg_zap_themself: "&f%s &czapped&f themself"
-msg_zap_everyone: "&f%s &czapped&f everyone"
 
 msg_launch: "&f%s &alaunched&f %s"
 msg_launch_themself: "&f%s &alaunched&f themselves"
-msg_launch_everyone: "&f%s &alaunched&f everyone"
 
 msg_boost: "&f%s &aboosted&f %s"
 msg_boost_themself: "&f%s &aboosted&f themselves"
-msg_boost_everyone: "&f%s &aboosted&f everyone"
 
 msg_poke: "&f%s &cpoked&f %s"
 msg_poke_themself: "&f%s &cpoked&f themselves"
-msg_poke_everyone: "&f%s &cpoked&f everyone"
 poke_force:
   maxY: 0.8
   minY: 0.2
@@ -331,7 +327,7 @@ poke_force:
 #  UTIL  #
 #        #
 ##########
-msg_util_help: "&fThis is a test message. Help is coming soon! :)"
+msg_util_help: "&fUtilities: &e/blocks&f and &e/hat&f."
 
 msg_fly_enabled: "&fYou can now fly! Please only use this in emergencies when you need to get somewhere high up."
 msg_fly_disabled: "&fYou can no longer fly. Thanks for disabling it!"
@@ -340,20 +336,6 @@ msg_hat_set: "&fNow that's a fancy hat!"
 msg_hat_removed: "&fAww, there goes your fancy hat."
 msg_hat_none: "&fTo put on a hat, hold what you want to wear!"
 
-##########
-#        #
-#  CORE  #
-#        #
-##########
-msg_core_help: "&fThis is a test message. Help is coming soon! :)"
-
-msg_reloaded: "&fPlugin reloaded successfully!"
-
-############
-#          #
-#  BLOCKS  #
-#          #
-############
 blocks_inventory_name: "Useful Building Blocks"
 blocks:
   block1:
@@ -373,12 +355,28 @@ blocks:
     material: "DRAGON_EGG"
     data: 0
 
+##########
+#        #
+#  CORE  #
+#        #
+##########
+msg_core_help: "&fCore Commands: &e/tfc reload&f."
+
+msg_reloaded: "&fPlugin reloaded successfully!"
+
+############
+#          #
+#  BLOCKS  #
+#          #
+############
+
+
 ###########
 #         #
 #  EMOTE  #
 #         #
 ###########
-msg_emote_help: "&fThis is a test message. Help is coming soon! :)"
+msg_emote_help: "&fEmotes: &e/winkwonk&f, &e/shrug&f, &e/doubt&f, &e/blame&f, and &e/sue&f."
 
 emote_winkwonk: "&d%s &5wink wonks &d;)"
 emote_shrug: "&a%s &2shrugs &a\\_o¬o_/"
@@ -395,7 +393,7 @@ msg_warp_first: "&fReaching maximum &6warp speed&f.."
 msg_warp_second: "&fReaching maximum &cwarp speed&f.."
 msg_warp_max: "&fMaximum &4warp speed&f reached!"
 
-msg_gamemode_help: "&fChange your gamemode!"
+msg_gamemode_help: "&fPlease enter a valid gamemode!"
 msg_gamemode_change: "&fYour gamemode has been changed to &e%s&f!"
 
 

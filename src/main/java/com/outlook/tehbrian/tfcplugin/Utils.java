@@ -38,14 +38,15 @@ public class Utils {
     }
 
     public static String format(String configKey, Object... replacements) {
-        FileConfiguration config = main.getConfig();
-        return colorString(String.format(config.getString(configKey), replacements));
+        return formatC("tfc_prefix", configKey, replacements);
     }
 
-    public static String format(String prefixKey, String configKey, Object... replacements) {
+    public static String formatC(String prefixKey, String configKey, Object... replacements) {
         FileConfiguration config = main.getConfig();
+        if (prefixKey.equalsIgnoreCase("none")) {
+            return colorString(String.format(config.getString(configKey), replacements));
+        }
         return colorString(config.getString(prefixKey) + " " + String.format(config.getString(configKey), replacements));
-
     }
 
     public static String colorString(String string) {
