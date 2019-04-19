@@ -75,7 +75,7 @@ public class MiscEvents implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        event.setQuitMessage(Utils.format("msg_leave", event.getPlayer().getDisplayName()));
+        event.setQuitMessage(Utils.formatC("none","msg_leave", event.getPlayer().getDisplayName()));
     }
 
     @EventHandler
