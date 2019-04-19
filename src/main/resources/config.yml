@@ -379,7 +379,7 @@ emote_winkwonk: "&d%s &5wink wonks &d;)"
 emote_shrug: "&a%s &2shrugs &a\\_o¬o_/"
 emote_doubt: "&b%s &9doubts that."
 emote_blame: "&c%s &4blames &c%s"
-emote_sue: "&c%s &4is suing &c%s"
+emote_sue: "&e%s &6is suing &e%s"
 
 ##########
 #        #
