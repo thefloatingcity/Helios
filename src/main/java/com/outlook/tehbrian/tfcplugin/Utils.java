@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -78,5 +79,13 @@ public class Utils {
         i.setDurability((short) data);
         i.setItemMeta(im);
         return i;
+    }
+
+    public static boolean isTop(Player player, Block block) {
+        Location start = player.getEyeLocation().clone();
+        while (!start.getBlock().equals(block) && start.distance(player.getEyeLocation()) < 6.0D) {
+            start.add(player.getLocation().getDirection().multiply(0.05D));
+        }
+        return start.getY() % 1.0D > 0.5D;
     }
 }

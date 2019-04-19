@@ -38,7 +38,7 @@ public class MiscEvents implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        event.setJoinMessage(Utils.format("msg_join", player.getDisplayName()));
+        event.setJoinMessage(Utils.formatC("none", "msg_join", player.getDisplayName()));
         player.sendMessage(Utils.formatC("none", "tfc_banner"));
 
         Flight.disableFlight(player);

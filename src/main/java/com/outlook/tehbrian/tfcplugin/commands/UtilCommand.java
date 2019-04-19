@@ -48,6 +48,7 @@ public class UtilCommand extends BaseCommand {
             ConfigurationSection block = main.getConfig().getConfigurationSection("blocks." + key);
             blocksInventory.addItem(Utils.createItem(block.getString("name"), Material.matchMaterial(block.getString("material")), 1, block.getInt("data")));
         }
+        player.openInventory(blocksInventory);
     }
 
     @CommandAlias("broadcast")
