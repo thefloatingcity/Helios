@@ -38,27 +38,14 @@ public class Utils {
     }
 
     public static String format(String configKey, Object... replacements) {
-        return format("tfc", PrefixType.NONE, configKey, replacements);
-    }
-
-    public static String format(PrefixType prefixType, String configKey, Object... replacements) {
-        return format("tfc", prefixType, configKey, replacements);
-    }
-
-    public static String format(String category, PrefixType prefixType, String configKey, Object... replacements) {
         FileConfiguration config = main.getConfig();
-        String configString = config.getString(configKey);
-        String formattedString = String.format(configString, replacements);
-        switch (prefixType) {
-            case PREFIX:
-                return colorString(config.getString(category + "_prefix") + " " + formattedString);
-            case MULTI:
-                return colorString(config.getString(category + "_color") + "&l> " + formattedString);
-            case NONE:
-                return colorString(formattedString);
-            default:
-                return null;
-        }
+        return colorString(String.format(config.getString(configKey), replacements));
+    }
+
+    public static String format(String prefixKey, String configKey, Object... replacements) {
+        FileConfiguration config = main.getConfig();
+        return colorString(config.getString(prefixKey) + " " + String.format(config.getString(configKey), replacements));
+
     }
 
     public static String colorString(String string) {
@@ -68,6 +55,15 @@ public class Utils {
     public static Location getSpawn() {
         FileConfiguration config = main.getConfig();
         return new Location(Bukkit.getWorld(config.getString("spawn.world")), config.getDouble("spawn.x"), config.getDouble("spawn.y"), config.getDouble("spawn.z"));
+    }
+
+    public static ItemStack createItem(String name, Material material, int amount, int data) {
+        ItemStack i = new ItemStack(material, amount);
+        ItemMeta im = i.getItemMeta();
+        im.setDisplayName(colorString(name));
+        i.setDurability((short) data);
+        i.setItemMeta(im);
+        return i;
     }
 
     public static ItemStack createItem(String name, List<String> lore, Material material, int amount, int data) {
@@ -81,11 +77,5 @@ public class Utils {
         i.setDurability((short) data);
         i.setItemMeta(im);
         return i;
-    }
-
-    public enum PrefixType {
-        PREFIX,
-        MULTI,
-        NONE
     }
 }

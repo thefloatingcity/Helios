@@ -11,7 +11,9 @@ import com.outlook.tehbrian.tfcplugin.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 @CommandAlias("util|utils")
@@ -37,10 +39,21 @@ public class UtilCommand extends BaseCommand {
         }
     }
 
+    @CommandAlias("blocks")
+    @CommandPermission("tfcplugin.blocks")
+    @Description("Useful bulding blocks.")
+    public void onBlocks(Player player) {
+        Inventory blocksInventory = Bukkit.createInventory(null, 27, main.getConfig().getString("blocks_inventory_name"));
+        for (String key : main.getConfig().getConfigurationSection("blocks").getKeys(false)) {
+            ConfigurationSection block = main.getConfig().getConfigurationSection("blocks." + key);
+            blocksInventory.addItem(Utils.createItem(block.getString("name"), Material.matchMaterial(block.getString("material")), 1, block.getInt("data")));
+        }
+    }
+
     @CommandAlias("broadcast")
     @CommandPermission("tfcplugin.broadcast")
     @Description("Broadcast a message to the server.")
-    public void onBroadcast(CommandSender commandSender, String text) {
+    public void onBroadcast(CommandSender sender, String text) {
         Bukkit.broadcastMessage(Utils.colorString(text));
     }
 

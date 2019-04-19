@@ -10,8 +10,8 @@ tfc_color: "&b"
 msg_motd: "&fWelcome back! You were last on &e%s&f %s ago."
 msg_welcome: "&fWelcome to the server, &e%s&f!"
 
-msg_join: "&f%s joined the game."
-msg_leave: "&f%s left the game."
+msg_join: "&7[&a+&7]&f &f%s joined the game."
+msg_leave: "&7[&c-&7]&f &f%s left the game."
 
 spawn:
   world: world
@@ -115,7 +115,6 @@ rules:
 ###########
 piano_prefix: "&7[&3Piano&7]&f"
 piano_color: "&3"
-
 
 msg_piano_help: "&fFirst, do &e/piano menu&f and pick out any notes you would like to play, and put them into your hotbar. Right clicking the notes while in the menu plays them! If you want a nice selection of notes, pick all of them that are marked as &eF# Major&f! Next, if you want to change the default instrument, you can use &e/piano instrument&f to pick an instrument you would like. Tab completion works too! Finally, do &e/piano toggle&f and then if you change your selected hotbar item to the slot the note is on, it'll play that note! Have fun!"
 msg_piano_enabled: "&fThe piano has been enabled!"
@@ -349,6 +348,30 @@ msg_hat_none: "&fTo put on a hat, hold what you want to wear!"
 msg_core_help: "&fThis is a test message. Help is coming soon! :)"
 
 msg_reloaded: "&fPlugin reloaded successfully!"
+
+############
+#          #
+#  BLOCKS  #
+#          #
+############
+blocks_inventory_name: "Useful Building Blocks"
+blocks:
+  block1:
+    name: "Brown Mushroom Block"
+    material: "BROWN_MUSHROOM"
+    data: 0
+  block2:
+    name: "Red Mushroom Block"
+    material: "RED_MUSHROOM"
+    data: 0
+  block3:
+    name: "Grass Path"
+    material: "GRASS_PATH"
+    data: 0
+  block4:
+    name: "Dragon Egg"
+    material: "DRAGON_EGG"
+    data: 0
 
 ###########
 #         #

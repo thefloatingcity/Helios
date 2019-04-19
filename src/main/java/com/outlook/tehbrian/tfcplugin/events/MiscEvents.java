@@ -9,6 +9,7 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -39,7 +40,7 @@ public class MiscEvents implements Listener {
         Player player = event.getPlayer();
 
         event.setJoinMessage(Utils.format("msg_join", player.getDisplayName()));
-        player.sendMessage(Utils.format(Utils.PrefixType.NONE, "tfc_banner"));
+        player.sendMessage(Utils.format("tfc_banner"));
 
         Flight.disableFlight(player);
 
@@ -101,6 +102,11 @@ public class MiscEvents implements Listener {
     @EventHandler
     public void onHeldItemChange(PlayerItemHeldEvent event) {
         Piano.play(event.getPlayer(), event.getPlayer().getInventory().getItem(event.getNewSlot()), true);
+    }
+
+    @EventHandler
+    public void onExplode(BlockExplodeEvent event) {
+        event.setCancelled(true);
     }
 
     @EventHandler
