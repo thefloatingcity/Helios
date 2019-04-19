@@ -339,20 +339,24 @@ msg_hat_none: "&fTo put on a hat, hold what you want to wear!"
 blocks_inventory_name: "Useful Building Blocks"
 blocks:
   block1:
-    name: "Brown Mushroom Block"
-    material: "BROWN_MUSHROOM"
+    name: "&fBrown Mushroom Block"
+    material: "HUGE_MUSHROOM_1"
     data: 0
   block2:
-    name: "Red Mushroom Block"
-    material: "RED_MUSHROOM"
+    name: "&fRed Mushroom Block"
+    material: "HUGE_MUSHROOM_2"
     data: 0
   block3:
-    name: "Grass Path"
+    name: "&fGrass Path"
     material: "GRASS_PATH"
     data: 0
   block4:
-    name: "Dragon Egg"
+    name: "&fDragon Egg"
     material: "DRAGON_EGG"
+    data: 0
+  block5:
+    name: "&fFarmland"
+    material: "SOIL"
     data: 0
 
 ##########
@@ -362,14 +366,7 @@ blocks:
 ##########
 msg_core_help: "&fCore Commands: &e/tfc reload&f."
 
-msg_reloaded: "&fPlugin reloaded successfully!"
-
-############
-#          #
-#  BLOCKS  #
-#          #
-############
-
+msg_reloaded: "&fConfig reloaded successfully!"
 
 ###########
 #         #
@@ -395,5 +392,3 @@ msg_warp_max: "&fMaximum &4warp speed&f reached!"
 
 msg_gamemode_help: "&fPlease enter a valid gamemode!"
 msg_gamemode_change: "&fYour gamemode has been changed to &e%s&f!"
-
-
