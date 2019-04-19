@@ -23,18 +23,18 @@ public class Utils {
     public static String emote(CommandSender sender, String configKey) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            return Utils.format(configKey, player.getDisplayName());
+            return Utils.formatC("none", configKey, player.getDisplayName());
         } else {
-            return Utils.format(configKey, sender.getName());
+            return Utils.formatC("none", configKey, sender.getName());
         }
     }
 
     public static String emote(CommandSender sender, String configKey, String text) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            return Utils.format(configKey, player.getDisplayName(), text);
+            return Utils.formatC("none", configKey, player.getDisplayName(), text);
         } else {
-            return Utils.format(configKey, sender.getName(), text);
+            return Utils.formatC("none", configKey, sender.getName(), text);
         }
     }
 
