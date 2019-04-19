@@ -52,34 +52,29 @@ public class BuildingEvents implements Listener {
     }
 
     @EventHandler
-    public void onIronTrapDoorInteract(final PlayerInteractEvent e) {
-        if (!e.isCancelled()) {
-            if (!ironTrapdoorNames.contains(e.getPlayer().getName())) {
-                if (e.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
-                    if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                        if (e.getClickedBlock().getType().equals(Material.IRON_TRAPDOOR)) {
-                            if (!nmsManager.isAtLeastVersion(1, 9, 0) || e.getHand().equals(EquipmentSlot.HAND)) {
-                                if (!e.getPlayer().isSneaking()) {
-                                    Bukkit.getScheduler().runTaskLater(this, new Runnable() {
-                                        public void run() {
-                                            Block b = e.getClickedBlock();
-                                            byte da = b.getData();
-                                            byte data = 0;
-                                            if (da >= 0 && da < 4) {
-                                                data = (byte) (da + 4);
-                                            } else if (da >= 4 && da < 8) {
-                                                data = (byte) (da - 4);
-                                            } else if (da >= 8 && da < 12) {
-                                                data = (byte) (da + 4);
-                                            } else if (da >= 12 && da < 16) {
-                                                data = (byte) (da - 4);
-                                            }
-
-                                            b.setData(data, true);
-                                        }
-                                    }, 0L);
-                                    e.setCancelled(true);
-                                }
+    public void onIronTrapDoorInteract(PlayerInteractEvent event) {
+        if (!event.isCancelled()) {
+            if (event.getPlayer().getGameMode() == GameMode.CREATIVE) {
+                if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+                    if (event.getClickedBlock().getType() == Material.IRON_TRAPDOOR) {
+                        if (event.getHand().equals(EquipmentSlot.HAND)) {
+                            if (!event.getPlayer().isSneaking()) {
+                                Bukkit.getScheduler().runTaskLater(main, () -> {
+                                    Block block = event.getClickedBlock();
+                                    byte da = block.getData();
+                                    byte data = 0;
+                                    if (da >= 0 && da < 4) {
+                                        data = (byte) (da + 4);
+                                    } else if (da >= 4 && da < 8) {
+                                        data = (byte) (da - 4);
+                                    } else if (da >= 8 && da < 12) {
+                                        data = (byte) (da + 4);
+                                    } else if (da >= 12 && da < 16) {
+                                        data = (byte) (da - 4);
+                                    }
+                                    block.setData(data, true);
+                                }, 0L);
+                                event.setCancelled(true);
                             }
                         }
                     }
@@ -89,33 +84,29 @@ public class BuildingEvents implements Listener {
     }
 
     @EventHandler
-    public void GlazedTerracottaInteract(PlayerInteractEvent e) {
-        if (!e.isCancelled()) {
-            if (nmsManager.isAtLeastVersion(1, 12, 0)) {
-                if (terracottaNames.contains(e.getPlayer().getName())) {
-                    if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                        if (e.getHand().equals(EquipmentSlot.HAND)) {
-                            if (e.getClickedBlock().getType().name().contains("GLAZED")) {
-                                if (e.getPlayer().isSneaking()) {
-                                    Material type = e.getPlayer().getInventory().getItemInHand().getType();
-                                    if (type.equals(Material.AIR)) {
-                                        Bukkit.getScheduler().runTaskLater(this, () -> {
-                                            Block b = e.getClickedBlock();
-                                            byte da = b.getData();
-                                            byte data = (byte) (da + 1);
-                                            if (da < 0 || da >= 4) {
-                                                data = 0;
-                                            }
-
-                                            b.setData(data, true);
-                                        }, 0L);
-                                        e.setCancelled(true);
+    public void onGlazedTerracottaInteract(PlayerInteractEvent event) {
+        if (!event.isCancelled()) {
+            if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+                if (event.getHand().equals(EquipmentSlot.HAND)) {
+                    if (event.getClickedBlock().getType().name().contains("GLAZED")) {
+                        if (event.getPlayer().isSneaking()) {
+                            Material type = event.getPlayer().getInventory().getItemInHand().getType();
+                            if (type.equals(Material.AIR)) {
+                                Bukkit.getScheduler().runTaskLater(main, () -> {
+                                    Block block = event.getClickedBlock();
+                                    byte da = block.getData();
+                                    byte data = (byte) (da + 1);
+                                    if (da < 0 || da >= 4) {
+                                        data = 0;
                                     }
-                                }
+                                    block.setData(data, true);
+                                }, 0L);
+                                event.setCancelled(true);
                             }
                         }
                     }
                 }
+
             }
         }
     }
@@ -125,8 +116,13 @@ public class BuildingEvents implements Listener {
         if (!event.isCancelled()) {
             if (event.getPlayer().getGameMode() == GameMode.CREATIVE) {
                 if (event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
+                    Material type = event.getPlayer().getInventory().getItemInHand().getType();
+                    if (!type.equals(Material.STEP) && !type.equals(Material.WOOD_STEP) && !type.equals(Material.STONE_SLAB2) && !type.equals(Material.PURPUR_SLAB)) {
+                        return;
+                    }
+
                     byte data;
-                    if (event.getClickedBlock().getType().equals(Material.DOUBLE_STEP) && event.getClickedBlock().getData() <= 7) {
+                    if (event.getClickedBlock().getType() == Material.DOUBLE_STEP && event.getClickedBlock().getData() <= 7) {
                         event.setCancelled(true);
                         data = event.getClickedBlock().getData();
                         if (this.isTop(event.getPlayer(), event.getClickedBlock())) {
@@ -138,7 +134,7 @@ public class BuildingEvents implements Listener {
                         }
                     }
 
-                    if (event.getClickedBlock().getType().equals(Material.WOOD_DOUBLE_STEP) && event.getClickedBlock().getData() <= 7) {
+                    if (event.getClickedBlock().getType() == Material.WOOD_DOUBLE_STEP && event.getClickedBlock().getData() <= 7) {
                         event.setCancelled(true);
                         data = event.getClickedBlock().getData();
                         if (this.isTop(event.getPlayer(), event.getClickedBlock())) {
@@ -150,7 +146,7 @@ public class BuildingEvents implements Listener {
                         }
                     }
 
-                    if (event.getClickedBlock().getType().equals(Material.DOUBLE_STONE_SLAB2) && event.getClickedBlock().getData() <= 7) {
+                    if (event.getClickedBlock().getType() == Material.DOUBLE_STONE_SLAB2 && event.getClickedBlock().getData() <= 7) {
                         event.setCancelled(true);
                         data = event.getClickedBlock().getData();
                         if (this.isTop(event.getPlayer(), event.getClickedBlock())) {
@@ -162,7 +158,7 @@ public class BuildingEvents implements Listener {
                         }
                     }
 
-                    if (event.getClickedBlock().getType().equals(Material.PURPUR_DOUBLE_SLAB) && event.getClickedBlock().getData() <= 7) {
+                    if (event.getClickedBlock().getType() == Material.PURPUR_DOUBLE_SLAB && event.getClickedBlock().getData() <= 7) {
                         event.setCancelled(true);
                         data = event.getClickedBlock().getData();
                         if (this.isTop(event.getPlayer(), event.getClickedBlock())) {
@@ -178,11 +174,11 @@ public class BuildingEvents implements Listener {
         }
     }
 
-    private boolean isTop(Player p, Block b) {
-        Location start = p.getEyeLocation().clone();
+    private boolean isTop(Player player, Block block) {
+        Location start = player.getEyeLocation().clone();
 
-        while (!start.getBlock().equals(b) && start.distance(p.getEyeLocation()) < 6.0D) {
-            start.add(p.getLocation().getDirection().multiply(0.05D));
+        while (!start.getBlock().equals(block) && start.distance(player.getEyeLocation()) < 6.0D) {
+            start.add(player.getLocation().getDirection().multiply(0.05D));
         }
 
         return start.getY() % 1.0D > 0.5D;
