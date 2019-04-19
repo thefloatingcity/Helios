@@ -3,11 +3,11 @@
 #  MAIN  #
 #        #
 ##########
-tfc_banner: "&8-*-*-*-*-*-*-*-*- &7-=[ &fThe &bFloating &aCity &7]=- &8-*-*-*-*-*-*-*-*-"
+tfc_banner: "&8-*-*-*-*-*-*-*-*- &7-=[&f The &bFloating &aCity &7]=- &8-*-*-*-*-*-*-*-*-"
 tfc_prefix: "&7[&fT&bF&aC&7]&f"
 tfc_color: "&b"
 
-msg_motd: "&fWelcome back! You were last on &e%s &f%s ago."
+msg_motd: "&fWelcome back! You were last on &e%s&f %s ago."
 msg_welcome: "&fWelcome to the server, &e%s&f!"
 
 msg_join: "&f%s joined the game."
@@ -117,7 +117,7 @@ piano_prefix: "&7[&3Piano&7]&f"
 piano_color: "&3"
 
 
-msg_piano_help: "&fFirst, do &e/piano menu &fand pick out any notes you would like to play, and put them into your hotbar. Right clicking the notes while in the menu plays them! If you want a nice selection of notes, pick all of them that are marked as &eF# Major&f! Next, if you want to change the default instrument, you can use &e/piano instrument &fto pick an instrument you would like. Tab completion works too! Finally, do &e/piano toggle &fand then if you change your selected hotbar item to the slot the note is on, it'll play that note! Have fun!"
+msg_piano_help: "&fFirst, do &e/piano menu&f and pick out any notes you would like to play, and put them into your hotbar. Right clicking the notes while in the menu plays them! If you want a nice selection of notes, pick all of them that are marked as &eF# Major&f! Next, if you want to change the default instrument, you can use &e/piano instrument&f to pick an instrument you would like. Tab completion works too! Finally, do &e/piano toggle&f and then if you change your selected hotbar item to the slot the note is on, it'll play that note! Have fun!"
 msg_piano_enabled: "&fThe piano has been enabled!"
 msg_piano_disabled: "&fThe piano has been disabled! Hope you enjoyed!"
 msg_piano_instrument_change: "&fYour piano instrument is now set to &e%s&f!"
@@ -126,175 +126,175 @@ piano_notes:
   piano_note1:
     name: "&fF♯/G♭ [&bOctave 1&f]"
     lore:
-      - "&7Part of &f[&eF# Major, F# Minor&f]"
+      - "&7Part of&f [&eF# Major, F# Minor&f]"
       - "&8[Note]"
       - "0.5"
     data: 8
   piano_note2:
     name: "&fG [&bOctave 1&f]"
     lore:
-      - "&7Part of &f[]"
+      - "&7Part of&f []"
       - "&8[Note]"
       - "0.529732"
     data: 0
   piano_note3:
     name: "&fG♯/A♭ [&bOctave 1&f]"
     lore:
-      - "&7Part of &f[&eF# Major, F# Minor&f]"
+      - "&7Part of&f [&eF# Major, F# Minor&f]"
       - "&8[Note]"
       - "0.561231"
     data: 8
   piano_note4:
     name: "&fA [&bOctave 1&f]"
     lore:
-      - "&7Part of &f[&eF# Minor&f]"
+      - "&7Part of&f [&eF# Minor&f]"
       - "&8[Note]"
       - "0.594604"
     data: 0
   piano_note5:
     name: "&fA♯/B♭ [&bOctave 1&f]"
     lore:
-      - "&7Part of &f[&eF# Major&f]"
+      - "&7Part of&f [&eF# Major&f]"
       - "&8[Note]"
       - "0.629961"
     data: 8
   piano_note6:
     name: "&fB [&bOctave 1&f]"
     lore:
-      - "&7Part of &f[&eF# Major, F# Minor&f]"
+      - "&7Part of&f [&eF# Major, F# Minor&f]"
       - "&8[Note]"
       - "0.667420"
     data: 0
   piano_note7:
     name: "&fC [&bOctave 1&f]"
     lore:
-      - "&7Part of &f[]"
+      - "&7Part of&f []"
       - "&8[Note]"
       - "0.707107"
     data: 0
   piano_note8:
     name: "&fC♯/D♭ [&bOctave 1&f]"
     lore:
-      - "&7Part of &f[&eF# Major, F# Minor&f]"
+      - "&7Part of&f [&eF# Major, F# Minor&f]"
       - "&8[Note]"
       - "0.749154"
     data: 8
   piano_note9:
     name: "&fD [&bOctave 1&f]"
     lore:
-      - "&7Part of &f[&eF# Minor&f]"
+      - "&7Part of&f [&eF# Minor&f]"
       - "&8[Note]"
       - "0.793701"
     data: 0
   piano_note10:
     name: "&fD♯/E♭ [&bOctave 1&f]"
     lore:
-      - "&7Part of &f[&eF# Major&f]"
+      - "&7Part of&f [&eF# Major&f]"
       - "&8[Note]"
       - "0.840896"
     data: 8
   piano_note11:
     name: "&fE [&bOctave 1&f]"
     lore:
-      - "&7Part of &f[&eF# Minor&f]"
+      - "&7Part of&f [&eF# Minor&f]"
       - "&8[Note]"
       - "0.890899"
     data: 0
   piano_note12:
     name: "&fF [&bOctave 1&f]"
     lore:
-      - "&7Part of &f[&eF# Major&f]"
+      - "&7Part of&f [&eF# Major&f]"
       - "&8[Note]"
       - "0.943874"
     data: 0
   piano_note13:
     name: "&fF♯/G♭ [&bOctave 2&f]"
     lore:
-      - "&7Part of &f[&eF# Major, F# Minor&f]"
+      - "&7Part of&f [&eF# Major, F# Minor&f]"
       - "&8[Note]"
       - "1"
     data: 8
   piano_note14:
     name: "&fG [&bOctave 2&f]"
     lore:
-      - "&7Part of &f[]"
+      - "&7Part of&f []"
       - "&8[Note]"
       - "1.059463"
     data: 0
   piano_note15:
     name: "&fG♯/A♭ [&bOctave 2&f]"
     lore:
-      - "&7Part of &f[&eF# Major, F# Minor&f]"
+      - "&7Part of&f [&eF# Major, F# Minor&f]"
       - "&8[Note]"
       - "1.122462"
     data: 8
   piano_note16:
     name: "&fA [&bOctave 2&f]"
     lore:
-      - "&7Part of &f[&eF# Minor&f]"
+      - "&7Part of&f [&eF# Minor&f]"
       - "&8[Note]"
       - "1.189207"
     data: 0
   piano_note17:
     name: "&fA#/B♭ [&bOctave 2&f]"
     lore:
-      - "&7Part of &f[&eF# Major&f]"
+      - "&7Part of&f [&eF# Major&f]"
       - "&8[Note]"
       - "1.259921"
     data: 8
   piano_note18:
     name: "&fB [&bOctave 2&f]"
     lore:
-      - "&7Part of &f[&eF# Major, F# Minor&f]"
+      - "&7Part of&f [&eF# Major, F# Minor&f]"
       - "&8[Note]"
       - "1.334840"
     data: 0
   piano_note19:
     name: "&fC [&bOctave 2&f]"
     lore:
-      - "&7Part of &f[]"
+      - "&7Part of&f []"
       - "&8[Note]"
       - "1.414214"
     data: 0
   piano_note20:
     name: "&fC♯/D♭ [&bOctave 2&f]"
     lore:
-      - "&7Part of &f[&eF# Major, F# Minor&f]"
+      - "&7Part of&f [&eF# Major, F# Minor&f]"
       - "&8[Note]"
       - "1.498307"
     data: 8
   piano_note21:
     name: "&fD [&bOctave 2&f]"
     lore:
-      - "&7Part of &f[&eF# Minor&f]"
+      - "&7Part of&f [&eF# Minor&f]"
       - "&8[Note]"
       - "1.587401"
     data: 0
   piano_note22:
     name: "&fD♯/E♭ [&bOctave 2&f]"
     lore:
-      - "&7Part of &f[&eF# Major&f]"
+      - "&7Part of&f [&eF# Major&f]"
       - "&8[Note]"
       - "1.681793"
     data: 8
   piano_note23:
     name: "&fE [&bOctave 2&f]"
     lore:
-      - "&7Part of &f[&eF# Minor&f]"
+      - "&7Part of&f [&eF# Minor&f]"
       - "&8[Note]"
       - "1.781797"
     data: 0
   piano_note24:
     name: "&fF [&bOctave 2&f]"
     lore:
-      - "&7Part of &f[&eF# Major&f]"
+      - "&7Part of&f [&eF# Major&f]"
       - "&8[Note]"
       - "1.887749"
     data: 0
   piano_note25:
     name: "&fF♯/G♭ [&bOctave 3&f]"
     lore:
-      - "&7Part of &f[&eF# Major, F# Minor&f]"
+      - "&7Part of&f [&eF# Major, F# Minor&f]"
       - "&8[Note]"
       - "2"
     data: 8
@@ -306,21 +306,21 @@ piano_notes:
 ############
 msg_action_help: "&fThis is a test message. Help is coming soon! :)"
 
-msg_zap: "&f%s &czapped &f%s"
-msg_zap_themself: "&f%s &czapped &fthemself"
-msg_zap_everyone: "&f%s &czapped &feveryone"
+msg_zap: "&f%s &czapped&f %s"
+msg_zap_themself: "&f%s &czapped&f themself"
+msg_zap_everyone: "&f%s &czapped&f everyone"
 
-msg_launch: "&f%s &alaunched &f%s"
-msg_launch_themself: "&f%s &alaunched &fthemselves"
-msg_launch_everyone: "&f%s &alaunched &feveryone"
+msg_launch: "&f%s &alaunched&f %s"
+msg_launch_themself: "&f%s &alaunched&f themselves"
+msg_launch_everyone: "&f%s &alaunched&f everyone"
 
-msg_boost: "&f%s &aboosted &f%s"
-msg_boost_themself: "&f%s &aboosted &fthemselves"
-msg_boost_everyone: "&f%s &aboosted &feveryone"
+msg_boost: "&f%s &aboosted&f %s"
+msg_boost_themself: "&f%s &aboosted&f themselves"
+msg_boost_everyone: "&f%s &aboosted&f everyone"
 
-msg_poke: "&f%s &cpoked &f%s"
-msg_poke_themself: "&f%s &cpoked &fthemselves"
-msg_poke_everyone: "&f%s &cpoked &feveryone"
+msg_poke: "&f%s &cpoked&f %s"
+msg_poke_themself: "&f%s &cpoked&f themselves"
+msg_poke_everyone: "&f%s &cpoked&f everyone"
 poke_force:
   maxY: 0.8
   minY: 0.2
@@ -357,13 +357,11 @@ msg_reloaded: "&fPlugin reloaded successfully!"
 ###########
 msg_emote_help: "&fThis is a test message. Help is coming soon! :)"
 
-msg_emote_server: "&f%s &f%s"
-msg_emote_player: "&f%s &f%s &f%s"
-msg_me: "&f%s &f%s &f%s"
-msg_shrug: "&ashrugs \\_o¬o_/"
-msg_doubt: "&9doubts that."
-msg_blame: "&cblames &f%s"
-msg_sue: "&cis suing &f%s"
+emote_winkwonk: "&d%s &5wink wonks &d;)"
+emote_shrug: "&a%s &2shrugs &a\\_o¬o_/"
+emote_doubt: "&b%s &9doubts that."
+emote_blame: "&c%s &4blames &c%s"
+emote_sue: "&c%s &4is suing &c%s"
 
 ##########
 #        #
@@ -372,7 +370,7 @@ msg_sue: "&cis suing &f%s"
 ##########
 msg_warp_first: "&fReaching maximum &6warp speed&f.."
 msg_warp_second: "&fReaching maximum &cwarp speed&f.."
-msg_warp_max: "&fMaximum &4warp speed &freached!"
+msg_warp_max: "&fMaximum &4warp speed&f reached!"
 
 msg_gamemode_help: "&fChange your gamemode!"
 msg_gamemode_change: "&fYour gamemode has been changed to &e%s&f!"

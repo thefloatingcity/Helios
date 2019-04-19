@@ -20,32 +20,39 @@ public class EmoteCommand extends BaseCommand {
         this.main = main;
     }
 
+    @CommandAlias("winkwonk")
+    @CommandPermission("tfcplugin.winkwonk")
+    @Description("Wink wonk ;)")
+    public void onWinkWonk(CommandSender sender) {
+        Bukkit.broadcastMessage(Utils.emote(sender, "emote_winkwonk"));
+    }
+
     @CommandAlias("shrug")
     @CommandPermission("tfcplugin.shrug")
     @Description("You don't know. They don't know.")
     public void onShrug(CommandSender sender) {
-        Bukkit.broadcastMessage(Utils.emote(sender, Utils.format(Utils.PrefixType.NONE, "msg_shrug")));
+        Bukkit.broadcastMessage(Utils.emote(sender, "emote_shrug"));
     }
 
     @CommandAlias("doubt")
     @CommandPermission("tfcplugin.doubt")
     @Description("Press X to doubt.")
     public void onDoubt(CommandSender sender) {
-        Bukkit.broadcastMessage(Utils.emote(sender, Utils.format(Utils.PrefixType.NONE, "msg_doubt")));
+        Bukkit.broadcastMessage(Utils.emote(sender, "emote_doubt"));
     }
 
     @CommandAlias("blame")
     @CommandPermission("tfcplugin.blame")
-    @Description("They did something wrong. Blame them!")
+    @Description("Pfft, it's their fault, not yours.")
     public void onBlame(CommandSender sender, String text) {
-        Bukkit.broadcastMessage(Utils.emote(sender, Utils.format(Utils.PrefixType.NONE, "msg_blame", text)));
+        Bukkit.broadcastMessage(Utils.emote(sender, "emote_blame", text));
     }
 
     @CommandAlias("sue")
     @CommandPermission("tfcplugin.sue")
-    @Description("Sue them! It fixes everything.")
+    @Description("Court fixes everything.. right?")
     public void onSue(CommandSender sender, String text) {
-        Bukkit.broadcastMessage(Utils.emote(sender, Utils.format(Utils.PrefixType.NONE, "msg_sue", text)));
+        Bukkit.broadcastMessage(Utils.emote(sender, "emote_sue", text));
     }
 
     @HelpCommand

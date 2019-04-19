@@ -19,21 +19,26 @@ public class Utils {
     private Utils() {
     }
 
-    public static String emote(CommandSender sender, String text) {
+    public static String emote(CommandSender sender, String configKey) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            return format("msg_emote_player", main.getVaultChat().getPlayerPrefix(player), player.getDisplayName(), text);
+            return Utils.format("msg_winkwonk", player.getDisplayName());
         } else {
-            return format("msg_emote_server", sender.getName(), text);
+            return Utils.format("msg_winkwonk", sender.getName());
+        }
+    }
+
+    public static String emote(CommandSender sender, String configKey, String text) {
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+            return Utils.format(configKey, player.getDisplayName(), text);
+        } else {
+            return Utils.format(configKey, sender.getName(), text);
         }
     }
 
     public static String format(String configKey, Object... replacements) {
-        return format("tfc", PrefixType.PREFIX, configKey, replacements);
-    }
-
-    public static String format(PrefixType prefixType, String configKey, Object... replacements) {
-        return format("tfc", prefixType, configKey, replacements);
+        return format("tfc", PrefixType.NONE, configKey, replacements);
     }
 
     public static String format(String category, PrefixType prefixType, String configKey, Object... replacements) {
