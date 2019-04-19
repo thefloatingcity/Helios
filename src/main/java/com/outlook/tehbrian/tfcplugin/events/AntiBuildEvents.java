@@ -5,6 +5,7 @@ import com.outlook.tehbrian.tfcplugin.Utils;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -20,7 +21,7 @@ public class AntiBuildEvents implements Listener {
         this.main = main;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onBlockPlace(BlockPlaceEvent event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
@@ -28,7 +29,7 @@ public class AntiBuildEvents implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onBlockBreak(BlockBreakEvent event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
@@ -36,7 +37,7 @@ public class AntiBuildEvents implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onBucketEmpty(PlayerBucketEmptyEvent event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
@@ -44,7 +45,7 @@ public class AntiBuildEvents implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onBucketFill(PlayerBucketFillEvent event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
@@ -52,7 +53,7 @@ public class AntiBuildEvents implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onHangingBreak(HangingBreakByEntityEvent event) {
         if (event.getRemover().getType().equals(EntityType.PLAYER)) {
             Player player = (Player) event.getRemover();
@@ -63,7 +64,7 @@ public class AntiBuildEvents implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onHangingPlace(HangingPlaceEvent event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
@@ -71,7 +72,7 @@ public class AntiBuildEvents implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
@@ -79,7 +80,7 @@ public class AntiBuildEvents implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onItemDrop(PlayerDropItemEvent event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
@@ -87,7 +88,7 @@ public class AntiBuildEvents implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onItemPickup(PlayerAttemptPickupItemEvent event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);

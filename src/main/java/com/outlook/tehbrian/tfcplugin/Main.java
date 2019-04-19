@@ -4,6 +4,7 @@ import co.aikar.commands.ACFUtil;
 import co.aikar.commands.PaperCommandManager;
 import com.outlook.tehbrian.tfcplugin.commands.*;
 import com.outlook.tehbrian.tfcplugin.events.AntiBuildEvents;
+import com.outlook.tehbrian.tfcplugin.events.BuildingEvents;
 import com.outlook.tehbrian.tfcplugin.events.MiscEvents;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;
@@ -30,8 +31,9 @@ public final class Main extends JavaPlugin {
         getConfig().options().copyHeader(true);
         saveDefaultConfig();
 
-        getServer().getPluginManager().registerEvents(new MiscEvents(this), this);
         getServer().getPluginManager().registerEvents(new AntiBuildEvents(this), this);
+        getServer().getPluginManager().registerEvents(new BuildingEvents(this), this);
+        getServer().getPluginManager().registerEvents(new MiscEvents(this), this);
 
         if (!setupVault()) {
             getLogger().severe("No Vault dependency found! Disabling plugin..");

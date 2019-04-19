@@ -9,9 +9,6 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockExplodeEvent;
-import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -105,26 +102,6 @@ public class MiscEvents implements Listener {
     public void onHeldItemChange(PlayerItemHeldEvent event) {
         if (Piano.getPlayerEnabledPiano(event.getPlayer())) {
             Piano.play(event.getPlayer(), event.getPlayer().getInventory().getItem(event.getNewSlot()), true);
-        }
-    }
-
-    @EventHandler
-    public void onBlockExplode(BlockExplodeEvent event) {
-        event.setCancelled(true);
-    }
-
-    @EventHandler
-    public void onLeavesDecay(LeavesDecayEvent event) {
-        event.setCancelled(true);
-    }
-
-    @EventHandler
-    public void onPlayerInteract(PlayerInteractEvent event) {
-        if (event.getAction() == Action.PHYSICAL && event.getMaterial() == Material.SOIL) {
-            event.setCancelled(true);
-        }
-        if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getMaterial() == Material.DRAGON_EGG) {
-            event.setCancelled(true);
         }
     }
 

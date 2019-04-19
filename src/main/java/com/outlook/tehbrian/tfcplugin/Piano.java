@@ -13,6 +13,7 @@ public class Piano {
 
     private static Set<UUID> playerEnabledPiano = new HashSet<>();
     private static Map<UUID, Sound> playerPianoInstrument = new HashMap<>();
+
     private Piano() {
     }
 
