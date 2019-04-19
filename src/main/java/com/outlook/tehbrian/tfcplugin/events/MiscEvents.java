@@ -108,7 +108,7 @@ public class MiscEvents implements Listener {
     @EventHandler
     public void onDamageEvent(EntityDamageEvent event) {
         if (event.getCause() == EntityDamageEvent.DamageCause.VOID) {
-            event.setCancelled(true);
+            event.setDamage(0);
             Location location = event.getEntity().getLocation();
             location.setY(500);
             event.getEntity().teleport(location);
