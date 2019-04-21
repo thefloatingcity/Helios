@@ -8,16 +8,10 @@ tfc_prefix: "&7[&fT&bF&aC&7]&f"
 tfc_multi: "&b&l>"
 
 msg_motd: "&fWelcome back! You were last on &e%s&f %s ago."
-msg_welcome: "&fWelcome to the server, &e%s&f!"
+msg_welcome: "&fWelcome to &aThe Floating City&f, &e%s&f!"
 
 msg_join: "&7[&a+&7]&f &f%s joined the game."
 msg_leave: "&7[&c-&7]&f &f%s left the game."
-
-spawn:
-  world: world
-  x: 0.5
-  y: 60
-  z: 0.5
 
 chat_format: "&f{prefix}&f &7%1$s&f{suffix}&f: %2$s"
 
@@ -25,6 +19,12 @@ msg_not_online: "&fThat player isn't online."
 msg_player_only: "&fYou must be a player to use this command."
 
 msg_no_build: "&fYou can't build! Please read our rules first by doing &e/rules&f!"
+
+spawn:
+  world: world
+  x: 0.5
+  y: 60
+  z: 0.5
 
 msg_warp_first: "&fReaching maximum &6warp speed&f.."
 msg_warp_second: "&fReaching maximum &cwarp speed&f.."
