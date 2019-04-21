@@ -11,6 +11,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
+@SuppressWarnings("unused")
 @CommandAlias("rules")
 @Description("Server and Discord rules.")
 public class RulesCommand extends BaseCommand {

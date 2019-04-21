@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 import static com.outlook.tehbrian.tfcplugin.Utils.getSpawn;
 
+@SuppressWarnings("unused")
 public class MiscEvents implements Listener {
 
     private final Main main;

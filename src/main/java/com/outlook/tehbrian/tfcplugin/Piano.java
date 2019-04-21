@@ -11,8 +11,8 @@ import java.util.*;
 
 public class Piano {
 
-    private static Set<UUID> playerEnabledPiano = new HashSet<>();
-    private static Map<UUID, Sound> playerPianoInstrument = new HashMap<>();
+    final private static Set<UUID> playerEnabledPiano = new HashSet<>();
+    final private static Map<UUID, Sound> playerPianoInstrument = new HashMap<>();
 
     private Piano() {
     }
@@ -42,11 +42,9 @@ public class Piano {
 
     public static void play(Player player, ItemStack item, boolean requireToggle) {
         if ((!requireToggle || getPlayerEnabledPiano(player)) && player.hasPermission("tfcplugin.piano")) {
-            if (item != null) {
-                if (item.getType() == Material.STAINED_GLASS_PANE && item.getItemMeta().hasLore()) {
-                    if (item.getLore().get(1).equals(ChatColor.DARK_GRAY + "[Note]")) {
-                        player.getWorld().playSound(player.getLocation(), getPlayerPianoInstrument(player), SoundCategory.MASTER, 3, Float.parseFloat(item.getLore().get(2)));
-                    }
+            if (item != null && item.getType() == Material.STAINED_GLASS_PANE) {
+                if (item.getItemMeta().hasLore() && Objects.requireNonNull(item.getLore()).get(1).equals(ChatColor.DARK_GRAY + "[Note]")) {
+                    player.getWorld().playSound(player.getLocation(), getPlayerPianoInstrument(player), SoundCategory.MASTER, 3, Float.parseFloat(item.getLore().get(2)));
                 }
             }
         }

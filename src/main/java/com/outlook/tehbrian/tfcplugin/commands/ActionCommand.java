@@ -13,6 +13,7 @@ import org.bukkit.util.Vector;
 
 import java.util.Random;
 
+@SuppressWarnings("unused")
 @CommandAlias("action|actions")
 @Description("Various world-changing actions.")
 public class ActionCommand extends BaseCommand {

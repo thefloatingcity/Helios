@@ -14,6 +14,7 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
+@SuppressWarnings({"unused", "deprecation"})
 public class BuildingEvents implements Listener {
 
     private final Main main;

@@ -31,7 +31,7 @@ public final class Main extends JavaPlugin {
         getConfig().options().copyHeader(true);
         saveDefaultConfig();
 
-        getServer().getPluginManager().registerEvents(new AntiBuildEvents(this), this);
+        getServer().getPluginManager().registerEvents(new AntiBuildEvents(), this);
         getServer().getPluginManager().registerEvents(new BuildingEvents(this), this);
         getServer().getPluginManager().registerEvents(new MiscEvents(this), this);
 

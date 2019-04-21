@@ -6,6 +6,7 @@ import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Utils;
 import org.bukkit.command.CommandSender;
 
+@SuppressWarnings("unused")
 @CommandAlias("tfc")
 @Description("Core commands for TFCPlugin.")
 public class CoreCommand extends BaseCommand {

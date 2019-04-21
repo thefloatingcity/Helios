@@ -10,6 +10,7 @@ import com.outlook.tehbrian.tfcplugin.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
+@SuppressWarnings("unused")
 @CommandAlias("emote|emotes")
 @Description("Various fun chat emotes.")
 public class EmoteCommand extends BaseCommand {

@@ -1,6 +1,5 @@
 package com.outlook.tehbrian.tfcplugin.events;
 
-import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Utils;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -13,13 +12,8 @@ import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.hanging.HangingPlaceEvent;
 import org.bukkit.event.player.*;
 
+@SuppressWarnings("unused")
 public class AntiBuildEvents implements Listener {
-
-    private final Main main;
-
-    public AntiBuildEvents(Main main) {
-        this.main = main;
-    }
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onBlockPlace(BlockPlaceEvent event) {

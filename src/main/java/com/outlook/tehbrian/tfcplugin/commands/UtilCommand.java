@@ -16,6 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+@SuppressWarnings("unused")
 @CommandAlias("util|utils")
 @Description("Various utilities.")
 public class UtilCommand extends BaseCommand {

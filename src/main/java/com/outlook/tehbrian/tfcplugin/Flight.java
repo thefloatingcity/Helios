@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class Flight {
 
-    private static Set<UUID> canBypassFly = new HashSet<>();
+    final private static Set<UUID> canBypassFly = new HashSet<>();
 
     private Flight() {
     }

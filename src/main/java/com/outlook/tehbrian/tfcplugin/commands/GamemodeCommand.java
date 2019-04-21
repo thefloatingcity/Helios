@@ -8,6 +8,7 @@ import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+@SuppressWarnings("unused")
 @CommandAlias("gm|gamemode")
 @CommandPermission("tfcplugin.gamemode")
 @Description("Change your gamemode.")
