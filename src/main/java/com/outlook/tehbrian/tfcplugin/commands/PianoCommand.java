@@ -28,7 +28,7 @@ public class PianoCommand extends BaseCommand {
     @Subcommand("menu")
     @Description("Pick your notes!")
     public void onMenu(Player player) {
-        Inventory pianoNotesInventory = Bukkit.createInventory(null, 27, main.getConfig().getString("piano_notes_inventory_name"));
+        Inventory pianoNotesInventory = Bukkit.createInventory(null, 27, Utils.colorString(main.getConfig().getString("piano_notes_inventory_name")));
         for (String key : main.getConfig().getConfigurationSection("piano_notes").getKeys(false)) {
             ConfigurationSection piano_note = main.getConfig().getConfigurationSection("piano_notes." + key);
             pianoNotesInventory.addItem(Utils.createItem(piano_note.getString("name"), piano_note.getStringList("lore"), Material.STAINED_GLASS_PANE, 1, piano_note.getInt("data")));

@@ -44,7 +44,7 @@ public class UtilCommand extends BaseCommand {
     @CommandPermission("tfcplugin.blocks")
     @Description("Useful bulding blocks.")
     public void onBlocks(Player player) {
-        Inventory blocksInventory = Bukkit.createInventory(null, 9, main.getConfig().getString("blocks_inventory_name"));
+        Inventory blocksInventory = Bukkit.createInventory(null, 9, Utils.colorString(main.getConfig().getString("blocks_inventory_name")));
         for (String key : main.getConfig().getConfigurationSection("blocks").getKeys(false)) {
             ConfigurationSection block = main.getConfig().getConfigurationSection("blocks." + key);
             blocksInventory.addItem(Utils.createItem(block.getString("name"), Material.matchMaterial(block.getString("material")), 1, block.getInt("data")));
