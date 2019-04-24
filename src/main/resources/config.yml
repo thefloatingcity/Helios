@@ -97,7 +97,7 @@ msg_piano_help: "&fFirst, do &e/piano menu&f and pick out any notes you would li
 msg_piano_enabled: "&fThe piano has been enabled!"
 msg_piano_disabled: "&fThe piano has been disabled! Hope you enjoyed!"
 msg_piano_instrument_change: "&fYour piano instrument is now set to &e%s&f!"
-piano_notes_inventory_name: "&3Piano"
+piano_notes_inventory_name: "&9Piano"
 piano_notes:
   piano_note1:
     name: "&fF♯/G♭ [&bOctave 1&f]"
@@ -283,74 +283,72 @@ piano_notes:
 rules_prefix: "&7[&cRules&7]&f"
 rules_multi: "&c&l>"
 
-msg_rules: "&fThese are temporary rules and still being worked on."
-msg_rules_help: "&fTo read the rules, type &erules&f, and to accept them, type &e/rules accept&f!"
-msg_rules_accept: "&fThanks for reading the rules! Here's your passenger!"
-msg_rules_already_accepted: "&fLooks like you already read the rules, thanks!"
-msg_golden_rule: "&fThe holy &eGolden Rule&f!"
-rules_inventory_name: "&cRules"
+msg_rules: "&f%s &7| Page &e%s&7/&e9"
+msg_rules_help: "&cInvalid page number. &fTry numbers &e1&7-&e9&f."
+msg_rules_accept: "&fThanks for reading the rules! Here's your passenger."
+msg_rules_already_accepted: "&fLooks like you've already read the rules, thanks!"
 rules:
   rule1:
-    name: "&fRule 1 &7| &eGriefing"
-    lore:
+    topic: "Griefing"
+    content:
       - "&fNo touching other people's stuff without their permission."
       - "&fThis includes placing or breaking blocks,"
       - "&ftaking or placing items in their chests, taking or placing items in their itemframes,"
       - "&ftrampling their crops, killing their animals.. You get the idea."
       - "&fPlease use common sense. If it isn't yours, leave it be."
   rule2:
-    name: "&fRule 2 &7| &eSwearing"
-    lore:
+    topic: "Swearing"
+    content:
       - "&fSwearing is allowed but please try to be courteous."
       - "&fRemember, as much as you may think otherwise, Minecraft is"
       - "&fa kids game and there are kids who play it."
       - "&fSo please just don't fill up the chat with a bunch of swearing."
   rule3:
-    name: "&fRule 3 &7| &eSpamming"
-    lore:
+    topic: "Spamming"
+    content:
       - "&fHaving long messages and lots of them is fine, but please"
       - "&fdon't fill up chat with meaningless gibberish,"
       - "&for repeat the same messages over and over. Again, please"
       - "&fbe courteous and mindful of other people."
   rule4:
-    name: "&fRule 4 &7| &eAdvertising"
-    lore:
+    topic: "Advertising"
+    content:
       - "&fWe're a pretty unconvential server! Talking about servers,"
       - "&fsaying their names, even putting their IPs is fine."
       - "&fJust no advertising any servers trying to get random people on it,"
       - "&fThere are websites for that, you know. If you're asking a friend if they wanna go on"
       - "&fthis server and they forgot the IP, it's fine."
   rule5:
-    name: "&fRule 5 &7| &eHurtful Speech"
-    lore:
+    topic: "Hurtful Speech"
+    content:
       - "&fNo hate speech or discrimination or insults against anyone."
       - "&fWe're not a politically correct server but don't be a jerk."
       - "&fIf something you say might hurt someone, don't say it."
   rule6:
-    name: "&fRule 6 &7| &eFlamewars"
-    lore:
+    topic: "Flamewars"
+    content:
       - "&fHaving discussions about things are fine! Religion, politics, so be it."
       - "&fHowever, keep it cool and a debate, not a flamewar."
       - "&fAlso, be mindful of Rule 5. If you feel like talking about something"
       - "&fthat might hurt someone, don't talk about it with them."
       - "&fBut if you both want to talk about it and engage in discussion, it's fine!"
   rule7:
-    name: "&fRule 7 &7| &ePG-13"
-    lore:
+    topic: "PG-13"
+    content:
       - "&fWe're a pretty relaxed server. But keep it PG-13."
       - "&fNo builds or chat that has a lot of gore or sexual content."
       - "&fIf you wouldn't see it in Avengers, don't make it please."
   rule8:
-    name: "&fRule 8 &7| &eLag, Bugs, and Glitches"
-    lore:
+    topic: "Lag, Bugs, and Glitches"
+    content:
       - "&fPlease don't try to break a server. It's not funny."
       - "&fYou're not a hacker, it just ruins the game we're all trying to"
       - "&fhave fun and play on. This means no lag machines or"
       - "&fgiant super big repeating complex redstone, and if you find"
       - "&fany bugs or glitches, please report them to staff! Thanks!"
   rule9:
-    name: "&fRule 9 &7| &eGolden Rule"
-    lore:
+    topic: "Golden Rule"
+    content:
       - "&fIf you forget even everything, remember this golden rule."
       - "&fDon't be a jerk, and use common sense. This one golden rule"
       - "&fwill happily keep you playing on the server."

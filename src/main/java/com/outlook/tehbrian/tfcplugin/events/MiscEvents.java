@@ -88,11 +88,6 @@ public class MiscEvents implements Listener {
                         event.setCancelled(true);
                         Piano.play(player, event.getCurrentItem(), false);
                     }
-                } else if (event.getClickedInventory().getName().equals(main.getConfig().getString("rules_inventory_name"))) {
-                    event.setCancelled(true);
-                    if (event.getSlot() == 8) {
-                        player.sendMessage(Utils.format("msg_golden_rule"));
-                    }
                 }
             }
         }
@@ -145,7 +140,7 @@ public class MiscEvents implements Listener {
     public void onSignChange(SignChangeEvent event) {
         if (event.getPlayer().hasPermission("tfcplugin.signcolor")) {
             String[] lines = event.getLines();
-            for (int l = 0; l <= 3; l++) {
+            for (int l = 0; l < 4; l++) {
                 event.setLine(l, ChatColor.translateAlternateColorCodes('&', lines[l]));
             }
         }

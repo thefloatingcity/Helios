@@ -4,12 +4,12 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Utils;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
+
+import java.util.List;
 
 @SuppressWarnings("unused")
 @CommandAlias("rules")
@@ -23,14 +23,12 @@ public class RulesCommand extends BaseCommand {
     }
 
     @Default
-    public void onRules(Player player) {
-        player.sendMessage(Utils.formatC("rules_prefix", "msg_rules"));
-        Inventory rulesInventory = Bukkit.createInventory(null, 9, Utils.colorString(main.getConfig().getString("rules_inventory_name")));
-        for (String key : main.getConfig().getConfigurationSection("rules").getKeys(false)) {
-            ConfigurationSection rule = main.getConfig().getConfigurationSection("rules." + key);
-            rulesInventory.addItem(Utils.createItem(rule.getString("name"), rule.getStringList("lore"), Material.WRITTEN_BOOK, 1, 0));
+    public void onRules(Player player, @Default("1") @Conditions("min=1,max=9") int page) {
+        ConfigurationSection rule = main.getConfig().getConfigurationSection("rules.rule" + page);
+        player.sendMessage(Utils.formatC("rules_prefix", "msg_rules", rule.getString("topic"), page));
+        for (String line : rule.getStringList("content")) {
+            player.sendMessage(Utils.colorString("rules_multi"));
         }
-        player.openInventory(rulesInventory);
     }
 
     @Subcommand("accept")
