@@ -97,7 +97,7 @@ msg_piano_help: "&fFirst, do &e/piano menu&f and pick out any notes you would li
 msg_piano_enabled: "&fThe piano has been enabled!"
 msg_piano_disabled: "&fThe piano has been disabled! Hope you enjoyed!"
 msg_piano_instrument_change: "&fYour piano instrument is now set to &e%s&f!"
-piano_notes_inventory_name: "Piano Notes Menu"
+piano_notes_inventory_name: "&3Piano"
 piano_notes:
   piano_note1:
     name: "&fF♯/G♭ [&bOctave 1&f]"
@@ -288,7 +288,7 @@ msg_rules_help: "&fTo read the rules, type &erules&f, and to accept them, type &
 msg_rules_accept: "&fThanks for reading the rules! Here's your passenger!"
 msg_rules_already_accepted: "&fLooks like you already read the rules, thanks!"
 msg_golden_rule: "&fThe holy &eGolden Rule&f!"
-rules_inventory_name: "The Floating City's Rules"
+rules_inventory_name: "&cRules"
 rules:
   rule1:
     name: "&fRule 1 &7| &eGriefing"
