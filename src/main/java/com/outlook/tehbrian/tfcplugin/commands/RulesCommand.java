@@ -4,12 +4,9 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Utils;
-import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
-
-import java.util.List;
 
 @SuppressWarnings("unused")
 @CommandAlias("rules")
