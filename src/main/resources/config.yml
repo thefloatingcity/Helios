@@ -94,8 +94,8 @@ piano_prefix: "&7[&3Piano&7]&f"
 piano_multi: "&3&l>"
 
 msg_piano_help: "&fFirst, do &e/piano menu&f and pick out any notes you would like to play, and put them into your hotbar. Right clicking the notes while in the menu plays them. If you want a nice selection of notes, pick all of them that are marked as &eF# Major&f! Next, if you want to change the default instrument, you can use &e/piano instrument&f to pick an instrument you would like. Tab completion works too! Finally, do &e/piano toggle&f and then if you change your selected hotbar item to the slot the note is on, it'll play that note! Have fun!"
-msg_piano_enabled: "&fThe piano has been enabled!"
-msg_piano_disabled: "&fThe piano has been disabled! Hope you enjoyed!"
+msg_piano_enabled: "&aThe piano is now enabled!"
+msg_piano_disabled: "&cThe piano is now disabled. &fHope you enjoyed!"
 msg_piano_instrument_change: "&fYour piano instrument is now set to &e%s&f!"
 piano_notes_inventory_name: "&9Piano"
 piano_notes:

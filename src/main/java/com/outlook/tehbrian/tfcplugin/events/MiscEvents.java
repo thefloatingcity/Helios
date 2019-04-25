@@ -58,13 +58,13 @@ public class MiscEvents implements Listener {
         if (player.hasPlayedBefore()) {
             long millisSinceLastPlayed = Calendar.getInstance().getTimeInMillis() - player.getLastPlayed();
             if (millisSinceLastPlayed >= 86400000) {
-                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed/86400000, "days"));
+                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed / 86400000, "days"));
             } else if (millisSinceLastPlayed >= 3600000) {
-                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed/3600000, "hours"));
+                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed / 3600000, "hours"));
             } else if (millisSinceLastPlayed >= 60000) {
-                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed/60000, "minutes"));
+                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed / 60000, "minutes"));
             } else if (millisSinceLastPlayed >= 1000) {
-                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed/1000, "seconds"));
+                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed / 1000, "seconds"));
             } else {
                 player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed, "milliseconds"));
             }

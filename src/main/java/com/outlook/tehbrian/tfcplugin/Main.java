@@ -1,7 +1,6 @@
 package com.outlook.tehbrian.tfcplugin;
 
 import co.aikar.commands.ACFUtil;
-import co.aikar.commands.BukkitCommandIssuer;
 import co.aikar.commands.ConditionFailedException;
 import co.aikar.commands.PaperCommandManager;
 import com.outlook.tehbrian.tfcplugin.commands.*;
@@ -10,9 +9,6 @@ import com.outlook.tehbrian.tfcplugin.events.BuildingEvents;
 import com.outlook.tehbrian.tfcplugin.events.MiscEvents;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;
-import org.bukkit.Bukkit;
-import org.bukkit.World;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -59,12 +55,12 @@ public final class Main extends JavaPlugin {
         manager.registerCommand(new UtilCommand(this));
 
         manager.getCommandConditions().addCondition(Integer.class, "limits", (c, exec, value) -> {
-           if (value == null) {
-               return;
-           }
-           if (c.hasConfig("min") && c.getConfigValue("min", 0) > value) {
-               throw new ConditionFailedException("Minimum value must be " + c.getConfigValue("min", 0));
-           }
+            if (value == null) {
+                return;
+            }
+            if (c.hasConfig("min") && c.getConfigValue("min", 0) > value) {
+                throw new ConditionFailedException("Min value must be " + c.getConfigValue("min", 0));
+            }
             if (c.hasConfig("max") && c.getConfigValue("max", 3) < value) {
                 throw new ConditionFailedException("Max value must be " + c.getConfigValue("max", 3));
             }

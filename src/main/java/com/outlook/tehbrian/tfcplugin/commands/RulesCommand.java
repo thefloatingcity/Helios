@@ -20,11 +20,11 @@ public class RulesCommand extends BaseCommand {
     }
 
     @Default
-    public void onRules(Player player, @Default("1") @Conditions("limit(min=1,max=9)") int page) {
+    public void onRules(Player player, @Default("1") @Conditions("limit(min=1,max=9)") Integer page) {
         ConfigurationSection rule = main.getConfig().getConfigurationSection("rules.rule" + page);
         player.sendMessage(Utils.formatC("rules_prefix", "msg_rules", rule.getString("topic"), page));
         for (String line : rule.getStringList("content")) {
-            player.sendMessage(Utils.colorString(main.getConfig().getString("rules_multi") + line));
+            player.sendMessage(Utils.colorString(main.getConfig().getString("rules_multi") + " " + line));
         }
     }
 
