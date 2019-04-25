@@ -20,23 +20,7 @@ public class Utils {
     private Utils() {
     }
 
-    public static String emote(CommandSender sender, String configKey) {
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            return Utils.formatC("none", configKey, player.getDisplayName());
-        } else {
-            return Utils.formatC("none", configKey, sender.getName());
-        }
-    }
 
-    public static String emote(CommandSender sender, String configKey, String text) {
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            return Utils.formatC("none", configKey, player.getDisplayName(), text);
-        } else {
-            return Utils.formatC("none", configKey, sender.getName(), text);
-        }
-    }
 
     public static String format(String configKey, Object... replacements) {
         return formatC("tfc_prefix", configKey, replacements);

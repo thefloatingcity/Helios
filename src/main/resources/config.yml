@@ -38,7 +38,7 @@ msg_warp_max: "&fMaximum &4warp speed&f reached!"
 msg_action_help: "&fActions: &e/zap&f, &e/launch&f, &e/boost&f, and &e/poke&f."
 
 msg_zap: "&f%s &czapped&f %s"
-msg_zap_themself: "&f%s &czapped&f themself"
+msg_zap_themself: "&f%s &czapped&f themselves"
 
 msg_launch: "&f%s &alaunched&f %s"
 msg_launch_themself: "&f%s &alaunched&f themselves"

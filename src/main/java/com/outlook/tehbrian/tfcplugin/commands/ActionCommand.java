@@ -38,11 +38,11 @@ public class ActionCommand extends BaseCommand {
     @CommandPermission("tfcplugin.launchother")
     @Description("Launch someone sky-high!")
     @CommandCompletion("@players")
-    public void onLaunchOther(CommandSender sender, OnlinePlayer targetWrapper) {
+    public void onLaunchOther(Player player, OnlinePlayer targetWrapper) {
         Player target = targetWrapper.getPlayer();
         target.setVelocity(new Vector(0, 10, 0));
         target.getWorld().playSound(target.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
-        Bukkit.broadcastMessage(Utils.format("msg_launch", sender.getName(), target.getDisplayName()));
+        Bukkit.broadcastMessage(Utils.format("msg_launch", player.getDisplayName(), target.getDisplayName()));
     }
 
     @CommandAlias("zap")
@@ -58,10 +58,10 @@ public class ActionCommand extends BaseCommand {
     @CommandPermission("tfcplugin.zapother")
     @Description("Zap someone! Like Zeus!")
     @CommandCompletion("@players")
-    public void onZapOther(CommandSender sender, OnlinePlayer targetWrapper) {
+    public void onZapOther(Player player, OnlinePlayer targetWrapper) {
         Player target = targetWrapper.getPlayer();
         target.getWorld().strikeLightning(target.getLocation());
-        Bukkit.broadcastMessage(Utils.format("msg_zap", sender.getName(), target.getDisplayName()));
+        Bukkit.broadcastMessage(Utils.format("msg_zap", player.getDisplayName(), target.getDisplayName()));
     }
 
     @CommandAlias("boost")
@@ -77,11 +77,11 @@ public class ActionCommand extends BaseCommand {
     @CommandPermission("tfcplugin.boostother")
     @Description("Zoom zoom!")
     @CommandCompletion("@players")
-    public void onBoostOther(CommandSender sender, OnlinePlayer targetWrapper) {
+    public void onBoostOther(Player player, OnlinePlayer targetWrapper) {
         Player target = targetWrapper.getPlayer();
         target.setVelocity(target.getLocation().getDirection().multiply(3));
         target.getWorld().playSound(target.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
-        Bukkit.broadcastMessage(Utils.format("msg_boost", sender.getName(), target.getDisplayName()));
+        Bukkit.broadcastMessage(Utils.format("msg_boost", player.getDisplayName(), target.getDisplayName()));
     }
 
     @CommandAlias("poke")
@@ -107,7 +107,7 @@ public class ActionCommand extends BaseCommand {
     @CommandPermission("tfcplugin.pokeother")
     @Description("Just a little push.")
     @CommandCompletion("@players")
-    public void onPokeOther(CommandSender sender, OnlinePlayer targetWrapper) {
+    public void onPokeOther(Player player, OnlinePlayer targetWrapper) {
         Player target = targetWrapper.getPlayer();
 
         double maxY = main.getConfig().getDouble("poke_force.maxY");
@@ -121,7 +121,7 @@ public class ActionCommand extends BaseCommand {
         Vector randomVector = new Vector(randX, randY, randZ);
 
         target.setVelocity(randomVector);
-        Bukkit.broadcastMessage(Utils.format("msg_poke", sender.getName(), target.getDisplayName()));
+        Bukkit.broadcastMessage(Utils.format("msg_poke", player.getDisplayName(), target.getDisplayName()));
     }
 
     @HelpCommand
