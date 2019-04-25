@@ -35,7 +35,7 @@ public class ActionCommand extends BaseCommand {
 
                 player.setVelocity(new Vector(0, 10, 0));
                 player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
-                Bukkit.broadcastMessage(Utils.format("msg_launch_themself", sender.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_launch_themself", player.getDisplayName()));
             } else {
                 sender.sendMessage(Utils.format("msg_player_only"));
             }
@@ -44,7 +44,7 @@ public class ActionCommand extends BaseCommand {
             if (target != null) {
                 target.setVelocity(new Vector(0, 10, 0));
                 target.getWorld().playSound(target.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
-                Bukkit.broadcastMessage(Utils.format("msg_launch", sender.getName(), target.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_launch", sender.getName(), target.getDisplayName()));
             } else {
                 sender.sendMessage(Utils.format("msg_not_online"));
             }
@@ -61,7 +61,7 @@ public class ActionCommand extends BaseCommand {
                 Player player = (Player) sender;
 
                 player.getWorld().strikeLightning(player.getLocation());
-                Bukkit.broadcastMessage(Utils.format("msg_zap_themself", sender.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_zap_themself", player.getDisplayName()));
             } else {
                 sender.sendMessage(Utils.format("msg_player_only"));
             }
@@ -69,7 +69,7 @@ public class ActionCommand extends BaseCommand {
             Player target = Bukkit.getPlayer(args[0]);
             if (target != null) {
                 target.getWorld().strikeLightning(target.getLocation());
-                Bukkit.broadcastMessage(Utils.format("msg_zap", sender.getName(), target.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_zap", sender.getName(), target.getDisplayName()));
             } else {
                 sender.sendMessage(Utils.format("msg_not_online"));
             }
@@ -87,7 +87,7 @@ public class ActionCommand extends BaseCommand {
 
                 player.setVelocity(player.getLocation().getDirection().multiply(3));
                 player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
-                Bukkit.broadcastMessage(Utils.format("msg_boost_themself", sender.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_boost_themself", player.getDisplayName()));
             } else {
                 sender.sendMessage(Utils.format("msg_player_only"));
             }
@@ -96,7 +96,7 @@ public class ActionCommand extends BaseCommand {
             if (target != null) {
                 target.setVelocity(target.getLocation().getDirection().multiply(3));
                 target.getWorld().playSound(target.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
-                Bukkit.broadcastMessage(Utils.format("msg_boost", sender.getName(), target.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_boost", sender.getName(), target.getDisplayName()));
             } else {
                 sender.sendMessage(Utils.format("msg_not_online"));
             }
@@ -124,7 +124,7 @@ public class ActionCommand extends BaseCommand {
                 Player player = (Player) sender;
 
                 player.setVelocity(randomVector);
-                Bukkit.broadcastMessage(Utils.format("msg_poke_themself", sender.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_poke_themself", player.getDisplayName()));
             } else {
                 sender.sendMessage(Utils.format("msg_player_only"));
             }
@@ -132,7 +132,7 @@ public class ActionCommand extends BaseCommand {
             Player target = Bukkit.getPlayer(args[0]);
             if (target != null) {
                 target.setVelocity(randomVector);
-                Bukkit.broadcastMessage(Utils.format("msg_poke", sender.getName(), target.getName()));
+                Bukkit.broadcastMessage(Utils.format("msg_poke", sender.getName(), target.getDisplayName()));
             } else {
                 sender.sendMessage(Utils.format("msg_not_online"));
             }
