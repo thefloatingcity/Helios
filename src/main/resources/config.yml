@@ -35,8 +35,6 @@ msg_warp_max: "&fMaximum &4warp speed&f reached!"
 #  ACTION  #
 #          #
 ############
-msg_action_help: "&fActions: &e/zap&f, &e/launch&f, &e/boost&f, and &e/poke&f."
-
 msg_zap: "&f%s &czapped&f %s"
 msg_zap_themself: "&f%s &czapped&f themselves"
 
@@ -59,8 +57,6 @@ poke_force:
 #  CORE  #
 #        #
 ##########
-msg_core_help: "&fCore Commands: &e/tfc reload&f."
-
 msg_reloaded: "&fConfig reloaded successfully!"
 
 ###########
@@ -68,8 +64,6 @@ msg_reloaded: "&fConfig reloaded successfully!"
 #  EMOTE  #
 #         #
 ###########
-msg_emote_help: "&fEmotes: &e/winkwonk&f, &e/shrug&f, &e/doubt&f, &e/blame&f, and &e/sue&f."
-
 emote_winkwonk: "&d%s &5wink wonks &d;)"
 emote_shrug: "&a%s &2shrugs &a\\_o¬o_/"
 emote_doubt: "&b%s &9doubts that."
@@ -82,8 +76,9 @@ emote_sue: "&e%s &6is suing &e%s"
 #  GAMEMODE  #
 #            #
 ##############
-msg_gamemode_help: "&fPlease enter a valid gamemode! Such as &esurvival&f, &es&f, &e0&f, &ecreative&f, &ec&f, &e1&f, &eadventure&f, &ea&f, or &e2&f."
-msg_gamemode_change: "&fYour gamemode has been changed to &e%s&f!"
+msg_gamemode_unknown: "&fPlease enter a valid gamemode! Such as &esurvival&f, &es&f, &e0&f, &ecreative&f, &ec&f, &e1&f, &eadventure&f, &ea&f, or &e2&f."
+msg_gamemode_changed: "&fYour gamemode has been changed to &e%s&f!"
+msg_gamemode_changed_other: "&6%s&f's gamemode has been changed to &e%s&f!"
 
 ###########
 #         #
@@ -360,8 +355,6 @@ rules:
 #  UTIL  #
 #        #
 ##########
-msg_util_help: "&fUtilities: &e/blocks&f and &e/hat&f."
-
 msg_fly_enabled: "&fYou can now fly! Please only use this in emergencies when you need to get somewhere high up."
 msg_fly_disabled: "&fYou can no longer fly. Thanks for disabling it!"
 

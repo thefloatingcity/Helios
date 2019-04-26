@@ -1,6 +1,7 @@
 package com.outlook.tehbrian.tfcplugin.commands;
 
 import co.aikar.commands.BaseCommand;
+import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Utils;
@@ -24,24 +25,24 @@ public class RulesCommand extends BaseCommand {
         ConfigurationSection rule = main.getConfig().getConfigurationSection("rules.rule" + page);
         player.sendMessage(Utils.formatC("rules_prefix", "msg_rules", rule.getString("topic"), page));
         for (String line : rule.getStringList("content")) {
-            player.sendMessage(Utils.colorString(main.getConfig().getString("rules_multi") + " " + line));
+            player.sendMessage(Utils.color(main.getConfig().getString("rules_multi") + " " + line));
         }
     }
 
     @Subcommand("accept")
     @CommandAlias("acceptrules")
-    @Description("Accept the rules and get building perms!")
+    @Description("Accept the rules and get building permissions!")
     public void onAccept(Player player) {
         if (player.hasPermission("tfcplugin.rulesaccepted")) {
             player.sendMessage(Utils.formatC("rules_prefix", "msg_rules_already_accepted"));
         } else {
-            player.sendMessage(Utils.formatC("rules_prefix", "msg_rules_accept"));
             main.getVaultPerms().playerAddGroup(null, player, "passenger");
+            player.sendMessage(Utils.formatC("rules_prefix", "msg_rules_accept"));
         }
     }
 
     @HelpCommand
-    public void onHelp(CommandSender sender) {
-        sender.sendMessage(Utils.formatC("rules_prefix", "msg_rules_help"));
+    public void onHelp(CommandSender sender, CommandHelp help) {
+        help.showHelp();
     }
 }

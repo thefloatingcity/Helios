@@ -129,9 +129,9 @@ public class MiscEvents implements Listener {
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         if (player.hasPermission("tfcplugin.chatcolor")) {
-            event.setMessage(Utils.colorString(event.getMessage()));
+            event.setMessage(Utils.color(event.getMessage()));
         }
-        event.setFormat(Utils.colorString(main.getConfig().getString("chat_format")
+        event.setFormat(Utils.color(main.getConfig().getString("chat_format")
                 .replace("{prefix}", main.getVaultChat().getPlayerPrefix(player))
                 .replace("{suffix}", main.getVaultChat().getPlayerSuffix(player))));
     }

@@ -5,12 +5,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Utils {
@@ -20,8 +20,6 @@ public class Utils {
     private Utils() {
     }
 
-
-
     public static String format(String configKey, Object... replacements) {
         return formatC("tfc_prefix", configKey, replacements);
     }
@@ -29,12 +27,12 @@ public class Utils {
     public static String formatC(String prefixKey, String configKey, Object... replacements) {
         FileConfiguration config = main.getConfig();
         if (prefixKey.equalsIgnoreCase("none")) {
-            return colorString(String.format(config.getString(configKey), replacements));
+            return color(String.format(config.getString(configKey), replacements));
         }
-        return colorString(config.getString(prefixKey) + " " + String.format(config.getString(configKey), replacements));
+        return color(config.getString(prefixKey) + " " + String.format(config.getString(configKey), replacements));
     }
 
-    public static String colorString(String string) {
+    public static String color(String string) {
         return string == null ? null : ChatColor.translateAlternateColorCodes('&', string);
     }
 
@@ -44,21 +42,16 @@ public class Utils {
     }
 
     public static ItemStack createItem(String name, Material material, int amount, int data) {
-        ItemStack i = new ItemStack(material, amount);
-        ItemMeta im = i.getItemMeta();
-        im.setDisplayName(colorString(name));
-        i.setDurability((short) data);
-        i.setItemMeta(im);
-        return i;
+        return createItem(material, amount, data, name, new ArrayList<>());
     }
 
-    public static ItemStack createItem(String name, List<String> lore, Material material, int amount, int data) {
+    public static ItemStack createItem(Material material, int amount, int data, String name, List<String> lore) {
         ItemStack i = new ItemStack(material, amount);
         ItemMeta im = i.getItemMeta();
         for (int x = 0; x < lore.size(); x++) {
-            lore.set(x, colorString(lore.get(x)));
+            lore.set(x, color(lore.get(x)));
         }
-        im.setDisplayName(colorString(name));
+        im.setDisplayName(color(name));
         im.setLore(lore);
         i.setDurability((short) data);
         i.setItemMeta(im);

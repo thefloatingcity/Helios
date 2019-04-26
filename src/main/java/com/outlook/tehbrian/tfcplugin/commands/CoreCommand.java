@@ -1,6 +1,7 @@
 package com.outlook.tehbrian.tfcplugin.commands;
 
 import co.aikar.commands.BaseCommand;
+import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Utils;
@@ -26,7 +27,7 @@ public class CoreCommand extends BaseCommand {
     }
 
     @HelpCommand
-    public void onHelp(CommandSender sender) {
-        sender.sendMessage(Utils.format("msg_core_help"));
+    public void onHelp(CommandSender sender, CommandHelp help) {
+        help.showHelp();
     }
 }

@@ -1,6 +1,7 @@
 package com.outlook.tehbrian.tfcplugin.commands;
 
 import co.aikar.commands.BaseCommand;
+import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import com.outlook.tehbrian.tfcplugin.Main;
@@ -27,7 +28,7 @@ public class ActionCommand extends BaseCommand {
 
     @CommandAlias("launch")
     @CommandPermission("tfcplugin.launch")
-    @Description("Launch someone sky-high!")
+    @Description("Up you go!")
     public void onLaunch(Player player) {
         player.setVelocity(new Vector(0, 10, 0));
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
@@ -38,6 +39,7 @@ public class ActionCommand extends BaseCommand {
     @CommandPermission("tfcplugin.launchother")
     @Description("Launch someone sky-high!")
     @CommandCompletion("@players")
+    @Syntax("<target>")
     public void onLaunchOther(Player player, OnlinePlayer targetWrapper) {
         Player target = targetWrapper.getPlayer();
         target.setVelocity(new Vector(0, 10, 0));
@@ -47,7 +49,7 @@ public class ActionCommand extends BaseCommand {
 
     @CommandAlias("zap")
     @CommandPermission("tfcplugin.zap")
-    @Description("Zap someone! Like Zeus!")
+    @Description("Zap.. yourself?")
     public void onZap(Player player) {
         player.getWorld().strikeLightning(player.getLocation());
         Bukkit.broadcastMessage(Utils.format("msg_zap_themself", player.getDisplayName()));
@@ -58,6 +60,7 @@ public class ActionCommand extends BaseCommand {
     @CommandPermission("tfcplugin.zapother")
     @Description("Zap someone! Like Zeus!")
     @CommandCompletion("@players")
+    @Syntax("<target>")
     public void onZapOther(Player player, OnlinePlayer targetWrapper) {
         Player target = targetWrapper.getPlayer();
         target.getWorld().strikeLightning(target.getLocation());
@@ -75,8 +78,9 @@ public class ActionCommand extends BaseCommand {
 
     @CommandAlias("boost")
     @CommandPermission("tfcplugin.boostother")
-    @Description("Zoom zoom!")
+    @Description("Useful for annoying others.")
     @CommandCompletion("@players")
+    @Syntax("<target>")
     public void onBoostOther(Player player, OnlinePlayer targetWrapper) {
         Player target = targetWrapper.getPlayer();
         target.setVelocity(target.getLocation().getDirection().multiply(3));
@@ -86,7 +90,7 @@ public class ActionCommand extends BaseCommand {
 
     @CommandAlias("poke")
     @CommandPermission("tfcplugin.poke")
-    @Description("Just a little push.")
+    @Description("Poke thineself.")
     public void onPoke(Player player) {
 
         double maxY = main.getConfig().getDouble("poke_force.maxY");
@@ -107,6 +111,7 @@ public class ActionCommand extends BaseCommand {
     @CommandPermission("tfcplugin.pokeother")
     @Description("Just a little push.")
     @CommandCompletion("@players")
+    @Syntax("<target>")
     public void onPokeOther(Player player, OnlinePlayer targetWrapper) {
         Player target = targetWrapper.getPlayer();
 
@@ -125,7 +130,7 @@ public class ActionCommand extends BaseCommand {
     }
 
     @HelpCommand
-    public void onHelp(CommandSender sender) {
-        sender.sendMessage(Utils.format("msg_action_help"));
+    public void onHelp(CommandSender sender, CommandHelp help) {
+        help.showHelp();
     }
 }
