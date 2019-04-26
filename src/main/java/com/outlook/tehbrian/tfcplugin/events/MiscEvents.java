@@ -95,9 +95,7 @@ public class MiscEvents implements Listener {
 
     @EventHandler
     public void onHeldItemChange(PlayerItemHeldEvent event) {
-        if (Piano.getPlayerEnabledPiano(event.getPlayer())) {
-            Piano.play(event.getPlayer(), event.getPlayer().getInventory().getItem(event.getNewSlot()), true);
-        }
+        Piano.play(event.getPlayer(), event.getPlayer().getInventory().getItem(event.getNewSlot()), true);
     }
 
     @EventHandler

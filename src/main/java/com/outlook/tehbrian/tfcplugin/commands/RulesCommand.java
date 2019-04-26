@@ -21,7 +21,7 @@ public class RulesCommand extends BaseCommand {
     }
 
     @Default
-    public void onRules(Player player, @Default("1") @Conditions("limit(min=1,max=9)") Integer page) {
+    public void onRules(Player player, @Default("1") @Conditions("limits:min=1,max=9") Integer page) {
         ConfigurationSection rule = main.getConfig().getConfigurationSection("rules.rule" + page);
         player.sendMessage(Utils.formatC("rules_prefix", "msg_rules", rule.getString("topic"), page));
         for (String line : rule.getStringList("content")) {

@@ -92,7 +92,7 @@ msg_piano_help: "&fFirst, do &e/piano menu&f and pick out any notes you would li
 msg_piano_enabled: "&aThe piano is now enabled!"
 msg_piano_disabled: "&cThe piano is now disabled. &fHope you enjoyed!"
 msg_piano_instrument_change: "&fYour piano instrument is now set to &e%s&f!"
-piano_notes_inventory_name: "&9Piano"
+piano_notes_inventory_name: "Piano Notes"
 piano_notes:
   piano_note1:
     name: "&fF♯/G♭ [&bOctave 1&f]"
