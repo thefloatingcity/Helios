@@ -30,7 +30,7 @@ public class UtilCommand extends BaseCommand {
 
     @CommandAlias("fly")
     @CommandPermission("tfcplugin.fly")
-    @Description("Fly, like the birds in the sky.")
+    @Description("Fly. Like the birds in the sky.")
     public void onFly(Player player) {
         if (Flight.getCanBypassFly(player)) {
             Flight.setCanBypassFly(player, false);
@@ -48,7 +48,7 @@ public class UtilCommand extends BaseCommand {
         Inventory blocksInventory = Bukkit.createInventory(null, 9, Utils.color(main.getConfig().getString("blocks_inventory_name")));
         for (String key : main.getConfig().getConfigurationSection("blocks").getKeys(false)) {
             ConfigurationSection block = main.getConfig().getConfigurationSection("blocks." + key);
-            blocksInventory.addItem(Utils.createItem(block.getString("name"), Material.matchMaterial(block.getString("material")), 1, block.getInt("data")));
+            blocksInventory.addItem(Utils.createItem(block.getString("name"), Material.matchMaterial(block.getString("material")), 1, 0));
         }
         player.openInventory(blocksInventory);
     }

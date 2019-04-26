@@ -39,12 +39,11 @@ public class ActionCommand extends BaseCommand {
     @CommandPermission("tfcplugin.launchother")
     @Description("Launch someone sky-high!")
     @CommandCompletion("@players")
-    @Syntax("<target>")
-    public void onLaunchOther(Player player, OnlinePlayer targetWrapper) {
-        Player target = targetWrapper.getPlayer();
-        target.setVelocity(new Vector(0, 10, 0));
-        target.getWorld().playSound(target.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
-        Bukkit.broadcastMessage(Utils.format("msg_launch", player.getDisplayName(), target.getDisplayName()));
+    public void onLaunchOther(Player player, OnlinePlayer target) {
+        Player targetPlayer = target.getPlayer();
+        targetPlayer.setVelocity(new Vector(0, 10, 0));
+        targetPlayer.getWorld().playSound(targetPlayer.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
+        Bukkit.broadcastMessage(Utils.format("msg_launch", player.getDisplayName(), targetPlayer.getDisplayName()));
     }
 
     @CommandAlias("zap")
@@ -60,11 +59,10 @@ public class ActionCommand extends BaseCommand {
     @CommandPermission("tfcplugin.zapother")
     @Description("Zap someone! Like Zeus!")
     @CommandCompletion("@players")
-    @Syntax("<target>")
-    public void onZapOther(Player player, OnlinePlayer targetWrapper) {
-        Player target = targetWrapper.getPlayer();
-        target.getWorld().strikeLightning(target.getLocation());
-        Bukkit.broadcastMessage(Utils.format("msg_zap", player.getDisplayName(), target.getDisplayName()));
+    public void onZapOther(Player player, OnlinePlayer target) {
+        Player targetPlayer = target.getPlayer();
+        targetPlayer.getWorld().strikeLightning(targetPlayer.getLocation());
+        Bukkit.broadcastMessage(Utils.format("msg_zap", player.getDisplayName(), targetPlayer.getDisplayName()));
     }
 
     @CommandAlias("boost")
@@ -80,12 +78,11 @@ public class ActionCommand extends BaseCommand {
     @CommandPermission("tfcplugin.boostother")
     @Description("Useful for annoying others.")
     @CommandCompletion("@players")
-    @Syntax("<target>")
-    public void onBoostOther(Player player, OnlinePlayer targetWrapper) {
-        Player target = targetWrapper.getPlayer();
-        target.setVelocity(target.getLocation().getDirection().multiply(3));
-        target.getWorld().playSound(target.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
-        Bukkit.broadcastMessage(Utils.format("msg_boost", player.getDisplayName(), target.getDisplayName()));
+    public void onBoostOther(Player player, OnlinePlayer target) {
+        Player targetPlayer = target.getPlayer();
+        targetPlayer.setVelocity(targetPlayer.getLocation().getDirection().multiply(3));
+        targetPlayer.getWorld().playSound(targetPlayer.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
+        Bukkit.broadcastMessage(Utils.format("msg_boost", player.getDisplayName(), targetPlayer.getDisplayName()));
     }
 
     @CommandAlias("poke")
@@ -111,9 +108,8 @@ public class ActionCommand extends BaseCommand {
     @CommandPermission("tfcplugin.pokeother")
     @Description("Just a little push.")
     @CommandCompletion("@players")
-    @Syntax("<target>")
-    public void onPokeOther(Player player, OnlinePlayer targetWrapper) {
-        Player target = targetWrapper.getPlayer();
+    public void onPokeOther(Player player, OnlinePlayer target) {
+        Player targetPlayer = target.getPlayer();
 
         double maxY = main.getConfig().getDouble("poke_force.maxY");
         double minY = main.getConfig().getDouble("poke_force.minY");
@@ -125,8 +121,8 @@ public class ActionCommand extends BaseCommand {
         double randZ = minXZ + random.nextDouble() * (maxXZ - minXZ);
         Vector randomVector = new Vector(randX, randY, randZ);
 
-        target.setVelocity(randomVector);
-        Bukkit.broadcastMessage(Utils.format("msg_poke", player.getDisplayName(), target.getDisplayName()));
+        targetPlayer.setVelocity(randomVector);
+        Bukkit.broadcastMessage(Utils.format("msg_poke", player.getDisplayName(), targetPlayer.getDisplayName()));
     }
 
     @HelpCommand

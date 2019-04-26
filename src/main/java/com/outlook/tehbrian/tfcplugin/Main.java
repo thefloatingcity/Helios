@@ -38,12 +38,20 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BuildingEvents(this), this);
         getServer().getPluginManager().registerEvents(new MiscEvents(this), this);
 
+        setupCommandManager();
+
         if (!setupVault()) {
             getLogger().severe("No Vault dependency found! Disabling plugin..");
             getServer().getPluginManager().disablePlugin(this);
-            return;
         }
+    }
 
+    @Override
+    public void onDisable() {
+        getLogger().info("I hope to see you again soon!");
+    }
+
+    private void setupCommandManager() {
         // ACF
         PaperCommandManager manager = new PaperCommandManager(this);
 
@@ -64,6 +72,7 @@ public final class Main extends JavaPlugin {
         Map<MessageKeyProvider, String> messages = new HashMap<>();
         messages.put(MessageKeys.COULD_NOT_FIND_PLAYER, "test");
         messages.put(MinecraftMessageKeys.YOU_MUST_BE_HOLDING_ITEM, "some other message");
+        messages.put(MessageKeys.ERROR_PREFIX, "TEST:");
         manager.getLocales().addMessages(manager.getLocales().getDefaultLocale(), messages);
 
         // ACF Conditions
@@ -78,11 +87,6 @@ public final class Main extends JavaPlugin {
                 throw new ConditionFailedException("Maximum value must be " + context.getConfigValue("max", 3));
             }
         });
-    }
-
-    @Override
-    public void onDisable() {
-        getLogger().info("I hope to see you again soon!");
     }
 
     private boolean setupVault() {

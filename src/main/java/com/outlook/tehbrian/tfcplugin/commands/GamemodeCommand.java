@@ -35,12 +35,11 @@ public class GamemodeCommand extends BaseCommand {
     @CommandPermission("tfcplugin.gamemodeother")
     @Description("Change someone's gamemode to Survival.")
     @CommandCompletion("@players")
-    @Syntax("<target>")
-    public void onSurvivalOther(CommandSender sender, OnlinePlayer targetWrapper) {
-        Player target = targetWrapper.getPlayer();
-        target.setGameMode(GameMode.SURVIVAL);
-        sender.sendMessage(Utils.format("msg_gamemode_changed_other", target.getDisplayName(), "Survival"));
-        target.sendMessage(Utils.format("msg_gamemode_changed", "Survival"));
+    public void onSurvivalOther(CommandSender sender, OnlinePlayer target) {
+        Player targetPlayer = target.getPlayer();
+        targetPlayer.setGameMode(GameMode.SURVIVAL);
+        sender.sendMessage(Utils.format("msg_gamemode_changed_other", targetPlayer.getDisplayName(), "Survival"));
+        targetPlayer.sendMessage(Utils.format("msg_gamemode_changed", "Survival"));
     }
 
     @Subcommand("creative|c|1")
@@ -57,12 +56,11 @@ public class GamemodeCommand extends BaseCommand {
     @CommandPermission("tfcplugin.gamemodeother")
     @Description("Change someone's gamemode to Creative.")
     @CommandCompletion("@players")
-    @Syntax("<target>")
-    public void onCreativeOther(CommandSender sender, OnlinePlayer targetWrapper) {
-        Player target = targetWrapper.getPlayer();
-        target.setGameMode(GameMode.CREATIVE);
-        sender.sendMessage(Utils.format("msg_gamemode_changed_other", target.getDisplayName(), "Creative"));
-        target.sendMessage(Utils.format("msg_gamemode_changed", "Creative"));
+    public void onCreativeOther(CommandSender sender, OnlinePlayer target) {
+        Player targetPlayer = target.getPlayer();
+        targetPlayer.setGameMode(GameMode.CREATIVE);
+        sender.sendMessage(Utils.format("msg_gamemode_changed_other", targetPlayer.getDisplayName(), "Creative"));
+        targetPlayer.sendMessage(Utils.format("msg_gamemode_changed", "Creative"));
     }
 
     @Subcommand("adventure|a|2")
@@ -76,15 +74,14 @@ public class GamemodeCommand extends BaseCommand {
 
     @Subcommand("adventure|a|2")
     @CommandAlias("gma")
-    @CommandPermission("tfcplugin.gamemode")
+    @CommandPermission("tfcplugin.gamemodeother")
     @Description("Change someone's gamemode to Adventure.")
     @CommandCompletion("@players")
-    @Syntax("<target>")
-    public void onAdventureOther(CommandSender sender, OnlinePlayer targetWrapper) {
-        Player target = targetWrapper.getPlayer();
-        target.setGameMode(GameMode.ADVENTURE);
-        sender.sendMessage(Utils.format("msg_gamemode_changed_other", target.getDisplayName(), "Creative"));
-        target.sendMessage(Utils.format("msg_gamemode_changed", "Adventure"));
+    public void onAdventureOther(CommandSender sender, OnlinePlayer target) {
+        Player targetPlayer = target.getPlayer();
+        targetPlayer.setGameMode(GameMode.ADVENTURE);
+        sender.sendMessage(Utils.format("msg_gamemode_changed_other", targetPlayer.getDisplayName(), "Creative"));
+        targetPlayer.sendMessage(Utils.format("msg_gamemode_changed", "Adventure"));
     }
 
     @CatchUnknown

@@ -284,78 +284,59 @@ msg_rules_accept: "&fThanks for reading the rules! Here's your passenger."
 msg_rules_already_accepted: "&fLooks like you've already read the rules, thanks!"
 rules:
   rule1:
+    topic: "The Rules"
+    content:
+      - "&fThese are the rules for the forums, the Discord, the server, and anything else that's related to The Floating City."
+      - "&fGenerally, use common sense and you'll be fine, but please read them! They're short and sweet :)"
+  rule2:
     topic: "Griefing"
     content:
-      - "&fNo touching other people's stuff without their permission."
-      - "&fThis includes placing or breaking blocks,"
-      - "&ftaking or placing items in their chests, taking or placing items in their itemframes,"
-      - "&ftrampling their crops, killing their animals.. You get the idea."
-      - "&fPlease use common sense. If it isn't yours, leave it be."
-  rule2:
-    topic: "Swearing"
-    content:
-      - "&fSwearing is allowed but please try to be courteous."
-      - "&fRemember, as much as you may think otherwise, Minecraft is"
-      - "&fa kids game and there are kids who play it."
-      - "&fSo please just don't fill up the chat with a bunch of swearing."
+      - "&fNo touching other people's stuff without their permission. This includes killing their animals, trampling their crops, touching their itemframes or chests.."
+      - "&fYou get the idea! If it isn't yours, leave it be."
   rule3:
-    topic: "Spamming"
+    topic: "Chat Stuff"
     content:
-      - "&fHaving long messages and lots of them is fine, but please"
-      - "&fdon't fill up chat with meaningless gibberish,"
-      - "&for repeat the same messages over and over. Again, please"
-      - "&fbe courteous and mindful of other people."
+      - "&fSwearing is allowed but please be courteous."
+      - "&fHaving long messages or lots of messages is fine, but please don't fill up chat with meaningless gibberish."
+      - "&fAdditionally, don't repeat the same messages over and over."
   rule4:
     topic: "Advertising"
     content:
-      - "&fWe're a pretty unconvential server! Talking about servers,"
-      - "&fsaying their names, even putting their IPs is fine."
-      - "&fJust no advertising any servers trying to get random people on it,"
-      - "&fThere are websites for that, you know. If you're asking a friend if they wanna go on"
-      - "&fthis server and they forgot the IP, it's fine."
+      - "&fWe're a pretty unconvential server! Talking about servers or saying their IPs, is fine!"
+      - "&fJust don't spam chat trying to get people to join a server. It's annoying, honestly."
   rule5:
     topic: "Hurtful Speech"
     content:
-      - "&fNo hate speech or discrimination or insults against anyone."
-      - "&fWe're not a politically correct server but don't be a jerk."
-      - "&fIf something you say might hurt someone, don't say it."
+      - "&fWe're not a politically correct server, but just don't be a jerk."
+      - "&fIf you think what you're going to say is going to hurt someone, just don't say it."
+      - "&fThis also goes the other way though. Don't get offended over silly things."
   rule6:
     topic: "Flamewars"
     content:
       - "&fHaving discussions about things are fine! Religion, politics, so be it."
-      - "&fHowever, keep it cool and a debate, not a flamewar."
-      - "&fAlso, be mindful of Rule 5. If you feel like talking about something"
-      - "&fthat might hurt someone, don't talk about it with them."
-      - "&fBut if you both want to talk about it and engage in discussion, it's fine!"
+      - "&fHowever, keep it a debate, not a flamewar. Keep your cool, don't start fighting with eachother. That's just not constructive."
   rule7:
     topic: "PG-13"
     content:
       - "&fWe're a pretty relaxed server. But keep it PG-13."
       - "&fNo builds or chat that has a lot of gore or sexual content."
-      - "&fIf you wouldn't see it in Avengers, don't make it please."
   rule8:
     topic: "Lag, Bugs, and Glitches"
     content:
-      - "&fPlease don't try to break a server. It's not funny."
-      - "&fYou're not a hacker, it just ruins the game we're all trying to"
-      - "&fhave fun and play on. This means no lag machines or"
-      - "&fgiant super big repeating complex redstone, and if you find"
-      - "&fany bugs or glitches, please report them to staff! Thanks!"
+      - "&fPlease don't try to break our server. It's not funny."
+      - "&fIf you find any bugs, glitches, or explots, please report them to staff, and definitely don't abuse them."
   rule9:
-    topic: "Golden Rule"
+    topic: "Common Sense"
     content:
-      - "&fIf you forget even everything, remember this golden rule."
-      - "&fDon't be a jerk, and use common sense. This one golden rule"
-      - "&fwill happily keep you playing on the server."
-      - "&fAs long as you're not a jerk towards anyone, and you use common sense,"
-      - "&flike not griefing builds, not spamming chat, etc, you'll be golden!"
+      - "&fAll in all, these rules boil down to common sense. Don't be a jerk, use your head, and have fun!"
+      - "&fOnce you're sure you're familiar with &mcommon sense&f our rules, type &e/rules accept&f to get passenger! :D"
 
 ##########
 #        #
 #  UTIL  #
 #        #
 ##########
-msg_fly_enabled: "&fYou can now fly! Please only use this in emergencies when you need to get somewhere high up."
+msg_fly_enabled: "&fYou can now fly! Please only use this in emergencies."
 msg_fly_disabled: "&fYou can no longer fly. Thanks for disabling it!"
 
 msg_hat_set: "&fNow that's a fancy hat!"
@@ -367,20 +348,15 @@ blocks:
   block1:
     name: "&fBrown Mushroom Block"
     material: "HUGE_MUSHROOM_1"
-    data: 0
   block2:
     name: "&fRed Mushroom Block"
     material: "HUGE_MUSHROOM_2"
-    data: 0
   block3:
     name: "&fGrass Path"
     material: "GRASS_PATH"
-    data: 0
   block4:
     name: "&fDragon Egg"
     material: "DRAGON_EGG"
-    data: 0
   block5:
     name: "&fFarmland"
     material: "SOIL"
-    data: 0
