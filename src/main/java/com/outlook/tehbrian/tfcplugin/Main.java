@@ -12,7 +12,6 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public final class Main extends JavaPlugin {
