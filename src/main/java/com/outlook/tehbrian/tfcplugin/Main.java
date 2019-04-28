@@ -1,7 +1,8 @@
 package com.outlook.tehbrian.tfcplugin;
 
-import co.aikar.commands.*;
-import co.aikar.locales.MessageKeyProvider;
+import co.aikar.commands.ACFUtil;
+import co.aikar.commands.ConditionFailedException;
+import co.aikar.commands.PaperCommandManager;
 import com.outlook.tehbrian.tfcplugin.commands.*;
 import com.outlook.tehbrian.tfcplugin.events.AntiBuildEvents;
 import com.outlook.tehbrian.tfcplugin.events.BuildingEvents;
@@ -11,8 +12,7 @@ import net.milkbowl.vault.permission.Permission;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Locale;
 
 public final class Main extends JavaPlugin {
 
@@ -69,11 +69,12 @@ public final class Main extends JavaPlugin {
         manager.enableUnstableAPI("help");
 
         // ACF Custom Messages
-        Map<MessageKeyProvider, String> messages = new HashMap<>();
-        messages.put(MessageKeys.COULD_NOT_FIND_PLAYER, "test");
-        messages.put(MinecraftMessageKeys.YOU_MUST_BE_HOLDING_ITEM, "some other message");
-        messages.put(MessageKeys.ERROR_PREFIX, "TEST:");
-        manager.getLocales().addMessages(manager.getLocales().getDefaultLocale(), messages);
+        try {
+            manager.getLocales().loadYamlLanguageFile("lang_en.yml", Locale.ENGLISH);
+        } catch (Exception e) {
+            getLogger().severe("Exception while trying to load ACF language files: " + e);
+            e.printStackTrace();
+        }
 
         // ACF Conditions
         manager.getCommandConditions().addCondition(Integer.class, "limits", (context, executionContext, value) -> {
