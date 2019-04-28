@@ -68,14 +68,6 @@ public final class Main extends JavaPlugin {
 
         manager.enableUnstableAPI("help");
 
-        // ACF Custom Messages
-        try {
-            manager.getLocales().loadYamlLanguageFile("lang_en.yml", Locale.ENGLISH);
-        } catch (Exception e) {
-            getLogger().severe("Exception while trying to load ACF language files: " + e);
-            e.printStackTrace();
-        }
-
         // ACF Conditions
         manager.getCommandConditions().addCondition(Integer.class, "limits", (context, executionContext, value) -> {
             if (value == null) {
