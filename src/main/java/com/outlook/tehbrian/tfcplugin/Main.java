@@ -1,6 +1,5 @@
 package com.outlook.tehbrian.tfcplugin;
 
-import co.aikar.commands.ACFUtil;
 import co.aikar.commands.ConditionFailedException;
 import co.aikar.commands.PaperCommandManager;
 import com.outlook.tehbrian.tfcplugin.commands.*;
@@ -69,10 +68,10 @@ public final class Main extends JavaPlugin {
                 return;
             }
             if (context.hasConfig("min") && context.getConfigValue("min", 0) > value) {
-                throw new ConditionFailedException("Minimum value must be " + context.getConfigValue("min", 0));
+                throw new ConditionFailedException("Minimum value is " + context.getConfigValue("min", 0) + ".");
             }
             if (context.hasConfig("max") && context.getConfigValue("max", 3) < value) {
-                throw new ConditionFailedException("Maximum value must be " + context.getConfigValue("max", 3));
+                throw new ConditionFailedException("Maximum value is " + context.getConfigValue("max", 3) + ".");
             }
         });
     }

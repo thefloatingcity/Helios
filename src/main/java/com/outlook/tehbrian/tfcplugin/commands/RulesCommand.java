@@ -37,9 +37,4 @@ public class RulesCommand extends BaseCommand {
             player.sendMessage(Utils.formatC("rules_prefix", "msg_rules_accept"));
         }
     }
-
-    @HelpCommand
-    public void onHelp(CommandSender sender, CommandHelp help) {
-        help.showHelp();
-    }
 }

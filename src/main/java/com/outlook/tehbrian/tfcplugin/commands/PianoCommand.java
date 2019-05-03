@@ -36,10 +36,11 @@ public class PianoCommand extends BaseCommand {
     }
 
     @Subcommand("instrument")
-    @Description("Pick any instrument!")
+    @Description("Pick your piano instrument!")
+    @CommandCompletion("*")
     public void onInstrument(Player player, Piano.PianoSound pianoSound) {
         Piano.setPlayerPianoInstrument(player, pianoSound.toSound());
-        player.sendMessage(Utils.formatC("piano_prefix", "msg_piano_instrument_change", pianoSound.toSound()));
+        player.sendMessage(Utils.formatC("piano_prefix", "msg_piano_instrument_change", pianoSound.toString()));
     }
 
     @Subcommand("toggle")

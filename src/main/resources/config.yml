@@ -67,7 +67,7 @@ msg_reloaded: "&fConfig reloaded successfully!"
 ###########
 emote_winkwonk: "&d%s &5wink wonks &d;)"
 emote_shrug: "&a%s &2shrugs &a\\_o¬o_/"
-emote_spook: "&d%s &dis a spook."
+emote_spook: "&d%s &5is a spook."
 emote_doubt: "&b%s &9doubts that."
 emote_blame: "&c%s &4blames &c%s"
 emote_sue: "&e%s &6is suing &e%s"

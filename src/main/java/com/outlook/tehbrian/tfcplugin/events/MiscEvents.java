@@ -59,15 +59,15 @@ public class MiscEvents implements Listener {
 
             long millisSinceLastPlayed = Calendar.getInstance().getTimeInMillis() - player.getLastPlayed();
             if (millisSinceLastPlayed >= 86400000) {
-                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed / 86400000d, "days"));
+                player.sendMessage(Utils.format("msg_motd", Math.floor((millisSinceLastPlayed / 86400000d) * 100) / 100, "days"));
             } else if (millisSinceLastPlayed >= 3600000) {
-                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed / 3600000d, "hours"));
+                player.sendMessage(Utils.format("msg_motd", Math.floor((millisSinceLastPlayed / 3600000d) * 100) / 100, "hours"));
             } else if (millisSinceLastPlayed >= 60000) {
-                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed / 60000d, "minutes"));
+                player.sendMessage(Utils.format("msg_motd", Math.floor((millisSinceLastPlayed / 60000d) * 100) / 100, "minutes"));
             } else if (millisSinceLastPlayed >= 1000) {
-                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed / 1000d, "seconds"));
+                player.sendMessage(Utils.format("msg_motd", Math.floor((millisSinceLastPlayed / 1000d) * 100) / 100, "seconds"));
             } else {
-                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed, "milliseconds"));
+                player.sendMessage(Utils.format("msg_motd", Math.floor((millisSinceLastPlayed) * 100) / 100, "milliseconds"));
             }
         } else {
             event.setJoinMessage(Utils.formatC("none", "msg_join_new", player.getDisplayName()));
