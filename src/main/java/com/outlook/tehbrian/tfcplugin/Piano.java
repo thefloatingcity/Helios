@@ -9,6 +9,8 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 
+import static org.bukkit.Sound.*;
+
 public class Piano {
 
     final private static Set<UUID> playerEnabledPiano = new HashSet<>();
@@ -50,17 +52,27 @@ public class Piano {
         }
     }
 
-    public enum PianoSounds {
-        BLOCK_NOTE_BASEDRUM,
-        BLOCK_NOTE_BASS,
-        BLOCK_NOTE_BELL,
-        BLOCK_NOTE_CHIME,
-        BLOCK_NOTE_FLUTE,
-        BLOCK_NOTE_GUITAR,
-        BLOCK_NOTE_HARP,
-        BLOCK_NOTE_HAT,
-        BLOCK_NOTE_PLING,
-        BLOCK_NOTE_SNARE,
-        BLOCK_NOTE_XYLOPHONE,
+    public enum PianoSound {
+        BASEDRUM(BLOCK_NOTE_BASEDRUM),
+        BASS(BLOCK_NOTE_BASS),
+        BEL(BLOCK_NOTE_BELL),
+        CHIME(BLOCK_NOTE_CHIME),
+        FLUTE(BLOCK_NOTE_FLUTE),
+        GUITAR(BLOCK_NOTE_GUITAR),
+        HARP(BLOCK_NOTE_HARP),
+        HAT(BLOCK_NOTE_HAT),
+        PLING(BLOCK_NOTE_PLING),
+        SNARE(BLOCK_NOTE_SNARE),
+        XYLOPHONE(BLOCK_NOTE_XYLOPHONE);
+
+        private final Sound sound;
+
+        PianoSound(Sound sound) {
+            this.sound = sound;
+        }
+
+        public Sound toSound() {
+            return sound;
+        }
     }
 }

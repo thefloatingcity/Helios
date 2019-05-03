@@ -6,7 +6,6 @@ import co.aikar.commands.annotation.*;
 import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Utils;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
 @SuppressWarnings("unused")
@@ -21,11 +20,9 @@ public class RulesCommand extends BaseCommand {
     }
 
     @Default
-    public void onRules(Player player, @Default("1") @Conditions("limits:min=1,max=9") Integer page) {
-        ConfigurationSection rule = main.getConfig().getConfigurationSection("rules.rule" + page);
-        player.sendMessage(Utils.formatC("rules_prefix", "msg_rules", rule.getString("topic"), page));
-        for (String line : rule.getStringList("content")) {
-            player.sendMessage(Utils.color(main.getConfig().getString("rules_multi") + " " + line));
+    public void onRules(CommandSender sender, @Default("1") @Conditions("limits:min=1,max=9") Integer page) {
+        for (String line : Utils.createPage(page, "rules", "rules_prefix", "rules_multi")) {
+            sender.sendMessage(line);
         }
     }
 

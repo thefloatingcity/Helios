@@ -38,7 +38,6 @@ public class MiscEvents implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        event.setJoinMessage(Utils.formatC("none", "msg_join", player.getDisplayName()));
         player.sendMessage(Utils.formatC("none", "tfc_banner"));
 
         Flight.disableFlight(player);
@@ -56,20 +55,24 @@ public class MiscEvents implements Listener {
         f.setFireworkMeta(fm);
 
         if (player.hasPlayedBefore()) {
+            event.setJoinMessage(Utils.formatC("none", "msg_join", player.getDisplayName()));
+
             long millisSinceLastPlayed = Calendar.getInstance().getTimeInMillis() - player.getLastPlayed();
             if (millisSinceLastPlayed >= 86400000) {
-                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed / 86400000, "days"));
+                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed / 86400000d, "days"));
             } else if (millisSinceLastPlayed >= 3600000) {
-                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed / 3600000, "hours"));
+                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed / 3600000d, "hours"));
             } else if (millisSinceLastPlayed >= 60000) {
-                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed / 60000, "minutes"));
+                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed / 60000d, "minutes"));
             } else if (millisSinceLastPlayed >= 1000) {
-                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed / 1000, "seconds"));
+                player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed / 1000d, "seconds"));
             } else {
                 player.sendMessage(Utils.format("msg_motd", millisSinceLastPlayed, "milliseconds"));
             }
         } else {
-            player.sendMessage(Utils.format("msg_welcome", player.getName()));
+            event.setJoinMessage(Utils.formatC("none", "msg_join_new", player.getDisplayName()));
+
+            player.sendMessage(Utils.format("msg_motd_new", player.getName()));
         }
     }
 
@@ -83,7 +86,7 @@ public class MiscEvents implements Listener {
         if (event.getWhoClicked() instanceof Player) {
             Player player = (Player) event.getWhoClicked();
             if (event.getClickedInventory() != null) {
-                if (event.getClickedInventory().getName().equals(main.getConfig().getString("piano_menu_inventory_name"))) {
+                if (event.getClickedInventory().getName().equals(main.getConfig().getString("piano_notes_inventory_name"))) {
                     if (event.isRightClick()) {
                         event.setCancelled(true);
                         Piano.play(player, event.getCurrentItem(), false);

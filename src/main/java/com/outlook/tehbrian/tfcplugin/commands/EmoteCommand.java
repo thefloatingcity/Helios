@@ -37,6 +37,13 @@ public class EmoteCommand extends BaseCommand {
         Bukkit.broadcastMessage(Utils.formatC("none", "emote_shrug", player.getDisplayName()));
     }
 
+    @CommandAlias("spook")
+    @CommandPermission("tfcplugin.spook")
+    @Description("OoooOOooOoOOoOOoo")
+    public void onSpook(Player player) {
+        Bukkit.broadcastMessage(Utils.formatC("none", "emote_spook", player.getDisplayName()));
+    }
+
     @CommandAlias("doubt")
     @CommandPermission("tfcplugin.doubt")
     @Description("Press X to doubt.")

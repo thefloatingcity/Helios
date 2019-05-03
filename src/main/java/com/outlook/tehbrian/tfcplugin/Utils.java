@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -29,11 +30,30 @@ public class Utils {
         if (prefixKey.equalsIgnoreCase("none")) {
             return color(String.format(config.getString(configKey), replacements));
         }
-        return color(config.getString(prefixKey) + " " + String.format(config.getString(configKey), replacements));
+        return prefixC(prefixKey, String.format(config.getString(configKey), replacements));
+    }
+
+    public static String prefix(String string) {
+        return prefixC("tfc_prefix", string);
+    }
+
+    public static String prefixC(String prefixKey, String string) {
+        FileConfiguration config = main.getConfig();
+        return color(config.getString(prefixKey) + " " + string);
     }
 
     public static String color(String string) {
         return string == null ? null : ChatColor.translateAlternateColorCodes('&', string);
+    }
+
+    public static List<String> createPage(Integer pageNumber, String type, String prefixKey, String multiKey) {
+        ConfigurationSection page = main.getConfig().getConfigurationSection(type + ".page" + pageNumber);
+        List<String> messages = new ArrayList<>();
+        messages.add(Utils.formatC(prefixKey, "msg_page", page.getString("topic"), pageNumber));
+        for (String line : page.getStringList("content")) {
+            messages.add(Utils.prefixC(multiKey, line));
+        }
+        return messages;
     }
 
     public static Location getSpawn() {
@@ -42,10 +62,10 @@ public class Utils {
     }
 
     public static ItemStack createItem(String name, Material material, int amount, int data) {
-        return createItem(material, amount, data, name, new ArrayList<>());
+        return createItem(name, material, amount, data, new ArrayList<>());
     }
 
-    public static ItemStack createItem(Material material, int amount, int data, String name, List<String> lore) {
+    public static ItemStack createItem(String name, Material material, int amount, int data, List<String> lore) {
         ItemStack i = new ItemStack(material, amount);
         ItemMeta im = i.getItemMeta();
         for (int x = 0; x < lore.size(); x++) {

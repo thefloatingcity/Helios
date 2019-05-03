@@ -7,7 +7,6 @@ import com.outlook.tehbrian.tfcplugin.Piano;
 import com.outlook.tehbrian.tfcplugin.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -30,18 +29,17 @@ public class PianoCommand extends BaseCommand {
     public void onMenu(Player player) {
         Inventory pianoNotesInventory = Bukkit.createInventory(null, 27, main.getConfig().getString("piano_notes_inventory_name"));
         for (String key : main.getConfig().getConfigurationSection("piano_notes").getKeys(false)) {
-            ConfigurationSection piano_note = main.getConfig().getConfigurationSection("piano_notes." + key);
-            pianoNotesInventory.addItem(Utils.createItem(Material.STAINED_GLASS_PANE, 1, piano_note.getInt("data"), piano_note.getString("name"), piano_note.getStringList("lore")));
+            ConfigurationSection pianoNote = main.getConfig().getConfigurationSection("piano_notes." + key);
+            pianoNotesInventory.addItem(Utils.createItem(pianoNote.getString("name"), Material.STAINED_GLASS_PANE, 1, pianoNote.getInt("data"), pianoNote.getStringList("lore")));
         }
         player.openInventory(pianoNotesInventory);
     }
 
     @Subcommand("instrument")
     @Description("Pick any instrument!")
-    @CommandCompletion("@pianosounds")
-    public void onInstrument(Player player, Sound sound) {
-        Piano.setPlayerPianoInstrument(player, sound);
-        player.sendMessage(Utils.formatC("piano_prefix", "msg_piano_instrument_change", sound.toString()));
+    public void onInstrument(Player player, Piano.PianoSound pianoSound) {
+        Piano.setPlayerPianoInstrument(player, pianoSound.toSound());
+        player.sendMessage(Utils.formatC("piano_prefix", "msg_piano_instrument_change", pianoSound.toSound()));
     }
 
     @Subcommand("toggle")
@@ -57,7 +55,9 @@ public class PianoCommand extends BaseCommand {
     }
 
     @HelpCommand
-    public void onHelp(CommandSender sender) {
-        sender.sendMessage(Utils.formatC("piano_prefix", "msg_piano_help"));
+    public void onHelp(CommandSender sender, @Default("1") @Conditions("limits:min=1,max=5") Integer page) {
+        for (String line : Utils.createPage(page, "piano_help", "piano_prefix", "piano_multi")) {
+            sender.sendMessage(line);
+        }
     }
 }

@@ -1,7 +1,6 @@
 package com.outlook.tehbrian.tfcplugin.commands;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import com.outlook.tehbrian.tfcplugin.Main;
@@ -87,10 +86,5 @@ public class GamemodeCommand extends BaseCommand {
     @CatchUnknown
     public void onUnknown(CommandSender sender) {
         sender.sendMessage(Utils.format("msg_gamemode_unknown"));
-    }
-
-    @HelpCommand
-    public void onHelp(CommandSender sender, CommandHelp help) {
-        help.showHelp();
     }
 }

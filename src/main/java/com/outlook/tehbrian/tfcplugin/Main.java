@@ -12,8 +12,6 @@ import net.milkbowl.vault.permission.Permission;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Locale;
-
 public final class Main extends JavaPlugin {
 
     private static Main instance = null;
@@ -54,9 +52,6 @@ public final class Main extends JavaPlugin {
     private void setupCommandManager() {
         // ACF
         PaperCommandManager manager = new PaperCommandManager(this);
-
-        // ACF Completions
-        manager.getCommandCompletions().registerAsyncCompletion("pianosounds", c -> ACFUtil.enumNames(Piano.PianoSounds.values()));
 
         manager.registerCommand(new ActionCommand(this));
         manager.registerCommand(new CoreCommand(this));
