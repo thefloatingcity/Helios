@@ -46,10 +46,10 @@ public class Utils {
         return string == null ? null : ChatColor.translateAlternateColorCodes('&', string);
     }
 
-    public static List<String> createPage(Integer pageNumber, String type, String prefixKey, String multiKey) {
+    public static List<String> createPage(int pageNumber, int maxPage, String type, String prefixKey, String multiKey) {
         ConfigurationSection page = main.getConfig().getConfigurationSection(type + ".page" + pageNumber);
         List<String> messages = new ArrayList<>();
-        messages.add(Utils.formatC(prefixKey, "msg_page", page.getString("topic"), pageNumber));
+        messages.add(Utils.formatC(prefixKey, "msg_page", page.getString("topic"), pageNumber, maxPage));
         for (String line : page.getStringList("content")) {
             messages.add(Utils.prefixC(multiKey, line));
         }

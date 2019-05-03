@@ -1,7 +1,6 @@
 package com.outlook.tehbrian.tfcplugin.commands;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Utils;
@@ -21,7 +20,7 @@ public class RulesCommand extends BaseCommand {
 
     @Default
     public void onRules(CommandSender sender, @Default("1") @Conditions("limits:min=1,max=9") Integer page) {
-        for (String line : Utils.createPage(page, "rules", "rules_prefix", "rules_multi")) {
+        for (String line : Utils.createPage(page, 9, "rules", "rules_prefix", "rules_multi")) {
             sender.sendMessage(line);
         }
     }

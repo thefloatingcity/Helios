@@ -15,7 +15,7 @@ msg_join: "&7[&a+&7]&f &b%s&f joined the game."
 
 msg_leave: "&7[&c-&7]&f &6%s&f left the game."
 
-msg_page: "&f%s &7| Page &e%s&7/&e9"
+msg_page: "&f%s &7| Page &e%s&7/&e%s"
 
 chat_format: "&f{prefix}&f &7%1$s&f{suffix}&f: %2$s"
 

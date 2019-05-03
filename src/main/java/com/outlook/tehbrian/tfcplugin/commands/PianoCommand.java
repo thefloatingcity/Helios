@@ -1,6 +1,7 @@
 package com.outlook.tehbrian.tfcplugin.commands;
 
 import co.aikar.commands.BaseCommand;
+import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Piano;
@@ -56,8 +57,8 @@ public class PianoCommand extends BaseCommand {
     }
 
     @HelpCommand
-    public void onHelp(CommandSender sender, @Default("1") @Conditions("limits:min=1,max=5") Integer page) {
-        for (String line : Utils.createPage(page, "piano_help", "piano_prefix", "piano_multi")) {
+    public void onHelp(CommandSender sender, CommandHelp help, @Default("1") @Conditions("limits:min=1,max=4") Integer page) {
+        for (String line : Utils.createPage(page, 4, "piano_help", "piano_prefix", "piano_multi")) {
             sender.sendMessage(line);
         }
     }
