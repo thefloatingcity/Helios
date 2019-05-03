@@ -111,8 +111,8 @@ piano_help:
     topic: "Starting It Up"
     content:
       - "&fThen to start playing, type &e/piano toggle&f till it's enabled."
-      - "&fNow, outside of your inventory, simply change your hotbar &7(keys 1-9)&f and it'll play the note that's on the slot you change to!"
-      - "&fHave fun!"
+      - "&fNow, outside of your inventory, simply change your actively held item, &7(keys 1-9)&f and you'll play the note that's on the slot you change to!"
+      - "&fYou can use any scale or combination of keys you want. Have fun!"
 
 msg_piano_enabled: "&aThe piano is now enabled!"
 msg_piano_disabled: "&cThe piano is now disabled."
