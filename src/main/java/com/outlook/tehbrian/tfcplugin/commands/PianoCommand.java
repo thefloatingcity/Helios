@@ -57,7 +57,7 @@ public class PianoCommand extends BaseCommand {
     }
 
     @HelpCommand
-    public void onHelp(CommandSender sender, CommandHelp help, @Default("1") @Conditions("limits:min=1,max=4") Integer page) {
+    public void onHelp(CommandSender sender, @Default("1") @Conditions("limits:min=1,max=4") Integer page) {
         for (String line : Utils.createPage(page, 4, "piano_help", "piano_prefix", "piano_multi")) {
             sender.sendMessage(line);
         }
