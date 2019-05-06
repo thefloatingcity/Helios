@@ -34,6 +34,15 @@ public class BuildingEvents implements Listener {
     }
 
     @EventHandler
+    public void onCropsTrample(PlayerInteractEvent event) {
+        if (event.getAction() == Action.PHYSICAL) {
+            if (event.getClickedBlock().getType() == Material.SOIL) {
+                event.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
     public void onDragonEggInteract(PlayerInteractEvent event) {
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getMaterial() == Material.DRAGON_EGG && !(event.getPlayer().getActiveItem().getType() == Material.DRAGON_EGG)) {
             event.setCancelled(true);
@@ -48,22 +57,21 @@ public class BuildingEvents implements Listener {
                     if (event.getHand() == EquipmentSlot.HAND) {
                         if (event.getClickedBlock().getType() == Material.IRON_TRAPDOOR) {
                             if (!event.getPlayer().isSneaking()) {
-                                Material type = event.getPlayer().getInventory().getItemInHand().getType();
-                                if (type.equals(Material.AIR)) {
+                                if (event.getPlayer().getInventory().getItemInHand().getType() == Material.AIR) {
                                     Bukkit.getScheduler().runTaskLater(main, () -> {
                                         Block block = event.getClickedBlock();
-                                        byte da = block.getData();
-                                        byte data = 0;
-                                        if (da >= 0 && da < 4) {
-                                            data = (byte) (da + 4);
-                                        } else if (da >= 4 && da < 8) {
-                                            data = (byte) (da - 4);
-                                        } else if (da >= 8 && da < 12) {
-                                            data = (byte) (da + 4);
-                                        } else if (da >= 12 && da < 16) {
-                                            data = (byte) (da - 4);
+                                        byte data = block.getData();
+                                        byte newData = 0;
+                                        if (data >= 0 && data < 4) {
+                                            newData = (byte) (data + 4);
+                                        } else if (data >= 4 && data < 8) {
+                                            newData = (byte) (data - 4);
+                                        } else if (data >= 8 && data < 12) {
+                                            newData = (byte) (data + 4);
+                                        } else if (data >= 12 && data < 16) {
+                                            newData = (byte) (data - 4);
                                         }
-                                        block.setData(data, true);
+                                        block.setData(newData, true);
                                     }, 0L);
                                     event.setCancelled(true);
                                 }
@@ -83,13 +91,12 @@ public class BuildingEvents implements Listener {
                     if (event.getHand() == EquipmentSlot.HAND) {
                         if (event.getClickedBlock().getType().name().contains("GLAZED")) {
                             if (event.getPlayer().isSneaking()) {
-                                Material type = event.getPlayer().getInventory().getItemInHand().getType();
-                                if (type.equals(Material.AIR)) {
+                                if (event.getPlayer().getInventory().getItemInHand().getType() == Material.AIR) {
                                     Bukkit.getScheduler().runTaskLater(main, () -> {
                                         Block block = event.getClickedBlock();
-                                        byte da = block.getData();
-                                        byte data = (byte) (da + 1);
-                                        if (da < 0 || da >= 4) {
+                                        byte data = block.getData();
+                                        byte newData = (byte) (data + 1);
+                                        if (data < 0 || data >= 4) {
                                             data = 0;
                                         }
                                         block.setData(data, true);
@@ -105,7 +112,7 @@ public class BuildingEvents implements Listener {
     }
 
     @EventHandler
-    public void onBlockBreak(PlayerInteractEvent event) {
+    public void onSlabBreak(PlayerInteractEvent event) {
         if (!event.isCancelled()) {
             if (event.getPlayer().getGameMode() == GameMode.CREATIVE) {
                 if (event.getAction() == Action.LEFT_CLICK_BLOCK) {
