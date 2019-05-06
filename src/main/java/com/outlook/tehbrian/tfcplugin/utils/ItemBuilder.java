@@ -84,7 +84,7 @@ public class ItemBuilder {
             itemMeta.setDisplayName(TextUtils.color(name));
         }
         if (lore != null) {
-            lore.forEach(TextUtils::color);
+            lore.replaceAll(TextUtils::color);
             itemMeta.setLore(lore);
         }
         if (unbreakable != null) {
