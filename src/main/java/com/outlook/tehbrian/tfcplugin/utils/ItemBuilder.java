@@ -16,8 +16,8 @@ public class ItemBuilder {
     private Short durability = null;
     private Map<Enchantment, Integer> enchantments = null;
     private List<ItemFlag> flags = null;
-    private List<String> lore = null;
     private String name = null;
+    private List<String> lore = null;
     private Boolean unbreakable = null;
 
     public ItemBuilder(Material material) {
@@ -44,13 +44,13 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder lore(List<String> lore) {
-        this.lore = lore;
+    public ItemBuilder name(String name) {
+        this.name = name;
         return this;
     }
 
-    public ItemBuilder name(String name) {
-        this.name = name;
+    public ItemBuilder lore(List<String> lore) {
+        this.lore = lore;
         return this;
     }
 
@@ -62,7 +62,6 @@ public class ItemBuilder {
     public ItemStack build() {
 
         ItemStack itemStack = new ItemStack(material);
-        ItemMeta itemMeta = itemStack.getItemMeta();
 
         if (amount != null) {
             itemStack.setAmount(amount);
@@ -78,14 +77,15 @@ public class ItemBuilder {
                 itemStack.addItemFlags(flag);
             }
         }
-        if (lore != null) {
-            for (int i = 0; i < lore.size(); i++) {
-                lore.set(i, TextUtils.color(lore.get(i)));
-            }
-            itemStack.setLore(lore);
-        }
+
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
         if (name != null) {
             itemMeta.setDisplayName(TextUtils.color(name));
+        }
+        if (lore != null) {
+            lore.forEach(TextUtils::color);
+            itemMeta.setLore(lore);
         }
         if (unbreakable != null) {
             itemMeta.setUnbreakable(unbreakable);
