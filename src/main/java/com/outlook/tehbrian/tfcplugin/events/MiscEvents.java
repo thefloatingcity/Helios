@@ -3,7 +3,6 @@ package com.outlook.tehbrian.tfcplugin.events;
 import com.outlook.tehbrian.tfcplugin.Flight;
 import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Piano;
-import com.outlook.tehbrian.tfcplugin.utils.DatabaseUtils;
 import com.outlook.tehbrian.tfcplugin.utils.MiscUtils;
 import com.outlook.tehbrian.tfcplugin.utils.TextUtils;
 import org.bukkit.*;
@@ -11,7 +10,6 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
@@ -36,17 +34,17 @@ public class MiscEvents implements Listener {
 
         Flight.disableFlight(player);
 
-        Firework f = player.getWorld().spawn(player.getLocation(), Firework.class);
-        FireworkMeta fm = f.getFireworkMeta();
-        fm.addEffect(FireworkEffect.builder()
+        Firework firework = player.getWorld().spawn(player.getLocation(), Firework.class);
+        FireworkMeta fireworkMeta = firework.getFireworkMeta();
+        fireworkMeta.addEffect(FireworkEffect.builder()
                 .flicker(true)
                 .trail(false)
                 .with(FireworkEffect.Type.BALL_LARGE)
                 .withColor(Color.WHITE, Color.BLUE, Color.GREEN)
                 .withFade(Color.GREEN, Color.BLUE, Color.WHITE)
                 .build());
-        fm.setPower(2);
-        f.setFireworkMeta(fm);
+        fireworkMeta.setPower(2);
+        firework.setFireworkMeta(fireworkMeta);
 
         if (player.hasPlayedBefore()) {
             event.setJoinMessage(TextUtils.formatC("none", "msg_join", player.getDisplayName()));
@@ -68,7 +66,6 @@ public class MiscEvents implements Listener {
 
             player.sendMessage(TextUtils.format("msg_motd_new", player.getName()));
         }
-        DatabaseUtils.updatePlayer(player, 151);
     }
 
     @EventHandler
@@ -103,7 +100,7 @@ public class MiscEvents implements Listener {
     }
 
     @EventHandler
-    public void onDamageEvent(EntityDamageEvent event) {
+    public void onVoidDamageEvent(EntityDamageEvent event) {
         if (event.getCause() == EntityDamageEvent.DamageCause.VOID) {
             event.setDamage(0);
             Location location = event.getEntity().getLocation();
@@ -136,15 +133,5 @@ public class MiscEvents implements Listener {
         event.setFormat(TextUtils.color(main.getConfig().getString("chat_format")
                 .replace("{prefix}", main.getVaultChat().getPlayerPrefix(player))
                 .replace("{suffix}", main.getVaultChat().getPlayerSuffix(player))));
-    }
-
-    @EventHandler
-    public void onSignChange(SignChangeEvent event) {
-        if (event.getPlayer().hasPermission("tfcplugin.signcolor")) {
-            String[] lines = event.getLines();
-            for (int l = 0; l < 4; l++) {
-                event.setLine(l, ChatColor.translateAlternateColorCodes('&', lines[l]));
-            }
-        }
     }
 }
