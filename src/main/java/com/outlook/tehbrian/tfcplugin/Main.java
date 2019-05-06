@@ -2,6 +2,9 @@ package com.outlook.tehbrian.tfcplugin;
 
 import co.aikar.commands.ConditionFailedException;
 import co.aikar.commands.PaperCommandManager;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoDatabase;
 import com.outlook.tehbrian.tfcplugin.commands.*;
 import com.outlook.tehbrian.tfcplugin.events.AntiBuildEvents;
 import com.outlook.tehbrian.tfcplugin.events.BuildingEvents;
@@ -13,27 +16,23 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
 
-    private static Main instance = null;
-    private static Permission vaultPerms = null;
-    private static Chat vaultChat = null;
+    private static Main instance;
+    private Permission vaultPerms;
+    private Chat vaultChat;
+    private MongoClient mongoClient;
+    private MongoDatabase database;
 
     public Main() {
         instance = this;
     }
 
-    static Main getInstance() {
+    public static Main getInstance() {
         return instance;
     }
 
     @Override
     public void onEnable() {
-        getConfig().options().copyDefaults(true);
-        getConfig().options().copyHeader(true);
-        saveDefaultConfig();
-
-        getServer().getPluginManager().registerEvents(new AntiBuildEvents(), this);
-        getServer().getPluginManager().registerEvents(new BuildingEvents(this), this);
-        getServer().getPluginManager().registerEvents(new MiscEvents(this), this);
+        setupDatabase();
 
         setupCommandManager();
 
@@ -41,15 +40,29 @@ public final class Main extends JavaPlugin {
             getLogger().severe("No Vault dependency found! Disabling plugin..");
             getServer().getPluginManager().disablePlugin(this);
         }
+
+        getConfig().options().copyDefaults(true);
+        getConfig().options().copyHeader(true);
+        saveDefaultConfig();
+
+        getServer().getPluginManager().registerEvents(new AntiBuildEvents(), this);
+        getServer().getPluginManager().registerEvents(new BuildingEvents(this), this);
+        getServer().getPluginManager().registerEvents(new MiscEvents(this), this);
     }
 
     @Override
     public void onDisable() {
-        getLogger().info("I hope to see you again soon!");
+        getLogger().info("Closing database..");
+        mongoClient.close();
+        getLogger().info("Goodbye!");
+    }
+
+    private void setupDatabase() {
+        mongoClient = MongoClients.create("mongodb+srv://TFCPlugin:thefloatingdatabase12345@cluster0-hkzse.mongodb.net/test?retryWrites=true");
+        database = mongoClient.getDatabase("tfc");
     }
 
     private void setupCommandManager() {
-        // ACF
         PaperCommandManager manager = new PaperCommandManager(this);
 
         manager.registerCommand(new ActionCommand(this));
@@ -62,7 +75,6 @@ public final class Main extends JavaPlugin {
 
         manager.enableUnstableAPI("help");
 
-        // ACF Conditions
         manager.getCommandConditions().addCondition(Integer.class, "limits", (context, executionContext, value) -> {
             if (value == null) {
                 return;
@@ -99,5 +111,9 @@ public final class Main extends JavaPlugin {
 
     public Chat getVaultChat() {
         return vaultChat;
+    }
+
+    public MongoDatabase getDatabase() {
+        return database;
     }
 }

@@ -8,34 +8,34 @@ import java.util.UUID;
 
 public class Flight {
 
-    final private static Set<UUID> canBypassFly = new HashSet<>();
+    final private static Set<UUID> playerCanBypassFly = new HashSet<>();
 
     private Flight() {
     }
 
-    public static boolean getCanBypassFly(Player player) {
-        return canBypassFly.contains(player.getUniqueId());
+    public static boolean getPlayerCanBypassFly(Player player) {
+        return playerCanBypassFly.contains(player.getUniqueId());
     }
 
-    public static void setCanBypassFly(Player player, Boolean bool) {
-        if (bool && player.hasPermission("tfcplugin.fly")) {
-            canBypassFly.add(player.getUniqueId());
+    public static void setPlayerCanBypassFly(Player player, boolean bool) {
+        if (player.hasPermission("tfcplugin.fly") && bool) {
+            playerCanBypassFly.add(player.getUniqueId());
             enableFlight(player);
         } else {
-            canBypassFly.remove(player.getUniqueId());
+            playerCanBypassFly.remove(player.getUniqueId());
             disableFlight(player);
         }
     }
 
     public static void enableFlight(Player player) {
-        if (getCanBypassFly(player) && player.hasPermission("tfcplugin.fly")) {
+        if (player.hasPermission("tfcplugin.fly") && getPlayerCanBypassFly(player)) {
             player.setAllowFlight(true);
             player.setFlying(true);
         }
     }
 
     public static void disableFlight(Player player) {
-        if (!getCanBypassFly(player) || !player.hasPermission("tfcplugin.fly")) {
+        if (!player.hasPermission("tfcplugin.fly") || !getPlayerCanBypassFly(player)) {
             player.setAllowFlight(false);
             player.setFlying(false);
         }

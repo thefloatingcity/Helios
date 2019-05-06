@@ -1,7 +1,7 @@
 package com.outlook.tehbrian.tfcplugin.events;
 
 import com.outlook.tehbrian.tfcplugin.Main;
-import com.outlook.tehbrian.tfcplugin.Utils;
+import com.outlook.tehbrian.tfcplugin.utils.MiscUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -34,7 +34,7 @@ public class BuildingEvents implements Listener {
     }
 
     @EventHandler
-    public void onDragonEggTeleport(PlayerInteractEvent event) {
+    public void onDragonEggInteract(PlayerInteractEvent event) {
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getMaterial() == Material.DRAGON_EGG && !(event.getPlayer().getActiveItem().getType() == Material.DRAGON_EGG)) {
             event.setCancelled(true);
         }
@@ -108,58 +108,60 @@ public class BuildingEvents implements Listener {
     public void onBlockBreak(PlayerInteractEvent event) {
         if (!event.isCancelled()) {
             if (event.getPlayer().getGameMode() == GameMode.CREATIVE) {
-                if (event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
-                    Material type = event.getPlayer().getInventory().getItemInHand().getType();
-                    if (!type.equals(Material.STEP) && !type.equals(Material.WOOD_STEP) && !type.equals(Material.STONE_SLAB2) && !type.equals(Material.PURPUR_SLAB)) {
+                if (event.getAction() == Action.LEFT_CLICK_BLOCK) {
+                    Material material = event.getPlayer().getInventory().getItemInHand().getType();
+                    if (material != Material.STEP && material != Material.WOOD_STEP && material != Material.STONE_SLAB2 && material != Material.PURPUR_SLAB) {
                         return;
                     }
+
+                    Block block = event.getClickedBlock();
                     byte data;
 
-                    if (event.getClickedBlock().getType() == Material.DOUBLE_STEP && event.getClickedBlock().getData() <= 7) {
+                    if (block.getType() == Material.DOUBLE_STEP && block.getData() <= 7) {
                         event.setCancelled(true);
-                        data = event.getClickedBlock().getData();
-                        if (Utils.isTop(event.getPlayer(), event.getClickedBlock())) {
-                            event.getClickedBlock().setType(Material.STEP);
-                            event.getClickedBlock().setData(data);
+                        data = block.getData();
+                        if (MiscUtils.isTop(event.getPlayer(), block)) {
+                            block.setType(Material.STEP);
+                            block.setData(data);
                         } else {
-                            event.getClickedBlock().setType(Material.STEP);
-                            event.getClickedBlock().setData((byte) (data + 8));
+                            block.setType(Material.STEP);
+                            block.setData((byte) (data + 8));
                         }
                     }
 
-                    if (event.getClickedBlock().getType() == Material.WOOD_DOUBLE_STEP && event.getClickedBlock().getData() <= 7) {
+                    if (block.getType() == Material.WOOD_DOUBLE_STEP && block.getData() <= 7) {
                         event.setCancelled(true);
-                        data = event.getClickedBlock().getData();
-                        if (Utils.isTop(event.getPlayer(), event.getClickedBlock())) {
-                            event.getClickedBlock().setType(Material.WOOD_STEP);
-                            event.getClickedBlock().setData(data);
+                        data = block.getData();
+                        if (MiscUtils.isTop(event.getPlayer(), block)) {
+                            block.setType(Material.WOOD_STEP);
+                            block.setData(data);
                         } else {
-                            event.getClickedBlock().setType(Material.WOOD_STEP);
-                            event.getClickedBlock().setData((byte) (data + 8));
+                            block.setType(Material.WOOD_STEP);
+                            block.setData((byte) (data + 8));
                         }
                     }
 
-                    if (event.getClickedBlock().getType() == Material.DOUBLE_STONE_SLAB2 && event.getClickedBlock().getData() <= 7) {
+                    if (block.getType() == Material.DOUBLE_STONE_SLAB2 && block.getData() <= 7) {
                         event.setCancelled(true);
-                        data = event.getClickedBlock().getData();
-                        if (Utils.isTop(event.getPlayer(), event.getClickedBlock())) {
-                            event.getClickedBlock().setType(Material.STONE_SLAB2);
-                            event.getClickedBlock().setData(data);
+                        data = block.getData();
+                        if (MiscUtils.isTop(event.getPlayer(), block)) {
+                            block.setType(Material.STONE_SLAB2);
+                            block.setData(data);
                         } else {
-                            event.getClickedBlock().setType(Material.STONE_SLAB2);
-                            event.getClickedBlock().setData((byte) (data + 8));
+                            block.setType(Material.STONE_SLAB2);
+                            block.setData((byte) (data + 8));
                         }
                     }
 
-                    if (event.getClickedBlock().getType() == Material.PURPUR_DOUBLE_SLAB && event.getClickedBlock().getData() <= 7) {
+                    if (block.getType() == Material.PURPUR_DOUBLE_SLAB && block.getData() <= 7) {
                         event.setCancelled(true);
-                        data = event.getClickedBlock().getData();
-                        if (Utils.isTop(event.getPlayer(), event.getClickedBlock())) {
-                            event.getClickedBlock().setType(Material.PURPUR_SLAB);
-                            event.getClickedBlock().setData(data);
+                        data = block.getData();
+                        if (MiscUtils.isTop(event.getPlayer(), block)) {
+                            block.setType(Material.PURPUR_SLAB);
+                            block.setData(data);
                         } else {
-                            event.getClickedBlock().setType(Material.PURPUR_SLAB);
-                            event.getClickedBlock().setData((byte) (data + 8));
+                            block.setType(Material.PURPUR_SLAB);
+                            block.setData((byte) (data + 8));
                         }
                     }
                 }

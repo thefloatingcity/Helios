@@ -8,7 +8,8 @@ import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.HelpCommand;
 import com.outlook.tehbrian.tfcplugin.Flight;
 import com.outlook.tehbrian.tfcplugin.Main;
-import com.outlook.tehbrian.tfcplugin.Utils;
+import com.outlook.tehbrian.tfcplugin.utils.ItemBuilder;
+import com.outlook.tehbrian.tfcplugin.utils.TextUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -32,12 +33,12 @@ public class UtilCommand extends BaseCommand {
     @CommandPermission("tfcplugin.fly")
     @Description("Fly. Like the birds in the sky.")
     public void onFly(Player player) {
-        if (Flight.getCanBypassFly(player)) {
-            Flight.setCanBypassFly(player, false);
-            player.sendMessage(Utils.format("msg_fly_disabled"));
+        if (Flight.getPlayerCanBypassFly(player)) {
+            Flight.setPlayerCanBypassFly(player, false);
+            player.sendMessage(TextUtils.format("msg_fly_disabled"));
         } else {
-            Flight.setCanBypassFly(player, true);
-            player.sendMessage(Utils.format("msg_fly_enabled"));
+            Flight.setPlayerCanBypassFly(player, true);
+            player.sendMessage(TextUtils.format("msg_fly_enabled"));
         }
     }
 
@@ -45,10 +46,12 @@ public class UtilCommand extends BaseCommand {
     @CommandPermission("tfcplugin.blocks")
     @Description("Useful bulding blocks.")
     public void onBlocks(Player player) {
-        Inventory blocksInventory = Bukkit.createInventory(null, 9, Utils.color(main.getConfig().getString("blocks_inventory_name")));
+        Inventory blocksInventory = Bukkit.createInventory(null, 9, TextUtils.color(main.getConfig().getString("blocks_inventory_name")));
         for (String key : main.getConfig().getConfigurationSection("blocks").getKeys(false)) {
             ConfigurationSection block = main.getConfig().getConfigurationSection("blocks." + key);
-            blocksInventory.addItem(Utils.createItem(block.getString("name"), Material.matchMaterial(block.getString("material")), 1, 0));
+            blocksInventory.addItem(new ItemBuilder(Material.matchMaterial(block.getString("material")))
+                    .name(block.getString("name"))
+                    .build());
         }
         player.openInventory(blocksInventory);
     }
@@ -57,7 +60,7 @@ public class UtilCommand extends BaseCommand {
     @CommandPermission("tfcplugin.broadcast")
     @Description("Broadcast a message to the server.")
     public void onBroadcast(CommandSender sender, String text) {
-        Bukkit.broadcastMessage(Utils.color(text));
+        Bukkit.broadcastMessage(TextUtils.color(text));
     }
 
     @CommandAlias("hat")
@@ -66,14 +69,14 @@ public class UtilCommand extends BaseCommand {
     public void onHat(Player player) {
         if (player.getInventory().getItemInMainHand().getType() == Material.AIR) {
             if (player.getInventory().getHelmet() == null) {
-                player.sendMessage(Utils.format("msg_hat_none"));
+                player.sendMessage(TextUtils.format("msg_hat_none"));
             } else {
                 player.getInventory().setHelmet(new ItemStack(Material.AIR));
-                player.sendMessage(Utils.format("msg_hat_removed"));
+                player.sendMessage(TextUtils.format("msg_hat_removed"));
             }
         } else {
             player.getInventory().setHelmet(player.getInventory().getItemInMainHand());
-            player.sendMessage(Utils.format("msg_hat_set"));
+            player.sendMessage(TextUtils.format("msg_hat_set"));
         }
     }
 

@@ -4,7 +4,8 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.Piano;
-import com.outlook.tehbrian.tfcplugin.Utils;
+import com.outlook.tehbrian.tfcplugin.utils.ItemBuilder;
+import com.outlook.tehbrian.tfcplugin.utils.TextUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -30,7 +31,12 @@ public class PianoCommand extends BaseCommand {
         Inventory pianoNotesInventory = Bukkit.createInventory(null, 27, main.getConfig().getString("piano_notes_inventory_name"));
         for (String key : main.getConfig().getConfigurationSection("piano_notes").getKeys(false)) {
             ConfigurationSection pianoNote = main.getConfig().getConfigurationSection("piano_notes." + key);
-            pianoNotesInventory.addItem(Utils.createItem(pianoNote.getString("name"), Material.STAINED_GLASS_PANE, 1, pianoNote.getInt("data"), pianoNote.getStringList("lore")));
+            pianoNotesInventory.addItem(new ItemBuilder(Material.STAINED_GLASS_PANE)
+                    .name(pianoNote.getString("name"))
+                    .amount(1)
+                    .durability((short) pianoNote.getInt("data"))
+                    .lore(pianoNote.getStringList("lore"))
+                    .build());
         }
         player.openInventory(pianoNotesInventory);
     }
@@ -40,7 +46,7 @@ public class PianoCommand extends BaseCommand {
     @CommandCompletion("*")
     public void onInstrument(Player player, Piano.PianoSound pianoSound) {
         Piano.setPlayerPianoInstrument(player, pianoSound.toSound());
-        player.sendMessage(Utils.formatC("piano_prefix", "msg_piano_instrument_change", pianoSound.toString()));
+        player.sendMessage(TextUtils.formatC("piano_prefix", "msg_piano_instrument_change", pianoSound.toString()));
     }
 
     @Subcommand("toggle")
@@ -48,16 +54,16 @@ public class PianoCommand extends BaseCommand {
     public void onToggle(Player player) {
         if (Piano.getPlayerEnabledPiano(player)) {
             Piano.setPlayerEnabledPiano(player, false);
-            player.sendMessage(Utils.formatC("piano_prefix", "msg_piano_disabled"));
+            player.sendMessage(TextUtils.formatC("piano_prefix", "msg_piano_disabled"));
         } else {
             Piano.setPlayerEnabledPiano(player, true);
-            player.sendMessage(Utils.formatC("piano_prefix", "msg_piano_enabled"));
+            player.sendMessage(TextUtils.formatC("piano_prefix", "msg_piano_enabled"));
         }
     }
 
     @HelpCommand
     public void onHelp(CommandSender sender, @Default("1") @Conditions("limits:min=1,max=4") Integer page) {
-        for (String line : Utils.createPage(page, 4, "piano_help", "piano_prefix", "piano_multi")) {
+        for (String line : TextUtils.createPage(page, 4, "piano_help", "piano_prefix", "piano_multi")) {
             sender.sendMessage(line);
         }
     }

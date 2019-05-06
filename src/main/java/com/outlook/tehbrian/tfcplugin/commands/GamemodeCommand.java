@@ -4,7 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import com.outlook.tehbrian.tfcplugin.Main;
-import com.outlook.tehbrian.tfcplugin.Utils;
+import com.outlook.tehbrian.tfcplugin.utils.TextUtils;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -26,7 +26,7 @@ public class GamemodeCommand extends BaseCommand {
     @Description("Change your gamemode to Survival.")
     public void onSurvival(Player player) {
         player.setGameMode(GameMode.SURVIVAL);
-        player.sendMessage(Utils.format("msg_gamemode_changed", "Survival"));
+        player.sendMessage(TextUtils.format("msg_gamemode_changed", "Survival"));
     }
 
     @Subcommand("survival|s|0")
@@ -37,8 +37,8 @@ public class GamemodeCommand extends BaseCommand {
     public void onSurvivalOther(CommandSender sender, OnlinePlayer target) {
         Player targetPlayer = target.getPlayer();
         targetPlayer.setGameMode(GameMode.SURVIVAL);
-        sender.sendMessage(Utils.format("msg_gamemode_changed_other", targetPlayer.getDisplayName(), "Survival"));
-        targetPlayer.sendMessage(Utils.format("msg_gamemode_changed", "Survival"));
+        sender.sendMessage(TextUtils.format("msg_gamemode_changed_other", targetPlayer.getDisplayName(), "Survival"));
+        targetPlayer.sendMessage(TextUtils.format("msg_gamemode_changed", "Survival"));
     }
 
     @Subcommand("creative|c|1")
@@ -47,7 +47,7 @@ public class GamemodeCommand extends BaseCommand {
     @Description("Change your gamemode to Creative.")
     public void onCreative(Player player) {
         player.setGameMode(GameMode.CREATIVE);
-        player.sendMessage(Utils.format("msg_gamemode_changed", "Creative"));
+        player.sendMessage(TextUtils.format("msg_gamemode_changed", "Creative"));
     }
 
     @Subcommand("creative|c|1")
@@ -58,8 +58,8 @@ public class GamemodeCommand extends BaseCommand {
     public void onCreativeOther(CommandSender sender, OnlinePlayer target) {
         Player targetPlayer = target.getPlayer();
         targetPlayer.setGameMode(GameMode.CREATIVE);
-        sender.sendMessage(Utils.format("msg_gamemode_changed_other", targetPlayer.getDisplayName(), "Creative"));
-        targetPlayer.sendMessage(Utils.format("msg_gamemode_changed", "Creative"));
+        sender.sendMessage(TextUtils.format("msg_gamemode_changed_other", targetPlayer.getDisplayName(), "Creative"));
+        targetPlayer.sendMessage(TextUtils.format("msg_gamemode_changed", "Creative"));
     }
 
     @Subcommand("adventure|a|2")
@@ -68,7 +68,7 @@ public class GamemodeCommand extends BaseCommand {
     @Description("Change your gamemode to Adventure.")
     public void onAdventure(Player player) {
         player.setGameMode(GameMode.ADVENTURE);
-        player.sendMessage(Utils.format("msg_gamemode_changed", "Adventure"));
+        player.sendMessage(TextUtils.format("msg_gamemode_changed", "Adventure"));
     }
 
     @Subcommand("adventure|a|2")
@@ -79,12 +79,12 @@ public class GamemodeCommand extends BaseCommand {
     public void onAdventureOther(CommandSender sender, OnlinePlayer target) {
         Player targetPlayer = target.getPlayer();
         targetPlayer.setGameMode(GameMode.ADVENTURE);
-        sender.sendMessage(Utils.format("msg_gamemode_changed_other", targetPlayer.getDisplayName(), "Creative"));
-        targetPlayer.sendMessage(Utils.format("msg_gamemode_changed", "Adventure"));
+        sender.sendMessage(TextUtils.format("msg_gamemode_changed_other", targetPlayer.getDisplayName(), "Creative"));
+        targetPlayer.sendMessage(TextUtils.format("msg_gamemode_changed", "Adventure"));
     }
 
     @CatchUnknown
     public void onUnknown(CommandSender sender) {
-        sender.sendMessage(Utils.format("msg_gamemode_unknown"));
+        sender.sendMessage(TextUtils.format("msg_gamemode_unknown"));
     }
 }

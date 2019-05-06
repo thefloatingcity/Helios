@@ -21,17 +21,16 @@ public class Piano {
         return playerEnabledPiano.contains(player.getUniqueId());
     }
 
-    public static void setPlayerEnabledPiano(Player player, Boolean bool) {
-        if (bool && player.hasPermission("tfcplugin.piano")) {
+    public static Sound getPlayerPianoInstrument(Player player) {
+        return playerPianoInstrument.getOrDefault(player.getUniqueId(), Sound.BLOCK_NOTE_HARP);
+    }
+
+    public static void setPlayerEnabledPiano(Player player, boolean bool) {
+        if (player.hasPermission("tfcplugin.piano") && bool) {
             playerEnabledPiano.add(player.getUniqueId());
         } else {
             playerEnabledPiano.remove(player.getUniqueId());
         }
-    }
-
-    public static Sound getPlayerPianoInstrument(Player player) {
-        playerPianoInstrument.putIfAbsent(player.getUniqueId(), Sound.BLOCK_NOTE_HARP);
-        return playerPianoInstrument.get(player.getUniqueId());
     }
 
     public static void setPlayerPianoInstrument(Player player, Sound sound) {
@@ -41,7 +40,7 @@ public class Piano {
     }
 
     public static void play(Player player, ItemStack item, boolean requireToggle) {
-        if ((!requireToggle || getPlayerEnabledPiano(player)) && player.hasPermission("tfcplugin.piano")) {
+        if (player.hasPermission("tfcplugin.piano") && ((!requireToggle || getPlayerEnabledPiano(player)))) {
             if (item != null && item.getType() == Material.STAINED_GLASS_PANE) {
                 if (item.getItemMeta().hasLore() && Objects.requireNonNull(item.getLore()).get(1).equals(ChatColor.DARK_GRAY + "[Note]")) {
                     player.getWorld().playSound(player.getLocation(), getPlayerPianoInstrument(player), SoundCategory.MASTER, 3, Float.parseFloat(item.getLore().get(2)));

@@ -5,7 +5,7 @@ import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import com.outlook.tehbrian.tfcplugin.Main;
-import com.outlook.tehbrian.tfcplugin.Utils;
+import com.outlook.tehbrian.tfcplugin.utils.TextUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -32,7 +32,7 @@ public class ActionCommand extends BaseCommand {
     public void onLaunch(Player player) {
         player.setVelocity(new Vector(0, 10, 0));
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
-        Bukkit.broadcastMessage(Utils.format("msg_launch_themself", player.getDisplayName()));
+        Bukkit.broadcastMessage(TextUtils.format("msg_launch_themself", player.getDisplayName()));
     }
 
     @CommandAlias("launch")
@@ -43,7 +43,7 @@ public class ActionCommand extends BaseCommand {
         Player targetPlayer = target.getPlayer();
         targetPlayer.setVelocity(new Vector(0, 10, 0));
         targetPlayer.getWorld().playSound(targetPlayer.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
-        Bukkit.broadcastMessage(Utils.format("msg_launch", player.getDisplayName(), targetPlayer.getDisplayName()));
+        Bukkit.broadcastMessage(TextUtils.format("msg_launch", player.getDisplayName(), targetPlayer.getDisplayName()));
     }
 
     @CommandAlias("zap")
@@ -51,9 +51,8 @@ public class ActionCommand extends BaseCommand {
     @Description("Zap.. yourself?")
     public void onZap(Player player) {
         player.getWorld().strikeLightning(player.getLocation());
-        Bukkit.broadcastMessage(Utils.format("msg_zap_themself", player.getDisplayName()));
+        Bukkit.broadcastMessage(TextUtils.format("msg_zap_themself", player.getDisplayName()));
     }
-
 
     @CommandAlias("zap")
     @CommandPermission("tfcplugin.zapother")
@@ -62,7 +61,7 @@ public class ActionCommand extends BaseCommand {
     public void onZapOther(Player player, OnlinePlayer target) {
         Player targetPlayer = target.getPlayer();
         targetPlayer.getWorld().strikeLightning(targetPlayer.getLocation());
-        Bukkit.broadcastMessage(Utils.format("msg_zap", player.getDisplayName(), targetPlayer.getDisplayName()));
+        Bukkit.broadcastMessage(TextUtils.format("msg_zap", player.getDisplayName(), targetPlayer.getDisplayName()));
     }
 
     @CommandAlias("boost")
@@ -71,7 +70,7 @@ public class ActionCommand extends BaseCommand {
     public void onBoost(Player player) {
         player.setVelocity(player.getLocation().getDirection().multiply(3));
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
-        Bukkit.broadcastMessage(Utils.format("msg_boost_themself", player.getDisplayName()));
+        Bukkit.broadcastMessage(TextUtils.format("msg_boost_themself", player.getDisplayName()));
     }
 
     @CommandAlias("boost")
@@ -82,7 +81,7 @@ public class ActionCommand extends BaseCommand {
         Player targetPlayer = target.getPlayer();
         targetPlayer.setVelocity(targetPlayer.getLocation().getDirection().multiply(3));
         targetPlayer.getWorld().playSound(targetPlayer.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
-        Bukkit.broadcastMessage(Utils.format("msg_boost", player.getDisplayName(), targetPlayer.getDisplayName()));
+        Bukkit.broadcastMessage(TextUtils.format("msg_boost", player.getDisplayName(), targetPlayer.getDisplayName()));
     }
 
     @CommandAlias("poke")
@@ -101,7 +100,7 @@ public class ActionCommand extends BaseCommand {
         Vector randomVector = new Vector(randX, randY, randZ);
 
         player.setVelocity(randomVector);
-        Bukkit.broadcastMessage(Utils.format("msg_poke_themself", player.getDisplayName()));
+        Bukkit.broadcastMessage(TextUtils.format("msg_poke_themself", player.getDisplayName()));
     }
 
     @CommandAlias("poke")
@@ -122,7 +121,7 @@ public class ActionCommand extends BaseCommand {
         Vector randomVector = new Vector(randX, randY, randZ);
 
         targetPlayer.setVelocity(randomVector);
-        Bukkit.broadcastMessage(Utils.format("msg_poke", player.getDisplayName(), targetPlayer.getDisplayName()));
+        Bukkit.broadcastMessage(TextUtils.format("msg_poke", player.getDisplayName(), targetPlayer.getDisplayName()));
     }
 
     @HelpCommand
