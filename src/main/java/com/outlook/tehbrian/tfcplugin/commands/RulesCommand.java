@@ -3,7 +3,9 @@ package com.outlook.tehbrian.tfcplugin.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import com.outlook.tehbrian.tfcplugin.Main;
-import com.outlook.tehbrian.tfcplugin.utils.TextUtils;
+import com.outlook.tehbrian.tfcplugin.utils.LuckPermsUtils;
+import com.outlook.tehbrian.tfcplugin.utils.MiscUtils;
+import com.outlook.tehbrian.tfcplugin.utils.MsgBuilder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -20,7 +22,7 @@ public class RulesCommand extends BaseCommand {
 
     @Default
     public void onRules(CommandSender sender, @Default("1") @Conditions("limits:min=1,max=9") Integer page) {
-        for (String line : TextUtils.createPage(page, 9, "rules", "rules_prefix", "rules_multi")) {
+        for (String line : MiscUtils.createPage(page, 9, "rules", "rules_prefix", "rules_multi")) {
             sender.sendMessage(line);
         }
     }
@@ -30,10 +32,10 @@ public class RulesCommand extends BaseCommand {
     @Description("Accept the rules and get building permissions!")
     public void onAccept(Player player) {
         if (player.hasPermission("tfcplugin.rulesaccepted")) {
-            player.sendMessage(TextUtils.formatC("rules_prefix", "msg_rules_already_accepted"));
+            player.sendMessage(new MsgBuilder().msg("rules_prefix").prefix("msg_rules_already_accepted").build());
         } else {
-            main.getVaultPerms().playerAddGroup(null, player, "passenger");
-            player.sendMessage(TextUtils.formatC("rules_prefix", "msg_rules_accept"));
+            LuckPermsUtils.setPlayerPrimaryGroup(player, "passenger");
+            player.sendMessage(new MsgBuilder().msg("rules_prefix").prefix("msg_rules_accept").build());
         }
     }
 }

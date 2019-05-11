@@ -9,7 +9,8 @@ import co.aikar.commands.annotation.HelpCommand;
 import com.outlook.tehbrian.tfcplugin.Flight;
 import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.utils.ItemBuilder;
-import com.outlook.tehbrian.tfcplugin.utils.TextUtils;
+import com.outlook.tehbrian.tfcplugin.utils.MiscUtils;
+import com.outlook.tehbrian.tfcplugin.utils.MsgBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -35,10 +36,10 @@ public class UtilCommand extends BaseCommand {
     public void onFly(Player player) {
         if (Flight.getPlayerCanBypassFly(player)) {
             Flight.setPlayerCanBypassFly(player, false);
-            player.sendMessage(TextUtils.format("msg_fly_disabled"));
+            player.sendMessage(new MsgBuilder().def("msg_fly_disabled").build());
         } else {
             Flight.setPlayerCanBypassFly(player, true);
-            player.sendMessage(TextUtils.format("msg_fly_enabled"));
+            player.sendMessage(new MsgBuilder().def("msg_fly_enabled").build());
         }
     }
 
@@ -46,7 +47,7 @@ public class UtilCommand extends BaseCommand {
     @CommandPermission("tfcplugin.blocks")
     @Description("Useful bulding blocks.")
     public void onBlocks(Player player) {
-        Inventory blocksInventory = Bukkit.createInventory(null, 9, TextUtils.color(main.getConfig().getString("blocks_inventory_name")));
+        Inventory blocksInventory = Bukkit.createInventory(null, 9, MiscUtils.color(main.getConfig().getString("blocks_inventory_name")));
         for (String key : main.getConfig().getConfigurationSection("blocks").getKeys(false)) {
             ConfigurationSection block = main.getConfig().getConfigurationSection("blocks." + key);
             blocksInventory.addItem(new ItemBuilder(Material.matchMaterial(block.getString("material")))
@@ -60,7 +61,7 @@ public class UtilCommand extends BaseCommand {
     @CommandPermission("tfcplugin.broadcast")
     @Description("Broadcast a message to the server.")
     public void onBroadcast(CommandSender sender, String text) {
-        Bukkit.broadcastMessage(TextUtils.color(text));
+        Bukkit.broadcastMessage(MiscUtils.color(text));
     }
 
     @CommandAlias("hat")
@@ -69,14 +70,14 @@ public class UtilCommand extends BaseCommand {
     public void onHat(Player player) {
         if (player.getInventory().getItemInMainHand().getType() == Material.AIR) {
             if (player.getInventory().getHelmet() == null) {
-                player.sendMessage(TextUtils.format("msg_hat_none"));
+                player.sendMessage(new MsgBuilder().def("msg_hat_none").build());
             } else {
                 player.getInventory().setHelmet(new ItemStack(Material.AIR));
-                player.sendMessage(TextUtils.format("msg_hat_removed"));
+                player.sendMessage(new MsgBuilder().def("msg_hat_removed").build());
             }
         } else {
             player.getInventory().setHelmet(player.getInventory().getItemInMainHand());
-            player.sendMessage(TextUtils.format("msg_hat_set"));
+            player.sendMessage(new MsgBuilder().def("msg_hat_set").build());
         }
     }
 

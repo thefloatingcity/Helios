@@ -2,9 +2,10 @@ package com.outlook.tehbrian.tfcplugin.events;
 
 import com.outlook.tehbrian.tfcplugin.Flight;
 import com.outlook.tehbrian.tfcplugin.Main;
-import com.outlook.tehbrian.tfcplugin.Piano;
+import com.outlook.tehbrian.tfcplugin.piano.Piano;
+import com.outlook.tehbrian.tfcplugin.utils.LuckPermsUtils;
 import com.outlook.tehbrian.tfcplugin.utils.MiscUtils;
-import com.outlook.tehbrian.tfcplugin.utils.TextUtils;
+import com.outlook.tehbrian.tfcplugin.utils.MsgBuilder;
 import org.bukkit.*;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
@@ -30,7 +31,7 @@ public class MiscEvents implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        player.sendMessage(TextUtils.formatC("none", "tfc_banner"));
+        player.sendMessage(new MsgBuilder().prefix("none").msg("tfc_banner").build());
 
         Flight.disableFlight(player);
 
@@ -47,30 +48,30 @@ public class MiscEvents implements Listener {
         firework.setFireworkMeta(fireworkMeta);
 
         if (player.hasPlayedBefore()) {
-            event.setJoinMessage(TextUtils.formatC("none", "msg_join", player.getDisplayName()));
+            event.setJoinMessage(new MsgBuilder().prefix("none").msg("msg_join").replace(player.getDisplayName()).build());
 
             long millisSinceLastPlayed = Calendar.getInstance().getTimeInMillis() - player.getLastPlayed();
             if (millisSinceLastPlayed >= 86400000) {
-                player.sendMessage(TextUtils.format("msg_motd", Math.floor((millisSinceLastPlayed / 86400000d) * 100) / 100, "days"));
+                player.sendMessage(new MsgBuilder().def("msg_motd").replace(Math.floor((millisSinceLastPlayed / 86400000d) * 100) / 100, "days").build());
             } else if (millisSinceLastPlayed >= 3600000) {
-                player.sendMessage(TextUtils.format("msg_motd", Math.floor((millisSinceLastPlayed / 3600000d) * 100) / 100, "hours"));
+                player.sendMessage(new MsgBuilder().def("msg_motd").replace(Math.floor((millisSinceLastPlayed / 3600000d) * 100) / 100, "hours").build());
             } else if (millisSinceLastPlayed >= 60000) {
-                player.sendMessage(TextUtils.format("msg_motd", Math.floor((millisSinceLastPlayed / 60000d) * 100) / 100, "minutes"));
+                player.sendMessage(new MsgBuilder().def("msg_motd").replace(Math.floor((millisSinceLastPlayed / 60000d) * 100) / 100, "minutes").build());
             } else if (millisSinceLastPlayed >= 1000) {
-                player.sendMessage(TextUtils.format("msg_motd", Math.floor((millisSinceLastPlayed / 1000d) * 100) / 100, "seconds"));
+                player.sendMessage(new MsgBuilder().def("msg_motd").replace(Math.floor((millisSinceLastPlayed / 1000d) * 100) / 100, "seconds").build());
             } else {
-                player.sendMessage(TextUtils.format("msg_motd", Math.floor((millisSinceLastPlayed) * 100) / 100, "milliseconds"));
+                player.sendMessage(new MsgBuilder().def("msg_motd").replace(Math.floor((millisSinceLastPlayed) * 100) / 100, "milliseconds").build());
             }
         } else {
-            event.setJoinMessage(TextUtils.formatC("none", "msg_join_new", player.getDisplayName()));
+            event.setJoinMessage(new MsgBuilder().def("msg_join_new").replace(player.getDisplayName()).build());
 
-            player.sendMessage(TextUtils.format("msg_motd_new", player.getName()));
+            player.sendMessage(new MsgBuilder().def("msg_motd_new").replace(player.getName()).build());
         }
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        event.setQuitMessage(TextUtils.formatC("none", "msg_leave", event.getPlayer().getDisplayName()));
+        event.setQuitMessage(new MsgBuilder().msg("msg_leave").prefix("none").replace(event.getPlayer().getDisplayName()).build());
     }
 
     @EventHandler
@@ -109,15 +110,15 @@ public class MiscEvents implements Listener {
             if (event.getEntity() instanceof Player) {
                 Player player = (Player) event.getEntity();
                 if (player.getFallDistance() >= 1500) {
-                    player.sendMessage(TextUtils.format("msg_warp_max"));
+                    player.sendMessage(new MsgBuilder().def("msg_warp_max").build());
                     player.teleport(MiscUtils.getSpawn());
                     player.getWorld().strikeLightningEffect(MiscUtils.getSpawn());
                     player.getWorld().playSound(MiscUtils.getSpawn(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 3, 1);
                     player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, MiscUtils.getSpawn(), 1);
                 } else if (player.getFallDistance() >= 1000) {
-                    player.sendMessage(TextUtils.format("msg_warp_second"));
+                    player.sendMessage(new MsgBuilder().def("msg_warp_second").build());
                 } else if (player.getFallDistance() >= 500) {
-                    player.sendMessage(TextUtils.format("msg_warp_first"));
+                    player.sendMessage(new MsgBuilder().def("msg_warp_first").build());
                 }
                 player.getWorld().playSound(location, Sound.ENTITY_ENDERMEN_TELEPORT, SoundCategory.MASTER, 4, 1);
             }
@@ -128,10 +129,10 @@ public class MiscEvents implements Listener {
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         if (player.hasPermission("tfcplugin.chatcolor")) {
-            event.setMessage(TextUtils.color(event.getMessage()));
+            event.setMessage(MiscUtils.color(event.getMessage()));
         }
-        event.setFormat(TextUtils.color(main.getConfig().getString("chat_format")
-                .replace("{prefix}", main.getVaultChat().getPlayerPrefix(player))
-                .replace("{suffix}", main.getVaultChat().getPlayerSuffix(player))));
+        event.setFormat(MiscUtils.color(main.getConfig().getString("chat_format")
+                .replace("{prefix}", LuckPermsUtils.getPlayerPrefix(player))
+                .replace("{suffix}", LuckPermsUtils.getPlayerSuffix(player))));
     }
 }

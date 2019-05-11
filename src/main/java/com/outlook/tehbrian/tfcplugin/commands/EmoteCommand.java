@@ -7,7 +7,7 @@ import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.HelpCommand;
 import com.outlook.tehbrian.tfcplugin.Main;
-import com.outlook.tehbrian.tfcplugin.utils.TextUtils;
+import com.outlook.tehbrian.tfcplugin.utils.MsgBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -27,42 +27,42 @@ public class EmoteCommand extends BaseCommand {
     @CommandPermission("tfcplugin.winkwonk")
     @Description("Wink wonk ;)")
     public void onWinkWonk(Player player) {
-        Bukkit.broadcastMessage(TextUtils.formatC("none", "emote_winkwonk", player.getDisplayName()));
+        Bukkit.broadcastMessage(new MsgBuilder().msg("emote_winkwonk").replace(player.getDisplayName()).build());
     }
 
     @CommandAlias("shrug")
     @CommandPermission("tfcplugin.shrug")
     @Description("You don't know. They don't know.")
     public void onShrug(Player player) {
-        Bukkit.broadcastMessage(TextUtils.formatC("none", "emote_shrug", player.getDisplayName()));
+        Bukkit.broadcastMessage(new MsgBuilder().msg("emote_shrug").replace(player.getDisplayName()).build());
     }
 
     @CommandAlias("spook")
     @CommandPermission("tfcplugin.spook")
     @Description("OoooOOooOoOOoOOoo")
     public void onSpook(Player player) {
-        Bukkit.broadcastMessage(TextUtils.formatC("none", "emote_spook", player.getDisplayName()));
+        Bukkit.broadcastMessage(new MsgBuilder().msg("emote_spook").replace(player.getDisplayName()).build());
     }
 
     @CommandAlias("doubt")
     @CommandPermission("tfcplugin.doubt")
     @Description("Press X to doubt.")
     public void onDoubt(Player player) {
-        Bukkit.broadcastMessage(TextUtils.formatC("none", "emote_doubt", player.getDisplayName()));
+        Bukkit.broadcastMessage(new MsgBuilder().msg("emote_doubt").replace(player.getDisplayName()).build());
     }
 
     @CommandAlias("blame")
     @CommandPermission("tfcplugin.blame")
     @Description("Pfft, it's their fault, not yours.")
     public void onBlame(Player player, String text) {
-        Bukkit.broadcastMessage(TextUtils.formatC("none", "emote_blame", player.getDisplayName(), text));
+        Bukkit.broadcastMessage(new MsgBuilder().msg("emote_blame").replace(player.getDisplayName(), text).build());
     }
 
     @CommandAlias("sue")
     @CommandPermission("tfcplugin.sue")
     @Description("Court fixes everything.. right?")
     public void onSue(Player player, String text) {
-        Bukkit.broadcastMessage(TextUtils.formatC("none", "emote_sue", player.getDisplayName(), text));
+        Bukkit.broadcastMessage(new MsgBuilder().msg("emote_sue").replace(player.getDisplayName(), text).build());
     }
 
     @HelpCommand

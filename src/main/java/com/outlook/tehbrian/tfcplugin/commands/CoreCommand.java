@@ -4,7 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import com.outlook.tehbrian.tfcplugin.Main;
-import com.outlook.tehbrian.tfcplugin.utils.TextUtils;
+import com.outlook.tehbrian.tfcplugin.utils.MsgBuilder;
 import org.bukkit.command.CommandSender;
 
 @SuppressWarnings("unused")
@@ -23,7 +23,7 @@ public class CoreCommand extends BaseCommand {
     @Description("Reload TFCPlugin.")
     public void onReload(CommandSender sender) {
         main.reloadConfig();
-        sender.sendMessage(TextUtils.format("msg_reloaded"));
+        sender.sendMessage(new MsgBuilder().def("msg_reloaded").build());
     }
 
     @HelpCommand

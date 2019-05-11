@@ -81,10 +81,10 @@ public class ItemBuilder {
         ItemMeta itemMeta = itemStack.getItemMeta();
 
         if (name != null) {
-            itemMeta.setDisplayName(TextUtils.color(name));
+            itemMeta.setDisplayName(MiscUtils.color(name));
         }
         if (lore != null) {
-            lore.replaceAll(TextUtils::color);
+            lore.replaceAll(MiscUtils::color);
             itemMeta.setLore(lore);
         }
         if (unbreakable != null) {

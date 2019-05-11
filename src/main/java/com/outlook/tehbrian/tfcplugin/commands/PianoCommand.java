@@ -3,9 +3,11 @@ package com.outlook.tehbrian.tfcplugin.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import com.outlook.tehbrian.tfcplugin.Main;
-import com.outlook.tehbrian.tfcplugin.Piano;
+import com.outlook.tehbrian.tfcplugin.piano.Piano;
+import com.outlook.tehbrian.tfcplugin.piano.PianoSound;
 import com.outlook.tehbrian.tfcplugin.utils.ItemBuilder;
-import com.outlook.tehbrian.tfcplugin.utils.TextUtils;
+import com.outlook.tehbrian.tfcplugin.utils.MiscUtils;
+import com.outlook.tehbrian.tfcplugin.utils.MsgBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -44,9 +46,9 @@ public class PianoCommand extends BaseCommand {
     @Subcommand("instrument")
     @Description("Pick your piano instrument!")
     @CommandCompletion("*")
-    public void onInstrument(Player player, Piano.PianoSound pianoSound) {
+    public void onInstrument(Player player, PianoSound pianoSound) {
         Piano.setPlayerPianoInstrument(player, pianoSound.toSound());
-        player.sendMessage(TextUtils.formatC("piano_prefix", "msg_piano_instrument_change", pianoSound.toString()));
+        player.sendMessage(new MsgBuilder().prefix("piano_prefix").msg("msg_piano_instrument_change").replace(pianoSound.toString()).build());
     }
 
     @Subcommand("toggle")
@@ -54,16 +56,16 @@ public class PianoCommand extends BaseCommand {
     public void onToggle(Player player) {
         if (Piano.getPlayerEnabledPiano(player)) {
             Piano.setPlayerEnabledPiano(player, false);
-            player.sendMessage(TextUtils.formatC("piano_prefix", "msg_piano_disabled"));
+            player.sendMessage(new MsgBuilder().prefix("piano_prefix").msg("msg_piano_disabled").build());
         } else {
             Piano.setPlayerEnabledPiano(player, true);
-            player.sendMessage(TextUtils.formatC("piano_prefix", "msg_piano_enabled"));
+            player.sendMessage(new MsgBuilder().prefix("piano_prefix").msg("msg_piano_enabled").build());
         }
     }
 
     @HelpCommand
     public void onHelp(CommandSender sender, @Default("1") @Conditions("limits:min=1,max=4") Integer page) {
-        for (String line : TextUtils.createPage(page, 4, "piano_help", "piano_prefix", "piano_multi")) {
+        for (String line : MiscUtils.createPage(page, 4, "piano_help", "piano_prefix", "piano_multi")) {
             sender.sendMessage(line);
         }
     }

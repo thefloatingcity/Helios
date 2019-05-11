@@ -9,16 +9,14 @@ import com.outlook.tehbrian.tfcplugin.commands.*;
 import com.outlook.tehbrian.tfcplugin.events.AntiBuildEvents;
 import com.outlook.tehbrian.tfcplugin.events.BuildingEvents;
 import com.outlook.tehbrian.tfcplugin.events.MiscEvents;
-import net.milkbowl.vault.chat.Chat;
-import net.milkbowl.vault.permission.Permission;
+import me.lucko.luckperms.api.LuckPermsApi;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
 
     private static Main instance;
-    private Permission vaultPerms;
-    private Chat vaultChat;
+    private LuckPermsApi luckPermsApi;
     private MongoClient mongoClient;
     private MongoDatabase database;
 
@@ -36,8 +34,8 @@ public final class Main extends JavaPlugin {
 
         setupCommandManager();
 
-        if (!setupVault()) {
-            getLogger().severe("No Vault dependency found! Disabling plugin..");
+        if (!setupLuckPermsApi()) {
+            getLogger().severe("No LuckPerms dependency found! Disabling plugin..");
             getServer().getPluginManager().disablePlugin(this);
         }
 
@@ -54,7 +52,7 @@ public final class Main extends JavaPlugin {
     public void onDisable() {
         getLogger().info("Closing database..");
         mongoClient.close();
-        getLogger().info("Goodbye!");
+        getLogger().info("Database has been closed!");
     }
 
     private void setupDatabase() {
@@ -88,29 +86,17 @@ public final class Main extends JavaPlugin {
         });
     }
 
-    private boolean setupVault() {
-        if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            return false;
-        }
-        RegisteredServiceProvider<Permission> prsp = getServer().getServicesManager().getRegistration(Permission.class);
+    private boolean setupLuckPermsApi() {
+        RegisteredServiceProvider<LuckPermsApi> prsp = getServer().getServicesManager().getRegistration(LuckPermsApi.class);
         if (prsp == null) {
             return false;
         }
-        vaultPerms = prsp.getProvider();
-        RegisteredServiceProvider<Chat> crsp = getServer().getServicesManager().getRegistration(Chat.class);
-        if (crsp == null) {
-            return false;
-        }
-        vaultChat = crsp.getProvider();
-        return (vaultPerms != null && vaultChat != null);
+        luckPermsApi = prsp.getProvider();
+        return luckPermsApi != null;
     }
 
-    public Permission getVaultPerms() {
-        return vaultPerms;
-    }
-
-    public Chat getVaultChat() {
-        return vaultChat;
+    public LuckPermsApi getLuckPermsApi() {
+        return luckPermsApi;
     }
 
     public MongoDatabase getDatabase() {
