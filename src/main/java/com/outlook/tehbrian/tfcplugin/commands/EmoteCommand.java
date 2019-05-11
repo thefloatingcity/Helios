@@ -2,10 +2,7 @@ package com.outlook.tehbrian.tfcplugin.commands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
-import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.CommandPermission;
-import co.aikar.commands.annotation.Description;
-import co.aikar.commands.annotation.HelpCommand;
+import co.aikar.commands.annotation.*;
 import com.outlook.tehbrian.tfcplugin.Main;
 import com.outlook.tehbrian.tfcplugin.utils.MsgBuilder;
 import org.bukkit.Bukkit;
@@ -46,14 +43,14 @@ public class EmoteCommand extends BaseCommand {
 
     @CommandAlias("doubt")
     @CommandPermission("tfcplugin.doubt")
-    @Description("Press X to doubt.")
+    @Description("Press X.")
     public void onDoubt(Player player) {
         Bukkit.broadcastMessage(new MsgBuilder().msg("emote_doubt").replace(player.getDisplayName()).build());
     }
 
     @CommandAlias("blame")
     @CommandPermission("tfcplugin.blame")
-    @Description("Pfft, it's their fault, not yours.")
+    @Description("It's their fault, not yours.")
     public void onBlame(Player player, String text) {
         Bukkit.broadcastMessage(new MsgBuilder().msg("emote_blame").replace(player.getDisplayName(), text).build());
     }
@@ -61,8 +58,12 @@ public class EmoteCommand extends BaseCommand {
     @CommandAlias("sue")
     @CommandPermission("tfcplugin.sue")
     @Description("Court fixes everything.. right?")
-    public void onSue(Player player, String text) {
-        Bukkit.broadcastMessage(new MsgBuilder().msg("emote_sue").replace(player.getDisplayName(), text).build());
+    public void onSue(Player player, @Optional String text) {
+        if (text == null) {
+            Bukkit.broadcastMessage(new MsgBuilder().msg("emote_sue").replace(player.getDisplayName()).build());
+        } else {
+            Bukkit.broadcastMessage(new MsgBuilder().msg("emote_sue_extra").replace(player.getDisplayName(), text).build());
+        }
     }
 
     @HelpCommand

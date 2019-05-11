@@ -70,7 +70,8 @@ emote_shrug: "&a%s &2shrugs &a\\_o¬o_/"
 emote_spook: "&7%s &8is a spook."
 emote_doubt: "&b%s &9doubts that."
 emote_blame: "&c%s &4blames &c%s"
-emote_sue: "&e%s &6is suing &e%s"
+emote_sue: "&e%s &6is suing"
+emote_sue_extra: "&e%s &6is suing &e%s"
 
 ##############
 #            #
