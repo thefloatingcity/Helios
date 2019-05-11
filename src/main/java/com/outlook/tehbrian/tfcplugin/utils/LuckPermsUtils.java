@@ -15,13 +15,15 @@ public class LuckPermsUtils {
     }
 
     public static String getPlayerPrefix(Player player) {
-        Contexts contexts = luckPermsApi.getContextManager().getApplicableContexts(player);
-        return luckPermsApi.getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData(contexts).getPrefix();
+        User user = luckPermsApi.getUserManager().getUser(player.getUniqueId());
+        Contexts contexts = luckPermsApi.getContextManager().getApplicableContexts(user);
+        return user.getCachedData().getMetaData(contexts).getPrefix();
     }
 
     public static String getPlayerSuffix(Player player) {
-        Contexts contexts = luckPermsApi.getContextManager().getApplicableContexts(player);
-        return luckPermsApi.getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData(contexts).getSuffix();
+        User user = luckPermsApi.getUserManager().getUser(player.getUniqueId());
+        Contexts contexts = luckPermsApi.getContextManager().getApplicableContexts(user);
+        return user.getCachedData().getMetaData(contexts).getSuffix();
     }
 
     public static void setPlayerPrimaryGroup(Player player, String group) {
