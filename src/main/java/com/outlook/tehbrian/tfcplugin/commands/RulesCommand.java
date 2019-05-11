@@ -32,10 +32,10 @@ public class RulesCommand extends BaseCommand {
     @Description("Accept the rules and get building permissions!")
     public void onAccept(Player player) {
         if (player.hasPermission("tfcplugin.rulesaccepted")) {
-            player.sendMessage(new MsgBuilder().msg("rules_prefix").prefix("msg_rules_already_accepted").build());
+            player.sendMessage(new MsgBuilder().prefix("rules_prefix").msg("msg_rules_already_accepted").build());
         } else {
             LuckPermsUtils.setPlayerPrimaryGroup(player, "passenger");
-            player.sendMessage(new MsgBuilder().msg("rules_prefix").prefix("msg_rules_accept").build());
+            player.sendMessage(new MsgBuilder().prefix("rules_prefix").msg("msg_rules_accept").build());
         }
     }
 }

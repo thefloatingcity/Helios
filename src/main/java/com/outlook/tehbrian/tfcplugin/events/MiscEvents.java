@@ -31,7 +31,7 @@ public class MiscEvents implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        player.sendMessage(new MsgBuilder().prefix("none").msg("tfc_banner").build());
+        player.sendMessage(new MsgBuilder().msg("tfc_banner").build());
 
         Flight.disableFlight(player);
 
@@ -48,7 +48,7 @@ public class MiscEvents implements Listener {
         firework.setFireworkMeta(fireworkMeta);
 
         if (player.hasPlayedBefore()) {
-            event.setJoinMessage(new MsgBuilder().prefix("none").msg("msg_join").replace(player.getDisplayName()).build());
+            event.setJoinMessage(new MsgBuilder().msg("msg_join").replace(player.getDisplayName()).build());
 
             long millisSinceLastPlayed = Calendar.getInstance().getTimeInMillis() - player.getLastPlayed();
             if (millisSinceLastPlayed >= 86400000) {
@@ -71,7 +71,7 @@ public class MiscEvents implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        event.setQuitMessage(new MsgBuilder().msg("msg_leave").prefix("none").replace(event.getPlayer().getDisplayName()).build());
+        event.setQuitMessage(new MsgBuilder().msg("msg_leave").replace(event.getPlayer().getDisplayName()).build());
     }
 
     @EventHandler
