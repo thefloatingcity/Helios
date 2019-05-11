@@ -63,7 +63,7 @@ public class MiscEvents implements Listener {
                 player.sendMessage(new MsgBuilder().def("msg_motd").replace(Math.floor((millisSinceLastPlayed) * 100) / 100, "milliseconds").build());
             }
         } else {
-            event.setJoinMessage(new MsgBuilder().def("msg_join_new").replace(player.getDisplayName()).build());
+            event.setJoinMessage(new MsgBuilder().msg("msg_join_new").replace(player.getDisplayName()).build());
 
             player.sendMessage(new MsgBuilder().def("msg_motd_new").replace(player.getName()).build());
         }
