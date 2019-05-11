@@ -80,32 +80,20 @@ public class ActionCommand extends BaseCommand {
     @Description("Just a little push.")
     @CommandCompletion("@players")
     public void onPoke(Player player, @Optional @CommandPermission("tfcplugin.pokeother") OnlinePlayer target) {
+        double maxY = main.getConfig().getDouble("poke_force.maxY");
+        double minY = main.getConfig().getDouble("poke_force.minY");
+        double maxXZ = main.getConfig().getDouble("poke_force.maxXZ");
+        double minXZ = main.getConfig().getDouble("poke_force.minXZ");
+        Random random = new Random();
+        double randX = minXZ + random.nextDouble() * (maxXZ - minXZ);
+        double randY = minY + random.nextDouble() * (maxY - minY);
+        double randZ = minXZ + random.nextDouble() * (maxXZ - minXZ);
+        Vector randomVector = new Vector(randX, randY, randZ);
         if (target == null) {
-            double maxY = main.getConfig().getDouble("poke_force.maxY");
-            double minY = main.getConfig().getDouble("poke_force.minY");
-            double maxXZ = main.getConfig().getDouble("poke_force.maxXZ");
-            double minXZ = main.getConfig().getDouble("poke_force.minXZ");
-            Random random = new Random();
-            double randX = minXZ + random.nextDouble() * (maxXZ - minXZ);
-            double randY = minY + random.nextDouble() * (maxY - minY);
-            double randZ = minXZ + random.nextDouble() * (maxXZ - minXZ);
-            Vector randomVector = new Vector(randX, randY, randZ);
-
             player.setVelocity(randomVector);
             Bukkit.broadcastMessage(new MsgBuilder().def("msg_poke_themself").replace(player.getDisplayName()).build());
         } else {
             Player targetPlayer = target.getPlayer();
-
-            double maxY = main.getConfig().getDouble("poke_force.maxY");
-            double minY = main.getConfig().getDouble("poke_force.minY");
-            double maxXZ = main.getConfig().getDouble("poke_force.maxXZ");
-            double minXZ = main.getConfig().getDouble("poke_force.minXZ");
-            Random random = new Random();
-            double randX = minXZ + random.nextDouble() * (maxXZ - minXZ);
-            double randY = minY + random.nextDouble() * (maxY - minY);
-            double randZ = minXZ + random.nextDouble() * (maxXZ - minXZ);
-            Vector randomVector = new Vector(randX, randY, randZ);
-
             targetPlayer.setVelocity(randomVector);
             Bukkit.broadcastMessage(new MsgBuilder().def("msg_poke").replace(player.getDisplayName(), targetPlayer.getDisplayName()).build());
         }
