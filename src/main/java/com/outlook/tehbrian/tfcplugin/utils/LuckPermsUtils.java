@@ -32,6 +32,6 @@ public class LuckPermsUtils {
     public static void setPlayerPrimaryGroup(Player player, String group) {
         User user = luckPermsApi.getUserManager().getUser(player.getUniqueId());
         user.setPrimaryGroup(group);
-        main.getLuckPermsApi().getUserManager().saveUser(user);
+        luckPermsApi.getUserManager().saveUser(user);
     }
 }
