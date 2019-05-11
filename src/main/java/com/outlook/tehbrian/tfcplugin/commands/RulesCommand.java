@@ -34,7 +34,7 @@ public class RulesCommand extends BaseCommand {
         if (player.hasPermission("tfcplugin.rulesaccepted")) {
             player.sendMessage(new MsgBuilder().prefix("rules_prefix").msg("msg_rules_already_accepted").build());
         } else {
-            LuckPermsUtils.setPlayerPrimaryGroup(player, "passenger");
+            LuckPermsUtils.setPlayerGroup(player, "passenger");
             player.sendMessage(new MsgBuilder().prefix("rules_prefix").msg("msg_rules_accept").build());
         }
     }

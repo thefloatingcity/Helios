@@ -29,9 +29,9 @@ public class LuckPermsUtils {
         return metaData.getSuffix() == null ? "" : metaData.getSuffix();
     }
 
-    public static void setPlayerPrimaryGroup(Player player, String group) {
+    public static void setPlayerGroup(Player player, String group) {
         User user = luckPermsApi.getUserManager().getUser(player.getUniqueId());
-        user.setPrimaryGroup(group);
+        user.setPermission(luckPermsApi.getNodeFactory().makeGroupNode(group).build());
         luckPermsApi.getUserManager().saveUser(user);
     }
 }
