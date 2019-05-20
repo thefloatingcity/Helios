@@ -8,6 +8,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ItemBuilder {
 
@@ -15,7 +16,7 @@ public class ItemBuilder {
     private Integer amount = null;
     private Short durability = null;
     private Map<Enchantment, Integer> enchantments = null;
-    private List<ItemFlag> flags = null;
+    private Set<ItemFlag> flags = null;
     private String name = null;
     private List<String> lore = null;
     private Boolean unbreakable = null;
@@ -39,7 +40,7 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder flags(List<ItemFlag> flags) {
+    public ItemBuilder flags(Set<ItemFlag> flags) {
         this.flags = flags;
         return this;
     }
