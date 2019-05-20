@@ -25,6 +25,18 @@ public class ItemBuilder {
         this.material = material;
     }
 
+    public static ItemBuilder importFrom(ItemStack itemStack) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        return new ItemBuilder(itemStack.getType())
+                .amount(itemStack.getAmount())
+                .durability(itemStack.getDurability())
+                .enchantments(itemStack.getEnchantments())
+                .flags(itemStack.getItemFlags())
+                .name(itemMeta.getDisplayName())
+                .lore(itemMeta.getLore())
+                .unbreakable(itemMeta.isUnbreakable());
+    }
+
     public ItemBuilder amount(Integer amount) {
         this.amount = amount;
         return this;
