@@ -9,7 +9,6 @@ import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Optional;
 import co.aikar.commands.annotation.Subcommand;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
-import com.outlook.tehbrian.tfcplugin.TFCPlugin;
 import com.outlook.tehbrian.tfcplugin.utils.MsgBuilder;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
@@ -19,12 +18,6 @@ import org.bukkit.entity.Player;
 @CommandAlias("gm|gamemode")
 @Description("Change your gamemode.")
 public class GamemodeCommand extends BaseCommand {
-
-    private final TFCPlugin main;
-
-    public GamemodeCommand(TFCPlugin main) {
-        this.main = main;
-    }
 
     @Subcommand("survival|s|0")
     @CommandAlias("gms")

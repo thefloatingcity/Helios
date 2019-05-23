@@ -61,10 +61,10 @@ public final class TFCPlugin extends JavaPlugin {
 
         manager.registerCommand(new ActionCommand(this));
         manager.registerCommand(new CoreCommand(this));
-        manager.registerCommand(new EmoteCommand(this));
-        manager.registerCommand(new GamemodeCommand(this));
+        manager.registerCommand(new EmoteCommand());
+        manager.registerCommand(new GamemodeCommand());
         manager.registerCommand(new PianoCommand(this));
-        manager.registerCommand(new RulesCommand(this));
+        manager.registerCommand(new RulesCommand());
         manager.registerCommand(new UtilCommand(this));
 
         manager.enableUnstableAPI("help");
