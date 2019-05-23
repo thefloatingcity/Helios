@@ -2,9 +2,6 @@ package com.outlook.tehbrian.tfcplugin;
 
 import co.aikar.commands.ConditionFailedException;
 import co.aikar.commands.PaperCommandManager;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoDatabase;
 import com.outlook.tehbrian.tfcplugin.commands.ActionCommand;
 import com.outlook.tehbrian.tfcplugin.commands.CoreCommand;
 import com.outlook.tehbrian.tfcplugin.commands.EmoteCommand;
@@ -15,29 +12,27 @@ import com.outlook.tehbrian.tfcplugin.commands.UtilCommand;
 import com.outlook.tehbrian.tfcplugin.events.AntiBuildEvents;
 import com.outlook.tehbrian.tfcplugin.events.BuildingEvents;
 import com.outlook.tehbrian.tfcplugin.events.MiscEvents;
+import com.outlook.tehbrian.tfcplugin.flight.FlightEvents;
+import com.outlook.tehbrian.tfcplugin.piano.PianoEvents;
 import me.lucko.luckperms.api.LuckPermsApi;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class Main extends JavaPlugin {
+public final class TFCPlugin extends JavaPlugin {
 
-    private static Main instance;
+    private static TFCPlugin instance;
     private LuckPermsApi luckPermsApi;
-    private MongoClient mongoClient;
-    private MongoDatabase database;
 
-    public Main() {
+    public TFCPlugin() {
         instance = this;
     }
 
-    public static Main getInstance() {
+    public static TFCPlugin getInstance() {
         return instance;
     }
 
     @Override
     public void onEnable() {
-        setupDatabase();
-
         setupCommandManager();
 
         if (!setupLuckPermsApi()) {
@@ -52,18 +47,13 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new AntiBuildEvents(), this);
         getServer().getPluginManager().registerEvents(new BuildingEvents(this), this);
         getServer().getPluginManager().registerEvents(new MiscEvents(this), this);
+        getServer().getPluginManager().registerEvents(new FlightEvents(), this);
+        getServer().getPluginManager().registerEvents(new PianoEvents(), this);
     }
 
     @Override
     public void onDisable() {
-        getLogger().info("Closing database..");
-        mongoClient.close();
-        getLogger().info("Database has been closed!");
-    }
-
-    private void setupDatabase() {
-        mongoClient = MongoClients.create("mongodb+srv://TFCPlugin:thefloatingdatabase12345@cluster0-hkzse.mongodb.net/test?retryWrites=true");
-        database = mongoClient.getDatabase("tfc");
+        getLogger().info("See you later!");
     }
 
     private void setupCommandManager() {
@@ -103,9 +93,5 @@ public final class Main extends JavaPlugin {
 
     public LuckPermsApi getLuckPermsApi() {
         return luckPermsApi;
-    }
-
-    public MongoDatabase getDatabase() {
-        return database;
     }
 }

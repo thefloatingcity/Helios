@@ -7,7 +7,7 @@ import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.HelpCommand;
 import co.aikar.commands.annotation.Subcommand;
-import com.outlook.tehbrian.tfcplugin.Main;
+import com.outlook.tehbrian.tfcplugin.TFCPlugin;
 import com.outlook.tehbrian.tfcplugin.utils.MsgBuilder;
 import org.bukkit.command.CommandSender;
 
@@ -16,9 +16,9 @@ import org.bukkit.command.CommandSender;
 @Description("Core commands for TFCPlugin.")
 public class CoreCommand extends BaseCommand {
 
-    private final Main main;
+    private final TFCPlugin main;
 
-    public CoreCommand(Main main) {
+    public CoreCommand(TFCPlugin main) {
         this.main = main;
     }
 

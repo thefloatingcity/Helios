@@ -9,8 +9,8 @@ import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.HelpCommand;
 import co.aikar.commands.annotation.Subcommand;
-import com.outlook.tehbrian.tfcplugin.Main;
-import com.outlook.tehbrian.tfcplugin.piano.Piano;
+import com.outlook.tehbrian.tfcplugin.TFCPlugin;
+import com.outlook.tehbrian.tfcplugin.piano.PianoManager;
 import com.outlook.tehbrian.tfcplugin.piano.PianoSound;
 import com.outlook.tehbrian.tfcplugin.utils.ItemBuilder;
 import com.outlook.tehbrian.tfcplugin.utils.MiscUtils;
@@ -28,9 +28,9 @@ import org.bukkit.inventory.Inventory;
 @Description("A playable piano!")
 public class PianoCommand extends BaseCommand {
 
-    private final Main main;
+    private final TFCPlugin main;
 
-    public PianoCommand(Main main) {
+    public PianoCommand(TFCPlugin main) {
         this.main = main;
     }
 
@@ -54,18 +54,18 @@ public class PianoCommand extends BaseCommand {
     @Description("Pick your piano instrument!")
     @CommandCompletion("*")
     public void onInstrument(Player player, PianoSound pianoSound) {
-        Piano.setPlayerPianoInstrument(player, pianoSound.toSound());
+        PianoManager.setPlayerPianoInstrument(player, pianoSound.toSound());
         player.sendMessage(new MsgBuilder().prefix("piano_prefix").msg("msg_piano_instrument_change").replace(pianoSound.toString()).build());
     }
 
     @Subcommand("toggle")
     @Description("Toggle your piano on and off.")
     public void onToggle(Player player) {
-        if (Piano.getPlayerEnabledPiano(player)) {
-            Piano.setPlayerEnabledPiano(player, false);
+        if (PianoManager.getPlayerEnabledPiano(player)) {
+            PianoManager.setPlayerEnabledPiano(player, false);
             player.sendMessage(new MsgBuilder().prefix("piano_prefix").msg("msg_piano_disabled").build());
         } else {
-            Piano.setPlayerEnabledPiano(player, true);
+            PianoManager.setPlayerEnabledPiano(player, true);
             player.sendMessage(new MsgBuilder().prefix("piano_prefix").msg("msg_piano_enabled").build());
         }
     }

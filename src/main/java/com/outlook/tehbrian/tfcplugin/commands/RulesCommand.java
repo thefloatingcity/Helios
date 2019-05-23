@@ -6,7 +6,7 @@ import co.aikar.commands.annotation.Conditions;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Subcommand;
-import com.outlook.tehbrian.tfcplugin.Main;
+import com.outlook.tehbrian.tfcplugin.TFCPlugin;
 import com.outlook.tehbrian.tfcplugin.utils.LuckPermsUtils;
 import com.outlook.tehbrian.tfcplugin.utils.MiscUtils;
 import com.outlook.tehbrian.tfcplugin.utils.MsgBuilder;
@@ -18,9 +18,9 @@ import org.bukkit.entity.Player;
 @Description("Server and Discord rules.")
 public class RulesCommand extends BaseCommand {
 
-    private final Main main;
+    private final TFCPlugin main;
 
-    public RulesCommand(Main main) {
+    public RulesCommand(TFCPlugin main) {
         this.main = main;
     }
 
@@ -38,7 +38,7 @@ public class RulesCommand extends BaseCommand {
         if (player.hasPermission("tfcplugin.rulesaccepted")) {
             player.sendMessage(new MsgBuilder().prefix("rules_prefix").msg("msg_rules_already_accepted").build());
         } else {
-            LuckPermsUtils.setPlayerGroup(player, "passenger");
+            LuckPermsUtils.addPlayerGroup(player, "passenger");
             player.sendMessage(new MsgBuilder().prefix("rules_prefix").msg("msg_rules_accept").build());
         }
     }

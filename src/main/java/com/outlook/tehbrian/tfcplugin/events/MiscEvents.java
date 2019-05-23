@@ -1,8 +1,6 @@
 package com.outlook.tehbrian.tfcplugin.events;
 
-import com.outlook.tehbrian.tfcplugin.Flight;
-import com.outlook.tehbrian.tfcplugin.Main;
-import com.outlook.tehbrian.tfcplugin.piano.Piano;
+import com.outlook.tehbrian.tfcplugin.TFCPlugin;
 import com.outlook.tehbrian.tfcplugin.utils.LuckPermsUtils;
 import com.outlook.tehbrian.tfcplugin.utils.MiscUtils;
 import com.outlook.tehbrian.tfcplugin.utils.MsgBuilder;
@@ -17,12 +15,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
 
 import java.util.Calendar;
@@ -30,9 +25,9 @@ import java.util.Calendar;
 @SuppressWarnings("unused")
 public class MiscEvents implements Listener {
 
-    private final Main main;
+    private final TFCPlugin main;
 
-    public MiscEvents(Main main) {
+    public MiscEvents(TFCPlugin main) {
         this.main = main;
     }
 
@@ -41,8 +36,6 @@ public class MiscEvents implements Listener {
         Player player = event.getPlayer();
 
         player.sendMessage(new MsgBuilder().msg("tfc_banner").build());
-
-        Flight.disableFlight(player);
 
         Firework firework = player.getWorld().spawn(player.getLocation(), Firework.class);
         FireworkMeta fireworkMeta = firework.getFireworkMeta();
@@ -81,32 +74,6 @@ public class MiscEvents implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         event.setQuitMessage(new MsgBuilder().msg("msg_leave").replace(event.getPlayer().getDisplayName()).build());
-    }
-
-    @EventHandler
-    public void onToggleFlight(PlayerToggleFlightEvent event) {
-        event.setCancelled(true);
-        Flight.disableFlight(event.getPlayer());
-    }
-
-    @EventHandler
-    public void onInventoryClick(InventoryClickEvent event) {
-        if (event.getWhoClicked() instanceof Player) {
-            Player player = (Player) event.getWhoClicked();
-            if (event.getClickedInventory() != null) {
-                if (event.getClickedInventory().getName().equals(main.getConfig().getString("piano_notes_inventory_name"))) {
-                    if (event.isRightClick()) {
-                        event.setCancelled(true);
-                        Piano.play(player, event.getCurrentItem(), false);
-                    }
-                }
-            }
-        }
-    }
-
-    @EventHandler
-    public void onItemHeld(PlayerItemHeldEvent event) {
-        Piano.play(event.getPlayer(), event.getPlayer().getInventory().getItem(event.getNewSlot()), true);
     }
 
     @EventHandler

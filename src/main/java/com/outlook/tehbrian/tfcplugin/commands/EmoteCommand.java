@@ -7,7 +7,7 @@ import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.HelpCommand;
 import co.aikar.commands.annotation.Optional;
-import com.outlook.tehbrian.tfcplugin.Main;
+import com.outlook.tehbrian.tfcplugin.TFCPlugin;
 import com.outlook.tehbrian.tfcplugin.utils.MsgBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -18,9 +18,9 @@ import org.bukkit.entity.Player;
 @Description("Various fun chat emotes.")
 public class EmoteCommand extends BaseCommand {
 
-    private final Main main;
+    private final TFCPlugin main;
 
-    public EmoteCommand(Main main) {
+    public EmoteCommand(TFCPlugin main) {
         this.main = main;
     }
 

@@ -1,6 +1,6 @@
 package com.outlook.tehbrian.tfcplugin.events;
 
-import com.outlook.tehbrian.tfcplugin.Main;
+import com.outlook.tehbrian.tfcplugin.TFCPlugin;
 import com.outlook.tehbrian.tfcplugin.utils.MiscUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -21,9 +21,9 @@ import org.bukkit.inventory.EquipmentSlot;
 @SuppressWarnings({"unused", "deprecation"})
 public class BuildingEvents implements Listener {
 
-    private final Main main;
+    private final TFCPlugin main;
 
-    public BuildingEvents(Main main) {
+    public BuildingEvents(TFCPlugin main) {
         this.main = main;
     }
 

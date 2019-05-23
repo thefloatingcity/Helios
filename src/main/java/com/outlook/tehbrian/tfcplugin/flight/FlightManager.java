@@ -1,4 +1,4 @@
-package com.outlook.tehbrian.tfcplugin;
+package com.outlook.tehbrian.tfcplugin.flight;
 
 import org.bukkit.entity.Player;
 
@@ -6,11 +6,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public class Flight {
+public class FlightManager {
 
     final private static Set<UUID> playerCanBypassFly = new HashSet<>();
 
-    private Flight() {
+    private FlightManager() {
     }
 
     public static boolean getPlayerCanBypassFly(Player player) {

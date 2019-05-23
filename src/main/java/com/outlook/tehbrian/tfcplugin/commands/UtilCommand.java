@@ -6,8 +6,8 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.HelpCommand;
-import com.outlook.tehbrian.tfcplugin.Flight;
-import com.outlook.tehbrian.tfcplugin.Main;
+import com.outlook.tehbrian.tfcplugin.TFCPlugin;
+import com.outlook.tehbrian.tfcplugin.flight.FlightManager;
 import com.outlook.tehbrian.tfcplugin.utils.ItemBuilder;
 import com.outlook.tehbrian.tfcplugin.utils.MiscUtils;
 import com.outlook.tehbrian.tfcplugin.utils.MsgBuilder;
@@ -24,9 +24,9 @@ import org.bukkit.inventory.ItemStack;
 @Description("Various utilities.")
 public class UtilCommand extends BaseCommand {
 
-    private final Main main;
+    private final TFCPlugin main;
 
-    public UtilCommand(Main main) {
+    public UtilCommand(TFCPlugin main) {
         this.main = main;
     }
 
@@ -34,11 +34,11 @@ public class UtilCommand extends BaseCommand {
     @CommandPermission("tfcplugin.fly")
     @Description("Fly. Like the birds in the sky.")
     public void onFly(Player player) {
-        if (Flight.getPlayerCanBypassFly(player)) {
-            Flight.setPlayerCanBypassFly(player, false);
+        if (FlightManager.getPlayerCanBypassFly(player)) {
+            FlightManager.setPlayerCanBypassFly(player, false);
             player.sendMessage(new MsgBuilder().def("msg_fly_disabled").build());
         } else {
-            Flight.setPlayerCanBypassFly(player, true);
+            FlightManager.setPlayerCanBypassFly(player, true);
             player.sendMessage(new MsgBuilder().def("msg_fly_enabled").build());
         }
     }

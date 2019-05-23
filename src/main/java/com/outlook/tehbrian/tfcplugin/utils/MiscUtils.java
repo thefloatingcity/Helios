@@ -1,6 +1,6 @@
 package com.outlook.tehbrian.tfcplugin.utils;
 
-import com.outlook.tehbrian.tfcplugin.Main;
+import com.outlook.tehbrian.tfcplugin.TFCPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class MiscUtils {
 
-    private static final Main main = Main.getInstance();
+    private static final TFCPlugin main = TFCPlugin.getInstance();
 
     private MiscUtils() {
     }

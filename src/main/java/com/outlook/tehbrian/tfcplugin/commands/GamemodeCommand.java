@@ -8,7 +8,7 @@ import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Subcommand;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
-import com.outlook.tehbrian.tfcplugin.Main;
+import com.outlook.tehbrian.tfcplugin.TFCPlugin;
 import com.outlook.tehbrian.tfcplugin.utils.MsgBuilder;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
@@ -19,9 +19,9 @@ import org.bukkit.entity.Player;
 @Description("Change your gamemode.")
 public class GamemodeCommand extends BaseCommand {
 
-    private final Main main;
+    private final TFCPlugin main;
 
-    public GamemodeCommand(Main main) {
+    public GamemodeCommand(TFCPlugin main) {
         this.main = main;
     }
 

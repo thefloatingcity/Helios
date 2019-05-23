@@ -1,6 +1,6 @@
 package com.outlook.tehbrian.tfcplugin.utils;
 
-import com.outlook.tehbrian.tfcplugin.Main;
+import com.outlook.tehbrian.tfcplugin.TFCPlugin;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class MsgBuilder {
@@ -12,7 +12,6 @@ public class MsgBuilder {
     private Object[] replacements;
 
     public MsgBuilder() {
-
     }
 
     public MsgBuilder def(String msgKey) {
@@ -48,7 +47,7 @@ public class MsgBuilder {
 
     public String build() {
 
-        FileConfiguration config = Main.getInstance().getConfig();
+        FileConfiguration config = TFCPlugin.getInstance().getConfig();
         String message = "";
 
         if (msgKey != null) {

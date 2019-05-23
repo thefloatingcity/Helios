@@ -9,7 +9,7 @@ import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.HelpCommand;
 import co.aikar.commands.annotation.Optional;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
-import com.outlook.tehbrian.tfcplugin.Main;
+import com.outlook.tehbrian.tfcplugin.TFCPlugin;
 import com.outlook.tehbrian.tfcplugin.utils.MsgBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -25,9 +25,9 @@ import java.util.Random;
 @Description("Various world-changing actions.")
 public class ActionCommand extends BaseCommand {
 
-    private final Main main;
+    private final TFCPlugin main;
 
-    public ActionCommand(Main main) {
+    public ActionCommand(TFCPlugin main) {
         this.main = main;
     }
 

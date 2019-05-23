@@ -14,12 +14,12 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
-public class Piano {
+public class PianoManager {
 
     final private static Set<UUID> playerEnabledPiano = new HashSet<>();
     final private static Map<UUID, Sound> playerPianoInstrument = new HashMap<>();
 
-    private Piano() {
+    private PianoManager() {
     }
 
     public static boolean getPlayerEnabledPiano(Player player) {

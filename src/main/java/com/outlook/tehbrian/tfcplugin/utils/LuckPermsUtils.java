@@ -1,6 +1,6 @@
 package com.outlook.tehbrian.tfcplugin.utils;
 
-import com.outlook.tehbrian.tfcplugin.Main;
+import com.outlook.tehbrian.tfcplugin.TFCPlugin;
 import me.lucko.luckperms.api.Contexts;
 import me.lucko.luckperms.api.LuckPermsApi;
 import me.lucko.luckperms.api.User;
@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 public class LuckPermsUtils {
 
-    private static final Main main = Main.getInstance();
+    private static final TFCPlugin main = TFCPlugin.getInstance();
     private static final LuckPermsApi luckPermsApi = main.getLuckPermsApi();
 
     private LuckPermsUtils() {
@@ -29,7 +29,7 @@ public class LuckPermsUtils {
         return metaData.getSuffix() == null ? "" : metaData.getSuffix();
     }
 
-    public static void setPlayerGroup(Player player, String group) {
+    public static void addPlayerGroup(Player player, String group) {
         User user = luckPermsApi.getUserManager().getUser(player.getUniqueId());
         user.setPermission(luckPermsApi.getNodeFactory().makeGroupNode(group).build());
         luckPermsApi.getUserManager().saveUser(user);
