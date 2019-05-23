@@ -6,6 +6,7 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandCompletion;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Description;
+import co.aikar.commands.annotation.Optional;
 import co.aikar.commands.annotation.Subcommand;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import com.outlook.tehbrian.tfcplugin.TFCPlugin;
@@ -28,64 +29,52 @@ public class GamemodeCommand extends BaseCommand {
     @Subcommand("survival|s|0")
     @CommandAlias("gms")
     @CommandPermission("tfcplugin.gamemode")
-    @Description("Change your gamemode to Survival.")
-    public void onSurvival(Player player) {
-        player.setGameMode(GameMode.SURVIVAL);
-        player.sendMessage(new MsgBuilder().def("msg_gamemode_changed").replace("Survival").build());
-    }
-
-    @Subcommand("survival|s|0")
-    @CommandAlias("gms")
-    @CommandPermission("tfcplugin.gamemodeother")
-    @Description("Change someone's gamemode to Survival.")
+    @Description("Change gamemode to Survival.")
     @CommandCompletion("@players")
-    public void onSurvivalOther(CommandSender sender, OnlinePlayer target) {
-        Player targetPlayer = target.getPlayer();
-        targetPlayer.setGameMode(GameMode.SURVIVAL);
-        sender.sendMessage(new MsgBuilder().def("msg_gamemode_changed_other").replace(targetPlayer.getDisplayName(), "Survival").build());
-        targetPlayer.sendMessage(new MsgBuilder().def("msg_gamemode_changed").replace("Survival").build());
+    public void onSurvival(Player player, @Optional @CommandPermission("tfcplugin.gamemodeother") OnlinePlayer target) {
+        if (target == null) {
+            player.setGameMode(GameMode.SURVIVAL);
+            player.sendMessage(new MsgBuilder().def("msg_gamemode_changed").replace("Survival").build());
+        } else {
+            Player targetPlayer = target.getPlayer();
+            targetPlayer.setGameMode(GameMode.SURVIVAL);
+            player.sendMessage(new MsgBuilder().def("msg_gamemode_changed_other").replace(targetPlayer.getDisplayName(), "Survival").build());
+            targetPlayer.sendMessage(new MsgBuilder().def("msg_gamemode_changed").replace("Survival").build());
+        }
     }
 
     @Subcommand("creative|c|1")
     @CommandAlias("gmc")
     @CommandPermission("tfcplugin.gamemode")
-    @Description("Change your gamemode to Creative.")
-    public void onCreative(Player player) {
-        player.setGameMode(GameMode.CREATIVE);
-        player.sendMessage(new MsgBuilder().def("msg_gamemode_changed").replace("Creative").build());
-    }
-
-    @Subcommand("creative|c|1")
-    @CommandAlias("gmc")
-    @CommandPermission("tfcplugin.gamemodeother")
-    @Description("Change someone's gamemode to Creative.")
+    @Description("Change gamemode to Creative.")
     @CommandCompletion("@players")
-    public void onCreativeOther(CommandSender sender, OnlinePlayer target) {
-        Player targetPlayer = target.getPlayer();
-        targetPlayer.setGameMode(GameMode.CREATIVE);
-        sender.sendMessage(new MsgBuilder().def("msg_gamemode_changed_other").replace(targetPlayer.getDisplayName(), "Creative").build());
-        targetPlayer.sendMessage(new MsgBuilder().def("msg_gamemode_changed").replace("Creative").build());
+    public void onCreative(Player player, @Optional @CommandPermission("tfcplugin.gamemodeother") OnlinePlayer target) {
+        if (target == null) {
+            player.setGameMode(GameMode.CREATIVE);
+            player.sendMessage(new MsgBuilder().def("msg_gamemode_changed").replace("Creative").build());
+        } else {
+            Player targetPlayer = target.getPlayer();
+            targetPlayer.setGameMode(GameMode.CREATIVE);
+            player.sendMessage(new MsgBuilder().def("msg_gamemode_changed_other").replace(targetPlayer.getDisplayName(), "Creative").build());
+            targetPlayer.sendMessage(new MsgBuilder().def("msg_gamemode_changed").replace("Creative").build());
+        }
     }
 
     @Subcommand("adventure|a|2")
     @CommandAlias("gma")
     @CommandPermission("tfcplugin.gamemode")
-    @Description("Change your gamemode to Adventure.")
-    public void onAdventure(Player player) {
-        player.setGameMode(GameMode.ADVENTURE);
-        player.sendMessage(new MsgBuilder().def("msg_gamemode_changed").replace("Adventure").build());
-    }
-
-    @Subcommand("adventure|a|2")
-    @CommandAlias("gma")
-    @CommandPermission("tfcplugin.gamemodeother")
-    @Description("Change someone's gamemode to Adventure.")
+    @Description("Change gamemode to Adventure.")
     @CommandCompletion("@players")
-    public void onAdventureOther(CommandSender sender, OnlinePlayer target) {
-        Player targetPlayer = target.getPlayer();
-        targetPlayer.setGameMode(GameMode.ADVENTURE);
-        sender.sendMessage(new MsgBuilder().def("msg_gamemode_changed_other").replace(targetPlayer.getDisplayName(), "Creative").build());
-        targetPlayer.sendMessage(new MsgBuilder().def("msg_gamemode_changed").replace("Adventure").build());
+    public void onAdventure(Player player, @Optional @CommandPermission("tfcplugin.gamemodeother") OnlinePlayer target) {
+        if (target == null) {
+            player.setGameMode(GameMode.ADVENTURE);
+            player.sendMessage(new MsgBuilder().def("msg_gamemode_changed").replace("Adventure").build());
+        } else {
+            Player targetPlayer = target.getPlayer();
+            targetPlayer.setGameMode(GameMode.ADVENTURE);
+            player.sendMessage(new MsgBuilder().def("msg_gamemode_changed_other").replace(targetPlayer.getDisplayName(), "Creative").build());
+            targetPlayer.sendMessage(new MsgBuilder().def("msg_gamemode_changed").replace("Adventure").build());
+        }
     }
 
     @CatchUnknown
