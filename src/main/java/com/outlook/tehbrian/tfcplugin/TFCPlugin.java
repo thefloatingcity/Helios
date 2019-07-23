@@ -6,6 +6,7 @@ import com.outlook.tehbrian.tfcplugin.commands.ActionCommand;
 import com.outlook.tehbrian.tfcplugin.commands.CoreCommand;
 import com.outlook.tehbrian.tfcplugin.commands.EmoteCommand;
 import com.outlook.tehbrian.tfcplugin.commands.GamemodeCommand;
+import com.outlook.tehbrian.tfcplugin.commands.OntimeCommand;
 import com.outlook.tehbrian.tfcplugin.commands.PianoCommand;
 import com.outlook.tehbrian.tfcplugin.commands.RulesCommand;
 import com.outlook.tehbrian.tfcplugin.commands.UtilCommand;
@@ -34,26 +35,32 @@ public final class TFCPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         setupCommandManager();
+        setupEvents();
+        setupConfig();
 
         if (!setupLuckPermsApi()) {
             getLogger().severe("No LuckPerms dependency found! Disabling plugin..");
             getServer().getPluginManager().disablePlugin(this);
         }
-
-        getConfig().options().copyDefaults(true);
-        getConfig().options().copyHeader(true);
-        saveDefaultConfig();
-
-        getServer().getPluginManager().registerEvents(new AntiBuildEvents(), this);
-        getServer().getPluginManager().registerEvents(new BuildingEvents(this), this);
-        getServer().getPluginManager().registerEvents(new MiscEvents(this), this);
-        getServer().getPluginManager().registerEvents(new FlightEvents(), this);
-        getServer().getPluginManager().registerEvents(new PianoEvents(), this);
     }
 
     @Override
     public void onDisable() {
         getLogger().info("See you later!");
+    }
+
+    private void setupConfig() {
+        getConfig().options().copyDefaults(true);
+        getConfig().options().copyHeader(true);
+        saveDefaultConfig();
+    }
+
+    private void setupEvents() {
+        getServer().getPluginManager().registerEvents(new AntiBuildEvents(), this);
+        getServer().getPluginManager().registerEvents(new BuildingEvents(this), this);
+        getServer().getPluginManager().registerEvents(new MiscEvents(this), this);
+        getServer().getPluginManager().registerEvents(new FlightEvents(), this);
+        getServer().getPluginManager().registerEvents(new PianoEvents(), this);
     }
 
     private void setupCommandManager() {
@@ -63,6 +70,7 @@ public final class TFCPlugin extends JavaPlugin {
         manager.registerCommand(new CoreCommand(this));
         manager.registerCommand(new EmoteCommand());
         manager.registerCommand(new GamemodeCommand());
+        manager.registerCommand(new OntimeCommand());
         manager.registerCommand(new PianoCommand(this));
         manager.registerCommand(new RulesCommand());
         manager.registerCommand(new UtilCommand(this));
@@ -76,8 +84,8 @@ public final class TFCPlugin extends JavaPlugin {
             if (context.hasConfig("min") && context.getConfigValue("min", 0) > value) {
                 throw new ConditionFailedException("Minimum value is " + context.getConfigValue("min", 0) + ".");
             }
-            if (context.hasConfig("max") && context.getConfigValue("max", 3) < value) {
-                throw new ConditionFailedException("Maximum value is " + context.getConfigValue("max", 3) + ".");
+            if (context.hasConfig("max") && context.getConfigValue("max", 10) < value) {
+                throw new ConditionFailedException("Maximum value is " + context.getConfigValue("max", 10) + ".");
             }
         });
     }

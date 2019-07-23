@@ -1,4 +1,4 @@
-package com.outlook.tehbrian.tfcplugin.utils;
+package com.outlook.tehbrian.tfcplugin.util;
 
 import com.outlook.tehbrian.tfcplugin.TFCPlugin;
 import me.lucko.luckperms.api.Contexts;

@@ -1,387 +1,432 @@
+##############
+#            #
+#  MESSAGES  #
+#            #
+##############
+
+msg:
+  motd: "&fWelcome back! You were last on %s ago."
+  motd_new: "&fWelcome to the server, &d%s&f! Please read the &e/rules&f and the boards to your right!"
+  join: "&7[&2+&7]&f &a%s&f joined the game."
+  join_new: "&7[&5+&7]&f &d%s&f has joined for the first time!"
+  leave: "&7[&4-&7]&f &c%s&f left the game."
+  no_build: "&fYou can't build yet. Please read our rules first by doing &e/rules&f!"
+
+  rules_accept: "&fThanks for reading the rules! Here's your passenger."
+  rules_already_accepted: "&fLooks like you've already read the rules, thanks!"
+
+  warp_first: "&6Reaching maximum warp speed.."
+  warp_second: "&cReaching maximum warp speed.."
+  warp_max: "&4Maximum warp speed reached!"
+
+  zap: "&f%s &czapped&f %s"
+  zap_themself: "&f%s &czapped&f themselves"
+  launch: "&f%s &alaunched&f %s"
+  launch_themself: "&f%s &alaunched&f themselves"
+  boost: "&f%s &aboosted&f %s"
+  boost_themself: "&f%s &aboosted&f themselves"
+  poke: "&f%s &cpoked&f %s"
+  poke_themself: "&f%s &cpoked&f themselves"
+
+  reloaded: "&fConfig reloaded successfully!"
+
+  piano_enabled: "&aThe piano is now enabled!"
+  piano_disabled: "&cThe piano is now disabled."
+  piano_instrument_change: "&fYour instrument is now set to &e%s&f!"
+
+  gamemode_unknown: "&fUnknown input. Try something such as &esurvival&f, &es&f, &e0&f, &ecreative&f, &ec&f, &e1&f, &eadventure&f, &ea&f, or &e2&f."
+  gamemode_changed: "&fYour gamemode has been changed to &e%s&f!"
+  gamemode_changed_other: "&6%s&f's gamemode has been changed to &e%s&f!"
+
+  ontime: "&fYou've been playing for %s."
+  ontime_other: "&e%s&f has been playing for %s."
+
+  fly_enabled: "&fYou can now fly! Please only use this in emergencies."
+  fly_disabled: "&fYou can no longer fly. Thanks for disabling it!"
+
+  hat_set: "&fNow that's a fancy hat!"
+  hat_removed: "&fAww, there goes your fancy hat."
+  hat_none: "&fTo put on a hat, hold what you want to wear!"
+
+  winkwonk: "&d%s &5wink wonks &d;)"
+  shrug: "&a%s &2shrugs &a\\_o¬o_/"
+  spook: "&7%s &8is a spook."
+  doubt: "&b%s &9doubts that."
+  blame: "&c%s &4blames &c%s"
+  sue: "&e%s &6is suing"
+  sue_extra: "&e%s &6is suing &e%s"
+
+#############
+#           #
+#  INFIXES  #
+#           #
+#############
+
+infixes:
+  rules:
+    prefix: "&cRules &7»&f"
+    multistart: &rules_multistart "&7[&cRules&7]&f"
+    multi: &rules_multi "&c»&f"
+
+  piano:
+    prefix: "&3Piano &7»&f"
+    multistart: &piano_multistart "&7[&3Piano&7]&f"
+    multi: &piano_multi "&3»&f"
+
+  server:
+    prefix: "&fT&bF&aC &7»&f"
+    multistart: "&7[&fT&bF&aC&7]&f"
+    multi: "&b»&f"
+
+  warper:
+    prefix: "&eWarper &7»&f"
+
+###########
+#         #
+#  BOOKS  #
+#         #
+###########
+
+books:
+  piano_manual:
+    multistart: *piano_multistart
+    multi: *piano_multi
+    pages:
+      1:
+        title: "Your Piano Manual"
+        content:
+          - "&fWelcome to your new piano! With this, you can play cool tunes and stuff."
+          - "&fType &e/piano help [page]&f to see the other pages!"
+      2:
+        title: "The Notes Menu"
+        content:
+          - "&fFirst, you're going want to do &e/piano menu&f and put the notes you would like to play into your hotbar."
+          - "&3PROTIP:&f Right clicking on the notes in the menu will play them, almost like a preview!"
+          - "&fYou can play any note that Minecraft supports, so if you want a good sounding set of notes, pick the ones marked &eF# Major&f or &eF# Minor&f!"
+      3:
+        title: "Other Instruments"
+        content:
+          - "&fThen, you'll most likely want to choose a different instrument."
+          - "&fType &e/piano instrument [sound]&f to pick an instrument. Tab complete works!"
+          - "&fSo simply type &e/piano instrument&f with a space at the end, and press tab to see a list!"
+      4:
+        title: "Starting It Up"
+        content:
+          - "&fThen to start playing, type &e/piano toggle&f till it's enabled."
+          - "&fNow, outside of your inventory, simply change your actively held item, &7(keys 1-9)&f and you'll play the note that's on the slot you change to!"
+          - "&fYou can use any scale or combination of keys you want. Have fun!"
+
+  rules:
+    multistart: *rules_multistart
+    multi: *rules_multi
+    pages:
+      1:
+        title: "The Rules"
+        content:
+          - "&fThese are the rules for the forums, the Discord, the server, and anything else that's related to The Floating City."
+          - "&fGenerally, use common sense and you'll be fine, but please read them! They're short and sweet :)"
+      2:
+        title: "Griefing"
+        content:
+          - "&fNo touching other people's stuff without their permission. This includes killing their animals, trampling their crops, touching their itemframes or chests.."
+          - "&fYou get the idea! If it isn't yours, leave it be."
+      3:
+        title: "Chat Stuff"
+        content:
+          - "&fSwearing is allowed but please be courteous."
+          - "&fHaving long messages or lots of messages is fine, but please don't fill up chat with meaningless gibberish."
+          - "&fAdditionally, don't repeat the same messages over and over."
+      4:
+        title: "Advertising"
+        content:
+          - "&fWe're a pretty unconvential server! Talking about servers or saying their IPs, is fine!"
+          - "&fJust don't spam chat trying to get people to join a server. It's annoying, honestly."
+      5:
+        title: "Hurtful Speech"
+        content:
+          - "&fWe're not a politically correct server, but just don't be a jerk."
+          - "&fIf you think what you're going to say is going to hurt someone, just don't say it."
+          - "&fThis also goes the other way though. Don't get offended over silly things."
+      6:
+        title: "Flamewars"
+        content:
+          - "&fHaving discussions about things are fine! Religion, politics, so be it."
+          - "&fHowever, keep it a debate, not a flamewar. Keep your cool, don't start fighting with eachother. That's just not constructive."
+      7:
+        title: "PG-13"
+        content:
+          - "&fWe're a pretty relaxed server. But keep it PG-13."
+          - "&fNo builds or chat that has a lot of gore or sexual content."
+      8:
+        title: "Lag, Bugs, and Glitches"
+        content:
+          - "&fPlease don't try to break our server. It's not funny."
+          - "&fIf you find any bugs, glitches, or explots, please report them to staff, and definitely don't abuse them."
+      9:
+        title: "Common Sense"
+        content:
+          - "&fAll in all, these rules boil down to common sense. Don't be a jerk, use your head, and have fun!"
+          - "&fOnce you're sure you're familiar with &mcommon sense&f our rules, type &e/rules accept&f to get passenger! :D"
+
+#################
+#               #
+#  INVENTORIES  #
+#               #
+#################
+
+inventories:
+  piano_notes:
+    name: "Funky Piano Notes"
+    size: 27
+    items:
+      1:
+        material: "STAINED_GLASS_PANE"
+        durability: 8
+        name: "&fF♯/G♭ [&bOctave 1&f]"
+        lore:
+          - "&7Part of &f[&eF# Major, F# Minor&f]"
+          - "&8[Note]"
+          - "0.5"
+      2:
+        material: "STAINED_GLASS_PANE"
+        durability: 0
+        name: "&fG [&bOctave 1&f]"
+        lore:
+          - "&7Part of &f[]"
+          - "&8[Note]"
+          - "0.529732"
+      3:
+        material: "STAINED_GLASS_PANE"
+        durability: 8
+        name: "&fG♯/A♭ [&bOctave 1&f]"
+        lore:
+          - "&7Part of &f[&eF# Major, F# Minor&f]"
+          - "&8[Note]"
+          - "0.561231"
+      4:
+        material: "STAINED_GLASS_PANE"
+        durability: 0
+        name: "&fA [&bOctave 1&f]"
+        lore:
+          - "&7Part of &f[&eF# Minor&f]"
+          - "&8[Note]"
+          - "0.594604"
+      5:
+        material: "STAINED_GLASS_PANE"
+        durability: 8
+        name: "&fA♯/B♭ [&bOctave 1&f]"
+        lore:
+          - "&7Part of &f[&eF# Major&f]"
+          - "&8[Note]"
+          - "0.629961"
+      6:
+        material: "STAINED_GLASS_PANE"
+        durability: 0
+        name: "&fB [&bOctave 1&f]"
+        lore:
+          - "&7Part of &f[&eF# Major, F# Minor&f]"
+          - "&8[Note]"
+          - "0.667420"
+      7:
+        material: "STAINED_GLASS_PANE"
+        durability: 0
+        name: "&fC [&bOctave 1&f]"
+        lore:
+          - "&7Part of &f[]"
+          - "&8[Note]"
+          - "0.707107"
+      8:
+        material: "STAINED_GLASS_PANE"
+        durability: 8
+        name: "&fC♯/D♭ [&bOctave 1&f]"
+        lore:
+          - "&7Part of &f[&eF# Major, F# Minor&f]"
+          - "&8[Note]"
+          - "0.749154"
+      9:
+        material: "STAINED_GLASS_PANE"
+        durability: 0
+        name: "&fD [&bOctave 1&f]"
+        lore:
+          - "&7Part of &f[&eF# Minor&f]"
+          - "&8[Note]"
+          - "0.793701"
+      10:
+        material: "STAINED_GLASS_PANE"
+        durability: 8
+        name: "&fD♯/E♭ [&bOctave 1&f]"
+        lore:
+          - "&7Part of &f[&eF# Major&f]"
+          - "&8[Note]"
+          - "0.840896"
+      11:
+        material: "STAINED_GLASS_PANE"
+        durability: 0
+        name: "&fE [&bOctave 1&f]"
+        lore:
+          - "&7Part of &f[&eF# Minor&f]"
+          - "&8[Note]"
+          - "0.890899"
+      12:
+        material: "STAINED_GLASS_PANE"
+        durability: 0
+        name: "&fF [&bOctave 1&f]"
+        lore:
+          - "&7Part of &f[&eF# Major&f]"
+          - "&8[Note]"
+          - "0.943874"
+      13:
+        material: "STAINED_GLASS_PANE"
+        durability: 8
+        name: "&fF♯/G♭ [&bOctave 2&f]"
+        lore:
+          - "&7Part of &f[&eF# Major, F# Minor&f]"
+          - "&8[Note]"
+          - "1"
+      14:
+        material: "STAINED_GLASS_PANE"
+        durability: 0
+        name: "&fG [&bOctave 2&f]"
+        lore:
+          - "&7Part of &f[]"
+          - "&8[Note]"
+          - "1.059463"
+      15:
+        material: "STAINED_GLASS_PANE"
+        durability: 8
+        name: "&fG♯/A♭ [&bOctave 2&f]"
+        lore:
+          - "&7Part of &f[&eF# Major, F# Minor&f]"
+          - "&8[Note]"
+          - "1.122462"
+      16:
+        material: "STAINED_GLASS_PANE"
+        durability: 0
+        name: "&fA [&bOctave 2&f]"
+        lore:
+          - "&7Part of &f[&eF# Minor&f]"
+          - "&8[Note]"
+          - "1.189207"
+      17:
+        material: "STAINED_GLASS_PANE"
+        durability: 8
+        name: "&fA#/B♭ [&bOctave 2&f]"
+        lore:
+          - "&7Part of &f[&eF# Major&f]"
+          - "&8[Note]"
+          - "1.259921"
+      18:
+        material: "STAINED_GLASS_PANE"
+        durability: 0
+        name: "&fB [&bOctave 2&f]"
+        lore:
+          - "&7Part of &f[&eF# Major, F# Minor&f]"
+          - "&8[Note]"
+          - "1.334840"
+      19:
+        material: "STAINED_GLASS_PANE"
+        durability: 0
+        name: "&fC [&bOctave 2&f]"
+        lore:
+          - "&7Part of &f[]"
+          - "&8[Note]"
+          - "1.414214"
+      20:
+        material: "STAINED_GLASS_PANE"
+        durability: 8
+        name: "&fC♯/D♭ [&bOctave 2&f]"
+        lore:
+          - "&7Part of &f[&eF# Major, F# Minor&f]"
+          - "&8[Note]"
+          - "1.498307"
+      21:
+        material: "STAINED_GLASS_PANE"
+        durability: 0
+        name: "&fD [&bOctave 2&f]"
+        lore:
+          - "&7Part of &f[&eF# Minor&f]"
+          - "&8[Note]"
+          - "1.587401"
+      22:
+        material: "STAINED_GLASS_PANE"
+        durability: 8
+        name: "&fD♯/E♭ [&bOctave 2&f]"
+        lore:
+          - "&7Part of &f[&eF# Major&f]"
+          - "&8[Note]"
+          - "1.681793"
+      23:
+        material: "STAINED_GLASS_PANE"
+        durability: 0
+        name: "&fE [&bOctave 2&f]"
+        lore:
+          - "&7Part of &f[&eF# Minor&f]"
+          - "&8[Note]"
+          - "1.781797"
+      24:
+        material: "STAINED_GLASS_PANE"
+        durability: 0
+        name: "&fF [&bOctave 2&f]"
+        lore:
+          - "&7Part of &f[&eF# Major&f]"
+          - "&8[Note]"
+          - "1.887749"
+      25:
+        material: "STAINED_GLASS_PANE"
+        durability: 8
+        name: "&fF♯/G♭ [&bOctave 3&f]"
+        lore:
+          - "&7Part of &f[&eF# Major, F# Minor&f]"
+          - "&8[Note]"
+          - "2"
+
+  blocks:
+    name: "Useful Building Blocks"
+    size: 9
+    items:
+      1:
+        material: "HUGE_MUSHROOM_1"
+        amount: 64
+        name: "&fBrown Mushroom Block"
+      2:
+        material: "HUGE_MUSHROOM_2"
+        amount: 64
+        name: "&fRed Mushroom Block"
+      3:
+        material: "GRASS_PATH"
+        amount: 64
+        name: "&fGrass Path"
+      4:
+        material: "DRAGON_EGG"
+        amount: 64
+        name: "&fDragon Egg"
+      5:
+        material: "SOIL"
+        amount: 64
+        name: "&fFarmland"
+
 ##########
 #        #
 #  MISC  #
 #        #
 ##########
-tfc_banner: "&8-*-*-*-*-*-*-*-*- &7-=[&f The &bFloating &aCity &7]=- &8-*-*-*-*-*-*-*-*-"
-tfc_prefix: "&7[&fT&bF&aC&7]&f"
-tfc_multi: "&b&l>"
 
-msg_motd_new: "&fWelcome to the server, &b%s&f! Please read the &e/rules&f and the boards to your right!"
-msg_motd: "&fWelcome back! You were last on &e%s&f %s ago."
+tfc_banner: "&8-*-*-*-*-*-*-*-*-&7 -=[&f The &bFloating &aCity &7]=- &8-*-*-*-*-*-*-*-*-"
 
-msg_join_new: "&7[&a+&7]&f &d%s&f has joined for the first time!"
-msg_join: "&7[&a+&7]&f &b%s&f joined the game."
-
-msg_leave: "&7[&c-&7]&f &6%s&f left the game."
-
-msg_page: "&f%s &7| Page &e%s&7/&e%s"
+page_format: "&f%s&7 | Page &e%s&7/&e%s"
 
 chat_format: "&f{prefix}&f &7%1$s&f{suffix}&f: %2$s"
 
-msg_no_build: "You can't build yet. Please read our rules first by doing &e/rules&f!"
+fancify_time_format: "&e%s&f %s"
 
-spawn:
-  world: world
-  x: 0.5
-  y: 60
-  z: 0.5
-
-msg_warp_first: "&fReaching maximum &6warp speed&f.."
-msg_warp_second: "&fReaching maximum &cwarp speed&f.."
-msg_warp_max: "&fMaximum &4warp speed&f reached!"
-
-############
-#          #
-#  ACTION  #
-#          #
-############
-msg_zap: "&f%s &czapped&f %s"
-msg_zap_themself: "&f%s &czapped&f themselves"
-
-msg_launch: "&f%s &alaunched&f %s"
-msg_launch_themself: "&f%s &alaunched&f themselves"
-
-msg_boost: "&f%s &aboosted&f %s"
-msg_boost_themself: "&f%s &aboosted&f themselves"
-
-msg_poke: "&f%s &cpoked&f %s"
-msg_poke_themself: "&f%s &cpoked&f themselves"
 poke_force:
   maxY: 0.8
   minY: 0.2
   maxXZ: 0.8
   minXZ: -0.8
 
-##########
-#        #
-#  CORE  #
-#        #
-##########
-msg_reloaded: "&fConfig reloaded successfully!"
-
-###########
-#         #
-#  EMOTE  #
-#         #
-###########
-emote_winkwonk: "&d%s &5wink wonks &d;)"
-emote_shrug: "&a%s &2shrugs &a\\_o¬o_/"
-emote_spook: "&7%s &8is a spook."
-emote_doubt: "&b%s &9doubts that."
-emote_blame: "&c%s &4blames &c%s"
-emote_sue: "&e%s &6is suing"
-emote_sue_extra: "&e%s &6is suing &e%s"
-
-##############
-#            #
-#  GAMEMODE  #
-#            #
-##############
-msg_gamemode_unknown: "&fUnknown input. Try something such as &esurvival&f, &es&f, &e0&f, &ecreative&f, &ec&f, &e1&f, &eadventure&f, &ea&f, or &e2&f."
-msg_gamemode_changed: "&fYour gamemode has been changed to &e%s&f!"
-msg_gamemode_changed_other: "&6%s&f's gamemode has been changed to &e%s&f!"
-
-###########
-#         #
-#  PIANO  #
-#         #
-###########
-piano_prefix: "&7[&3Piano&7]&f"
-piano_multi: "&3&l>"
-
-piano_help:
-  page1:
-    topic: "Your Piano Manual"
-    content:
-      - "&fWelcome to your new piano! With this, you can play cool tunes and stuff."
-      - "&fType &e/piano help [page]&f to see the other pages!"
-  page2:
-    topic: "The Notes Menu"
-    content:
-      - "&fFirst, you're going want to do &e/piano menu&f and put the notes you would like to play into your hotbar."
-      - "&3PROTIP:&f Right clicking on the notes in the menu will play them, almost like a preview!"
-      - "&fYou can play any note that Minecraft supports, so if you want a good sounding set of notes, pick the ones marked &eF# Major&f or &eF# Minor&f!"
-  page3:
-    topic: "Other Instruments"
-    content:
-      - "&fThen, you'll most likely want to choose a different instrument."
-      - "&fType &e/piano instrument [sound]&f to pick an instrument. Tab complete works!"
-      - "&fSo simply type &e/piano instrument&f with a space at the end, and press tab to see a list!"
-  page4:
-    topic: "Starting It Up"
-    content:
-      - "&fThen to start playing, type &e/piano toggle&f till it's enabled."
-      - "&fNow, outside of your inventory, simply change your actively held item, &7(keys 1-9)&f and you'll play the note that's on the slot you change to!"
-      - "&fYou can use any scale or combination of keys you want. Have fun!"
-
-msg_piano_enabled: "&aThe piano is now enabled!"
-msg_piano_disabled: "&cThe piano is now disabled."
-msg_piano_instrument_change: "&fYour piano instrument is now set to &e%s&f!"
-piano_notes_inventory_name: "Piano Notes"
-piano_notes:
-  piano_note1:
-    name: "&fF♯/G♭ [&bOctave 1&f]"
-    lore:
-      - "&7Part of&f [&eF# Major, F# Minor&f]"
-      - "&8[Note]"
-      - "0.5"
-    data: 8
-  piano_note2:
-    name: "&fG [&bOctave 1&f]"
-    lore:
-      - "&7Part of&f []"
-      - "&8[Note]"
-      - "0.529732"
-    data: 0
-  piano_note3:
-    name: "&fG♯/A♭ [&bOctave 1&f]"
-    lore:
-      - "&7Part of&f [&eF# Major, F# Minor&f]"
-      - "&8[Note]"
-      - "0.561231"
-    data: 8
-  piano_note4:
-    name: "&fA [&bOctave 1&f]"
-    lore:
-      - "&7Part of&f [&eF# Minor&f]"
-      - "&8[Note]"
-      - "0.594604"
-    data: 0
-  piano_note5:
-    name: "&fA♯/B♭ [&bOctave 1&f]"
-    lore:
-      - "&7Part of&f [&eF# Major&f]"
-      - "&8[Note]"
-      - "0.629961"
-    data: 8
-  piano_note6:
-    name: "&fB [&bOctave 1&f]"
-    lore:
-      - "&7Part of&f [&eF# Major, F# Minor&f]"
-      - "&8[Note]"
-      - "0.667420"
-    data: 0
-  piano_note7:
-    name: "&fC [&bOctave 1&f]"
-    lore:
-      - "&7Part of&f []"
-      - "&8[Note]"
-      - "0.707107"
-    data: 0
-  piano_note8:
-    name: "&fC♯/D♭ [&bOctave 1&f]"
-    lore:
-      - "&7Part of&f [&eF# Major, F# Minor&f]"
-      - "&8[Note]"
-      - "0.749154"
-    data: 8
-  piano_note9:
-    name: "&fD [&bOctave 1&f]"
-    lore:
-      - "&7Part of&f [&eF# Minor&f]"
-      - "&8[Note]"
-      - "0.793701"
-    data: 0
-  piano_note10:
-    name: "&fD♯/E♭ [&bOctave 1&f]"
-    lore:
-      - "&7Part of&f [&eF# Major&f]"
-      - "&8[Note]"
-      - "0.840896"
-    data: 8
-  piano_note11:
-    name: "&fE [&bOctave 1&f]"
-    lore:
-      - "&7Part of&f [&eF# Minor&f]"
-      - "&8[Note]"
-      - "0.890899"
-    data: 0
-  piano_note12:
-    name: "&fF [&bOctave 1&f]"
-    lore:
-      - "&7Part of&f [&eF# Major&f]"
-      - "&8[Note]"
-      - "0.943874"
-    data: 0
-  piano_note13:
-    name: "&fF♯/G♭ [&bOctave 2&f]"
-    lore:
-      - "&7Part of&f [&eF# Major, F# Minor&f]"
-      - "&8[Note]"
-      - "1"
-    data: 8
-  piano_note14:
-    name: "&fG [&bOctave 2&f]"
-    lore:
-      - "&7Part of&f []"
-      - "&8[Note]"
-      - "1.059463"
-    data: 0
-  piano_note15:
-    name: "&fG♯/A♭ [&bOctave 2&f]"
-    lore:
-      - "&7Part of&f [&eF# Major, F# Minor&f]"
-      - "&8[Note]"
-      - "1.122462"
-    data: 8
-  piano_note16:
-    name: "&fA [&bOctave 2&f]"
-    lore:
-      - "&7Part of&f [&eF# Minor&f]"
-      - "&8[Note]"
-      - "1.189207"
-    data: 0
-  piano_note17:
-    name: "&fA#/B♭ [&bOctave 2&f]"
-    lore:
-      - "&7Part of&f [&eF# Major&f]"
-      - "&8[Note]"
-      - "1.259921"
-    data: 8
-  piano_note18:
-    name: "&fB [&bOctave 2&f]"
-    lore:
-      - "&7Part of&f [&eF# Major, F# Minor&f]"
-      - "&8[Note]"
-      - "1.334840"
-    data: 0
-  piano_note19:
-    name: "&fC [&bOctave 2&f]"
-    lore:
-      - "&7Part of&f []"
-      - "&8[Note]"
-      - "1.414214"
-    data: 0
-  piano_note20:
-    name: "&fC♯/D♭ [&bOctave 2&f]"
-    lore:
-      - "&7Part of&f [&eF# Major, F# Minor&f]"
-      - "&8[Note]"
-      - "1.498307"
-    data: 8
-  piano_note21:
-    name: "&fD [&bOctave 2&f]"
-    lore:
-      - "&7Part of&f [&eF# Minor&f]"
-      - "&8[Note]"
-      - "1.587401"
-    data: 0
-  piano_note22:
-    name: "&fD♯/E♭ [&bOctave 2&f]"
-    lore:
-      - "&7Part of&f [&eF# Major&f]"
-      - "&8[Note]"
-      - "1.681793"
-    data: 8
-  piano_note23:
-    name: "&fE [&bOctave 2&f]"
-    lore:
-      - "&7Part of&f [&eF# Minor&f]"
-      - "&8[Note]"
-      - "1.781797"
-    data: 0
-  piano_note24:
-    name: "&fF [&bOctave 2&f]"
-    lore:
-      - "&7Part of&f [&eF# Major&f]"
-      - "&8[Note]"
-      - "1.887749"
-    data: 0
-  piano_note25:
-    name: "&fF♯/G♭ [&bOctave 3&f]"
-    lore:
-      - "&7Part of&f [&eF# Major, F# Minor&f]"
-      - "&8[Note]"
-      - "2"
-    data: 8
-
-###########
-#         #
-#  RULES  #
-#         #
-###########
-rules_prefix: "&7[&cRules&7]&f"
-rules_multi: "&c&l>"
-
-msg_rules_accept: "&fThanks for reading the rules! Here's your passenger."
-msg_rules_already_accepted: "&fLooks like you've already read the rules, thanks!"
-
-rules:
-  page1:
-    topic: "The Rules"
-    content:
-      - "&fThese are the rules for the forums, the Discord, the server, and anything else that's related to The Floating City."
-      - "&fGenerally, use common sense and you'll be fine, but please read them! They're short and sweet :)"
-  page2:
-    topic: "Griefing"
-    content:
-      - "&fNo touching other people's stuff without their permission. This includes killing their animals, trampling their crops, touching their itemframes or chests.."
-      - "&fYou get the idea! If it isn't yours, leave it be."
-  page3:
-    topic: "Chat Stuff"
-    content:
-      - "&fSwearing is allowed but please be courteous."
-      - "&fHaving long messages or lots of messages is fine, but please don't fill up chat with meaningless gibberish."
-      - "&fAdditionally, don't repeat the same messages over and over."
-  page4:
-    topic: "Advertising"
-    content:
-      - "&fWe're a pretty unconvential server! Talking about servers or saying their IPs, is fine!"
-      - "&fJust don't spam chat trying to get people to join a server. It's annoying, honestly."
-  page5:
-    topic: "Hurtful Speech"
-    content:
-      - "&fWe're not a politically correct server, but just don't be a jerk."
-      - "&fIf you think what you're going to say is going to hurt someone, just don't say it."
-      - "&fThis also goes the other way though. Don't get offended over silly things."
-  page6:
-    topic: "Flamewars"
-    content:
-      - "&fHaving discussions about things are fine! Religion, politics, so be it."
-      - "&fHowever, keep it a debate, not a flamewar. Keep your cool, don't start fighting with eachother. That's just not constructive."
-  page7:
-    topic: "PG-13"
-    content:
-      - "&fWe're a pretty relaxed server. But keep it PG-13."
-      - "&fNo builds or chat that has a lot of gore or sexual content."
-  page8:
-    topic: "Lag, Bugs, and Glitches"
-    content:
-      - "&fPlease don't try to break our server. It's not funny."
-      - "&fIf you find any bugs, glitches, or explots, please report them to staff, and definitely don't abuse them."
-  page9:
-    topic: "Common Sense"
-    content:
-      - "&fAll in all, these rules boil down to common sense. Don't be a jerk, use your head, and have fun!"
-      - "&fOnce you're sure you're familiar with &mcommon sense&f our rules, type &e/rules accept&f to get passenger! :D"
-
-##########
-#        #
-#  UTIL  #
-#        #
-##########
-msg_fly_enabled: "&fYou can now fly! Please only use this in emergencies."
-msg_fly_disabled: "&fYou can no longer fly. Thanks for disabling it!"
-
-msg_hat_set: "&fNow that's a fancy hat!"
-msg_hat_removed: "&fAww, there goes your fancy hat."
-msg_hat_none: "&fTo put on a hat, hold what you want to wear!"
-
-blocks_inventory_name: "Useful Building Blocks"
-blocks:
-  block1:
-    name: "&fBrown Mushroom Block"
-    material: "HUGE_MUSHROOM_1"
-  block2:
-    name: "&fRed Mushroom Block"
-    material: "HUGE_MUSHROOM_2"
-  block3:
-    name: "&fGrass Path"
-    material: "GRASS_PATH"
-  block4:
-    name: "&fDragon Egg"
-    material: "DRAGON_EGG"
-  block5:
-    name: "&fFarmland"
-    material: "SOIL"
+spawn:
+  world: world
+  x: 0.5
+  y: 60
+  z: 0.5

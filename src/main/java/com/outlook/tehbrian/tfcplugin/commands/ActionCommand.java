@@ -10,7 +10,7 @@ import co.aikar.commands.annotation.HelpCommand;
 import co.aikar.commands.annotation.Optional;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import com.outlook.tehbrian.tfcplugin.TFCPlugin;
-import com.outlook.tehbrian.tfcplugin.utils.MsgBuilder;
+import com.outlook.tehbrian.tfcplugin.util.MsgBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -39,12 +39,12 @@ public class ActionCommand extends BaseCommand {
         if (target == null) {
             player.setVelocity(new Vector(0, 10, 0));
             player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg_launch_themself").replace(player.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().def("msg.launch_themself").replace(player.getDisplayName()).build());
         } else {
             Player targetPlayer = target.getPlayer();
             targetPlayer.setVelocity(new Vector(0, 10, 0));
             targetPlayer.getWorld().playSound(targetPlayer.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg_launch").replace(player.getDisplayName(), targetPlayer.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().def("msg.launch").replace(player.getDisplayName(), targetPlayer.getDisplayName()).build());
         }
     }
 
@@ -55,11 +55,11 @@ public class ActionCommand extends BaseCommand {
     public void onZap(Player player, @Optional @CommandPermission("tfcplugin.zapother") OnlinePlayer target) {
         if (target == null) {
             player.getWorld().strikeLightning(player.getLocation());
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg_zap_themself").replace(player.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().def("msg.zap_themself").replace(player.getDisplayName()).build());
         } else {
             Player targetPlayer = target.getPlayer();
             targetPlayer.getWorld().strikeLightning(targetPlayer.getLocation());
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg_zap").replace(player.getDisplayName(), targetPlayer.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().def("msg.zap").replace(player.getDisplayName(), targetPlayer.getDisplayName()).build());
         }
     }
 
@@ -69,14 +69,14 @@ public class ActionCommand extends BaseCommand {
     @CommandCompletion("@players")
     public void onBoost(Player player, @Optional @CommandPermission("tfcplugin.boostother") OnlinePlayer target) {
         if (target == null) {
-            player.setVelocity(player.getLocation().getDirection().multiply(3));
-            player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg_boost_themself").replace(player.getDisplayName()).build());
+            player.setVelocity(player.getEyeLocation().getDirection().multiply(3));
+            player.getWorld().playSound(player.getEyeLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
+            Bukkit.broadcastMessage(new MsgBuilder().def("msg.boost_themself").replace(player.getDisplayName()).build());
         } else {
             Player targetPlayer = target.getPlayer();
             targetPlayer.setVelocity(targetPlayer.getLocation().getDirection().multiply(3));
-            targetPlayer.getWorld().playSound(targetPlayer.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg_boost").replace(player.getDisplayName(), targetPlayer.getDisplayName()).build());
+            targetPlayer.getWorld().playSound(targetPlayer.getEyeLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
+            Bukkit.broadcastMessage(new MsgBuilder().def("msg.boost").replace(player.getDisplayName(), targetPlayer.getDisplayName()).build());
         }
     }
 
@@ -96,11 +96,11 @@ public class ActionCommand extends BaseCommand {
         Vector randomVector = new Vector(randX, randY, randZ);
         if (target == null) {
             player.setVelocity(randomVector);
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg_poke_themself").replace(player.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().def("msg.poke_themself").replace(player.getDisplayName()).build());
         } else {
             Player targetPlayer = target.getPlayer();
             targetPlayer.setVelocity(randomVector);
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg_poke").replace(player.getDisplayName(), targetPlayer.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().def("msg.poke").replace(player.getDisplayName(), targetPlayer.getDisplayName()).build());
         }
     }
 

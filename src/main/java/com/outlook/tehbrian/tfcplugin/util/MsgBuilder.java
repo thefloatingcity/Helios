@@ -1,4 +1,4 @@
-package com.outlook.tehbrian.tfcplugin.utils;
+package com.outlook.tehbrian.tfcplugin.util;
 
 import com.outlook.tehbrian.tfcplugin.TFCPlugin;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -16,11 +16,11 @@ public class MsgBuilder {
 
     public MsgBuilder def(String msgKey) {
         this.msgKey = msgKey;
-        this.prefixKey = "tfc_prefix";
+        this.prefixKey = "infixes.server.prefix";
         return this;
     }
 
-    public MsgBuilder msg(String msgKey) {
+    public MsgBuilder msgKey(String msgKey) {
         this.msgKey = msgKey;
         return this;
     }
@@ -30,7 +30,7 @@ public class MsgBuilder {
         return this;
     }
 
-    public MsgBuilder prefix(String prefixKey) {
+    public MsgBuilder prefixKey(String prefixKey) {
         this.prefixKey = prefixKey;
         return this;
     }
@@ -46,7 +46,6 @@ public class MsgBuilder {
     }
 
     public String build() {
-
         FileConfiguration config = TFCPlugin.getInstance().getConfig();
         String message = "";
 

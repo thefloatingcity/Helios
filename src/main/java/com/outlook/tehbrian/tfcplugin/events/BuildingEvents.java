@@ -1,7 +1,7 @@
 package com.outlook.tehbrian.tfcplugin.events;
 
 import com.outlook.tehbrian.tfcplugin.TFCPlugin;
-import com.outlook.tehbrian.tfcplugin.utils.MiscUtils;
+import com.outlook.tehbrian.tfcplugin.util.MiscUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;

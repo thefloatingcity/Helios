@@ -6,7 +6,7 @@
     <groupId>com.outlook.tehbrian</groupId>
     <artifactId>tfcplugin</artifactId>
     <!-- Version is used in plugin.yml -->
-    <version>1.0.4</version>
+    <version>1.5.0</version>
     <packaging>jar</packaging>
 
     <!-- Name, Description, and URL are used in plugin.yml -->
@@ -44,7 +44,7 @@
     <developers>
         <developer>
             <name>TehBrian</name>
-            <url>https://t3hbrian.github.io</url>
+            <url>https://itstehbrian.github.io</url>
         </developer>
     </developers>
 
@@ -91,7 +91,7 @@
     </dependencies>
 
     <build>
-        <finalName>${project.name}-${project.version}</finalName>
+        <finalName>${project.name}</finalName>
         <sourceDirectory>src/main/java</sourceDirectory>
         <defaultGoal>clean install</defaultGoal>
         <resources>

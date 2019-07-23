@@ -1,9 +1,11 @@
 package com.outlook.tehbrian.tfcplugin.events;
 
 import com.outlook.tehbrian.tfcplugin.TFCPlugin;
-import com.outlook.tehbrian.tfcplugin.utils.LuckPermsUtils;
-import com.outlook.tehbrian.tfcplugin.utils.MiscUtils;
-import com.outlook.tehbrian.tfcplugin.utils.MsgBuilder;
+import com.outlook.tehbrian.tfcplugin.util.LuckPermsUtils;
+import com.outlook.tehbrian.tfcplugin.util.MiscUtils;
+import com.outlook.tehbrian.tfcplugin.util.MsgBuilder;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
@@ -35,9 +37,9 @@ public class MiscEvents implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        player.sendMessage(new MsgBuilder().msg("tfc_banner").build());
+        player.sendMessage(new MsgBuilder().msgKey("tfc_banner").build());
 
-        Firework firework = player.getWorld().spawn(player.getLocation(), Firework.class);
+        Firework firework = player.getWorld().spawn(player.getEyeLocation(), Firework.class);
         FireworkMeta fireworkMeta = firework.getFireworkMeta();
         fireworkMeta.addEffect(FireworkEffect.builder()
                 .flicker(true)
@@ -50,53 +52,49 @@ public class MiscEvents implements Listener {
         firework.setFireworkMeta(fireworkMeta);
 
         if (player.hasPlayedBefore()) {
-            event.setJoinMessage(new MsgBuilder().msg("msg_join").replace(player.getDisplayName()).build());
+            event.setJoinMessage(new MsgBuilder().msgKey("msg.join").replace(player.getDisplayName()).build());
 
             long millisSinceLastPlayed = Calendar.getInstance().getTimeInMillis() - player.getLastPlayed();
-            if (millisSinceLastPlayed >= 86400000) {
-                player.sendMessage(new MsgBuilder().def("msg_motd").replace(Math.floor((millisSinceLastPlayed / 86400000d) * 100) / 100, "days").build());
-            } else if (millisSinceLastPlayed >= 3600000) {
-                player.sendMessage(new MsgBuilder().def("msg_motd").replace(Math.floor((millisSinceLastPlayed / 3600000d) * 100) / 100, "hours").build());
-            } else if (millisSinceLastPlayed >= 60000) {
-                player.sendMessage(new MsgBuilder().def("msg_motd").replace(Math.floor((millisSinceLastPlayed / 60000d) * 100) / 100, "minutes").build());
-            } else if (millisSinceLastPlayed >= 1000) {
-                player.sendMessage(new MsgBuilder().def("msg_motd").replace(Math.floor((millisSinceLastPlayed / 1000d) * 100) / 100, "seconds").build());
-            } else {
-                player.sendMessage(new MsgBuilder().def("msg_motd").replace(Math.floor((millisSinceLastPlayed) * 100) / 100, "milliseconds").build());
-            }
+            player.sendMessage(new MsgBuilder().def("msg.motd").replace(MiscUtils.fancifyTime(millisSinceLastPlayed)).build());
         } else {
-            event.setJoinMessage(new MsgBuilder().msg("msg_join_new").replace(player.getDisplayName()).build());
+            event.setJoinMessage(new MsgBuilder().msgKey("msg.join_new").replace(player.getDisplayName()).build());
 
-            player.sendMessage(new MsgBuilder().def("msg_motd_new").replace(player.getName()).build());
+            player.sendMessage(new MsgBuilder().def("msg.motd_new").replace(player.getName()).build());
         }
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        event.setQuitMessage(new MsgBuilder().msg("msg_leave").replace(event.getPlayer().getDisplayName()).build());
+        event.setQuitMessage(new MsgBuilder().msgKey("msg.leave").replace(event.getPlayer().getDisplayName()).build());
     }
 
     @EventHandler
     public void onVoidDamageEvent(EntityDamageEvent event) {
         if (event.getCause() == EntityDamageEvent.DamageCause.VOID) {
-            event.setDamage(0);
             Location location = event.getEntity().getLocation();
-            location.setY(500);
-            event.getEntity().teleport(location);
-            if (event.getEntity() instanceof Player) {
-                Player player = (Player) event.getEntity();
-                if (player.getFallDistance() >= 1500) {
-                    player.sendMessage(new MsgBuilder().def("msg_warp_max").build());
-                    player.teleport(MiscUtils.getSpawn());
-                    player.getWorld().strikeLightningEffect(MiscUtils.getSpawn());
-                    player.getWorld().playSound(MiscUtils.getSpawn(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 3, 1);
-                    player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, MiscUtils.getSpawn(), 1);
-                } else if (player.getFallDistance() >= 1000) {
-                    player.sendMessage(new MsgBuilder().def("msg_warp_second").build());
-                } else if (player.getFallDistance() >= 500) {
-                    player.sendMessage(new MsgBuilder().def("msg_warp_first").build());
+            if (location.getY() <= -50) {
+                event.setCancelled(true);
+                event.setDamage(0);
+                if (location.getY() <= -300) {
+                    event.setCancelled(false);
+                    location.setY(600);
+                    event.getEntity().teleport(location);
+                    if (event.getEntity() instanceof Player) {
+                        Player player = (Player) event.getEntity();
+                        if (player.getFallDistance() >= 3000) {
+                            player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp_max").build());
+                            player.teleport(MiscUtils.getSpawn());
+                            player.getWorld().strikeLightningEffect(MiscUtils.getSpawn());
+                            player.getWorld().playSound(MiscUtils.getSpawn(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 3, 1);
+                            player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, MiscUtils.getSpawn(), 1);
+                        } else if (player.getFallDistance() >= 2000) {
+                            player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp_second").build());
+                        } else if (player.getFallDistance() >= 1000) {
+                            player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp_first").build());
+                        }
+                        player.getWorld().playSound(location, Sound.ENTITY_ENDERMEN_TELEPORT, SoundCategory.MASTER, 4, 1);
+                    }
                 }
-                player.getWorld().playSound(location, Sound.ENTITY_ENDERMEN_TELEPORT, SoundCategory.MASTER, 4, 1);
             }
         }
     }
@@ -104,9 +102,23 @@ public class MiscEvents implements Listener {
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
+
         if (player.hasPermission("tfcplugin.chatcolor")) {
             event.setMessage(MiscUtils.color(event.getMessage()));
         }
+
+        for (Player pingedPlayer : Bukkit.getOnlinePlayers()) {
+            if (!player.equals(pingedPlayer)) {
+                String lastColors = ChatColor.getLastColors(event.getMessage());
+                String playerName = pingedPlayer.getName();
+
+                if (event.getMessage().toLowerCase().contains(playerName.toLowerCase())) {
+                    event.setMessage(event.getMessage().replaceAll("(?i)(" + playerName + ")", ChatColor.GOLD + "$1" + (lastColors.isEmpty() ? ChatColor.RESET : lastColors)));
+                    pingedPlayer.playSound(pingedPlayer.getEyeLocation(), Sound.BLOCK_NOTE_PLING, 1000, 2);
+                }
+            }
+        }
+
         event.setFormat(MiscUtils.color(main.getConfig().getString("chat_format")
                 .replace("{prefix}", LuckPermsUtils.getPlayerPrefix(player))
                 .replace("{suffix}", LuckPermsUtils.getPlayerSuffix(player))));

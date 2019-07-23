@@ -9,7 +9,7 @@ import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Optional;
 import co.aikar.commands.annotation.Subcommand;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
-import com.outlook.tehbrian.tfcplugin.utils.MsgBuilder;
+import com.outlook.tehbrian.tfcplugin.util.MsgBuilder;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -27,12 +27,12 @@ public class GamemodeCommand extends BaseCommand {
     public void onSurvival(Player player, @Optional @CommandPermission("tfcplugin.gamemodeother") OnlinePlayer target) {
         if (target == null) {
             player.setGameMode(GameMode.SURVIVAL);
-            player.sendMessage(new MsgBuilder().def("msg_gamemode_changed").replace("Survival").build());
+            player.sendMessage(new MsgBuilder().def("msg.gamemode_changed").replace("Survival").build());
         } else {
             Player targetPlayer = target.getPlayer();
             targetPlayer.setGameMode(GameMode.SURVIVAL);
-            player.sendMessage(new MsgBuilder().def("msg_gamemode_changed_other").replace(targetPlayer.getDisplayName(), "Survival").build());
-            targetPlayer.sendMessage(new MsgBuilder().def("msg_gamemode_changed").replace("Survival").build());
+            player.sendMessage(new MsgBuilder().def("msg.gamemode_changed_other").replace(targetPlayer.getDisplayName(), "Survival").build());
+            targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode_changed").replace("Survival").build());
         }
     }
 
@@ -44,12 +44,12 @@ public class GamemodeCommand extends BaseCommand {
     public void onCreative(Player player, @Optional @CommandPermission("tfcplugin.gamemodeother") OnlinePlayer target) {
         if (target == null) {
             player.setGameMode(GameMode.CREATIVE);
-            player.sendMessage(new MsgBuilder().def("msg_gamemode_changed").replace("Creative").build());
+            player.sendMessage(new MsgBuilder().def("msg.gamemode_changed").replace("Creative").build());
         } else {
             Player targetPlayer = target.getPlayer();
             targetPlayer.setGameMode(GameMode.CREATIVE);
-            player.sendMessage(new MsgBuilder().def("msg_gamemode_changed_other").replace(targetPlayer.getDisplayName(), "Creative").build());
-            targetPlayer.sendMessage(new MsgBuilder().def("msg_gamemode_changed").replace("Creative").build());
+            player.sendMessage(new MsgBuilder().def("msg.gamemode_changed_other").replace(targetPlayer.getDisplayName(), "Creative").build());
+            targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode_changed").replace("Creative").build());
         }
     }
 
@@ -61,17 +61,17 @@ public class GamemodeCommand extends BaseCommand {
     public void onAdventure(Player player, @Optional @CommandPermission("tfcplugin.gamemodeother") OnlinePlayer target) {
         if (target == null) {
             player.setGameMode(GameMode.ADVENTURE);
-            player.sendMessage(new MsgBuilder().def("msg_gamemode_changed").replace("Adventure").build());
+            player.sendMessage(new MsgBuilder().def("msg.gamemode_changed").replace("Adventure").build());
         } else {
             Player targetPlayer = target.getPlayer();
             targetPlayer.setGameMode(GameMode.ADVENTURE);
-            player.sendMessage(new MsgBuilder().def("msg_gamemode_changed_other").replace(targetPlayer.getDisplayName(), "Creative").build());
-            targetPlayer.sendMessage(new MsgBuilder().def("msg_gamemode_changed").replace("Adventure").build());
+            player.sendMessage(new MsgBuilder().def("msg.gamemode_changed_other").replace(targetPlayer.getDisplayName(), "Creative").build());
+            targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode_changed").replace("Adventure").build());
         }
     }
 
     @CatchUnknown
     public void onUnknown(CommandSender sender) {
-        sender.sendMessage(new MsgBuilder().def("msg_gamemode_unknown").build());
+        sender.sendMessage(new MsgBuilder().def("msg.gamemode_unknown").build());
     }
 }

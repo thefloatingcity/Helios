@@ -1,4 +1,4 @@
-package com.outlook.tehbrian.tfcplugin.utils;
+package com.outlook.tehbrian.tfcplugin.util;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -37,6 +37,11 @@ public class ItemBuilder {
                 .unbreakable(itemMeta.isUnbreakable());
     }
 
+    public ItemBuilder material(Material material) {
+        this.material = material;
+        return this;
+    }
+
     public ItemBuilder amount(Integer amount) {
         this.amount = amount;
         return this;
@@ -73,7 +78,6 @@ public class ItemBuilder {
     }
 
     public ItemStack build() {
-
         ItemStack itemStack = new ItemStack(material);
 
         if (amount != null) {

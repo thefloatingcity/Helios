@@ -48,7 +48,7 @@ public class PianoManager {
         if (player.hasPermission("tfcplugin.piano") && ((!requireToggle || getPlayerEnabledPiano(player)))) {
             if (item != null && item.getType() == Material.STAINED_GLASS_PANE) {
                 if (item.getItemMeta().hasLore() && Objects.requireNonNull(item.getLore()).get(1).equals(ChatColor.DARK_GRAY + "[Note]")) {
-                    player.getWorld().playSound(player.getLocation(), getPlayerPianoInstrument(player), SoundCategory.MASTER, 3, Float.parseFloat(item.getLore().get(2)));
+                    player.getWorld().playSound(player.getEyeLocation(), getPlayerPianoInstrument(player), SoundCategory.MASTER, 3, Float.parseFloat(item.getLore().get(2)));
                 }
             }
         }
