@@ -60,7 +60,7 @@ public final class TFCPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BuildingEvents(this), this);
         getServer().getPluginManager().registerEvents(new MiscEvents(this), this);
         getServer().getPluginManager().registerEvents(new FlightEvents(), this);
-        getServer().getPluginManager().registerEvents(new PianoEvents(), this);
+        getServer().getPluginManager().registerEvents(new PianoEvents(this), this);
     }
 
     private void setupCommandManager() {
