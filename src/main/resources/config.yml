@@ -19,14 +19,14 @@ msg:
   warp_second: "&cReaching maximum warp speed.."
   warp_max: "&4Maximum warp speed reached!"
 
-  zap: "&f%s &czapped&f %s"
-  zap_themself: "&f%s &czapped&f themselves"
-  launch: "&f%s &alaunched&f %s"
-  launch_themself: "&f%s &alaunched&f themselves"
-  boost: "&f%s &aboosted&f %s"
-  boost_themself: "&f%s &aboosted&f themselves"
-  poke: "&f%s &cpoked&f %s"
-  poke_themself: "&f%s &cpoked&f themselves"
+  zap_other: "&f%s &czapped&f %s"
+  zap: "&f%s &czapped&f themselves"
+  launch_other: "&f%s &alaunched&f %s"
+  launch: "&f%s &alaunched&f themselves"
+  boost_other: "&f%s &aboosted&f %s"
+  boost: "&f%s &aboosted&f themselves"
+  poke_other: "&f%s &cpoked&f %s"
+  poke: "&f%s &cpoked&f themselves"
 
   reloaded: "&fConfig reloaded successfully!"
 

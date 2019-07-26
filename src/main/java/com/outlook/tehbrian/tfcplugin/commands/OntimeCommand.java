@@ -20,14 +20,14 @@ public class OntimeCommand extends BaseCommand {
     @Default
     @CommandCompletion("@players")
     public void onOntime(Player player, @Optional OnlinePlayer target) {
+        Player targetPlayer = target == null ? player : target.getPlayer();
+
+        long millisPlayed = (targetPlayer.getStatistic(Statistic.PLAY_ONE_TICK) / 20) * 1000;
+
         if (target == null) {
-            long millisPlayed = (player.getStatistic(Statistic.PLAY_ONE_TICK) / 20) * 1000;
             player.sendMessage(new MsgBuilder().def("msg.ontime").replace(MiscUtils.fancifyTime(millisPlayed)).build());
         } else {
-            Player targetPlayer = target.getPlayer();
-            long millisPlayed = (targetPlayer.getStatistic(Statistic.PLAY_ONE_TICK) / 20) * 1000;
             player.sendMessage(new MsgBuilder().def("msg.ontime_other").replace(targetPlayer.getDisplayName(), MiscUtils.fancifyTime(millisPlayed)).build());
-
         }
     }
 
