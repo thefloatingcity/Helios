@@ -52,7 +52,9 @@ msg:
   shrug: "&a%s &2shrugs &a\\_o¬o_/"
   spook: "&7%s &8is a spook."
   doubt: "&b%s &9doubts that."
+  unreadable: "&1%s &0is unreadable."
   blame: "&c%s &4blames &c%s"
+  hug: "&3%s &fhugs &3%s"
   sue: "&e%s &6is suing"
   sue_extra: "&e%s &6is suing &e%s"
 

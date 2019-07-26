@@ -45,11 +45,25 @@ public class EmoteCommand extends BaseCommand {
         Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.doubt").replace(player.getDisplayName()).build());
     }
 
+    @CommandAlias("unreadable")
+    @CommandPermission("tfcplugin.unreadable")
+    @Description("Untransparent. Is that a word? Opaque?.")
+    public void onUnreadable(Player player) {
+        Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.unreadable").replace(player.getDisplayName()).build());
+    }
+
     @CommandAlias("blame")
     @CommandPermission("tfcplugin.blame")
     @Description("It's their fault, not yours.")
     public void onBlame(Player player, String text) {
         Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.blame").replace(player.getDisplayName(), text).build());
+    }
+
+    @CommandAlias("hug")
+    @CommandPermission("tfcplugin.hug")
+    @Description("D'aww that's so cute!")
+    public void onHug(Player player, String text) {
+        Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.hug").replace(player.getDisplayName(), text).build());
     }
 
     @CommandAlias("sue")
