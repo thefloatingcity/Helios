@@ -3,6 +3,7 @@ package com.outlook.tehbrian.tfcplugin.events;
 import com.outlook.tehbrian.tfcplugin.util.MsgBuilder;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -15,10 +16,22 @@ import org.bukkit.event.player.PlayerAttemptPickupItemEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 @SuppressWarnings("unused")
 public class AntiBuildEvents implements Listener {
+
+    @EventHandler(priority = EventPriority.HIGH)
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+        if (event.getDamager().getType() == EntityType.PLAYER) {
+            Player player = (Player) event.getDamager();
+            if (!player.hasPermission("tfcplugin.build")) {
+                event.setCancelled(true);
+                player.sendMessage(new MsgBuilder().def("msg.no_build").build());
+            }
+        }
+    }
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onBlockPlace(BlockPlaceEvent event) {
@@ -57,52 +70,33 @@ public class AntiBuildEvents implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onBucketFill(PlayerBucketFillEvent event) {
-        if (!event.getPlayer().hasPermission("tfcplugin.build")) {
-            event.setCancelled(true);
-            event.getPlayer().sendMessage(new MsgBuilder().def("msg.no_build").build());
-        }
+        onAntiBuild(event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onBucketEmpty(PlayerBucketEmptyEvent event) {
-        if (!event.getPlayer().hasPermission("tfcplugin.build")) {
-            event.setCancelled(true);
-            event.getPlayer().sendMessage(new MsgBuilder().def("msg.no_build").build());
-        }
+        onAntiBuild(event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onItemPickup(PlayerAttemptPickupItemEvent event) {
-        if (!event.getPlayer().hasPermission("tfcplugin.build")) {
-            event.setCancelled(true);
-            event.getPlayer().sendMessage(new MsgBuilder().def("msg.no_build").build());
-        }
+        onAntiBuild(event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onItemDrop(PlayerDropItemEvent event) {
-        if (!event.getPlayer().hasPermission("tfcplugin.build")) {
-            event.setCancelled(true);
-            event.getPlayer().sendMessage(new MsgBuilder().def("msg.no_build").build());
-        }
+        onAntiBuild(event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerInteract(PlayerInteractEvent event) {
+        onAntiBuild(event);
+    }
+
+    private <T extends PlayerEvent & Cancellable> void onAntiBuild(T event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
             event.getPlayer().sendMessage(new MsgBuilder().def("msg.no_build").build());
-        }
-    }
-
-    @EventHandler(priority = EventPriority.HIGH)
-    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if (event.getDamager().getType() == EntityType.PLAYER) {
-            Player player = (Player) event.getDamager();
-            if (!player.hasPermission("tfcplugin.build")) {
-                event.setCancelled(true);
-                player.sendMessage(new MsgBuilder().def("msg.no_build").build());
-            }
         }
     }
 }
