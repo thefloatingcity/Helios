@@ -47,7 +47,7 @@ public class EmoteCommand extends BaseCommand {
 
     @CommandAlias("unreadable")
     @CommandPermission("tfcplugin.unreadable")
-    @Description("Untransparent. Is that a word? Opaque?.")
+    @Description("Untransparent. Is that a word? Opaque?")
     public void onUnreadable(Player player) {
         Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.unreadable").replace(player.getDisplayName()).build());
     }

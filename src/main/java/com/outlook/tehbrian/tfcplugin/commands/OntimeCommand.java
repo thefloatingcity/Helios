@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 
 @SuppressWarnings("unused")
 @CommandAlias("ontime")
-@Description("Check your playtime. ")
+@Description("Check your playtime.")
 public class OntimeCommand extends BaseCommand {
 
     @Default
