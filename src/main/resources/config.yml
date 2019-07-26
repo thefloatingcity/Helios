@@ -405,6 +405,18 @@ inventories:
         amount: 64
         name: "&fFarmland"
 
+#############
+#           #
+#  OPTIONS  #
+#           #
+#############
+
+options:
+  explosions_disabled: true
+  leaves_decay_disabled: true
+  crop_trampling_disabled: true
+  dragon_egg_teleporting_disabled: true
+
 ##########
 #        #
 #  MISC  #

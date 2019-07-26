@@ -12,6 +12,7 @@ import org.bukkit.block.Sign;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
@@ -29,27 +30,35 @@ public class BuildingEvents implements Listener {
 
     @EventHandler
     public void onEntityExplode(EntityExplodeEvent event) {
-        event.setCancelled(true);
+        if (main.getConfig().getBoolean("options.explosions_disabled")) {
+            event.setCancelled(true);
+        }
     }
 
     @EventHandler
     public void onLeavesDecay(LeavesDecayEvent event) {
-        event.setCancelled(true);
+        if (main.getConfig().getBoolean("options.leaves_decay_disabled")) {
+            event.setCancelled(true);
+        }
     }
 
     @EventHandler
     public void onCropsTrample(PlayerInteractEvent event) {
-        if (event.getAction() == Action.PHYSICAL) {
-            if (event.getClickedBlock().getType() == Material.SOIL) {
-                event.setCancelled(true);
+        if (main.getConfig().getBoolean("options.crop_trampling_disabled")) {
+            if (event.getAction() == Action.PHYSICAL) {
+                if (event.getClickedBlock().getType() == Material.SOIL) {
+                    event.setCancelled(true);
+                }
             }
         }
     }
 
     @EventHandler
-    public void onDragonEggInteract(PlayerInteractEvent event) {
-        if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getMaterial() == Material.DRAGON_EGG && !(event.getPlayer().getActiveItem().getType() == Material.DRAGON_EGG)) {
-            event.setCancelled(true);
+    public void onDragonEggTeleport(BlockFromToEvent event) {
+        if (main.getConfig().getBoolean("options.dragon_egg_teleporting_disabled")) {
+            if (event.getBlock().getType() == Material.DRAGON_EGG) {
+                event.setCancelled(true);
+            }
         }
     }
 
