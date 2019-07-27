@@ -6,9 +6,9 @@
 
 msg:
   motd: "&fWelcome back! You were last on %s ago."
-  motd_new: "&fWelcome to the server, &d%s&f! Please read the &e/rules&f and the boards to your right!"
+  motd_new: "&fWelcome to the server, &b%s&f! Please read the &e/rules&f and the boards to your right!"
   join: "&7[&2+&7]&f &a%s&f joined the game."
-  join_new: "&7[&5+&7]&f &d%s&f has joined for the first time!"
+  join_new: "&7[&3+&7]&f &b%s&f has joined for the first time!"
   leave: "&7[&4-&7]&f &c%s&f left the game."
   no_build: "&fYou can't build yet. Please read our rules first by doing &e/rules&f!"
 
@@ -48,15 +48,19 @@ msg:
   hat_removed: "&fAww, there goes your fancy hat."
   hat_none: "&fTo put on a hat, hold what you want to wear!"
 
-  winkwonk: "&d%s &5wink wonks &d;)"
-  shrug: "&a%s &2shrugs &a\\_o¬o_/"
-  spook: "&7%s &8is a spook."
-  doubt: "&b%s &9doubts that."
-  unreadable: "&1%s &0is unreadable."
-  blame: "&c%s &4blames &c%s"
-  hug: "&3%s &fhugs &3%s"
-  sue: "&e%s &6is suing"
-  sue_extra: "&e%s &6is suing &e%s"
+  unreadable: "&8%s &0is unreadable." #0 8
+  2: "&9%s &1"                        #1 9 NEEDS
+  shrug: "&a%s &2shrugs &a\\_o¬o_/"   #2 A
+  hug: "&b%s &3hugs &b%s"             #3 B
+  blame: "&c%s &4blames &c%s"         #4 C
+  winkwonk: "&d%s &5wink wonks &d;)"  #5 D
+  sue: "&e%s &6is suing."             #6 E
+  sue_extra: "&e%s &6is suing &e%s"   #6 E
+  8: "&f%s &7"                        #7 F NEEDS
+
+  spook: "&7%s &8is a spook."  #8 7
+  doubt: "&3%s &9doubts that." #9 3
+  13: "&6%s &c"                #C 6 NEEDS
 
 #############
 #           #
