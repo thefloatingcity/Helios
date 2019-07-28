@@ -18,42 +18,42 @@ import org.bukkit.entity.Player;
 public class EmoteCommand extends BaseCommand {
 
     @CommandAlias("unreadable")
-    @CommandPermission("tfcplugin.unreadable")
+    @CommandPermission("tfcplugin.emote.unreadable")
     @Description("Untransparent. Is that a word? Opaque?")
     public void onUnreadable(Player player) {
         Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.unreadable").replace(player.getDisplayName()).build());
     }
 
     @CommandAlias("shrug")
-    @CommandPermission("tfcplugin.shrug")
+    @CommandPermission("tfcplugin.emote.shrug")
     @Description("You don't know. They don't know.")
     public void onShrug(Player player) {
         Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.shrug").replace(player.getDisplayName()).build());
     }
 
     @CommandAlias("hug")
-    @CommandPermission("tfcplugin.hug")
+    @CommandPermission("tfcplugin.emote.hug")
     @Description("D'aww that's so cute!")
     public void onHug(Player player, String text) {
         Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.hug").replace(player.getDisplayName(), text).build());
     }
 
     @CommandAlias("blame")
-    @CommandPermission("tfcplugin.blame")
+    @CommandPermission("tfcplugin.emote.blame")
     @Description("It's their fault, not yours.")
     public void onBlame(Player player, String text) {
         Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.blame").replace(player.getDisplayName(), text).build());
     }
 
     @CommandAlias("winkwonk")
-    @CommandPermission("tfcplugin.winkwonk")
+    @CommandPermission("tfcplugin.emote.winkwonk")
     @Description("Wink wonk ;)")
     public void onWinkWonk(Player player) {
         Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.winkwonk").replace(player.getDisplayName()).build());
     }
 
     @CommandAlias("sue")
-    @CommandPermission("tfcplugin.sue")
+    @CommandPermission("tfcplugin.emote.sue")
     @Description("Court fixes everything.. right?")
     public void onSue(Player player, @Optional String text) {
         if (text == null) {
@@ -64,14 +64,14 @@ public class EmoteCommand extends BaseCommand {
     }
 
     @CommandAlias("spook")
-    @CommandPermission("tfcplugin.spook")
+    @CommandPermission("tfcplugin.emote.spook")
     @Description("OoooOOooOoOOoOOoo")
     public void onSpook(Player player) {
         Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.spook").replace(player.getDisplayName()).build());
     }
 
     @CommandAlias("doubt")
-    @CommandPermission("tfcplugin.doubt")
+    @CommandPermission("tfcplugin.emote.doubt")
     @Description("Press X.")
     public void onDoubt(Player player) {
         Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.doubt").replace(player.getDisplayName()).build());

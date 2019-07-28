@@ -25,12 +25,13 @@ public class GamemodeCommand extends BaseCommand {
     @Description("Change gamemode to Survival.")
     @CommandCompletion("@players")
     public void onSurvival(Player player, @Optional @CommandPermission("tfcplugin.gamemodeother") OnlinePlayer target) {
+        Player targetPlayer = target == null ? player : target.getPlayer();
+
+        targetPlayer.setGameMode(GameMode.SURVIVAL);
+
         if (target == null) {
-            player.setGameMode(GameMode.SURVIVAL);
             player.sendMessage(new MsgBuilder().def("msg.gamemode_changed").replace("Survival").build());
         } else {
-            Player targetPlayer = target.getPlayer();
-            targetPlayer.setGameMode(GameMode.SURVIVAL);
             player.sendMessage(new MsgBuilder().def("msg.gamemode_changed_other").replace(targetPlayer.getDisplayName(), "Survival").build());
             targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode_changed").replace("Survival").build());
         }
@@ -42,12 +43,13 @@ public class GamemodeCommand extends BaseCommand {
     @Description("Change gamemode to Creative.")
     @CommandCompletion("@players")
     public void onCreative(Player player, @Optional @CommandPermission("tfcplugin.gamemodeother") OnlinePlayer target) {
+        Player targetPlayer = target == null ? player : target.getPlayer();
+
+        targetPlayer.setGameMode(GameMode.CREATIVE);
+
         if (target == null) {
-            player.setGameMode(GameMode.CREATIVE);
             player.sendMessage(new MsgBuilder().def("msg.gamemode_changed").replace("Creative").build());
         } else {
-            Player targetPlayer = target.getPlayer();
-            targetPlayer.setGameMode(GameMode.CREATIVE);
             player.sendMessage(new MsgBuilder().def("msg.gamemode_changed_other").replace(targetPlayer.getDisplayName(), "Creative").build());
             targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode_changed").replace("Creative").build());
         }
@@ -59,12 +61,13 @@ public class GamemodeCommand extends BaseCommand {
     @Description("Change gamemode to Adventure.")
     @CommandCompletion("@players")
     public void onAdventure(Player player, @Optional @CommandPermission("tfcplugin.gamemodeother") OnlinePlayer target) {
+        Player targetPlayer = target == null ? player : target.getPlayer();
+
+        targetPlayer.setGameMode(GameMode.ADVENTURE);
+
         if (target == null) {
-            player.setGameMode(GameMode.ADVENTURE);
             player.sendMessage(new MsgBuilder().def("msg.gamemode_changed").replace("Adventure").build());
         } else {
-            Player targetPlayer = target.getPlayer();
-            targetPlayer.setGameMode(GameMode.ADVENTURE);
             player.sendMessage(new MsgBuilder().def("msg.gamemode_changed_other").replace(targetPlayer.getDisplayName(), "Creative").build());
             targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode_changed").replace("Adventure").build());
         }

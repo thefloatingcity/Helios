@@ -29,7 +29,7 @@ public class UtilCommand extends BaseCommand {
     }
 
     @CommandAlias("fly")
-    @CommandPermission("tfcplugin.fly")
+    @CommandPermission("tfcplugin.util.fly")
     @Description("Fly. Like the birds in the sky.")
     public void onFly(Player player) {
         if (FlightManager.getPlayerCanBypassFly(player)) {
@@ -42,21 +42,21 @@ public class UtilCommand extends BaseCommand {
     }
 
     @CommandAlias("blocks")
-    @CommandPermission("tfcplugin.blocks")
-    @Description("Useful bulding blocks.")
+    @CommandPermission("tfcplugin.util.blocks")
+    @Description("Useful building blocks.")
     public void onBlocks(Player player) {
         player.openInventory(ConfigParsers.getInventory("inventories.blocks"));
     }
 
     @CommandAlias("broadcast")
-    @CommandPermission("tfcplugin.broadcast")
+    @CommandPermission("tfcplugin.util.broadcast")
     @Description("Broadcast a message to the server.")
     public void onBroadcast(CommandSender sender, String text) {
         Bukkit.broadcastMessage(MiscUtils.color(text));
     }
 
     @CommandAlias("hat")
-    @CommandPermission("tfcplugin.hat")
+    @CommandPermission("tfcplugin.util.hat")
     @Description("Put things on your head!")
     public void onHat(Player player) {
         if (player.getInventory().getItemInMainHand().getType() == Material.AIR) {

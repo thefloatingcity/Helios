@@ -34,6 +34,6 @@ public class OntimeCommand extends BaseCommand {
     @CommandAlias("rankup")
     @Description("Get fancy new perks the more you play!")
     public void onRankup(Player player) {
-
+        player.sendMessage("Currently not working.. Bug Brian about this till it's done ;p");
     }
 }

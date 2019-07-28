@@ -46,12 +46,12 @@ public class PianoCommand extends BaseCommand {
     @Subcommand("toggle")
     @Description("Toggle your piano on and off.")
     public void onToggle(Player player) {
+        PianoManager.setPlayerEnabledPiano(player, !PianoManager.getPlayerEnabledPiano(player));
+
         if (PianoManager.getPlayerEnabledPiano(player)) {
-            PianoManager.setPlayerEnabledPiano(player, false);
-            player.sendMessage(new MsgBuilder().prefixKey("infixes.piano.prefix").msgKey("msg.piano_disabled").build());
-        } else {
-            PianoManager.setPlayerEnabledPiano(player, true);
             player.sendMessage(new MsgBuilder().prefixKey("infixes.piano.prefix").msgKey("msg.piano_enabled").build());
+        } else {
+            player.sendMessage(new MsgBuilder().prefixKey("infixes.piano.prefix").msgKey("msg.piano_disabled").build());
         }
     }
 

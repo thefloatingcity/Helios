@@ -32,10 +32,10 @@ public class ActionCommand extends BaseCommand {
     }
 
     @CommandAlias("launch")
-    @CommandPermission("tfcplugin.launch")
+    @CommandPermission("tfcplugin.action.launch")
     @Description("Like a rocket!")
     @CommandCompletion("@player")
-    public void onLaunch(Player player, @Optional @CommandPermission("tfcplugin.launchother") OnlinePlayer target) {
+    public void onLaunch(Player player, @Optional @CommandPermission("tfcplugin.action.launchother") OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
         targetPlayer.setVelocity(new Vector(0, 10, 0));
@@ -48,28 +48,11 @@ public class ActionCommand extends BaseCommand {
         }
     }
 
-    @CommandAlias("zap")
-    @CommandPermission("tfcplugin.zap")
-    @Description("Kentucky Fried Player")
-    @CommandCompletion("@players")
-    public void onZap(Player player, @Optional @CommandPermission("tfcplugin.zapother") OnlinePlayer target) {
-        Player targetPlayer = target == null ? player : target.getPlayer();
-
-        targetPlayer.getWorld().strikeLightning(targetPlayer.getLocation());
-
-        if (target == null) {
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg.zap").replace(player.getDisplayName()).build());
-        } else {
-
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg.zap_other").replace(player.getDisplayName(), targetPlayer.getDisplayName()).build());
-        }
-    }
-
     @CommandAlias("boost")
-    @CommandPermission("tfcplugin.boost")
+    @CommandPermission("tfcplugin.action.boost")
     @Description("Useful for annoying others.")
     @CommandCompletion("@players")
-    public void onBoost(Player player, @Optional @CommandPermission("tfcplugin.boostother") OnlinePlayer target) {
+    public void onBoost(Player player, @Optional @CommandPermission("tfcplugin.action.boostother") OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
         targetPlayer.setVelocity(targetPlayer.getLocation().getDirection().multiply(3));
@@ -82,11 +65,28 @@ public class ActionCommand extends BaseCommand {
         }
     }
 
+    @CommandAlias("zap")
+    @CommandPermission("tfcplugin.action.zap")
+    @Description("Kentucky Fried Player")
+    @CommandCompletion("@players")
+    public void onZap(Player player, @Optional @CommandPermission("tfcplugin.action.zapother") OnlinePlayer target) {
+        Player targetPlayer = target == null ? player : target.getPlayer();
+
+        targetPlayer.getWorld().strikeLightning(targetPlayer.getLocation());
+
+        if (target == null) {
+            Bukkit.broadcastMessage(new MsgBuilder().def("msg.zap").replace(player.getDisplayName()).build());
+        } else {
+
+            Bukkit.broadcastMessage(new MsgBuilder().def("msg.zap_other").replace(player.getDisplayName(), targetPlayer.getDisplayName()).build());
+        }
+    }
+
     @CommandAlias("poke")
-    @CommandPermission("tfcplugin.poke")
+    @CommandPermission("tfcplugin.action.poke")
     @Description("Just a little push.")
     @CommandCompletion("@players")
-    public void onPoke(Player player, @Optional @CommandPermission("tfcplugin.pokeother") OnlinePlayer target) {
+    public void onPoke(Player player, @Optional @CommandPermission("tfcplugin.action.pokeother") OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
         double maxY = main.getConfig().getDouble("poke_force.maxY");
