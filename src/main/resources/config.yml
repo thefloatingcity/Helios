@@ -12,7 +12,7 @@ msg:
   leave: "&7[&4-&7]&f &c%s&f left the game."
   no_build: "&fYou can't build yet. Please read our rules first by doing &e/rules&f!"
 
-  rules_accept: "&fThanks for reading the rules! Here's your passenger."
+  rules_accept: "&fThanks for reading the rules! Now go, be free!"
   rules_already_accepted: "&fLooks like you've already read the rules, thanks!"
 
   warp_first: "&6Reaching maximum warp speed.."
