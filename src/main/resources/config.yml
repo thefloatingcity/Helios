@@ -419,6 +419,7 @@ inventories:
 
 options:
   explosions_disabled: true
+  explosions_damage_disabled: true
   leaves_decay_disabled: true
   crop_trampling_disabled: true
   dragon_egg_teleporting_disabled: true

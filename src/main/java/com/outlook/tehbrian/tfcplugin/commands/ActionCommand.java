@@ -50,7 +50,7 @@ public class ActionCommand extends BaseCommand {
 
     @CommandAlias("boost")
     @CommandPermission("tfcplugin.action.boost")
-    @Description("Useful for annoying others.")
+    @Description("Gives you a case of the zoomies.")
     @CommandCompletion("@players")
     public void onBoost(Player player, @Optional @CommandPermission("tfcplugin.action.boostother") OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
@@ -67,7 +67,7 @@ public class ActionCommand extends BaseCommand {
 
     @CommandAlias("zap")
     @CommandPermission("tfcplugin.action.zap")
-    @Description("Kentucky Fried Player")
+    @Description("Kentucky Fried Player.")
     @CommandCompletion("@players")
     public void onZap(Player player, @Optional @CommandPermission("tfcplugin.action.zapother") OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
@@ -84,7 +84,7 @@ public class ActionCommand extends BaseCommand {
 
     @CommandAlias("poke")
     @CommandPermission("tfcplugin.action.poke")
-    @Description("Just a little push.")
+    @Description("Useful for annoying others.")
     @CommandCompletion("@players")
     public void onPoke(Player player, @Optional @CommandPermission("tfcplugin.action.pokeother") OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();

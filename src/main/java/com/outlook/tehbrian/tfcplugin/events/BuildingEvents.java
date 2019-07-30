@@ -3,18 +3,20 @@ package com.outlook.tehbrian.tfcplugin.events;
 import com.outlook.tehbrian.tfcplugin.TFCPlugin;
 import com.outlook.tehbrian.tfcplugin.util.MiscUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.block.SignChangeEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
@@ -32,6 +34,15 @@ public class BuildingEvents implements Listener {
     public void onEntityExplode(EntityExplodeEvent event) {
         if (main.getConfig().getBoolean("options.explosions_disabled")) {
             event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onEntityDamage(EntityDamageEvent event) {
+        if (event.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION || event.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
+            if (main.getConfig().getBoolean("options.explosions_damage_disabled")) {
+                event.setCancelled(true);
+            }
         }
     }
 
@@ -67,7 +78,7 @@ public class BuildingEvents implements Listener {
         if (event.getPlayer().hasPermission("tfcplugin.signcolor")) {
             String[] lines = event.getLines();
             for (int l = 0; l < 4; l++) {
-                event.setLine(l, ChatColor.translateAlternateColorCodes('&', lines[l]));
+                event.setLine(l, MiscUtils.color(lines[l]));
             }
         }
     }
@@ -152,7 +163,7 @@ public class BuildingEvents implements Listener {
         if (data <= 7) {
             if (block.getType() == Material.DOUBLE_STEP) {
                 event.setCancelled(true);
-                if (MiscUtils.isTop(event.getPlayer(), block)) {
+                if (isTop(event.getPlayer(), block)) {
                     block.setType(Material.STEP);
                     block.setData(data);
                 } else {
@@ -163,7 +174,7 @@ public class BuildingEvents implements Listener {
 
             if (block.getType() == Material.WOOD_DOUBLE_STEP) {
                 event.setCancelled(true);
-                if (MiscUtils.isTop(event.getPlayer(), block)) {
+                if (isTop(event.getPlayer(), block)) {
                     block.setType(Material.WOOD_STEP);
                     block.setData(data);
                 } else {
@@ -174,7 +185,7 @@ public class BuildingEvents implements Listener {
 
             if (block.getType() == Material.DOUBLE_STONE_SLAB2) {
                 event.setCancelled(true);
-                if (MiscUtils.isTop(event.getPlayer(), block)) {
+                if (isTop(event.getPlayer(), block)) {
                     block.setType(Material.STONE_SLAB2);
                     block.setData(data);
                 } else {
@@ -185,7 +196,7 @@ public class BuildingEvents implements Listener {
 
             if (block.getType() == Material.PURPUR_DOUBLE_SLAB) {
                 event.setCancelled(true);
-                if (MiscUtils.isTop(event.getPlayer(), block)) {
+                if (isTop(event.getPlayer(), block)) {
                     block.setType(Material.PURPUR_SLAB);
                     block.setData(data);
                 } else {
@@ -194,5 +205,13 @@ public class BuildingEvents implements Listener {
                 }
             }
         }
+    }
+
+    private boolean isTop(Player player, Block block) {
+        Location start = player.getEyeLocation().clone();
+        while (!start.getBlock().equals(block) && start.distance(player.getEyeLocation()) < 6.0D) {
+            start.add(player.getEyeLocation().getDirection().multiply(0.05D));
+        }
+        return start.getY() % 1.0D > 0.5D;
     }
 }

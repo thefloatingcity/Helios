@@ -24,7 +24,7 @@ public class CoreCommand extends BaseCommand {
 
     @Subcommand("reload")
     @CommandPermission("tfcplugin.reload")
-    @Description("Reload TFCPlugin.")
+    @Description("Reload TFCPlugin's config.")
     public void onReload(CommandSender sender) {
         main.reloadConfig();
         sender.sendMessage(new MsgBuilder().def("msg.reloaded").build());

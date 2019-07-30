@@ -17,12 +17,12 @@ import org.bukkit.entity.Player;
 @SuppressWarnings("unused")
 @CommandAlias("gm|gamemode")
 @CommandPermission("tfcplugin.gamemode")
-@Description("Change your gamemode.")
+@Description("Change a player's gamemode.")
 public class GamemodeCommand extends BaseCommand {
 
     @Subcommand("survival|s|0")
     @CommandAlias("gms")
-    @Description("Change gamemode to Survival.")
+    @Description("Change a player's gamemode to Survival.")
     @CommandCompletion("@players")
     public void onSurvival(Player player, @Optional @CommandPermission("tfcplugin.gamemodeother") OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
@@ -39,7 +39,7 @@ public class GamemodeCommand extends BaseCommand {
 
     @Subcommand("creative|c|1")
     @CommandAlias("gmc")
-    @Description("Change gamemode to Creative.")
+    @Description("Change a player's gamemode to Creative.")
     @CommandCompletion("@players")
     public void onCreative(Player player, @Optional @CommandPermission("tfcplugin.gamemodeother") OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
@@ -56,7 +56,7 @@ public class GamemodeCommand extends BaseCommand {
 
     @Subcommand("adventure|a|2")
     @CommandAlias("gma")
-    @Description("Change gamemode to Adventure.")
+    @Description("Change a player's gamemode to Adventure.")
     @CommandCompletion("@players")
     public void onAdventure(Player player, @Optional @CommandPermission("tfcplugin.gamemodeother") OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();

@@ -4,9 +4,7 @@ import com.outlook.tehbrian.tfcplugin.TFCPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 
 public class MiscUtils {
 
@@ -18,14 +16,6 @@ public class MiscUtils {
     public static Location getSpawn() {
         FileConfiguration config = main.getConfig();
         return new Location(Bukkit.getWorld(config.getString("spawn.world")), config.getDouble("spawn.x"), config.getDouble("spawn.y"), config.getDouble("spawn.z"));
-    }
-
-    public static boolean isTop(Player player, Block block) {
-        Location start = player.getEyeLocation().clone();
-        while (!start.getBlock().equals(block) && start.distance(player.getEyeLocation()) < 6.0D) {
-            start.add(player.getEyeLocation().getDirection().multiply(0.05D));
-        }
-        return start.getY() % 1.0D > 0.5D;
     }
 
     public static String color(String string) {
