@@ -6,6 +6,7 @@ import com.outlook.tehbrian.tfcplugin.commands.ActionCommand;
 import com.outlook.tehbrian.tfcplugin.commands.CoreCommand;
 import com.outlook.tehbrian.tfcplugin.commands.EmoteCommand;
 import com.outlook.tehbrian.tfcplugin.commands.GamemodeCommand;
+import com.outlook.tehbrian.tfcplugin.commands.ItemCommand;
 import com.outlook.tehbrian.tfcplugin.commands.OntimeCommand;
 import com.outlook.tehbrian.tfcplugin.commands.PianoCommand;
 import com.outlook.tehbrian.tfcplugin.commands.RulesCommand;
@@ -22,6 +23,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class TFCPlugin extends JavaPlugin {
 
     private static TFCPlugin instance;
+    private PaperCommandManager commandManager;
     private LuckPermsApi luckPermsApi;
 
     public TFCPlugin() {
@@ -64,20 +66,20 @@ public final class TFCPlugin extends JavaPlugin {
     }
 
     private void setupCommandManager() {
-        PaperCommandManager manager = new PaperCommandManager(this);
+        commandManager = new PaperCommandManager(this);
 
-        manager.registerCommand(new ActionCommand(this));
-        manager.registerCommand(new CoreCommand(this));
-        manager.registerCommand(new EmoteCommand());
-        manager.registerCommand(new GamemodeCommand());
-        manager.registerCommand(new OntimeCommand());
-        manager.registerCommand(new PianoCommand(this));
-        manager.registerCommand(new RulesCommand());
-        manager.registerCommand(new UtilCommand(this));
+        commandManager.registerCommand(new ActionCommand(this));
+        commandManager.registerCommand(new CoreCommand(this));
+        commandManager.registerCommand(new EmoteCommand());
+        commandManager.registerCommand(new GamemodeCommand());
+        commandManager.registerCommand(new OntimeCommand());
+        commandManager.registerCommand(new PianoCommand(this));
+        commandManager.registerCommand(new RulesCommand());
+        commandManager.registerCommand(new UtilCommand(this));
 
-        manager.enableUnstableAPI("help");
+        commandManager.enableUnstableAPI("help");
 
-        manager.getCommandConditions().addCondition(Integer.class, "limits", (context, executionContext, value) -> {
+        commandManager.getCommandConditions().addCondition(Integer.class, "limits", (context, executionContext, value) -> {
             if (value == null) {
                 return;
             }
@@ -97,6 +99,10 @@ public final class TFCPlugin extends JavaPlugin {
         }
         luckPermsApi = prsp.getProvider();
         return luckPermsApi != null;
+    }
+
+    public PaperCommandManager getCommandManager() {
+        return commandManager;
     }
 
     public LuckPermsApi getLuckPermsApi() {

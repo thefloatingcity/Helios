@@ -155,7 +155,9 @@ public class BuildingEvents implements Listener {
         if (event.getPlayer().getGameMode() != GameMode.CREATIVE) return;
 
         Material material = event.getPlayer().getInventory().getItemInMainHand().getType();
-        if (material != Material.STEP && material != Material.WOOD_STEP && material != Material.STONE_SLAB2 && material != Material.PURPUR_SLAB) return;
+        if (material != Material.STEP && material != Material.WOOD_STEP && material != Material.STONE_SLAB2 && material != Material.PURPUR_SLAB) {
+            return;
+        }
 
         Block block = event.getClickedBlock();
         byte data = block.getData();
