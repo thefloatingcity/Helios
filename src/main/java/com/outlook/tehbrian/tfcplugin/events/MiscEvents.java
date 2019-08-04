@@ -37,7 +37,7 @@ public class MiscEvents implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        player.sendMessage(new MsgBuilder().msgKey("tfc_banner").build());
+        player.sendMessage(new MsgBuilder().msgKey("msg.banner").build());
 
         Firework firework = player.getWorld().spawn(player.getEyeLocation(), Firework.class);
         FireworkMeta fireworkMeta = firework.getFireworkMeta();
@@ -52,20 +52,20 @@ public class MiscEvents implements Listener {
         firework.setFireworkMeta(fireworkMeta);
 
         if (player.hasPlayedBefore()) {
-            event.setJoinMessage(new MsgBuilder().msgKey("msg.join").replace(player.getDisplayName()).build());
+            event.setJoinMessage(new MsgBuilder().msgKey("msg.join").formats(player.getDisplayName()).build());
 
             long millisSinceLastPlayed = Calendar.getInstance().getTimeInMillis() - player.getLastPlayed();
-            player.sendMessage(new MsgBuilder().def("msg.motd").replace(MiscUtils.fancifyTime(millisSinceLastPlayed)).build());
+            player.sendMessage(new MsgBuilder().def("msg.motd").formats(MiscUtils.fancifyTime(millisSinceLastPlayed)).build());
         } else {
-            event.setJoinMessage(new MsgBuilder().msgKey("msg.join_new").replace(player.getDisplayName()).build());
+            event.setJoinMessage(new MsgBuilder().msgKey("msg.join_new").formats(player.getDisplayName()).build());
 
-            player.sendMessage(new MsgBuilder().def("msg.motd_new").replace(player.getName()).build());
+            player.sendMessage(new MsgBuilder().def("msg.motd_new").formats(player.getName()).build());
         }
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        event.setQuitMessage(new MsgBuilder().msgKey("msg.leave").replace(event.getPlayer().getDisplayName()).build());
+        event.setQuitMessage(new MsgBuilder().msgKey("msg.leave").formats(event.getPlayer().getDisplayName()).build());
     }
 
     @EventHandler
@@ -82,15 +82,15 @@ public class MiscEvents implements Listener {
                     if (event.getEntity() instanceof Player) {
                         Player player = (Player) event.getEntity();
                         if (player.getFallDistance() >= 3000) {
-                            player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp_max").build());
+                            player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.max").build());
                             player.teleport(MiscUtils.getSpawn());
                             player.getWorld().strikeLightningEffect(MiscUtils.getSpawn());
                             player.getWorld().playSound(MiscUtils.getSpawn(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 3, 1);
                             player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, MiscUtils.getSpawn(), 1);
                         } else if (player.getFallDistance() >= 2000) {
-                            player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp_second").build());
+                            player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.second").build());
                         } else if (player.getFallDistance() >= 1000) {
-                            player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp_first").build());
+                            player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.first").build());
                         }
                         player.getWorld().playSound(location, Sound.ENTITY_ENDERMEN_TELEPORT, SoundCategory.MASTER, 4, 1);
                     }
@@ -119,7 +119,7 @@ public class MiscEvents implements Listener {
             }
         }
 
-        event.setFormat(MiscUtils.color(main.getConfig().getString("chat_format")
+        event.setFormat(MiscUtils.color(main.getConfig().getString("msg.chat_format")
                 .replace("{prefix}", LuckPermsUtils.getPlayerPrefix(player))
                 .replace("{suffix}", LuckPermsUtils.getPlayerSuffix(player))));
     }

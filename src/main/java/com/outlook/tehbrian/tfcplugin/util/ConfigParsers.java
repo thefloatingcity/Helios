@@ -24,8 +24,8 @@ public class ConfigParsers {
 
         messages.add(new MsgBuilder()
                 .prefixString(book.getString("multistart"))
-                .msgKey("page_format")
-                .replace(page.getString("title"), pageNumber, pages.getKeys(false).size())
+                .msgKey("msg.page_format")
+                .formats(page.getString("title"), pageNumber, pages.getKeys(false).size())
                 .build());
 
         for (String line : page.getStringList("content")) {

@@ -25,9 +25,9 @@ public class OntimeCommand extends BaseCommand {
         long millisPlayed = (targetPlayer.getStatistic(Statistic.PLAY_ONE_TICK) / 20) * 1000;
 
         if (target == null) {
-            player.sendMessage(new MsgBuilder().def("msg.ontime").replace(MiscUtils.fancifyTime(millisPlayed)).build());
+            player.sendMessage(new MsgBuilder().def("msg.ontime.check_self").formats(MiscUtils.fancifyTime(millisPlayed)).build());
         } else {
-            player.sendMessage(new MsgBuilder().def("msg.ontime_other").replace(targetPlayer.getDisplayName(), MiscUtils.fancifyTime(millisPlayed)).build());
+            player.sendMessage(new MsgBuilder().def("msg.ontime.check_other").formats(targetPlayer.getDisplayName(), MiscUtils.fancifyTime(millisPlayed)).build());
         }
     }
 

@@ -34,10 +34,10 @@ public class UtilCommand extends BaseCommand {
     public void onFly(Player player) {
         if (FlightManager.getPlayerCanBypassFly(player)) {
             FlightManager.setPlayerCanBypassFly(player, false);
-            player.sendMessage(new MsgBuilder().def("msg.fly_disabled").build());
+            player.sendMessage(new MsgBuilder().def("msg.fly.disabled").build());
         } else {
             FlightManager.setPlayerCanBypassFly(player, true);
-            player.sendMessage(new MsgBuilder().def("msg.fly_enabled").build());
+            player.sendMessage(new MsgBuilder().def("msg.fly.enabled").build());
         }
     }
 
@@ -61,14 +61,14 @@ public class UtilCommand extends BaseCommand {
     public void onHat(Player player) {
         if (player.getInventory().getItemInMainHand().getType() == Material.AIR) {
             if (player.getInventory().getHelmet() == null) {
-                player.sendMessage(new MsgBuilder().def("msg.hat_none").build());
+                player.sendMessage(new MsgBuilder().def("msg.hat.none").build());
             } else {
                 player.getInventory().setHelmet(new ItemStack(Material.AIR));
-                player.sendMessage(new MsgBuilder().def("msg.hat_removed").build());
+                player.sendMessage(new MsgBuilder().def("msg.hat.removed").build());
             }
         } else {
             player.getInventory().setHelmet(player.getInventory().getItemInMainHand());
-            player.sendMessage(new MsgBuilder().def("msg.hat_set").build());
+            player.sendMessage(new MsgBuilder().def("msg.hat.set").build());
         }
     }
 

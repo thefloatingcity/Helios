@@ -9,7 +9,7 @@ public class MsgBuilder {
     private String msgString;
     private String prefixKey;
     private String prefixString;
-    private Object[] replacements;
+    private Object[] formats;
 
     public MsgBuilder() {
     }
@@ -40,8 +40,8 @@ public class MsgBuilder {
         return this;
     }
 
-    public MsgBuilder replace(Object... replacements) {
-        this.replacements = replacements;
+    public MsgBuilder formats(Object... formats) {
+        this.formats = formats;
         return this;
     }
 
@@ -61,8 +61,8 @@ public class MsgBuilder {
             message = prefixString + " " + message;
         }
 
-        if (replacements != null) {
-            message = String.format(message, replacements);
+        if (formats != null) {
+            message = String.format(message, formats);
         }
 
         return MiscUtils.color(message);

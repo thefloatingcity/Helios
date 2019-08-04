@@ -30,10 +30,10 @@ public class GamemodeCommand extends BaseCommand {
         targetPlayer.setGameMode(GameMode.SURVIVAL);
 
         if (target == null) {
-            player.sendMessage(new MsgBuilder().def("msg.gamemode_changed").replace("Survival").build());
+            player.sendMessage(new MsgBuilder().def("msg.gamemode.changed").formats("Survival").build());
         } else {
-            player.sendMessage(new MsgBuilder().def("msg.gamemode_changed_other").replace(targetPlayer.getDisplayName(), "Survival").build());
-            targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode_changed").replace("Survival").build());
+            player.sendMessage(new MsgBuilder().def("msg.gamemode.changed_other").formats(targetPlayer.getDisplayName(), "Survival").build());
+            targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode.changed").formats("Survival").build());
         }
     }
 
@@ -47,10 +47,10 @@ public class GamemodeCommand extends BaseCommand {
         targetPlayer.setGameMode(GameMode.CREATIVE);
 
         if (target == null) {
-            player.sendMessage(new MsgBuilder().def("msg.gamemode_changed").replace("Creative").build());
+            player.sendMessage(new MsgBuilder().def("msg.gamemode.changed").formats("Creative").build());
         } else {
-            player.sendMessage(new MsgBuilder().def("msg.gamemode_changed_other").replace(targetPlayer.getDisplayName(), "Creative").build());
-            targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode_changed").replace("Creative").build());
+            player.sendMessage(new MsgBuilder().def("msg.gamemode.changed_other").formats(targetPlayer.getDisplayName(), "Creative").build());
+            targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode.changed").formats("Creative").build());
         }
     }
 
@@ -64,15 +64,15 @@ public class GamemodeCommand extends BaseCommand {
         targetPlayer.setGameMode(GameMode.ADVENTURE);
 
         if (target == null) {
-            player.sendMessage(new MsgBuilder().def("msg.gamemode_changed").replace("Adventure").build());
+            player.sendMessage(new MsgBuilder().def("msg.gamemode.changed").formats("Adventure").build());
         } else {
-            player.sendMessage(new MsgBuilder().def("msg.gamemode_changed_other").replace(targetPlayer.getDisplayName(), "Creative").build());
-            targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode_changed").replace("Adventure").build());
+            player.sendMessage(new MsgBuilder().def("msg.gamemode.changed_other").formats(targetPlayer.getDisplayName(), "Creative").build());
+            targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode.changed").formats("Adventure").build());
         }
     }
 
     @CatchUnknown
     public void onUnknown(CommandSender sender) {
-        sender.sendMessage(new MsgBuilder().def("msg.gamemode_unknown").build());
+        sender.sendMessage(new MsgBuilder().def("msg.gamemode.unknown").build());
     }
 }

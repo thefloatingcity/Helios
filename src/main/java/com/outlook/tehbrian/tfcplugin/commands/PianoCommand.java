@@ -40,7 +40,7 @@ public class PianoCommand extends BaseCommand {
     @CommandCompletion("*")
     public void onInstrument(Player player, PianoSound pianoSound) {
         PianoManager.setPlayerPianoInstrument(player, pianoSound.toSound());
-        player.sendMessage(new MsgBuilder().prefixKey("infixes.piano.prefix").msgKey("msg.piano_instrument_change").replace(pianoSound.toString()).build());
+        player.sendMessage(new MsgBuilder().prefixKey("infixes.piano.prefix").msgKey("msg.piano.instrument_change").formats(pianoSound.toString()).build());
     }
 
     @Subcommand("toggle")
@@ -49,9 +49,9 @@ public class PianoCommand extends BaseCommand {
         PianoManager.setPlayerEnabledPiano(player, !PianoManager.getPlayerEnabledPiano(player));
 
         if (PianoManager.getPlayerEnabledPiano(player)) {
-            player.sendMessage(new MsgBuilder().prefixKey("infixes.piano.prefix").msgKey("msg.piano_enabled").build());
+            player.sendMessage(new MsgBuilder().prefixKey("infixes.piano.prefix").msgKey("msg.piano.enabled").build());
         } else {
-            player.sendMessage(new MsgBuilder().prefixKey("infixes.piano.prefix").msgKey("msg.piano_disabled").build());
+            player.sendMessage(new MsgBuilder().prefixKey("infixes.piano.prefix").msgKey("msg.piano.disabled").build());
         }
     }
 
