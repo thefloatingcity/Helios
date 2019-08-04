@@ -24,6 +24,13 @@ public class EmoteCommand extends BaseCommand {
         Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.emote.unreadable").formats(player.getDisplayName()).build());
     }
 
+    @CommandAlias("cry")
+    @CommandPermission("tfcplugin.emote.cry")
+    @Description("So sad.")
+    public void onCry(Player player) {
+        Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.emote.cry").formats(player.getDisplayName()).build());
+    }
+
     @CommandAlias("shrug")
     @CommandPermission("tfcplugin.emote.shrug")
     @Description("You don't know. They don't know.")
@@ -82,13 +89,6 @@ public class EmoteCommand extends BaseCommand {
     @Description("It's kiss, with a lisp.")
     public void onKith(Player player, String text) {
         Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.emote.kith").formats(player.getDisplayName(), text).build());
-    }
-
-    @CommandAlias("cry")
-    @CommandPermission("tfcplugin.emote.cry")
-    @Description("So sad.")
-    public void onCry(Player player) {
-        Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.emote.cry").formats(player.getDisplayName()).build());
     }
 
     @HelpCommand
