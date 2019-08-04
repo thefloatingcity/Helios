@@ -22,13 +22,13 @@ msg:
 
   action:
     launch_other: "&f%s &alaunched&f %s"
-    launch: "&f%s &alaunched&f themselves"
+    launch_self: "&f%s &alaunched&f themselves"
     boost_other: "&f%s &aboosted&f %s"
-    boost: "&f%s &aboosted&f themselves"
+    boost_self: "&f%s &aboosted&f themselves"
     zap_other: "&f%s &czapped&f %s"
-    zap: "&f%s &czapped&f themselves"
+    zap_self: "&f%s &czapped&f themselves"
     poke_other: "&f%s &cpoked&f %s"
-    poke: "&f%s &cpoked&f themselves"
+    poke_self: "&f%s &cpoked&f themselves"
 
   emote:
     unreadable: "&8%s &0is unreadable." #0 8
