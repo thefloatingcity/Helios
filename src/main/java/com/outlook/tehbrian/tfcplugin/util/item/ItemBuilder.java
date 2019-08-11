@@ -1,5 +1,6 @@
-package com.outlook.tehbrian.tfcplugin.util;
+package com.outlook.tehbrian.tfcplugin.util.item;
 
+import com.outlook.tehbrian.tfcplugin.util.MiscUtils;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -23,23 +24,6 @@ public class ItemBuilder {
 
     public ItemBuilder(Material material) {
         this.material = material;
-    }
-
-    public static ItemBuilder importFrom(ItemStack itemStack) {
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        return new ItemBuilder(itemStack.getType())
-                .amount(itemStack.getAmount())
-                .durability(itemStack.getDurability())
-                .enchantments(itemStack.getEnchantments())
-                .flags(itemStack.getItemFlags())
-                .name(itemMeta.getDisplayName())
-                .lore(itemMeta.getLore())
-                .unbreakable(itemMeta.isUnbreakable());
-    }
-
-    public ItemBuilder material(Material material) {
-        this.material = material;
-        return this;
     }
 
     public ItemBuilder amount(Integer amount) {
