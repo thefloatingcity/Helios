@@ -8,7 +8,7 @@ import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Optional;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import com.outlook.tehbrian.tfcplugin.util.MiscUtils;
-import com.outlook.tehbrian.tfcplugin.util.MsgBuilder;
+import com.outlook.tehbrian.tfcplugin.util.msg.MsgBuilder;
 import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
 
@@ -22,7 +22,8 @@ public class OntimeCommand extends BaseCommand {
     public void onOntime(Player player, @Optional OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
-        long millisPlayed = (targetPlayer.getStatistic(Statistic.PLAY_ONE_TICK) / 20) * 1000;
+        // Liars. Why was it changed from PLAY_ONE_TICK to PLAY_ONE_MINUTE? It's updated 1 every tick, not minute.
+        long millisPlayed = (targetPlayer.getStatistic(Statistic.PLAY_ONE_MINUTE) / 20) * 1000;
 
         if (target == null) {
             player.sendMessage(new MsgBuilder().def("msg.ontime.check_self").formats(MiscUtils.fancifyTime(millisPlayed)).build());

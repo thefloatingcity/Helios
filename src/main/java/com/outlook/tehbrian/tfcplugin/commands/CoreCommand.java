@@ -8,8 +8,10 @@ import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.HelpCommand;
 import co.aikar.commands.annotation.Subcommand;
 import com.outlook.tehbrian.tfcplugin.TFCPlugin;
-import com.outlook.tehbrian.tfcplugin.util.MsgBuilder;
+import com.outlook.tehbrian.tfcplugin.flight.FlightManager;
+import com.outlook.tehbrian.tfcplugin.util.msg.MsgBuilder;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 @SuppressWarnings("unused")
 @CommandAlias("tfc")
@@ -23,11 +25,24 @@ public class CoreCommand extends BaseCommand {
     }
 
     @Subcommand("reload")
-    @CommandPermission("tfcplugin.reload")
+    @CommandPermission("tfcplugin.core.reload")
     @Description("Reload TFCPlugin's config.")
     public void onReload(CommandSender sender) {
         main.reloadConfig();
-        sender.sendMessage(new MsgBuilder().def("msg.reloaded").build());
+        sender.sendMessage(new MsgBuilder().def("msg.core.reload").build());
+    }
+
+    @CommandAlias("fly")
+    @CommandPermission("tfcplugin.core.fly")
+    @Description("Toggle your flight ability.")
+    public void onFly(Player player) {
+        FlightManager.setPlayerCanBypassFly(player, !FlightManager.getPlayerCanBypassFly(player));
+
+        if (FlightManager.getPlayerCanBypassFly(player)) {
+            player.sendMessage(new MsgBuilder().def("msg.core.fly_enabled").build());
+        } else {
+            player.sendMessage(new MsgBuilder().def("msg.core.fly_disabled").build());
+        }
     }
 
     @HelpCommand

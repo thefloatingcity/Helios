@@ -1,6 +1,7 @@
 package com.outlook.tehbrian.tfcplugin.util;
 
 import com.outlook.tehbrian.tfcplugin.TFCPlugin;
+import com.outlook.tehbrian.tfcplugin.util.msg.MsgBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;

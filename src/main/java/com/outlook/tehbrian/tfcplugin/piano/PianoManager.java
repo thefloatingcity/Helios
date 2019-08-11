@@ -1,7 +1,6 @@
 package com.outlook.tehbrian.tfcplugin.piano;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
@@ -27,7 +26,7 @@ public class PianoManager {
     }
 
     public static Sound getPlayerPianoInstrument(Player player) {
-        return playerPianoInstrument.getOrDefault(player.getUniqueId(), Sound.BLOCK_NOTE_HARP);
+        return playerPianoInstrument.getOrDefault(player.getUniqueId(), Sound.BLOCK_NOTE_BLOCK_HARP);
     }
 
     public static void setPlayerEnabledPiano(Player player, boolean bool) {
@@ -46,7 +45,7 @@ public class PianoManager {
 
     public static void play(Player player, ItemStack item, boolean requireToggle) {
         if (player.hasPermission("tfcplugin.piano") && ((!requireToggle || getPlayerEnabledPiano(player)))) {
-            if (item != null && item.getType() == Material.STAINED_GLASS_PANE) {
+            if (item != null && item.getType().name().toLowerCase().contains("pane")) {
                 if (item.getItemMeta().hasLore() && Objects.requireNonNull(item.getLore()).get(1).equals(ChatColor.DARK_GRAY + "[Note]")) {
                     player.getWorld().playSound(player.getEyeLocation(), getPlayerPianoInstrument(player), SoundCategory.MASTER, 3, Float.parseFloat(item.getLore().get(2)));
                 }

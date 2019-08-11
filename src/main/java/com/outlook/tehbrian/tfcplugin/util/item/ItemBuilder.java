@@ -15,7 +15,6 @@ public class ItemBuilder {
 
     private Material material;
     private Integer amount = null;
-    private Short durability = null;
     private Map<Enchantment, Integer> enchantments = null;
     private Set<ItemFlag> flags = null;
     private String name = null;
@@ -28,11 +27,6 @@ public class ItemBuilder {
 
     public ItemBuilder amount(Integer amount) {
         this.amount = amount;
-        return this;
-    }
-
-    public ItemBuilder durability(Short durability) {
-        this.durability = durability;
         return this;
     }
 
@@ -66,9 +60,6 @@ public class ItemBuilder {
 
         if (amount != null) {
             itemStack.setAmount(amount);
-        }
-        if (durability != null) {
-            itemStack.setDurability(durability);
         }
         if (enchantments != null) {
             itemStack.addUnsafeEnchantments(enchantments);

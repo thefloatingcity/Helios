@@ -54,8 +54,6 @@ public class ItemEditor {
     }
 
     public ItemEditor addLore(String string) {
-
-
         return this;
     }
 

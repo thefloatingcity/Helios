@@ -26,7 +26,7 @@ public class PianoEvents implements Listener {
         if (event.getWhoClicked() instanceof Player) {
             Player player = (Player) event.getWhoClicked();
             if (event.getClickedInventory() != null) {
-                if (event.getClickedInventory().getName().equals(main.getConfig().getString("inventories.piano_notes.name"))) {
+                if (event.getView().getTitle().equals(main.getConfig().getString("inventories.piano_notes.name"))) {
                     if (event.isRightClick()) {
                         event.setCancelled(true);
                         PianoManager.play(player, event.getCurrentItem(), false);

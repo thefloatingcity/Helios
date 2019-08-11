@@ -8,7 +8,7 @@ import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Subcommand;
 import com.outlook.tehbrian.tfcplugin.util.ConfigParsers;
 import com.outlook.tehbrian.tfcplugin.util.LuckPermsUtils;
-import com.outlook.tehbrian.tfcplugin.util.MsgBuilder;
+import com.outlook.tehbrian.tfcplugin.util.msg.MsgBuilder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -28,7 +28,7 @@ public class RulesCommand extends BaseCommand {
     @CommandAlias("acceptrules")
     @Description("Accept the rules and get building permissions!")
     public void onAccept(Player player) {
-        if (player.hasPermission("tfcplugin.rulesaccepted")) {
+        if (player.hasPermission("tfcplugin.build")) {
             player.sendMessage(new MsgBuilder().prefixKey("infixes.rules.prefix").msgKey("msg.rules.already_accepted").build());
         } else {
             LuckPermsUtils.addPlayerGroup(player, "passenger");

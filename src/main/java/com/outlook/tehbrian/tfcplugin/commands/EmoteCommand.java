@@ -7,7 +7,7 @@ import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.HelpCommand;
 import co.aikar.commands.annotation.Optional;
-import com.outlook.tehbrian.tfcplugin.util.MsgBuilder;
+import com.outlook.tehbrian.tfcplugin.util.msg.MsgBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -68,6 +68,13 @@ public class EmoteCommand extends BaseCommand {
         } else {
             Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.emote.sue_extra").formats(player.getDisplayName(), text).build());
         }
+    }
+
+    @CommandAlias("highfive")
+    @CommandPermission("tfcplugin.emote.highfive")
+    @Description("Up high! Down low! Too slow!")
+    public void onHighfive(Player player, String text) {
+        Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.emote.highfive").formats(player.getDisplayName(), text).build());
     }
 
     @CommandAlias("spook")

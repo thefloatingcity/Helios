@@ -7,7 +7,7 @@ website: ${url}
 main: ${mainClass}
 depend: []
 database: false
-api-version: 1.12
+api-version: 1.14
 commands: {} # Thanks, ACF!
 permissions:
   tfcplugin.chatcolor:
@@ -19,10 +19,3 @@ permissions:
   tfcplugin.build:
     description: Permission to interact with the world.
     default: op
-  tfcplugin.*:
-    description: Complete permission to all of TFCPlugin.
-    default: op
-    children:
-      tfcplugin.chatcolor: true
-      tfcplugin.signcolor: true
-      tfcplugin.build: true

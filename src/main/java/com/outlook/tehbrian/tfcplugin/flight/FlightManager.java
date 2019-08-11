@@ -18,7 +18,7 @@ public class FlightManager {
     }
 
     public static void setPlayerCanBypassFly(Player player, boolean bool) {
-        if (player.hasPermission("tfcplugin.util.fly") && bool) {
+        if (player.hasPermission("tfcplugin.core.fly") && bool) {
             playerCanBypassFly.add(player.getUniqueId());
             enableFlight(player);
         } else {
@@ -28,14 +28,14 @@ public class FlightManager {
     }
 
     public static void enableFlight(Player player) {
-        if (player.hasPermission("tfcplugin.util.fly") && getPlayerCanBypassFly(player)) {
+        if (player.hasPermission("tfcplugin.core.fly") && getPlayerCanBypassFly(player)) {
             player.setAllowFlight(true);
             player.setFlying(true);
         }
     }
 
     public static void disableFlight(Player player) {
-        if (!player.hasPermission("tfcplugin.util.fly") || !getPlayerCanBypassFly(player)) {
+        if (!player.hasPermission("tfcplugin.core.fly") || !getPlayerCanBypassFly(player)) {
             player.setAllowFlight(false);
             player.setFlying(false);
         }

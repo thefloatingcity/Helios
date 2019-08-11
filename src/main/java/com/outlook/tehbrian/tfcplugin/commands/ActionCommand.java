@@ -10,7 +10,7 @@ import co.aikar.commands.annotation.HelpCommand;
 import co.aikar.commands.annotation.Optional;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import com.outlook.tehbrian.tfcplugin.TFCPlugin;
-import com.outlook.tehbrian.tfcplugin.util.MsgBuilder;
+import com.outlook.tehbrian.tfcplugin.util.msg.MsgBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -39,7 +39,7 @@ public class ActionCommand extends BaseCommand {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
         targetPlayer.setVelocity(new Vector(0, 10, 0));
-        targetPlayer.getWorld().playSound(targetPlayer.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
+        targetPlayer.getWorld().playSound(targetPlayer.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
 
         if (target == null) {
             Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.launch_self").formats(player.getDisplayName()).build());
@@ -56,7 +56,7 @@ public class ActionCommand extends BaseCommand {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
         targetPlayer.setVelocity(targetPlayer.getLocation().getDirection().multiply(3));
-        targetPlayer.getWorld().playSound(targetPlayer.getEyeLocation(), Sound.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
+        targetPlayer.getWorld().playSound(targetPlayer.getEyeLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
 
         if (target == null) {
             Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.boost_self").formats(player.getDisplayName()).build());
@@ -77,7 +77,6 @@ public class ActionCommand extends BaseCommand {
         if (target == null) {
             Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.zap_self").formats(player.getDisplayName()).build());
         } else {
-
             Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.zap_other").formats(player.getDisplayName(), targetPlayer.getDisplayName()).build());
         }
     }

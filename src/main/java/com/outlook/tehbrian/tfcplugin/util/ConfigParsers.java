@@ -2,6 +2,7 @@ package com.outlook.tehbrian.tfcplugin.util;
 
 import com.outlook.tehbrian.tfcplugin.TFCPlugin;
 import com.outlook.tehbrian.tfcplugin.util.item.ItemBuilder;
+import com.outlook.tehbrian.tfcplugin.util.msg.MsgBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -50,7 +51,6 @@ public class ConfigParsers {
 
             inventory.addItem(new ItemBuilder(Material.matchMaterial(item.getString("material")))
                     .amount(item.isSet("amount") ? item.getInt("amount") : 1)
-                    .durability((short) item.getInt("durability"))
                     .name(item.getString("name"))
                     .lore(item.getStringList("lore"))
                     .unbreakable(item.getBoolean("unbreakable"))

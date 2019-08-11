@@ -8,7 +8,7 @@ msg:
   fancify_time_format: "&e%s&f %s"
   page_format: "&f%s&7 | Page &e%s&7/&e%s"
   chat_format: "&f{prefix}&f &7%1$s&f{suffix}&f: %2$s"
-  banner: "&8-*-*-*-*-*-*-*-*-&7 -=[&f The &bFloating &aCity &7]=- &8-*-*-*-*-*-*-*-*-"
+  banner: "&8-=-=-=-=-=-=-=-[&7 -=[&f The &bFloating &aCity &7]=- &8]-=-=-=-=-=-=-=-"
 
   motd: "&fWelcome back! You were last on %s ago."
   motd_new: "&fWelcome to the server, &b%s&f! Please read the &e/rules&f and the boards to your right!"
@@ -18,7 +18,6 @@ msg:
   leave: "&7[&4-&7]&f &c%s&f left the game."
 
   no_build: "&fYou can't build yet. Please read our rules first by doing &e/rules&f!"
-  reloaded: "&fConfig reloaded successfully!"
 
   action:
     launch_other: "&f%s &alaunched&f %s"
@@ -30,6 +29,11 @@ msg:
     poke_other: "&f%s &cpoked&f %s"
     poke_self: "&f%s &cpoked&f themselves"
 
+  core:
+    reload: "&fConfig reloaded successfully!"
+    fly_enabled: "&fYou can now fly! Please only use this in emergencies."
+    fly_disabled: "&fYou can no longer fly. Thanks for disabling it!"
+
   emote:
     unreadable: "&8%s &0is unreadable." #0 8
     cry: "&9%s &1is crying."            #1 9
@@ -39,7 +43,7 @@ msg:
     winkwonk: "&d%s &5wink wonks &d;)"  #5 D
     sue: "&e%s &6is suing."             #6 E
     sue_extra: "&e%s &6is suing &e%s"   #6 E
-    8: "&f%s &7"                        #7 F NEEDS
+    highfive: "&f%s &7highfives &f%s"   #7 F
 
     spook: "&7%s &8is a spook."  #8 7
     doubt: "&3%s &9doubts that." #9 3
@@ -47,12 +51,8 @@ msg:
 
   gamemode:
     unknown: "&fUnknown input. Try something such as &esurvival&f, &es&f, &e0&f, &ecreative&f, &ec&f, &e1&f, &eadventure&f, &ea&f, or &e2&f."
-    changed: "&fYour gamemode has been changed to &e%s&f!"
-    changed_other: "&6%s&f's gamemode has been changed to &e%s&f!"
-
-  item:
-    setname: "&fThe item's name "
-    getname: ""
+    change_self: "&fYour gamemode has been changed to &e%s&f!"
+    change_other: "&6%s&f's gamemode has been changed to &e%s&f!"
 
   ontime:
     check_self: "&fYou've been playing for %s."
@@ -66,10 +66,6 @@ msg:
   rules:
     accept: "&fThanks for reading the rules! Now go, be free!"
     already_accepted: "&fLooks like you've already read the rules, thanks!"
-
-  fly:
-    enabled: "&fYou can now fly! Please only use this in emergencies."
-    disabled: "&fYou can no longer fly. Thanks for disabling it!"
 
   hat:
     set: "&fNow that's a fancy hat!"
@@ -208,200 +204,175 @@ inventories:
     size: 27
     items:
       1:
-        material: "STAINED_GLASS_PANE"
-        durability: 8
+        material: "LIGHT_GRAY_STAINED_GLASS_PANE"
         name: "&fF♯/G♭ [&bOctave 1&f]"
         lore:
           - "&7Part of &f[&eF# Major, F# Minor&f]"
           - "&8[Note]"
           - "0.5"
       2:
-        material: "STAINED_GLASS_PANE"
-        durability: 0
+        material: "WHITE_STAINED_GLASS_PANE"
         name: "&fG [&bOctave 1&f]"
         lore:
           - "&7Part of &f[]"
           - "&8[Note]"
           - "0.529732"
       3:
-        material: "STAINED_GLASS_PANE"
-        durability: 8
+        material: "LIGHT_GRAY_STAINED_GLASS_PANE"
         name: "&fG♯/A♭ [&bOctave 1&f]"
         lore:
           - "&7Part of &f[&eF# Major, F# Minor&f]"
           - "&8[Note]"
           - "0.561231"
       4:
-        material: "STAINED_GLASS_PANE"
-        durability: 0
+        material: "WHITE_STAINED_GLASS_PANE"
         name: "&fA [&bOctave 1&f]"
         lore:
           - "&7Part of &f[&eF# Minor&f]"
           - "&8[Note]"
           - "0.594604"
       5:
-        material: "STAINED_GLASS_PANE"
-        durability: 8
+        material: "LIGHT_GRAY_STAINED_GLASS_PANE"
         name: "&fA♯/B♭ [&bOctave 1&f]"
         lore:
           - "&7Part of &f[&eF# Major&f]"
           - "&8[Note]"
           - "0.629961"
       6:
-        material: "STAINED_GLASS_PANE"
-        durability: 0
+        material: "WHITE_STAINED_GLASS_PANE"
         name: "&fB [&bOctave 1&f]"
         lore:
           - "&7Part of &f[&eF# Major, F# Minor&f]"
           - "&8[Note]"
           - "0.667420"
       7:
-        material: "STAINED_GLASS_PANE"
-        durability: 0
+        material: "WHITE_STAINED_GLASS_PANE"
         name: "&fC [&bOctave 1&f]"
         lore:
           - "&7Part of &f[]"
           - "&8[Note]"
           - "0.707107"
       8:
-        material: "STAINED_GLASS_PANE"
-        durability: 8
+        material: "LIGHT_GRAY_STAINED_GLASS_PANE"
         name: "&fC♯/D♭ [&bOctave 1&f]"
         lore:
           - "&7Part of &f[&eF# Major, F# Minor&f]"
           - "&8[Note]"
           - "0.749154"
       9:
-        material: "STAINED_GLASS_PANE"
-        durability: 0
+        material: "WHITE_STAINED_GLASS_PANE"
         name: "&fD [&bOctave 1&f]"
         lore:
           - "&7Part of &f[&eF# Minor&f]"
           - "&8[Note]"
           - "0.793701"
       10:
-        material: "STAINED_GLASS_PANE"
-        durability: 8
+        material: "LIGHT_GRAY_STAINED_GLASS_PANE"
         name: "&fD♯/E♭ [&bOctave 1&f]"
         lore:
           - "&7Part of &f[&eF# Major&f]"
           - "&8[Note]"
           - "0.840896"
       11:
-        material: "STAINED_GLASS_PANE"
-        durability: 0
+        material: "WHITE_STAINED_GLASS_PANE"
         name: "&fE [&bOctave 1&f]"
         lore:
           - "&7Part of &f[&eF# Minor&f]"
           - "&8[Note]"
           - "0.890899"
       12:
-        material: "STAINED_GLASS_PANE"
-        durability: 0
+        material: "WHITE_STAINED_GLASS_PANE"
         name: "&fF [&bOctave 1&f]"
         lore:
           - "&7Part of &f[&eF# Major&f]"
           - "&8[Note]"
           - "0.943874"
       13:
-        material: "STAINED_GLASS_PANE"
-        durability: 8
+        material: "LIGHT_GRAY_STAINED_GLASS_PANE"
         name: "&fF♯/G♭ [&bOctave 2&f]"
         lore:
           - "&7Part of &f[&eF# Major, F# Minor&f]"
           - "&8[Note]"
           - "1"
       14:
-        material: "STAINED_GLASS_PANE"
-        durability: 0
+        material: "WHITE_STAINED_GLASS_PANE"
         name: "&fG [&bOctave 2&f]"
         lore:
           - "&7Part of &f[]"
           - "&8[Note]"
           - "1.059463"
       15:
-        material: "STAINED_GLASS_PANE"
-        durability: 8
+        material: "LIGHT_GRAY_STAINED_GLASS_PANE"
         name: "&fG♯/A♭ [&bOctave 2&f]"
         lore:
           - "&7Part of &f[&eF# Major, F# Minor&f]"
           - "&8[Note]"
           - "1.122462"
       16:
-        material: "STAINED_GLASS_PANE"
-        durability: 0
+        material: "WHITE_STAINED_GLASS_PANE"
         name: "&fA [&bOctave 2&f]"
         lore:
           - "&7Part of &f[&eF# Minor&f]"
           - "&8[Note]"
           - "1.189207"
       17:
-        material: "STAINED_GLASS_PANE"
-        durability: 8
+        material: "LIGHT_GRAY_STAINED_GLASS_PANE"
         name: "&fA#/B♭ [&bOctave 2&f]"
         lore:
           - "&7Part of &f[&eF# Major&f]"
           - "&8[Note]"
           - "1.259921"
       18:
-        material: "STAINED_GLASS_PANE"
-        durability: 0
+        material: "WHITE_STAINED_GLASS_PANE"
         name: "&fB [&bOctave 2&f]"
         lore:
           - "&7Part of &f[&eF# Major, F# Minor&f]"
           - "&8[Note]"
           - "1.334840"
       19:
-        material: "STAINED_GLASS_PANE"
-        durability: 0
+        material: "WHITE_STAINED_GLASS_PANE"
         name: "&fC [&bOctave 2&f]"
         lore:
           - "&7Part of &f[]"
           - "&8[Note]"
           - "1.414214"
       20:
-        material: "STAINED_GLASS_PANE"
-        durability: 8
+        material: "LIGHT_GRAY_STAINED_GLASS_PANE"
         name: "&fC♯/D♭ [&bOctave 2&f]"
         lore:
           - "&7Part of &f[&eF# Major, F# Minor&f]"
           - "&8[Note]"
           - "1.498307"
       21:
-        material: "STAINED_GLASS_PANE"
-        durability: 0
+        material: "WHITE_STAINED_GLASS_PANE"
         name: "&fD [&bOctave 2&f]"
         lore:
           - "&7Part of &f[&eF# Minor&f]"
           - "&8[Note]"
           - "1.587401"
       22:
-        material: "STAINED_GLASS_PANE"
-        durability: 8
+        material: "LIGHT_GRAY_STAINED_GLASS_PANE"
         name: "&fD♯/E♭ [&bOctave 2&f]"
         lore:
           - "&7Part of &f[&eF# Major&f]"
           - "&8[Note]"
           - "1.681793"
       23:
-        material: "STAINED_GLASS_PANE"
-        durability: 0
+        material: "WHITE_STAINED_GLASS_PANE"
         name: "&fE [&bOctave 2&f]"
         lore:
           - "&7Part of &f[&eF# Minor&f]"
           - "&8[Note]"
           - "1.781797"
       24:
-        material: "STAINED_GLASS_PANE"
-        durability: 0
+        material: "WHITE_STAINED_GLASS_PANE"
         name: "&fF [&bOctave 2&f]"
         lore:
           - "&7Part of &f[&eF# Major&f]"
           - "&8[Note]"
           - "1.887749"
       25:
-        material: "STAINED_GLASS_PANE"
-        durability: 8
+        material: "LIGHT_GRAY_STAINED_GLASS_PANE"
         name: "&fF♯/G♭ [&bOctave 3&f]"
         lore:
           - "&7Part of &f[&eF# Major, F# Minor&f]"
@@ -413,25 +384,9 @@ inventories:
     size: 9
     items:
       1:
-        material: "HUGE_MUSHROOM_1"
-        amount: 64
-        name: "&fBrown Mushroom Block"
-      2:
-        material: "HUGE_MUSHROOM_2"
-        amount: 64
-        name: "&fRed Mushroom Block"
-      3:
-        material: "GRASS_PATH"
-        amount: 64
-        name: "&fGrass Path"
-      4:
         material: "DRAGON_EGG"
         amount: 64
         name: "&fDragon Egg"
-      5:
-        material: "SOIL"
-        amount: 64
-        name: "&fFarmland"
 
 #############
 #           #

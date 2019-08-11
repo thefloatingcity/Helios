@@ -13,7 +13,7 @@ import com.outlook.tehbrian.tfcplugin.TFCPlugin;
 import com.outlook.tehbrian.tfcplugin.piano.PianoManager;
 import com.outlook.tehbrian.tfcplugin.piano.PianoSound;
 import com.outlook.tehbrian.tfcplugin.util.ConfigParsers;
-import com.outlook.tehbrian.tfcplugin.util.MsgBuilder;
+import com.outlook.tehbrian.tfcplugin.util.msg.MsgBuilder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

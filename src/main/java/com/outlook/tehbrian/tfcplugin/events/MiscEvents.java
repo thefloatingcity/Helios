@@ -3,7 +3,7 @@ package com.outlook.tehbrian.tfcplugin.events;
 import com.outlook.tehbrian.tfcplugin.TFCPlugin;
 import com.outlook.tehbrian.tfcplugin.util.LuckPermsUtils;
 import com.outlook.tehbrian.tfcplugin.util.MiscUtils;
-import com.outlook.tehbrian.tfcplugin.util.MsgBuilder;
+import com.outlook.tehbrian.tfcplugin.util.msg.MsgBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -70,33 +70,32 @@ public class MiscEvents implements Listener {
 
     @EventHandler
     public void onVoidDamageEvent(EntityDamageEvent event) {
-        if (event.getCause() == EntityDamageEvent.DamageCause.VOID) {
-            Location location = event.getEntity().getLocation();
-            if (location.getY() <= -50) {
-                event.setCancelled(true);
-                event.setDamage(0);
-                if (location.getY() <= -300) {
-                    event.setCancelled(false);
-                    location.setY(600);
-                    event.getEntity().teleport(location);
-                    if (event.getEntity() instanceof Player) {
-                        Player player = (Player) event.getEntity();
-                        if (player.getFallDistance() >= 3000) {
-                            player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.max").build());
-                            player.teleport(MiscUtils.getSpawn());
-                            player.getWorld().strikeLightningEffect(MiscUtils.getSpawn());
-                            player.getWorld().playSound(MiscUtils.getSpawn(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 3, 1);
-                            player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, MiscUtils.getSpawn(), 1);
-                        } else if (player.getFallDistance() >= 2000) {
-                            player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.second").build());
-                        } else if (player.getFallDistance() >= 1000) {
-                            player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.first").build());
-                        }
-                        player.getWorld().playSound(location, Sound.ENTITY_ENDERMEN_TELEPORT, SoundCategory.MASTER, 4, 1);
-                    }
-                }
-            }
+        if (event.getCause() != EntityDamageEvent.DamageCause.VOID) return;
+        Location location = event.getEntity().getLocation();
+
+        if (location.getY() > -50) return;
+        event.setCancelled(true);
+
+        if (location.getY() > -300) return;
+        location.setY(600);
+        event.getEntity().teleport(location);
+
+        if (!(event.getEntity() instanceof Player)) return;
+        Player player = (Player) event.getEntity();
+
+        if (player.getFallDistance() >= 3000) {
+            player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.max").build());
+            player.teleport(MiscUtils.getSpawn());
+            player.getWorld().strikeLightningEffect(MiscUtils.getSpawn());
+            player.getWorld().playSound(MiscUtils.getSpawn(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 3, 1);
+            player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, MiscUtils.getSpawn(), 1);
+        } else if (player.getFallDistance() >= 2000) {
+            player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.second").build());
+        } else if (player.getFallDistance() >= 1000) {
+            player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.first").build());
         }
+
+        player.getWorld().playSound(location, Sound.ENTITY_ENDERMAN_TELEPORT, SoundCategory.MASTER, 4, 1);
     }
 
     @EventHandler
@@ -114,7 +113,7 @@ public class MiscEvents implements Listener {
 
                 if (event.getMessage().toLowerCase().contains(playerName.toLowerCase())) {
                     event.setMessage(event.getMessage().replaceAll("(?i)(" + playerName + ")", ChatColor.GOLD + "$1" + (lastColors.isEmpty() ? ChatColor.RESET : lastColors)));
-                    pingedPlayer.playSound(pingedPlayer.getEyeLocation(), Sound.BLOCK_NOTE_PLING, 1000, 2);
+                    pingedPlayer.playSound(pingedPlayer.getEyeLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 2);
                 }
             }
         }

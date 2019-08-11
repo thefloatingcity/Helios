@@ -1,6 +1,7 @@
-package com.outlook.tehbrian.tfcplugin.util;
+package com.outlook.tehbrian.tfcplugin.util.msg;
 
 import com.outlook.tehbrian.tfcplugin.TFCPlugin;
+import com.outlook.tehbrian.tfcplugin.util.MiscUtils;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;

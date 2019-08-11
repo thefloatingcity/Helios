@@ -10,7 +10,6 @@ public class FlightEvents implements Listener {
 
     @EventHandler
     public void onToggleFlight(PlayerToggleFlightEvent event) {
-        event.setCancelled(true);
         FlightManager.disableFlight(event.getPlayer());
     }
 

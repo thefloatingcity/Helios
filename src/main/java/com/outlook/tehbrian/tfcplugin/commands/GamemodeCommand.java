@@ -9,7 +9,7 @@ import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Optional;
 import co.aikar.commands.annotation.Subcommand;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
-import com.outlook.tehbrian.tfcplugin.util.MsgBuilder;
+import com.outlook.tehbrian.tfcplugin.util.msg.MsgBuilder;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -30,10 +30,10 @@ public class GamemodeCommand extends BaseCommand {
         targetPlayer.setGameMode(GameMode.SURVIVAL);
 
         if (target == null) {
-            player.sendMessage(new MsgBuilder().def("msg.gamemode.changed").formats("Survival").build());
+            player.sendMessage(new MsgBuilder().def("msg.gamemode.change_self").formats("Survival").build());
         } else {
-            player.sendMessage(new MsgBuilder().def("msg.gamemode.changed_other").formats(targetPlayer.getDisplayName(), "Survival").build());
-            targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode.changed").formats("Survival").build());
+            player.sendMessage(new MsgBuilder().def("msg.gamemode.change_other").formats(targetPlayer.getDisplayName(), "Survival").build());
+            targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode.change_self").formats("Survival").build());
         }
     }
 
@@ -47,10 +47,10 @@ public class GamemodeCommand extends BaseCommand {
         targetPlayer.setGameMode(GameMode.CREATIVE);
 
         if (target == null) {
-            player.sendMessage(new MsgBuilder().def("msg.gamemode.changed").formats("Creative").build());
+            player.sendMessage(new MsgBuilder().def("msg.gamemode.change_self").formats("Creative").build());
         } else {
-            player.sendMessage(new MsgBuilder().def("msg.gamemode.changed_other").formats(targetPlayer.getDisplayName(), "Creative").build());
-            targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode.changed").formats("Creative").build());
+            player.sendMessage(new MsgBuilder().def("msg.gamemode.change_other").formats(targetPlayer.getDisplayName(), "Creative").build());
+            targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode.change_self").formats("Creative").build());
         }
     }
 
@@ -64,10 +64,10 @@ public class GamemodeCommand extends BaseCommand {
         targetPlayer.setGameMode(GameMode.ADVENTURE);
 
         if (target == null) {
-            player.sendMessage(new MsgBuilder().def("msg.gamemode.changed").formats("Adventure").build());
+            player.sendMessage(new MsgBuilder().def("msg.gamemode.change_self").formats("Adventure").build());
         } else {
-            player.sendMessage(new MsgBuilder().def("msg.gamemode.changed_other").formats(targetPlayer.getDisplayName(), "Creative").build());
-            targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode.changed").formats("Adventure").build());
+            player.sendMessage(new MsgBuilder().def("msg.gamemode.change_other").formats(targetPlayer.getDisplayName(), "Creative").build());
+            targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode.change_self").formats("Adventure").build());
         }
     }
 
