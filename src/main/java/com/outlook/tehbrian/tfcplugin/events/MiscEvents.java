@@ -77,6 +77,8 @@ public class MiscEvents implements Listener {
         event.setCancelled(true);
 
         if (location.getY() > -300) return;
+        event.setCancelled(false);
+        event.setDamage(0);
         location.setY(600);
         event.getEntity().teleport(location);
 
