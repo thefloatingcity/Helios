@@ -5,10 +5,10 @@
 ##############
 
 msg:
-  fancify_time_format: "&e%s&f %s"
-  page_format: "&f%s&7 | Page &e%s&7/&e%s"
-  chat_format: "&f{prefix}&f &7%1$s&f{suffix}&f: %2$s"
   banner: "&8-=-=-=-=-=-=-=-[&7 -=[&f The &bFloating &aCity &7]=- &8]-=-=-=-=-=-=-=-"
+  chat_format: "&f{prefix}&f &7%1$s&f{suffix}&f: %2$s"
+  page_format: "&f%s&7 | Page &e%s&7/&e%s"
+  fancify_time_format: "&e%s&f %s"
 
   motd: "&fWelcome back! You were last on %s ago."
   motd_new: "&fWelcome to the server, &b%s&f! Please read the &e/rules&f and the boards to your right!"
@@ -17,7 +17,7 @@ msg:
   join_new: "&7[&3+&7]&f &b%s&f has joined for the first time!"
   leave: "&7[&4-&7]&f &c%s&f left the game."
 
-  no_build: "&fYou can't build yet. Please read our rules first by doing &e/rules&f!"
+  no_build: "&fYou can't build yet. Please read the rules first by doing &e/rules&f!"
 
   action:
     launch_other: "&f%s &alaunched&f %s"
@@ -30,9 +30,9 @@ msg:
     poke_self: "&f%s &cpoked&f themselves"
 
   core:
-    reload: "&fConfig reloaded successfully!"
-    fly_enabled: "&fYou can now fly! Please only use this in emergencies."
-    fly_disabled: "&fYou can no longer fly. Thanks for disabling it!"
+    reload: "&fThe config has been reloaded successfully!"
+    fly_enabled: "&aFly enabled! &fPlease use this in emergencies only."
+    fly_disabled: "&cFly disabled. &fThank you for disabling it!"
 
   emote:
     unreadable: "&8%s &0is unreadable." #0 8
@@ -59,9 +59,9 @@ msg:
     check_other: "&e%s&f has been playing for %s."
 
   piano:
-    enabled: "&aThe piano is now enabled!"
-    disabled: "&cThe piano is now disabled."
-    instrument_change: "&fYour instrument is now set to &e%s&f!"
+    enabled: "&aYour piano is now enabled!"
+    disabled: "&cYour piano is now disabled."
+    instrument_change: "&fYour instrument has been set to &e%s&f!"
 
   rules:
     accept: "&fThanks for reading the rules! Now go, be free!"
