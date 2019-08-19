@@ -12,7 +12,7 @@
     <!-- Name, Description, and URL are used in plugin.yml -->
     <name>TFCPlugin</name>
     <description>The custom plugin designed for The Floating City.</description>
-    <url>https://thefloating.city</url>
+    <url>https://github.com/ItsTehBrian/TFCPlugin</url>
 
     <licenses>
         <license>
