@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.outlook.tehbrian</groupId>
+    <groupId>xyz.tehbrian</groupId>
     <artifactId>tfcplugin</artifactId>
     <!-- Version is used in plugin.yml -->
     <version>1.5.0</version>
@@ -44,14 +44,14 @@
     <developers>
         <developer>
             <name>TehBrian</name>
-            <url>https://itstehbrian.github.io</url>
+            <url>https://tehbrian.xyz</url>
         </developer>
     </developers>
 
     <properties>
         <!--  Author, and MainClass are used in plugin.yml -->
         <author>TehBrian</author>
-        <mainClass>com.outlook.tehbrian.tfcplugin.TFCPlugin</mainClass>
+        <mainClass>xyz.tehbrian.tfcplugin.TFCPlugin</mainClass>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -135,7 +135,7 @@
                     <relocations>
                         <relocation>
                             <pattern>co.aikar.commands</pattern>
-                            <shadedPattern>com.outlook.tehbrian.acf</shadedPattern>
+                            <shadedPattern>xyz.tehbrian.acf</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
