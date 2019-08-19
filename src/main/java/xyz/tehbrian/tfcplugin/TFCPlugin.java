@@ -36,9 +36,9 @@ public final class TFCPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        setupCommandManager();
-        setupEvents();
         setupConfig();
+        setupEvents();
+        setupCommandManager();
 
         if (!setupLuckPermsApi()) {
             getLogger().severe("No LuckPerms dependency found! Disabling plugin..");
@@ -49,6 +49,20 @@ public final class TFCPlugin extends JavaPlugin {
     @Override
     public void onDisable() {
         getLogger().info("See you later!");
+    }
+
+    private void setupConfig() {
+        getConfig().options().copyDefaults(true);
+        getConfig().options().copyHeader(true);
+        saveDefaultConfig();
+    }
+
+    private void setupEvents() {
+        getServer().getPluginManager().registerEvents(new AntiBuildEvents(), this);
+        getServer().getPluginManager().registerEvents(new BuildingEvents(this), this);
+        getServer().getPluginManager().registerEvents(new MiscEvents(this), this);
+        getServer().getPluginManager().registerEvents(new FlightEvents(), this);
+        getServer().getPluginManager().registerEvents(new PianoEvents(this), this);
     }
 
     private void setupCommandManager() {
@@ -77,20 +91,6 @@ public final class TFCPlugin extends JavaPlugin {
                 throw new ConditionFailedException("Maximum value is " + context.getConfigValue("max", 10) + ".");
             }
         });
-    }
-
-    private void setupEvents() {
-        getServer().getPluginManager().registerEvents(new AntiBuildEvents(), this);
-        getServer().getPluginManager().registerEvents(new BuildingEvents(this), this);
-        getServer().getPluginManager().registerEvents(new MiscEvents(this), this);
-        getServer().getPluginManager().registerEvents(new FlightEvents(), this);
-        getServer().getPluginManager().registerEvents(new PianoEvents(this), this);
-    }
-
-    private void setupConfig() {
-        getConfig().options().copyDefaults(true);
-        getConfig().options().copyHeader(true);
-        saveDefaultConfig();
     }
 
     private boolean setupLuckPermsApi() {
