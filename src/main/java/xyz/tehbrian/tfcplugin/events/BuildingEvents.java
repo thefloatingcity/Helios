@@ -83,7 +83,7 @@ public class BuildingEvents implements Listener {
     public void onSignChange(SignChangeEvent event) {
         if (event.getPlayer().hasPermission("tfcplugin.signcolor")) {
             String[] lines = event.getLines();
-            for (int l = 0; l < 4; l++) {
+            for (int l = 0; l < lines.length; l++) {
                 event.setLine(l, MiscUtils.color(lines[l]));
             }
         }
