@@ -152,7 +152,7 @@ books:
       2:
         title: "Griefing"
         content:
-          - "&fNo touching other people's stuff without their permission. This includes killing their animals, trampling their crops, touching their itemframes or chests.."
+          - "&fNo touching other people's stuff without their permission. This includes killing their animals, trampling their crops, touching their item frames or chests.."
           - "&fYou get the idea! If it isn't yours, leave it be."
       3:
         title: "Chat Stuff"
@@ -175,7 +175,7 @@ books:
         title: "Flamewars"
         content:
           - "&fHaving discussions about things are fine! Religion, politics, so be it."
-          - "&fHowever, keep it a debate, not a flamewar. Keep your cool, don't start fighting with eachother. That's just not constructive."
+          - "&fHowever, keep it a debate, not a flamewar. Keep your cool, don't start fighting with each other. That's just not constructive."
       7:
         title: "PG-13"
         content:
@@ -185,7 +185,7 @@ books:
         title: "Lag, Bugs, and Glitches"
         content:
           - "&fPlease don't try to break our server. It's not funny."
-          - "&fIf you find any bugs, glitches, or explots, please report them to staff, and definitely don't abuse them."
+          - "&fIf you find any bugs, glitches, or exploits, please report them to staff, and definitely don't abuse them."
       9:
         title: "Common Sense"
         content:
