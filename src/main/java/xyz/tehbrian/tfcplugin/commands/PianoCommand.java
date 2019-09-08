@@ -11,7 +11,6 @@ import co.aikar.commands.annotation.HelpCommand;
 import co.aikar.commands.annotation.Subcommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import xyz.tehbrian.tfcplugin.TFCPlugin;
 import xyz.tehbrian.tfcplugin.piano.PianoManager;
 import xyz.tehbrian.tfcplugin.piano.PianoSound;
 import xyz.tehbrian.tfcplugin.util.ConfigParsers;
@@ -22,12 +21,6 @@ import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 @CommandPermission("tfcplugin.piano")
 @Description("A playable piano!")
 public class PianoCommand extends BaseCommand {
-
-    private final TFCPlugin main;
-
-    public PianoCommand(TFCPlugin main) {
-        this.main = main;
-    }
 
     @Subcommand("menu")
     @Description("Pick your notes!")

@@ -21,12 +21,6 @@ import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 @Description("Various utilities.")
 public class UtilCommand extends BaseCommand {
 
-    private final TFCPlugin main;
-
-    public UtilCommand(TFCPlugin main) {
-        this.main = main;
-    }
-
     @CommandAlias("blocks")
     @CommandPermission("tfcplugin.util.blocks")
     @Description("Useful building blocks.")
