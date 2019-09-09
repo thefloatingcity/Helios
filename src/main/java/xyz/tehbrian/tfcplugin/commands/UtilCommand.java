@@ -11,7 +11,6 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import xyz.tehbrian.tfcplugin.TFCPlugin;
 import xyz.tehbrian.tfcplugin.util.ConfigParsers;
 import xyz.tehbrian.tfcplugin.util.MiscUtils;
 import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;

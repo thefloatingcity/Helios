@@ -9,14 +9,17 @@ import xyz.tehbrian.tfcplugin.util.MiscUtils;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
+/**
+ * Only use if you want to create new items.
+ * If you'd like to modify existing items, see {@link xyz.tehbrian.tfcplugin.util.item.ItemModifier}.
+ */
 public class ItemBuilder {
 
     private Material material;
     private Integer amount = null;
     private Map<Enchantment, Integer> enchantments = null;
-    private Set<ItemFlag> flags = null;
+    private ItemFlag[] flags = null;
     private String name = null;
     private List<String> lore = null;
     private Boolean unbreakable = null;
@@ -35,7 +38,7 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder flags(Set<ItemFlag> flags) {
+    public ItemBuilder flags(ItemFlag... flags) {
         this.flags = flags;
         return this;
     }
@@ -65,9 +68,7 @@ public class ItemBuilder {
             itemStack.addUnsafeEnchantments(enchantments);
         }
         if (flags != null) {
-            for (ItemFlag flag : flags) {
-                itemStack.addItemFlags(flag);
-            }
+            itemStack.addItemFlags(flags);
         }
 
         ItemMeta itemMeta = itemStack.getItemMeta();
