@@ -9,6 +9,8 @@ import co.aikar.commands.annotation.HelpCommand;
 import co.aikar.commands.annotation.Subcommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.PlayerInventory;
+import xyz.tehbrian.tfcplugin.util.item.ItemModifier;
 
 @SuppressWarnings("unused")
 @CommandAlias("item")
@@ -19,36 +21,32 @@ public class ItemCommand extends BaseCommand {
     @CommandPermission("tfcplugin.item.setname")
     @Description("Set the item's display name.")
     public void onSetName(Player player, String text) {
-    }
-
-    @Subcommand("addlore")
-    @CommandPermission("tfcplugin.item.addlore")
-    @Description("Add lore to the end of the item's lore.")
-    public void onAddLore(Player player, String text) {
-    }
-
-    @Subcommand("removelore")
-    @CommandPermission("tfcplugin.item.removelore")
-    @Description("Remove lore from a specific index.")
-    public void onRemoveLore(Player player, Short index, String text) {
-    }
-
-    @Subcommand("setlore")
-    @CommandPermission("tfcplugin.item.setlore")
-    @Description("Set the lore at a specific index.")
-    public void onSetLore(Player player, Short index, String text) {
+        PlayerInventory inventory = player.getInventory();
+        inventory.setItemInMainHand(new ItemModifier(inventory.getItemInMainHand()).setName(text).getItem());
     }
 
     @Subcommand("setamount")
     @CommandPermission("tfcplugin.item.setamount")
-    @Description("Set the amount of items in the itemstack.")
+    @Description("Set the item's amount.")
     public void onSetAmount(Player player, Integer amount) {
+        PlayerInventory inventory = player.getInventory();
+        inventory.setItemInMainHand(new ItemModifier(inventory.getItemInMainHand()).setAmount(amount).getItem());
     }
 
-    @Subcommand("setdurability")
-    @CommandPermission("tfcplugin.item.setdurability")
-    @Description("Set the item's durability.")
-    public void onSetDurability(Player player, Short durability) {
+    @Subcommand("addlore")
+    @CommandPermission("tfcplugin.item.addlore")
+    @Description("Add on to the item's lore in a new line.")
+    public void onAddLore(Player player, String text) {
+        PlayerInventory inventory = player.getInventory();
+        inventory.setItemInMainHand(new ItemModifier(inventory.getItemInMainHand()).addLore(text).getItem());
+    }
+
+    @Subcommand("changelore")
+    @CommandPermission("tfcplugin.item.changelore")
+    @Description("Change a specific line on an item's lore.")
+    public void onEditLore(Player player, String text) {
+        PlayerInventory inventory = player.getInventory();
+        inventory.setItemInMainHand(new ItemModifier(inventory.getItemInMainHand()).addLore(text).getItem());
     }
 
     @HelpCommand

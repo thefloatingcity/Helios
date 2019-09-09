@@ -76,7 +76,7 @@ public class ItemModifier {
         return this;
     }
 
-    public ItemModifier editLore(int index, String string) {
+    public ItemModifier changeLore(int index, String string) {
         List<String> lore = itemMeta.getLore();
         lore.set(index, MiscUtils.color(string));
         itemMeta.setLore(lore);
