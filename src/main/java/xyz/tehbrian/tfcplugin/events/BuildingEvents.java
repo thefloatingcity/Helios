@@ -102,6 +102,11 @@ public class BuildingEvents implements Listener {
 
         Bukkit.getScheduler().runTask(main, () -> {
             Sign sign = (Sign) blockState;
+            String[] lines = sign.getLines();
+            for (int l = 0; l < lines.length; l++) {
+                sign.setLine(l, lines[l].replace('§', '&'));
+            }
+            sign.update();
             event.getPlayer().openSign(sign);
         });
         event.setCancelled(true);
