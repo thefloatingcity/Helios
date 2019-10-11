@@ -1,4 +1,4 @@
-package xyz.tehbrian.tfcplugin.piano;
+package xyz.tehbrian.tfcplugin.listeners;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -6,13 +6,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import xyz.tehbrian.tfcplugin.TFCPlugin;
+import xyz.tehbrian.tfcplugin.managers.PianoManager;
 
 @SuppressWarnings("unused")
-public class PianoEvents implements Listener {
+public class PianoListener implements Listener {
 
     private final TFCPlugin main;
 
-    public PianoEvents(TFCPlugin main) {
+    public PianoListener(TFCPlugin main) {
         this.main = main;
     }
 

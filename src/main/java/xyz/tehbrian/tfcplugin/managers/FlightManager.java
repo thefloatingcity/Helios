@@ -1,4 +1,4 @@
-package xyz.tehbrian.tfcplugin.flight;
+package xyz.tehbrian.tfcplugin.managers;
 
 import org.bukkit.entity.Player;
 

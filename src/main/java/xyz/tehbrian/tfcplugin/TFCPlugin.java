@@ -14,11 +14,11 @@ import xyz.tehbrian.tfcplugin.commands.OntimeCommand;
 import xyz.tehbrian.tfcplugin.commands.PianoCommand;
 import xyz.tehbrian.tfcplugin.commands.RulesCommand;
 import xyz.tehbrian.tfcplugin.commands.UtilCommand;
-import xyz.tehbrian.tfcplugin.events.AntiBuildEvents;
-import xyz.tehbrian.tfcplugin.events.BuildingEvents;
-import xyz.tehbrian.tfcplugin.events.MiscEvents;
-import xyz.tehbrian.tfcplugin.flight.FlightEvents;
-import xyz.tehbrian.tfcplugin.piano.PianoEvents;
+import xyz.tehbrian.tfcplugin.listeners.AntiBuildListener;
+import xyz.tehbrian.tfcplugin.listeners.BuildingListener;
+import xyz.tehbrian.tfcplugin.listeners.MiscListener;
+import xyz.tehbrian.tfcplugin.listeners.FlightListener;
+import xyz.tehbrian.tfcplugin.listeners.PianoListener;
 
 public final class TFCPlugin extends JavaPlugin {
 
@@ -58,11 +58,11 @@ public final class TFCPlugin extends JavaPlugin {
     }
 
     private void setupEvents() {
-        getServer().getPluginManager().registerEvents(new AntiBuildEvents(), this);
-        getServer().getPluginManager().registerEvents(new BuildingEvents(this), this);
-        getServer().getPluginManager().registerEvents(new MiscEvents(this), this);
-        getServer().getPluginManager().registerEvents(new FlightEvents(), this);
-        getServer().getPluginManager().registerEvents(new PianoEvents(this), this);
+        getServer().getPluginManager().registerEvents(new AntiBuildListener(), this);
+        getServer().getPluginManager().registerEvents(new BuildingListener(this), this);
+        getServer().getPluginManager().registerEvents(new MiscListener(this), this);
+        getServer().getPluginManager().registerEvents(new FlightListener(), this);
+        getServer().getPluginManager().registerEvents(new PianoListener(this), this);
     }
 
     private void setupCommandManager() {

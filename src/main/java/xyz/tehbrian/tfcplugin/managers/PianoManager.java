@@ -1,4 +1,4 @@
-package xyz.tehbrian.tfcplugin.piano;
+package xyz.tehbrian.tfcplugin.managers;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;

@@ -1,4 +1,4 @@
-package xyz.tehbrian.tfcplugin.events;
+package xyz.tehbrian.tfcplugin.listeners;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -25,11 +25,11 @@ import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 import java.util.Calendar;
 
 @SuppressWarnings("unused")
-public class MiscEvents implements Listener {
+public class MiscListener implements Listener {
 
     private final TFCPlugin main;
 
-    public MiscEvents(TFCPlugin main) {
+    public MiscListener(TFCPlugin main) {
         this.main = main;
     }
 

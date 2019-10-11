@@ -1,4 +1,4 @@
-package xyz.tehbrian.tfcplugin.events;
+package xyz.tehbrian.tfcplugin.listeners;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -28,11 +28,11 @@ import xyz.tehbrian.tfcplugin.TFCPlugin;
 import xyz.tehbrian.tfcplugin.util.MiscUtils;
 
 @SuppressWarnings({"unused"})
-public class BuildingEvents implements Listener {
+public class BuildingListener implements Listener {
 
     private final TFCPlugin main;
 
-    public BuildingEvents(TFCPlugin main) {
+    public BuildingListener(TFCPlugin main) {
         this.main = main;
     }
 

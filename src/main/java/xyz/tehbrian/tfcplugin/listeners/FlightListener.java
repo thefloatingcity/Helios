@@ -1,12 +1,13 @@
-package xyz.tehbrian.tfcplugin.flight;
+package xyz.tehbrian.tfcplugin.listeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
+import xyz.tehbrian.tfcplugin.managers.FlightManager;
 
 @SuppressWarnings("unused")
-public class FlightEvents implements Listener {
+public class FlightListener implements Listener {
 
     @EventHandler
     public void onToggleFlight(PlayerToggleFlightEvent event) {

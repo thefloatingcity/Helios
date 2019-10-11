@@ -1,4 +1,4 @@
-package xyz.tehbrian.tfcplugin.events;
+package xyz.tehbrian.tfcplugin.listeners;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -20,7 +20,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 
 @SuppressWarnings("unused")
-public class AntiBuildEvents implements Listener {
+public class AntiBuildListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
