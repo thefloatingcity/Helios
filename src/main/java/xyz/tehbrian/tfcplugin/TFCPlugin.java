@@ -16,8 +16,8 @@ import xyz.tehbrian.tfcplugin.commands.RulesCommand;
 import xyz.tehbrian.tfcplugin.commands.UtilCommand;
 import xyz.tehbrian.tfcplugin.listeners.AntiBuildListener;
 import xyz.tehbrian.tfcplugin.listeners.BuildingListener;
-import xyz.tehbrian.tfcplugin.listeners.MiscListener;
 import xyz.tehbrian.tfcplugin.listeners.FlightListener;
+import xyz.tehbrian.tfcplugin.listeners.MiscListener;
 import xyz.tehbrian.tfcplugin.listeners.PianoListener;
 
 public final class TFCPlugin extends JavaPlugin {
