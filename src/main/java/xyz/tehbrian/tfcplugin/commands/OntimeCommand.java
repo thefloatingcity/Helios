@@ -22,7 +22,7 @@ public class OntimeCommand extends BaseCommand {
     public void onOntime(Player player, @Optional OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
-        // Liars. Why was it changed from PLAY_ONE_TICK to PLAY_ONE_MINUTE? It's updated 1 every tick, not minute.
+        // Liars. Why was it changed from PLAY_ONE_TICK to PLAY_ONE_MINUTE? It's incremented every tick, not minute.
         long millisPlayed = (targetPlayer.getStatistic(Statistic.PLAY_ONE_MINUTE) / 20) * 1000;
 
         if (target == null) {
