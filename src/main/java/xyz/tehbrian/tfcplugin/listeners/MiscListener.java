@@ -76,28 +76,26 @@ public class MiscListener implements Listener {
         if (location.getY() > -50) return;
         event.setCancelled(true);
 
-        if (location.getY() > -300) return;
-        event.setCancelled(false);
-        event.setDamage(0);
-        location.setY(600);
-        event.getEntity().teleport(location);
+        if (location.getY() > -450) return;
+        Bukkit.getScheduler().runTask(main, () -> {
+            location.setY(650);
+            event.getEntity().teleport(location);
 
-        if (!(event.getEntity() instanceof Player)) return;
-        Player player = (Player) event.getEntity();
+            if (!(event.getEntity() instanceof Player)) return;
+            Player player = (Player) event.getEntity();
 
-        if (player.getFallDistance() >= 3000) {
-            player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.max").build());
-            player.teleport(MiscUtils.getSpawn());
-            player.getWorld().strikeLightningEffect(MiscUtils.getSpawn());
-            player.getWorld().playSound(MiscUtils.getSpawn(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 3, 1);
-            player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, MiscUtils.getSpawn(), 1);
-        } else if (player.getFallDistance() >= 2000) {
-            player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.second").build());
-        } else if (player.getFallDistance() >= 1000) {
-            player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.first").build());
-        }
-
-        player.getWorld().playSound(location, Sound.ENTITY_ENDERMAN_TELEPORT, SoundCategory.MASTER, 4, 1);
+            if (player.getFallDistance() >= 3000) {
+                player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.max").build());
+                player.teleport(MiscUtils.getSpawn());
+                player.getWorld().strikeLightningEffect(MiscUtils.getSpawn());
+                player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, MiscUtils.getSpawn(), 1);
+                player.getWorld().playSound(MiscUtils.getSpawn(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 4, 1);
+            } else if (player.getFallDistance() >= 2000) {
+                player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.second").build());
+            } else if (player.getFallDistance() >= 1000) {
+                player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.first").build());
+            }
+        });
     }
 
     @EventHandler
