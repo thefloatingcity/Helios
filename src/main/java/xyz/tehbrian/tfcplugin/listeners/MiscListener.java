@@ -87,6 +87,7 @@ public class MiscListener implements Listener {
 
             if (player.getFallDistance() >= 3000) {
                 player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.max").build());
+                player.setFallDistance(0);
                 player.teleport(ConfigUtils.getSpawn());
                 player.getWorld().strikeLightningEffect(ConfigUtils.getSpawn());
                 player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, ConfigUtils.getSpawn(), 1);
