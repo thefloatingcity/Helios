@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  * Only use if you want to modify existing items.
- * If you'd like to create new items, see {@link xyz.tehbrian.tfcplugin.util.item.ItemBuilder}.
+ * If you would like to create new items, see {@link xyz.tehbrian.tfcplugin.util.item.ItemBuilder}.
  */
 public class ItemModifier {
 
