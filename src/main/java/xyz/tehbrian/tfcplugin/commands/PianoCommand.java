@@ -13,7 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import xyz.tehbrian.tfcplugin.managers.PianoManager;
 import xyz.tehbrian.tfcplugin.managers.PianoSound;
-import xyz.tehbrian.tfcplugin.util.ConfigParsers;
+import xyz.tehbrian.tfcplugin.util.ConfigUtils;
 import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 
 @SuppressWarnings("unused")
@@ -25,7 +25,7 @@ public class PianoCommand extends BaseCommand {
     @Subcommand("menu")
     @Description("Pick your notes!")
     public void onMenu(Player player) {
-        player.openInventory(ConfigParsers.getInventory("inventories.piano_notes"));
+        player.openInventory(ConfigUtils.getInventory("inventories.piano_notes"));
     }
 
     @Subcommand("instrument")
@@ -50,7 +50,7 @@ public class PianoCommand extends BaseCommand {
 
     @HelpCommand
     public void onHelp(CommandSender sender, @Default("1") @Conditions("limits:min=1,max=4") Integer page) {
-        for (String line : ConfigParsers.getPage("books.piano_manual", page)) {
+        for (String line : ConfigUtils.getPage("books.piano_manual", page)) {
             sender.sendMessage(line);
         }
     }

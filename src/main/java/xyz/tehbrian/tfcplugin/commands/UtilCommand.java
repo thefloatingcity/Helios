@@ -11,7 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import xyz.tehbrian.tfcplugin.util.ConfigParsers;
+import xyz.tehbrian.tfcplugin.util.ConfigUtils;
 import xyz.tehbrian.tfcplugin.util.MiscUtils;
 import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 
@@ -24,7 +24,7 @@ public class UtilCommand extends BaseCommand {
     @CommandPermission("tfcplugin.util.blocks")
     @Description("Useful building blocks.")
     public void onBlocks(Player player) {
-        player.openInventory(ConfigParsers.getInventory("inventories.blocks"));
+        player.openInventory(ConfigUtils.getInventory("inventories.blocks"));
     }
 
     @CommandAlias("broadcast")

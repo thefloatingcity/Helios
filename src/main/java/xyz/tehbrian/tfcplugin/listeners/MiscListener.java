@@ -18,6 +18,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
 import xyz.tehbrian.tfcplugin.TFCPlugin;
+import xyz.tehbrian.tfcplugin.util.ConfigUtils;
 import xyz.tehbrian.tfcplugin.util.LuckPermsUtils;
 import xyz.tehbrian.tfcplugin.util.MiscUtils;
 import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
@@ -86,10 +87,10 @@ public class MiscListener implements Listener {
 
             if (player.getFallDistance() >= 3000) {
                 player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.max").build());
-                player.teleport(MiscUtils.getSpawn());
-                player.getWorld().strikeLightningEffect(MiscUtils.getSpawn());
-                player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, MiscUtils.getSpawn(), 1);
-                player.getWorld().playSound(MiscUtils.getSpawn(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 4, 1);
+                player.teleport(ConfigUtils.getSpawn());
+                player.getWorld().strikeLightningEffect(ConfigUtils.getSpawn());
+                player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, ConfigUtils.getSpawn(), 1);
+                player.getWorld().playSound(ConfigUtils.getSpawn(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 4, 1);
             } else if (player.getFallDistance() >= 2000) {
                 player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.second").build());
             } else if (player.getFallDistance() >= 1000) {

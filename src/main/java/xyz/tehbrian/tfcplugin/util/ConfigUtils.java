@@ -1,8 +1,10 @@
 package xyz.tehbrian.tfcplugin.util;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.Inventory;
 import xyz.tehbrian.tfcplugin.TFCPlugin;
 import xyz.tehbrian.tfcplugin.util.item.ItemBuilder;
@@ -11,11 +13,11 @@ import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConfigParsers {
+public class ConfigUtils {
 
     private static final TFCPlugin main = TFCPlugin.getInstance();
 
-    private ConfigParsers() {
+    private ConfigUtils() {
     }
 
     public static List<String> getPage(String configKey, Integer pageNumber) {
@@ -26,7 +28,7 @@ public class ConfigParsers {
 
         messages.add(new MsgBuilder()
                 .prefixString(book.getString("multistart"))
-                .msgKey("msg.page_format")
+                .msgKey("msg.page_header")
                 .formats(page.getString("title"), pageNumber, pages.getKeys(false).size())
                 .build());
 
@@ -58,5 +60,10 @@ public class ConfigParsers {
         }
 
         return inventory;
+    }
+
+    public static Location getSpawn() {
+        FileConfiguration config = main.getConfig();
+        return new Location(Bukkit.getWorld(config.getString("spawn.world")), config.getDouble("spawn.x"), config.getDouble("spawn.y"), config.getDouble("spawn.z"));
     }
 }

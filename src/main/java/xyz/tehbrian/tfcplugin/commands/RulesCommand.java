@@ -8,7 +8,7 @@ import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Subcommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import xyz.tehbrian.tfcplugin.util.ConfigParsers;
+import xyz.tehbrian.tfcplugin.util.ConfigUtils;
 import xyz.tehbrian.tfcplugin.util.LuckPermsUtils;
 import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 
@@ -19,7 +19,7 @@ public class RulesCommand extends BaseCommand {
 
     @Default
     public void onRules(CommandSender sender, @Default("1") @Conditions("limits:min=1,max=9") Integer page) {
-        for (String line : ConfigParsers.getPage("books.rules", page)) {
+        for (String line : ConfigUtils.getPage("books.rules", page)) {
             sender.sendMessage(line);
         }
     }

@@ -88,6 +88,11 @@
             <version>4.4</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.stefvanschie.inventoryframework</groupId>
+            <artifactId>IF</artifactId>
+            <version>0.5.9</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -136,6 +141,10 @@
                         <relocation>
                             <pattern>co.aikar.commands</pattern>
                             <shadedPattern>xyz.tehbrian.acf</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>com.github.stefvanschie.inventoryframework</pattern>
+                            <shadedPattern>xyz.tehbrian.inventoryframework</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>

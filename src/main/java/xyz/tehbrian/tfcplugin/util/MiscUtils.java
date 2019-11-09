@@ -1,26 +1,15 @@
 package xyz.tehbrian.tfcplugin.util;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.configuration.file.FileConfiguration;
-import xyz.tehbrian.tfcplugin.TFCPlugin;
 import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 
 public class MiscUtils {
 
-    private static final TFCPlugin main = TFCPlugin.getInstance();
-
     private MiscUtils() {
     }
 
-    public static Location getSpawn() {
-        FileConfiguration config = main.getConfig();
-        return new Location(Bukkit.getWorld(config.getString("spawn.world")), config.getDouble("spawn.x"), config.getDouble("spawn.y"), config.getDouble("spawn.z"));
-    }
-
     public static String color(String string) {
-        return string == null ? null : ChatColor.translateAlternateColorCodes('&', string);
+        return ChatColor.translateAlternateColorCodes('&', string);
     }
 
     public static String fancifyTime(long milliseconds) {

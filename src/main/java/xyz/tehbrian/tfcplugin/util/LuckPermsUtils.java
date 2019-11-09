@@ -9,8 +9,7 @@ import xyz.tehbrian.tfcplugin.TFCPlugin;
 
 public class LuckPermsUtils {
 
-    private static final TFCPlugin main = TFCPlugin.getInstance();
-    private static final LuckPermsApi luckPermsApi = main.getLuckPermsApi();
+    private static final LuckPermsApi luckPermsApi = TFCPlugin.getInstance().getLuckPermsApi();
 
     private LuckPermsUtils() {
     }
