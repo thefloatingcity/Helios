@@ -48,19 +48,21 @@ public class MsgBuilder {
 
     public String build() {
         FileConfiguration config = TFCPlugin.getInstance().getConfig();
-        String message = "";
-
-        if (msgKey != null) {
-            message = config.getString(msgKey);
-        } else if (msgString != null) {
-            message = msgString;
-        }
+        StringBuilder sb = new StringBuilder();
 
         if (prefixKey != null) {
-            message = config.getString(prefixKey) + " " + message;
+            sb.append(config.getString(prefixKey)).append(" ");
         } else if (prefixString != null) {
-            message = prefixString + " " + message;
+            sb.append(prefixString).append(" ");
         }
+
+        if (msgKey != null) {
+            sb.append(config.getString(msgKey));
+        } else if (msgString != null) {
+            sb.append(msgString);
+        }
+
+        String message = sb.toString();
 
         if (formats != null) {
             message = String.format(message, formats);
