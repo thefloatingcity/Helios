@@ -38,7 +38,7 @@ public class BuildingListener implements Listener {
 
     @EventHandler
     public void onEntityExplode(EntityExplodeEvent event) {
-        if (main.getConfig().getBoolean("options.explosions_disabled")) {
+        if (main.getConfig().getBoolean("options.disable_explosions")) {
             event.setCancelled(true);
         }
     }
@@ -46,7 +46,7 @@ public class BuildingListener implements Listener {
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event) {
         if (event.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION || event.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
-            if (main.getConfig().getBoolean("options.explosions_damage_disabled")) {
+            if (main.getConfig().getBoolean("options.disable_explosions_damage")) {
                 event.setCancelled(true);
             }
         }
@@ -54,14 +54,14 @@ public class BuildingListener implements Listener {
 
     @EventHandler
     public void onLeavesDecay(LeavesDecayEvent event) {
-        if (main.getConfig().getBoolean("options.leaves_decay_disabled")) {
+        if (main.getConfig().getBoolean("options.disable_leaves_decay")) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onCropsTrample(PlayerInteractEvent event) {
-        if (main.getConfig().getBoolean("options.crop_trampling_disabled")) {
+        if (main.getConfig().getBoolean("options.disable_farmland_trampling")) {
             if (event.getAction() == Action.PHYSICAL) {
                 if (event.getClickedBlock().getType() == Material.FARMLAND) {
                     event.setCancelled(true);
@@ -72,7 +72,7 @@ public class BuildingListener implements Listener {
 
     @EventHandler
     public void onDragonEggTeleport(BlockFromToEvent event) {
-        if (main.getConfig().getBoolean("options.dragon_egg_teleporting_disabled")) {
+        if (main.getConfig().getBoolean("options.disable_dragon_egg_teleportation")) {
             if (event.getBlock().getType() == Material.DRAGON_EGG) {
                 event.setCancelled(true);
             }

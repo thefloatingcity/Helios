@@ -395,11 +395,11 @@ inventories:
 #############
 
 options:
-  explosions_disabled: true
-  explosions_damage_disabled: true
-  leaves_decay_disabled: true
-  crop_trampling_disabled: true
-  dragon_egg_teleporting_disabled: true
+  disable_explosions: true
+  disable_explosions_damage: true
+  disable_leaves_decay: true
+  disable_farmland_trampling: true
+  disable_dragon_egg_teleportion: true
 
 ##########
 #        #
