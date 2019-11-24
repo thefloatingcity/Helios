@@ -45,8 +45,8 @@ public class BuildingListener implements Listener {
 
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event) {
-        if (event.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION || event.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
-            if (main.getConfig().getBoolean("options.disable_explosions_damage")) {
+        if (main.getConfig().getBoolean("options.disable_explosions_damage")) {
+            if (event.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION || event.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
                 event.setCancelled(true);
             }
         }
@@ -60,7 +60,7 @@ public class BuildingListener implements Listener {
     }
 
     @EventHandler
-    public void onCropsTrample(PlayerInteractEvent event) {
+    public void onFarmlandTrample(PlayerInteractEvent event) {
         if (main.getConfig().getBoolean("options.disable_farmland_trampling")) {
             if (event.getAction() == Action.PHYSICAL) {
                 if (event.getClickedBlock().getType() == Material.FARMLAND) {
@@ -114,23 +114,19 @@ public class BuildingListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onIronTrapDoorInteract(PlayerInteractEvent event) {
+        if (event.getClickedBlock().getType() != Material.IRON_TRAPDOOR) return;
+        if (event.getPlayer().getInventory().getItemInMainHand().getType() != Material.AIR) return;
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         if (event.getHand() != EquipmentSlot.HAND) return;
         if (event.getPlayer().getGameMode() != GameMode.CREATIVE) return;
         if (event.getPlayer().isSneaking()) return;
-        if (event.getClickedBlock().getType() != Material.IRON_TRAPDOOR) return;
-        if (event.getPlayer().getInventory().getItemInMainHand().getType() != Material.AIR) return;
 
         Bukkit.getScheduler().runTask(main, () -> {
             Block block = event.getClickedBlock();
 
             TrapDoor trapDoor = (TrapDoor) block.getBlockData();
 
-            if (trapDoor.isOpen()) {
-                trapDoor.setOpen(false);
-            } else {
-                trapDoor.setOpen(true);
-            }
+            trapDoor.setOpen(!trapDoor.isOpen());
 
             block.setBlockData(trapDoor);
         });
@@ -138,13 +134,32 @@ public class BuildingListener implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true)
+    public void onSlabBreak(BlockBreakEvent event) {
+        if (!Tag.SLABS.isTagged(event.getPlayer().getInventory().getItemInMainHand().getType())) return;
+        if (event.getPlayer().getGameMode() != GameMode.CREATIVE) return;
+        if (!Tag.SLABS.isTagged(event.getBlock().getType())) return;
+
+        Slab blockData = (Slab) event.getBlock().getBlockData();
+        if (blockData.getType() != Slab.Type.DOUBLE) return;
+
+        if (isTop(event.getPlayer(), event.getBlock())) {
+            blockData.setType(Slab.Type.BOTTOM);
+        } else {
+            blockData.setType(Slab.Type.TOP);
+        }
+
+        event.getBlock().setBlockData(blockData, true);
+        event.setCancelled(true);
+    }
+
+    @EventHandler(ignoreCancelled = true)
     public void onGlazedTerracottaInteract(PlayerInteractEvent event) {
+        if (!event.getClickedBlock().getType().name().toLowerCase().contains("glazed")) return;
+        if (event.getPlayer().getInventory().getItemInMainHand().getType() != Material.AIR) return;
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         if (event.getHand() != EquipmentSlot.HAND) return;
         if (event.getPlayer().getGameMode() != GameMode.CREATIVE) return;
         if (!event.getPlayer().isSneaking()) return;
-        if (!event.getClickedBlock().getType().name().toLowerCase().contains("glazed")) return;
-        if (event.getPlayer().getInventory().getItemInMainHand().getType() != Material.AIR) return;
 
         Bukkit.getScheduler().runTask(main, () -> {
             Block block = event.getClickedBlock();
@@ -167,25 +182,6 @@ public class BuildingListener implements Listener {
 
             block.setBlockData(directional);
         });
-        event.setCancelled(true);
-    }
-
-    @EventHandler(ignoreCancelled = true)
-    public void onSlabBreak(BlockBreakEvent event) {
-        if (event.getPlayer().getGameMode() != GameMode.CREATIVE) return;
-        if (!Tag.SLABS.isTagged(event.getPlayer().getInventory().getItemInMainHand().getType())) return;
-        if (!Tag.SLABS.isTagged(event.getBlock().getType())) return;
-
-        Slab blockData = (Slab) event.getBlock().getBlockData();
-        if (blockData.getType() != Slab.Type.DOUBLE) return;
-
-        if (isTop(event.getPlayer(), event.getBlock())) {
-            blockData.setType(Slab.Type.BOTTOM);
-        } else {
-            blockData.setType(Slab.Type.TOP);
-        }
-
-        event.getBlock().setBlockData(blockData, true);
         event.setCancelled(true);
     }
 
