@@ -12,6 +12,7 @@ import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import xyz.tehbrian.tfcplugin.managers.FlightManager;
 import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 
 @SuppressWarnings("unused")
@@ -45,6 +46,7 @@ public class GamemodeCommand extends BaseCommand {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
         targetPlayer.setGameMode(GameMode.CREATIVE);
+        FlightManager.disableFlight(targetPlayer);
 
         if (target == null) {
             player.sendMessage(new MsgBuilder().def("msg.gamemode.change_self").formats("Creative").build());

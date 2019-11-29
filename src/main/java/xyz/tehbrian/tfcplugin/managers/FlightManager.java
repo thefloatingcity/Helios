@@ -1,6 +1,8 @@
 package xyz.tehbrian.tfcplugin.managers;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import xyz.tehbrian.tfcplugin.TFCPlugin;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,17 +29,27 @@ public class FlightManager {
         }
     }
 
+    public static boolean toggleFlight(Player player) {
+        boolean bool = getPlayerCanBypassFly(player);
+        setPlayerCanBypassFly(player, !bool);
+        return !bool;
+    }
+
     public static void enableFlight(Player player) {
         if (player.hasPermission("tfcplugin.core.fly") && getPlayerCanBypassFly(player)) {
-            player.setAllowFlight(true);
-            player.setFlying(true);
+            Bukkit.getScheduler().runTask(TFCPlugin.getInstance(), () -> {
+                player.setAllowFlight(true);
+                player.setFlying(true);
+            });
         }
     }
 
     public static void disableFlight(Player player) {
         if (!player.hasPermission("tfcplugin.core.fly") || !getPlayerCanBypassFly(player)) {
-            player.setAllowFlight(false);
-            player.setFlying(false);
+            Bukkit.getScheduler().runTask(TFCPlugin.getInstance(), () -> {
+                player.setAllowFlight(false);
+                player.setFlying(false);
+            });
         }
     }
 }

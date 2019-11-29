@@ -36,9 +36,7 @@ public class CoreCommand extends BaseCommand {
     @CommandPermission("tfcplugin.core.fly")
     @Description("Toggle your flight ability.")
     public void onFly(Player player) {
-        FlightManager.setPlayerCanBypassFly(player, !FlightManager.getPlayerCanBypassFly(player));
-
-        if (FlightManager.getPlayerCanBypassFly(player)) {
+        if (FlightManager.toggleFlight(player)) {
             player.sendMessage(new MsgBuilder().def("msg.core.fly_enabled").build());
         } else {
             player.sendMessage(new MsgBuilder().def("msg.core.fly_disabled").build());
