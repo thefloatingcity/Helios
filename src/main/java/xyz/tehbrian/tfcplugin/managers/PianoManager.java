@@ -1,7 +1,6 @@
 package xyz.tehbrian.tfcplugin.managers;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -16,7 +15,7 @@ import java.util.UUID;
 public class PianoManager {
 
     final private static Set<UUID> playerEnabledPiano = new HashSet<>();
-    final private static Map<UUID, Sound> playerPianoInstrument = new HashMap<>();
+    final private static Map<UUID, PianoSound> playerPianoInstrument = new HashMap<>();
 
     private PianoManager() {
     }
@@ -25,8 +24,8 @@ public class PianoManager {
         return playerEnabledPiano.contains(player.getUniqueId());
     }
 
-    public static Sound getPlayerPianoInstrument(Player player) {
-        return playerPianoInstrument.getOrDefault(player.getUniqueId(), Sound.BLOCK_NOTE_BLOCK_HARP);
+    public static PianoSound getPlayerPianoInstrument(Player player) {
+        return playerPianoInstrument.getOrDefault(player.getUniqueId(), PianoSound.HARP);
     }
 
     public static void setPlayerEnabledPiano(Player player, boolean bool) {
@@ -37,9 +36,9 @@ public class PianoManager {
         }
     }
 
-    public static void setPlayerPianoInstrument(Player player, Sound sound) {
+    public static void setPlayerPianoInstrument(Player player, PianoSound pianoSound) {
         if (player.hasPermission("tfcplugin.piano")) {
-            playerPianoInstrument.put(player.getUniqueId(), sound);
+            playerPianoInstrument.put(player.getUniqueId(), pianoSound);
         }
     }
 
@@ -47,7 +46,7 @@ public class PianoManager {
         if (player.hasPermission("tfcplugin.piano") && ((!requireToggle || getPlayerEnabledPiano(player)))) {
             if (item != null && item.getType().name().toLowerCase().contains("pane")) {
                 if (item.getItemMeta().hasLore() && Objects.requireNonNull(item.getLore()).get(1).equals(ChatColor.DARK_GRAY + "[Note]")) {
-                    player.getWorld().playSound(player.getEyeLocation(), getPlayerPianoInstrument(player), SoundCategory.MASTER, 3, Float.parseFloat(item.getLore().get(2)));
+                    player.getWorld().playSound(player.getEyeLocation(), getPlayerPianoInstrument(player).toSound(), SoundCategory.MASTER, 3, Float.parseFloat(item.getLore().get(2)));
                 }
             }
         }
