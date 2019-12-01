@@ -56,7 +56,7 @@ msg:
 
   ontime:
     check_self: "&fYou've been playing for %s."
-    check_other: "&e%s&f has been playing for %s."
+    check_other: "&6%s&f has been playing for %s."
 
   piano:
     enabled: "&aYour piano is now enabled!"
