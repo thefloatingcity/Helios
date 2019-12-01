@@ -17,8 +17,7 @@ public class ConfigUtils {
 
     private static final TFCPlugin main = TFCPlugin.getInstance();
 
-    private ConfigUtils() {
-    }
+    private ConfigUtils() {}
 
     public static List<String> getPage(String configKey, Integer pageNumber) {
         ConfigurationSection book = main.getConfig().getConfigurationSection(configKey);

@@ -17,8 +17,7 @@ public class PianoManager {
     final private static Set<UUID> playerEnabledPiano = new HashSet<>();
     final private static Map<UUID, PianoSound> playerPianoInstrument = new HashMap<>();
 
-    private PianoManager() {
-    }
+    private PianoManager() {}
 
     public static boolean getPlayerEnabledPiano(Player player) {
         return playerEnabledPiano.contains(player.getUniqueId());

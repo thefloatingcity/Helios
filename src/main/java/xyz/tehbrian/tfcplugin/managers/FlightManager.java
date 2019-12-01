@@ -12,8 +12,7 @@ public class FlightManager {
 
     final private static Set<UUID> playerCanBypassFly = new HashSet<>();
 
-    private FlightManager() {
-    }
+    private FlightManager() {}
 
     public static boolean getPlayerCanBypassFly(Player player) {
         return playerCanBypassFly.contains(player.getUniqueId());

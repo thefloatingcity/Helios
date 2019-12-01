@@ -5,8 +5,7 @@ import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 
 public class MiscUtils {
 
-    private MiscUtils() {
-    }
+    private MiscUtils() {}
 
     public static String color(String string) {
         return ChatColor.translateAlternateColorCodes('&', string);

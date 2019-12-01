@@ -11,8 +11,7 @@ public class LuckPermsUtils {
 
     private static final LuckPermsApi luckPermsApi = TFCPlugin.getInstance().getLuckPermsApi();
 
-    private LuckPermsUtils() {
-    }
+    private LuckPermsUtils() {}
 
     public static String getPlayerPrefix(Player player) {
         User user = luckPermsApi.getUserManager().getUser(player.getUniqueId());
