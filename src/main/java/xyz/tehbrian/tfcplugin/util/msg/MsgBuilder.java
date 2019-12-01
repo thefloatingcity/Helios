@@ -12,8 +12,7 @@ public class MsgBuilder {
     private String prefixString;
     private Object[] formats;
 
-    public MsgBuilder() {
-    }
+    public MsgBuilder() {}
 
     public MsgBuilder def(String msgKey) {
         this.msgKey = msgKey;
