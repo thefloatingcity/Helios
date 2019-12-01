@@ -30,7 +30,7 @@ msg:
     poke_self: "&f%s &cpoked&f themselves"
 
   core:
-    reload: "&fThe config has been reloaded successfully!"
+    reload: "&fThe config has been successfully reloaded!"
     fly_enabled: "&aFly enabled! &fPlease use this in emergencies only."
     fly_disabled: "&cFly disabled. &fThank you for disabling it!"
 
