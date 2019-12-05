@@ -6,7 +6,7 @@
 
 msg:
   banner: "&8-=-=-=-=-=-=-=-[&7 -=[&f The &bFloating &aCity &7]=- &8]-=-=-=-=-=-=-=-"
-  chat_format: "&7%1$s&r: %2$s"
+  chat_format: " &7%1$s&r: %2$s"
   page_header: "&f%s&7 | Page &e%s&7/&e%s"
   fancify_time_format: "&e%.2f&f %s"
 
