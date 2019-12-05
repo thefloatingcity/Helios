@@ -38,11 +38,11 @@ public final class TFCPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        setupConfig();
-        setupEvents();
-        setupCommandManager();
+        setUpConfig();
+        setUpEvents();
+        setUpCommandManager();
 
-        if (!setupLuckPermsApi()) {
+        if (!setUpLuckPermsApi()) {
             getLogger().severe("No LuckPerms dependency found! Disabling plugin..");
             getServer().getPluginManager().disablePlugin(this);
         }
@@ -53,13 +53,13 @@ public final class TFCPlugin extends JavaPlugin {
         getLogger().info("See you later!");
     }
 
-    private void setupConfig() {
+    private void setUpConfig() {
         getConfig().options().copyDefaults(true);
         getConfig().options().copyHeader(true);
         saveDefaultConfig();
     }
 
-    private void setupEvents() {
+    private void setUpEvents() {
         getServer().getPluginManager().registerEvents(new AntiBuildListener(), this);
         getServer().getPluginManager().registerEvents(new BuildingListener(this), this);
         getServer().getPluginManager().registerEvents(new MiscListener(this), this);
@@ -67,7 +67,7 @@ public final class TFCPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PianoListener(this), this);
     }
 
-    private void setupCommandManager() {
+    private void setUpCommandManager() {
         commandManager = new PaperCommandManager(this);
 
         commandManager.registerCommand(new ActionCommand(this));
@@ -95,7 +95,7 @@ public final class TFCPlugin extends JavaPlugin {
         });
     }
 
-    private boolean setupLuckPermsApi() {
+    private boolean setUpLuckPermsApi() {
         RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
         if (provider == null) {
             return false;
