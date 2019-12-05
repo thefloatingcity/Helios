@@ -54,8 +54,6 @@ public final class TFCPlugin extends JavaPlugin {
     }
 
     private void setUpConfig() {
-        getConfig().options().copyDefaults(true);
-        getConfig().options().copyHeader(true);
         saveDefaultConfig();
     }
 
