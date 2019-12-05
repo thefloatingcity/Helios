@@ -60,11 +60,13 @@ public final class TFCPlugin extends JavaPlugin {
     }
 
     private void setUpEvents() {
-        getServer().getPluginManager().registerEvents(new AntiBuildListener(), this);
-        getServer().getPluginManager().registerEvents(new BuildingListener(this), this);
-        getServer().getPluginManager().registerEvents(new MiscListener(this), this);
-        getServer().getPluginManager().registerEvents(new FlightListener(), this);
-        getServer().getPluginManager().registerEvents(new PianoListener(this), this);
+        PluginManager pluginManager = getServer().getPluginManager();
+
+        pluginManager.registerEvents(new AntiBuildListener(), this);
+        pluginManager.registerEvents(new BuildingListener(this), this);
+        pluginManager.registerEvents(new MiscListener(this), this);
+        pluginManager.registerEvents(new FlightListener(), this);
+        pluginManager.registerEvents(new PianoListener(this), this);
     }
 
     private void setUpCommandManager() {
