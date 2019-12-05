@@ -2,7 +2,9 @@ package xyz.tehbrian.tfcplugin;
 
 import co.aikar.commands.ConditionFailedException;
 import co.aikar.commands.PaperCommandManager;
-import me.lucko.luckperms.api.LuckPermsApi;
+import net.luckperms.api.LuckPerms;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.tehbrian.tfcplugin.commands.ActionCommand;
@@ -24,7 +26,7 @@ public final class TFCPlugin extends JavaPlugin {
 
     private static TFCPlugin instance;
     private PaperCommandManager commandManager;
-    private LuckPermsApi luckPermsApi;
+    private LuckPerms luckPermsApi;
 
     public TFCPlugin() {
         instance = this;
@@ -94,11 +96,11 @@ public final class TFCPlugin extends JavaPlugin {
     }
 
     private boolean setupLuckPermsApi() {
-        RegisteredServiceProvider<LuckPermsApi> prsp = getServer().getServicesManager().getRegistration(LuckPermsApi.class);
-        if (prsp == null) {
+        RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
+        if (provider == null) {
             return false;
         }
-        luckPermsApi = prsp.getProvider();
+        luckPermsApi = provider.getProvider();
         return true;
     }
 
@@ -106,7 +108,7 @@ public final class TFCPlugin extends JavaPlugin {
         return commandManager;
     }
 
-    public LuckPermsApi getLuckPermsApi() {
+    public LuckPerms getLuckPermsApi() {
         return luckPermsApi;
     }
 }
