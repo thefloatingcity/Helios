@@ -46,7 +46,6 @@ public class GamemodeCommand extends BaseCommand {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
         targetPlayer.setGameMode(GameMode.CREATIVE);
-        FlightManager.disableFlight(targetPlayer);
 
         if (target == null) {
             player.sendMessage(new MsgBuilder().def("msg.gamemode.change_self").formats("Creative").build());
