@@ -12,7 +12,6 @@ import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import xyz.tehbrian.tfcplugin.managers.FlightManager;
 import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 
 @SuppressWarnings("unused")
