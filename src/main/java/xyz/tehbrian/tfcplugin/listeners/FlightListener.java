@@ -16,7 +16,7 @@ public class FlightListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onJoin(PlayerJoinEvent event) {
         FlightManager.disableFlight(event.getPlayer());
     }
 

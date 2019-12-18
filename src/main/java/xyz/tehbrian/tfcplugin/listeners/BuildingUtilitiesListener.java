@@ -17,66 +17,21 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockFromToEvent;
-import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.block.SignChangeEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import xyz.tehbrian.tfcplugin.TFCPlugin;
 import xyz.tehbrian.tfcplugin.util.MiscUtils;
 
+import java.util.Objects;
+
 @SuppressWarnings({"unused"})
-public class BuildingListener implements Listener {
+public class BuildingUtilitiesListener implements Listener {
 
     private final TFCPlugin main;
 
-    public BuildingListener(TFCPlugin main) {
+    public BuildingUtilitiesListener(TFCPlugin main) {
         this.main = main;
-    }
-
-    @EventHandler
-    public void onEntityExplode(EntityExplodeEvent event) {
-        if (main.getConfig().getBoolean("options.disable_explosions")) {
-            event.setCancelled(true);
-        }
-    }
-
-    @EventHandler
-    public void onEntityDamage(EntityDamageEvent event) {
-        if (main.getConfig().getBoolean("options.disable_explosions_damage")) {
-            if (event.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION || event.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
-                event.setCancelled(true);
-            }
-        }
-    }
-
-    @EventHandler
-    public void onLeavesDecay(LeavesDecayEvent event) {
-        if (main.getConfig().getBoolean("options.disable_leaves_decay")) {
-            event.setCancelled(true);
-        }
-    }
-
-    @EventHandler
-    public void onFarmlandTrample(PlayerInteractEvent event) {
-        if (main.getConfig().getBoolean("options.disable_farmland_trampling")) {
-            if (event.getAction() == Action.PHYSICAL) {
-                if (event.getClickedBlock().getType() == Material.FARMLAND) {
-                    event.setCancelled(true);
-                }
-            }
-        }
-    }
-
-    @EventHandler
-    public void onDragonEggTeleport(BlockFromToEvent event) {
-        if (main.getConfig().getBoolean("options.disable_dragon_egg_teleportation")) {
-            if (event.getBlock().getType() == Material.DRAGON_EGG) {
-                event.setCancelled(true);
-            }
-        }
     }
 
     @EventHandler
@@ -96,7 +51,7 @@ public class BuildingListener implements Listener {
         if (event.getPlayer().getGameMode() != GameMode.CREATIVE) return;
         if (event.getPlayer().isSneaking()) return;
 
-        BlockState blockState = event.getClickedBlock().getState();
+        BlockState blockState = Objects.requireNonNull(event.getClickedBlock()).getState();
         if (!(blockState instanceof Sign)) return;
         if (!(Tag.SIGNS.isTagged(event.getPlayer().getInventory().getItemInMainHand().getType()))) return;
 
@@ -114,7 +69,7 @@ public class BuildingListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onIronTrapDoorInteract(PlayerInteractEvent event) {
-        if (event.getClickedBlock().getType() != Material.IRON_TRAPDOOR) return;
+        if (Objects.requireNonNull(event.getClickedBlock()).getType() != Material.IRON_TRAPDOOR) return;
         if (event.getPlayer().getInventory().getItemInMainHand().getType() != Material.AIR) return;
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         if (event.getHand() != EquipmentSlot.HAND) return;
@@ -154,7 +109,7 @@ public class BuildingListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onGlazedTerracottaInteract(PlayerInteractEvent event) {
-        if (!event.getClickedBlock().getType().name().toLowerCase().contains("glazed")) return;
+        if (!Objects.requireNonNull(event.getClickedBlock()).getType().name().toLowerCase().contains("glazed")) return;
         if (event.getPlayer().getInventory().getItemInMainHand().getType() != Material.AIR) return;
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         if (event.getHand() != EquipmentSlot.HAND) return;
