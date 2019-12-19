@@ -395,8 +395,12 @@ inventories:
 #############
 
 options:
-  disable_explosions: true
-  disable_explosions_damage: true
+  disable_entity_explode: true
+  disable_entity_damage_by_entity_explode: true
+
+  disable_block_explode: true
+  disable_entity_damage_by_block_explode: true
+
   disable_leaves_decay: true
   disable_farmland_trample: true
   disable_dragon_egg_teleport: true

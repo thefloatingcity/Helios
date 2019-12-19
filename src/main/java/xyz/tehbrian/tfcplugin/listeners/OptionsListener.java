@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -24,15 +25,31 @@ public class OptionsListener implements Listener {
 
     @EventHandler
     public void onEntityExplode(EntityExplodeEvent event) {
-        if (main.getConfig().getBoolean("options.disable_explosions")) {
+        if (main.getConfig().getBoolean("options.disable_entity_explode")) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
-    public void onEntityExplosionDamage(EntityDamageEvent event) {
-        if (main.getConfig().getBoolean("options.disable_explosions_damage")) {
-            if (event.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION || event.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
+    public void onEntityDamageByEntityExplode(EntityDamageEvent event) {
+        if (main.getConfig().getBoolean("options.disable_entity_damage_by_entity_explode")) {
+            if (event.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
+                event.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onBlockExplode(BlockExplodeEvent event) {
+        if (main.getConfig().getBoolean("options.disable_block_explode")) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onEntityDamageByBlockExplode(EntityDamageEvent event) {
+        if (main.getConfig().getBoolean("options.disable_entity_damage_by_block_explode")) {
+            if (event.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
                 event.setCancelled(true);
             }
         }
