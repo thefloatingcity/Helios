@@ -58,7 +58,7 @@ public class OptionsListener implements Listener {
 
     @EventHandler
     public void onDragonEggTeleport(BlockFromToEvent event) {
-        if (main.getConfig().getBoolean("options.disable_dragon_egg_teleportation")) {
+        if (main.getConfig().getBoolean("options.disable_dragon_egg_teleport")) {
             if (event.getBlock().getType() == Material.DRAGON_EGG) {
                 event.setCancelled(true);
             }

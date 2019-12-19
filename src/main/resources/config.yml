@@ -399,7 +399,7 @@ options:
   disable_explosions_damage: true
   disable_leaves_decay: true
   disable_farmland_trample: true
-  disable_dragon_egg_teleportation: true
+  disable_dragon_egg_teleport: true
 
 ##########
 #        #
