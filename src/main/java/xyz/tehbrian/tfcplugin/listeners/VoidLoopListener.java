@@ -23,7 +23,7 @@ public class VoidLoopListener implements Listener {
     }
 
     @EventHandler
-    public void onEntityInVoid(EntityDamageEvent event) {
+    public void onEntityDamageByVoid(EntityDamageEvent event) {
         if (event.getCause() != EntityDamageEvent.DamageCause.VOID) return;
         Location location = event.getEntity().getLocation();
 
