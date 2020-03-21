@@ -25,7 +25,7 @@ import xyz.tehbrian.tfcplugin.util.MiscUtils;
 
 import java.util.Objects;
 
-@SuppressWarnings({"unused"})
+@SuppressWarnings("unused")
 public class BuildingUtilitiesListener implements Listener {
 
     private final TFCPlugin main;
