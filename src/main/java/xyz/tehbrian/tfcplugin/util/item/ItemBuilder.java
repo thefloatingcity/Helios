@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class ItemBuilder {
 
-    private Material material;
+    private final Material material;
     private Integer amount = null;
     private Map<Enchantment, Integer> enchantments = null;
     private ItemFlag[] flags = null;

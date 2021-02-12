@@ -39,16 +39,16 @@ public class VoidLoopListener implements Listener {
             Player player = (Player) event.getEntity();
 
             if (player.getFallDistance() >= 3000) {
-                player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.max").build());
+                player.sendMessage(new MsgBuilder().prefixKey("prefixes.warper.prefix").msgKey("msg.warp.max").build());
                 player.setFallDistance(0);
                 player.teleport(ConfigUtils.getSpawn());
                 player.getWorld().strikeLightningEffect(ConfigUtils.getSpawn());
                 player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, ConfigUtils.getSpawn(), 1);
                 player.getWorld().playSound(ConfigUtils.getSpawn(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 4, 1);
             } else if (player.getFallDistance() >= 2000) {
-                player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.second").build());
+                player.sendMessage(new MsgBuilder().prefixKey("prefixes.warper.prefix").msgKey("msg.warp.second").build());
             } else if (player.getFallDistance() >= 1000) {
-                player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.first").build());
+                player.sendMessage(new MsgBuilder().prefixKey("prefixes.warper.prefix").msgKey("msg.warp.first").build());
             }
         });
     }

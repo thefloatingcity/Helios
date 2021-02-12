@@ -5,23 +5,23 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
-import xyz.tehbrian.tfcplugin.managers.FlightManager;
+import xyz.tehbrian.tfcplugin.TFCPlugin;
 
 @SuppressWarnings("unused")
 public class FlightListener implements Listener {
 
     @EventHandler
     public void onToggleFlight(PlayerToggleFlightEvent event) {
-        FlightManager.disableFlight(event.getPlayer());
+        TFCPlugin.getInstance().getPlayerDataManager().getPlayerData(event.getPlayer()).disableFlight();
     }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        FlightManager.disableFlight(event.getPlayer());
+        TFCPlugin.getInstance().getPlayerDataManager().getPlayerData(event.getPlayer()).disableFlight();
     }
 
     @EventHandler
     public void onGameModeChange(PlayerGameModeChangeEvent event) {
-        FlightManager.disableFlight(event.getPlayer());
+        TFCPlugin.getInstance().getPlayerDataManager().getPlayerData(event.getPlayer()).disableFlight();
     }
 }

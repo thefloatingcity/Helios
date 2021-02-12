@@ -1,4 +1,4 @@
-package xyz.tehbrian.tfcplugin.managers;
+package xyz.tehbrian.tfcplugin;
 
 import org.bukkit.Sound;
 

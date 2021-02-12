@@ -12,6 +12,7 @@ import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ConfigUtils {
 
@@ -21,14 +22,14 @@ public class ConfigUtils {
 
     public static List<String> getPage(String configKey, Integer pageNumber) {
         ConfigurationSection book = main.getConfig().getConfigurationSection(configKey);
-        ConfigurationSection pages = book.getConfigurationSection("pages");
-        ConfigurationSection page = pages.getConfigurationSection(pageNumber.toString());
+        ConfigurationSection pages = Objects.requireNonNull(book).getConfigurationSection("pages");
+        ConfigurationSection page = Objects.requireNonNull(pages).getConfigurationSection(pageNumber.toString());
         List<String> messages = new ArrayList<>();
 
         messages.add(new MsgBuilder()
                 .prefixString(book.getString("multistart"))
                 .msgKey("msg.page_header")
-                .formats(page.getString("title"), pageNumber, pages.getKeys(false).size())
+                .formats(Objects.requireNonNull(page).getString("title"), pageNumber, pages.getKeys(false).size())
                 .build());
 
         for (String line : page.getStringList("content")) {
@@ -44,13 +45,13 @@ public class ConfigUtils {
 
     public static Inventory getInventory(String configKey) {
         ConfigurationSection invConfigSection = main.getConfig().getConfigurationSection(configKey);
-        ConfigurationSection items = invConfigSection.getConfigurationSection("items");
+        ConfigurationSection items = Objects.requireNonNull(invConfigSection).getConfigurationSection("items");
         Inventory inventory = Bukkit.createInventory(null, invConfigSection.getInt("size"), MiscUtils.color(invConfigSection.getString("name")));
 
-        for (String key : items.getKeys(false)) {
+        for (String key : Objects.requireNonNull(items).getKeys(false)) {
             ConfigurationSection item = items.getConfigurationSection(key);
 
-            inventory.addItem(new ItemBuilder(Material.matchMaterial(item.getString("material")))
+            inventory.addItem(new ItemBuilder(Material.matchMaterial(Objects.requireNonNull(Objects.requireNonNull(item).getString("material"))))
                     .amount(item.isSet("amount") ? item.getInt("amount") : 1)
                     .name(item.getString("name"))
                     .lore(item.getStringList("lore"))
@@ -63,6 +64,6 @@ public class ConfigUtils {
 
     public static Location getSpawn() {
         FileConfiguration config = main.getConfig();
-        return new Location(Bukkit.getWorld(config.getString("spawn.world")), config.getDouble("spawn.x"), config.getDouble("spawn.y"), config.getDouble("spawn.z"));
+        return new Location(Bukkit.getWorld(Objects.requireNonNull(config.getString("spawn.world"))), config.getDouble("spawn.x"), config.getDouble("spawn.y"), config.getDouble("spawn.z"));
     }
 }

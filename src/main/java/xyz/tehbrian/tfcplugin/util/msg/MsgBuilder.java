@@ -12,11 +12,9 @@ public class MsgBuilder {
     private String prefixString;
     private Object[] formats;
 
-    public MsgBuilder() {}
-
     public MsgBuilder def(String msgKey) {
         this.msgKey = msgKey;
-        this.prefixKey = "infixes.server.prefix";
+        this.prefixKey = "prefixes.server.prefix";
         return this;
     }
 

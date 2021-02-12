@@ -10,7 +10,6 @@ import co.aikar.commands.annotation.Subcommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import xyz.tehbrian.tfcplugin.TFCPlugin;
-import xyz.tehbrian.tfcplugin.managers.FlightManager;
 import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 
 @SuppressWarnings("unused")
@@ -36,7 +35,7 @@ public class CoreCommand extends BaseCommand {
     @CommandPermission("tfcplugin.core.fly")
     @Description("Toggle your flight ability.")
     public void onFly(Player player) {
-        if (FlightManager.toggleFlight(player)) {
+        if (main.getPlayerDataManager().getPlayerData(player).toggleFlyBypassEnabled()) {
             player.sendMessage(new MsgBuilder().def("msg.core.fly_enabled").build());
         } else {
             player.sendMessage(new MsgBuilder().def("msg.core.fly_disabled").build());

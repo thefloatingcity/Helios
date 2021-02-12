@@ -1,5 +1,6 @@
 package xyz.tehbrian.tfcplugin.util.item;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -7,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import xyz.tehbrian.tfcplugin.util.MiscUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,8 +18,8 @@ import java.util.Map;
  */
 public class ItemModifier {
 
-    private ItemStack itemStack;
-    private ItemMeta itemMeta;
+    private final ItemStack itemStack;
+    private final ItemMeta itemMeta;
 
     public ItemModifier(ItemStack itemStack) {
         this.itemStack = itemStack;
@@ -71,6 +73,9 @@ public class ItemModifier {
 
     public ItemModifier addLore(String string) {
         List<String> lore = itemMeta.getLore();
+        if (lore == null) {
+            lore = new ArrayList<>();
+        }
         lore.add(MiscUtils.color(string));
         itemMeta.setLore(lore);
         return this;
@@ -78,6 +83,9 @@ public class ItemModifier {
 
     public ItemModifier changeLore(int index, String string) {
         List<String> lore = itemMeta.getLore();
+        if (lore == null) {
+            lore = new ArrayList<>();
+        }
         lore.set(index, MiscUtils.color(string));
         itemMeta.setLore(lore);
         return this;
@@ -85,7 +93,14 @@ public class ItemModifier {
 
     public ItemModifier removeLore(int index) {
         List<String> lore = itemMeta.getLore();
-        lore.remove(index);
+        if (lore == null) {
+            lore = new ArrayList<>();
+        }
+        try {
+            lore.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            Bukkit.broadcastMessage("whoop dee doo");
+        }
         itemMeta.setLore(lore);
         return this;
     }

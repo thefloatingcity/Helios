@@ -42,9 +42,9 @@ public class ActionCommand extends BaseCommand {
         targetPlayer.getWorld().playSound(targetPlayer.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
 
         if (target == null) {
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.launch_self").formats(player.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.launch_self").formats(player.getDisplayName()).build());
         } else {
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.launch_other").formats(player.getDisplayName(), targetPlayer.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.launch_other").formats(player.getDisplayName(), targetPlayer.getDisplayName()).build());
         }
     }
 
@@ -59,15 +59,15 @@ public class ActionCommand extends BaseCommand {
         targetPlayer.getWorld().playSound(targetPlayer.getEyeLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
 
         if (target == null) {
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.boost_self").formats(player.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.boost_self").formats(player.getDisplayName()).build());
         } else {
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.boost_other").formats(player.getDisplayName(), targetPlayer.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.boost_other").formats(player.getDisplayName(), targetPlayer.getDisplayName()).build());
         }
     }
 
     @CommandAlias("zap")
     @CommandPermission("tfcplugin.action.zap")
-    @Description("Kentucky Fried Player.")
+    @Description("Kentucky Fried Player")
     @CommandCompletion("@players")
     public void onZap(Player player, @Optional @CommandPermission("tfcplugin.action.zapother") OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
@@ -75,9 +75,9 @@ public class ActionCommand extends BaseCommand {
         targetPlayer.getWorld().strikeLightning(targetPlayer.getLocation());
 
         if (target == null) {
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.zap_self").formats(player.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.zap_self").formats(player.getDisplayName()).build());
         } else {
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.zap_other").formats(player.getDisplayName(), targetPlayer.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.zap_other").formats(player.getDisplayName(), targetPlayer.getDisplayName()).build());
         }
     }
 
@@ -101,9 +101,9 @@ public class ActionCommand extends BaseCommand {
         targetPlayer.setVelocity(randomVector);
 
         if (target == null) {
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.poke_self").formats(player.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.poke_self").formats(player.getDisplayName()).build());
         } else {
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.poke_other").formats(player.getDisplayName(), targetPlayer.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.poke_other").formats(player.getDisplayName(), targetPlayer.getDisplayName()).build());
         }
     }
 

@@ -11,8 +11,9 @@ import co.aikar.commands.annotation.HelpCommand;
 import co.aikar.commands.annotation.Subcommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import xyz.tehbrian.tfcplugin.managers.PianoManager;
-import xyz.tehbrian.tfcplugin.managers.PianoSound;
+import xyz.tehbrian.tfcplugin.TFCPlugin;
+import xyz.tehbrian.tfcplugin.guis.PianoMenuGui;
+import xyz.tehbrian.tfcplugin.PianoSound;
 import xyz.tehbrian.tfcplugin.util.ConfigUtils;
 import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 
@@ -25,26 +26,24 @@ public class PianoCommand extends BaseCommand {
     @Subcommand("menu")
     @Description("Pick your notes!")
     public void onMenu(Player player) {
-        player.openInventory(ConfigUtils.getInventory("inventories.piano_notes"));
+        PianoMenuGui.generate().show(player);
     }
 
     @Subcommand("instrument")
     @Description("Pick your instrument!")
     @CommandCompletion("*")
     public void onInstrument(Player player, PianoSound pianoSound) {
-        PianoManager.setPlayerPianoInstrument(player, pianoSound);
-        player.sendMessage(new MsgBuilder().prefixKey("infixes.piano.prefix").msgKey("msg.piano.instrument_change").formats(pianoSound.toString()).build());
+        TFCPlugin.getInstance().getPlayerDataManager().getPlayerData(player).setPianoSound(pianoSound);
+        player.sendMessage(new MsgBuilder().prefixKey("prefixes.piano.prefix").msgKey("msg.piano.instrument_change").formats(pianoSound.toString()).build());
     }
 
     @Subcommand("toggle")
     @Description("Toggle your piano on and off.")
     public void onToggle(Player player) {
-        PianoManager.setPlayerEnabledPiano(player, !PianoManager.getPlayerEnabledPiano(player));
-
-        if (PianoManager.getPlayerEnabledPiano(player)) {
-            player.sendMessage(new MsgBuilder().prefixKey("infixes.piano.prefix").msgKey("msg.piano.enabled").build());
+        if (TFCPlugin.getInstance().getPlayerDataManager().getPlayerData(player).togglePianoEnabled()) {
+            player.sendMessage(new MsgBuilder().prefixKey("prefixes.piano.prefix").msgKey("msg.piano.enabled").build());
         } else {
-            player.sendMessage(new MsgBuilder().prefixKey("infixes.piano.prefix").msgKey("msg.piano.disabled").build());
+            player.sendMessage(new MsgBuilder().prefixKey("prefixes.piano.prefix").msgKey("msg.piano.disabled").build());
         }
     }
 
