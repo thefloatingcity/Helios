@@ -28,7 +28,7 @@ public class PianoListener implements Listener {
         if (!player.hasPermission("tfcplugin.piano")) return;
         if (!this.main.getPlayerDataManager().getUser(player).hasPianoEnabled()) return;
 
-        play(event.getPlayer(), event.getPlayer().getInventory().getItem(event.getNewSlot()));
+        this.play(event.getPlayer(), event.getPlayer().getInventory().getItem(event.getNewSlot()));
     }
 
     @EventHandler
@@ -42,7 +42,7 @@ public class PianoListener implements Listener {
         if (!event.isRightClick()) return;
 
         event.setCancelled(true);
-        play(player, event.getCurrentItem());
+        this.play(player, event.getCurrentItem());
     }
 
     private void play(Player player, ItemStack item) {

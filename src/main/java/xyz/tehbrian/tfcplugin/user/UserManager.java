@@ -16,7 +16,7 @@ public class UserManager {
     }
 
     public User getUser(Player player) {
-        return getUser(player.getUniqueId());
+        return this.getUser(player.getUniqueId());
     }
 
     public Map<UUID, User> getUserMap() {

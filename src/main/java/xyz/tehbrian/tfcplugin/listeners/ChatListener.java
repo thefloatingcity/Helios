@@ -50,13 +50,13 @@ public class ChatListener implements Listener {
 
             // 3a. Check player name.
             if (event.getMessage().toLowerCase().contains(pingedPlayerName.toLowerCase())) {
-                event.setMessage(replaceCaseSensitive(event.getMessage(), pingedPlayerName, replacement));
+                event.setMessage(this.replaceCaseSensitive(event.getMessage(), pingedPlayerName, replacement));
                 pingedPlayer.playSound(pingedPlayer.getEyeLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 2);
             }
 
             // 3b. Check player display name.
             if (event.getMessage().toLowerCase().contains(pingedPlayerDisplayName.toLowerCase())) {
-                event.setMessage(replaceCaseSensitive(event.getMessage(), pingedPlayerDisplayName, replacement));
+                event.setMessage(this.replaceCaseSensitive(event.getMessage(), pingedPlayerDisplayName, replacement));
                 pingedPlayer.playSound(pingedPlayer.getEyeLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 2);
             }
         }
@@ -65,7 +65,7 @@ public class ChatListener implements Listener {
         ConfigurationSection replacements = this.main.getConfig().getConfigurationSection("replacements");
         Set<String> replacementKeys = replacements.getKeys(false);
         for (String from : replacementKeys) {
-            event.setMessage(replaceCaseSensitive(event.getMessage(), from, replacements.getString(from)));
+            event.setMessage(this.replaceCaseSensitive(event.getMessage(), from, replacements.getString(from)));
         }
     }
 

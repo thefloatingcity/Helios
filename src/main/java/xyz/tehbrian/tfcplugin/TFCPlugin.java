@@ -50,27 +50,27 @@ public final class TFCPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        setupConfig();
-        setupEvents();
-        setupCommands();
+        this.setupConfig();
+        this.setupEvents();
+        this.setupCommands();
 
-        if (!setupLuckPermsApi()) {
-            getLogger().severe("No LuckPerms dependency found! Disabling plugin..");
-            getServer().getPluginManager().disablePlugin(this);
+        if (!this.setupLuckPermsApi()) {
+            this.getLogger().severe("No LuckPerms dependency found! Disabling plugin..");
+            this.getServer().getPluginManager().disablePlugin(this);
         }
     }
 
     @Override
     public void onDisable() {
-        getLogger().info("See you later!");
+        this.getLogger().info("See you later!");
     }
 
     private void setupConfig() {
-        saveDefaultConfig();
+        this.saveDefaultConfig();
     }
 
     private void setupEvents() {
-        PluginManager pluginManager = getServer().getPluginManager();
+        PluginManager pluginManager = this.getServer().getPluginManager();
 
         pluginManager.registerEvents(new AntiBuildListener(), this);
         pluginManager.registerEvents(new BoosterListener(this), this);

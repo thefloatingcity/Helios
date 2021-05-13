@@ -35,21 +35,21 @@ public class User {
     public void setFlyBypassEnabled(boolean flyBypassEnabled) {
         this.flyBypassEnabled = flyBypassEnabled;
 
-        if (hasFlyBypassEnabled()) {
-            enableFlight();
+        if (this.hasFlyBypassEnabled()) {
+            this.enableFlight();
         } else {
-            disableFlight();
+            this.disableFlight();
         }
     }
 
     public boolean toggleFlyBypassEnabled() {
-        setFlyBypassEnabled(!hasFlyBypassEnabled());
-        return hasFlyBypassEnabled();
+        this.setFlyBypassEnabled(!this.hasFlyBypassEnabled());
+        return this.hasFlyBypassEnabled();
     }
 
     public void enableFlight() {
-        Player player = getPlayer();
-        if (player.hasPermission("tfcplugin.core.fly") && hasFlyBypassEnabled()) {
+        Player player = this.getPlayer();
+        if (player.hasPermission("tfcplugin.core.fly") && this.hasFlyBypassEnabled()) {
             Bukkit.getScheduler().runTask(TFCPlugin.getInstance(), () -> {
                 player.setAllowFlight(true);
                 player.setFlying(true);
@@ -58,8 +58,8 @@ public class User {
     }
 
     public void disableFlight() {
-        Player player = getPlayer();
-        if (!player.hasPermission("tfcplugin.core.fly") || !hasFlyBypassEnabled()) {
+        Player player = this.getPlayer();
+        if (!player.hasPermission("tfcplugin.core.fly") || !this.hasFlyBypassEnabled()) {
             Bukkit.getScheduler().runTask(TFCPlugin.getInstance(), () -> {
                 player.setAllowFlight(false);
                 player.setFlying(false);
@@ -76,8 +76,8 @@ public class User {
     }
 
     public boolean togglePianoEnabled() {
-        setPianoEnabled(!hasPianoEnabled());
-        return hasPianoEnabled();
+        this.setPianoEnabled(!this.hasPianoEnabled());
+        return this.hasPianoEnabled();
     }
 
     public PianoSound getPianoSound() {

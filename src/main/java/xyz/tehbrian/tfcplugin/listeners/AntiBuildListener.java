@@ -63,27 +63,27 @@ public class AntiBuildListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onBucketFill(PlayerBucketFillEvent event) {
-        onAntiBuild(event);
+        this.onAntiBuild(event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onBucketEmpty(PlayerBucketEmptyEvent event) {
-        onAntiBuild(event);
+        this.onAntiBuild(event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onItemPickup(PlayerAttemptPickupItemEvent event) {
-        onAntiBuild(event);
+        this.onAntiBuild(event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onItemDrop(PlayerDropItemEvent event) {
-        onAntiBuild(event);
+        this.onAntiBuild(event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onInteract(PlayerInteractEvent event) {
-        onAntiBuild(event);
+        this.onAntiBuild(event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
@@ -99,13 +99,13 @@ public class AntiBuildListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onArmorStandManipulate(PlayerArmorStandManipulateEvent event) {
-        onAntiBuild(event);
+        this.onAntiBuild(event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onItemFrameRotate(PlayerInteractEntityEvent event) {
         if (event.getRightClicked().getType() == EntityType.ITEM_FRAME) {
-            onAntiBuild(event);
+            this.onAntiBuild(event);
         }
     }
 
