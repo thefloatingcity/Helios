@@ -1,11 +1,10 @@
 name: ${name}
-version: ${version}
-main: ${mainClass}
-
 description: ${description}
 author: ${author}
 website: ${url}
 
+version: ${version}
+main: ${mainClass}
 api-version: 1.16
 
 permissions:
