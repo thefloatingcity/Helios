@@ -31,7 +31,7 @@ public class VoidLoopListener implements Listener {
         event.setCancelled(true);
 
         if (location.getY() > -450) return;
-        Bukkit.getScheduler().runTask(main, () -> {
+        Bukkit.getScheduler().runTask(this.main, () -> {
             location.setY(650);
             event.getEntity().teleport(location);
 

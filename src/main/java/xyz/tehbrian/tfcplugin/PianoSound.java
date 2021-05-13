@@ -27,6 +27,6 @@ public enum PianoSound {
     }
 
     public Sound toSound() {
-        return sound;
+        return this.sound;
     }
 }

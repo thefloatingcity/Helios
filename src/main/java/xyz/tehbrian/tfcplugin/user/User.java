@@ -21,15 +21,15 @@ public class User {
     }
 
     public UUID getUuid() {
-        return uuid;
+        return this.uuid;
     }
 
     public Player getPlayer() {
-        return Bukkit.getPlayer(uuid);
+        return Bukkit.getPlayer(this.uuid);
     }
 
     public boolean hasFlyBypassEnabled() {
-        return flyBypassEnabled;
+        return this.flyBypassEnabled;
     }
 
     public void setFlyBypassEnabled(boolean flyBypassEnabled) {
@@ -68,7 +68,7 @@ public class User {
     }
 
     public boolean hasPianoEnabled() {
-        return pianoEnabled;
+        return this.pianoEnabled;
     }
 
     public void setPianoEnabled(boolean pianoEnabled) {
@@ -81,7 +81,7 @@ public class User {
     }
 
     public PianoSound getPianoSound() {
-        return pianoSound;
+        return this.pianoSound;
     }
 
     public void setPianoSound(PianoSound pianoSound) {

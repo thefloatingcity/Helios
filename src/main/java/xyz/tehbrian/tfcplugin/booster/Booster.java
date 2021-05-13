@@ -17,26 +17,26 @@ public class Booster {
     }
 
     public Location getLocation() {
-        return location;
+        return this.location;
     }
 
     public int getSize() {
-        return size;
+        return this.size;
     }
 
     public Axis getAxis() {
-        return axis;
+        return this.axis;
     }
 
     public void generate() {
         for (double degrees = 0.0D; degrees < 360.0D; degrees += 10.0D) {
             double angle = Math.toRadians(degrees);
 
-            double vx = location.getX() * Math.cos(angle) - location.getZ() * Math.sin(angle);
-            double vy = location.getY() * Math.cos(angle) - location.getY() * Math.sin(angle);
-            double vz = location.getX() * Math.sin(angle) + location.getZ() * Math.cos(angle);
+            double vx = this.location.getX() * Math.cos(angle) - this.location.getZ() * Math.sin(angle);
+            double vy = this.location.getY() * Math.cos(angle) - this.location.getY() * Math.sin(angle);
+            double vz = this.location.getX() * Math.sin(angle) + this.location.getZ() * Math.cos(angle);
 
-            location.getWorld().getBlockAt((int) vx, (int) vy, (int) vz).setType(Material.YELLOW_TERRACOTTA);
+            this.location.getWorld().getBlockAt((int) vx, (int) vy, (int) vz).setType(Material.YELLOW_TERRACOTTA);
         }
     }
 }

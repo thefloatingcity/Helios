@@ -47,22 +47,22 @@ public class MsgBuilder {
         FileConfiguration config = TFCPlugin.getInstance().getConfig();
         StringBuilder sb = new StringBuilder();
 
-        if (prefixKey != null) {
-            sb.append(config.getString(prefixKey)).append(" ");
-        } else if (prefixString != null) {
-            sb.append(prefixString).append(" ");
+        if (this.prefixKey != null) {
+            sb.append(config.getString(this.prefixKey)).append(" ");
+        } else if (this.prefixString != null) {
+            sb.append(this.prefixString).append(" ");
         }
 
-        if (msgKey != null) {
-            sb.append(config.getString(msgKey));
-        } else if (msgString != null) {
-            sb.append(msgString);
+        if (this.msgKey != null) {
+            sb.append(config.getString(this.msgKey));
+        } else if (this.msgString != null) {
+            sb.append(this.msgString);
         }
 
         String message = sb.toString();
 
-        if (formats != null) {
-            message = String.format(message, formats);
+        if (this.formats != null) {
+            message = String.format(message, this.formats);
         }
 
         return MiscUtils.color(message);

@@ -16,38 +16,38 @@ public class BoosterManager {
 
     public Booster newBooster(String name, Location location, int radius, Axis axis) {
         Booster booster = new Booster(location, radius, axis);
-        boosters.put(name, booster);
+        this.boosters.put(name, booster);
         return booster;
     }
 
     public void addGlidingPlayer(Player player) {
-        glidingPlayers.add(player);
+        this.glidingPlayers.add(player);
     }
 
     public void removeGlidingPlayer(Player player) {
-        glidingPlayers.remove(player);
+        this.glidingPlayers.remove(player);
     }
 
     public boolean isPlayerGliding(Player player) {
-        return glidingPlayers.contains(player);
+        return this.glidingPlayers.contains(player);
     }
 
     public void setPlayerGliding(Player player, boolean bool) {
         if (bool) {
-            glidingPlayers.add(player);
+            this.glidingPlayers.add(player);
         } else {
-            glidingPlayers.remove(player);
+            this.glidingPlayers.remove(player);
         }
     }
 
     public Set<Player> getGlidingPlayers() {
-        return glidingPlayers;
+        return this.glidingPlayers;
     }
 
-    public Set<Booster> getBoosters() { return new HashSet<>(boosters.values()); }
+    public Set<Booster> getBoosters() { return new HashSet<>(this.boosters.values()); }
 
     public Booster getBooster(String name) {
-        return boosters.get(name);
+        return this.boosters.get(name);
     }
 /*
     public Set<Location> getBoosterLocations() {

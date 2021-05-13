@@ -19,13 +19,13 @@ public class BoosterListener implements Listener {
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
 
-            main.getBoosterManager().setPlayerGliding(player, player.isGliding());
+            this.main.getBoosterManager().setPlayerGliding(player, player.isGliding());
         }
     }
 
     public void startThingy() {
-        for (Player player : main.getBoosterManager().getGlidingPlayers()) {
-            if (main.getBoosterManager().checkIfPlayerIsInBooster(player)) {
+        for (Player player : this.main.getBoosterManager().getGlidingPlayers()) {
+            if (this.main.getBoosterManager().checkIfPlayerIsInBooster(player)) {
                 player.setVelocity(player.getLocation().getDirection().multiply(3));
             }
         }

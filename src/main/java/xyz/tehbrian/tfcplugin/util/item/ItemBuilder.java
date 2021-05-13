@@ -59,29 +59,29 @@ public class ItemBuilder {
     }
 
     public ItemStack build() {
-        ItemStack itemStack = new ItemStack(material);
+        ItemStack itemStack = new ItemStack(this.material);
 
-        if (amount != null) {
-            itemStack.setAmount(amount);
+        if (this.amount != null) {
+            itemStack.setAmount(this.amount);
         }
-        if (enchantments != null) {
-            itemStack.addUnsafeEnchantments(enchantments);
+        if (this.enchantments != null) {
+            itemStack.addUnsafeEnchantments(this.enchantments);
         }
-        if (flags != null) {
-            itemStack.addItemFlags(flags);
+        if (this.flags != null) {
+            itemStack.addItemFlags(this.flags);
         }
 
         ItemMeta itemMeta = itemStack.getItemMeta();
 
-        if (name != null) {
-            itemMeta.setDisplayName(MiscUtils.color(name));
+        if (this.name != null) {
+            itemMeta.setDisplayName(MiscUtils.color(this.name));
         }
-        if (lore != null) {
-            lore.replaceAll(MiscUtils::color);
-            itemMeta.setLore(lore);
+        if (this.lore != null) {
+            this.lore.replaceAll(MiscUtils::color);
+            itemMeta.setLore(this.lore);
         }
-        if (unbreakable != null) {
-            itemMeta.setUnbreakable(unbreakable);
+        if (this.unbreakable != null) {
+            itemMeta.setUnbreakable(this.unbreakable);
         }
 
         itemStack.setItemMeta(itemMeta);

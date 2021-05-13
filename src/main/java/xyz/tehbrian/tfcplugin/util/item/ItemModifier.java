@@ -27,72 +27,72 @@ public class ItemModifier {
     }
 
     public ItemModifier setMaterial(Material material) {
-        itemStack.setType(material);
+        this.itemStack.setType(material);
         return this;
     }
 
     public ItemModifier setAmount(int amount) {
-        itemStack.setAmount(amount);
+        this.itemStack.setAmount(amount);
         return this;
     }
 
     public ItemModifier addEnchantment(Enchantment enchantment, int level) {
-        itemStack.addEnchantment(enchantment, level);
+        this.itemStack.addEnchantment(enchantment, level);
         return this;
     }
 
     public ItemModifier addEnchantments(Map<Enchantment, Integer> enchantments) {
-        itemStack.addEnchantments(enchantments);
+        this.itemStack.addEnchantments(enchantments);
         return this;
     }
 
     public ItemModifier removeEnchantment(Enchantment enchantment) {
-        itemStack.removeEnchantment(enchantment);
+        this.itemStack.removeEnchantment(enchantment);
         return this;
     }
 
     public ItemModifier addFlags(ItemFlag... flags) {
-        itemStack.addItemFlags(flags);
+        this.itemStack.addItemFlags(flags);
         return this;
     }
 
     public ItemModifier removeFlags(ItemFlag... flags) {
-        itemStack.removeItemFlags(flags);
+        this.itemStack.removeItemFlags(flags);
         return this;
     }
 
     public ItemModifier setName(String name) {
-        itemMeta.setDisplayName(MiscUtils.color(name));
+        this.itemMeta.setDisplayName(MiscUtils.color(name));
         return this;
     }
 
     public ItemModifier setLore(List<String> lore) {
-        itemMeta.setLore(lore);
+        this.itemMeta.setLore(lore);
         return this;
     }
 
     public ItemModifier addLore(String string) {
-        List<String> lore = itemMeta.getLore();
+        List<String> lore = this.itemMeta.getLore();
         if (lore == null) {
             lore = new ArrayList<>();
         }
         lore.add(MiscUtils.color(string));
-        itemMeta.setLore(lore);
+        this.itemMeta.setLore(lore);
         return this;
     }
 
     public ItemModifier changeLore(int index, String string) {
-        List<String> lore = itemMeta.getLore();
+        List<String> lore = this.itemMeta.getLore();
         if (lore == null) {
             lore = new ArrayList<>();
         }
         lore.set(index, MiscUtils.color(string));
-        itemMeta.setLore(lore);
+        this.itemMeta.setLore(lore);
         return this;
     }
 
     public ItemModifier removeLore(int index) {
-        List<String> lore = itemMeta.getLore();
+        List<String> lore = this.itemMeta.getLore();
         if (lore == null) {
             lore = new ArrayList<>();
         }
@@ -101,17 +101,17 @@ public class ItemModifier {
         } catch (IndexOutOfBoundsException e) {
             Bukkit.broadcastMessage("whoop dee doo");
         }
-        itemMeta.setLore(lore);
+        this.itemMeta.setLore(lore);
         return this;
     }
 
     public ItemModifier setUnbreakable(boolean unbreakable) {
-        itemMeta.setUnbreakable(unbreakable);
+        this.itemMeta.setUnbreakable(unbreakable);
         return this;
     }
 
     public ItemStack getItem() {
-        itemStack.setItemMeta(this.itemMeta);
+        this.itemStack.setItemMeta(this.itemMeta);
         return this.itemStack;
     }
 }

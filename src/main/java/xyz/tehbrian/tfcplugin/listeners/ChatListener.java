@@ -28,7 +28,7 @@ public class ChatListener implements Listener {
         Player player = event.getPlayer();
 
         // 1. Format the chat.
-        event.setFormat(MiscUtils.color(Objects.requireNonNull(main.getConfig().getString("msg.chat_format"))
+        event.setFormat(MiscUtils.color(Objects.requireNonNull(this.main.getConfig().getString("msg.chat_format"))
                 .replace("{prefix}", LuckPermsUtils.getPlayerPrefix(player))
                 .replace("{suffix}", LuckPermsUtils.getPlayerSuffix(player))));
 
@@ -62,7 +62,7 @@ public class ChatListener implements Listener {
         }
 
         // 4. Chat replacements.
-        ConfigurationSection replacements = main.getConfig().getConfigurationSection("replacements");
+        ConfigurationSection replacements = this.main.getConfig().getConfigurationSection("replacements");
         Set<String> replacementKeys = replacements.getKeys(false);
         for (String from : replacementKeys) {
             event.setMessage(replaceCaseSensitive(event.getMessage(), from, replacements.getString(from)));

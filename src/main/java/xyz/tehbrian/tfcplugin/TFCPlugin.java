@@ -83,22 +83,22 @@ public final class TFCPlugin extends JavaPlugin {
     }
 
     private void setupCommands() {
-        commandManager = new PaperCommandManager(this);
+        this.commandManager = new PaperCommandManager(this);
 
-        commandManager.registerCommand(new ActionCommand(this));
-        commandManager.registerCommand(new BoosterCommand(this));
-        commandManager.registerCommand(new CoreCommand(this));
-        commandManager.registerCommand(new EmoteCommand());
-        commandManager.registerCommand(new GamemodeCommand());
-        commandManager.registerCommand(new MenuCommand());
-        commandManager.registerCommand(new OntimeCommand());
-        commandManager.registerCommand(new PianoCommand());
-        commandManager.registerCommand(new RulesCommand());
-        commandManager.registerCommand(new UtilCommand());
+        this.commandManager.registerCommand(new ActionCommand(this));
+        this.commandManager.registerCommand(new BoosterCommand(this));
+        this.commandManager.registerCommand(new CoreCommand(this));
+        this.commandManager.registerCommand(new EmoteCommand());
+        this.commandManager.registerCommand(new GamemodeCommand());
+        this.commandManager.registerCommand(new MenuCommand());
+        this.commandManager.registerCommand(new OntimeCommand());
+        this.commandManager.registerCommand(new PianoCommand());
+        this.commandManager.registerCommand(new RulesCommand());
+        this.commandManager.registerCommand(new UtilCommand());
 
-        commandManager.enableUnstableAPI("help");
+        this.commandManager.enableUnstableAPI("help");
 
-        commandManager.getCommandConditions().addCondition(Integer.class, "limits", (context, executionContext, value) -> {
+        this.commandManager.getCommandConditions().addCondition(Integer.class, "limits", (context, executionContext, value) -> {
             if (value == null) {
                 return;
             }
@@ -116,36 +116,36 @@ public final class TFCPlugin extends JavaPlugin {
         if (provider == null) {
             return false;
         }
-        luckPermsApi = provider.getProvider();
+        this.luckPermsApi = provider.getProvider();
         return true;
     }
 
     public PaperCommandManager getCommandManager() {
-        return commandManager;
+        return this.commandManager;
     }
 
     public LuckPerms getLuckPermsApi() {
-        return luckPermsApi;
+        return this.luckPermsApi;
     }
 
     public BoosterManager getBoosterManager() {
-        if (boosterManager == null) {
-            boosterManager = new BoosterManager();
+        if (this.boosterManager == null) {
+            this.boosterManager = new BoosterManager();
         }
-        return boosterManager;
+        return this.boosterManager;
     }
 
     public UserManager getPlayerDataManager() {
-        if (playerDataManager == null) {
-            playerDataManager = new UserManager();
+        if (this.playerDataManager == null) {
+            this.playerDataManager = new UserManager();
         }
-        return playerDataManager;
+        return this.playerDataManager;
     }
 
     public ConfigManager getConfigManager() {
-        if (configManager == null) {
-            configManager = new ConfigManager(this);
+        if (this.configManager == null) {
+            this.configManager = new ConfigManager(this);
         }
-        return configManager;
+        return this.configManager;
     }
 }

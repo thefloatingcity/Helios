@@ -88,10 +88,10 @@ public class ActionCommand extends BaseCommand {
     public void onPoke(Player player, @Optional @CommandPermission("tfcplugin.action.pokeother") OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
-        double maxY = main.getConfig().getDouble("poke_force.maxY");
-        double minY = main.getConfig().getDouble("poke_force.minY");
-        double maxXZ = main.getConfig().getDouble("poke_force.maxXZ");
-        double minXZ = main.getConfig().getDouble("poke_force.minXZ");
+        double maxY = this.main.getConfig().getDouble("poke_force.maxY");
+        double minY = this.main.getConfig().getDouble("poke_force.minY");
+        double maxXZ = this.main.getConfig().getDouble("poke_force.maxXZ");
+        double minXZ = this.main.getConfig().getDouble("poke_force.minXZ");
         Random random = new Random();
         double randX = minXZ + random.nextDouble() * (maxXZ - minXZ);
         double randY = minY + random.nextDouble() * (maxY - minY);

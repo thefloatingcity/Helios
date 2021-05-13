@@ -11,8 +11,8 @@ public class UserManager {
     private final Map<UUID, User> userMap = new HashMap<>();
 
     public User getUser(UUID uuid) {
-        userMap.computeIfAbsent(uuid, User::new);
-        return userMap.get(uuid);
+        this.userMap.computeIfAbsent(uuid, User::new);
+        return this.userMap.get(uuid);
     }
 
     public User getUser(Player player) {
@@ -20,6 +20,6 @@ public class UserManager {
     }
 
     public Map<UUID, User> getUserMap() {
-        return userMap;
+        return this.userMap;
     }
 }

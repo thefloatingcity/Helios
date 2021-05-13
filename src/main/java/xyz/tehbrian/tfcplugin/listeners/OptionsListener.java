@@ -25,14 +25,14 @@ public class OptionsListener implements Listener {
 
     @EventHandler
     public void onEntityExplode(EntityExplodeEvent event) {
-        if (main.getConfig().getBoolean("options.disable_entity_explode")) {
+        if (this.main.getConfig().getBoolean("options.disable_entity_explode")) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onEntityDamageByEntityExplode(EntityDamageEvent event) {
-        if (main.getConfig().getBoolean("options.disable_entity_damage_by_entity_explode")) {
+        if (this.main.getConfig().getBoolean("options.disable_entity_damage_by_entity_explode")) {
             if (event.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
                 event.setCancelled(true);
             }
@@ -41,14 +41,14 @@ public class OptionsListener implements Listener {
 
     @EventHandler
     public void onBlockExplode(BlockExplodeEvent event) {
-        if (main.getConfig().getBoolean("options.disable_block_explode")) {
+        if (this.main.getConfig().getBoolean("options.disable_block_explode")) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onEntityDamageByBlockExplode(EntityDamageEvent event) {
-        if (main.getConfig().getBoolean("options.disable_entity_damage_by_block_explode")) {
+        if (this.main.getConfig().getBoolean("options.disable_entity_damage_by_block_explode")) {
             if (event.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
                 event.setCancelled(true);
             }
@@ -57,14 +57,14 @@ public class OptionsListener implements Listener {
 
     @EventHandler
     public void onLeavesDecay(LeavesDecayEvent event) {
-        if (main.getConfig().getBoolean("options.disable_leaves_decay")) {
+        if (this.main.getConfig().getBoolean("options.disable_leaves_decay")) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onFarmlandTrample(PlayerInteractEvent event) {
-        if (main.getConfig().getBoolean("options.disable_farmland_trample")) {
+        if (this.main.getConfig().getBoolean("options.disable_farmland_trample")) {
             if (event.getAction() == Action.PHYSICAL) {
                 if (Objects.requireNonNull(event.getClickedBlock()).getType() == Material.FARMLAND) {
                     event.setCancelled(true);
@@ -75,7 +75,7 @@ public class OptionsListener implements Listener {
 
     @EventHandler
     public void onDragonEggTeleport(BlockFromToEvent event) {
-        if (main.getConfig().getBoolean("options.disable_dragon_egg_teleport")) {
+        if (this.main.getConfig().getBoolean("options.disable_dragon_egg_teleport")) {
             if (event.getBlock().getType() == Material.DRAGON_EGG) {
                 event.setCancelled(true);
             }

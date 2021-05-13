@@ -26,7 +26,7 @@ public class PianoListener implements Listener {
         Player player = event.getPlayer();
 
         if (!player.hasPermission("tfcplugin.piano")) return;
-        if (!main.getPlayerDataManager().getUser(player).hasPianoEnabled()) return;
+        if (!this.main.getPlayerDataManager().getUser(player).hasPianoEnabled()) return;
 
         play(event.getPlayer(), event.getPlayer().getInventory().getItem(event.getNewSlot()));
     }
@@ -38,7 +38,7 @@ public class PianoListener implements Listener {
 
         if (!player.hasPermission("tfcplugin.piano")) return;
         if (event.getClickedInventory() == null) return;
-        if (!event.getView().getTitle().equals(main.getConfig().getString("inventories.piano_notes.name"))) return;
+        if (!event.getView().getTitle().equals(this.main.getConfig().getString("inventories.piano_notes.name"))) return;
         if (!event.isRightClick()) return;
 
         event.setCancelled(true);
@@ -59,6 +59,6 @@ public class PianoListener implements Listener {
         if (!item.getItemMeta().hasLore() && Objects.requireNonNull(item.getLore()).get(1).equals(ChatColor.DARK_GRAY + "[Note]"))
             return;
 
-        player.getWorld().playSound(player.getEyeLocation(), main.getPlayerDataManager().getUser(player).getPianoSound().toSound(), SoundCategory.MASTER, 3, Float.parseFloat(item.getLore().get(2)));
+        player.getWorld().playSound(player.getEyeLocation(), this.main.getPlayerDataManager().getUser(player).getPianoSound().toSound(), SoundCategory.MASTER, 3, Float.parseFloat(item.getLore().get(2)));
     }
 }
