@@ -1,14 +1,13 @@
 name: ${name}
 version: ${version}
+main: ${mainClass}
+
 description: ${description}
-load: POSTWORLD
 author: ${author}
 website: ${url}
-main: ${mainClass}
-depend: []
-database: false
+
 api-version: 1.16
-commands: {} # Thanks, ACF!
+
 permissions:
   tfcplugin.chatcolor:
     description: Permission to color chat text.
