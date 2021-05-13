@@ -23,21 +23,21 @@ public class UtilCommand extends BaseCommand {
     @CommandAlias("blocks")
     @CommandPermission("tfcplugin.util.blocks")
     @Description("Useful building blocks.")
-    public void onBlocks(Player player) {
+    public void onBlocks(final Player player) {
         BlocksGui.generate().show(player);
     }
 
     @CommandAlias("broadcast")
     @CommandPermission("tfcplugin.util.broadcast")
     @Description("Broadcast a message to the server.")
-    public void onBroadcast(CommandSender sender, String text) {
+    public void onBroadcast(final CommandSender sender, final String text) {
         Bukkit.broadcastMessage(MiscUtils.color(text));
     }
 
     @CommandAlias("hat")
     @CommandPermission("tfcplugin.util.hat")
     @Description("Put things on your head!")
-    public void onHat(Player player) {
+    public void onHat(final Player player) {
         if (player.getInventory().getItemInMainHand().getType() == Material.AIR) {
             if (player.getInventory().getHelmet() == null) {
                 player.sendMessage(new MsgBuilder().def("msg.hat.none").build());
@@ -52,7 +52,7 @@ public class UtilCommand extends BaseCommand {
     }
 
     @HelpCommand
-    public void onHelp(CommandSender sender, CommandHelp help) {
+    public void onHelp(final CommandSender sender, final CommandHelp help) {
         help.showHelp();
     }
 }

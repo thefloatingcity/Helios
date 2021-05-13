@@ -11,17 +11,17 @@ import xyz.tehbrian.tfcplugin.TFCPlugin;
 public class FlightListener implements Listener {
 
     @EventHandler
-    public void onToggleFlight(PlayerToggleFlightEvent event) {
+    public void onToggleFlight(final PlayerToggleFlightEvent event) {
         TFCPlugin.getInstance().getPlayerDataManager().getUser(event.getPlayer()).disableFlight();
     }
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent event) {
+    public void onJoin(final PlayerJoinEvent event) {
         TFCPlugin.getInstance().getPlayerDataManager().getUser(event.getPlayer()).disableFlight();
     }
 
     @EventHandler
-    public void onGameModeChange(PlayerGameModeChangeEvent event) {
+    public void onGameModeChange(final PlayerGameModeChangeEvent event) {
         TFCPlugin.getInstance().getPlayerDataManager().getUser(event.getPlayer()).disableFlight();
     }
 }

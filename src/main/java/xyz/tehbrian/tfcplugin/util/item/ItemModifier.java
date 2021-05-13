@@ -21,57 +21,57 @@ public class ItemModifier {
     private final ItemStack itemStack;
     private final ItemMeta itemMeta;
 
-    public ItemModifier(ItemStack itemStack) {
+    public ItemModifier(final ItemStack itemStack) {
         this.itemStack = itemStack;
         this.itemMeta = itemStack.getItemMeta();
     }
 
-    public ItemModifier setMaterial(Material material) {
+    public ItemModifier setMaterial(final Material material) {
         this.itemStack.setType(material);
         return this;
     }
 
-    public ItemModifier setAmount(int amount) {
+    public ItemModifier setAmount(final int amount) {
         this.itemStack.setAmount(amount);
         return this;
     }
 
-    public ItemModifier addEnchantment(Enchantment enchantment, int level) {
+    public ItemModifier addEnchantment(final Enchantment enchantment, final int level) {
         this.itemStack.addEnchantment(enchantment, level);
         return this;
     }
 
-    public ItemModifier addEnchantments(Map<Enchantment, Integer> enchantments) {
+    public ItemModifier addEnchantments(final Map<Enchantment, Integer> enchantments) {
         this.itemStack.addEnchantments(enchantments);
         return this;
     }
 
-    public ItemModifier removeEnchantment(Enchantment enchantment) {
+    public ItemModifier removeEnchantment(final Enchantment enchantment) {
         this.itemStack.removeEnchantment(enchantment);
         return this;
     }
 
-    public ItemModifier addFlags(ItemFlag... flags) {
+    public ItemModifier addFlags(final ItemFlag... flags) {
         this.itemStack.addItemFlags(flags);
         return this;
     }
 
-    public ItemModifier removeFlags(ItemFlag... flags) {
+    public ItemModifier removeFlags(final ItemFlag... flags) {
         this.itemStack.removeItemFlags(flags);
         return this;
     }
 
-    public ItemModifier setName(String name) {
+    public ItemModifier setName(final String name) {
         this.itemMeta.setDisplayName(MiscUtils.color(name));
         return this;
     }
 
-    public ItemModifier setLore(List<String> lore) {
+    public ItemModifier setLore(final List<String> lore) {
         this.itemMeta.setLore(lore);
         return this;
     }
 
-    public ItemModifier addLore(String string) {
+    public ItemModifier addLore(final String string) {
         List<String> lore = this.itemMeta.getLore();
         if (lore == null) {
             lore = new ArrayList<>();
@@ -81,7 +81,7 @@ public class ItemModifier {
         return this;
     }
 
-    public ItemModifier changeLore(int index, String string) {
+    public ItemModifier changeLore(final int index, final String string) {
         List<String> lore = this.itemMeta.getLore();
         if (lore == null) {
             lore = new ArrayList<>();
@@ -91,21 +91,21 @@ public class ItemModifier {
         return this;
     }
 
-    public ItemModifier removeLore(int index) {
+    public ItemModifier removeLore(final int index) {
         List<String> lore = this.itemMeta.getLore();
         if (lore == null) {
             lore = new ArrayList<>();
         }
         try {
             lore.remove(index);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (final IndexOutOfBoundsException e) {
             Bukkit.broadcastMessage("whoop dee doo");
         }
         this.itemMeta.setLore(lore);
         return this;
     }
 
-    public ItemModifier setUnbreakable(boolean unbreakable) {
+    public ItemModifier setUnbreakable(final boolean unbreakable) {
         this.itemMeta.setUnbreakable(unbreakable);
         return this;
     }

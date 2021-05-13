@@ -25,21 +25,21 @@ public class PianoCommand extends BaseCommand {
 
     @Subcommand("menu")
     @Description("Pick your notes!")
-    public void onMenu(Player player) {
+    public void onMenu(final Player player) {
         PianoMenuGui.generate().show(player);
     }
 
     @Subcommand("instrument")
     @Description("Pick your instrument!")
     @CommandCompletion("*")
-    public void onInstrument(Player player, PianoSound pianoSound) {
+    public void onInstrument(final Player player, final PianoSound pianoSound) {
         TFCPlugin.getInstance().getPlayerDataManager().getUser(player).setPianoSound(pianoSound);
         player.sendMessage(new MsgBuilder().prefixKey("prefixes.piano.prefix").msgKey("msg.piano.instrument_change").formats(pianoSound.toString()).build());
     }
 
     @Subcommand("toggle")
     @Description("Toggle your piano on and off.")
-    public void onToggle(Player player) {
+    public void onToggle(final Player player) {
         if (TFCPlugin.getInstance().getPlayerDataManager().getUser(player).togglePianoEnabled()) {
             player.sendMessage(new MsgBuilder().prefixKey("prefixes.piano.prefix").msgKey("msg.piano.enabled").build());
         } else {
@@ -48,7 +48,7 @@ public class PianoCommand extends BaseCommand {
     }
 
     @HelpCommand
-    public void onHelp(CommandSender sender, @Default("1") @Conditions("limits:min=1,max=4") Integer page) {
+    public void onHelp(final CommandSender sender, @Default("1") @Conditions("limits:min=1,max=4") final Integer page) {
         for (String line : ConfigUtils.getPage("books.piano_manual", page)) {
             sender.sendMessage(line);
         }

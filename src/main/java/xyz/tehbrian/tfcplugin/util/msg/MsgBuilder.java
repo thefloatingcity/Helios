@@ -12,33 +12,33 @@ public class MsgBuilder {
     private String prefixString;
     private Object[] formats;
 
-    public MsgBuilder def(String msgKey) {
+    public MsgBuilder def(final String msgKey) {
         this.msgKey = msgKey;
         this.prefixKey = "prefixes.server.prefix";
         return this;
     }
 
-    public MsgBuilder msgKey(String msgKey) {
+    public MsgBuilder msgKey(final String msgKey) {
         this.msgKey = msgKey;
         return this;
     }
 
-    public MsgBuilder msgString(String msgString) {
+    public MsgBuilder msgString(final String msgString) {
         this.msgString = msgString;
         return this;
     }
 
-    public MsgBuilder prefixKey(String prefixKey) {
+    public MsgBuilder prefixKey(final String prefixKey) {
         this.prefixKey = prefixKey;
         return this;
     }
 
-    public MsgBuilder prefixString(String prefixString) {
+    public MsgBuilder prefixString(final String prefixString) {
         this.prefixString = prefixString;
         return this;
     }
 
-    public MsgBuilder formats(Object... formats) {
+    public MsgBuilder formats(final Object... formats) {
         this.formats = formats;
         return this;
     }

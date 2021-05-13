@@ -24,7 +24,7 @@ public class GamemodeCommand extends BaseCommand {
     @CommandAlias("gms")
     @Description("Change a player's gamemode to Survival.")
     @CommandCompletion("@players")
-    public void onSurvival(Player player, @Optional @CommandPermission("tfcplugin.gamemodeother") OnlinePlayer target) {
+    public void onSurvival(final Player player, @Optional @CommandPermission("tfcplugin.gamemodeother") final OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
         targetPlayer.setGameMode(GameMode.SURVIVAL);
@@ -41,7 +41,7 @@ public class GamemodeCommand extends BaseCommand {
     @CommandAlias("gmc")
     @Description("Change a player's gamemode to Creative.")
     @CommandCompletion("@players")
-    public void onCreative(Player player, @Optional @CommandPermission("tfcplugin.gamemodeother") OnlinePlayer target) {
+    public void onCreative(final Player player, @Optional @CommandPermission("tfcplugin.gamemodeother") final OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
         targetPlayer.setGameMode(GameMode.CREATIVE);
@@ -58,7 +58,7 @@ public class GamemodeCommand extends BaseCommand {
     @CommandAlias("gma")
     @Description("Change a player's gamemode to Adventure.")
     @CommandCompletion("@players")
-    public void onAdventure(Player player, @Optional @CommandPermission("tfcplugin.gamemodeother") OnlinePlayer target) {
+    public void onAdventure(final Player player, @Optional @CommandPermission("tfcplugin.gamemodeother") final OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
         targetPlayer.setGameMode(GameMode.ADVENTURE);
@@ -72,7 +72,7 @@ public class GamemodeCommand extends BaseCommand {
     }
 
     @CatchUnknown
-    public void onUnknown(CommandSender sender) {
+    public void onUnknown(final CommandSender sender) {
         sender.sendMessage(new MsgBuilder().def("msg.gamemode.unknown").build());
     }
 }

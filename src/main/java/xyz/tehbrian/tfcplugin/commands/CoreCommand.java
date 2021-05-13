@@ -19,14 +19,14 @@ public class CoreCommand extends BaseCommand {
 
     private final TFCPlugin main;
 
-    public CoreCommand(TFCPlugin main) {
+    public CoreCommand(final TFCPlugin main) {
         this.main = main;
     }
 
     @Subcommand("reload")
     @CommandPermission("tfcplugin.core.reload")
     @Description("Reload TFCPlugin's config.")
-    public void onReload(CommandSender sender) {
+    public void onReload(final CommandSender sender) {
         this.main.reloadConfig();
         sender.sendMessage(new MsgBuilder().def("msg.core.reload").build());
     }
@@ -34,7 +34,7 @@ public class CoreCommand extends BaseCommand {
     @CommandAlias("fly")
     @CommandPermission("tfcplugin.core.fly")
     @Description("Toggle your flight ability.")
-    public void onFly(Player player) {
+    public void onFly(final Player player) {
         if (this.main.getPlayerDataManager().getUser(player).toggleFlyBypassEnabled()) {
             player.sendMessage(new MsgBuilder().def("msg.core.fly_enabled").build());
         } else {
@@ -43,7 +43,7 @@ public class CoreCommand extends BaseCommand {
     }
 
     @HelpCommand
-    public void onHelp(CommandSender sender, CommandHelp help) {
+    public void onHelp(final CommandSender sender, final CommandHelp help) {
         help.showHelp();
     }
 }

@@ -32,7 +32,7 @@ public class User {
         return this.flyBypassEnabled;
     }
 
-    public void setFlyBypassEnabled(boolean flyBypassEnabled) {
+    public void setFlyBypassEnabled(final boolean flyBypassEnabled) {
         this.flyBypassEnabled = flyBypassEnabled;
 
         if (this.hasFlyBypassEnabled()) {
@@ -71,7 +71,7 @@ public class User {
         return this.pianoEnabled;
     }
 
-    public void setPianoEnabled(boolean pianoEnabled) {
+    public void setPianoEnabled(final boolean pianoEnabled) {
         this.pianoEnabled = pianoEnabled;
     }
 
@@ -84,7 +84,7 @@ public class User {
         return this.pianoSound;
     }
 
-    public void setPianoSound(PianoSound pianoSound) {
+    public void setPianoSound(final PianoSound pianoSound) {
         this.pianoSound = pianoSound;
     }
 }

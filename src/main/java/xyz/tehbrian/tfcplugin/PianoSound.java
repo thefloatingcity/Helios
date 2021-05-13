@@ -22,7 +22,7 @@ public enum PianoSound {
 
     private final Sound sound;
 
-    PianoSound(Sound sound) {
+    PianoSound(final Sound sound) {
         this.sound = sound;
     }
 

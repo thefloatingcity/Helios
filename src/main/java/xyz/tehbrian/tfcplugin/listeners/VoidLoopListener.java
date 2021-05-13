@@ -18,12 +18,12 @@ public class VoidLoopListener implements Listener {
 
     private final TFCPlugin main;
 
-    public VoidLoopListener(TFCPlugin main) {
+    public VoidLoopListener(final TFCPlugin main) {
         this.main = main;
     }
 
     @EventHandler
-    public void onEntityDamageByVoid(EntityDamageEvent event) {
+    public void onEntityDamageByVoid(final EntityDamageEvent event) {
         if (event.getCause() != EntityDamageEvent.DamageCause.VOID) return;
         Location location = event.getEntity().getLocation();
 

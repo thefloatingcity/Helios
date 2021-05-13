@@ -14,25 +14,25 @@ public class BoosterManager {
     private final Map<String, Booster> boosters = new HashMap<>();
     private final Set<Player> glidingPlayers = new HashSet<>();
 
-    public Booster newBooster(String name, Location location, int radius, Axis axis) {
+    public Booster newBooster(final String name, final Location location, final int radius, final Axis axis) {
         Booster booster = new Booster(location, radius, axis);
         this.boosters.put(name, booster);
         return booster;
     }
 
-    public void addGlidingPlayer(Player player) {
+    public void addGlidingPlayer(final Player player) {
         this.glidingPlayers.add(player);
     }
 
-    public void removeGlidingPlayer(Player player) {
+    public void removeGlidingPlayer(final Player player) {
         this.glidingPlayers.remove(player);
     }
 
-    public boolean isPlayerGliding(Player player) {
+    public boolean isPlayerGliding(final Player player) {
         return this.glidingPlayers.contains(player);
     }
 
-    public void setPlayerGliding(Player player, boolean bool) {
+    public void setPlayerGliding(final Player player, final boolean bool) {
         if (bool) {
             this.glidingPlayers.add(player);
         } else {
@@ -46,7 +46,7 @@ public class BoosterManager {
 
     public Set<Booster> getBoosters() { return new HashSet<>(this.boosters.values()); }
 
-    public Booster getBooster(String name) {
+    public Booster getBooster(final String name) {
         return this.boosters.get(name);
     }
 /*
@@ -56,7 +56,7 @@ public class BoosterManager {
 
  */
 
-    public boolean checkIfPlayerIsInBooster(Player player) {
+    public boolean checkIfPlayerIsInBooster(final Player player) {
         return false;
     }
 }

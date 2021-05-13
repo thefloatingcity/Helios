@@ -22,14 +22,14 @@ public class BoosterCommand extends BaseCommand {
 
     private final TFCPlugin main;
 
-    public BoosterCommand(TFCPlugin main) {
+    public BoosterCommand(final TFCPlugin main) {
         this.main = main;
     }
 
     @Subcommand("create")
     @Description("Create a booster.")
     @CommandCompletion("*")
-    public void onCreate(Player player, String name, Integer radius, Axis axis) {
+    public void onCreate(final Player player, final String name, final Integer radius, final Axis axis) {
         BoosterManager boosterManager = this.main.getBoosterManager();
 
         boosterManager.newBooster(name, player.getLocation(), radius, axis);
@@ -37,7 +37,7 @@ public class BoosterCommand extends BaseCommand {
     }
 
     @HelpCommand
-    public void onHelp(CommandSender sender, CommandHelp help) {
+    public void onHelp(final CommandSender sender, final CommandHelp help) {
         help.showHelp();
     }
 }

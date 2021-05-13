@@ -20,12 +20,12 @@ public class PlayerListener implements Listener {
 
     private final TFCPlugin main;
 
-    public PlayerListener(TFCPlugin main) {
+    public PlayerListener(final TFCPlugin main) {
         this.main = main;
     }
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent event) {
+    public void onJoin(final PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
         player.sendMessage(new MsgBuilder().msgKey("msg.banner").build());
@@ -55,7 +55,7 @@ public class PlayerListener implements Listener {
     }
 
     @EventHandler
-    public void onQuit(PlayerQuitEvent event) {
+    public void onQuit(final PlayerQuitEvent event) {
         event.setQuitMessage(new MsgBuilder().msgKey("msg.leave").formats(event.getPlayer().getDisplayName()).build());
     }
 }

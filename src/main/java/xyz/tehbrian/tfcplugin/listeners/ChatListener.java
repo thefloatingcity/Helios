@@ -19,12 +19,12 @@ public class ChatListener implements Listener {
 
     private final TFCPlugin main;
 
-    public ChatListener(TFCPlugin main) {
+    public ChatListener(final TFCPlugin main) {
         this.main = main;
     }
 
     @EventHandler
-    public void onChat(AsyncPlayerChatEvent event) {
+    public void onChat(final AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
 
         // 1. Format the chat.
@@ -69,12 +69,12 @@ public class ChatListener implements Listener {
         }
     }
 
-    private String replaceCaseSensitive(String message, String from, String to) {
+    private String replaceCaseSensitive(final String message, final String from, final String to) {
         String lastColors = ChatColor.getLastColors(message);
         return message.replaceAll("(?i)(" + MiscUtils.color(from) + ")", MiscUtils.color(to) + (lastColors.isEmpty() ? ChatColor.RESET : lastColors));
     }
 
-    private String replaceCaseInsensitive(String message, String from, String to) {
+    private String replaceCaseInsensitive(final String message, final String from, final String to) {
         String lastColors = ChatColor.getLastColors(message);
         return message.replaceAll("(" + MiscUtils.color(from) + ")", MiscUtils.color(to) + (lastColors.isEmpty() ? ChatColor.RESET : lastColors));
     }

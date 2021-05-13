@@ -10,7 +10,7 @@ public class ConfigManager {
 
     private final TFCPlugin main;
 
-    public ConfigManager(TFCPlugin main) {
+    public ConfigManager(final TFCPlugin main) {
         this.main = main;
 
         File whateverFile = new File(main.getDataFolder() + "/whatever.yml");

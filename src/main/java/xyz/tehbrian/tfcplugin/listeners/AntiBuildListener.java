@@ -27,7 +27,7 @@ import java.util.Objects;
 public class AntiBuildListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onBlockPlace(BlockPlaceEvent event) {
+    public void onBlockPlace(final BlockPlaceEvent event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
             event.getPlayer().sendMessage(new MsgBuilder().def("msg.no_build").build());
@@ -35,7 +35,7 @@ public class AntiBuildListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onBlockBreak(BlockBreakEvent event) {
+    public void onBlockBreak(final BlockBreakEvent event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
             event.getPlayer().sendMessage(new MsgBuilder().def("msg.no_build").build());
@@ -43,7 +43,7 @@ public class AntiBuildListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onHangingPlace(HangingPlaceEvent event) {
+    public void onHangingPlace(final HangingPlaceEvent event) {
         if (!Objects.requireNonNull(event.getPlayer()).hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
             event.getPlayer().sendMessage(new MsgBuilder().def("msg.no_build").build());
@@ -51,7 +51,7 @@ public class AntiBuildListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onHangingBreak(HangingBreakByEntityEvent event) {
+    public void onHangingBreak(final HangingBreakByEntityEvent event) {
         if (Objects.requireNonNull(event.getRemover()).getType() == EntityType.PLAYER) {
             Player player = (Player) event.getRemover();
             if (!player.hasPermission("tfcplugin.build")) {
@@ -62,32 +62,32 @@ public class AntiBuildListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onBucketFill(PlayerBucketFillEvent event) {
+    public void onBucketFill(final PlayerBucketFillEvent event) {
         this.onAntiBuild(event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onBucketEmpty(PlayerBucketEmptyEvent event) {
+    public void onBucketEmpty(final PlayerBucketEmptyEvent event) {
         this.onAntiBuild(event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onItemPickup(PlayerAttemptPickupItemEvent event) {
+    public void onItemPickup(final PlayerAttemptPickupItemEvent event) {
         this.onAntiBuild(event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onItemDrop(PlayerDropItemEvent event) {
+    public void onItemDrop(final PlayerDropItemEvent event) {
         this.onAntiBuild(event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onInteract(PlayerInteractEvent event) {
+    public void onInteract(final PlayerInteractEvent event) {
         this.onAntiBuild(event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+    public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {
         if (event.getDamager().getType() == EntityType.PLAYER) {
             Player player = (Player) event.getDamager();
             if (!player.hasPermission("tfcplugin.build")) {
@@ -98,18 +98,18 @@ public class AntiBuildListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onArmorStandManipulate(PlayerArmorStandManipulateEvent event) {
+    public void onArmorStandManipulate(final PlayerArmorStandManipulateEvent event) {
         this.onAntiBuild(event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onItemFrameRotate(PlayerInteractEntityEvent event) {
+    public void onItemFrameRotate(final PlayerInteractEntityEvent event) {
         if (event.getRightClicked().getType() == EntityType.ITEM_FRAME) {
             this.onAntiBuild(event);
         }
     }
 
-    private <T extends PlayerEvent & Cancellable> void onAntiBuild(T event) {
+    private <T extends PlayerEvent & Cancellable> void onAntiBuild(final T event) {
         if (!event.getPlayer().hasPermission("tfcplugin.build")) {
             event.setCancelled(true);
             event.getPlayer().sendMessage(new MsgBuilder().def("msg.no_build").build());

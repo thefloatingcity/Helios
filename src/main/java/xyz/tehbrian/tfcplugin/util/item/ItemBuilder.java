@@ -24,36 +24,36 @@ public class ItemBuilder {
     private List<String> lore = null;
     private Boolean unbreakable = null;
 
-    public ItemBuilder(Material material) {
+    public ItemBuilder(final Material material) {
         this.material = material;
     }
 
-    public ItemBuilder amount(Integer amount) {
+    public ItemBuilder amount(final Integer amount) {
         this.amount = amount;
         return this;
     }
 
-    public ItemBuilder enchantments(Map<Enchantment, Integer> enchantments) {
+    public ItemBuilder enchantments(final Map<Enchantment, Integer> enchantments) {
         this.enchantments = enchantments;
         return this;
     }
 
-    public ItemBuilder flags(ItemFlag... flags) {
+    public ItemBuilder flags(final ItemFlag... flags) {
         this.flags = flags;
         return this;
     }
 
-    public ItemBuilder name(String name) {
+    public ItemBuilder name(final String name) {
         this.name = name;
         return this;
     }
 
-    public ItemBuilder lore(List<String> lore) {
+    public ItemBuilder lore(final List<String> lore) {
         this.lore = lore;
         return this;
     }
 
-    public ItemBuilder unbreakable(Boolean unbreakable) {
+    public ItemBuilder unbreakable(final Boolean unbreakable) {
         this.unbreakable = unbreakable;
         return this;
     }

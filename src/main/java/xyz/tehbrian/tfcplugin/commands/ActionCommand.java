@@ -27,7 +27,7 @@ public class ActionCommand extends BaseCommand {
 
     private final TFCPlugin main;
 
-    public ActionCommand(TFCPlugin main) {
+    public ActionCommand(final TFCPlugin main) {
         this.main = main;
     }
 
@@ -35,7 +35,7 @@ public class ActionCommand extends BaseCommand {
     @CommandPermission("tfcplugin.action.launch")
     @Description("Like a rocket!")
     @CommandCompletion("@player")
-    public void onLaunch(Player player, @Optional @CommandPermission("tfcplugin.action.launchother") OnlinePlayer target) {
+    public void onLaunch(final Player player, @Optional @CommandPermission("tfcplugin.action.launchother") final OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
         targetPlayer.setVelocity(new Vector(0, 10, 0));
@@ -52,7 +52,7 @@ public class ActionCommand extends BaseCommand {
     @CommandPermission("tfcplugin.action.boost")
     @Description("Gives you a case of the zoomies.")
     @CommandCompletion("@players")
-    public void onBoost(Player player, @Optional @CommandPermission("tfcplugin.action.boostother") OnlinePlayer target) {
+    public void onBoost(final Player player, @Optional @CommandPermission("tfcplugin.action.boostother") final OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
         targetPlayer.setVelocity(targetPlayer.getLocation().getDirection().multiply(3));
@@ -69,7 +69,7 @@ public class ActionCommand extends BaseCommand {
     @CommandPermission("tfcplugin.action.zap")
     @Description("Kentucky Fried Player")
     @CommandCompletion("@players")
-    public void onZap(Player player, @Optional @CommandPermission("tfcplugin.action.zapother") OnlinePlayer target) {
+    public void onZap(final Player player, @Optional @CommandPermission("tfcplugin.action.zapother") final OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
         targetPlayer.getWorld().strikeLightning(targetPlayer.getLocation());
@@ -85,7 +85,7 @@ public class ActionCommand extends BaseCommand {
     @CommandPermission("tfcplugin.action.poke")
     @Description("Useful for annoying others.")
     @CommandCompletion("@players")
-    public void onPoke(Player player, @Optional @CommandPermission("tfcplugin.action.pokeother") OnlinePlayer target) {
+    public void onPoke(final Player player, @Optional @CommandPermission("tfcplugin.action.pokeother") final OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
         double maxY = this.main.getConfig().getDouble("poke_force.maxY");
@@ -108,7 +108,7 @@ public class ActionCommand extends BaseCommand {
     }
 
     @HelpCommand
-    public void onHelp(CommandSender sender, CommandHelp help) {
+    public void onHelp(final CommandSender sender, final CommandHelp help) {
         help.showHelp();
     }
 }

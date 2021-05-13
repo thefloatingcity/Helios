@@ -17,12 +17,12 @@ public class PianoListener implements Listener {
 
     private final TFCPlugin main;
 
-    public PianoListener(TFCPlugin main) {
+    public PianoListener(final TFCPlugin main) {
         this.main = main;
     }
 
     @EventHandler
-    public void onItemHeld(PlayerItemHeldEvent event) {
+    public void onItemHeld(final PlayerItemHeldEvent event) {
         Player player = event.getPlayer();
 
         if (!player.hasPermission("tfcplugin.piano")) return;
@@ -32,7 +32,7 @@ public class PianoListener implements Listener {
     }
 
     @EventHandler
-    public void onInventoryClick(InventoryClickEvent event) {
+    public void onInventoryClick(final InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player)) return;
         Player player = (Player) event.getWhoClicked();
 
@@ -45,7 +45,7 @@ public class PianoListener implements Listener {
         this.play(player, event.getCurrentItem());
     }
 
-    private void play(Player player, ItemStack item) {
+    private void play(final Player player, final ItemStack item) {
         /* TODO
         ItemStack itemStack = new ItemStack(Material.DIRT);
         NamespacedKey key = new NamespacedKey(main, "our-custom-key");

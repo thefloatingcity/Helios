@@ -7,11 +7,11 @@ public class MiscUtils {
 
     private MiscUtils() {}
 
-    public static String color(String string) {
+    public static String color(final String string) {
         return ChatColor.translateAlternateColorCodes('&', string);
     }
 
-    public static String fancifyTime(long milliseconds) {
+    public static String fancifyTime(final long milliseconds) {
         if (milliseconds >= 86400000) {
             return new MsgBuilder().msgKey("msg.fancify_time_format").formats(milliseconds / 86400000d, "days").build();
         } else if (milliseconds >= 3600000) {

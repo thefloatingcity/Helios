@@ -20,7 +20,7 @@ public class ConfigUtils {
 
     private ConfigUtils() {}
 
-    public static List<String> getPage(String configKey, Integer pageNumber) {
+    public static List<String> getPage(final String configKey, final Integer pageNumber) {
         ConfigurationSection book = main.getConfig().getConfigurationSection(configKey);
         ConfigurationSection pages = Objects.requireNonNull(book).getConfigurationSection("pages");
         ConfigurationSection page = Objects.requireNonNull(pages).getConfigurationSection(pageNumber.toString());
@@ -43,7 +43,7 @@ public class ConfigUtils {
         return messages;
     }
 
-    public static Inventory getInventory(String configKey) {
+    public static Inventory getInventory(final String configKey) {
         ConfigurationSection invConfigSection = main.getConfig().getConfigurationSection(configKey);
         ConfigurationSection items = Objects.requireNonNull(invConfigSection).getConfigurationSection("items");
         Inventory inventory = Bukkit.createInventory(null, invConfigSection.getInt("size"), MiscUtils.color(invConfigSection.getString("name")));

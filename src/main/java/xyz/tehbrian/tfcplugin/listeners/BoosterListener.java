@@ -10,12 +10,12 @@ public class BoosterListener implements Listener {
 
     private final TFCPlugin main;
 
-    public BoosterListener(TFCPlugin main) {
+    public BoosterListener(final TFCPlugin main) {
         this.main = main;
     }
 
     @EventHandler
-    public void onPlayerToggleGlide(EntityToggleGlideEvent event) {
+    public void onPlayerToggleGlide(final EntityToggleGlideEvent event) {
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
 

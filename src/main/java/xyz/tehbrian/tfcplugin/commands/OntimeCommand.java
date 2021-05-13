@@ -19,7 +19,7 @@ public class OntimeCommand extends BaseCommand {
 
     @Default
     @CommandCompletion("@players")
-    public void onOntime(Player player, @Optional OnlinePlayer target) {
+    public void onOntime(final Player player, @Optional final OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
         // Liars. Why was it changed from PLAY_ONE_TICK to PLAY_ONE_MINUTE? It's incremented every tick, not minute.
@@ -34,7 +34,7 @@ public class OntimeCommand extends BaseCommand {
 
     @CommandAlias("rankup")
     @Description("Get fancy new perks the more you play!")
-    public void onRankup(Player player) {
+    public void onRankup(final Player player) {
         player.sendMessage("Currently not working.. Bug Brian about this till it's done ;p");
     }
 }

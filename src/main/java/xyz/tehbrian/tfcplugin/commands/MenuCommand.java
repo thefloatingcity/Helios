@@ -13,7 +13,7 @@ import xyz.tehbrian.tfcplugin.guis.MenuGui;
 public class MenuCommand extends BaseCommand {
 
     @Default
-    public void onMenu(Player player) {
+    public void onMenu(final Player player) {
         MenuGui.generate().show(player);
     }
 }

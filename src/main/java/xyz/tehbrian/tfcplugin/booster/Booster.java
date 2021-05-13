@@ -10,7 +10,7 @@ public class Booster {
     private final int size;
     private final Axis axis;
 
-    public Booster(Location location, int size, Axis axis) {
+    public Booster(final Location location, final int size, final Axis axis) {
         this.location = location;
         this.size = size;
         this.axis = axis;
