@@ -27,7 +27,7 @@ import xyz.tehbrian.tfcplugin.listeners.OptionsListener;
 import xyz.tehbrian.tfcplugin.listeners.PianoListener;
 import xyz.tehbrian.tfcplugin.listeners.PlayerListener;
 import xyz.tehbrian.tfcplugin.listeners.VoidLoopListener;
-import xyz.tehbrian.tfcplugin.player.PlayerDataManager;
+import xyz.tehbrian.tfcplugin.user.UserManager;
 
 public final class TFCPlugin extends JavaPlugin {
 
@@ -35,7 +35,7 @@ public final class TFCPlugin extends JavaPlugin {
 
     private LuckPerms luckPermsApi;
     private PaperCommandManager commandManager;
-    private PlayerDataManager playerDataManager;
+    private UserManager playerDataManager;
 
     private BoosterManager boosterManager;
     private ConfigManager configManager;
@@ -135,9 +135,9 @@ public final class TFCPlugin extends JavaPlugin {
         return boosterManager;
     }
 
-    public PlayerDataManager getPlayerDataManager() {
+    public UserManager getPlayerDataManager() {
         if (playerDataManager == null) {
-            playerDataManager = new PlayerDataManager();
+            playerDataManager = new UserManager();
         }
         return playerDataManager;
     }

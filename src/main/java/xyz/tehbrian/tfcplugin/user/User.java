@@ -1,4 +1,4 @@
-package xyz.tehbrian.tfcplugin.player;
+package xyz.tehbrian.tfcplugin.user;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -7,7 +7,7 @@ import xyz.tehbrian.tfcplugin.TFCPlugin;
 
 import java.util.UUID;
 
-public class PlayerData {
+public class User {
 
     private final UUID uuid;
 
@@ -16,7 +16,7 @@ public class PlayerData {
 
     private PianoSound pianoSound = PianoSound.HARP;
 
-    public PlayerData(final UUID uuid) {
+    public User(final UUID uuid) {
         this.uuid = uuid;
     }
 
