@@ -13,9 +13,6 @@ permissions:
   tfcplugin.chatcolor:
     description: Permission to color chat text.
     default: op
-  tfcplugin.signcolor:
-    description: Permission to color sign text.
-    default: op
   tfcplugin.build:
     description: Permission to interact with the world.
     default: op
