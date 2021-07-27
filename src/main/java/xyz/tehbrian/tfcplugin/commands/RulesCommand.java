@@ -19,7 +19,7 @@ public class RulesCommand extends BaseCommand {
 
     @Default
     public void onRules(final CommandSender sender, @Default("1") @Conditions("limits:min=1,max=9") final Integer page) {
-        for (String line : ConfigUtils.getPage("books.rules", page)) {
+        for (final String line : ConfigUtils.getPage("books.rules", page)) {
             sender.sendMessage(line);
         }
     }
@@ -35,4 +35,5 @@ public class RulesCommand extends BaseCommand {
             player.sendMessage(new MsgBuilder().prefixKey("prefixes.rules.prefix").msgKey("msg.rules.accept").build());
         }
     }
+
 }

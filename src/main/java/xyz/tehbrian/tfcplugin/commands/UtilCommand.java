@@ -55,4 +55,5 @@ public class UtilCommand extends BaseCommand {
     public void onHelp(final CommandSender sender, final CommandHelp help) {
         help.showHelp();
     }
+
 }

@@ -24,4 +24,5 @@ public class FlightListener implements Listener {
     public void onGameModeChange(final PlayerGameModeChangeEvent event) {
         TFCPlugin.getInstance().getPlayerDataManager().getUser(event.getPlayer()).disableFlight();
     }
+
 }

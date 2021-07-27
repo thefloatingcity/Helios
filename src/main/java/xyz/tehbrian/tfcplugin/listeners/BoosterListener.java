@@ -17,17 +17,18 @@ public class BoosterListener implements Listener {
     @EventHandler
     public void onPlayerToggleGlide(final EntityToggleGlideEvent event) {
         if (event.getEntity() instanceof Player) {
-            Player player = (Player) event.getEntity();
+            final Player player = (Player) event.getEntity();
 
             this.main.getBoosterManager().setPlayerGliding(player, player.isGliding());
         }
     }
 
     public void startThingy() {
-        for (Player player : this.main.getBoosterManager().getGlidingPlayers()) {
+        for (final Player player : this.main.getBoosterManager().getGlidingPlayers()) {
             if (this.main.getBoosterManager().checkIfPlayerIsInBooster(player)) {
                 player.setVelocity(player.getLocation().getDirection().multiply(3));
             }
         }
     }
+
 }

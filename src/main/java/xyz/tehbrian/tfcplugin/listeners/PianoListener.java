@@ -23,23 +23,37 @@ public class PianoListener implements Listener {
 
     @EventHandler
     public void onItemHeld(final PlayerItemHeldEvent event) {
-        Player player = event.getPlayer();
+        final Player player = event.getPlayer();
 
-        if (!player.hasPermission("tfcplugin.piano")) return;
-        if (!this.main.getPlayerDataManager().getUser(player).hasPianoEnabled()) return;
+        if (!player.hasPermission("tfcplugin.piano")) {
+            return;
+        }
+        if (!this.main.getPlayerDataManager().getUser(player).hasPianoEnabled()) {
+            return;
+        }
 
         this.play(event.getPlayer(), event.getPlayer().getInventory().getItem(event.getNewSlot()));
     }
 
     @EventHandler
     public void onInventoryClick(final InventoryClickEvent event) {
-        if (!(event.getWhoClicked() instanceof Player)) return;
-        Player player = (Player) event.getWhoClicked();
+        if (!(event.getWhoClicked() instanceof Player)) {
+            return;
+        }
+        final Player player = (Player) event.getWhoClicked();
 
-        if (!player.hasPermission("tfcplugin.piano")) return;
-        if (event.getClickedInventory() == null) return;
-        if (!event.getView().getTitle().equals(this.main.getConfig().getString("inventories.piano_notes.name"))) return;
-        if (!event.isRightClick()) return;
+        if (!player.hasPermission("tfcplugin.piano")) {
+            return;
+        }
+        if (event.getClickedInventory() == null) {
+            return;
+        }
+        if (!event.getView().getTitle().equals(this.main.getConfig().getString("inventories.piano_notes.name"))) {
+            return;
+        }
+        if (!event.isRightClick()) {
+            return;
+        }
 
         event.setCancelled(true);
         this.play(player, event.getCurrentItem());
@@ -54,11 +68,23 @@ public class PianoListener implements Listener {
         itemStack.setItemMeta(itemMeta);
         */
 
-        if (item == null) return;
-        if (!item.getType().name().toLowerCase().contains("pane")) return;
-        if (!item.getItemMeta().hasLore() && Objects.requireNonNull(item.getLore()).get(1).equals(ChatColor.DARK_GRAY + "[Note]"))
+        if (item == null) {
             return;
+        }
+        if (!item.getType().name().toLowerCase().contains("pane")) {
+            return;
+        }
+        if (!item.getItemMeta().hasLore() && Objects.requireNonNull(item.getLore()).get(1).equals(ChatColor.DARK_GRAY + "[Note]")) {
+            return;
+        }
 
-        player.getWorld().playSound(player.getEyeLocation(), this.main.getPlayerDataManager().getUser(player).getPianoSound().toSound(), SoundCategory.MASTER, 3, Float.parseFloat(item.getLore().get(2)));
+        player.getWorld().playSound(
+                player.getEyeLocation(),
+                this.main.getPlayerDataManager().getUser(player).getPianoSound().toSound(),
+                SoundCategory.MASTER,
+                3,
+                Float.parseFloat(item.getLore().get(2))
+        );
     }
+
 }

@@ -9,11 +9,12 @@ import xyz.tehbrian.tfcplugin.TFCPlugin;
 
 public class BlocksGui {
 
-    private BlocksGui() {}
+    private BlocksGui() {
+    }
 
     public static Gui generate() {
-        Gui gui = new Gui(TFCPlugin.getInstance(), 1, "Super Secret Building Blocks");
-        OutlinePane pane = new OutlinePane(0, 0, 9, 1);
+        final Gui gui = new Gui(TFCPlugin.getInstance(), 1, "Super Secret Building Blocks");
+        final OutlinePane pane = new OutlinePane(0, 0, 9, 1);
 
         pane.addItem(new GuiItem(new ItemStack(Material.BARRIER)));
         pane.addItem(new GuiItem(new ItemStack(Material.DRAGON_EGG)));
@@ -21,4 +22,5 @@ public class BlocksGui {
         gui.addPane(pane);
         return gui;
     }
+
 }

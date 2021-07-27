@@ -30,7 +30,7 @@ public class BoosterCommand extends BaseCommand {
     @Description("Create a booster.")
     @CommandCompletion("*")
     public void onCreate(final Player player, final String name, final Integer radius, final Axis axis) {
-        BoosterManager boosterManager = this.main.getBoosterManager();
+        final BoosterManager boosterManager = this.main.getBoosterManager();
 
         boosterManager.newBooster(name, player.getLocation(), radius, axis);
         boosterManager.getBooster(name).generate();
@@ -40,4 +40,5 @@ public class BoosterCommand extends BaseCommand {
     public void onHelp(final CommandSender sender, final CommandHelp help) {
         help.showHelp();
     }
+
 }

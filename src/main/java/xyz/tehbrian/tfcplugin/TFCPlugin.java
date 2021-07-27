@@ -70,7 +70,7 @@ public final class TFCPlugin extends JavaPlugin {
     }
 
     private void setupEvents() {
-        PluginManager pluginManager = this.getServer().getPluginManager();
+        final PluginManager pluginManager = this.getServer().getPluginManager();
 
         pluginManager.registerEvents(new AntiBuildListener(), this);
         pluginManager.registerEvents(new BoosterListener(this), this);
@@ -112,7 +112,7 @@ public final class TFCPlugin extends JavaPlugin {
     }
 
     private boolean setupLuckPermsApi() {
-        RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
+        final RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
         if (provider == null) {
             return false;
         }
@@ -148,4 +148,5 @@ public final class TFCPlugin extends JavaPlugin {
         }
         return this.configManager;
     }
+
 }

@@ -30,13 +30,14 @@ public class Booster {
 
     public void generate() {
         for (double degrees = 0.0D; degrees < 360.0D; degrees += 10.0D) {
-            double angle = Math.toRadians(degrees);
+            final double angle = Math.toRadians(degrees);
 
-            double vx = this.location.getX() * Math.cos(angle) - this.location.getZ() * Math.sin(angle);
-            double vy = this.location.getY() * Math.cos(angle) - this.location.getY() * Math.sin(angle);
-            double vz = this.location.getX() * Math.sin(angle) + this.location.getZ() * Math.cos(angle);
+            final double vx = this.location.getX() * Math.cos(angle) - this.location.getZ() * Math.sin(angle);
+            final double vy = this.location.getY() * Math.cos(angle) - this.location.getY() * Math.sin(angle);
+            final double vz = this.location.getX() * Math.sin(angle) + this.location.getZ() * Math.cos(angle);
 
             this.location.getWorld().getBlockAt((int) vx, (int) vy, (int) vz).setType(Material.YELLOW_TERRACOTTA);
         }
     }
+
 }

@@ -13,7 +13,8 @@ public class ConfigManager {
     public ConfigManager(final TFCPlugin main) {
         this.main = main;
 
-        File whateverFile = new File(main.getDataFolder() + "/whatever.yml");
-        FileConfiguration whatever = YamlConfiguration.loadConfiguration(whateverFile);
+        final File whateverFile = new File(main.getDataFolder() + "/whatever.yml");
+        final FileConfiguration whatever = YamlConfiguration.loadConfiguration(whateverFile);
     }
+
 }

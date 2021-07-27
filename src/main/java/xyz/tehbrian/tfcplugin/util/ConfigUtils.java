@@ -18,13 +18,14 @@ public class ConfigUtils {
 
     private static final TFCPlugin main = TFCPlugin.getInstance();
 
-    private ConfigUtils() {}
+    private ConfigUtils() {
+    }
 
     public static List<String> getPage(final String configKey, final Integer pageNumber) {
-        ConfigurationSection book = main.getConfig().getConfigurationSection(configKey);
-        ConfigurationSection pages = Objects.requireNonNull(book).getConfigurationSection("pages");
-        ConfigurationSection page = Objects.requireNonNull(pages).getConfigurationSection(pageNumber.toString());
-        List<String> messages = new ArrayList<>();
+        final ConfigurationSection book = main.getConfig().getConfigurationSection(configKey);
+        final ConfigurationSection pages = Objects.requireNonNull(book).getConfigurationSection("pages");
+        final ConfigurationSection page = Objects.requireNonNull(pages).getConfigurationSection(pageNumber.toString());
+        final List<String> messages = new ArrayList<>();
 
         messages.add(new MsgBuilder()
                 .prefixString(book.getString("multistart"))
@@ -32,7 +33,7 @@ public class ConfigUtils {
                 .formats(Objects.requireNonNull(page).getString("title"), pageNumber, pages.getKeys(false).size())
                 .build());
 
-        for (String line : page.getStringList("content")) {
+        for (final String line : page.getStringList("content")) {
             messages.add(new MsgBuilder()
                     .prefixString(book.getString("multi"))
                     .msgString(line)
@@ -44,14 +45,20 @@ public class ConfigUtils {
     }
 
     public static Inventory getInventory(final String configKey) {
-        ConfigurationSection invConfigSection = main.getConfig().getConfigurationSection(configKey);
-        ConfigurationSection items = Objects.requireNonNull(invConfigSection).getConfigurationSection("items");
-        Inventory inventory = Bukkit.createInventory(null, invConfigSection.getInt("size"), MiscUtils.color(invConfigSection.getString("name")));
+        final ConfigurationSection invConfigSection = main.getConfig().getConfigurationSection(configKey);
+        final ConfigurationSection items = Objects.requireNonNull(invConfigSection).getConfigurationSection("items");
+        final Inventory inventory = Bukkit.createInventory(
+                null,
+                invConfigSection.getInt("size"),
+                MiscUtils.color(invConfigSection.getString("name"))
+        );
 
-        for (String key : Objects.requireNonNull(items).getKeys(false)) {
-            ConfigurationSection item = items.getConfigurationSection(key);
+        for (final String key : Objects.requireNonNull(items).getKeys(false)) {
+            final ConfigurationSection item = items.getConfigurationSection(key);
 
-            inventory.addItem(new ItemBuilder(Material.matchMaterial(Objects.requireNonNull(Objects.requireNonNull(item).getString("material"))))
+            inventory.addItem(new ItemBuilder(Material.matchMaterial(Objects.requireNonNull(Objects
+                    .requireNonNull(item)
+                    .getString("material"))))
                     .amount(item.isSet("amount") ? item.getInt("amount") : 1)
                     .name(item.getString("name"))
                     .lore(item.getStringList("lore"))
@@ -63,7 +70,13 @@ public class ConfigUtils {
     }
 
     public static Location getSpawn() {
-        FileConfiguration config = main.getConfig();
-        return new Location(Bukkit.getWorld(Objects.requireNonNull(config.getString("spawn.world"))), config.getDouble("spawn.x"), config.getDouble("spawn.y"), config.getDouble("spawn.z"));
+        final FileConfiguration config = main.getConfig();
+        return new Location(
+                Bukkit.getWorld(Objects.requireNonNull(config.getString("spawn.world"))),
+                config.getDouble("spawn.x"),
+                config.getDouble("spawn.y"),
+                config.getDouble("spawn.z")
+        );
     }
+
 }

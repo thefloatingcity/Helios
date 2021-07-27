@@ -48,7 +48,7 @@ public class User {
     }
 
     public void enableFlight() {
-        Player player = this.getPlayer();
+        final Player player = this.getPlayer();
         if (player.hasPermission("tfcplugin.core.fly") && this.hasFlyBypassEnabled()) {
             Bukkit.getScheduler().runTask(TFCPlugin.getInstance(), () -> {
                 player.setAllowFlight(true);
@@ -58,7 +58,7 @@ public class User {
     }
 
     public void disableFlight() {
-        Player player = this.getPlayer();
+        final Player player = this.getPlayer();
         if (!player.hasPermission("tfcplugin.core.fly") || !this.hasFlyBypassEnabled()) {
             Bukkit.getScheduler().runTask(TFCPlugin.getInstance(), () -> {
                 player.setAllowFlight(false);
@@ -87,4 +87,5 @@ public class User {
     public void setPianoSound(final PianoSound pianoSound) {
         this.pianoSound = pianoSound;
     }
+
 }

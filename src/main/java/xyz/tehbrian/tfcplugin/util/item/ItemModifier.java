@@ -114,4 +114,5 @@ public class ItemModifier {
         this.itemStack.setItemMeta(this.itemMeta);
         return this.itemStack;
     }
+
 }

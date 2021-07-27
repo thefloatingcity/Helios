@@ -20,15 +20,18 @@ public class OntimeCommand extends BaseCommand {
     @Default
     @CommandCompletion("@players")
     public void onOntime(final Player player, @Optional final OnlinePlayer target) {
-        Player targetPlayer = target == null ? player : target.getPlayer();
+        final Player targetPlayer = target == null ? player : target.getPlayer();
 
         // Liars. Why was it changed from PLAY_ONE_TICK to PLAY_ONE_MINUTE? It's incremented every tick, not minute.
-        long millisPlayed = (targetPlayer.getStatistic(Statistic.PLAY_ONE_MINUTE) / 20) * 1000;
+        final long millisPlayed = (targetPlayer.getStatistic(Statistic.PLAY_ONE_MINUTE) / 20) * 1000;
 
         if (target == null) {
             player.sendMessage(new MsgBuilder().def("msg.ontime.check_self").formats(MiscUtils.fancifyTime(millisPlayed)).build());
         } else {
-            player.sendMessage(new MsgBuilder().def("msg.ontime.check_other").formats(targetPlayer.getDisplayName(), MiscUtils.fancifyTime(millisPlayed)).build());
+            player.sendMessage(new MsgBuilder()
+                    .def("msg.ontime.check_other")
+                    .formats(targetPlayer.getDisplayName(), MiscUtils.fancifyTime(millisPlayed))
+                    .build());
         }
     }
 
@@ -37,4 +40,5 @@ public class OntimeCommand extends BaseCommand {
     public void onRankup(final Player player) {
         player.sendMessage("Currently not working.. Bug Brian about this till it's done ;p");
     }
+
 }

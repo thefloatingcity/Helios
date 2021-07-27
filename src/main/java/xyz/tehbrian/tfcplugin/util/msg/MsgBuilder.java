@@ -44,8 +44,8 @@ public class MsgBuilder {
     }
 
     public String build() {
-        FileConfiguration config = TFCPlugin.getInstance().getConfig();
-        StringBuilder sb = new StringBuilder();
+        final FileConfiguration config = TFCPlugin.getInstance().getConfig();
+        final StringBuilder sb = new StringBuilder();
 
         if (this.prefixKey != null) {
             sb.append(config.getString(this.prefixKey)).append(" ");
@@ -67,4 +67,5 @@ public class MsgBuilder {
 
         return MiscUtils.color(message);
     }
+
 }

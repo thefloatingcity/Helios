@@ -25,7 +25,7 @@ public class ChatListener implements Listener {
 
     @EventHandler
     public void onChat(final AsyncPlayerChatEvent event) {
-        Player player = event.getPlayer();
+        final Player player = event.getPlayer();
 
         // 1. Format the chat.
         event.setFormat(MiscUtils.color(Objects.requireNonNull(this.main.getConfig().getString("msg.chat_format"))
@@ -38,12 +38,13 @@ public class ChatListener implements Listener {
         }
 
         // 3. Ping other players.
-        for (Player pingedPlayer : Bukkit.getOnlinePlayers()) {
-            if (pingedPlayer.getUniqueId().equals(player.getUniqueId())) continue;
+        for (final Player pingedPlayer : Bukkit.getOnlinePlayers()) {
+            if (pingedPlayer.getUniqueId().equals(player.getUniqueId())) {
+                continue;
+            }
 
-            String pingedPlayerName = pingedPlayer.getName();
-            String pingedPlayerDisplayName = pingedPlayer.getDisplayName();
-
+            final String pingedPlayerName = pingedPlayer.getName();
+            final String pingedPlayerDisplayName = pingedPlayer.getDisplayName();
 
 
             final String replacement = ChatColor.GOLD + "$1";
@@ -62,20 +63,27 @@ public class ChatListener implements Listener {
         }
 
         // 4. Chat replacements.
-        ConfigurationSection replacements = this.main.getConfig().getConfigurationSection("replacements");
-        Set<String> replacementKeys = replacements.getKeys(false);
-        for (String from : replacementKeys) {
+        final ConfigurationSection replacements = this.main.getConfig().getConfigurationSection("replacements");
+        final Set<String> replacementKeys = replacements.getKeys(false);
+        for (final String from : replacementKeys) {
             event.setMessage(this.replaceCaseSensitive(event.getMessage(), from, replacements.getString(from)));
         }
     }
 
     private String replaceCaseSensitive(final String message, final String from, final String to) {
-        String lastColors = ChatColor.getLastColors(message);
-        return message.replaceAll("(?i)(" + MiscUtils.color(from) + ")", MiscUtils.color(to) + (lastColors.isEmpty() ? ChatColor.RESET : lastColors));
+        final String lastColors = ChatColor.getLastColors(message);
+        return message.replaceAll(
+                "(?i)(" + MiscUtils.color(from) + ")",
+                MiscUtils.color(to) + (lastColors.isEmpty() ? ChatColor.RESET : lastColors)
+        );
     }
 
     private String replaceCaseInsensitive(final String message, final String from, final String to) {
-        String lastColors = ChatColor.getLastColors(message);
-        return message.replaceAll("(" + MiscUtils.color(from) + ")", MiscUtils.color(to) + (lastColors.isEmpty() ? ChatColor.RESET : lastColors));
+        final String lastColors = ChatColor.getLastColors(message);
+        return message.replaceAll(
+                "(" + MiscUtils.color(from) + ")",
+                MiscUtils.color(to) + (lastColors.isEmpty() ? ChatColor.RESET : lastColors)
+        );
     }
+
 }

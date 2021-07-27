@@ -11,9 +11,9 @@ import co.aikar.commands.annotation.HelpCommand;
 import co.aikar.commands.annotation.Subcommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import xyz.tehbrian.tfcplugin.PianoSound;
 import xyz.tehbrian.tfcplugin.TFCPlugin;
 import xyz.tehbrian.tfcplugin.guis.PianoMenuGui;
-import xyz.tehbrian.tfcplugin.PianoSound;
 import xyz.tehbrian.tfcplugin.util.ConfigUtils;
 import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 
@@ -34,7 +34,11 @@ public class PianoCommand extends BaseCommand {
     @CommandCompletion("*")
     public void onInstrument(final Player player, final PianoSound pianoSound) {
         TFCPlugin.getInstance().getPlayerDataManager().getUser(player).setPianoSound(pianoSound);
-        player.sendMessage(new MsgBuilder().prefixKey("prefixes.piano.prefix").msgKey("msg.piano.instrument_change").formats(pianoSound.toString()).build());
+        player.sendMessage(new MsgBuilder()
+                .prefixKey("prefixes.piano.prefix")
+                .msgKey("msg.piano.instrument_change")
+                .formats(pianoSound.toString())
+                .build());
     }
 
     @Subcommand("toggle")
@@ -49,8 +53,9 @@ public class PianoCommand extends BaseCommand {
 
     @HelpCommand
     public void onHelp(final CommandSender sender, @Default("1") @Conditions("limits:min=1,max=4") final Integer page) {
-        for (String line : ConfigUtils.getPage("books.piano_manual", page)) {
+        for (final String line : ConfigUtils.getPage("books.piano_manual", page)) {
             sender.sendMessage(line);
         }
     }
+
 }

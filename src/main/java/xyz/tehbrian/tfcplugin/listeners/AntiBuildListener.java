@@ -53,7 +53,7 @@ public class AntiBuildListener implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onHangingBreak(final HangingBreakByEntityEvent event) {
         if (Objects.requireNonNull(event.getRemover()).getType() == EntityType.PLAYER) {
-            Player player = (Player) event.getRemover();
+            final Player player = (Player) event.getRemover();
             if (!player.hasPermission("tfcplugin.build")) {
                 event.setCancelled(true);
                 player.sendMessage(new MsgBuilder().def("msg.no_build").build());
@@ -89,7 +89,7 @@ public class AntiBuildListener implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {
         if (event.getDamager().getType() == EntityType.PLAYER) {
-            Player player = (Player) event.getDamager();
+            final Player player = (Player) event.getDamager();
             if (!player.hasPermission("tfcplugin.build")) {
                 event.setCancelled(true);
                 player.sendMessage(new MsgBuilder().def("msg.no_build").build());
@@ -115,4 +115,5 @@ public class AntiBuildListener implements Listener {
             event.getPlayer().sendMessage(new MsgBuilder().def("msg.no_build").build());
         }
     }
+
 }

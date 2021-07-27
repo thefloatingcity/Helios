@@ -14,30 +14,32 @@ public class LuckPermsUtils {
 
     private static final LuckPerms luckPerms = TFCPlugin.getInstance().getLuckPermsApi();
 
-    private LuckPermsUtils() {}
+    private LuckPermsUtils() {
+    }
 
     public static String getPlayerPrefix(final Player player) {
-        User user = Objects.requireNonNull(luckPerms.getUserManager().getUser(player.getUniqueId()));
+        final User user = Objects.requireNonNull(luckPerms.getUserManager().getUser(player.getUniqueId()));
 
-        QueryOptions queryOptions = luckPerms.getContextManager().getQueryOptions(player);
+        final QueryOptions queryOptions = luckPerms.getContextManager().getQueryOptions(player);
 
-        CachedMetaData metaData = user.getCachedData().getMetaData(queryOptions);
+        final CachedMetaData metaData = user.getCachedData().getMetaData(queryOptions);
         return metaData.getPrefix() == null ? "" : metaData.getPrefix();
     }
 
     public static String getPlayerSuffix(final Player player) {
-        User user = Objects.requireNonNull(luckPerms.getUserManager().getUser(player.getUniqueId()));
+        final User user = Objects.requireNonNull(luckPerms.getUserManager().getUser(player.getUniqueId()));
 
-        QueryOptions queryOptions = luckPerms.getContextManager().getQueryOptions(player);
+        final QueryOptions queryOptions = luckPerms.getContextManager().getQueryOptions(player);
 
-        CachedMetaData metaData = user.getCachedData().getMetaData(queryOptions);
+        final CachedMetaData metaData = user.getCachedData().getMetaData(queryOptions);
         return metaData.getSuffix() == null ? "" : metaData.getSuffix();
     }
 
     public static void addPlayerGroup(final Player player, final String group) {
-        User user = Objects.requireNonNull(luckPerms.getUserManager().getUser(player.getUniqueId()));
+        final User user = Objects.requireNonNull(luckPerms.getUserManager().getUser(player.getUniqueId()));
 
         user.data().add(InheritanceNode.builder(group).build());
         luckPerms.getUserManager().saveUser(user);
     }
+
 }

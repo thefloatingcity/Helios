@@ -12,19 +12,22 @@ import java.util.Objects;
 
 public class PianoMenuGui {
 
-    private PianoMenuGui() {}
+    private PianoMenuGui() {
+    }
 
     public static Gui generate() {
-        ConfigurationSection invConfigSection = TFCPlugin.getInstance().getConfig().getConfigurationSection("inventories.piano_notes");
-        ConfigurationSection items = Objects.requireNonNull(invConfigSection).getConfigurationSection("items");
+        final ConfigurationSection invConfigSection = TFCPlugin.getInstance().getConfig().getConfigurationSection("inventories.piano_notes");
+        final ConfigurationSection items = Objects.requireNonNull(invConfigSection).getConfigurationSection("items");
 
-        Gui gui = new Gui(TFCPlugin.getInstance(), 3, Objects.requireNonNull(invConfigSection.getString("name")));
-        OutlinePane pane = new OutlinePane(0, 0, 9, 3);
+        final Gui gui = new Gui(TFCPlugin.getInstance(), 3, Objects.requireNonNull(invConfigSection.getString("name")));
+        final OutlinePane pane = new OutlinePane(0, 0, 9, 3);
 
-        for (String key : Objects.requireNonNull(items).getKeys(false)) {
-            ConfigurationSection item = items.getConfigurationSection(key);
+        for (final String key : Objects.requireNonNull(items).getKeys(false)) {
+            final ConfigurationSection item = items.getConfigurationSection(key);
 
-            pane.addItem(new GuiItem(new ItemBuilder(Material.matchMaterial(Objects.requireNonNull(Objects.requireNonNull(item).getString("material"))))
+            pane.addItem(new GuiItem(new ItemBuilder(Material.matchMaterial(Objects.requireNonNull(Objects
+                    .requireNonNull(item)
+                    .getString("material"))))
                     .amount(item.isSet("amount") ? item.getInt("amount") : 1)
                     .name(item.getString("name"))
                     .lore(item.getStringList("lore"))
@@ -35,4 +38,5 @@ public class PianoMenuGui {
         gui.addPane(pane);
         return gui;
     }
+
 }

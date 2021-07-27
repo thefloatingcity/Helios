@@ -26,12 +26,12 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onJoin(final PlayerJoinEvent event) {
-        Player player = event.getPlayer();
+        final Player player = event.getPlayer();
 
         player.sendMessage(new MsgBuilder().msgKey("msg.banner").build());
 
-        Firework firework = player.getWorld().spawn(player.getEyeLocation(), Firework.class);
-        FireworkMeta fireworkMeta = firework.getFireworkMeta();
+        final Firework firework = player.getWorld().spawn(player.getEyeLocation(), Firework.class);
+        final FireworkMeta fireworkMeta = firework.getFireworkMeta();
         fireworkMeta.addEffect(FireworkEffect.builder()
                 .flicker(true)
                 .trail(false)
@@ -45,7 +45,7 @@ public class PlayerListener implements Listener {
         if (player.hasPlayedBefore()) {
             event.setJoinMessage(new MsgBuilder().msgKey("msg.join").formats(player.getDisplayName()).build());
 
-            long millisSinceLastPlayed = Calendar.getInstance().getTimeInMillis() - player.getLastPlayed();
+            final long millisSinceLastPlayed = Calendar.getInstance().getTimeInMillis() - player.getLastPlayed();
             player.sendMessage(new MsgBuilder().def("msg.motd").formats(MiscUtils.fancifyTime(millisSinceLastPlayed)).build());
         } else {
             event.setJoinMessage(new MsgBuilder().msgKey("msg.join_new").formats(player.getDisplayName()).build());
@@ -58,4 +58,5 @@ public class PlayerListener implements Listener {
     public void onQuit(final PlayerQuitEvent event) {
         event.setQuitMessage(new MsgBuilder().msgKey("msg.leave").formats(event.getPlayer().getDisplayName()).build());
     }
+
 }

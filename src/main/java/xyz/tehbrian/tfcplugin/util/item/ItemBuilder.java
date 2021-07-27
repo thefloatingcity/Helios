@@ -59,7 +59,7 @@ public class ItemBuilder {
     }
 
     public ItemStack build() {
-        ItemStack itemStack = new ItemStack(this.material);
+        final ItemStack itemStack = new ItemStack(this.material);
 
         if (this.amount != null) {
             itemStack.setAmount(this.amount);
@@ -71,7 +71,7 @@ public class ItemBuilder {
             itemStack.addItemFlags(this.flags);
         }
 
-        ItemMeta itemMeta = itemStack.getItemMeta();
+        final ItemMeta itemMeta = itemStack.getItemMeta();
 
         if (this.name != null) {
             itemMeta.setDisplayName(MiscUtils.color(this.name));
@@ -88,4 +88,5 @@ public class ItemBuilder {
 
         return itemStack;
     }
+
 }

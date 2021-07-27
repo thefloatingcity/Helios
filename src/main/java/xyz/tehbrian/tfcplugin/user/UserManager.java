@@ -22,4 +22,5 @@ public class UserManager {
     public Map<UUID, User> getUserMap() {
         return this.userMap;
     }
+
 }

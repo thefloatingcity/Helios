@@ -16,4 +16,5 @@ public class MenuCommand extends BaseCommand {
     public void onMenu(final Player player) {
         MenuGui.generate().show(player);
     }
+
 }

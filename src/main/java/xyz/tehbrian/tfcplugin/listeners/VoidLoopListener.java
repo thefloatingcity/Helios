@@ -24,19 +24,27 @@ public class VoidLoopListener implements Listener {
 
     @EventHandler
     public void onEntityDamageByVoid(final EntityDamageEvent event) {
-        if (event.getCause() != EntityDamageEvent.DamageCause.VOID) return;
-        Location location = event.getEntity().getLocation();
+        if (event.getCause() != EntityDamageEvent.DamageCause.VOID) {
+            return;
+        }
+        final Location location = event.getEntity().getLocation();
 
-        if (location.getY() > -50) return;
+        if (location.getY() > -50) {
+            return;
+        }
         event.setCancelled(true);
 
-        if (location.getY() > -450) return;
+        if (location.getY() > -450) {
+            return;
+        }
         Bukkit.getScheduler().runTask(this.main, () -> {
             location.setY(650);
             event.getEntity().teleport(location);
 
-            if (!(event.getEntity() instanceof Player)) return;
-            Player player = (Player) event.getEntity();
+            if (!(event.getEntity() instanceof Player)) {
+                return;
+            }
+            final Player player = (Player) event.getEntity();
 
             if (player.getFallDistance() >= 3000) {
                 player.sendMessage(new MsgBuilder().prefixKey("prefixes.warper.prefix").msgKey("msg.warp.max").build());
@@ -52,4 +60,5 @@ public class VoidLoopListener implements Listener {
             }
         });
     }
+
 }
