@@ -18,12 +18,12 @@ public class VoidLoopListener implements Listener {
 
     private final TFCPlugin main;
 
-    public VoidLoopListener(TFCPlugin main) {
+    public VoidLoopListener(final TFCPlugin main) {
         this.main = main;
     }
 
     @EventHandler
-    public void onEntityDamageByVoid(EntityDamageEvent event) {
+    public void onEntityDamageByVoid(final EntityDamageEvent event) {
         if (event.getCause() != EntityDamageEvent.DamageCause.VOID) return;
         Location location = event.getEntity().getLocation();
 
@@ -31,7 +31,7 @@ public class VoidLoopListener implements Listener {
         event.setCancelled(true);
 
         if (location.getY() > -450) return;
-        Bukkit.getScheduler().runTask(main, () -> {
+        Bukkit.getScheduler().runTask(this.main, () -> {
             location.setY(650);
             event.getEntity().teleport(location);
 
@@ -39,16 +39,16 @@ public class VoidLoopListener implements Listener {
             Player player = (Player) event.getEntity();
 
             if (player.getFallDistance() >= 3000) {
-                player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.max").build());
+                player.sendMessage(new MsgBuilder().prefixKey("prefixes.warper.prefix").msgKey("msg.warp.max").build());
                 player.setFallDistance(0);
                 player.teleport(ConfigUtils.getSpawn());
                 player.getWorld().strikeLightningEffect(ConfigUtils.getSpawn());
                 player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, ConfigUtils.getSpawn(), 1);
                 player.getWorld().playSound(ConfigUtils.getSpawn(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 4, 1);
             } else if (player.getFallDistance() >= 2000) {
-                player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.second").build());
+                player.sendMessage(new MsgBuilder().prefixKey("prefixes.warper.prefix").msgKey("msg.warp.second").build());
             } else if (player.getFallDistance() >= 1000) {
-                player.sendMessage(new MsgBuilder().prefixKey("infixes.warper.prefix").msgKey("msg.warp.first").build());
+                player.sendMessage(new MsgBuilder().prefixKey("prefixes.warper.prefix").msgKey("msg.warp.first").build());
             }
         });
     }

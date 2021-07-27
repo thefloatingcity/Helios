@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class ItemBuilder {
 
-    private Material material;
+    private final Material material;
     private Integer amount = null;
     private Map<Enchantment, Integer> enchantments = null;
     private ItemFlag[] flags = null;
@@ -24,64 +24,64 @@ public class ItemBuilder {
     private List<String> lore = null;
     private Boolean unbreakable = null;
 
-    public ItemBuilder(Material material) {
+    public ItemBuilder(final Material material) {
         this.material = material;
     }
 
-    public ItemBuilder amount(Integer amount) {
+    public ItemBuilder amount(final Integer amount) {
         this.amount = amount;
         return this;
     }
 
-    public ItemBuilder enchantments(Map<Enchantment, Integer> enchantments) {
+    public ItemBuilder enchantments(final Map<Enchantment, Integer> enchantments) {
         this.enchantments = enchantments;
         return this;
     }
 
-    public ItemBuilder flags(ItemFlag... flags) {
+    public ItemBuilder flags(final ItemFlag... flags) {
         this.flags = flags;
         return this;
     }
 
-    public ItemBuilder name(String name) {
+    public ItemBuilder name(final String name) {
         this.name = name;
         return this;
     }
 
-    public ItemBuilder lore(List<String> lore) {
+    public ItemBuilder lore(final List<String> lore) {
         this.lore = lore;
         return this;
     }
 
-    public ItemBuilder unbreakable(Boolean unbreakable) {
+    public ItemBuilder unbreakable(final Boolean unbreakable) {
         this.unbreakable = unbreakable;
         return this;
     }
 
     public ItemStack build() {
-        ItemStack itemStack = new ItemStack(material);
+        ItemStack itemStack = new ItemStack(this.material);
 
-        if (amount != null) {
-            itemStack.setAmount(amount);
+        if (this.amount != null) {
+            itemStack.setAmount(this.amount);
         }
-        if (enchantments != null) {
-            itemStack.addUnsafeEnchantments(enchantments);
+        if (this.enchantments != null) {
+            itemStack.addUnsafeEnchantments(this.enchantments);
         }
-        if (flags != null) {
-            itemStack.addItemFlags(flags);
+        if (this.flags != null) {
+            itemStack.addItemFlags(this.flags);
         }
 
         ItemMeta itemMeta = itemStack.getItemMeta();
 
-        if (name != null) {
-            itemMeta.setDisplayName(MiscUtils.color(name));
+        if (this.name != null) {
+            itemMeta.setDisplayName(MiscUtils.color(this.name));
         }
-        if (lore != null) {
-            lore.replaceAll(MiscUtils::color);
-            itemMeta.setLore(lore);
+        if (this.lore != null) {
+            this.lore.replaceAll(MiscUtils::color);
+            itemMeta.setLore(this.lore);
         }
-        if (unbreakable != null) {
-            itemMeta.setUnbreakable(unbreakable);
+        if (this.unbreakable != null) {
+            itemMeta.setUnbreakable(this.unbreakable);
         }
 
         itemStack.setItemMeta(itemMeta);

@@ -7,26 +7,38 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import xyz.tehbrian.tfcplugin.booster.BoosterManager;
 import xyz.tehbrian.tfcplugin.commands.ActionCommand;
+import xyz.tehbrian.tfcplugin.commands.BoosterCommand;
 import xyz.tehbrian.tfcplugin.commands.CoreCommand;
 import xyz.tehbrian.tfcplugin.commands.EmoteCommand;
 import xyz.tehbrian.tfcplugin.commands.GamemodeCommand;
-import xyz.tehbrian.tfcplugin.commands.ItemCommand;
+import xyz.tehbrian.tfcplugin.commands.MenuCommand;
 import xyz.tehbrian.tfcplugin.commands.OntimeCommand;
 import xyz.tehbrian.tfcplugin.commands.PianoCommand;
 import xyz.tehbrian.tfcplugin.commands.RulesCommand;
 import xyz.tehbrian.tfcplugin.commands.UtilCommand;
+import xyz.tehbrian.tfcplugin.config.ConfigManager;
 import xyz.tehbrian.tfcplugin.listeners.AntiBuildListener;
-import xyz.tehbrian.tfcplugin.listeners.BuildingListener;
+import xyz.tehbrian.tfcplugin.listeners.BoosterListener;
+import xyz.tehbrian.tfcplugin.listeners.ChatListener;
 import xyz.tehbrian.tfcplugin.listeners.FlightListener;
-import xyz.tehbrian.tfcplugin.listeners.MiscListener;
+import xyz.tehbrian.tfcplugin.listeners.OptionsListener;
 import xyz.tehbrian.tfcplugin.listeners.PianoListener;
+import xyz.tehbrian.tfcplugin.listeners.PlayerListener;
+import xyz.tehbrian.tfcplugin.listeners.VoidLoopListener;
+import xyz.tehbrian.tfcplugin.user.UserManager;
 
 public final class TFCPlugin extends JavaPlugin {
 
     private static TFCPlugin instance;
-    private PaperCommandManager commandManager;
+
     private LuckPerms luckPermsApi;
+    private PaperCommandManager commandManager;
+    private UserManager playerDataManager;
+
+    private BoosterManager boosterManager;
+    private ConfigManager configManager;
 
     public TFCPlugin() {
         instance = this;
@@ -38,51 +50,55 @@ public final class TFCPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        setUpConfig();
-        setUpEvents();
-        setUpCommandManager();
+        this.setupConfig();
+        this.setupEvents();
+        this.setupCommands();
 
-        if (!setUpLuckPermsApi()) {
-            getLogger().severe("No LuckPerms dependency found! Disabling plugin..");
-            getServer().getPluginManager().disablePlugin(this);
+        if (!this.setupLuckPermsApi()) {
+            this.getLogger().severe("No LuckPerms dependency found! Disabling plugin..");
+            this.getServer().getPluginManager().disablePlugin(this);
         }
     }
 
     @Override
     public void onDisable() {
-        getLogger().info("See you later!");
+        this.getLogger().info("See you later!");
     }
 
-    private void setUpConfig() {
-        saveDefaultConfig();
+    private void setupConfig() {
+        this.saveDefaultConfig();
     }
 
-    private void setUpEvents() {
-        PluginManager pluginManager = getServer().getPluginManager();
+    private void setupEvents() {
+        PluginManager pluginManager = this.getServer().getPluginManager();
 
         pluginManager.registerEvents(new AntiBuildListener(), this);
-        pluginManager.registerEvents(new BuildingListener(this), this);
-        pluginManager.registerEvents(new MiscListener(this), this);
+        pluginManager.registerEvents(new BoosterListener(this), this);
+        pluginManager.registerEvents(new ChatListener(this), this);
         pluginManager.registerEvents(new FlightListener(), this);
+        pluginManager.registerEvents(new OptionsListener(this), this);
         pluginManager.registerEvents(new PianoListener(this), this);
+        pluginManager.registerEvents(new PlayerListener(this), this);
+        pluginManager.registerEvents(new VoidLoopListener(this), this);
     }
 
-    private void setUpCommandManager() {
-        commandManager = new PaperCommandManager(this);
+    private void setupCommands() {
+        this.commandManager = new PaperCommandManager(this);
 
-        commandManager.registerCommand(new ActionCommand(this));
-        commandManager.registerCommand(new CoreCommand(this));
-        commandManager.registerCommand(new EmoteCommand());
-        commandManager.registerCommand(new GamemodeCommand());
-        commandManager.registerCommand(new ItemCommand());
-        commandManager.registerCommand(new OntimeCommand());
-        commandManager.registerCommand(new PianoCommand());
-        commandManager.registerCommand(new RulesCommand());
-        commandManager.registerCommand(new UtilCommand());
+        this.commandManager.registerCommand(new ActionCommand(this));
+        this.commandManager.registerCommand(new BoosterCommand(this));
+        this.commandManager.registerCommand(new CoreCommand(this));
+        this.commandManager.registerCommand(new EmoteCommand());
+        this.commandManager.registerCommand(new GamemodeCommand());
+        this.commandManager.registerCommand(new MenuCommand());
+        this.commandManager.registerCommand(new OntimeCommand());
+        this.commandManager.registerCommand(new PianoCommand());
+        this.commandManager.registerCommand(new RulesCommand());
+        this.commandManager.registerCommand(new UtilCommand());
 
-        commandManager.enableUnstableAPI("help");
+        this.commandManager.enableUnstableAPI("help");
 
-        commandManager.getCommandConditions().addCondition(Integer.class, "limits", (context, executionContext, value) -> {
+        this.commandManager.getCommandConditions().addCondition(Integer.class, "limits", (context, executionContext, value) -> {
             if (value == null) {
                 return;
             }
@@ -95,20 +111,41 @@ public final class TFCPlugin extends JavaPlugin {
         });
     }
 
-    private boolean setUpLuckPermsApi() {
+    private boolean setupLuckPermsApi() {
         RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
         if (provider == null) {
             return false;
         }
-        luckPermsApi = provider.getProvider();
+        this.luckPermsApi = provider.getProvider();
         return true;
     }
 
     public PaperCommandManager getCommandManager() {
-        return commandManager;
+        return this.commandManager;
     }
 
     public LuckPerms getLuckPermsApi() {
-        return luckPermsApi;
+        return this.luckPermsApi;
+    }
+
+    public BoosterManager getBoosterManager() {
+        if (this.boosterManager == null) {
+            this.boosterManager = new BoosterManager();
+        }
+        return this.boosterManager;
+    }
+
+    public UserManager getPlayerDataManager() {
+        if (this.playerDataManager == null) {
+            this.playerDataManager = new UserManager();
+        }
+        return this.playerDataManager;
+    }
+
+    public ConfigManager getConfigManager() {
+        if (this.configManager == null) {
+            this.configManager = new ConfigManager(this);
+        }
+        return this.configManager;
     }
 }

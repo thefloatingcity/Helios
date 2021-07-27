@@ -1,4 +1,4 @@
-package xyz.tehbrian.tfcplugin.managers;
+package xyz.tehbrian.tfcplugin;
 
 import org.bukkit.Sound;
 
@@ -22,11 +22,11 @@ public enum PianoSound {
 
     private final Sound sound;
 
-    PianoSound(Sound sound) {
+    PianoSound(final Sound sound) {
         this.sound = sound;
     }
 
     public Sound toSound() {
-        return sound;
+        return this.sound;
     }
 }

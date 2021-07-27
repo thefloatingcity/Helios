@@ -16,7 +16,7 @@ public class LuckPermsUtils {
 
     private LuckPermsUtils() {}
 
-    public static String getPlayerPrefix(Player player) {
+    public static String getPlayerPrefix(final Player player) {
         User user = Objects.requireNonNull(luckPerms.getUserManager().getUser(player.getUniqueId()));
 
         QueryOptions queryOptions = luckPerms.getContextManager().getQueryOptions(player);
@@ -25,7 +25,7 @@ public class LuckPermsUtils {
         return metaData.getPrefix() == null ? "" : metaData.getPrefix();
     }
 
-    public static String getPlayerSuffix(Player player) {
+    public static String getPlayerSuffix(final Player player) {
         User user = Objects.requireNonNull(luckPerms.getUserManager().getUser(player.getUniqueId()));
 
         QueryOptions queryOptions = luckPerms.getContextManager().getQueryOptions(player);
@@ -34,7 +34,7 @@ public class LuckPermsUtils {
         return metaData.getSuffix() == null ? "" : metaData.getSuffix();
     }
 
-    public static void addPlayerGroup(Player player, String group) {
+    public static void addPlayerGroup(final Player player, final String group) {
         User user = Objects.requireNonNull(luckPerms.getUserManager().getUser(player.getUniqueId()));
 
         user.data().add(InheritanceNode.builder(group).build());

@@ -18,7 +18,7 @@ import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 public class RulesCommand extends BaseCommand {
 
     @Default
-    public void onRules(CommandSender sender, @Default("1") @Conditions("limits:min=1,max=9") Integer page) {
+    public void onRules(final CommandSender sender, @Default("1") @Conditions("limits:min=1,max=9") final Integer page) {
         for (String line : ConfigUtils.getPage("books.rules", page)) {
             sender.sendMessage(line);
         }
@@ -27,12 +27,12 @@ public class RulesCommand extends BaseCommand {
     @Subcommand("accept")
     @CommandAlias("acceptrules")
     @Description("Accept the rules and get building permissions!")
-    public void onAccept(Player player) {
+    public void onAccept(final Player player) {
         if (player.hasPermission("tfcplugin.build")) {
-            player.sendMessage(new MsgBuilder().prefixKey("infixes.rules.prefix").msgKey("msg.rules.already_accepted").build());
+            player.sendMessage(new MsgBuilder().prefixKey("prefixes.rules.prefix").msgKey("msg.rules.already_accepted").build());
         } else {
             LuckPermsUtils.addPlayerGroup(player, "passenger");
-            player.sendMessage(new MsgBuilder().prefixKey("infixes.rules.prefix").msgKey("msg.rules.accept").build());
+            player.sendMessage(new MsgBuilder().prefixKey("prefixes.rules.prefix").msgKey("msg.rules.accept").build());
         }
     }
 }

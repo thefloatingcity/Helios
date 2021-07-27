@@ -27,7 +27,7 @@ public class ActionCommand extends BaseCommand {
 
     private final TFCPlugin main;
 
-    public ActionCommand(TFCPlugin main) {
+    public ActionCommand(final TFCPlugin main) {
         this.main = main;
     }
 
@@ -35,16 +35,16 @@ public class ActionCommand extends BaseCommand {
     @CommandPermission("tfcplugin.action.launch")
     @Description("Like a rocket!")
     @CommandCompletion("@player")
-    public void onLaunch(Player player, @Optional @CommandPermission("tfcplugin.action.launchother") OnlinePlayer target) {
+    public void onLaunch(final Player player, @Optional @CommandPermission("tfcplugin.action.launchother") final OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
         targetPlayer.setVelocity(new Vector(0, 10, 0));
         targetPlayer.getWorld().playSound(targetPlayer.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
 
         if (target == null) {
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.launch_self").formats(player.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.launch_self").formats(player.getDisplayName()).build());
         } else {
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.launch_other").formats(player.getDisplayName(), targetPlayer.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.launch_other").formats(player.getDisplayName(), targetPlayer.getDisplayName()).build());
         }
     }
 
@@ -52,32 +52,32 @@ public class ActionCommand extends BaseCommand {
     @CommandPermission("tfcplugin.action.boost")
     @Description("Gives you a case of the zoomies.")
     @CommandCompletion("@players")
-    public void onBoost(Player player, @Optional @CommandPermission("tfcplugin.action.boostother") OnlinePlayer target) {
+    public void onBoost(final Player player, @Optional @CommandPermission("tfcplugin.action.boostother") final OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
         targetPlayer.setVelocity(targetPlayer.getLocation().getDirection().multiply(3));
         targetPlayer.getWorld().playSound(targetPlayer.getEyeLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
 
         if (target == null) {
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.boost_self").formats(player.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.boost_self").formats(player.getDisplayName()).build());
         } else {
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.boost_other").formats(player.getDisplayName(), targetPlayer.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.boost_other").formats(player.getDisplayName(), targetPlayer.getDisplayName()).build());
         }
     }
 
     @CommandAlias("zap")
     @CommandPermission("tfcplugin.action.zap")
-    @Description("Kentucky Fried Player.")
+    @Description("Kentucky Fried Player")
     @CommandCompletion("@players")
-    public void onZap(Player player, @Optional @CommandPermission("tfcplugin.action.zapother") OnlinePlayer target) {
+    public void onZap(final Player player, @Optional @CommandPermission("tfcplugin.action.zapother") final OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
         targetPlayer.getWorld().strikeLightning(targetPlayer.getLocation());
 
         if (target == null) {
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.zap_self").formats(player.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.zap_self").formats(player.getDisplayName()).build());
         } else {
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.zap_other").formats(player.getDisplayName(), targetPlayer.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.zap_other").formats(player.getDisplayName(), targetPlayer.getDisplayName()).build());
         }
     }
 
@@ -85,13 +85,13 @@ public class ActionCommand extends BaseCommand {
     @CommandPermission("tfcplugin.action.poke")
     @Description("Useful for annoying others.")
     @CommandCompletion("@players")
-    public void onPoke(Player player, @Optional @CommandPermission("tfcplugin.action.pokeother") OnlinePlayer target) {
+    public void onPoke(final Player player, @Optional @CommandPermission("tfcplugin.action.pokeother") final OnlinePlayer target) {
         Player targetPlayer = target == null ? player : target.getPlayer();
 
-        double maxY = main.getConfig().getDouble("poke_force.maxY");
-        double minY = main.getConfig().getDouble("poke_force.minY");
-        double maxXZ = main.getConfig().getDouble("poke_force.maxXZ");
-        double minXZ = main.getConfig().getDouble("poke_force.minXZ");
+        double maxY = this.main.getConfig().getDouble("poke_force.maxY");
+        double minY = this.main.getConfig().getDouble("poke_force.minY");
+        double maxXZ = this.main.getConfig().getDouble("poke_force.maxXZ");
+        double minXZ = this.main.getConfig().getDouble("poke_force.minXZ");
         Random random = new Random();
         double randX = minXZ + random.nextDouble() * (maxXZ - minXZ);
         double randY = minY + random.nextDouble() * (maxY - minY);
@@ -101,14 +101,14 @@ public class ActionCommand extends BaseCommand {
         targetPlayer.setVelocity(randomVector);
 
         if (target == null) {
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.poke_self").formats(player.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.poke_self").formats(player.getDisplayName()).build());
         } else {
-            Bukkit.broadcastMessage(new MsgBuilder().def("msg.action.poke_other").formats(player.getDisplayName(), targetPlayer.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.poke_other").formats(player.getDisplayName(), targetPlayer.getDisplayName()).build());
         }
     }
 
     @HelpCommand
-    public void onHelp(CommandSender sender, CommandHelp help) {
+    public void onHelp(final CommandSender sender, final CommandHelp help) {
         help.showHelp();
     }
 }
