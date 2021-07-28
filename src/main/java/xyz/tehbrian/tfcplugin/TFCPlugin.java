@@ -47,7 +47,7 @@ public final class TFCPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         this.setupConfig();
-        this.setupEvents();
+        this.setupListeners();
         this.setupCommands();
 
         if (!this.setupLuckPermsApi()) {
@@ -65,7 +65,7 @@ public final class TFCPlugin extends JavaPlugin {
         this.saveDefaultConfig();
     }
 
-    private void setupEvents() {
+    private void setupListeners() {
         final PluginManager pluginManager = this.getServer().getPluginManager();
 
         pluginManager.registerEvents(new AntiBuildListener(), this);
