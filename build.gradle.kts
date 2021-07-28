@@ -15,7 +15,6 @@ repositories {
     mavenLocal()
 
     maven {
-        name = "papermc-repo"
         url = uri("https://papermc.io/repo/repository/maven-public/")
     }
     maven {
@@ -29,13 +28,10 @@ repositories {
     maven {
         url = uri("https://repo.aikar.co/content/groups/aikar/")
     }
-    maven {
-        url = uri("https://repo.maven.apache.org/maven2/")
-    }
 }
 
 dependencies {
-    compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT")
 
     compileOnly("net.luckperms:api:5.0")
     implementation("com.google.inject:guice:5.0.1")
