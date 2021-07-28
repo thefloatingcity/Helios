@@ -23,7 +23,6 @@ import xyz.tehbrian.tfcplugin.listeners.AntiBuildListener;
 import xyz.tehbrian.tfcplugin.listeners.BoosterListener;
 import xyz.tehbrian.tfcplugin.listeners.ChatListener;
 import xyz.tehbrian.tfcplugin.listeners.FlightListener;
-import xyz.tehbrian.tfcplugin.listeners.OptionsListener;
 import xyz.tehbrian.tfcplugin.listeners.PianoListener;
 import xyz.tehbrian.tfcplugin.listeners.PlayerListener;
 import xyz.tehbrian.tfcplugin.listeners.VoidLoopListener;
@@ -76,7 +75,6 @@ public final class TFCPlugin extends JavaPlugin {
         pluginManager.registerEvents(new BoosterListener(this), this);
         pluginManager.registerEvents(new ChatListener(this), this);
         pluginManager.registerEvents(new FlightListener(), this);
-        pluginManager.registerEvents(new OptionsListener(this), this);
         pluginManager.registerEvents(new PianoListener(this), this);
         pluginManager.registerEvents(new PlayerListener(this), this);
         pluginManager.registerEvents(new VoidLoopListener(this), this);
