@@ -7,7 +7,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import xyz.tehbrian.tfcplugin.booster.BoosterManager;
 import xyz.tehbrian.tfcplugin.commands.ActionCommand;
 import xyz.tehbrian.tfcplugin.commands.BoosterCommand;
 import xyz.tehbrian.tfcplugin.commands.CoreCommand;
@@ -20,7 +19,6 @@ import xyz.tehbrian.tfcplugin.commands.RulesCommand;
 import xyz.tehbrian.tfcplugin.commands.UtilCommand;
 import xyz.tehbrian.tfcplugin.config.ConfigManager;
 import xyz.tehbrian.tfcplugin.listeners.AntiBuildListener;
-import xyz.tehbrian.tfcplugin.listeners.BoosterListener;
 import xyz.tehbrian.tfcplugin.listeners.ChatListener;
 import xyz.tehbrian.tfcplugin.listeners.FlightListener;
 import xyz.tehbrian.tfcplugin.listeners.PianoListener;
@@ -36,7 +34,6 @@ public final class TFCPlugin extends JavaPlugin {
     private PaperCommandManager commandManager;
     private UserManager playerDataManager;
 
-    private BoosterManager boosterManager;
     private ConfigManager configManager;
 
     public TFCPlugin() {
@@ -72,7 +69,6 @@ public final class TFCPlugin extends JavaPlugin {
         final PluginManager pluginManager = this.getServer().getPluginManager();
 
         pluginManager.registerEvents(new AntiBuildListener(), this);
-        pluginManager.registerEvents(new BoosterListener(this), this);
         pluginManager.registerEvents(new ChatListener(this), this);
         pluginManager.registerEvents(new FlightListener(), this);
         pluginManager.registerEvents(new PianoListener(this), this);
@@ -124,13 +120,6 @@ public final class TFCPlugin extends JavaPlugin {
 
     public LuckPerms getLuckPermsApi() {
         return this.luckPermsApi;
-    }
-
-    public BoosterManager getBoosterManager() {
-        if (this.boosterManager == null) {
-            this.boosterManager = new BoosterManager();
-        }
-        return this.boosterManager;
     }
 
     public UserManager getPlayerDataManager() {
