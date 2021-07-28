@@ -33,7 +33,7 @@ public class PianoCommand extends BaseCommand {
     @Description("Pick your instrument!")
     @CommandCompletion("*")
     public void onInstrument(final Player player, final PianoSound pianoSound) {
-        TFCPlugin.getInstance().getPlayerDataManager().getUser(player).setPianoSound(pianoSound);
+        TFCPlugin.getInstance().getUserManager().getUser(player).setPianoSound(pianoSound);
         player.sendMessage(new MsgBuilder()
                 .prefixKey("prefixes.piano.prefix")
                 .msgKey("msg.piano.instrument_change")
@@ -44,7 +44,7 @@ public class PianoCommand extends BaseCommand {
     @Subcommand("toggle")
     @Description("Toggle your piano on and off.")
     public void onToggle(final Player player) {
-        if (TFCPlugin.getInstance().getPlayerDataManager().getUser(player).togglePianoEnabled()) {
+        if (TFCPlugin.getInstance().getUserManager().getUser(player).togglePianoEnabled()) {
             player.sendMessage(new MsgBuilder().prefixKey("prefixes.piano.prefix").msgKey("msg.piano.enabled").build());
         } else {
             player.sendMessage(new MsgBuilder().prefixKey("prefixes.piano.prefix").msgKey("msg.piano.disabled").build());

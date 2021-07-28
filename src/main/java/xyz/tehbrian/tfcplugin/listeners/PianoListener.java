@@ -28,7 +28,7 @@ public class PianoListener implements Listener {
         if (!player.hasPermission("tfcplugin.piano")) {
             return;
         }
-        if (!this.main.getPlayerDataManager().getUser(player).hasPianoEnabled()) {
+        if (!this.main.getUserManager().getUser(player).hasPianoEnabled()) {
             return;
         }
 
@@ -80,7 +80,7 @@ public class PianoListener implements Listener {
 
         player.getWorld().playSound(
                 player.getEyeLocation(),
-                this.main.getPlayerDataManager().getUser(player).getPianoSound().toSound(),
+                this.main.getUserManager().getUser(player).getPianoSound().toSound(),
                 SoundCategory.MASTER,
                 3,
                 Float.parseFloat(item.getLore().get(2))

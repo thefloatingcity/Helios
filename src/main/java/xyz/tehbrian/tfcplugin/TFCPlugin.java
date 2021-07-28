@@ -32,7 +32,7 @@ public final class TFCPlugin extends JavaPlugin {
 
     private LuckPerms luckPermsApi;
     private PaperCommandManager commandManager;
-    private UserManager playerDataManager;
+    private UserManager userManager;
 
     private ConfigManager configManager;
 
@@ -122,11 +122,11 @@ public final class TFCPlugin extends JavaPlugin {
         return this.luckPermsApi;
     }
 
-    public UserManager getPlayerDataManager() {
-        if (this.playerDataManager == null) {
-            this.playerDataManager = new UserManager();
+    public UserManager getUserManager() {
+        if (this.userManager == null) {
+            this.userManager = new UserManager();
         }
-        return this.playerDataManager;
+        return this.userManager;
     }
 
     public ConfigManager getConfigManager() {
