@@ -8,16 +8,16 @@ import org.jetbrains.annotations.NotNull;
 import java.nio.file.Path;
 
 /**
- * Loads and holds values for {@code books.yml}.
+ * Loads and holds values for {@code inventories.yml}.
  */
-public final class BooksConfig extends AbstractRawHoconConfig {
+public final class InventoriesConfig extends AbstractRawHoconConfig {
 
     @Inject
-    public BooksConfig(
+    public InventoriesConfig(
             final @NotNull Logger logger,
             final @NotNull @Named("dataFolder") Path dataFolder
     ) {
-        super(logger, dataFolder.resolve("books.yml"));
+        super(logger, dataFolder.resolve("inventories.yml"));
     }
 
 }

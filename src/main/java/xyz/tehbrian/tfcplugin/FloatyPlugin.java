@@ -14,7 +14,10 @@ import xyz.tehbrian.tfcplugin.commands.OntimeCommand;
 import xyz.tehbrian.tfcplugin.commands.PianoCommand;
 import xyz.tehbrian.tfcplugin.commands.RulesCommand;
 import xyz.tehbrian.tfcplugin.commands.UtilCommand;
+import xyz.tehbrian.tfcplugin.config.BooksConfig;
 import xyz.tehbrian.tfcplugin.config.ConfigConfig;
+import xyz.tehbrian.tfcplugin.config.EmotesConfig;
+import xyz.tehbrian.tfcplugin.config.InventoriesConfig;
 import xyz.tehbrian.tfcplugin.config.LangConfig;
 import xyz.tehbrian.tfcplugin.inject.ConfigModule;
 import xyz.tehbrian.tfcplugin.inject.PluginModule;
@@ -63,13 +66,16 @@ public final class FloatyPlugin extends TehPlugin {
         this.setupCommands();
 
         if (!this.injector.getInstance(LuckPermsService.class).load()) {
-            this.getLogger().severe("No LuckPerms dependency found! Disabling plugin..");
+            this.getLogger().severe("No LuckPerms dependency found. Disabling plugin.");
             this.disableSelf();
         }
     }
 
     public void loadConfigs() {
+        this.injector.getInstance(BooksConfig.class).load();
         this.injector.getInstance(ConfigConfig.class).load();
+        this.injector.getInstance(EmotesConfig.class).load();
+        this.injector.getInstance(InventoriesConfig.class).load();
         this.injector.getInstance(LangConfig.class).load();
     }
 

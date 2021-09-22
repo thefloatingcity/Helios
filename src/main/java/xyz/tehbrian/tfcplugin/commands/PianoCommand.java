@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import xyz.tehbrian.tfcplugin.config.BooksConfig;
 import xyz.tehbrian.tfcplugin.piano.Instrument;
-import xyz.tehbrian.tfcplugin.piano.PianoMenuGui;
+import xyz.tehbrian.tfcplugin.piano.PianoMenuProvider;
 import xyz.tehbrian.tfcplugin.user.UserService;
 import xyz.tehbrian.tfcplugin.util.MsgBuilder;
 
@@ -25,20 +25,23 @@ import xyz.tehbrian.tfcplugin.util.MsgBuilder;
 public class PianoCommand extends BaseCommand {
 
     private final UserService userService;
+    private final PianoMenuProvider pianoMenuProvider;
     private final BooksConfig booksConfig;
 
     public PianoCommand(
             final @NonNull UserService userService,
+            final @NonNull PianoMenuProvider pianoMenuProvider,
             final @NonNull BooksConfig booksConfig
     ) {
         this.userService = userService;
+        this.pianoMenuProvider = pianoMenuProvider;
         this.booksConfig = booksConfig;
     }
 
     @Subcommand("menu")
     @Description("Pick your notes!")
     public void onMenu(final Player player) {
-        PianoMenuGui.generate().show(player);
+        this.pianoMenuProvider.generate().show(player);
     }
 
     @Subcommand("instrument")
