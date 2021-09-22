@@ -7,24 +7,19 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.Inventory;
-import xyz.tehbrian.tfcplugin.TFCPlugin;
-import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
+import org.spongepowered.configurate.CommentedConfigurationNode;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ConfigUtils {
+public class ConfigDeserializers {
 
-    private static final TFCPlugin main = TFCPlugin.getInstance();
-
-    private ConfigUtils() {
+    private ConfigDeserializers() {
     }
 
-    public static List<String> getPage(final String configKey, final Integer pageNumber) {
-        final ConfigurationSection book = main.getConfig().getConfigurationSection(configKey);
+    public static List<String> deserializePage(final ConfigurationSection book, final Integer pageNumber) {
         final ConfigurationSection pages = Objects.requireNonNull(book).getConfigurationSection("pages");
         final ConfigurationSection page = Objects.requireNonNull(pages).getConfigurationSection(pageNumber.toString());
         final List<String> messages = new ArrayList<>();
@@ -46,13 +41,12 @@ public class ConfigUtils {
         return messages;
     }
 
-    public static Inventory getInventory(final String configKey) {
-        final ConfigurationSection invConfigSection = main.getConfig().getConfigurationSection(configKey);
-        final ConfigurationSection items = Objects.requireNonNull(invConfigSection).getConfigurationSection("items");
+    public static Inventory deserializeInventory(final ConfigurationSection section) {
+        final ConfigurationSection items = Objects.requireNonNull(section).getConfigurationSection("items");
         final Inventory inventory = Bukkit.createInventory(
                 null,
-                invConfigSection.getInt("size"),
-                MiscUtils.color(invConfigSection.getString("name"))
+                section.getInt("size"),
+                MiscUtils.color(section.getString("name"))
         );
 
         for (final String key : Objects.requireNonNull(items).getKeys(false)) {
@@ -75,13 +69,12 @@ public class ConfigUtils {
         return inventory;
     }
 
-    public static Location getSpawn() {
-        final FileConfiguration config = main.getConfig();
+    public static Location deserializeLocation(final CommentedConfigurationNode section) {
         return new Location(
-                Bukkit.getWorld(Objects.requireNonNull(config.getString("spawn.world"))),
-                config.getDouble("spawn.x"),
-                config.getDouble("spawn.y"),
-                config.getDouble("spawn.z")
+                Bukkit.getWorld(Objects.requireNonNull(section.node("world").getString())),
+                section.node("x").getDouble(),
+                section.node("y").getDouble(),
+                section.node("z").getDouble()
         );
     }
 

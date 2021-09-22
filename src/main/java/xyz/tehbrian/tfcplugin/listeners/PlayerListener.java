@@ -9,18 +9,18 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
-import xyz.tehbrian.tfcplugin.TFCPlugin;
+import xyz.tehbrian.tfcplugin.FloatyPlugin;
 import xyz.tehbrian.tfcplugin.util.MiscUtils;
-import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
+import xyz.tehbrian.tfcplugin.util.MsgBuilder;
 
 import java.util.Calendar;
 
 @SuppressWarnings("unused")
 public class PlayerListener implements Listener {
 
-    private final TFCPlugin main;
+    private final FloatyPlugin main;
 
-    public PlayerListener(final TFCPlugin main) {
+    public PlayerListener(final FloatyPlugin main) {
         this.main = main;
     }
 

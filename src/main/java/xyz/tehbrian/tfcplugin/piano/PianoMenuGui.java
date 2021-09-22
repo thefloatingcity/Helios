@@ -1,4 +1,4 @@
-package xyz.tehbrian.tfcplugin.guis;
+package xyz.tehbrian.tfcplugin.piano;
 
 import broccolai.corn.paper.item.PaperItemBuilder;
 import com.github.stefvanschie.inventoryframework.Gui;
@@ -8,7 +8,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
-import xyz.tehbrian.tfcplugin.TFCPlugin;
+import xyz.tehbrian.tfcplugin.FloatyPlugin;
 
 import java.util.Objects;
 
@@ -18,13 +18,13 @@ public class PianoMenuGui {
     }
 
     public static Gui generate() {
-        final ConfigurationSection invConfigSection = TFCPlugin
+        final ConfigurationSection invConfigSection = FloatyPlugin
                 .getInstance()
                 .getConfig()
                 .getConfigurationSection("inventories.piano_notes");
         final ConfigurationSection items = Objects.requireNonNull(invConfigSection).getConfigurationSection("items");
 
-        final Gui gui = new Gui(TFCPlugin.getInstance(), 3, Objects.requireNonNull(invConfigSection.getString("name")));
+        final Gui gui = new Gui(FloatyPlugin.getInstance(), 3, Objects.requireNonNull(invConfigSection.getString("name")));
         final OutlinePane pane = new OutlinePane(0, 0, 9, 3);
 
         for (final String key : Objects.requireNonNull(items).getKeys(false)) {

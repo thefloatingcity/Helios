@@ -1,91 +1,58 @@
 package xyz.tehbrian.tfcplugin.user;
 
+import dev.tehbrian.tehlib.paper.user.PaperUser;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import xyz.tehbrian.tfcplugin.PianoSound;
-import xyz.tehbrian.tfcplugin.TFCPlugin;
+import xyz.tehbrian.tfcplugin.piano.Instrument;
 
 import java.util.UUID;
 
-public class User {
-
-    private final UUID uuid;
+public class User extends PaperUser {
 
     private boolean flyBypassEnabled = false;
     private boolean pianoEnabled = false;
-
-    private PianoSound pianoSound = PianoSound.HARP;
+    private Instrument instrument = Instrument.HARP;
 
     public User(final UUID uuid) {
-        this.uuid = uuid;
-    }
-
-    public UUID getUuid() {
-        return this.uuid;
+        super(uuid);
     }
 
     public Player getPlayer() {
         return Bukkit.getPlayer(this.uuid);
     }
 
-    public boolean hasFlyBypassEnabled() {
+    public boolean flyBypassEnabled() {
         return this.flyBypassEnabled;
     }
 
-    public void setFlyBypassEnabled(final boolean flyBypassEnabled) {
+    public void flyBypassEnabled(final boolean flyBypassEnabled) {
         this.flyBypassEnabled = flyBypassEnabled;
-
-        if (this.hasFlyBypassEnabled()) {
-            this.enableFlight();
-        } else {
-            this.disableFlight();
-        }
     }
 
     public boolean toggleFlyBypassEnabled() {
-        this.setFlyBypassEnabled(!this.hasFlyBypassEnabled());
-        return this.hasFlyBypassEnabled();
+        this.flyBypassEnabled(!this.flyBypassEnabled());
+        return this.flyBypassEnabled();
     }
 
-    public void enableFlight() {
-        final Player player = this.getPlayer();
-        if (player.hasPermission("tfcplugin.core.fly") && this.hasFlyBypassEnabled()) {
-            Bukkit.getScheduler().runTask(TFCPlugin.getInstance(), () -> {
-                player.setAllowFlight(true);
-                player.setFlying(true);
-            });
-        }
-    }
-
-    public void disableFlight() {
-        final Player player = this.getPlayer();
-        if (!player.hasPermission("tfcplugin.core.fly") || !this.hasFlyBypassEnabled()) {
-            Bukkit.getScheduler().runTask(TFCPlugin.getInstance(), () -> {
-                player.setAllowFlight(false);
-                player.setFlying(false);
-            });
-        }
-    }
-
-    public boolean hasPianoEnabled() {
+    public boolean pianoEnabled() {
         return this.pianoEnabled;
     }
 
-    public void setPianoEnabled(final boolean pianoEnabled) {
+    public void pianoEnabled(final boolean pianoEnabled) {
         this.pianoEnabled = pianoEnabled;
     }
 
     public boolean togglePianoEnabled() {
-        this.setPianoEnabled(!this.hasPianoEnabled());
-        return this.hasPianoEnabled();
+        this.pianoEnabled(!this.pianoEnabled());
+        return this.pianoEnabled();
     }
 
-    public PianoSound getPianoSound() {
-        return this.pianoSound;
+    public Instrument instrument() {
+        return this.instrument;
     }
 
-    public void setPianoSound(final PianoSound pianoSound) {
-        this.pianoSound = pianoSound;
+    public void instrument(final Instrument instrument) {
+        this.instrument = instrument;
     }
 
 }

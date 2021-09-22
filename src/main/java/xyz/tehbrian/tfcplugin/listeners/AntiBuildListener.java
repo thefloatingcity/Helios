@@ -19,7 +19,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
+import xyz.tehbrian.tfcplugin.util.MsgBuilder;
 
 import java.util.Objects;
 

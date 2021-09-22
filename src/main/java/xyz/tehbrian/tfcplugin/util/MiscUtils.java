@@ -1,7 +1,6 @@
 package xyz.tehbrian.tfcplugin.util;
 
 import org.bukkit.ChatColor;
-import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 
 public class MiscUtils {
 

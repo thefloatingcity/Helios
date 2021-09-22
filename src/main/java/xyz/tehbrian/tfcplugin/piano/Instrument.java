@@ -1,8 +1,8 @@
-package xyz.tehbrian.tfcplugin;
+package xyz.tehbrian.tfcplugin.piano;
 
 import org.bukkit.Sound;
 
-public enum PianoSound {
+public enum Instrument {
     BANJO(Sound.BLOCK_NOTE_BLOCK_BANJO),
     BASEDRUM(Sound.BLOCK_NOTE_BLOCK_BASEDRUM),
     BASS(Sound.BLOCK_NOTE_BLOCK_BASS),
@@ -22,11 +22,11 @@ public enum PianoSound {
 
     private final Sound sound;
 
-    PianoSound(final Sound sound) {
+    Instrument(final Sound sound) {
         this.sound = sound;
     }
 
-    public Sound toSound() {
+    public Sound asBukkitSound() {
         return this.sound;
     }
 }

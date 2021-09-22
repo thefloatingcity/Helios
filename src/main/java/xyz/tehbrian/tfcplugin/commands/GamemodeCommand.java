@@ -12,7 +12,7 @@ import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
+import xyz.tehbrian.tfcplugin.util.MsgBuilder;
 
 @SuppressWarnings("unused")
 @CommandAlias("gm|gamemode")

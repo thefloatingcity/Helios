@@ -10,7 +10,7 @@ import co.aikar.commands.annotation.Optional;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
+import xyz.tehbrian.tfcplugin.util.MsgBuilder;
 
 @SuppressWarnings("unused")
 @CommandAlias("emote|emotes")

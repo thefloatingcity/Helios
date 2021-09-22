@@ -15,19 +15,19 @@ import org.bukkit.SoundCategory;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-import xyz.tehbrian.tfcplugin.TFCPlugin;
-import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
+import xyz.tehbrian.tfcplugin.FloatyPlugin;
+import xyz.tehbrian.tfcplugin.util.MsgBuilder;
 
 import java.util.Random;
 
 @SuppressWarnings("unused")
 @CommandAlias("action|actions")
 @Description("Various world-changing actions.")
-public class ActionCommand extends BaseCommand {
+public class ActCommand extends BaseCommand {
 
-    private final TFCPlugin main;
+    private final FloatyPlugin main;
 
-    public ActionCommand(final TFCPlugin main) {
+    public ActCommand(final FloatyPlugin main) {
         this.main = main;
     }
 

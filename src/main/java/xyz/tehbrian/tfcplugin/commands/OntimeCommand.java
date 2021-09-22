@@ -10,7 +10,7 @@ import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
 import xyz.tehbrian.tfcplugin.util.MiscUtils;
-import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
+import xyz.tehbrian.tfcplugin.util.MsgBuilder;
 
 @SuppressWarnings("unused")
 @CommandAlias("ontime")

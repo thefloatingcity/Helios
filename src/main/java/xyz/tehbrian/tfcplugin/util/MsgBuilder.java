@@ -1,8 +1,7 @@
-package xyz.tehbrian.tfcplugin.util.msg;
+package xyz.tehbrian.tfcplugin.util;
 
 import org.bukkit.configuration.file.FileConfiguration;
-import xyz.tehbrian.tfcplugin.TFCPlugin;
-import xyz.tehbrian.tfcplugin.util.MiscUtils;
+import xyz.tehbrian.tfcplugin.FloatyPlugin;
 
 public class MsgBuilder {
 
@@ -44,7 +43,7 @@ public class MsgBuilder {
     }
 
     public String build() {
-        final FileConfiguration config = TFCPlugin.getInstance().getConfig();
+        final FileConfiguration config = FloatyPlugin.getInstance().getConfig();
         final StringBuilder sb = new StringBuilder();
 
         if (this.prefixKey != null) {

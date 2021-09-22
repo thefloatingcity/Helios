@@ -8,27 +8,26 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
-import xyz.tehbrian.tfcplugin.TFCPlugin;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import xyz.tehbrian.tfcplugin.user.UserService;
 
 import java.util.Objects;
 
 @SuppressWarnings("unused")
 public class PianoListener implements Listener {
 
-    private final TFCPlugin main;
+    private final UserService userService;
 
-    public PianoListener(final TFCPlugin main) {
-        this.main = main;
+    public PianoListener(final @NonNull UserService userService) {
+        this.userService = userService;
     }
 
     @EventHandler
     public void onItemHeld(final PlayerItemHeldEvent event) {
         final Player player = event.getPlayer();
 
-        if (!player.hasPermission("tfcplugin.piano")) {
-            return;
-        }
-        if (!this.main.getUserManager().getUser(player).hasPianoEnabled()) {
+        if (!player.hasPermission("tfcplugin.piano")
+                || !this.userService.getUser(player).pianoEnabled()) {
             return;
         }
 
@@ -37,21 +36,11 @@ public class PianoListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(final InventoryClickEvent event) {
-        if (!(event.getWhoClicked() instanceof Player)) {
-            return;
-        }
-        final Player player = (Player) event.getWhoClicked();
-
-        if (!player.hasPermission("tfcplugin.piano")) {
-            return;
-        }
-        if (event.getClickedInventory() == null) {
-            return;
-        }
-        if (!event.getView().getTitle().equals(this.main.getConfig().getString("inventories.piano_notes.name"))) {
-            return;
-        }
-        if (!event.isRightClick()) {
+        if (!(event.getWhoClicked() instanceof final Player player)
+                || !player.hasPermission("tfcplugin.piano")
+                || event.getClickedInventory() == null
+                //|| !event.getView().title().equals(this.main.getConfig().getString("inventories.piano_notes.name"))
+                || !event.isRightClick()) {
             return;
         }
 
@@ -80,7 +69,7 @@ public class PianoListener implements Listener {
 
         player.getWorld().playSound(
                 player.getEyeLocation(),
-                this.main.getUserManager().getUser(player).getPianoSound().toSound(),
+                this.userService.getUser(player).instrument().asBukkitSound(),
                 SoundCategory.MASTER,
                 3,
                 Float.parseFloat(item.getLore().get(2))

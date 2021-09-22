@@ -44,6 +44,7 @@ dependencies {
     implementation("co.aikar:acf-paper:0.5.0-SNAPSHOT")
 
     implementation("broccolai.corn:corn-minecraft-paper:3.0.0-SNAPSHOT")
+    implementation("dev.tehbrian:tehlib-paper:0.1.0-SNAPSHOT")
 }
 
 tasks {
