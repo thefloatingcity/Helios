@@ -45,7 +45,7 @@ public class PianoCommand extends BaseCommand {
     @Description("Pick your instrument!")
     @CommandCompletion("*")
     public void onInstrument(final Player player, final Instrument pianoSound) {
-        this.userService.getUser(player).instrument(pianoSound);
+        this.userService.getUser(player).piano().instrument(pianoSound);
         player.sendMessage(new MsgBuilder()
                 .prefixKey("prefixes.piano.prefix")
                 .msgKey("msg.piano.instrument_change")
@@ -56,7 +56,7 @@ public class PianoCommand extends BaseCommand {
     @Subcommand("toggle")
     @Description("Toggle your piano on and off.")
     public void onToggle(final Player player) {
-        if (this.userService.getUser(player).togglePianoEnabled()) {
+        if (this.userService.getUser(player).piano().toggleEnabled()) {
             player.sendMessage(new MsgBuilder().prefixKey("prefixes.piano.prefix").msgKey("msg.piano.enabled").build());
         } else {
             player.sendMessage(new MsgBuilder().prefixKey("prefixes.piano.prefix").msgKey("msg.piano.disabled").build());

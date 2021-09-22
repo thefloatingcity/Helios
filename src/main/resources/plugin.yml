@@ -4,7 +4,7 @@ authors: [ TehBrian ]
 website: https://github.com/thefloatingcity/TFCPlugin
 
 version: ${version}
-main: xyz.tehbrian.tfcplugin.TFCPlugin
+main: xyz.tehbrian.tfcplugin.FloatyPlugin
 api-version: 1.17
 
 permissions:

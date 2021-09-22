@@ -27,7 +27,7 @@ public class PianoListener implements Listener {
         final Player player = event.getPlayer();
 
         if (!player.hasPermission("tfcplugin.piano")
-                || !this.userService.getUser(player).pianoEnabled()) {
+                || !this.userService.getUser(player).piano().enabled()) {
             return;
         }
 
@@ -69,7 +69,7 @@ public class PianoListener implements Listener {
 
         player.getWorld().playSound(
                 player.getEyeLocation(),
-                this.userService.getUser(player).instrument().asBukkitSound(),
+                this.userService.getUser(player).piano().instrument().asBukkitSound(),
                 SoundCategory.MASTER,
                 3,
                 Float.parseFloat(item.getLore().get(2))

@@ -3,15 +3,15 @@ package xyz.tehbrian.tfcplugin.user;
 import dev.tehbrian.tehlib.paper.user.PaperUser;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import xyz.tehbrian.tfcplugin.piano.Instrument;
 
 import java.util.UUID;
 
 public class User extends PaperUser {
 
+    private final @NonNull Piano piano = new Piano(false, Instrument.HARP);
     private boolean flyBypassEnabled = false;
-    private boolean pianoEnabled = false;
-    private Instrument instrument = Instrument.HARP;
 
     public User(final UUID uuid) {
         super(uuid);
@@ -34,25 +34,44 @@ public class User extends PaperUser {
         return this.flyBypassEnabled();
     }
 
-    public boolean pianoEnabled() {
-        return this.pianoEnabled;
+    public @NonNull Piano piano() {
+        return piano;
     }
 
-    public void pianoEnabled(final boolean pianoEnabled) {
-        this.pianoEnabled = pianoEnabled;
-    }
+    public static class Piano {
 
-    public boolean togglePianoEnabled() {
-        this.pianoEnabled(!this.pianoEnabled());
-        return this.pianoEnabled();
-    }
+        private boolean enabled;
+        private Instrument instrument;
 
-    public Instrument instrument() {
-        return this.instrument;
-    }
+        public Piano(
+                final boolean enabled,
+                final Instrument instrument
+        ) {
+            this.enabled = enabled;
+            this.instrument = instrument;
+        }
 
-    public void instrument(final Instrument instrument) {
-        this.instrument = instrument;
+        public boolean enabled() {
+            return this.enabled;
+        }
+
+        public void enabled(final boolean enabled) {
+            this.enabled = enabled;
+        }
+
+        public boolean toggleEnabled() {
+            this.enabled(!this.enabled());
+            return this.enabled();
+        }
+
+        public Instrument instrument() {
+            return this.instrument;
+        }
+
+        public void instrument(final Instrument instrument) {
+            this.instrument = instrument;
+        }
+
     }
 
 }
