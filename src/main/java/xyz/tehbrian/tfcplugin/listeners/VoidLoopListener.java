@@ -10,22 +10,26 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.tfcplugin.FloatyPlugin;
 import xyz.tehbrian.tfcplugin.config.ConfigConfig;
-import xyz.tehbrian.tfcplugin.util.MsgBuilder;
+import xyz.tehbrian.tfcplugin.config.LangConfig;
 
 @SuppressWarnings("unused")
 public class VoidLoopListener implements Listener {
 
     private final FloatyPlugin floatyPlugin;
     private final ConfigConfig configConfig;
+    private final LangConfig langConfig;
 
     public VoidLoopListener(
             final @NonNull FloatyPlugin floatyPlugin,
-            final @NonNull ConfigConfig configConfig
+            final @NonNull ConfigConfig configConfig,
+            final @NonNull LangConfig langConfig
     ) {
         this.floatyPlugin = floatyPlugin;
         this.configConfig = configConfig;
+        this.langConfig = langConfig;
     }
 
     @EventHandler
@@ -52,7 +56,7 @@ public class VoidLoopListener implements Listener {
             }
 
             if (player.getFallDistance() >= 3000) {
-                player.sendMessage(new MsgBuilder().prefixKey("prefixes.warper.prefix").msgKey("msg.warp.max").build());
+                player.sendMessage(this.langConfig.c(NodePath.path("warp", "max")));
                 player.setFallDistance(0);
                 player.teleport(configConfig.spawn());
                 player.getWorld().strikeLightningEffect(configConfig.spawn());
@@ -65,9 +69,9 @@ public class VoidLoopListener implements Listener {
                         1
                 );
             } else if (player.getFallDistance() >= 2000) {
-                player.sendMessage(new MsgBuilder().prefixKey("prefixes.warper.prefix").msgKey("msg.warp.second").build());
+                player.sendMessage(this.langConfig.c(NodePath.path("warp", "second")));
             } else if (player.getFallDistance() >= 1000) {
-                player.sendMessage(new MsgBuilder().prefixKey("prefixes.warper.prefix").msgKey("msg.warp.first").build());
+                player.sendMessage(this.langConfig.c(NodePath.path("warp", "first")));
             }
         });
     }

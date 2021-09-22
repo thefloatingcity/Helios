@@ -13,7 +13,6 @@ java {
 
 repositories {
     mavenCentral()
-    mavenLocal()
 
     maven("https://papermc.io/repo/repository/maven-public/") {
         name = "papermc"
@@ -27,8 +26,11 @@ repositories {
     maven("https://repo.broccol.ai/snapshots/") {
         name = "broccolai-snapshots"
     }
-
+    maven("https://repo.thbn.me/snapshots/") {
+        name = "thbn-snapshots"
+    }
     maven("https://repo.aikar.co/content/groups/aikar/") {
+        name = "aikar"
     }
 }
 

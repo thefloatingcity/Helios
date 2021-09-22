@@ -1,4 +1,4 @@
-package xyz.tehbrian.tfcplugin.commands;
+package xyz.tehbrian.tfcplugin.command;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;

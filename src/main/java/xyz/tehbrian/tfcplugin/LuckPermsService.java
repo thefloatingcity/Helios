@@ -5,7 +5,6 @@ import net.luckperms.api.cacheddata.CachedMetaData;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.types.InheritanceNode;
 import net.luckperms.api.query.QueryOptions;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -24,7 +23,10 @@ public class LuckPermsService {
     }
 
     public boolean load() {
-        final RegisteredServiceProvider<LuckPerms> provider = floatyPlugin.getServer().getServicesManager().getRegistration(LuckPerms.class);
+        final RegisteredServiceProvider<LuckPerms> provider = floatyPlugin
+                .getServer()
+                .getServicesManager()
+                .getRegistration(LuckPerms.class);
         if (provider == null) {
             return false;
         }

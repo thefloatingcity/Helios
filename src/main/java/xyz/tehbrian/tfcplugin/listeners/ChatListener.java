@@ -1,24 +1,14 @@
 package xyz.tehbrian.tfcplugin.listeners;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Sound;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.tfcplugin.LuckPermsService;
 import xyz.tehbrian.tfcplugin.config.LangConfig;
 import xyz.tehbrian.tfcplugin.util.MiscUtils;
-
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
 
 public class ChatListener implements Listener {
 
@@ -32,6 +22,20 @@ public class ChatListener implements Listener {
         this.langConfig = langConfig;
         this.luckPermsService = luckPermsService;
     }
+
+//    no-permission: §cI'm sorry, but you don't have permission for that command.
+//    connection-throttle: §c»§6»§e»§f Connection throttled. Please wait a moment before reconnecting. §e«§6«§c«
+//    authentication-servers-down: §4»§c»§6»§f Mojang's authentication servers seem to be down. Try joining again in a bit! §6«§c«§4«
+//    flying-player: §f»§7»§8»§f You can't fly in The Floating City! Perhaps it was a glitch, or maybe lag? §8«§7«§f«
+//    flying-vehicle: §f»§7»§8»§f You can't fly in The Floating City! Perhaps it was a glitch, or maybe lag? §8«§7«§f«
+//    whitelist: §f»§7»§8»§f You aren't whitelisted on this server! §8«§7«§f«
+//    unknown-command: §fUnrecognized command. Try §e/help§f for a list of commands.
+//    server-full: §4»§c»§6»§f The Floating City is currently full! Try joining again in a bit! §6«§c«§4«
+//    outdated-client: §1»§9»§3»§f The Floating City is running a newer version! Please use {0} §3«§9«§1«
+//    outdated-server: §1»§9»§3»§f The Floating City is running an older version! Please use {0} §3«§9«§1«
+//    restart: §9»§3»§b»§f The Floating City is restarting. Come back in a moment! §b«§3«§9«
+//    shutdown-message: §f»§7»§8»§f The Floating City has been closed. See ya soon! §8«§7«§f«
+//    motd=\u00A77                -\=[ \u00A7fThe \u00A7bFloating \u00A7aCity \u00A77]\=-\n      \u00A77Creative building in a void world with no fly.
 
     @EventHandler
     public void onChat(final AsyncChatEvent event) {

@@ -6,14 +6,14 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import dev.tehbrian.tehlib.paper.TehPlugin;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
-import xyz.tehbrian.tfcplugin.commands.ActCommand;
-import xyz.tehbrian.tfcplugin.commands.CoreCommand;
-import xyz.tehbrian.tfcplugin.commands.EmoteCommand;
-import xyz.tehbrian.tfcplugin.commands.GamemodeCommand;
-import xyz.tehbrian.tfcplugin.commands.OntimeCommand;
-import xyz.tehbrian.tfcplugin.commands.PianoCommand;
-import xyz.tehbrian.tfcplugin.commands.RulesCommand;
-import xyz.tehbrian.tfcplugin.commands.UtilCommand;
+import xyz.tehbrian.tfcplugin.command.ActCommand;
+import xyz.tehbrian.tfcplugin.command.CoreCommand;
+import xyz.tehbrian.tfcplugin.command.EmoteCommand;
+import xyz.tehbrian.tfcplugin.command.GamemodeCommand;
+import xyz.tehbrian.tfcplugin.command.OntimeCommand;
+import xyz.tehbrian.tfcplugin.command.PianoCommand;
+import xyz.tehbrian.tfcplugin.command.RulesCommand;
+import xyz.tehbrian.tfcplugin.command.UtilCommand;
 import xyz.tehbrian.tfcplugin.config.BooksConfig;
 import xyz.tehbrian.tfcplugin.config.ConfigConfig;
 import xyz.tehbrian.tfcplugin.config.EmotesConfig;
@@ -24,6 +24,7 @@ import xyz.tehbrian.tfcplugin.inject.PluginModule;
 import xyz.tehbrian.tfcplugin.inject.UserModule;
 import xyz.tehbrian.tfcplugin.listeners.AntiBuildListener;
 import xyz.tehbrian.tfcplugin.listeners.ChatListener;
+import xyz.tehbrian.tfcplugin.listeners.TransportationListener;
 import xyz.tehbrian.tfcplugin.listeners.FlightListener;
 import xyz.tehbrian.tfcplugin.listeners.PianoListener;
 import xyz.tehbrian.tfcplugin.listeners.PlayerListener;
@@ -83,6 +84,7 @@ public final class FloatyPlugin extends TehPlugin {
         registerListeners(
                 this.injector.getInstance(AntiBuildListener.class),
                 this.injector.getInstance(ChatListener.class),
+                this.injector.getInstance(TransportationListener.class),
                 this.injector.getInstance(FlightListener.class),
                 this.injector.getInstance(PianoListener.class),
                 this.injector.getInstance(PlayerListener.class),
