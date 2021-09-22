@@ -19,7 +19,7 @@ public class LangConfig extends AbstractLangConfig<HoconConfigurateWrapper> {
             final @NotNull Logger logger,
             final @NotNull @Named("dataFolder") Path dataFolder
     ) {
-        super(logger, new HoconConfigurateWrapper(logger, dataFolder.resolve("lang.yml")));
+        super(logger, new HoconConfigurateWrapper(logger, dataFolder.resolve("lang.conf")));
     }
 
 }

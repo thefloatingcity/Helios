@@ -64,6 +64,12 @@ public final class FloatyPlugin extends TehPlugin {
     }
 
     public void loadConfigs() {
+        this.saveResourceSilently("books.conf");
+        this.saveResourceSilently("config.conf");
+        this.saveResourceSilently("emotes.conf");
+        this.saveResourceSilently("inventories.conf");
+        this.saveResourceSilently("lang.conf");
+
         this.injector.getInstance(BooksConfig.class).load();
         this.injector.getInstance(ConfigConfig.class).load();
         this.injector.getInstance(EmotesConfig.class).load();

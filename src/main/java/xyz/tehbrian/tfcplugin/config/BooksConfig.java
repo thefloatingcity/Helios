@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.nio.file.Path;
 
 /**
- * Loads and holds values for {@code books.yml}.
+ * Loads and holds values for {@code books.conf}.
  */
 public final class BooksConfig extends AbstractRawHoconConfig {
 
@@ -17,7 +17,7 @@ public final class BooksConfig extends AbstractRawHoconConfig {
             final @NotNull Logger logger,
             final @NotNull @Named("dataFolder") Path dataFolder
     ) {
-        super(logger, dataFolder.resolve("books.yml"));
+        super(logger, dataFolder.resolve("books.conf"));
     }
 
 }

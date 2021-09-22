@@ -18,7 +18,7 @@ import xyz.tehbrian.tfcplugin.util.ConfigDeserializers;
 import java.nio.file.Path;
 
 /**
- * Loads and holds values for {@code config.yml}.
+ * Loads and holds values for {@code config.conf}.
  */
 public final class ConfigConfig extends AbstractConfig<HoconConfigurateWrapper> {
 
@@ -33,8 +33,8 @@ public final class ConfigConfig extends AbstractConfig<HoconConfigurateWrapper> 
             final @NotNull @Named("dataFolder") Path dataFolder,
             final @NotNull FloatyPlugin floatyPlugin
     ) {
-        super(logger, new HoconConfigurateWrapper(logger, dataFolder.resolve("config.yml"), HoconConfigurationLoader.builder()
-                .path(dataFolder.resolve("config.yml"))
+        super(logger, new HoconConfigurateWrapper(logger, dataFolder.resolve("config.conf"), HoconConfigurationLoader.builder()
+                .path(dataFolder.resolve("config.conf"))
                 .defaultOptions(opts -> opts.implicitInitialization(false))
                 .build()));
         this.floatyPlugin = floatyPlugin;

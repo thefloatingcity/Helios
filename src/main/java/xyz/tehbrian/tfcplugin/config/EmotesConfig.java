@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.nio.file.Path;
 
 /**
- * Loads and holds values for {@code emotes.yml}.
+ * Loads and holds values for {@code emotes.conf}.
  */
 public final class EmotesConfig extends AbstractRawHoconConfig {
 
@@ -17,7 +17,7 @@ public final class EmotesConfig extends AbstractRawHoconConfig {
             final @NotNull Logger logger,
             final @NotNull @Named("dataFolder") Path dataFolder
     ) {
-        super(logger, dataFolder.resolve("emotes.yml"));
+        super(logger, dataFolder.resolve("emotes.conf"));
     }
 
 }
