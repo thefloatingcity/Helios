@@ -9,6 +9,7 @@ import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.HelpCommand;
 import co.aikar.commands.annotation.Optional;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
+import com.google.inject.Inject;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -27,6 +28,7 @@ public class ActCommand extends BaseCommand {
 
     private final FloatyPlugin main;
 
+    @Inject
     public ActCommand(final FloatyPlugin main) {
         this.main = main;
     }

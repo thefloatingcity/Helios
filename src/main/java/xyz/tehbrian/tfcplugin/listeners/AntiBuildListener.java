@@ -1,5 +1,6 @@
 package xyz.tehbrian.tfcplugin.listeners;
 
+import com.google.inject.Inject;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
@@ -27,6 +28,7 @@ public class AntiBuildListener implements Listener {
 
     private final LangConfig langConfig;
 
+    @Inject
     public AntiBuildListener(final @NonNull LangConfig langConfig) {
         this.langConfig = langConfig;
     }

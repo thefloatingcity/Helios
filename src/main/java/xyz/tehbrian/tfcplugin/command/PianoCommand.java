@@ -9,6 +9,7 @@ import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.HelpCommand;
 import co.aikar.commands.annotation.Subcommand;
+import com.google.inject.Inject;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -28,6 +29,7 @@ public class PianoCommand extends BaseCommand {
     private final PianoMenuProvider pianoMenuProvider;
     private final BooksConfig booksConfig;
 
+    @Inject
     public PianoCommand(
             final @NonNull UserService userService,
             final @NonNull PianoMenuProvider pianoMenuProvider,

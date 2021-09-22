@@ -1,5 +1,6 @@
 package xyz.tehbrian.tfcplugin.listeners;
 
+import com.google.inject.Inject;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -22,6 +23,7 @@ public class VoidLoopListener implements Listener {
     private final ConfigConfig configConfig;
     private final LangConfig langConfig;
 
+    @Inject
     public VoidLoopListener(
             final @NonNull FloatyPlugin floatyPlugin,
             final @NonNull ConfigConfig configConfig,

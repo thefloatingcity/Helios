@@ -6,6 +6,7 @@ import co.aikar.commands.annotation.Conditions;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Subcommand;
+import com.google.inject.Inject;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -19,6 +20,7 @@ public class RulesCommand extends BaseCommand {
 
     private final LuckPermsService luckPermsService;
 
+    @Inject
     public RulesCommand(
             final @NonNull LuckPermsService luckPermsService
     ) {

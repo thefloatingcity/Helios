@@ -1,5 +1,6 @@
 package xyz.tehbrian.tfcplugin;
 
+import com.google.inject.Inject;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.cacheddata.CachedMetaData;
 import net.luckperms.api.model.user.User;
@@ -16,6 +17,7 @@ public class LuckPermsService {
     private final FloatyPlugin floatyPlugin;
     private LuckPerms luckPerms;
 
+    @Inject
     public LuckPermsService(
             final @NonNull FloatyPlugin floatyPlugin
     ) {

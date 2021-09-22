@@ -1,5 +1,6 @@
 package xyz.tehbrian.tfcplugin;
 
+import com.google.inject.Inject;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import xyz.tehbrian.tfcplugin.user.User;
@@ -10,6 +11,7 @@ public class FlightService {
     private final UserService userService;
     private final FloatyPlugin floatyPlugin;
 
+    @Inject
     public FlightService(
             final @NonNull UserService userService,
             final @NonNull FloatyPlugin floatyPlugin

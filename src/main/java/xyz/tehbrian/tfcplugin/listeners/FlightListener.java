@@ -1,5 +1,6 @@
 package xyz.tehbrian.tfcplugin.listeners;
 
+import com.google.inject.Inject;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
@@ -13,6 +14,7 @@ public class FlightListener implements Listener {
 
     private final FlightService flightService;
 
+    @Inject
     public FlightListener(
             final @NonNull FlightService flightService
     ) {

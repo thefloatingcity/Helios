@@ -5,8 +5,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import xyz.tehbrian.tfcplugin.config.LangConfig;
 
 @SuppressWarnings("unused")
 public class TransportationListener implements Listener {

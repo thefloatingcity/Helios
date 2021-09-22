@@ -1,5 +1,6 @@
 package xyz.tehbrian.tfcplugin.listeners;
 
+import com.google.inject.Inject;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -15,6 +16,7 @@ public class ChatListener implements Listener {
     private final LangConfig langConfig;
     private final LuckPermsService luckPermsService;
 
+    @Inject
     public ChatListener(
             final @NonNull LangConfig langConfig,
             final @NonNull LuckPermsService luckPermsService
