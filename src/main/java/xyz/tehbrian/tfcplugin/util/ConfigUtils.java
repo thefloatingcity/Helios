@@ -1,5 +1,8 @@
 package xyz.tehbrian.tfcplugin.util;
 
+import broccolai.corn.paper.item.PaperItemBuilder;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -7,7 +10,6 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.Inventory;
 import xyz.tehbrian.tfcplugin.TFCPlugin;
-import xyz.tehbrian.tfcplugin.util.item.ItemBuilder;
 import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 
 import java.util.ArrayList;
@@ -56,12 +58,16 @@ public class ConfigUtils {
         for (final String key : Objects.requireNonNull(items).getKeys(false)) {
             final ConfigurationSection item = items.getConfigurationSection(key);
 
-            inventory.addItem(new ItemBuilder(Material.matchMaterial(Objects.requireNonNull(Objects
-                    .requireNonNull(item)
-                    .getString("material"))))
+            inventory.addItem(PaperItemBuilder.ofType(
+                    Objects.requireNonNull(
+                            Material.matchMaterial(
+                                    Objects.requireNonNull(
+                                            Objects.requireNonNull(item).getString("material")
+                                    )
+                            )))
                     .amount(item.isSet("amount") ? item.getInt("amount") : 1)
-                    .name(item.getString("name"))
-                    .lore(item.getStringList("lore"))
+                    .name(MiniMessage.get().parse(Objects.requireNonNull(item.getString("name"))))
+                    .lore(Component.text("uwu broke ur lore"))
                     .unbreakable(item.getBoolean("unbreakable"))
                     .build());
         }

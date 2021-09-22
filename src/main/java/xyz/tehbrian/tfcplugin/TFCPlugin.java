@@ -8,11 +8,9 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.tehbrian.tfcplugin.commands.ActionCommand;
-import xyz.tehbrian.tfcplugin.commands.BoosterCommand;
 import xyz.tehbrian.tfcplugin.commands.CoreCommand;
 import xyz.tehbrian.tfcplugin.commands.EmoteCommand;
 import xyz.tehbrian.tfcplugin.commands.GamemodeCommand;
-import xyz.tehbrian.tfcplugin.commands.MenuCommand;
 import xyz.tehbrian.tfcplugin.commands.OntimeCommand;
 import xyz.tehbrian.tfcplugin.commands.PianoCommand;
 import xyz.tehbrian.tfcplugin.commands.RulesCommand;
@@ -80,11 +78,9 @@ public final class TFCPlugin extends JavaPlugin {
         this.commandManager = new PaperCommandManager(this);
 
         this.commandManager.registerCommand(new ActionCommand(this));
-        this.commandManager.registerCommand(new BoosterCommand(this));
         this.commandManager.registerCommand(new CoreCommand(this));
         this.commandManager.registerCommand(new EmoteCommand());
         this.commandManager.registerCommand(new GamemodeCommand());
-        this.commandManager.registerCommand(new MenuCommand());
         this.commandManager.registerCommand(new OntimeCommand());
         this.commandManager.registerCommand(new PianoCommand());
         this.commandManager.registerCommand(new RulesCommand());

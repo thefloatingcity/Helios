@@ -12,21 +12,23 @@ java {
 }
 
 repositories {
+    mavenCentral()
     mavenLocal()
 
-    maven {
-        url = uri("https://papermc.io/repo/repository/maven-public/")
+    maven("https://papermc.io/repo/repository/maven-public/") {
+        name = "papermc"
     }
-    maven {
+    maven("https://oss.sonatype.org/content/groups/public/") {
         name = "sonatype"
-        url = uri("https://oss.sonatype.org/content/groups/public/")
     }
-    maven {
+    maven("https://s01.oss.sonatype.org/content/groups/public/") {
         name = "sonatype-s01"
-        url = uri("https://s01.oss.sonatype.org/content/groups/public/")
     }
-    maven {
-        url = uri("https://repo.aikar.co/content/groups/aikar/")
+    maven("https://repo.broccol.ai/snapshots/") {
+        name = "broccolai-snapshots"
+    }
+
+    maven("https://repo.aikar.co/content/groups/aikar/") {
     }
 }
 
@@ -40,18 +42,22 @@ dependencies {
     implementation("com.github.stefvanschie.inventoryframework:IF:0.7.2")
 
     implementation("co.aikar:acf-paper:0.5.0-SNAPSHOT")
+
+    implementation("broccolai.corn:corn-minecraft-paper:3.0.0-SNAPSHOT")
 }
 
-tasks.processResources {
-    filesMatching("**/plugin.yml") {
-        expand("version" to project.version)
+tasks {
+    processResources {
+        filesMatching("**/plugin.yml") {
+            expand("version" to project.version)
+        }
     }
-}
 
-tasks.shadowJar {
-    archiveBaseName.set("TFCPlugin")
+    shadowJar {
+        archiveBaseName.set("TFCPlugin")
 
-    relocate("co.aikar.commands", "xyz.tehbrian.tfcplugin.libs.acf")
-    relocate("co.aikar.locales", "xyz.tehbrian.tfcplugin.libs.locales")
-    relocate("com.github.stefvanschie.inventoryframework", "xyz.tehbrian.tfcplugin.libs.inventoryframework")
+        relocate("co.aikar.commands", "xyz.tehbrian.tfcplugin.libs.acf")
+        relocate("co.aikar.locales", "xyz.tehbrian.tfcplugin.libs.locales")
+        relocate("com.github.stefvanschie.inventoryframework", "xyz.tehbrian.tfcplugin.libs.inventoryframework")
+    }
 }

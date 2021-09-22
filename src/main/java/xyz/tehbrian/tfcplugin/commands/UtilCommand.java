@@ -11,7 +11,6 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import xyz.tehbrian.tfcplugin.guis.BlocksGui;
 import xyz.tehbrian.tfcplugin.util.MiscUtils;
 import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 
@@ -19,13 +18,6 @@ import xyz.tehbrian.tfcplugin.util.msg.MsgBuilder;
 @CommandAlias("util|utils")
 @Description("Various utilities.")
 public class UtilCommand extends BaseCommand {
-
-    @CommandAlias("blocks")
-    @CommandPermission("tfcplugin.util.blocks")
-    @Description("Useful building blocks.")
-    public void onBlocks(final Player player) {
-        BlocksGui.generate().show(player);
-    }
 
     @CommandAlias("broadcast")
     @CommandPermission("tfcplugin.util.broadcast")

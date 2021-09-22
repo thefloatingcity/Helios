@@ -1,8 +1,9 @@
 # TFCPlugin
-The core, monolithic plugin for The Floating City. [The Floating City](https://thefloating.city)
-is a unique Minecraft server where you can freely build with creative, but in a
-void world, unable to fly. If that sounds interesting to you, consider giving
-the server a quick visit!
+The core, monolithic plugin for The Floating City.
+
+[The Floating City](https://thefloating.city) is a unique Minecraft server where
+you can freely build with creative, but in a void world, unable to fly. If that
+sounds interesting to you, consider giving the server a quick visit!
 
 ## Contributing
 If you see any bugs, typos, or anything that can be improved, feel free to
