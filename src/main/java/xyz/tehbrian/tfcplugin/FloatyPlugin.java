@@ -24,27 +24,18 @@ import xyz.tehbrian.tfcplugin.inject.PluginModule;
 import xyz.tehbrian.tfcplugin.inject.UserModule;
 import xyz.tehbrian.tfcplugin.listeners.AntiBuildListener;
 import xyz.tehbrian.tfcplugin.listeners.ChatListener;
-import xyz.tehbrian.tfcplugin.listeners.TransportationListener;
 import xyz.tehbrian.tfcplugin.listeners.FlightListener;
 import xyz.tehbrian.tfcplugin.listeners.PianoListener;
 import xyz.tehbrian.tfcplugin.listeners.PlayerListener;
+import xyz.tehbrian.tfcplugin.listeners.TransportationListener;
 import xyz.tehbrian.tfcplugin.listeners.VoidLoopListener;
 
 public final class FloatyPlugin extends TehPlugin {
 
-    private static FloatyPlugin instance;
     /**
      * The Guice injector.
      */
     private @MonotonicNonNull Injector injector;
-
-    public FloatyPlugin() {
-        instance = this;
-    }
-
-    public static FloatyPlugin getInstance() {
-        return instance;
-    }
 
     @Override
     public void onEnable() {

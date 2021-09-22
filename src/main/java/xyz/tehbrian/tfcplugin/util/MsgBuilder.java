@@ -1,8 +1,5 @@
 package xyz.tehbrian.tfcplugin.util;
 
-import org.bukkit.configuration.file.FileConfiguration;
-import xyz.tehbrian.tfcplugin.FloatyPlugin;
-
 public class MsgBuilder {
 
     private String msgKey;
@@ -43,17 +40,16 @@ public class MsgBuilder {
     }
 
     public String build() {
-        final FileConfiguration config = FloatyPlugin.getInstance().getConfig();
         final StringBuilder sb = new StringBuilder();
 
         if (this.prefixKey != null) {
-            sb.append(config.getString(this.prefixKey)).append(" ");
+            sb.append(this.prefixKey).append(" ");
         } else if (this.prefixString != null) {
             sb.append(this.prefixString).append(" ");
         }
 
         if (this.msgKey != null) {
-            sb.append(config.getString(this.msgKey));
+            sb.append(this.msgKey);
         } else if (this.msgString != null) {
             sb.append(this.msgString);
         }
