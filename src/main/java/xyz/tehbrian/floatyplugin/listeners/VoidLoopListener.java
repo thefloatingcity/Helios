@@ -7,6 +7,7 @@ import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -40,7 +41,8 @@ public class VoidLoopListener implements Listener {
         if (event.getCause() != EntityDamageEvent.DamageCause.VOID) {
             return;
         }
-        final Location location = event.getEntity().getLocation();
+        final Entity entity = event.getEntity();
+        final Location location = entity.getLocation();
 
         if (location.getY() > -50) {
             return;
@@ -48,7 +50,7 @@ public class VoidLoopListener implements Listener {
         event.setCancelled(true);
 
 
-        final World.Environment environment = event.getEntity().getWorld().getEnvironment();
+        final World.Environment environment = entity.getWorld().getEnvironment();
 
         final var engageY = switch (environment) {
             case THE_END -> -200;
@@ -68,9 +70,11 @@ public class VoidLoopListener implements Listener {
             };
 
             location.setY(teleportY);
-            event.getEntity().teleport(location);
+            final var oldVelocity = entity.getVelocity();
+            entity.teleport(location);
+            entity.setVelocity(oldVelocity);
 
-            if (!(event.getEntity() instanceof final Player player)) {
+            if (!(entity instanceof final Player player)) {
                 return;
             }
 
