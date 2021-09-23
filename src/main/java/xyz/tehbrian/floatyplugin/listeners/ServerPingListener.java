@@ -1,6 +1,7 @@
 package xyz.tehbrian.floatyplugin.listeners;
 
 import com.destroystokyo.paper.event.server.PaperServerListPingEvent;
+import com.google.inject.Inject;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -11,6 +12,7 @@ public final class ServerPingListener implements Listener {
 
     private final LangConfig langConfig;
 
+    @Inject
     public ServerPingListener(
             final @NonNull LangConfig langConfig
     ) {

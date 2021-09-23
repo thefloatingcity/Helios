@@ -58,7 +58,7 @@ public final class JoinQuitListener implements Listener {
         } else {
             event.joinMessage(this.langConfig.c(NodePath.path("join_new"), Template.of("player", player.displayName())));
 
-            event.joinMessage(this.langConfig.c(NodePath.path("motd_new"), Template.of("player", player.displayName())));
+            player.sendMessage(this.langConfig.c(NodePath.path("motd_new"), Template.of("player", player.displayName())));
         }
     }
 
