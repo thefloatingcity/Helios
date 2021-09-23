@@ -21,7 +21,7 @@ public class BroadcastCommand extends PaperCloudCommand<CommandSender> {
                 .meta(CommandMeta.DESCRIPTION, "Broadcast a server message.")
                 .permission("floatyplugin.broadcast")
                 .argument(StringArgument.greedy("message"))
-                .handler((c) -> c.getSender().getServer().sendMessage(FormatUtil.miniMessage(c.<String>get("message"))));
+                .handler(c -> c.getSender().getServer().sendMessage(FormatUtil.miniMessage(c.<String>get("message"))));
 
         commandManager.command(main);
     }

@@ -90,7 +90,7 @@ public final class ConfigConfig extends AbstractConfig<HoconConfigurateWrapper> 
     public static record Data(@NonNull PokeForce pokeForce) {
 
         @ConfigSerializable
-        public static record PokeForce(int minY, int maxY, int minXZ, int maxXZ) {
+        public static record PokeForce(double minY, double maxY, double minXZ, double maxXZ) {
 
         }
 

@@ -32,7 +32,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
         final var unreadable = commandManager.commandBuilder("unreadable")
                 .meta(CommandMeta.DESCRIPTION, "Untransparent. Is that a word? Opaque?")
                 .permission("floatyplugin.emote.unreadable")
-                .handler((c) -> c.getSender().getServer().sendMessage(this.langConfig.c(
+                .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("emote", "unreadable"),
                         Template.of("player", c.getSender().getName())
                 )));
@@ -40,7 +40,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
         final var shrug = commandManager.commandBuilder("shrug")
                 .meta(CommandMeta.DESCRIPTION, "You don't know. They don't know.")
                 .permission("floatyplugin.emote.shrug")
-                .handler((c) -> c.getSender().getServer().sendMessage(this.langConfig.c(
+                .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("emote", "shrug"),
                         Template.of("player", c.getSender().getName())
                 )));
@@ -48,7 +48,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
         final var spook = commandManager.commandBuilder("spook")
                 .meta(CommandMeta.DESCRIPTION, "OoooOOooOoOOoOOoo")
                 .permission("floatyplugin.emote.spook")
-                .handler((c) -> c.getSender().getServer().sendMessage(this.langConfig.c(
+                .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("emote", "spook"),
                         Template.of("player", c.getSender().getName())
                 )));

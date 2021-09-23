@@ -12,7 +12,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
-import org.spongepowered.configurate.serialize.SerializationException;
 import xyz.tehbrian.floatyplugin.config.BooksConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.piano.Instrument;
@@ -52,29 +51,32 @@ public class PianoCommand extends PaperCloudCommand<CommandSender> {
     public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
         final var main = commandManager.commandBuilder("piano")
                 .meta(CommandMeta.DESCRIPTION, "A fancy playable piano.")
-                .permission("floatyplugin.piano");
+                .permission("floatyplugin.piano")
+                .handler(c -> {
+                    for (final Component line : ConfigDeserializers.deserializePage(
+                            Objects.requireNonNull(this.booksConfig.rootNode())
+                                    .node("piano_manual"), 1)) {
+                        c.getSender().sendMessage(line);
+                    }
+                });
 
         final var help = main.literal("help")
                 .argument(IntegerArgument.<CommandSender>newBuilder("page")
                         .withMin(1)
-                        .withMax(4)
+                        .withMax(5)
                         .asOptionalWithDefault(1)
                         .build())
-                .handler((c) -> {
-                    try {
-                        for (final Component line : ConfigDeserializers.deserializePage(Objects
-                                .requireNonNull(this.booksConfig.rootNode())
-                                .node("piano_manual"), c.<Integer>get("page"))) {
-                            c.getSender().sendMessage(line);
-                        }
-                    } catch (final SerializationException e) {
-                        e.printStackTrace();
+                .handler(c -> {
+                    for (final Component line : ConfigDeserializers.deserializePage(
+                            Objects.requireNonNull(this.booksConfig.rootNode())
+                                    .node("piano_manual"), c.<Integer>get("page"))) {
+                        c.getSender().sendMessage(line);
                     }
                 });
 
         final var toggle = main.literal("toggle", ArgumentDescription.of("Toggle your piano on and off."))
                 .senderType(Player.class)
-                .handler((c) -> {
+                .handler(c -> {
                     final Player sender = (Player) c.getSender();
                     if (this.userService.getUser(sender).piano().toggleEnabled()) {
                         sender.sendMessage(this.langConfig.c(NodePath.path("piano", "enabled")));
@@ -85,12 +87,12 @@ public class PianoCommand extends PaperCloudCommand<CommandSender> {
 
         final var menu = main.literal("menu", ArgumentDescription.of("Pick your notes!"))
                 .senderType(Player.class)
-                .handler((c) -> this.pianoMenuProvider.generate().show((Player) c.getSender()));
+                .handler(c -> this.pianoMenuProvider.generate().show((Player) c.getSender()));
 
         final var instrument = main.literal("instrument", ArgumentDescription.of("Pick your instrument!"))
                 .senderType(Player.class)
                 .argument(EnumArgument.of(Instrument.class, "instrument"))
-                .handler((c) -> {
+                .handler(c -> {
                     final Instrument inst = c.get("instrument");
                     final Player sender = (Player) c.getSender();
 

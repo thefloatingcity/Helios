@@ -21,8 +21,7 @@ public final class ConfigDeserializers {
     private ConfigDeserializers() {
     }
 
-    public static List<Component> deserializePage(final CommentedConfigurationNode book, final Integer pageNumber)
-            throws SerializationException {
+    public static List<Component> deserializePage(final CommentedConfigurationNode book, final Integer pageNumber) {
         final int pageIndex = pageNumber - 1;
 
         final List<CommentedConfigurationNode> pages = Objects.requireNonNull(book).node("pages").childrenList();
@@ -38,8 +37,13 @@ public final class ConfigDeserializers {
         ));
 
         final String multi = book.node("multi").getString();
-        for (final String line : Objects.requireNonNull(page.node("content").getList(String.class))) {
-            messages.add(MiniMessage.get().parse(multi + line));
+        try {
+            for (final String line : Objects.requireNonNull(page.node("content").getList(String.class))) {
+                messages.add(MiniMessage.get().parse(multi + line));
+            }
+        } catch (final SerializationException e) {
+            e.printStackTrace();
+            return List.of();
         }
 
         return messages;
@@ -76,9 +80,9 @@ public final class ConfigDeserializers {
     public static Location deserializeLocation(final CommentedConfigurationNode section) {
         return new Location(
                 Bukkit.getWorld(Objects.requireNonNull(section.node("world").getString())),
-                section.node("x").getDouble(),
-                section.node("y").getDouble(),
-                section.node("z").getDouble()
+                section.node("x").getDouble(0),
+                section.node("y").getDouble(0),
+                section.node("z").getDouble(0)
         );
     }
 

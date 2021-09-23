@@ -37,7 +37,7 @@ public class GamemodeCommands extends PaperCloudCommand<CommandSender> {
                 .meta(CommandMeta.DESCRIPTION, "Change gamemodes.");
 
         final var survival = main.literal("survival", ArgumentDescription.of("Change to survival."), "s", "0")
-                .handler((c) -> {
+                .handler(c -> {
                     final Player sender = (Player) c.getSender();
                     sender.setGameMode(GameMode.SURVIVAL);
                     sender.sendMessage(this.langConfig.c(
@@ -47,7 +47,7 @@ public class GamemodeCommands extends PaperCloudCommand<CommandSender> {
                 });
 
         final var creative = main.literal("creative", ArgumentDescription.of("Change to creative."), "c", "1")
-                .handler((c) -> {
+                .handler(c -> {
                     final Player sender = (Player) c.getSender();
                     sender.setGameMode(GameMode.CREATIVE);
                     sender.sendMessage(this.langConfig.c(
@@ -57,7 +57,7 @@ public class GamemodeCommands extends PaperCloudCommand<CommandSender> {
                 });
 
         final var adventure = main.literal("adventure", ArgumentDescription.of("Change to adventure."), "a", "2")
-                .handler((c) -> {
+                .handler(c -> {
                     final Player sender = (Player) c.getSender();
                     sender.setGameMode(GameMode.ADVENTURE);
                     sender.sendMessage(this.langConfig.c(

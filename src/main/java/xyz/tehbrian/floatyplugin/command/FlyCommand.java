@@ -40,7 +40,7 @@ public class FlyCommand extends PaperCloudCommand<CommandSender> {
                 .meta(CommandMeta.DESCRIPTION, "Bends the space/time continuum.")
                 .permission("floatyplugin.fly")
                 .senderType(Player.class)
-                .handler((c) -> {
+                .handler(c -> {
                     final Player player = (Player) c.getSender();
                     if (this.userService.getUser(player).toggleFlyBypassEnabled()) {
                         player.sendMessage(this.langConfig.c(NodePath.path("fly", "enabled")));

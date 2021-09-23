@@ -40,7 +40,7 @@ public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
                 .meta(CommandMeta.DESCRIPTION, "Check how long you've played.")
                 .senderType(Player.class)
                 .argument(PlayerArgument.optional("player"))
-                .handler((c) -> {
+                .handler(c -> {
                     final var sender = (Player) c.getSender();
 
                     c.<Player>getOptional("player").ifPresentOrElse((target) -> sender.sendMessage(this.langConfig.c(
@@ -56,7 +56,7 @@ public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
         final var ascend = commandManager.commandBuilder("ascend")
                 .meta(CommandMeta.DESCRIPTION, "Get fancy new perks!")
                 .senderType(Player.class)
-                .handler((c) -> c.getSender().sendMessage(Component.text("coming soon..").color(NamedTextColor.GRAY)));
+                .handler(c -> c.getSender().sendMessage(Component.text("coming soon..").color(NamedTextColor.GRAY)));
 
         commandManager.command(playtime);
         commandManager.command(ascend);

@@ -6,8 +6,6 @@ import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import net.kyori.adventure.text.minimessage.Template;
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -44,7 +42,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
 //                .permission("floatyplugin.action.launch")
 //                .meta(CommandMeta.DESCRIPTION, "Like a rocket!")
 //                .argument(PlayerArgument.optional("player"))
-//                .handler((c) -> {
+//                .handler(c -> {
 //                    final Player sender = (Player) c.getSender();
 //                    final Player target = c.<Player>getOptional("player").orElse((sender));
 //
@@ -71,7 +69,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
 //                .permission("floatyplugin.action.boost")
 //                .meta(CommandMeta.DESCRIPTION, "Gives you a case of the zoomies.")
 //                .argument(PlayerArgument.optional("player"))
-//                .handler((c) -> {
+//                .handler(c -> {
 //                    final Player sender = (Player) c.getSender();
 //                    final Player target = c.<Player>getOptional("player").orElse((sender));
 //
@@ -103,7 +101,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
                 .permission("floatyplugin.action.zap")
                 .meta(CommandMeta.DESCRIPTION, "Kentucky Fried Player")
                 .argument(PlayerArgument.optional("player"))
-                .handler((c) -> {
+                .handler(c -> {
                     final Player sender = (Player) c.getSender();
                     final Player target = c.<Player>getOptional("player").orElse((sender));
 
@@ -128,7 +126,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
                 .permission("floatyplugin.action.poke")
                 .meta(CommandMeta.DESCRIPTION, "Useful for annoying others.")
                 .argument(PlayerArgument.optional("player"))
-                .handler((c) -> {
+                .handler(c -> {
                     final Player sender = (Player) c.getSender();
                     final Player target = c.<Player>getOptional("player").orElse((sender));
 
@@ -147,13 +145,13 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
 
                     if (c.<Player>getOptional("player").isPresent()) {
                         sender.getServer().sendMessage(this.langConfig.c(
-                                NodePath.path("act", "zap_other"),
+                                NodePath.path("act", "poke_other"),
                                 Template.of("issuer", sender.displayName()),
                                 Template.of("target", target.displayName())
                         ));
                     } else {
                         sender.getServer().sendMessage(this.langConfig.c(
-                                NodePath.path("act", "zap_self"),
+                                NodePath.path("act", "poke_self"),
                                 Template.of("issuer", sender.displayName())
                         ));
                     }

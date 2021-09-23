@@ -35,7 +35,7 @@ public class HatCommand extends PaperCloudCommand<CommandSender> {
                 .meta(CommandMeta.DESCRIPTION, "Put fancy things on your head!")
                 .permission("floatyplugin.hat")
                 .senderType(Player.class)
-                .handler((c) -> {
+                .handler(c -> {
                     final var player = (Player) c.getSender();
 
                     final PlayerInventory inventory = player.getInventory();

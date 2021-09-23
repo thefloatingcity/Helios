@@ -11,7 +11,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
-import org.spongepowered.configurate.serialize.SerializationException;
 import xyz.tehbrian.floatyplugin.LuckPermsService;
 import xyz.tehbrian.floatyplugin.config.BooksConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
@@ -49,24 +48,19 @@ public class RulesCommand extends PaperCloudCommand<CommandSender> {
         final var page = main
                 .argument(IntegerArgument.<CommandSender>newBuilder("page")
                         .withMin(1)
-                        .withMax(9)
+                        .withMax(7)
                         .asOptionalWithDefault(1)
                         .build())
-                .handler((c) -> {
-                    try {
-                        for (final Component line : ConfigDeserializers.deserializePage(Objects
-                                .requireNonNull(this.booksConfig.rootNode())
-                                .node("rules"), c.<Integer>get("page"))) {
-                            c.getSender().sendMessage(line);
-                        }
-                    } catch (final SerializationException e) {
-                        e.printStackTrace();
+                .handler(c -> {
+                    for (final Component line : ConfigDeserializers.deserializePage(
+                            Objects.requireNonNull(this.booksConfig.rootNode()).node("rules"), c.<Integer>get("page"))) {
+                        c.getSender().sendMessage(line);
                     }
                 });
 
         final var accept = main.literal("accept", ArgumentDescription.of("Whew, that was a lot of reading."))
                 .senderType(Player.class)
-                .handler((c) -> {
+                .handler(c -> {
                     final var player = (Player) c.getSender();
                     if (player.hasPermission("floatyplugin.build")) {
                         player.sendMessage(this.langConfig.c(NodePath.path("rules", "already_accepted")));
