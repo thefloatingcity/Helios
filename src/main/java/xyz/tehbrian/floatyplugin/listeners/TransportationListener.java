@@ -106,7 +106,7 @@ public class TransportationListener implements Listener {
                 return;
             }
 
-            player.sendMessage(this.langConfig.c(NodePath.path("no_sprinting")));
+            player.sendMessage(this.langConfig.c(NodePath.path("no_sprint")));
 
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 4, true, false, false));
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1000000000, 1, true, false, false));

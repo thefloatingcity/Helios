@@ -11,13 +11,13 @@ import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
-public class MainCommand extends PaperCloudCommand<CommandSender> {
+public class FloatyPluginCommand extends PaperCloudCommand<CommandSender> {
 
     private final FloatyPlugin floatyPlugin;
     private final LangConfig langConfig;
 
     @Inject
-    public MainCommand(
+    public FloatyPluginCommand(
             final @NonNull FloatyPlugin floatyPlugin,
             final @NonNull LangConfig langConfig
     ) {
@@ -32,8 +32,8 @@ public class MainCommand extends PaperCloudCommand<CommandSender> {
      */
     @Override
     public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
-        final var main = commandManager.commandBuilder("tfc")
-                .meta(CommandMeta.DESCRIPTION, "Core commands for TFC.");
+        final var main = commandManager.commandBuilder("floatyplugin")
+                .meta(CommandMeta.DESCRIPTION, "Core commands for FloatyPlugin.");
 
         final var reload = main.literal("reload", ArgumentDescription.of("Reload the plugin's configs."))
                 .permission("floatyplugin.reload")
