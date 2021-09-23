@@ -1,4 +1,4 @@
-# TFCPlugin
+# FloatyPlugin
 The core, monolithic plugin for The Floating City.
 
 [The Floating City](https://thefloating.city) is a unique Minecraft server where

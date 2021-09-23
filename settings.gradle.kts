@@ -1,1 +1,1 @@
-rootProject.name = "tfcplugin"
+rootProject.name = "floatyplugin"

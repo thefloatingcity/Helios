@@ -57,10 +57,10 @@ tasks {
     }
 
     shadowJar {
-        archiveBaseName.set("TFCPlugin")
+        archiveBaseName.set("FloatyPlugin")
 
-        relocate("co.aikar.commands", "xyz.tehbrian.tfcplugin.libs.acf")
-        relocate("co.aikar.locales", "xyz.tehbrian.tfcplugin.libs.locales")
-        relocate("com.github.stefvanschie.inventoryframework", "xyz.tehbrian.tfcplugin.libs.inventoryframework")
+        relocate("co.aikar.commands", "xyz.tehbrian.floatyplugin.libs.acf")
+        relocate("co.aikar.locales", "xyz.tehbrian.floatyplugin.libs.locales")
+        relocate("com.github.stefvanschie.inventoryframework", "xyz.tehbrian.floatyplugin.libs.inventoryframework")
     }
 }

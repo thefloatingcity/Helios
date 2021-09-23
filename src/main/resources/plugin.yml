@@ -1,16 +1,16 @@
-name: TFCPlugin
+name: FloatyPlugin
 description: The core, monolithic plugin for The Floating City.
 authors: [ TehBrian ]
-website: https://github.com/thefloatingcity/TFCPlugin
+website: https://github.com/thefloatingcity/FloatyPlugin
 
 version: ${version}
-main: xyz.tehbrian.tfcplugin.FloatyPlugin
+main: xyz.tehbrian.floatyplugin.FloatyPlugin
 api-version: 1.17
 
 permissions:
-  tfcplugin.chatcolor:
+  floatyplugin.chatcolor:
     description: Permission to color chat text.
     default: op
-  tfcplugin.build:
+  floatyplugin.build:
     description: Permission to interact with the world.
     default: op
