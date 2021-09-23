@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
-import xyz.tehbrian.floatyplugin.util.MiscUtils;
+import xyz.tehbrian.floatyplugin.util.TimeFormatter;
 
 import java.util.Map;
 
@@ -45,11 +45,11 @@ public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
 
                     c.<Player>getOptional("player").ifPresentOrElse((target) -> sender.sendMessage(this.langConfig.c(
                             NodePath.path("playtime", "other"),
-                            Template.of("time", MiscUtils.fancifyTime(getMillisPlayed(target))),
+                            Template.of("time", TimeFormatter.fancifyTime(getMillisPlayed(target))),
                             Template.of("player", target.name())
                     )), () -> sender.sendMessage(this.langConfig.c(
                             NodePath.path("playtime", "self"),
-                            Map.of("time", MiscUtils.fancifyTime(getMillisPlayed(sender)))
+                            Map.of("time", TimeFormatter.fancifyTime(getMillisPlayed(sender)))
                     )));
                 });
 

@@ -14,7 +14,7 @@ import org.bukkit.inventory.meta.FireworkMeta;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
-import xyz.tehbrian.floatyplugin.util.MiscUtils;
+import xyz.tehbrian.floatyplugin.util.TimeFormatter;
 
 import java.util.Calendar;
 
@@ -49,8 +49,8 @@ public class PlayerListener implements Listener {
         if (player.hasPlayedBefore()) {
             event.joinMessage(this.langConfig.c(NodePath.path("join"), Template.of("player", player.displayName())));
 
-            final long millisSinceLastPlayed = Calendar.getInstance().getTimeInMillis() - player.getLastSeen();
-            player.sendMessage(this.langConfig.c(NodePath.path("motd"), Template.of("last", MiscUtils.fancifyTime(millisSinceLastPlayed))));
+            final long millisSinceLastPlayed = Calendar.getInstance().getTimeInMillis() - player.getLastPlayed(); // TODO: use non-deprecated method
+            player.sendMessage(this.langConfig.c(NodePath.path("motd"), Template.of("last", TimeFormatter.fancifyTime(millisSinceLastPlayed))));
         } else {
             event.joinMessage(this.langConfig.c(NodePath.path("join_new"), Template.of("player", player.displayName())));
 

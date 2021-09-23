@@ -1,13 +1,13 @@
 package xyz.tehbrian.floatyplugin.util;
 
-public class MiscUtils {
+public class TimeFormatter {
 
-    private MiscUtils() {
+    private TimeFormatter() {
     }
 
     public static String fancifyTime(final long milliseconds) {
         final var format = "%.2f %s";
-        final var simpleFormat = "%l %s";
+        final var simpleFormat = "%d %s";
 
         if (milliseconds >= 86400000) {
             return String.format(format, milliseconds / 86400000d, "days");
