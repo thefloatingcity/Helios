@@ -23,15 +23,18 @@ public class ConfigDeserializers {
 
     public static List<Component> deserializePage(final CommentedConfigurationNode book, final Integer pageNumber)
             throws SerializationException {
-        final CommentedConfigurationNode pages = Objects.requireNonNull(book).node("pages");
-        final CommentedConfigurationNode page = Objects.requireNonNull(pages).node(pageNumber.toString());
+        final int pageIndex = pageNumber - 1;
+
+        final List<CommentedConfigurationNode> pages = Objects.requireNonNull(book).node("pages").childrenList();
+        final CommentedConfigurationNode page = pages.get(pageIndex);
+
         final List<Component> messages = new ArrayList<>();
 
         messages.add(MiniMessage.get().parse(
                 book.node("multistart").getString() + book.node("page_header").getString(),
                 Template.of("title", Objects.requireNonNull(page.node("title").getString())),
                 Template.of("page", pageNumber.toString()),
-                Template.of("page_count", String.valueOf(pages.childrenList().size()))
+                Template.of("page_count", String.valueOf(pages.size()))
         ));
 
         final String multi = book.node("multi").getString();

@@ -56,7 +56,7 @@ public class RulesCommand extends PaperCloudCommand<CommandSender> {
                     try {
                         for (final Component line : ConfigDeserializers.deserializePage(Objects
                                 .requireNonNull(this.booksConfig.rootNode())
-                                .node("books"), c.<Integer>get("page"))) {
+                                .node("rules"), c.<Integer>get("page"))) {
                             c.getSender().sendMessage(line);
                         }
                     } catch (final SerializationException e) {
