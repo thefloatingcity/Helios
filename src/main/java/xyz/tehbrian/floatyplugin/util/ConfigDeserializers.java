@@ -82,7 +82,9 @@ public final class ConfigDeserializers {
                 Bukkit.getWorld(Objects.requireNonNull(section.node("world").getString())),
                 section.node("x").getDouble(0),
                 section.node("y").getDouble(0),
-                section.node("z").getDouble(0)
+                section.node("z").getDouble(0),
+                section.node("yaw").getFloat(0),
+                section.node("pitch").getFloat(0)
         );
     }
 
