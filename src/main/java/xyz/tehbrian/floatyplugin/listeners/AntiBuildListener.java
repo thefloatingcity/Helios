@@ -79,7 +79,7 @@ public class AntiBuildListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onInteract(final PlayerInteractEvent event) {
-        this.onAntiBuild(event, true);
+        this.onAntiBuild(event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
@@ -109,10 +109,10 @@ public class AntiBuildListener implements Listener {
 
     private <T extends Cancellable> void onAntiBuild(final T event, final Player player, final boolean silent) {
         if (!player.hasPermission("floatyplugin.build")) {
-            event.setCancelled(true);
             if (!silent) {
                 player.sendMessage(this.langConfig.c(NodePath.path("no_build")));
             }
+            event.setCancelled(true);
         }
     }
 
