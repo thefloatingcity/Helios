@@ -29,9 +29,6 @@ repositories {
     maven("https://repo.thbn.me/snapshots/") {
         name = "thbn-snapshots"
     }
-    maven("https://repo.aikar.co/content/groups/aikar/") {
-        name = "aikar"
-    }
 }
 
 dependencies {
@@ -42,8 +39,6 @@ dependencies {
     implementation("net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT")
     implementation("org.spongepowered:configurate-hocon:4.0.0")
     implementation("com.github.stefvanschie.inventoryframework:IF:0.7.2")
-
-    implementation("co.aikar:acf-paper:0.5.0-SNAPSHOT")
 
     implementation("broccolai.corn:corn-minecraft-paper:3.0.0-SNAPSHOT")
     implementation("dev.tehbrian:tehlib-paper:0.1.0-SNAPSHOT")
@@ -59,8 +54,6 @@ tasks {
     shadowJar {
         archiveBaseName.set("FloatyPlugin")
 
-        relocate("co.aikar.commands", "xyz.tehbrian.floatyplugin.libs.acf")
-        relocate("co.aikar.locales", "xyz.tehbrian.floatyplugin.libs.locales")
         relocate("com.github.stefvanschie.inventoryframework", "xyz.tehbrian.floatyplugin.libs.inventoryframework")
     }
 }

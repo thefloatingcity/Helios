@@ -96,7 +96,7 @@ public class AntiBuildListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onInteractEntity(final PlayerInteractEntityEvent event) {
-        this.onAntiBuild(event, true);
+        this.onAntiBuild(event);
     }
 
     private <T extends PlayerEvent & Cancellable> void onAntiBuild(final T event, final boolean silent) {

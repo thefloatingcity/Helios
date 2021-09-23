@@ -43,10 +43,10 @@ public class RulesCommand extends PaperCloudCommand<CommandSender> {
      */
     @Override
     public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
-        final var rules = commandManager.commandBuilder("rules")
+        final var main = commandManager.commandBuilder("rules")
                 .meta(CommandMeta.DESCRIPTION, "Um, the rules.");
 
-        final var rulesPage = rules
+        final var page = main
                 .argument(IntegerArgument.<CommandSender>newBuilder("page")
                         .withMin(1)
                         .withMax(9)
@@ -64,7 +64,7 @@ public class RulesCommand extends PaperCloudCommand<CommandSender> {
                     }
                 });
 
-        final var rulesAccept = rules.literal("accept", ArgumentDescription.of("Whew, that was a lot of reading."))
+        final var accept = main.literal("accept", ArgumentDescription.of("Whew, that was a lot of reading."))
                 .senderType(Player.class)
                 .handler((c) -> {
                     final var player = (Player) c.getSender();
@@ -76,9 +76,9 @@ public class RulesCommand extends PaperCloudCommand<CommandSender> {
                     }
                 });
 
-        commandManager.command(rules);
-        commandManager.command(rulesPage);
-        commandManager.command(rulesAccept);
+        commandManager.command(main);
+        commandManager.command(page);
+        commandManager.command(accept);
     }
 
 }

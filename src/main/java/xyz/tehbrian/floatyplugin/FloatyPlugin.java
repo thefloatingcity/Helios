@@ -1,7 +1,5 @@
 package xyz.tehbrian.floatyplugin;
 
-import co.aikar.commands.ConditionFailedException;
-import co.aikar.commands.PaperCommandManager;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import dev.tehbrian.tehlib.paper.TehPlugin;
@@ -11,15 +9,14 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import xyz.tehbrian.floatyplugin.command.BroadcastCommand;
 import xyz.tehbrian.floatyplugin.command.CommandService;
+import xyz.tehbrian.floatyplugin.command.FlyCommand;
+import xyz.tehbrian.floatyplugin.command.GamemodeCommands;
 import xyz.tehbrian.floatyplugin.command.HatCommand;
+import xyz.tehbrian.floatyplugin.command.MainCommand;
+import xyz.tehbrian.floatyplugin.command.PianoCommand;
+import xyz.tehbrian.floatyplugin.command.PlaytimeCommands;
 import xyz.tehbrian.floatyplugin.command.RulesCommand;
 import xyz.tehbrian.floatyplugin.command.WorldCommands;
-import xyz.tehbrian.floatyplugin.command.legacy.ActCommand;
-import xyz.tehbrian.floatyplugin.command.legacy.CoreCommand;
-import xyz.tehbrian.floatyplugin.command.legacy.EmoteCommand;
-import xyz.tehbrian.floatyplugin.command.legacy.GamemodeCommand;
-import xyz.tehbrian.floatyplugin.command.legacy.OntimeCommand;
-import xyz.tehbrian.floatyplugin.command.legacy.PianoCommand;
 import xyz.tehbrian.floatyplugin.config.BooksConfig;
 import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 import xyz.tehbrian.floatyplugin.config.EmotesConfig;
@@ -30,7 +27,6 @@ import xyz.tehbrian.floatyplugin.inject.PluginModule;
 import xyz.tehbrian.floatyplugin.inject.UserModule;
 import xyz.tehbrian.floatyplugin.listeners.AntiBuildListener;
 import xyz.tehbrian.floatyplugin.listeners.ChatListener;
-import xyz.tehbrian.floatyplugin.listeners.FlightListener;
 import xyz.tehbrian.floatyplugin.listeners.PianoListener;
 import xyz.tehbrian.floatyplugin.listeners.PlayerListener;
 import xyz.tehbrian.floatyplugin.listeners.TransportationListener;
@@ -87,7 +83,6 @@ public final class FloatyPlugin extends TehPlugin {
         registerListeners(
                 this.injector.getInstance(AntiBuildListener.class),
                 this.injector.getInstance(ChatListener.class),
-                this.injector.getInstance(FlightListener.class),
                 this.injector.getInstance(PianoListener.class),
                 this.injector.getInstance(PlayerListener.class),
                 this.injector.getInstance(TransportationListener.class),
@@ -108,36 +103,14 @@ public final class FloatyPlugin extends TehPlugin {
         }
 
         this.injector.getInstance(BroadcastCommand.class).register(commandManager);
+        this.injector.getInstance(FlyCommand.class).register(commandManager);
+        this.injector.getInstance(GamemodeCommands.class).register(commandManager);
         this.injector.getInstance(HatCommand.class).register(commandManager);
+        this.injector.getInstance(MainCommand.class).register(commandManager);
+        this.injector.getInstance(PianoCommand.class).register(commandManager);
+        this.injector.getInstance(PlaytimeCommands.class).register(commandManager);
         this.injector.getInstance(RulesCommand.class).register(commandManager);
         this.injector.getInstance(WorldCommands.class).register(commandManager);
-
-        this.setupLegacyCommands();
-    }
-
-    private void setupLegacyCommands() {
-        final PaperCommandManager commandManager = new PaperCommandManager(this);
-
-        commandManager.registerCommand(this.injector.getInstance(ActCommand.class));
-        commandManager.registerCommand(this.injector.getInstance(CoreCommand.class));
-        commandManager.registerCommand(this.injector.getInstance(EmoteCommand.class));
-        commandManager.registerCommand(this.injector.getInstance(GamemodeCommand.class));
-        commandManager.registerCommand(this.injector.getInstance(OntimeCommand.class));
-        commandManager.registerCommand(this.injector.getInstance(PianoCommand.class));
-
-        commandManager.enableUnstableAPI("help");
-
-        commandManager.getCommandConditions().addCondition(Integer.class, "limits", (context, executionContext, value) -> {
-            if (value == null) {
-                return;
-            }
-            if (context.hasConfig("min") && context.getConfigValue("min", 0) > value) {
-                throw new ConditionFailedException("Minimum value is " + context.getConfigValue("min", 0) + ".");
-            }
-            if (context.hasConfig("max") && context.getConfigValue("max", 10) < value) {
-                throw new ConditionFailedException("Maximum value is " + context.getConfigValue("max", 10) + ".");
-            }
-        });
     }
 
 }

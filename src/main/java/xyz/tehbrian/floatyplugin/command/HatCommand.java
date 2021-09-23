@@ -31,7 +31,7 @@ public class HatCommand extends PaperCloudCommand<CommandSender> {
      */
     @Override
     public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
-        final var hat = commandManager.commandBuilder("hat")
+        final var main = commandManager.commandBuilder("hat")
                 .meta(CommandMeta.DESCRIPTION, "Put fancy things on your head!")
                 .permission("floatyplugin.hat")
                 .senderType(Player.class)
@@ -53,7 +53,7 @@ public class HatCommand extends PaperCloudCommand<CommandSender> {
                     }
                 });
 
-        commandManager.command(hat);
+        commandManager.command(main);
     }
 
 }

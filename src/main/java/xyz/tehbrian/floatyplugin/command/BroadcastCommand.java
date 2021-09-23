@@ -17,13 +17,13 @@ public class BroadcastCommand extends PaperCloudCommand<CommandSender> {
      */
     @Override
     public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
-        final var broadcast = commandManager.commandBuilder("broadcast")
+        final var main = commandManager.commandBuilder("broadcast")
                 .meta(CommandMeta.DESCRIPTION, "Broadcast a server message.")
                 .permission("floatyplugin.broadcast")
                 .argument(StringArgument.greedy("message"))
                 .handler((c) -> c.getSender().getServer().sendMessage(FormatUtil.miniMessage(c.<String>get("message"))));
 
-        commandManager.command(broadcast);
+        commandManager.command(main);
     }
 
 }
