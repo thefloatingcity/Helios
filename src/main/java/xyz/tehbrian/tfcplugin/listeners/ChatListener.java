@@ -2,27 +2,36 @@ package xyz.tehbrian.tfcplugin.listeners;
 
 import com.google.inject.Inject;
 import io.papermc.paper.event.player.AsyncChatEvent;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.TextReplacementConfig;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.minimessage.Template;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import xyz.tehbrian.tfcplugin.LuckPermsService;
+import org.spongepowered.configurate.CommentedConfigurationNode;
+import org.spongepowered.configurate.NodePath;
+import xyz.tehbrian.tfcplugin.config.EmotesConfig;
 import xyz.tehbrian.tfcplugin.config.LangConfig;
-import xyz.tehbrian.tfcplugin.util.MiscUtils;
+import xyz.tehbrian.tfcplugin.util.FormatUtil;
+
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
 
 public class ChatListener implements Listener {
 
+    private final EmotesConfig emotesConfig;
     private final LangConfig langConfig;
-    private final LuckPermsService luckPermsService;
 
     @Inject
     public ChatListener(
-            final @NonNull LangConfig langConfig,
-            final @NonNull LuckPermsService luckPermsService
+            final @NonNull EmotesConfig emotesConfig,
+            final @NonNull LangConfig langConfig
     ) {
+        this.emotesConfig = emotesConfig;
         this.langConfig = langConfig;
-        this.luckPermsService = luckPermsService;
     }
 
 //    no-permission: §cI'm sorry, but you don't have permission for that command.
@@ -43,61 +52,52 @@ public class ChatListener implements Listener {
     public void onChat(final AsyncChatEvent event) {
         final Player player = event.getPlayer();
 
-//        // 1. Format the chat.
-//        event.setFormat(this.langConfig.c(NodePath.path("chat_format")));
-//
-//        // 2. Color the message.
-//        if (player.hasPermission("tfcplugin.chatcolor")) {
-//            event.setMessage(MiscUtils.color(event.getMessage()));
-//        }
-//
-//        // 3. Ping other players.
-//        for (final Player pingedPlayer : Bukkit.getOnlinePlayers()) {
-//            if (pingedPlayer.getUniqueId().equals(player.getUniqueId())) {
-//                continue;
-//            }
-//
-//            final String pingedPlayerName = pingedPlayer.getName();
-//            final String pingedPlayerDisplayName = pingedPlayer.getDisplayName();
-//
-//
-//            final String replacement = ChatColor.GOLD + "$1";
-//
-//            // 3a. Check player name.
-//            if (event.getMessage().toLowerCase().contains(pingedPlayerName.toLowerCase())) {
-//                event.setMessage(this.replaceCaseSensitive(event.getMessage(), pingedPlayerName, replacement));
-//                pingedPlayer.playSound(pingedPlayer.getEyeLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 2);
-//            }
-//
-//            // 3b. Check player display name.
-//            if (event.getMessage().toLowerCase().contains(pingedPlayerDisplayName.toLowerCase())) {
-//                event.setMessage(this.replaceCaseSensitive(event.getMessage(), pingedPlayerDisplayName, replacement));
-//                pingedPlayer.playSound(pingedPlayer.getEyeLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 2);
-//            }
-//        }
-//
-//        // 4. Chat replacements.
-//        final ConfigurationSection replacements = this.main.getConfig().getConfigurationSection("replacements");
-//        final Set<String> replacementKeys = replacements.getKeys(false);
-//        for (final String from : replacementKeys) {
-//            event.setMessage(this.replaceCaseSensitive(event.getMessage(), from, replacements.getString(from)));
-//        }
+//         * @param source            the message source
+//         * @param sourceDisplayName the display name of the source player
+//         * @param message           the chat message
+//         * @param viewer            the receiving {@link Audience}
+//         * @return a rendered chat message
+
+        event.renderer((source, sourceDisplayName, message, viewer) -> {
+            var renderedMessage = message;
+            if (player.hasPermission("tfcplugin.chatcolor")) {
+                renderedMessage = FormatUtil.legacy(message);
+            }
+
+            for (final Player onlinePlayer : player.getServer().getOnlinePlayers()) {
+                if (onlinePlayer.getUniqueId().equals(player.getUniqueId())) {
+                    continue;
+                }
+
+                final String playerName = FormatUtil.plain(onlinePlayer.name());
+
+                if (this.containsIgnoreCase(FormatUtil.plain(message), playerName)) {
+                    renderedMessage = renderedMessage.replaceText(TextReplacementConfig.builder()
+                            .match("(?i)(" + playerName + ")")
+                            .replacement(onlinePlayer.name().color(NamedTextColor.GOLD))
+                            .build());
+                    onlinePlayer.playSound(onlinePlayer.getEyeLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 2);
+                }
+            }
+
+            final CommentedConfigurationNode emotes = this.emotesConfig.rootNode();
+            for (final Map.Entry<Object, CommentedConfigurationNode> entry : emotes.childrenMap().entrySet()) {
+                renderedMessage = renderedMessage.replaceText(TextReplacementConfig.builder()
+                        .match("(" + entry.getKey() + ")")
+                        .replacement(FormatUtil.miniMessage(Objects.requireNonNull(entry.getValue().getString())))
+                        .build());
+            }
+
+            return this.langConfig.c(
+                    NodePath.path("chat_format"),
+                    Template.of("sender", sourceDisplayName),
+                    Template.of("message", renderedMessage)
+            );
+        });
     }
 
-    private String replaceCaseSensitive(final String message, final String from, final String to) {
-        final String lastColors = ChatColor.getLastColors(message);
-        return message.replaceAll(
-                "(?i)(" + MiscUtils.color(from) + ")",
-                MiscUtils.color(to) + (lastColors.isEmpty() ? ChatColor.RESET : lastColors)
-        );
-    }
-
-    private String replaceCaseInsensitive(final String message, final String from, final String to) {
-        final String lastColors = ChatColor.getLastColors(message);
-        return message.replaceAll(
-                "(" + MiscUtils.color(from) + ")",
-                MiscUtils.color(to) + (lastColors.isEmpty() ? ChatColor.RESET : lastColors)
-        );
+    private boolean containsIgnoreCase(final String string, final String that) {
+        return string.toLowerCase(Locale.ROOT).contains(that.toLowerCase(Locale.ROOT));
     }
 
 }

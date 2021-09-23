@@ -81,10 +81,10 @@ public final class FloatyPlugin extends TehPlugin {
         registerListeners(
                 this.injector.getInstance(AntiBuildListener.class),
                 this.injector.getInstance(ChatListener.class),
-                this.injector.getInstance(TransportationListener.class),
                 this.injector.getInstance(FlightListener.class),
                 this.injector.getInstance(PianoListener.class),
                 this.injector.getInstance(PlayerListener.class),
+                this.injector.getInstance(TransportationListener.class),
                 this.injector.getInstance(VoidLoopListener.class)
         );
     }
