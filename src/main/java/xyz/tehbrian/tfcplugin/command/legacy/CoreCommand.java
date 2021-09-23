@@ -1,4 +1,4 @@
-package xyz.tehbrian.tfcplugin.command;
+package xyz.tehbrian.tfcplugin.command.legacy;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
@@ -37,7 +37,7 @@ public class CoreCommand extends BaseCommand {
     @Description("Reload TFCPlugin's config.")
     public void onReload(final CommandSender sender) {
         this.floatyPlugin.loadConfigs();
-        sender.sendMessage(new MsgBuilder().def("msg.core.reload").build());
+        sender.sendMessage(new MsgBuilder().def("core.reload").build());
     }
 
     @CommandAlias("fly")
@@ -45,9 +45,9 @@ public class CoreCommand extends BaseCommand {
     @Description("Toggle your flight ability.")
     public void onFly(final Player player) {
         if (this.userService.getUser(player).toggleFlyBypassEnabled()) {
-            player.sendMessage(new MsgBuilder().def("msg.core.fly_enabled").build());
+            player.sendMessage(new MsgBuilder().def("core.fly_enabled").build());
         } else {
-            player.sendMessage(new MsgBuilder().def("msg.core.fly_disabled").build());
+            player.sendMessage(new MsgBuilder().def("core.fly_disabled").build());
         }
     }
 

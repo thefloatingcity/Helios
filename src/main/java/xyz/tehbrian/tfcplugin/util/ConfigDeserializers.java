@@ -3,12 +3,14 @@ package xyz.tehbrian.tfcplugin.util;
 import broccolai.corn.paper.item.PaperItemBuilder;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.Template;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.Inventory;
 import org.spongepowered.configurate.CommentedConfigurationNode;
+import org.spongepowered.configurate.serialize.SerializationException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,25 +21,24 @@ public class ConfigDeserializers {
     private ConfigDeserializers() {
     }
 
-    public static List<String> deserializePage(final ConfigurationSection book, final Integer pageNumber) {
-        final ConfigurationSection pages = Objects.requireNonNull(book).getConfigurationSection("pages");
-        final ConfigurationSection page = Objects.requireNonNull(pages).getConfigurationSection(pageNumber.toString());
-        final List<String> messages = new ArrayList<>();
+    public static List<Component> deserializePage(final CommentedConfigurationNode book, final Integer pageNumber)
+            throws SerializationException {
+        final CommentedConfigurationNode pages = Objects.requireNonNull(book).node("pages");
+        final CommentedConfigurationNode page = Objects.requireNonNull(pages).node(pageNumber.toString());
+        final List<Component> messages = new ArrayList<>();
 
-        messages.add(new MsgBuilder()
-                .prefixString(book.getString("multistart"))
-                .msgKey("msg.page_header")
-                .formats(Objects.requireNonNull(page).getString("title"), pageNumber, pages.getKeys(false).size())
-                .build());
+        messages.add(MiniMessage.get().parse(
+                book.node("multistart").getString() + book.node("page_header").getString(),
+                Template.of("title", Objects.requireNonNull(page.node("title").getString())),
+                Template.of("page", pageNumber.toString()),
+                Template.of("page_count", String.valueOf(pages.childrenList().size()))
+        ));
 
-        for (final String line : page.getStringList("content")) {
-            messages.add(new MsgBuilder()
-                    .prefixString(book.getString("multi"))
-                    .msgString(line)
-                    .build());
+        final String multi = book.node("multi").getString();
+        for (final String line : Objects.requireNonNull(page.node("content").getList(String.class))) {
+            messages.add(MiniMessage.get().parse(multi + line));
         }
 
-        messages.replaceAll(MiscUtils::color);
         return messages;
     }
 

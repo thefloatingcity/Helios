@@ -17,7 +17,6 @@ import xyz.tehbrian.tfcplugin.config.LangConfig;
 import xyz.tehbrian.tfcplugin.util.MiscUtils;
 
 import java.util.Calendar;
-import java.util.List;
 
 @SuppressWarnings("unused")
 public class PlayerListener implements Listener {
@@ -63,8 +62,7 @@ public class PlayerListener implements Listener {
     public void onQuit(final PlayerQuitEvent event) {
         event.quitMessage(this.langConfig.c(
                 NodePath.path("leave"),
-                List.of(Template.of("player", event.getPlayer().displayName())
-                )
+                Template.of("player", event.getPlayer().displayName())
         ));
     }
 

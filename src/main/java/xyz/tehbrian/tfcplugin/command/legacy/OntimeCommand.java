@@ -1,4 +1,4 @@
-package xyz.tehbrian.tfcplugin.command;
+package xyz.tehbrian.tfcplugin.command.legacy;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
@@ -26,10 +26,10 @@ public class OntimeCommand extends BaseCommand {
         final long millisPlayed = (targetPlayer.getStatistic(Statistic.PLAY_ONE_MINUTE) / 20) * 1000;
 
         if (target == null) {
-            player.sendMessage(new MsgBuilder().def("msg.ontime.check_self").formats(MiscUtils.fancifyTime(millisPlayed)).build());
+            player.sendMessage(new MsgBuilder().def("ontime.check_self").formats(MiscUtils.fancifyTime(millisPlayed)).build());
         } else {
             player.sendMessage(new MsgBuilder()
-                    .def("msg.ontime.check_other")
+                    .def("ontime.check_other")
                     .formats(targetPlayer.getDisplayName(), MiscUtils.fancifyTime(millisPlayed))
                     .build());
         }

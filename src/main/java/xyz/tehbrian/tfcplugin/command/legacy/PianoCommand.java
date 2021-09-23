@@ -1,4 +1,4 @@
-package xyz.tehbrian.tfcplugin.command;
+package xyz.tehbrian.tfcplugin.command.legacy;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
@@ -53,7 +53,7 @@ public class PianoCommand extends BaseCommand {
         this.userService.getUser(player).piano().instrument(pianoSound);
         player.sendMessage(new MsgBuilder()
                 .prefixKey("prefixes.piano.prefix")
-                .msgKey("msg.piano.instrument_change")
+                .msgKey("piano.instrument_change")
                 .formats(pianoSound.toString())
                 .build());
     }
@@ -62,9 +62,9 @@ public class PianoCommand extends BaseCommand {
     @Description("Toggle your piano on and off.")
     public void onToggle(final Player player) {
         if (this.userService.getUser(player).piano().toggleEnabled()) {
-            player.sendMessage(new MsgBuilder().prefixKey("prefixes.piano.prefix").msgKey("msg.piano.enabled").build());
+            player.sendMessage(new MsgBuilder().prefixKey("prefixes.piano.prefix").msgKey("piano.enabled").build());
         } else {
-            player.sendMessage(new MsgBuilder().prefixKey("prefixes.piano.prefix").msgKey("msg.piano.disabled").build());
+            player.sendMessage(new MsgBuilder().prefixKey("prefixes.piano.prefix").msgKey("piano.disabled").build());
         }
     }
 

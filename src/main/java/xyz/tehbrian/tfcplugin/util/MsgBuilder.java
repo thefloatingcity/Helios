@@ -1,12 +1,15 @@
 package xyz.tehbrian.tfcplugin.util;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class MsgBuilder {
 
     private String msgKey;
     private String msgString;
     private String prefixKey;
     private String prefixString;
-    private Object[] formats;
+    private List<String> formats;
 
     public MsgBuilder def(final String msgKey) {
         this.msgKey = msgKey;
@@ -34,8 +37,8 @@ public class MsgBuilder {
         return this;
     }
 
-    public MsgBuilder formats(final Object... formats) {
-        this.formats = formats;
+    public MsgBuilder formats(final String... formats) {
+        this.formats = Arrays.asList(formats);
         return this;
     }
 
@@ -54,13 +57,12 @@ public class MsgBuilder {
             sb.append(this.msgString);
         }
 
-        String message = sb.toString();
 
         if (this.formats != null) {
-            message = String.format(message, this.formats);
+            sb.append(" [").append(String.join(", ", formats)).append("]");
         }
 
-        return MiscUtils.color(message);
+        return sb.toString();
     }
 
 }

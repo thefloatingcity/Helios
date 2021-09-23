@@ -1,4 +1,4 @@
-package xyz.tehbrian.tfcplugin.command;
+package xyz.tehbrian.tfcplugin.command.legacy;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
@@ -44,10 +44,10 @@ public class ActCommand extends BaseCommand {
         targetPlayer.getWorld().playSound(targetPlayer.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
 
         if (target == null) {
-            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.launch_self").formats(player.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("action.launch_self").formats(player.getDisplayName()).build());
         } else {
             Bukkit.broadcastMessage(new MsgBuilder()
-                    .msgKey("msg.action.launch_other")
+                    .msgKey("action.launch_other")
                     .formats(player.getDisplayName(), targetPlayer.getDisplayName())
                     .build());
         }
@@ -70,10 +70,10 @@ public class ActCommand extends BaseCommand {
         );
 
         if (target == null) {
-            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.boost_self").formats(player.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("action.boost_self").formats(player.getDisplayName()).build());
         } else {
             Bukkit.broadcastMessage(new MsgBuilder()
-                    .msgKey("msg.action.boost_other")
+                    .msgKey("action.boost_other")
                     .formats(player.getDisplayName(), targetPlayer.getDisplayName())
                     .build());
         }
@@ -89,10 +89,10 @@ public class ActCommand extends BaseCommand {
         targetPlayer.getWorld().strikeLightning(targetPlayer.getLocation());
 
         if (target == null) {
-            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.zap_self").formats(player.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("action.zap_self").formats(player.getDisplayName()).build());
         } else {
             Bukkit.broadcastMessage(new MsgBuilder()
-                    .msgKey("msg.action.zap_other")
+                    .msgKey("action.zap_other")
                     .formats(player.getDisplayName(), targetPlayer.getDisplayName())
                     .build());
         }
@@ -118,10 +118,10 @@ public class ActCommand extends BaseCommand {
         targetPlayer.setVelocity(randomVector);
 
         if (target == null) {
-            Bukkit.broadcastMessage(new MsgBuilder().msgKey("msg.action.poke_self").formats(player.getDisplayName()).build());
+            Bukkit.broadcastMessage(new MsgBuilder().msgKey("action.poke_self").formats(player.getDisplayName()).build());
         } else {
             Bukkit.broadcastMessage(new MsgBuilder()
-                    .msgKey("msg.action.poke_other")
+                    .msgKey("action.poke_other")
                     .formats(player.getDisplayName(), targetPlayer.getDisplayName())
                     .build());
         }

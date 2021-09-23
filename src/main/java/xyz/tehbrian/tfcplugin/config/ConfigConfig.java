@@ -25,7 +25,7 @@ public final class ConfigConfig extends AbstractConfig<HoconConfigurateWrapper> 
     private final FloatyPlugin floatyPlugin;
 
     private @Nullable Data data;
-    private @Nullable Location spawn;
+    private @Nullable Spawn spawn;
 
     @Inject
     public ConfigConfig(
@@ -63,7 +63,12 @@ public final class ConfigConfig extends AbstractConfig<HoconConfigurateWrapper> 
             return;
         }
 
-        this.spawn = ConfigDeserializers.deserializeLocation(rootNode.node("spawn"));
+        final var spawnNode = rootNode.node("spawn");
+        this.spawn = new Spawn(
+                ConfigDeserializers.deserializeLocation(spawnNode.node("overworld")),
+                ConfigDeserializers.deserializeLocation(spawnNode.node("nether")),
+                ConfigDeserializers.deserializeLocation(spawnNode.node("end"))
+        );
 
         this.logger.info("Successfully loaded configuration file {}", fileName);
     }
@@ -77,7 +82,7 @@ public final class ConfigConfig extends AbstractConfig<HoconConfigurateWrapper> 
         return this.data;
     }
 
-    public @Nullable Location spawn() {
+    public @Nullable Spawn spawn() {
         return this.spawn;
     }
 
@@ -88,6 +93,12 @@ public final class ConfigConfig extends AbstractConfig<HoconConfigurateWrapper> 
         public static record PokeForce(int minY, int maxY, int minXZ, int maxXZ) {
 
         }
+
+    }
+
+    public static record Spawn(Location overworld,
+                               Location nether,
+                               Location end) {
 
     }
 

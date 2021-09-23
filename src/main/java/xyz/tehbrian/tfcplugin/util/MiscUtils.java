@@ -13,15 +13,15 @@ public class MiscUtils {
 
     public static String fancifyTime(final long milliseconds) {
         if (milliseconds >= 86400000) {
-            return new MsgBuilder().msgKey("msg.fancify_time_format").formats(milliseconds / 86400000d, "days").build();
+            return new MsgBuilder().msgKey("fancify_time_format").formats(String.valueOf(milliseconds / 86400000d), "days").build();
         } else if (milliseconds >= 3600000) {
-            return new MsgBuilder().msgKey("msg.fancify_time_format").formats(milliseconds / 3600000d, "hours").build();
+            return new MsgBuilder().msgKey("fancify_time_format").formats(String.valueOf(milliseconds / 3600000d), "hours").build();
         } else if (milliseconds >= 60000) {
-            return new MsgBuilder().msgKey("msg.fancify_time_format").formats(milliseconds / 60000d, "minutes").build();
+            return new MsgBuilder().msgKey("fancify_time_format").formats(String.valueOf(milliseconds / 60000d), "minutes").build();
         } else if (milliseconds >= 1000) {
-            return new MsgBuilder().msgKey("msg.fancify_time_format").formats(milliseconds / 1000d, "seconds").build();
+            return new MsgBuilder().msgKey("fancify_time_format").formats(String.valueOf(milliseconds / 1000d), "seconds").build();
         } else {
-            return new MsgBuilder().msgKey("msg.fancify_time_format").formats(milliseconds, "milliseconds").build();
+            return new MsgBuilder().msgKey("fancify_time_format").formats(String.valueOf(milliseconds), "milliseconds").build();
         }
     }
 

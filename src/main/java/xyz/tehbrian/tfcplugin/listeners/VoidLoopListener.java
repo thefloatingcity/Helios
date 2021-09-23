@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -46,30 +47,46 @@ public class VoidLoopListener implements Listener {
         }
         event.setCancelled(true);
 
-        if (location.getY() > -450) {
+
+        final World.Environment environment = event.getEntity().getWorld().getEnvironment();
+
+        final var engageY = switch (environment) {
+            case THE_END -> -200;
+            case NETHER -> -100;
+            default -> -500;
+        };
+
+        if (location.getY() > engageY) {
             return;
         }
+
         Bukkit.getScheduler().runTask(this.floatyPlugin, () -> {
-            location.setY(650);
+            final var teleportY = switch (environment) {
+                case THE_END -> 500;
+                case NETHER -> 400;
+                default -> 650;
+            };
+
+            location.setY(teleportY);
             event.getEntity().teleport(location);
 
             if (!(event.getEntity() instanceof final Player player)) {
                 return;
             }
 
+            final var spawnLocation = switch (environment) {
+                case THE_END -> this.configConfig.spawn().end();
+                case NETHER -> this.configConfig.spawn().nether();
+                default -> this.configConfig.spawn().overworld();
+            };
+
             if (player.getFallDistance() >= 3000) {
                 player.sendMessage(this.langConfig.c(NodePath.path("warp", "max")));
                 player.setFallDistance(0);
-                player.teleport(configConfig.spawn());
-                player.getWorld().strikeLightningEffect(configConfig.spawn());
-                player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, configConfig.spawn(), 1);
-                player.getWorld().playSound(
-                        configConfig.spawn(),
-                        Sound.ENTITY_GENERIC_EXPLODE,
-                        SoundCategory.MASTER,
-                        4,
-                        1
-                );
+                player.teleport(spawnLocation);
+                player.getWorld().strikeLightningEffect(spawnLocation);
+                player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, spawnLocation, 1);
+                player.getWorld().playSound(spawnLocation, Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 4, 1);
             } else if (player.getFallDistance() >= 2000) {
                 player.sendMessage(this.langConfig.c(NodePath.path("warp", "second")));
             } else if (player.getFallDistance() >= 1000) {

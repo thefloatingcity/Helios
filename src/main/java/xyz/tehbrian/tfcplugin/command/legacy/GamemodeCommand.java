@@ -1,4 +1,4 @@
-package xyz.tehbrian.tfcplugin.command;
+package xyz.tehbrian.tfcplugin.command.legacy;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CatchUnknown;
@@ -30,13 +30,13 @@ public class GamemodeCommand extends BaseCommand {
         targetPlayer.setGameMode(GameMode.SURVIVAL);
 
         if (target == null) {
-            player.sendMessage(new MsgBuilder().def("msg.gamemode.change_self").formats("Survival").build());
+            player.sendMessage(new MsgBuilder().def("gamemode.change_self").formats("Survival").build());
         } else {
             player.sendMessage(new MsgBuilder()
-                    .def("msg.gamemode.change_other")
+                    .def("gamemode.change_other")
                     .formats(targetPlayer.getDisplayName(), "Survival")
                     .build());
-            targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode.change_self").formats("Survival").build());
+            targetPlayer.sendMessage(new MsgBuilder().def("gamemode.change_self").formats("Survival").build());
         }
     }
 
@@ -50,13 +50,13 @@ public class GamemodeCommand extends BaseCommand {
         targetPlayer.setGameMode(GameMode.CREATIVE);
 
         if (target == null) {
-            player.sendMessage(new MsgBuilder().def("msg.gamemode.change_self").formats("Creative").build());
+            player.sendMessage(new MsgBuilder().def("gamemode.change_self").formats("Creative").build());
         } else {
             player.sendMessage(new MsgBuilder()
-                    .def("msg.gamemode.change_other")
+                    .def("gamemode.change_other")
                     .formats(targetPlayer.getDisplayName(), "Creative")
                     .build());
-            targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode.change_self").formats("Creative").build());
+            targetPlayer.sendMessage(new MsgBuilder().def("gamemode.change_self").formats("Creative").build());
         }
     }
 
@@ -70,19 +70,19 @@ public class GamemodeCommand extends BaseCommand {
         targetPlayer.setGameMode(GameMode.ADVENTURE);
 
         if (target == null) {
-            player.sendMessage(new MsgBuilder().def("msg.gamemode.change_self").formats("Adventure").build());
+            player.sendMessage(new MsgBuilder().def("gamemode.change_self").formats("Adventure").build());
         } else {
             player.sendMessage(new MsgBuilder()
-                    .def("msg.gamemode.change_other")
+                    .def("gamemode.change_other")
                     .formats(targetPlayer.getDisplayName(), "Creative")
                     .build());
-            targetPlayer.sendMessage(new MsgBuilder().def("msg.gamemode.change_self").formats("Adventure").build());
+            targetPlayer.sendMessage(new MsgBuilder().def("gamemode.change_self").formats("Adventure").build());
         }
     }
 
     @CatchUnknown
     public void onUnknown(final CommandSender sender) {
-        sender.sendMessage(new MsgBuilder().def("msg.gamemode.unknown").build());
+        sender.sendMessage(new MsgBuilder().def("gamemode.unknown").build());
     }
 
 }

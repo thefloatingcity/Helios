@@ -5,15 +5,21 @@ import co.aikar.commands.PaperCommandManager;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import dev.tehbrian.tehlib.paper.TehPlugin;
+import org.bukkit.command.CommandSender;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
-import xyz.tehbrian.tfcplugin.command.ActCommand;
-import xyz.tehbrian.tfcplugin.command.CoreCommand;
-import xyz.tehbrian.tfcplugin.command.EmoteCommand;
-import xyz.tehbrian.tfcplugin.command.GamemodeCommand;
-import xyz.tehbrian.tfcplugin.command.OntimeCommand;
-import xyz.tehbrian.tfcplugin.command.PianoCommand;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import xyz.tehbrian.tfcplugin.command.BroadcastCommand;
+import xyz.tehbrian.tfcplugin.command.CommandService;
+import xyz.tehbrian.tfcplugin.command.HatCommand;
 import xyz.tehbrian.tfcplugin.command.RulesCommand;
-import xyz.tehbrian.tfcplugin.command.UtilCommand;
+import xyz.tehbrian.tfcplugin.command.WorldCommands;
+import xyz.tehbrian.tfcplugin.command.legacy.ActCommand;
+import xyz.tehbrian.tfcplugin.command.legacy.CoreCommand;
+import xyz.tehbrian.tfcplugin.command.legacy.EmoteCommand;
+import xyz.tehbrian.tfcplugin.command.legacy.GamemodeCommand;
+import xyz.tehbrian.tfcplugin.command.legacy.OntimeCommand;
+import xyz.tehbrian.tfcplugin.command.legacy.PianoCommand;
 import xyz.tehbrian.tfcplugin.config.BooksConfig;
 import xyz.tehbrian.tfcplugin.config.ConfigConfig;
 import xyz.tehbrian.tfcplugin.config.EmotesConfig;
@@ -90,6 +96,26 @@ public final class FloatyPlugin extends TehPlugin {
     }
 
     private void setupCommands() {
+        final @NonNull CommandService commandService = this.injector.getInstance(CommandService.class);
+        commandService.init();
+
+        final cloud.commandframework.paper.@Nullable PaperCommandManager<CommandSender> commandManager = commandService.get();
+        if (commandManager == null) {
+            this.getLog4JLogger().error("The CommandService was null after initialization!");
+            this.getLog4JLogger().error("Disabling plugin.");
+            this.disableSelf();
+            return;
+        }
+
+        this.injector.getInstance(BroadcastCommand.class).register(commandManager);
+        this.injector.getInstance(HatCommand.class).register(commandManager);
+        this.injector.getInstance(RulesCommand.class).register(commandManager);
+        this.injector.getInstance(WorldCommands.class).register(commandManager);
+
+        this.setupLegacyCommands();
+    }
+
+    private void setupLegacyCommands() {
         final PaperCommandManager commandManager = new PaperCommandManager(this);
 
         commandManager.registerCommand(this.injector.getInstance(ActCommand.class));
@@ -98,8 +124,6 @@ public final class FloatyPlugin extends TehPlugin {
         commandManager.registerCommand(this.injector.getInstance(GamemodeCommand.class));
         commandManager.registerCommand(this.injector.getInstance(OntimeCommand.class));
         commandManager.registerCommand(this.injector.getInstance(PianoCommand.class));
-        commandManager.registerCommand(this.injector.getInstance(RulesCommand.class));
-        commandManager.registerCommand(this.injector.getInstance(UtilCommand.class));
 
         commandManager.enableUnstableAPI("help");
 
