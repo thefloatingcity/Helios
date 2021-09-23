@@ -47,7 +47,7 @@ public class ConfigDeserializers {
         final Inventory inventory = Bukkit.createInventory(
                 null,
                 section.getInt("size"),
-                MiscUtils.color(section.getString("name"))
+                Objects.requireNonNull(section.getString("name"))
         );
 
         for (final String key : Objects.requireNonNull(items).getKeys(false)) {

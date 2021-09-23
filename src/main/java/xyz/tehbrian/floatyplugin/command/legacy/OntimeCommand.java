@@ -23,7 +23,7 @@ public class OntimeCommand extends BaseCommand {
         final Player targetPlayer = target == null ? player : target.getPlayer();
 
         // Liars. Why was it changed from PLAY_ONE_TICK to PLAY_ONE_MINUTE? It's incremented every tick, not minute.
-        final long millisPlayed = (targetPlayer.getStatistic(Statistic.PLAY_ONE_MINUTE) / 20) * 1000;
+        final long millisPlayed = (targetPlayer.getStatistic(Statistic.PLAY_ONE_MINUTE) / 20) * 1000L;
 
         if (target == null) {
             player.sendMessage(new MsgBuilder().def("ontime.check_self").formats(MiscUtils.fancifyTime(millisPlayed)).build());

@@ -1,27 +1,24 @@
 package xyz.tehbrian.floatyplugin.util;
 
-import org.bukkit.ChatColor;
-
 public class MiscUtils {
 
     private MiscUtils() {
     }
 
-    public static String color(final String string) {
-        return ChatColor.translateAlternateColorCodes('&', string);
-    }
-
     public static String fancifyTime(final long milliseconds) {
+        final var format = "%.2f %s";
+        final var simpleFormat = "%l %s";
+
         if (milliseconds >= 86400000) {
-            return new MsgBuilder().msgKey("fancify_time_format").formats(String.valueOf(milliseconds / 86400000d), "days").build();
+            return String.format(format, milliseconds / 86400000d, "days");
         } else if (milliseconds >= 3600000) {
-            return new MsgBuilder().msgKey("fancify_time_format").formats(String.valueOf(milliseconds / 3600000d), "hours").build();
+            return String.format(format, milliseconds / 3600000d, "hours");
         } else if (milliseconds >= 60000) {
-            return new MsgBuilder().msgKey("fancify_time_format").formats(String.valueOf(milliseconds / 60000d), "minutes").build();
+            return String.format(format, milliseconds / 60000d, "minutes");
         } else if (milliseconds >= 1000) {
-            return new MsgBuilder().msgKey("fancify_time_format").formats(String.valueOf(milliseconds / 1000d), "seconds").build();
+            return String.format(format, milliseconds / 1000d, "seconds");
         } else {
-            return new MsgBuilder().msgKey("fancify_time_format").formats(String.valueOf(milliseconds), "milliseconds").build();
+            return String.format(simpleFormat, milliseconds, "milliseconds");
         }
     }
 

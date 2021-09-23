@@ -57,7 +57,6 @@ public class MsgBuilder {
             sb.append(this.msgString);
         }
 
-
         if (this.formats != null) {
             sb.append(" [").append(String.join(", ", formats)).append("]");
         }
