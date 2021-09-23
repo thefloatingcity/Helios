@@ -2,6 +2,7 @@ package xyz.tehbrian.floatyplugin.listeners;
 
 import com.google.inject.Inject;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.World;
@@ -15,6 +16,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -25,9 +28,10 @@ import xyz.tehbrian.floatyplugin.config.LangConfig;
 
 /**
  * Ensures the following:
- * - Elytra nowhere but the end
- * - No sprinting, fun stuff in the nether
- * - No flying absolutely anywhere
+ * - no elytra anywhere but the end
+ * - no sprinting in the nether
+ * - no flying anywhere
+ * - no spectator
  */
 public final class TransportationListener implements Listener {
 
@@ -62,17 +66,6 @@ public final class TransportationListener implements Listener {
     }
 
     @EventHandler
-    public void onMove(final PlayerMoveEvent event) {
-        final Player player = event.getPlayer();
-        if (player.getWorld().getEnvironment() != World.Environment.THE_END) {
-            player.setGliding(false);
-        }
-        if (player.getWorld().getEnvironment() == World.Environment.NETHER) {
-            player.setSprinting(false);
-        }
-    }
-
-    @EventHandler
     public void onGameMode(final PlayerGameModeChangeEvent event) {
         final Player player = event.getPlayer();
         if (event.getNewGameMode() == GameMode.SPECTATOR) {
@@ -85,36 +78,58 @@ public final class TransportationListener implements Listener {
     }
 
     @EventHandler
-    public void onElytra(final EntityToggleGlideEvent event) {
-        if (event.getEntity().getWorld().getEnvironment() != World.Environment.THE_END) {
-            if (event.getEntity() instanceof Player player) {
-                player.setGliding(false);
-            }
+    public void onMove(final PlayerMoveEvent event) {
+        final Player player = event.getPlayer();
+        if (player.getWorld().getEnvironment() != World.Environment.THE_END) {
+            player.setGliding(false);
+        }
+        if (player.getWorld().getEnvironment() == World.Environment.NETHER) {
+            player.setSprinting(false);
         }
     }
 
     @EventHandler
-    public void onWorldChange(final PlayerChangedWorldEvent event) {
-        event.getPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
+    public void onElytra(final EntityToggleGlideEvent event) {
+        if (event.getEntity().getWorld().getEnvironment() == World.Environment.THE_END
+                || !(event.getEntity() instanceof Player player)) {
+            return;
+        }
+
+        if (event.isGliding()) {
+            player.playSound(player.getLocation(), Sound.ENTITY_TURTLE_EGG_CRACK, SoundCategory.MASTER, 100, 2);
+
+            final PlayerInventory inventory = player.getInventory();
+            if (inventory.getChestplate() != null && inventory.getChestplate().getType() == Material.ELYTRA) {
+                inventory.setChestplate(new ItemStack(Material.AIR));
+            }
+        }
+
+        player.setGliding(false);
     }
 
     @EventHandler
     public void onSprint(final PlayerToggleSprintEvent event) {
         final Player player = event.getPlayer();
-        if (player.getWorld().getEnvironment() == World.Environment.NETHER) {
-            if (!event.isSprinting()) {
-                return;
-            }
+        if (player.getWorld().getEnvironment() != World.Environment.NETHER
+                || !event.isSprinting()) {
+            return;
+        }
 
+        if (event.isSprinting()) {
             player.sendMessage(this.langConfig.c(NodePath.path("no_sprint")));
 
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 4, true, false, false));
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1000000000, 1, true, false, false));
             player.playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_DAMAGE, SoundCategory.MASTER, 100, 0);
             player.playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_DEATH, SoundCategory.MASTER, 100, 0);
-
-            player.getServer().getScheduler().scheduleSyncDelayedTask(this.floatyPlugin, () -> player.setSprinting(false), 3);
         }
+
+        player.setSprinting(false);
+    }
+
+    @EventHandler
+    public void onWorldChange(final PlayerChangedWorldEvent event) {
+        event.getPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
     }
 
 }

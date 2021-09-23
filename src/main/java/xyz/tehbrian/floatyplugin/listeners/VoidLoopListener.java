@@ -47,9 +47,8 @@ public final class VoidLoopListener implements Listener {
         if (location.getY() > -50) {
             return;
         }
+
         event.setCancelled(true);
-
-
         final World.Environment environment = entity.getWorld().getEnvironment();
 
         final var engageY = switch (environment) {
@@ -65,7 +64,7 @@ public final class VoidLoopListener implements Listener {
         Bukkit.getScheduler().runTask(this.floatyPlugin, () -> {
             final var teleportY = switch (environment) {
                 case THE_END -> 500;
-                case NETHER -> 400;
+                case NETHER -> 350;
                 default -> 650;
             };
 
