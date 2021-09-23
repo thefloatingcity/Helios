@@ -6,7 +6,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import xyz.tehbrian.floatyplugin.user.User;
 import xyz.tehbrian.floatyplugin.user.UserService;
 
-public class FlightService {
+public final class FlightService {
 
     private final UserService userService;
     private final FloatyPlugin floatyPlugin;

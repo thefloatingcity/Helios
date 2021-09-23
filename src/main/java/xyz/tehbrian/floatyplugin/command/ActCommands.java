@@ -1,21 +1,35 @@
 package xyz.tehbrian.floatyplugin.command;
 
+import cloud.commandframework.bukkit.parsers.PlayerArgument;
+import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
+import net.kyori.adventure.text.minimessage.Template;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.spongepowered.configurate.NodePath;
+import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
-public class ActCommands extends PaperCloudCommand<CommandSender> {
+import java.util.Random;
+
+public final class ActCommands extends PaperCloudCommand<CommandSender> {
 
     private final LangConfig langConfig;
+    private final ConfigConfig configConfig;
 
     @Inject
     public ActCommands(
-            final @NonNull LangConfig langConfig
+            final @NonNull LangConfig langConfig,
+            final @NonNull ConfigConfig configConfig
     ) {
         this.langConfig = langConfig;
+        this.configConfig = configConfig;
     }
 
     /**
@@ -25,99 +39,128 @@ public class ActCommands extends PaperCloudCommand<CommandSender> {
      */
     @Override
     public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
-//@CommandAlias("launch")
-//    @CommandPermission("floatyplugin.action.launch")
-//    @Description("Like a rocket!")
-//    @CommandCompletion("@player")
-//    public void onLaunch(final Player player, @Optional @CommandPermission("floatyplugin.action.launchother") final OnlinePlayer target) {
-//        final Player targetPlayer = target == null ? player : target.getPlayer();
+//        final var launch = commandManager.commandBuilder("launch")
+//                .senderType(Player.class)
+//                .permission("floatyplugin.action.launch")
+//                .meta(CommandMeta.DESCRIPTION, "Like a rocket!")
+//                .argument(PlayerArgument.optional("player"))
+//                .handler((c) -> {
+//                    final Player sender = (Player) c.getSender();
+//                    final Player target = c.<Player>getOptional("player").orElse((sender));
 //
-//        targetPlayer.setVelocity(new Vector(0, 10, 0));
-//        targetPlayer.getWorld().playSound(targetPlayer.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
+//                    target.setVelocity(new Vector(0, 10, 0));
+//                    target.getWorld().playSound(target.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
 //
-//        if (target == null) {
-//            Bukkit.broadcastMessage(new MsgBuilder().msgKey("action.launch_self").formats(player.getDisplayName()).build());
-//        } else {
-//            Bukkit.broadcastMessage(new MsgBuilder()
-//                    .msgKey("action.launch_other")
-//                    .formats(player.getDisplayName(), targetPlayer.getDisplayName())
-//                    .build());
-//        }
-//    }
+//                    if (c.<Player>getOptional("player").isPresent()) {
+//                        sender.getServer().sendMessage(this.langConfig.c(
+//                                NodePath.path("act", "launch_other"),
+//                                Template.of("issuer", sender.displayName()),
+//                                Template.of("target", target.displayName())
+//                        ));
+//                    } else {
+//                        sender.getServer().sendMessage(this.langConfig.c(
+//                                NodePath.path("act", "launch_self"),
+//                                Template.of("issuer", sender.displayName())
+//                        ));
+//                    }
+//                });
 //
-//    @CommandAlias("boost")
-//    @CommandPermission("floatyplugin.action.boost")
-//    @Description("Gives you a case of the zoomies.")
-//    @CommandCompletion("@players")
-//    public void onBoost(final Player player, @Optional @CommandPermission("floatyplugin.action.boostother") final OnlinePlayer target) {
-//        final Player targetPlayer = target == null ? player : target.getPlayer();
 //
-//        targetPlayer.setVelocity(targetPlayer.getLocation().getDirection().multiply(3));
-//        targetPlayer.getWorld().playSound(
-//                targetPlayer.getEyeLocation(),
-//                Sound.ENTITY_FIREWORK_ROCKET_LAUNCH,
-//                SoundCategory.MASTER,
-//                5,
-//                0.75F
-//        );
+//        final var boost = commandManager.commandBuilder("boost")
+//                .senderType(Player.class)
+//                .permission("floatyplugin.action.boost")
+//                .meta(CommandMeta.DESCRIPTION, "Gives you a case of the zoomies.")
+//                .argument(PlayerArgument.optional("player"))
+//                .handler((c) -> {
+//                    final Player sender = (Player) c.getSender();
+//                    final Player target = c.<Player>getOptional("player").orElse((sender));
 //
-//        if (target == null) {
-//            Bukkit.broadcastMessage(new MsgBuilder().msgKey("action.boost_self").formats(player.getDisplayName()).build());
-//        } else {
-//            Bukkit.broadcastMessage(new MsgBuilder()
-//                    .msgKey("action.boost_other")
-//                    .formats(player.getDisplayName(), targetPlayer.getDisplayName())
-//                    .build());
-//        }
-//    }
+//                    target.setVelocity(target.getLocation().getDirection().multiply(3));
+//                    target.getWorld().playSound(
+//                            target.getEyeLocation(),
+//                            Sound.ENTITY_FIREWORK_ROCKET_LAUNCH,
+//                            SoundCategory.MASTER,
+//                            5,
+//                            0.75F
+//                    );
 //
-//    @CommandAlias("zap")
-//    @CommandPermission("floatyplugin.action.zap")
-//    @Description("Kentucky Fried Player")
-//    @CommandCompletion("@players")
-//    public void onZap(final Player player, @Optional @CommandPermission("floatyplugin.action.zapother") final OnlinePlayer target) {
-//        final Player targetPlayer = target == null ? player : target.getPlayer();
-//
-//        targetPlayer.getWorld().strikeLightning(targetPlayer.getLocation());
-//
-//        if (target == null) {
-//            Bukkit.broadcastMessage(new MsgBuilder().msgKey("action.zap_self").formats(player.getDisplayName()).build());
-//        } else {
-//            Bukkit.broadcastMessage(new MsgBuilder()
-//                    .msgKey("action.zap_other")
-//                    .formats(player.getDisplayName(), targetPlayer.getDisplayName())
-//                    .build());
-//        }
-//    }
-//
-//    @CommandAlias("poke")
-//    @CommandPermission("floatyplugin.action.poke")
-//    @Description("Useful for annoying others.")
-//    @CommandCompletion("@players")
-//    public void onPoke(final Player player, @Optional @CommandPermission("floatyplugin.action.pokeother") final OnlinePlayer target) {
-//        final Player targetPlayer = target == null ? player : target.getPlayer();
-//
-//        final double maxY = this.main.getConfig().getDouble("poke_force.maxY");
-//        final double minY = this.main.getConfig().getDouble("poke_force.minY");
-//        final double maxXZ = this.main.getConfig().getDouble("poke_force.maxXZ");
-//        final double minXZ = this.main.getConfig().getDouble("poke_force.minXZ");
-//        final Random random = new Random();
-//        final double randX = minXZ + random.nextDouble() * (maxXZ - minXZ);
-//        final double randY = minY + random.nextDouble() * (maxY - minY);
-//        final double randZ = minXZ + random.nextDouble() * (maxXZ - minXZ);
-//        final Vector randomVector = new Vector(randX, randY, randZ);
-//
-//        targetPlayer.setVelocity(randomVector);
-//
-//        if (target == null) {
-//            Bukkit.broadcastMessage(new MsgBuilder().msgKey("action.poke_self").formats(player.getDisplayName()).build());
-//        } else {
-//            Bukkit.broadcastMessage(new MsgBuilder()
-//                    .msgKey("action.poke_other")
-//                    .formats(player.getDisplayName(), targetPlayer.getDisplayName())
-//                    .build());
-//        }
-//    }
+//                    if (c.<Player>getOptional("player").isPresent()) {
+//                        sender.getServer().sendMessage(this.langConfig.c(
+//                                NodePath.path("act", "boost_other"),
+//                                Template.of("issuer", sender.displayName()),
+//                                Template.of("target", target.displayName())
+//                        ));
+//                    } else {
+//                        sender.getServer().sendMessage(this.langConfig.c(
+//                                NodePath.path("act", "boost_self"),
+//                                Template.of("issuer", sender.displayName())
+//                        ));
+//                    }
+//                });
+
+        final var zap = commandManager.commandBuilder("zap")
+                .senderType(Player.class)
+                .permission("floatyplugin.action.zap")
+                .meta(CommandMeta.DESCRIPTION, "Kentucky Fried Player")
+                .argument(PlayerArgument.optional("player"))
+                .handler((c) -> {
+                    final Player sender = (Player) c.getSender();
+                    final Player target = c.<Player>getOptional("player").orElse((sender));
+
+                    target.getWorld().strikeLightning(target.getLocation());
+
+                    if (c.<Player>getOptional("player").isPresent()) {
+                        sender.getServer().sendMessage(this.langConfig.c(
+                                NodePath.path("act", "zap_other"),
+                                Template.of("issuer", sender.displayName()),
+                                Template.of("target", target.displayName())
+                        ));
+                    } else {
+                        sender.getServer().sendMessage(this.langConfig.c(
+                                NodePath.path("act", "zap_self"),
+                                Template.of("issuer", sender.displayName())
+                        ));
+                    }
+                });
+
+        final var poke = commandManager.commandBuilder("poke")
+                .senderType(Player.class)
+                .permission("floatyplugin.action.poke")
+                .meta(CommandMeta.DESCRIPTION, "Useful for annoying others.")
+                .argument(PlayerArgument.optional("player"))
+                .handler((c) -> {
+                    final Player sender = (Player) c.getSender();
+                    final Player target = c.<Player>getOptional("player").orElse((sender));
+
+                    final ConfigConfig.Data.PokeForce pokeForce = this.configConfig.data().pokeForce();
+                    final double maxY = pokeForce.maxY();
+                    final double minY = pokeForce.minY();
+                    final double maxXZ = pokeForce.maxXZ();
+                    final double minXZ = pokeForce.minXZ();
+                    final Random random = new Random();
+                    final double randX = minXZ + random.nextDouble() * (maxXZ - minXZ);
+                    final double randY = minY + random.nextDouble() * (maxY - minY);
+                    final double randZ = minXZ + random.nextDouble() * (maxXZ - minXZ);
+                    final Vector randomVector = new Vector(randX, randY, randZ);
+
+                    target.setVelocity(randomVector);
+
+                    if (c.<Player>getOptional("player").isPresent()) {
+                        sender.getServer().sendMessage(this.langConfig.c(
+                                NodePath.path("act", "zap_other"),
+                                Template.of("issuer", sender.displayName()),
+                                Template.of("target", target.displayName())
+                        ));
+                    } else {
+                        sender.getServer().sendMessage(this.langConfig.c(
+                                NodePath.path("act", "zap_self"),
+                                Template.of("issuer", sender.displayName())
+                        ));
+                    }
+                });
+
+        commandManager.command(zap);
+        commandManager.command(poke);
     }
 
 }

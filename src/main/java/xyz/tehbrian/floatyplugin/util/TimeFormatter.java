@@ -1,6 +1,6 @@
 package xyz.tehbrian.floatyplugin.util;
 
-public class TimeFormatter {
+public final class TimeFormatter {
 
     private TimeFormatter() {
     }

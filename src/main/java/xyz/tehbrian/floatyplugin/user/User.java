@@ -8,7 +8,7 @@ import xyz.tehbrian.floatyplugin.piano.Instrument;
 
 import java.util.UUID;
 
-public class User extends PaperUser {
+public final class User extends PaperUser {
 
     private final @NonNull Piano piano = new Piano(false, Instrument.HARP);
     private boolean flyBypassEnabled = false;
@@ -35,10 +35,10 @@ public class User extends PaperUser {
     }
 
     public @NonNull Piano piano() {
-        return piano;
+        return this.piano;
     }
 
-    public static class Piano {
+    public static final class Piano {
 
         private boolean enabled;
         private Instrument instrument;

@@ -19,7 +19,7 @@ import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
 @SuppressWarnings("unused")
-public class VoidLoopListener implements Listener {
+public final class VoidLoopListener implements Listener {
 
     private final FloatyPlugin floatyPlugin;
     private final ConfigConfig configConfig;

@@ -19,12 +19,12 @@ import xyz.tehbrian.floatyplugin.util.TimeFormatter;
 import java.util.Calendar;
 
 @SuppressWarnings("unused")
-public class PlayerListener implements Listener {
+public final class JoinQuitListener implements Listener {
 
     private final LangConfig langConfig;
 
     @Inject
-    public PlayerListener(final @NonNull LangConfig langConfig) {
+    public JoinQuitListener(final @NonNull LangConfig langConfig) {
         this.langConfig = langConfig;
     }
 
@@ -49,8 +49,12 @@ public class PlayerListener implements Listener {
         if (player.hasPlayedBefore()) {
             event.joinMessage(this.langConfig.c(NodePath.path("join"), Template.of("player", player.displayName())));
 
-            final long millisSinceLastPlayed = Calendar.getInstance().getTimeInMillis() - player.getLastPlayed(); // TODO: use non-deprecated method
-            player.sendMessage(this.langConfig.c(NodePath.path("motd"), Template.of("last", TimeFormatter.fancifyTime(millisSinceLastPlayed))));
+            // TODO: use non-deprecated method
+            final long millisSinceLastPlayed = Calendar.getInstance().getTimeInMillis() - player.getLastPlayed();
+            player.sendMessage(this.langConfig.c(
+                    NodePath.path("motd"),
+                    Template.of("last", TimeFormatter.fancifyTime(millisSinceLastPlayed))
+            ));
         } else {
             event.joinMessage(this.langConfig.c(NodePath.path("join_new"), Template.of("player", player.displayName())));
 

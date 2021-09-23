@@ -20,7 +20,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
-public class ChatListener implements Listener {
+public final class ChatListener implements Listener {
 
     private final EmotesConfig emotesConfig;
     private final LangConfig langConfig;

@@ -45,11 +45,11 @@ public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
 
                     c.<Player>getOptional("player").ifPresentOrElse((target) -> sender.sendMessage(this.langConfig.c(
                             NodePath.path("playtime", "other"),
-                            Template.of("time", TimeFormatter.fancifyTime(getMillisPlayed(target))),
+                            Template.of("time", TimeFormatter.fancifyTime(this.getMillisPlayed(target))),
                             Template.of("player", target.getName())
                     )), () -> sender.sendMessage(this.langConfig.c(
                             NodePath.path("playtime", "self"),
-                            Map.of("time", TimeFormatter.fancifyTime(getMillisPlayed(sender)))
+                            Map.of("time", TimeFormatter.fancifyTime(this.getMillisPlayed(sender)))
                     )));
                 });
 

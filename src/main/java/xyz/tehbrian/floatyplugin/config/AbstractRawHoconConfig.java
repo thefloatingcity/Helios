@@ -1,5 +1,6 @@
 package xyz.tehbrian.floatyplugin.config;
 
+import dev.tehbrian.tehlib.core.configurate.AbstractRawConfig;
 import org.apache.logging.log4j.Logger;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.hocon.HoconConfigurationLoader;

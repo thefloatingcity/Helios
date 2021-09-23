@@ -66,10 +66,10 @@ public class GamemodeCommands extends PaperCloudCommand<CommandSender> {
                     ));
                 });
 
-        commandManager.command(main)
-                .command(survival)
-                .command(creative)
-                .command(adventure);
+        commandManager.command(main);
+        commandManager.command(survival);
+        commandManager.command(creative);
+        commandManager.command(adventure);
     }
 
 }

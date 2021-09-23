@@ -29,7 +29,7 @@ import xyz.tehbrian.floatyplugin.config.LangConfig;
  * - No sprinting, fun stuff in the nether
  * - No flying absolutely anywhere
  */
-public class TransportationListener implements Listener {
+public final class TransportationListener implements Listener {
 
     private final LangConfig langConfig;
     private final FloatyPlugin floatyPlugin;

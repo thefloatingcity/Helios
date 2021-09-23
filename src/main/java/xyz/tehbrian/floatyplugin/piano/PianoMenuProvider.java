@@ -16,7 +16,7 @@ import xyz.tehbrian.floatyplugin.config.InventoriesConfig;
 
 import java.util.Objects;
 
-public class PianoMenuProvider {
+public final class PianoMenuProvider {
 
     private final FloatyPlugin floatyPlugin;
     private final InventoriesConfig inventoriesConfig;

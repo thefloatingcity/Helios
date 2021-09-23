@@ -5,7 +5,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.UUID;
 
-public class UserService extends PaperUserService<User> {
+public final class UserService extends PaperUserService<User> {
 
     @Override
     public @NonNull User getUser(@NonNull final UUID uuid) {
