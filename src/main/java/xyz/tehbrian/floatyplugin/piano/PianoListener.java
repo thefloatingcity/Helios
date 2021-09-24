@@ -1,8 +1,8 @@
-package xyz.tehbrian.floatyplugin.listeners;
+package xyz.tehbrian.floatyplugin.piano;
 
+import com.destroystokyo.paper.MaterialTags;
 import com.google.inject.Inject;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,9 +11,11 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import xyz.tehbrian.floatyplugin.Constants;
 import xyz.tehbrian.floatyplugin.config.InventoriesConfig;
 import xyz.tehbrian.floatyplugin.user.UserService;
+import xyz.tehbrian.floatyplugin.util.FormatUtil;
 
 import java.util.List;
 import java.util.Objects;
@@ -42,7 +44,10 @@ public final class PianoListener implements Listener {
             return;
         }
 
-        this.play(player, Objects.requireNonNull(player.getInventory().getItem(event.getNewSlot())));
+        final @Nullable ItemStack newItem = player.getInventory().getItem(event.getNewSlot());
+        if (newItem != null) {
+            this.play(player, newItem);
+        }
     }
 
     @EventHandler
@@ -50,28 +55,32 @@ public final class PianoListener implements Listener {
         if (!(event.getWhoClicked() instanceof final Player player)
                 || !player.hasPermission(Constants.Permissions.PIANO)
                 || event.getClickedInventory() == null
-                || !event.getView().title().contains(MiniMessage.get().parse(
+                || !event.getView().title().equals(FormatUtil.miniMessage(
                 Objects.requireNonNull(this.inventoriesConfig.rootNode().node("piano_notes", "name").getString())))
                 || !event.isRightClick()) {
             return;
         }
 
         event.setCancelled(true);
-        this.play(player, Objects.requireNonNull(event.getCurrentItem()));
+
+        final @Nullable ItemStack currentItem = event.getCurrentItem();
+        if (currentItem != null) {
+            this.play(player, currentItem);
+        }
     }
 
-    private void play(final Player player, final ItemStack item) {
+    private void play(final @NonNull Player player, final @NonNull ItemStack item) {
 //        ItemStack itemStack = new ItemStack(Material.DIRT);
 //        NamespacedKey key = new NamespacedKey(main, "our-custom-key");
 //        ItemMeta itemMeta = itemfStack.getItemMeta();
 //        itemMeta.getPersistentDataContainer().set(key, PersistentDataType.DOUBLE, Math.PI);
 //        itemStack.setItemMeta(itemMeta);
 
-        final List<Component> lore = Objects.requireNonNull(item.lore());
+        final @Nullable List<Component> lore = item.lore();
 
-
-        if (!item.getType().name().toLowerCase().contains("pane")
-                || !lore.get(1).contains(Component.text("[Note]"))) {
+        if (lore == null
+                || !MaterialTags.STAINED_GLASS_PANES.isTagged(item)
+                || FormatUtil.plain(lore.get(0)).equals("Note")) {
             return;
         }
 
@@ -80,7 +89,7 @@ public final class PianoListener implements Listener {
                 this.userService.getUser(player).piano().instrument().asBukkitSound(),
                 SoundCategory.MASTER,
                 3,
-                Float.parseFloat(lore.get(2).toString())
+                Float.parseFloat(FormatUtil.plain(lore.get(1)))
         );
     }
 

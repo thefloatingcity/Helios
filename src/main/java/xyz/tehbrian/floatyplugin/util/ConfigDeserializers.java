@@ -39,7 +39,7 @@ public final class ConfigDeserializers {
         final String multi = book.node("multi").getString();
         try {
             for (final String line : Objects.requireNonNull(page.node("content").getList(String.class))) {
-                messages.add(MiniMessage.get().parse(multi + line));
+                messages.add(FormatUtil.miniMessage(multi + line));
             }
         } catch (final SerializationException e) {
             e.printStackTrace();
@@ -54,7 +54,7 @@ public final class ConfigDeserializers {
         final Inventory inventory = Bukkit.createInventory(
                 null,
                 section.getInt("size"),
-                Objects.requireNonNull(section.getString("name"))
+                FormatUtil.miniMessage(Objects.requireNonNull(section.getString("name")))
         );
 
         for (final String key : Objects.requireNonNull(items).getKeys(false)) {
@@ -68,7 +68,7 @@ public final class ConfigDeserializers {
                                     )
                             )))
                     .amount(item.isSet("amount") ? item.getInt("amount") : 1)
-                    .name(MiniMessage.get().parse(Objects.requireNonNull(item.getString("name"))))
+                    .name(FormatUtil.miniMessage(Objects.requireNonNull(item.getString("name"))))
                     .lore(Component.text("uwu broke ur lore"))
                     .unbreakable(item.getBoolean("unbreakable"))
                     .build());

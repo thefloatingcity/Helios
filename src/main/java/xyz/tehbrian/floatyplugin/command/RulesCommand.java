@@ -62,12 +62,12 @@ public class RulesCommand extends PaperCloudCommand<CommandSender> {
         final var accept = main.literal("accept", ArgumentDescription.of("Whew, that was a lot of reading."))
                 .senderType(Player.class)
                 .handler(c -> {
-                    final var player = (Player) c.getSender();
-                    if (player.hasPermission(Constants.Permissions.BUILD)) {
-                        player.sendMessage(this.langConfig.c(NodePath.path("rules", "already_accepted")));
+                    final Player sender = (Player) c.getSender();
+                    if (sender.hasPermission(Constants.Permissions.BUILD)) {
+                        sender.sendMessage(this.langConfig.c(NodePath.path("rules", "already_accepted")));
                     } else {
-                        this.luckPermsService.addPlayerGroup(player, "passenger");
-                        player.sendMessage(this.langConfig.c(NodePath.path("rules", "accept")));
+                        this.luckPermsService.addPlayerGroup(sender, "passenger");
+                        sender.sendMessage(this.langConfig.c(NodePath.path("rules", "accept")));
                     }
                 });
 

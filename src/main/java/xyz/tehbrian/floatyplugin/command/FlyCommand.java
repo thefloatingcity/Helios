@@ -42,13 +42,13 @@ public class FlyCommand extends PaperCloudCommand<CommandSender> {
                 .permission(Constants.Permissions.FLY)
                 .senderType(Player.class)
                 .handler(c -> {
-                    final Player player = (Player) c.getSender();
-                    if (this.userService.getUser(player).toggleFlyBypassEnabled()) {
-                        player.sendMessage(this.langConfig.c(NodePath.path("fly", "enabled")));
-                        this.flightService.enableFlight(player);
+                    final Player sender = (Player) c.getSender();
+                    if (this.userService.getUser(sender).toggleFlyBypassEnabled()) {
+                        sender.sendMessage(this.langConfig.c(NodePath.path("fly", "enabled")));
+                        this.flightService.enableFlight(sender);
                     } else {
-                        player.sendMessage(this.langConfig.c(NodePath.path("fly", "disabled")));
-                        this.flightService.disableFlight(player);
+                        sender.sendMessage(this.langConfig.c(NodePath.path("fly", "disabled")));
+                        this.flightService.disableFlight(sender);
                     }
                 });
 

@@ -37,20 +37,20 @@ public class HatCommand extends PaperCloudCommand<CommandSender> {
                 .permission(Constants.Permissions.HAT)
                 .senderType(Player.class)
                 .handler(c -> {
-                    final var player = (Player) c.getSender();
-
-                    final PlayerInventory inventory = player.getInventory();
+                    final Player sender = (Player) c.getSender();
+                    final PlayerInventory inventory = sender.getInventory();
                     final ItemStack heldItem = inventory.getItemInMainHand();
+
                     if (heldItem.getType() == Material.AIR) {
                         if (inventory.getHelmet() == null) {
-                            player.sendMessage(this.langConfig.c(NodePath.path("hat", "none")));
+                            sender.sendMessage(this.langConfig.c(NodePath.path("hat", "none")));
                         } else {
                             inventory.setHelmet(new ItemStack(Material.AIR));
-                            player.sendMessage(this.langConfig.c(NodePath.path("hat", "removed")));
+                            sender.sendMessage(this.langConfig.c(NodePath.path("hat", "removed")));
                         }
                     } else {
                         inventory.setHelmet(heldItem);
-                        player.sendMessage(this.langConfig.c(NodePath.path("hat", "set")));
+                        sender.sendMessage(this.langConfig.c(NodePath.path("hat", "set")));
                     }
                 });
 
