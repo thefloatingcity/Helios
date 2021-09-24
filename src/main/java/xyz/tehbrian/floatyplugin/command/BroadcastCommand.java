@@ -6,6 +6,7 @@ import cloud.commandframework.paper.PaperCommandManager;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import xyz.tehbrian.floatyplugin.Constants;
 import xyz.tehbrian.floatyplugin.util.FormatUtil;
 
 public class BroadcastCommand extends PaperCloudCommand<CommandSender> {
@@ -19,7 +20,7 @@ public class BroadcastCommand extends PaperCloudCommand<CommandSender> {
     public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
         final var main = commandManager.commandBuilder("broadcast")
                 .meta(CommandMeta.DESCRIPTION, "Broadcast a server message.")
-                .permission("floatyplugin.broadcast")
+                .permission(Constants.Permissions.BROADCAST)
                 .argument(StringArgument.greedy("message"))
                 .handler(c -> c.getSender().getServer().sendMessage(FormatUtil.miniMessage(c.<String>get("message"))));
 

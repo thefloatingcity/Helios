@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
+import xyz.tehbrian.floatyplugin.Constants;
 import xyz.tehbrian.floatyplugin.config.BooksConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.piano.Instrument;
@@ -51,7 +52,7 @@ public class PianoCommand extends PaperCloudCommand<CommandSender> {
     public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
         final var main = commandManager.commandBuilder("piano")
                 .meta(CommandMeta.DESCRIPTION, "A fancy playable piano.")
-                .permission("floatyplugin.piano")
+                .permission(Constants.Permissions.PIANO)
                 .handler(c -> {
                     for (final Component line : ConfigDeserializers.deserializePage(
                             Objects.requireNonNull(this.booksConfig.rootNode())

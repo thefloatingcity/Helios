@@ -9,6 +9,7 @@ import net.kyori.adventure.text.minimessage.Template;
 import org.bukkit.command.CommandSender;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
+import xyz.tehbrian.floatyplugin.Constants;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
 public class FunCommands extends PaperCloudCommand<CommandSender> {
@@ -31,7 +32,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
     public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
         final var unreadable = commandManager.commandBuilder("unreadable")
                 .meta(CommandMeta.DESCRIPTION, "Untransparent. Is that a word? Opaque?")
-                .permission("floatyplugin.emote.unreadable")
+                .permission(Constants.Permissions.UNREADABLE)
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("emote", "unreadable"),
                         Template.of("player", c.getSender().getName())
@@ -39,7 +40,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
 
         final var shrug = commandManager.commandBuilder("shrug")
                 .meta(CommandMeta.DESCRIPTION, "You don't know. They don't know.")
-                .permission("floatyplugin.emote.shrug")
+                .permission(Constants.Permissions.SHRUG)
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("emote", "shrug"),
                         Template.of("player", c.getSender().getName())
@@ -47,7 +48,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
 
         final var spook = commandManager.commandBuilder("spook")
                 .meta(CommandMeta.DESCRIPTION, "OoooOOooOoOOoOOoo")
-                .permission("floatyplugin.emote.spook")
+                .permission(Constants.Permissions.SPOOK)
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("emote", "spook"),
                         Template.of("player", c.getSender().getName())
@@ -55,7 +56,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
 
         final var hug = commandManager.commandBuilder("hug")
                 .meta(CommandMeta.DESCRIPTION, "D'aww that's so cute!")
-                .permission("floatyplugin.emote.hug")
+                .permission(Constants.Permissions.HUG)
                 .argument(StringArgument.greedy("text"))
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("emote", "hug"),
@@ -65,7 +66,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
 
         final var kith = commandManager.commandBuilder("kith")
                 .meta(CommandMeta.DESCRIPTION, "It's kiss, with a lisp.")
-                .permission("floatyplugin.emote.kith")
+                .permission(Constants.Permissions.KITH)
                 .argument(StringArgument.greedy("text"))
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("emote", "kith"),
@@ -75,7 +76,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
 
         final var blame = commandManager.commandBuilder("blame")
                 .meta(CommandMeta.DESCRIPTION, "It's their fault, not yours.")
-                .permission("floatyplugin.emote.blame")
+                .permission(Constants.Permissions.BLAME)
                 .argument(StringArgument.greedy("text"))
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("emote", "blame"),
@@ -85,7 +86,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
 
         final var highfive = commandManager.commandBuilder("highfive")
                 .meta(CommandMeta.DESCRIPTION, "Up high! Down low! Too slow!")
-                .permission("floatyplugin.emote.highfive")
+                .permission(Constants.Permissions.HIGHFIVE)
                 .argument(StringArgument.greedy("text"))
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("emote", "highfive"),
@@ -94,7 +95,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 )));
 
         final var sue = commandManager.commandBuilder("sue")
-                .permission("floatyplugin.emote.sue")
+                .permission(Constants.Permissions.SUE)
                 .meta(CommandMeta.DESCRIPTION, "Court fixes everything.. right?")
                 .argument(StringArgument.optional("text", StringArgument.StringMode.GREEDY))
                 .handler(c -> c.<String>getOptional("text").ifPresentOrElse(

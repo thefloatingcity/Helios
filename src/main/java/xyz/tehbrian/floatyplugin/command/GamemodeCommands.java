@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
+import xyz.tehbrian.floatyplugin.Constants;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
 import java.util.Map;
@@ -33,7 +34,7 @@ public class GamemodeCommands extends PaperCloudCommand<CommandSender> {
     @Override
     public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
         final var main = commandManager.commandBuilder("gamemode", "gm")
-                .permission("floatyplugin.gamemode")
+                .permission(Constants.Permissions.GAMEMODE)
                 .meta(CommandMeta.DESCRIPTION, "Change gamemodes.");
 
         final var survival = main.literal("survival", ArgumentDescription.of("Change to survival."), "s", "0")

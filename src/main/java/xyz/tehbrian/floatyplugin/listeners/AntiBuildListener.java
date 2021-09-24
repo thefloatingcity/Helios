@@ -21,6 +21,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
+import xyz.tehbrian.floatyplugin.Constants;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
 @SuppressWarnings("unused")
@@ -108,7 +109,7 @@ public final class AntiBuildListener implements Listener {
     }
 
     private <T extends Cancellable> void onAntiBuild(final T event, final Player player, final boolean silent) {
-        if (!player.hasPermission("floatyplugin.build")) {
+        if (!player.hasPermission(Constants.Permissions.BUILD)) {
             if (!silent) {
                 player.sendMessage(this.langConfig.c(NodePath.path("no_build")));
             }

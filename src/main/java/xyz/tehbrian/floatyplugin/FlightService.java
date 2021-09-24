@@ -23,7 +23,7 @@ public final class FlightService {
     public void checkFlight(final Player player) {
         final User user = this.userService.getUser(player);
 
-        if (player.hasPermission("floatyplugin.core.fly") && user.flyBypassEnabled()) {
+        if (player.hasPermission(Constants.Permissions.FLY) && user.flyBypassEnabled()) {
             this.enableFlight(player);
         } else {
             this.disableFlight(player);

@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
+import xyz.tehbrian.floatyplugin.Constants;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
 public class HatCommand extends PaperCloudCommand<CommandSender> {
@@ -33,7 +34,7 @@ public class HatCommand extends PaperCloudCommand<CommandSender> {
     public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
         final var main = commandManager.commandBuilder("hat")
                 .meta(CommandMeta.DESCRIPTION, "Put fancy things on your head!")
-                .permission("floatyplugin.hat")
+                .permission(Constants.Permissions.HAT)
                 .senderType(Player.class)
                 .handler(c -> {
                     final var player = (Player) c.getSender();

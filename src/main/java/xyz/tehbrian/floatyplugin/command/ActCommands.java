@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
+import xyz.tehbrian.floatyplugin.Constants;
 import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
@@ -39,7 +40,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
     public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
 //        final var launch = commandManager.commandBuilder("launch")
 //                .senderType(Player.class)
-//                .permission("floatyplugin.action.launch")
+//                .permission(Constants.Permissions.LAUNCH)
 //                .meta(CommandMeta.DESCRIPTION, "Like a rocket!")
 //                .argument(PlayerArgument.optional("player"))
 //                .handler(c -> {
@@ -66,7 +67,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
 //
 //        final var boost = commandManager.commandBuilder("boost")
 //                .senderType(Player.class)
-//                .permission("floatyplugin.action.boost")
+//                .permission(Constants.Permissions.BOOST)
 //                .meta(CommandMeta.DESCRIPTION, "Gives you a case of the zoomies.")
 //                .argument(PlayerArgument.optional("player"))
 //                .handler(c -> {
@@ -98,7 +99,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
 
         final var zap = commandManager.commandBuilder("zap")
                 .senderType(Player.class)
-                .permission("floatyplugin.action.zap")
+                .permission(Constants.Permissions.ZAP)
                 .meta(CommandMeta.DESCRIPTION, "Kentucky Fried Player")
                 .argument(PlayerArgument.optional("player"))
                 .handler(c -> {
@@ -123,7 +124,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
 
         final var poke = commandManager.commandBuilder("poke")
                 .senderType(Player.class)
-                .permission("floatyplugin.action.poke")
+                .permission(Constants.Permissions.POKE)
                 .meta(CommandMeta.DESCRIPTION, "Useful for annoying others.")
                 .argument(PlayerArgument.optional("player"))
                 .handler(c -> {

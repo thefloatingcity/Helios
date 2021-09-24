@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
+import xyz.tehbrian.floatyplugin.Constants;
 import xyz.tehbrian.floatyplugin.FlightService;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.user.UserService;
@@ -38,7 +39,7 @@ public class FlyCommand extends PaperCloudCommand<CommandSender> {
     public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
         final var main = commandManager.commandBuilder("fly")
                 .meta(CommandMeta.DESCRIPTION, "Bends the space/time continuum.")
-                .permission("floatyplugin.fly")
+                .permission(Constants.Permissions.FLY)
                 .senderType(Player.class)
                 .handler(c -> {
                     final Player player = (Player) c.getSender();

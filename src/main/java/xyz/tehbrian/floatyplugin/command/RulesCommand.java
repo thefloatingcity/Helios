@@ -11,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
+import xyz.tehbrian.floatyplugin.Constants;
 import xyz.tehbrian.floatyplugin.LuckPermsService;
 import xyz.tehbrian.floatyplugin.config.BooksConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
@@ -62,7 +63,7 @@ public class RulesCommand extends PaperCloudCommand<CommandSender> {
                 .senderType(Player.class)
                 .handler(c -> {
                     final var player = (Player) c.getSender();
-                    if (player.hasPermission("floatyplugin.build")) {
+                    if (player.hasPermission(Constants.Permissions.BUILD)) {
                         player.sendMessage(this.langConfig.c(NodePath.path("rules", "already_accepted")));
                     } else {
                         this.luckPermsService.addPlayerGroup(player, "passenger");

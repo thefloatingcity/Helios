@@ -12,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.NodePath;
+import xyz.tehbrian.floatyplugin.Constants;
 import xyz.tehbrian.floatyplugin.config.EmotesConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.util.FormatUtil;
@@ -46,7 +47,7 @@ public final class ChatListener implements Listener {
 
         event.renderer((source, sourceDisplayName, message, viewer) -> {
             var renderedMessage = message;
-            if (player.hasPermission("floatyplugin.chatcolor")) {
+            if (player.hasPermission(Constants.Permissions.CHATCOLOR)) {
                 renderedMessage = FormatUtil.legacy(message);
             }
 
