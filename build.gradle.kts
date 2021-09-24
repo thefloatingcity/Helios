@@ -38,7 +38,6 @@ dependencies {
     implementation("com.google.inject:guice:5.0.1")
     implementation("net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT")
     implementation("org.spongepowered:configurate-hocon:4.0.0")
-    implementation("com.github.stefvanschie.inventoryframework:IF:0.7.2")
 
     implementation("broccolai.corn:corn-minecraft-paper:3.0.0-SNAPSHOT")
     implementation("dev.tehbrian:tehlib-paper:0.1.0-SNAPSHOT")
@@ -53,7 +52,5 @@ tasks {
 
     shadowJar {
         archiveBaseName.set("FloatyPlugin")
-
-        relocate("com.github.stefvanschie.inventoryframework", "xyz.tehbrian.floatyplugin.libs.inventoryframework")
     }
 }
