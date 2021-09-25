@@ -36,15 +36,6 @@ public final class JoinQuitListener implements Listener {
 
         final Firework firework = player.getWorld().spawn(player.getEyeLocation(), Firework.class);
         final FireworkMeta fireworkMeta = firework.getFireworkMeta();
-        fireworkMeta.addEffect(FireworkEffect.builder()
-                .flicker(true)
-                .trail(false)
-                .with(FireworkEffect.Type.BALL_LARGE)
-                .withColor(Color.WHITE, Color.BLUE, Color.GREEN)
-                .withFade(Color.GREEN, Color.BLUE, Color.WHITE)
-                .build());
-        fireworkMeta.setPower(2);
-        firework.setFireworkMeta(fireworkMeta);
 
         if (player.hasPlayedBefore()) {
             event.joinMessage(this.langConfig.c(NodePath.path("join"), Template.of("player", player.displayName())));
@@ -55,11 +46,31 @@ public final class JoinQuitListener implements Listener {
                     NodePath.path("motd"),
                     Template.of("last", TimeFormatter.fancifyTime(millisSinceLastPlayed))
             ));
+
+            fireworkMeta.addEffect(FireworkEffect.builder()
+                    .flicker(true)
+                    .trail(false)
+                    .with(FireworkEffect.Type.BALL)
+                    .withColor(Color.WHITE, Color.BLUE, Color.GREEN)
+                    .withFade(Color.GREEN, Color.BLUE, Color.WHITE)
+                    .build());
+            fireworkMeta.setPower(2);
         } else {
             event.joinMessage(this.langConfig.c(NodePath.path("join_new"), Template.of("player", player.displayName())));
 
             player.sendMessage(this.langConfig.c(NodePath.path("motd_new"), Template.of("player", player.displayName())));
+
+            fireworkMeta.addEffect(FireworkEffect.builder()
+                    .flicker(true)
+                    .trail(true)
+                    .with(FireworkEffect.Type.BALL_LARGE)
+                    .withColor(Color.SILVER, Color.PURPLE, Color.TEAL)
+                    .withFade(Color.TEAL, Color.PURPLE, Color.SILVER)
+                    .build());
+            fireworkMeta.setPower(3);
         }
+
+        firework.setFireworkMeta(fireworkMeta);
     }
 
     @EventHandler
