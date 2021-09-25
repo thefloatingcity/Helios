@@ -1,9 +1,6 @@
 package xyz.tehbrian.floatyplugin.piano;
 
 import broccolai.corn.paper.item.PaperItemBuilder;
-import com.github.stefvanschie.inventoryframework.Gui;
-import com.github.stefvanschie.inventoryframework.GuiItem;
-import com.github.stefvanschie.inventoryframework.pane.OutlinePane;
 import com.google.inject.Inject;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;

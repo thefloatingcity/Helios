@@ -2,6 +2,7 @@ package xyz.tehbrian.floatyplugin.listeners;
 
 import com.google.inject.Inject;
 import io.papermc.paper.event.player.AsyncChatEvent;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.Template;
@@ -10,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.Constants;
@@ -20,6 +22,7 @@ import xyz.tehbrian.floatyplugin.util.FormatUtil;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public final class ChatListener implements Listener {
 
@@ -37,7 +40,21 @@ public final class ChatListener implements Listener {
 
     @EventHandler
     public void onChat(final AsyncChatEvent event) {
-        final Player player = event.getPlayer();
+        final Player sender = event.getPlayer();
+
+        @Nullable Player pingedPlayer = null;
+        for (final Player onlinePlayer : sender.getServer().getOnlinePlayers()) {
+            if (onlinePlayer.getUniqueId().equals(sender.getUniqueId())) {
+                continue;
+            }
+
+            final String playerName = FormatUtil.plain(onlinePlayer.displayName());
+
+            if (this.containsIgnoreCase(FormatUtil.plain(event.message()), playerName)) {
+                pingedPlayer = onlinePlayer;
+                onlinePlayer.playSound(onlinePlayer.getEyeLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 2);
+            }
+        }
 
 //         * @param source            the message source
 //         * @param sourceDisplayName the display name of the source player
@@ -45,26 +62,18 @@ public final class ChatListener implements Listener {
 //         * @param viewer            the receiving {@link Audience}
 //         * @return a rendered chat message
 
+        final @Nullable Player finalPingedPlayer = pingedPlayer;
         event.renderer((source, sourceDisplayName, message, viewer) -> {
             var renderedMessage = message;
-            if (player.hasPermission(Constants.Permissions.CHATCOLOR)) {
+            if (sender.hasPermission(Constants.Permissions.CHATCOLOR)) {
                 renderedMessage = FormatUtil.legacy(message);
             }
 
-            for (final Player onlinePlayer : player.getServer().getOnlinePlayers()) {
-                if (onlinePlayer.getUniqueId().equals(player.getUniqueId())) {
-                    continue;
-                }
-
-                final String playerName = FormatUtil.plain(onlinePlayer.name());
-
-                if (this.containsIgnoreCase(FormatUtil.plain(message), playerName)) {
-                    renderedMessage = renderedMessage.replaceText(TextReplacementConfig.builder()
-                            .match("(?i)(" + playerName + ")")
-                            .replacement(onlinePlayer.name().color(NamedTextColor.GOLD))
-                            .build());
-                    onlinePlayer.playSound(onlinePlayer.getEyeLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 2);
-                }
+            if (finalPingedPlayer != null) {
+                renderedMessage = renderedMessage.replaceText(TextReplacementConfig.builder()
+                        .match(Pattern.compile(FormatUtil.plain(finalPingedPlayer.displayName()), Pattern.CASE_INSENSITIVE))
+                        .replacement((m, b) -> Component.text(m.group(0)).color(NamedTextColor.GOLD))
+                        .build());
             }
 
             final CommentedConfigurationNode emotes = this.emotesConfig.rootNode();
