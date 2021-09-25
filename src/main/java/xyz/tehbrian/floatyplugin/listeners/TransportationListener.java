@@ -7,8 +7,10 @@ import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Vehicle;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
@@ -16,6 +18,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
+import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
@@ -84,6 +87,42 @@ public final class TransportationListener implements Listener {
         }
         if (environment == World.Environment.NETHER) {
             player.setSprinting(false);
+            if (player.isInsideVehicle()) {
+                player.leaveVehicle();
+            }
+        }
+    }
+
+    @EventHandler
+    public void onVehicleEnter(final VehicleEnterEvent e) {
+        if (e.getEntered().getWorld().getEnvironment() != World.Environment.NETHER) {
+            return;
+        }
+
+        if (e.getEntered() instanceof Player player) {
+            final Vehicle vehicle = e.getVehicle();
+            player.sendMessage(this.langConfig.c(NodePath.path("no_vehicle")));
+            vehicle.getWorld().createExplosion(vehicle, 2, true, false);
+            vehicle.remove();
+        } else {
+            e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPotionEffect(final EntityPotionEffectEvent e) {
+        if (!(e.getEntity() instanceof Player player)
+                || player.getWorld().getEnvironment() != World.Environment.NETHER
+                || e.getNewEffect() == null) {
+            return;
+        }
+
+        final PotionEffectType type = e.getNewEffect().getType();
+        if (type.equals(PotionEffectType.SPEED)
+                || type.equals(PotionEffectType.JUMP)
+                || type.equals(PotionEffectType.SLOW_FALLING)) {
+            player.setGameMode(GameMode.SURVIVAL);
+            player.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 10000, 100, false, true, true));
         }
     }
 
