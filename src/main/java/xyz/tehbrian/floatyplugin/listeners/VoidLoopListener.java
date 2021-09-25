@@ -27,10 +27,10 @@ import java.time.Duration;
 @SuppressWarnings("unused")
 public final class VoidLoopListener implements Listener {
 
-    private static final Title.Times INSTANT_TIMES = Title.Times.of(
+    private static final Title.Times INSTANT_IN_TIMES = Title.Times.of(
             Duration.ZERO,
-            Duration.ofSeconds(5),
-            Duration.ZERO
+            Duration.ofSeconds(4),
+            Duration.ofSeconds(1)
     );
 
     private static final Title.Times FLASHING_TIMES = Title.Times.of(
@@ -104,7 +104,7 @@ public final class VoidLoopListener implements Listener {
                             player.showTitle(Title.title(
                                     this.langConfig.c(NodePath.path("warp", "max")),
                                     this.langConfig.c(NodePath.path("warp", "max_sub")),
-                                    INSTANT_TIMES
+                                    INSTANT_IN_TIMES
                             ));
                         } else if (fallDistance >= 3800) {
                             player.showTitle(Title.title(

@@ -6,11 +6,16 @@ import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import net.kyori.adventure.text.minimessage.Template;
+import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.Constants;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FunCommands extends PaperCloudCommand<CommandSender> {
 
@@ -30,6 +35,17 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
      */
     @Override
     public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
+        final var stringWithPlayerSuggestionsArgument = StringArgument
+                .<CommandSender>newBuilder("text")
+                .withSuggestionsProvider((c, i) -> this.onlinePlayerNames(c.getSender().getServer()))
+                .build();
+
+        final var optionalStringWithPlayerSuggestionsArgument = StringArgument
+                .<CommandSender>newBuilder("text")
+                .withSuggestionsProvider((c, i) -> this.onlinePlayerNames(c.getSender().getServer()))
+                .asOptional()
+                .build();
+
         final var unreadable = commandManager.commandBuilder("unreadable")
                 .meta(CommandMeta.DESCRIPTION, "Untransparent. Is that a word? Opaque?")
                 .permission(Constants.Permissions.UNREADABLE)
@@ -57,7 +73,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
         final var hug = commandManager.commandBuilder("hug")
                 .meta(CommandMeta.DESCRIPTION, "D'aww that's so cute!")
                 .permission(Constants.Permissions.HUG)
-                .argument(StringArgument.greedy("text"))
+                .argument(stringWithPlayerSuggestionsArgument.copy())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("emote", "hug"),
                         Template.of("player", c.getSender().getName()),
@@ -67,7 +83,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
         final var kith = commandManager.commandBuilder("kith")
                 .meta(CommandMeta.DESCRIPTION, "It's kiss, with a lisp.")
                 .permission(Constants.Permissions.KITH)
-                .argument(StringArgument.greedy("text"))
+                .argument(stringWithPlayerSuggestionsArgument.copy())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("emote", "kith"),
                         Template.of("player", c.getSender().getName()),
@@ -77,7 +93,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
         final var blame = commandManager.commandBuilder("blame")
                 .meta(CommandMeta.DESCRIPTION, "It's their fault, not yours.")
                 .permission(Constants.Permissions.BLAME)
-                .argument(StringArgument.greedy("text"))
+                .argument(stringWithPlayerSuggestionsArgument.copy())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("emote", "blame"),
                         Template.of("player", c.getSender().getName()),
@@ -87,7 +103,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
         final var highfive = commandManager.commandBuilder("highfive")
                 .meta(CommandMeta.DESCRIPTION, "Up high! Down low! Too slow!")
                 .permission(Constants.Permissions.HIGHFIVE)
-                .argument(StringArgument.greedy("text"))
+                .argument(stringWithPlayerSuggestionsArgument.copy())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("emote", "highfive"),
                         Template.of("player", c.getSender().getName()),
@@ -97,7 +113,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
         final var sue = commandManager.commandBuilder("sue")
                 .permission(Constants.Permissions.SUE)
                 .meta(CommandMeta.DESCRIPTION, "Court fixes everything.. right?")
-                .argument(StringArgument.optional("text", StringArgument.StringMode.GREEDY))
+                .argument(optionalStringWithPlayerSuggestionsArgument.copy())
                 .handler(c -> c.<String>getOptional("text").ifPresentOrElse(
                         (text) -> c
                                 .getSender()
@@ -124,6 +140,16 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
         commandManager.command(blame);
         commandManager.command(highfive);
         commandManager.command(sue);
+    }
+
+    private @NonNull List<@NonNull String> onlinePlayerNames(final Server server) {
+        final List<String> output = new ArrayList<>();
+
+        for (final Player player : server.getOnlinePlayers()) {
+            output.add(player.getName());
+        }
+
+        return output;
     }
 
 }
