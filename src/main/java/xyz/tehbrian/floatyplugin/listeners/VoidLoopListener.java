@@ -1,9 +1,12 @@
 package xyz.tehbrian.floatyplugin.listeners;
 
 import com.google.inject.Inject;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.Server;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.World;
@@ -12,14 +15,29 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
+import java.time.Duration;
+
 @SuppressWarnings("unused")
 public final class VoidLoopListener implements Listener {
+
+    private static final Title.Times INSTANT_TIMES = Title.Times.of(
+            Duration.ZERO,
+            Duration.ofSeconds(5),
+            Duration.ZERO
+    );
+
+    private static final Title.Times FLASHING_TIMES = Title.Times.of(
+            Duration.ofSeconds(1),
+            Duration.ofSeconds(3),
+            Duration.ofSeconds(1)
+    );
 
     private final FloatyPlugin floatyPlugin;
     private final ConfigConfig configConfig;
@@ -36,66 +54,185 @@ public final class VoidLoopListener implements Listener {
         this.langConfig = langConfig;
     }
 
+    public void startTeleportationTask() {
+        final Server server = this.floatyPlugin.getServer();
+        final BukkitScheduler scheduler = server.getScheduler();
+
+        scheduler.scheduleSyncRepeatingTask(
+                this.floatyPlugin,
+                () -> {
+                    for (final Player player : server.getOnlinePlayers()) {
+                        final World.Environment environment = player.getWorld().getEnvironment();
+                        final Location location = player.getLocation();
+
+                        if (location.getY() < this.lowEngage(environment)) { // they too low
+                            Bukkit.getScheduler().runTask(this.floatyPlugin, () -> {
+                                location.setY(this.lowTeleport(environment));
+                                final var oldVelocity = player.getVelocity();
+                                player.teleport(location);
+                                player.setVelocity(oldVelocity);
+                            });
+                        } else if (location.getY() > this.highEngage(environment)) { // they too high
+                            Bukkit.getScheduler().runTask(this.floatyPlugin, () -> {
+                                location.setY(this.highTeleport(environment));
+                                final var oldVelocity = player.getVelocity();
+                                player.teleport(location);
+                                player.setVelocity(oldVelocity);
+                            });
+                        }  // they're in the non-epic zone
+                    }
+                },
+                0, 20
+        );
+
+        scheduler.scheduleSyncRepeatingTask(
+                this.floatyPlugin,
+                () -> {
+                    for (final Player player : server.getOnlinePlayers()) {
+                        final float fallDistance = player.getFallDistance();
+
+                        if (fallDistance >= 4000) {
+                            final Location spawnLocation = this.spawnLocation(player.getWorld().getEnvironment());
+
+                            player.setFallDistance(0);
+                            player.teleport(spawnLocation);
+
+                            player.getWorld().strikeLightningEffect(spawnLocation);
+                            player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, spawnLocation, 1);
+                            player.getWorld().playSound(spawnLocation, Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 4, 1);
+
+                            player.showTitle(Title.title(
+                                    this.langConfig.c(NodePath.path("warp", "max")),
+                                    this.langConfig.c(NodePath.path("warp", "max_sub")),
+                                    INSTANT_TIMES
+                            ));
+                        } else if (fallDistance >= 3800) {
+                            player.showTitle(Title.title(
+                                    Component.empty(),
+                                    this.langConfig.c(NodePath.path("warp", "fourth")),
+                                    FLASHING_TIMES
+                            ));
+
+                            for (int i = 0; i < 100; i = i + 2) {
+                                scheduler.scheduleSyncDelayedTask(
+                                        this.floatyPlugin,
+                                        () -> player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 2),
+                                        i
+                                );
+                            }
+                        } else if (fallDistance >= 3400) {
+                            player.showTitle(Title.title(
+                                    Component.empty(),
+                                    this.langConfig.c(NodePath.path("warp", "third")),
+                                    FLASHING_TIMES
+                            ));
+
+                            for (int i = 0; i < 100; i = i + 5) {
+                                scheduler.scheduleSyncDelayedTask(this.floatyPlugin,
+                                        () -> player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 1.6F), i
+                                );
+                            }
+                        } else if (fallDistance >= 3000) {
+                            player.showTitle(Title.title(
+                                    Component.empty(),
+                                    this.langConfig.c(NodePath.path("warp", "second")),
+                                    FLASHING_TIMES
+                            ));
+
+                            for (int i = 0; i < 100; i = i + 10) {
+                                scheduler.scheduleSyncDelayedTask(this.floatyPlugin,
+                                        () -> player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 0.9F), i
+                                );
+                            }
+                        } else if (fallDistance >= 2000) {
+                            player.showTitle(Title.title(
+                                    Component.empty(),
+                                    this.langConfig.c(NodePath.path("warp", "first")),
+                                    FLASHING_TIMES
+                            ));
+
+                            for (int i = 0; i < 100; i = i + 20) {
+                                scheduler.scheduleSyncDelayedTask(this.floatyPlugin,
+                                        () -> player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 0.5F), i
+                                );
+                            }
+                        }
+                    }
+                },
+                0, 100
+        );
+    }
+
+    /**
+     * Ensures that no entity will be damaged due to true void damage, meaning
+     * void damage actually caused by the void. Additionally, offers a low-engage-only
+     * void loop for all entities; whereas the scheduler void loop is player-only.
+     *
+     * @param event the event
+     */
     @EventHandler
     public void onEntityDamageByVoid(final EntityDamageEvent event) {
-        if (event.getCause() != EntityDamageEvent.DamageCause.VOID) {
-            return;
-        }
         final Entity entity = event.getEntity();
         final Location location = entity.getLocation();
 
-        if (location.getY() > -50) {
+        if (event.getCause() != EntityDamageEvent.DamageCause.VOID
+                || location.getY() > -50) {
             return;
         }
 
         event.setCancelled(true);
+
+        if (entity instanceof Player player) {
+            return; // players will be handled by the task; no need to handle them twice
+        }
+
         final World.Environment environment = entity.getWorld().getEnvironment();
 
-        final var engageY = switch (environment) {
-            case THE_END -> -200;
-            case NETHER -> -100;
-            default -> -500;
-        };
-
-        if (location.getY() > engageY) {
+        if (location.getY() > this.lowEngage(environment)) {
             return;
         }
 
         Bukkit.getScheduler().runTask(this.floatyPlugin, () -> {
-            final var teleportY = switch (environment) {
-                case THE_END -> 500;
-                case NETHER -> 350;
-                default -> 650;
-            };
-
-            location.setY(teleportY);
+            location.setY(this.lowTeleport(environment));
             final var oldVelocity = entity.getVelocity();
             entity.teleport(location);
             entity.setVelocity(oldVelocity);
-
-            if (!(entity instanceof final Player player)) {
-                return;
-            }
-
-            final var spawnLocation = switch (environment) {
-                case THE_END -> this.configConfig.spawn().end();
-                case NETHER -> this.configConfig.spawn().nether();
-                default -> this.configConfig.spawn().overworld();
-            };
-
-            if (player.getFallDistance() >= 3000) {
-                player.sendMessage(this.langConfig.c(NodePath.path("warp", "max")));
-                player.setFallDistance(0);
-                player.teleport(spawnLocation);
-                player.getWorld().strikeLightningEffect(spawnLocation);
-                player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, spawnLocation, 1);
-                player.getWorld().playSound(spawnLocation, Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 4, 1);
-            } else if (player.getFallDistance() >= 2000) {
-                player.sendMessage(this.langConfig.c(NodePath.path("warp", "second")));
-            } else if (player.getFallDistance() >= 1000) {
-                player.sendMessage(this.langConfig.c(NodePath.path("warp", "first")));
-            }
         });
+    }
+
+    private Location spawnLocation(final World.Environment environment) {
+        return switch (environment) {
+            case THE_END -> this.configConfig.spawn().end();
+            case NETHER -> this.configConfig.spawn().nether();
+            default -> this.configConfig.spawn().overworld();
+        };
+    }
+
+    // Trouble understanding? No worries, I gotchu.
+    // ibb.co/BtP8YZT
+
+    private int lowEngage(final World.Environment environment) {
+        return switch (environment) {
+            case THE_END -> -200;
+            case NETHER -> -100;
+            default -> -500;
+        };
+    }
+
+    private int lowTeleport(final World.Environment environment) {
+        return this.highEngage(environment) - 50;
+    }
+
+    private int highEngage(final World.Environment environment) {
+        return switch (environment) {
+            case THE_END -> 500;
+            case NETHER -> 350;
+            default -> 650;
+        };
+    }
+
+    private int highTeleport(final World.Environment environment) {
+        return this.lowEngage(environment) + 50;
     }
 
 }

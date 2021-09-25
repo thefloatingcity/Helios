@@ -30,10 +30,10 @@ import xyz.tehbrian.floatyplugin.inject.UserModule;
 import xyz.tehbrian.floatyplugin.listeners.AntiBuildListener;
 import xyz.tehbrian.floatyplugin.listeners.ChatListener;
 import xyz.tehbrian.floatyplugin.listeners.JoinQuitListener;
-import xyz.tehbrian.floatyplugin.piano.PianoListener;
 import xyz.tehbrian.floatyplugin.listeners.ServerPingListener;
 import xyz.tehbrian.floatyplugin.listeners.TransportationListener;
 import xyz.tehbrian.floatyplugin.listeners.VoidLoopListener;
+import xyz.tehbrian.floatyplugin.piano.PianoListener;
 
 public final class FloatyPlugin extends TehPlugin {
 
@@ -83,6 +83,8 @@ public final class FloatyPlugin extends TehPlugin {
     }
 
     private void setupListeners() {
+        final VoidLoopListener voidLoop = this.injector.getInstance(VoidLoopListener.class);
+
         registerListeners(
                 this.injector.getInstance(AntiBuildListener.class),
                 this.injector.getInstance(ChatListener.class),
@@ -90,8 +92,10 @@ public final class FloatyPlugin extends TehPlugin {
                 this.injector.getInstance(PianoListener.class),
                 this.injector.getInstance(ServerPingListener.class),
                 this.injector.getInstance(TransportationListener.class),
-                this.injector.getInstance(VoidLoopListener.class)
+                voidLoop
         );
+
+        voidLoop.startTeleportationTask();
     }
 
     private void setupCommands() {

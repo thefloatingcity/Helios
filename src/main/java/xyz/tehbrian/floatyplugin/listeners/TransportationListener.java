@@ -62,12 +62,10 @@ public final class TransportationListener implements Listener {
 
     @EventHandler
     public void onGameModeChange(final PlayerGameModeChangeEvent event) {
-        this.flightService.checkFlight(event.getPlayer());
-    }
-
-    @EventHandler
-    public void onGameMode(final PlayerGameModeChangeEvent event) {
         final Player player = event.getPlayer();
+
+        this.flightService.checkFlight(player);
+
         if (event.getNewGameMode() == GameMode.SPECTATOR) {
             event.setCancelled(true);
             player.setGameMode(GameMode.ADVENTURE);
@@ -80,10 +78,11 @@ public final class TransportationListener implements Listener {
     @EventHandler
     public void onMove(final PlayerMoveEvent event) {
         final Player player = event.getPlayer();
-        if (player.getWorld().getEnvironment() != World.Environment.THE_END) {
+        final World.Environment environment = player.getWorld().getEnvironment();
+        if (environment != World.Environment.THE_END) {
             player.setGliding(false);
         }
-        if (player.getWorld().getEnvironment() == World.Environment.NETHER) {
+        if (environment == World.Environment.NETHER) {
             player.setSprinting(false);
         }
     }
