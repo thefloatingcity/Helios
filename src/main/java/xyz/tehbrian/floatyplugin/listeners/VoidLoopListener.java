@@ -113,11 +113,10 @@ public final class VoidLoopListener implements Listener {
                                     FLASHING_TIMES
                             ));
 
+                            final Location location = player.getLocation();
                             for (int i = 0; i < 100; i = i + 2) {
-                                scheduler.scheduleSyncDelayedTask(
-                                        this.floatyPlugin,
-                                        () -> player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 2),
-                                        i
+                                scheduler.scheduleSyncDelayedTask(this.floatyPlugin,
+                                        () -> player.playSound(location, Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 2), i
                                 );
                             }
                         } else if (fallDistance >= 3400) {
@@ -127,9 +126,10 @@ public final class VoidLoopListener implements Listener {
                                     FLASHING_TIMES
                             ));
 
+                            final Location location = player.getLocation();
                             for (int i = 0; i < 100; i = i + 5) {
                                 scheduler.scheduleSyncDelayedTask(this.floatyPlugin,
-                                        () -> player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 1.6F), i
+                                        () -> player.playSound(location, Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 1.6F), i
                                 );
                             }
                         } else if (fallDistance >= 3000) {
@@ -139,9 +139,10 @@ public final class VoidLoopListener implements Listener {
                                     FLASHING_TIMES
                             ));
 
+                            final Location location = player.getLocation();
                             for (int i = 0; i < 100; i = i + 10) {
                                 scheduler.scheduleSyncDelayedTask(this.floatyPlugin,
-                                        () -> player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 0.9F), i
+                                        () -> player.playSound(location, Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 0.9F), i
                                 );
                             }
                         } else if (fallDistance >= 2000) {
@@ -151,9 +152,10 @@ public final class VoidLoopListener implements Listener {
                                     FLASHING_TIMES
                             ));
 
+                            final Location location = player.getLocation();
                             for (int i = 0; i < 100; i = i + 20) {
                                 scheduler.scheduleSyncDelayedTask(this.floatyPlugin,
-                                        () -> player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 0.5F), i
+                                        () -> player.playSound(location, Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 0.5F), i
                                 );
                             }
                         }
@@ -213,26 +215,26 @@ public final class VoidLoopListener implements Listener {
 
     private int lowEngage(final World.Environment environment) {
         return switch (environment) {
-            case THE_END -> -200;
             case NETHER -> -100;
-            default -> -500;
+            case THE_END -> -170;
+            default -> -260;
         };
     }
 
     private int lowTeleport(final World.Environment environment) {
-        return this.highEngage(environment) - 50;
+        return this.highEngage(environment) - 10;
     }
 
     private int highEngage(final World.Environment environment) {
         return switch (environment) {
-            case THE_END -> 500;
+            case THE_END -> 460;
             case NETHER -> 350;
-            default -> 650;
+            default -> 470;
         };
     }
 
     private int highTeleport(final World.Environment environment) {
-        return this.lowEngage(environment) + 50;
+        return this.lowEngage(environment) + 10;
     }
 
 }
