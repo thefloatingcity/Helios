@@ -112,9 +112,9 @@ public final class TransportationListener implements Listener {
 
         if (e.getEntered() instanceof Player player) {
             final Vehicle vehicle = e.getVehicle();
-            player.sendMessage(this.langConfig.c(NodePath.path("no_vehicle")));
             vehicle.getWorld().createExplosion(vehicle, 2, true, false);
             vehicle.remove();
+            player.sendMessage(this.langConfig.c(NodePath.path("no_vehicle")));
         } else {
             e.setCancelled(true);
         }
@@ -131,7 +131,9 @@ public final class TransportationListener implements Listener {
         final PotionEffectType type = e.getNewEffect().getType();
         if (type.equals(PotionEffectType.SPEED)
                 || type.equals(PotionEffectType.JUMP)
-                || type.equals(PotionEffectType.SLOW_FALLING)) {
+                || type.equals(PotionEffectType.SLOW_FALLING)
+                || type.equals(PotionEffectType.LEVITATION)) {
+            e.setCancelled(true);
             player.setGameMode(GameMode.SURVIVAL);
             player.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 10000, 100, false, true, true));
         }
@@ -144,6 +146,8 @@ public final class TransportationListener implements Listener {
             return;
         }
 
+        player.setGliding(false);
+
         if (event.isGliding()) {
             player.playSound(player.getLocation(), Sound.ENTITY_TURTLE_EGG_CRACK, SoundCategory.MASTER, 100, 2);
 
@@ -152,8 +156,6 @@ public final class TransportationListener implements Listener {
                 inventory.setChestplate(new ItemStack(Material.AIR));
             }
         }
-
-        player.setGliding(false);
     }
 
     @EventHandler
@@ -164,6 +166,8 @@ public final class TransportationListener implements Listener {
             return;
         }
 
+        player.setSprinting(false);
+
         if (event.isSprinting()) {
             player.sendMessage(this.langConfig.c(NodePath.path("no_sprint")));
 
@@ -173,8 +177,6 @@ public final class TransportationListener implements Listener {
             player.playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_DEATH, SoundCategory.MASTER, 100, 0);
             player.playSound(player.getLocation(), Sound.AMBIENT_WARPED_FOREST_MOOD, SoundCategory.MASTER, 100, 1);
         }
-
-        player.setSprinting(false);
     }
 
     @EventHandler
