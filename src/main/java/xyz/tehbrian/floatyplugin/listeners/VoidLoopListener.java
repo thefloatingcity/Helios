@@ -54,7 +54,7 @@ public final class VoidLoopListener implements Listener {
         this.langConfig = langConfig;
     }
 
-    public void startTeleportationTask() {
+    public void startTasks() {
         final Server server = this.floatyPlugin.getServer();
         final BukkitScheduler scheduler = server.getScheduler();
 

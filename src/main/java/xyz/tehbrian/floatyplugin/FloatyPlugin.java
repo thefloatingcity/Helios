@@ -96,8 +96,8 @@ public final class FloatyPlugin extends TehPlugin {
                 voidLoop
         );
 
-        voidLoop.startTeleportationTask();
-        transportationListener.startRedundancyCheckTasks();
+        voidLoop.startTasks();
+        transportationListener.startTasks();
     }
 
     private void setupCommands() {

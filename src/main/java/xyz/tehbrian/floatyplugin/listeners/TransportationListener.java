@@ -60,7 +60,7 @@ public final class TransportationListener implements Listener {
         this.configConfig = configConfig;
     }
 
-    public void startRedundancyCheckTasks() {
+    public void startTasks() {
         final Server server = this.floatyPlugin.getServer();
 
         server.getScheduler().scheduleSyncRepeatingTask(
@@ -123,9 +123,9 @@ public final class TransportationListener implements Listener {
     @EventHandler
     public void onTeleport(final PlayerTeleportEvent e) {
         final PlayerTeleportEvent.TeleportCause cause = e.getCause();
-
         final Player player = e.getPlayer();
         final World.Environment environment = player.getWorld().getEnvironment();
+
         switch (cause) {
             case ENDER_PEARL, CHORUS_FRUIT -> {
                 if (environment == World.Environment.THE_END) {
