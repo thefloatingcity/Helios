@@ -3,6 +3,7 @@ package xyz.tehbrian.floatyplugin.listeners;
 import com.google.inject.Inject;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.Server;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.World;
@@ -15,7 +16,6 @@ import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
@@ -53,6 +53,32 @@ public final class TransportationListener implements Listener {
         this.flightService = flightService;
     }
 
+    public void startRedundancyCheckTasks() {
+        final Server server = this.floatyPlugin.getServer();
+
+        server.getScheduler().scheduleSyncRepeatingTask(
+                this.floatyPlugin,
+                () -> {
+                    for (final Player player : server.getOnlinePlayers()) {
+                        final World.Environment environment = player.getWorld().getEnvironment();
+
+                        this.flightService.checkFlight(player);
+
+                        if (environment != World.Environment.THE_END) {
+                            player.setGliding(false);
+                        }
+
+                        if (environment == World.Environment.NETHER) {
+                            player.setSprinting(false);
+                            if (player.isInsideVehicle()) {
+                                player.leaveVehicle();
+                            }
+                        }
+                    }
+                }, 1, 10
+        );
+    }
+
     @EventHandler
     public void onToggleFlight(final PlayerToggleFlightEvent event) {
         this.flightService.checkFlight(event.getPlayer());
@@ -75,21 +101,6 @@ public final class TransportationListener implements Listener {
             player.setFireTicks(100);
             player.getWorld().strikeLightning(player.getLocation());
             player.sendMessage(this.langConfig.c(NodePath.path("no_spectator")));
-        }
-    }
-
-    @EventHandler
-    public void onMove(final PlayerMoveEvent event) {
-        final Player player = event.getPlayer();
-        final World.Environment environment = player.getWorld().getEnvironment();
-        if (environment != World.Environment.THE_END) {
-            player.setGliding(false);
-        }
-        if (environment == World.Environment.NETHER) {
-            player.setSprinting(false);
-            if (player.isInsideVehicle()) {
-                player.leaveVehicle();
-            }
         }
     }
 

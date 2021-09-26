@@ -84,6 +84,7 @@ public final class FloatyPlugin extends TehPlugin {
 
     private void setupListeners() {
         final VoidLoopListener voidLoop = this.injector.getInstance(VoidLoopListener.class);
+        final TransportationListener transportationListener = this.injector.getInstance(TransportationListener.class);
 
         registerListeners(
                 this.injector.getInstance(AntiBuildListener.class),
@@ -91,11 +92,12 @@ public final class FloatyPlugin extends TehPlugin {
                 this.injector.getInstance(JoinQuitListener.class),
                 this.injector.getInstance(PianoListener.class),
                 this.injector.getInstance(ServerPingListener.class),
-                this.injector.getInstance(TransportationListener.class),
+                transportationListener,
                 voidLoop
         );
 
         voidLoop.startTeleportationTask();
+        transportationListener.startRedundancyCheckTasks();
     }
 
     private void setupCommands() {

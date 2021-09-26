@@ -184,7 +184,7 @@ public final class VoidLoopListener implements Listener {
 
         event.setCancelled(true);
 
-        if (entity instanceof Player player) {
+        if (entity instanceof Player) {
             return; // players will be handled by the task; no need to handle them twice
         }
 
