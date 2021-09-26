@@ -5,6 +5,7 @@ import com.google.inject.name.Named;
 import dev.tehbrian.tehlib.core.configurate.AbstractConfig;
 import org.apache.logging.log4j.Logger;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
@@ -16,6 +17,7 @@ import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.util.ConfigDeserializers;
 
 import java.nio.file.Path;
+import java.util.Objects;
 
 /**
  * Loads and holds values for {@code config.conf}.
@@ -84,6 +86,14 @@ public final class ConfigConfig extends AbstractConfig<HoconConfigurateWrapper> 
 
     public @Nullable Spawn spawn() {
         return this.spawn;
+    }
+
+    public @NonNull Location spawnLocation(final World.Environment environment) {
+        return Objects.requireNonNull(switch (environment) {
+            case THE_END -> this.spawn().end();
+            case NETHER -> this.spawn().nether();
+            default -> this.spawn().overworld();
+        });
     }
 
     @ConfigSerializable

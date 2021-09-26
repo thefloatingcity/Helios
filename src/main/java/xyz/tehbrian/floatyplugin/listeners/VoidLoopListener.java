@@ -92,7 +92,7 @@ public final class VoidLoopListener implements Listener {
                         final float fallDistance = player.getFallDistance();
 
                         if (fallDistance >= 4000) {
-                            final Location spawnLocation = this.spawnLocation(player.getWorld().getEnvironment());
+                            final Location spawnLocation = this.configConfig.spawnLocation(player.getWorld().getEnvironment());
 
                             player.setFallDistance(0);
                             player.teleport(spawnLocation);
@@ -200,14 +200,6 @@ public final class VoidLoopListener implements Listener {
             entity.teleport(location);
             entity.setVelocity(oldVelocity);
         });
-    }
-
-    private Location spawnLocation(final World.Environment environment) {
-        return switch (environment) {
-            case THE_END -> this.configConfig.spawn().end();
-            case NETHER -> this.configConfig.spawn().nether();
-            default -> this.configConfig.spawn().overworld();
-        };
     }
 
     // Trouble understanding? No worries, I gotchu.
