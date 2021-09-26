@@ -3,6 +3,7 @@ package xyz.tehbrian.floatyplugin.listeners;
 import com.google.inject.Inject;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Server;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -70,8 +71,17 @@ public final class TransportationListener implements Listener {
 
                         if (environment == World.Environment.NETHER) {
                             player.setSprinting(false);
-                            if (player.isInsideVehicle()) {
-                                player.leaveVehicle();
+                            player.leaveVehicle();
+
+                            switch (player.getLocation().add(0, -0.8, 0).getBlock().getType()) {
+                                case ICE, PACKED_ICE, BLUE_ICE, FROSTED_ICE -> player.addPotionEffect(new PotionEffect(
+                                        PotionEffectType.SLOW, 40, 3, true, false, false
+                                ));
+                                case SOUL_SAND, SOUL_SOIL -> player.addPotionEffect(new PotionEffect(
+                                        PotionEffectType.SLOW, 40, 120, true, false, false
+                                ));
+                                default -> {
+                                }
                             }
                         }
                     }
