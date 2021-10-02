@@ -13,18 +13,24 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
+import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.util.TimeFormatter;
 
 import java.util.Calendar;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "ClassCanBeRecord"})
 public final class JoinQuitListener implements Listener {
 
+    private final FloatyPlugin floatyPlugin;
     private final LangConfig langConfig;
 
     @Inject
-    public JoinQuitListener(final @NonNull LangConfig langConfig) {
+    public JoinQuitListener(
+            final @NonNull FloatyPlugin floatyPlugin,
+            final @NonNull LangConfig langConfig
+    ) {
+        this.floatyPlugin = floatyPlugin;
         this.langConfig = langConfig;
     }
 
@@ -33,9 +39,6 @@ public final class JoinQuitListener implements Listener {
         final Player player = event.getPlayer();
 
         player.sendMessage(this.langConfig.c(NodePath.path("banner")));
-
-        final Firework firework = player.getWorld().spawn(player.getEyeLocation(), Firework.class);
-        final FireworkMeta fireworkMeta = firework.getFireworkMeta();
 
         if (player.hasPlayedBefore()) {
             event.joinMessage(this.langConfig.c(NodePath.path("join"), Template.of("player", player.displayName())));
@@ -46,31 +49,40 @@ public final class JoinQuitListener implements Listener {
                     NodePath.path("motd"),
                     Template.of("last", TimeFormatter.fancifyTime(millisSinceLastPlayed))
             ));
-
-            fireworkMeta.addEffect(FireworkEffect.builder()
-                    .flicker(true)
-                    .trail(false)
-                    .with(FireworkEffect.Type.BALL)
-                    .withColor(Color.WHITE, Color.BLUE, Color.GREEN)
-                    .withFade(Color.GREEN, Color.BLUE, Color.WHITE)
-                    .build());
-            fireworkMeta.setPower(2);
         } else {
             event.joinMessage(this.langConfig.c(NodePath.path("join_new"), Template.of("player", player.displayName())));
 
             player.sendMessage(this.langConfig.c(NodePath.path("motd_new"), Template.of("player", player.displayName())));
-
-            fireworkMeta.addEffect(FireworkEffect.builder()
-                    .flicker(true)
-                    .trail(true)
-                    .with(FireworkEffect.Type.BALL_LARGE)
-                    .withColor(Color.SILVER, Color.PURPLE, Color.TEAL)
-                    .withFade(Color.TEAL, Color.PURPLE, Color.SILVER)
-                    .build());
-            fireworkMeta.setPower(3);
         }
 
-        firework.setFireworkMeta(fireworkMeta);
+        player.getServer().getScheduler().scheduleSyncDelayedTask(this.floatyPlugin,
+                () -> {
+                    final Firework firework = player.getWorld().spawn(player.getLocation().add(0, 2, 0), Firework.class);
+                    final FireworkMeta fireworkMeta = firework.getFireworkMeta();
+
+                    if (player.hasPlayedBefore()) {
+                        fireworkMeta.addEffect(FireworkEffect.builder()
+                                .flicker(true)
+                                .trail(false)
+                                .with(FireworkEffect.Type.BALL)
+                                .withColor(Color.WHITE, Color.BLUE, Color.GREEN)
+                                .withFade(Color.GREEN, Color.BLUE, Color.WHITE)
+                                .build());
+                        fireworkMeta.setPower(2);
+                    } else {
+                        fireworkMeta.addEffect(FireworkEffect.builder()
+                                .flicker(true)
+                                .trail(true)
+                                .with(FireworkEffect.Type.BALL_LARGE)
+                                .withColor(Color.SILVER, Color.PURPLE, Color.TEAL)
+                                .withFade(Color.TEAL, Color.PURPLE, Color.SILVER)
+                                .build());
+                        fireworkMeta.setPower(3);
+                    }
+
+                    firework.setFireworkMeta(fireworkMeta);
+                }, 2
+        );
     }
 
     @EventHandler
