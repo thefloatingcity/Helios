@@ -3,12 +3,14 @@ package xyz.tehbrian.floatyplugin;
 import com.google.inject.Inject;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.cacheddata.CachedMetaData;
+import net.luckperms.api.context.ImmutableContextSet;
 import net.luckperms.api.model.user.User;
-import net.luckperms.api.model.user.UserManager;
 import net.luckperms.api.node.types.InheritanceNode;
 import net.luckperms.api.query.QueryOptions;
+import net.luckperms.api.track.Track;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.Objects;
@@ -16,7 +18,8 @@ import java.util.Objects;
 public final class LuckPermsService {
 
     private final FloatyPlugin floatyPlugin;
-    private LuckPerms luckPerms;
+
+    private @MonotonicNonNull LuckPerms luckPerms;
 
     @Inject
     public LuckPermsService(
@@ -39,30 +42,33 @@ public final class LuckPermsService {
 
     public String getPlayerPrefix(final Player player) {
         final User user = Objects.requireNonNull(this.luckPerms.getUserManager().getUser(player.getUniqueId()));
-
         final QueryOptions queryOptions = this.luckPerms.getContextManager().getQueryOptions(player);
-
         final CachedMetaData metaData = user.getCachedData().getMetaData(queryOptions);
+
         return metaData.getPrefix() == null ? "" : metaData.getPrefix();
     }
 
     public String getPlayerSuffix(final Player player) {
         final User user = Objects.requireNonNull(this.luckPerms.getUserManager().getUser(player.getUniqueId()));
-
         final QueryOptions queryOptions = this.luckPerms.getContextManager().getQueryOptions(player);
-
         final CachedMetaData metaData = user.getCachedData().getMetaData(queryOptions);
+
         return metaData.getSuffix() == null ? "" : metaData.getSuffix();
     }
 
-    public void addPlayerGroup(final Player player, final String group) {
-        Objects.requireNonNull(this.luckPerms);
-        final UserManager userManager = this.luckPerms.getUserManager();
+    public void promotePlayerTrack(final Player player, final String trackName) {
+        final User user = Objects.requireNonNull(this.luckPerms.getUserManager().getUser(player.getUniqueId()));
+        final Track track = Objects.requireNonNull(this.luckPerms.getTrackManager().getTrack(trackName));
 
-        final User user = Objects.requireNonNull(userManager.getUser(player.getUniqueId()));
+        track.promote(user, ImmutableContextSet.empty());
+        this.luckPerms.getUserManager().saveUser(user);
+    }
+
+    public void addPlayerGroup(final Player player, final String group) {
+        final User user = Objects.requireNonNull(this.luckPerms.getUserManager().getUser(player.getUniqueId()));
 
         user.data().add(InheritanceNode.builder(group).build());
-        userManager.saveUser(user);
+        this.luckPerms.getUserManager().saveUser(user);
     }
 
 }
