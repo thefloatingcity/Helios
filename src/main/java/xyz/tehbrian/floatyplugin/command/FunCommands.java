@@ -52,7 +52,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .meta(CommandMeta.DESCRIPTION, "Untransparent. Is that a word? Opaque?")
                 .permission(Constants.Permissions.UNREADABLE)
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
-                        NodePath.path("emote", "unreadable"),
+                        NodePath.path("fun", "unreadable"),
                         Template.of("player", c.getSender().getName())
                 )));
 
@@ -60,7 +60,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .meta(CommandMeta.DESCRIPTION, "You don't know. They don't know.")
                 .permission(Constants.Permissions.SHRUG)
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
-                        NodePath.path("emote", "shrug"),
+                        NodePath.path("fun", "shrug"),
                         Template.of("player", c.getSender().getName())
                 )));
 
@@ -68,7 +68,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .meta(CommandMeta.DESCRIPTION, "OoooOOooOoOOoOOoo")
                 .permission(Constants.Permissions.SPOOK)
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
-                        NodePath.path("emote", "spook"),
+                        NodePath.path("fun", "spook"),
                         Template.of("player", c.getSender().getName())
                 )));
 
@@ -77,17 +77,17 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .permission(Constants.Permissions.HUG)
                 .argument(stringWithPlayerSuggestionsArgument.copy())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
-                        NodePath.path("emote", "hug"),
+                        NodePath.path("fun", "hug"),
                         Template.of("player", c.getSender().getName()),
                         Template.of("text", c.<String>get("text"))
                 )));
 
-        final var kith = commandManager.commandBuilder("kith")
-                .meta(CommandMeta.DESCRIPTION, "It's kiss, with a lisp.")
-                .permission(Constants.Permissions.KITH)
+        final var smooch = commandManager.commandBuilder("smooch")
+                .meta(CommandMeta.DESCRIPTION, "Give 'em a smooch.")
+                .permission(Constants.Permissions.SMOOCH)
                 .argument(stringWithPlayerSuggestionsArgument.copy())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
-                        NodePath.path("emote", "kith"),
+                        NodePath.path("fun", "smooch"),
                         Template.of("player", c.getSender().getName()),
                         Template.of("text", c.<String>get("text"))
                 )));
@@ -97,7 +97,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .permission(Constants.Permissions.BLAME)
                 .argument(stringWithPlayerSuggestionsArgument.copy())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
-                        NodePath.path("emote", "blame"),
+                        NodePath.path("fun", "blame"),
                         Template.of("player", c.getSender().getName()),
                         Template.of("text", c.<String>get("text"))
                 )));
@@ -107,7 +107,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .permission(Constants.Permissions.HIGHFIVE)
                 .argument(stringWithPlayerSuggestionsArgument.copy())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
-                        NodePath.path("emote", "highfive"),
+                        NodePath.path("fun", "highfive"),
                         Template.of("player", c.getSender().getName()),
                         Template.of("text", c.<String>get("text"))
                 )));
@@ -121,7 +121,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                                 .getSender()
                                 .getServer()
                                 .sendMessage(this.langConfig.c(
-                                        NodePath.path("emote", "sue_extra"),
+                                        NodePath.path("fun", "sue_extra"),
                                         Template.of("player", c.getSender().getName()),
                                         Template.of("text", text)
                                 )),
@@ -129,7 +129,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                                 .getSender()
                                 .getServer()
                                 .sendMessage(this.langConfig.c(
-                                        NodePath.path("emote", "sue"),
+                                        NodePath.path("fun", "sue"),
                                         Template.of("player", c.getSender().getName())
                                 ))
                 ));
@@ -138,7 +138,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
         commandManager.command(shrug);
         commandManager.command(spook);
         commandManager.command(hug);
-        commandManager.command(kith);
+        commandManager.command(smooch);
         commandManager.command(blame);
         commandManager.command(highfive);
         commandManager.command(sue);

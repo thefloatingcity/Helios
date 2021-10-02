@@ -27,7 +27,7 @@ public final class Constants {
         public static final String SHRUG = EMOTE + ".shrug";
         public static final String SPOOK = EMOTE + ".spook";
         public static final String HUG = EMOTE + ".hug";
-        public static final String KITH = EMOTE + ".kith";
+        public static final String SMOOCH = EMOTE + ".smooch";
         public static final String BLAME = EMOTE + ".blame";
         public static final String HIGHFIVE = EMOTE + ".highfive";
         public static final String SUE = EMOTE + ".sue";
