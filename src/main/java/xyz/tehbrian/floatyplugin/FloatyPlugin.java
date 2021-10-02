@@ -26,6 +26,8 @@ import xyz.tehbrian.floatyplugin.config.EmotesConfig;
 import xyz.tehbrian.floatyplugin.config.InventoriesConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.inject.ConfigModule;
+import xyz.tehbrian.floatyplugin.inject.FlightModule;
+import xyz.tehbrian.floatyplugin.inject.LuckPermsModule;
 import xyz.tehbrian.floatyplugin.inject.PluginModule;
 import xyz.tehbrian.floatyplugin.inject.UserModule;
 import xyz.tehbrian.floatyplugin.listeners.AntiBuildListener;
@@ -48,6 +50,8 @@ public final class FloatyPlugin extends TehPlugin {
         try {
             this.injector = Guice.createInjector(
                     new ConfigModule(),
+                    new FlightModule(),
+                    new LuckPermsModule(),
                     new PluginModule(this),
                     new UserModule()
             );
