@@ -12,6 +12,7 @@ public final class User extends PaperUser {
 
     private final @NonNull Piano piano = new Piano(false, Instrument.HARP);
     private boolean flyBypassEnabled = false;
+    private int netherBlindnessCount = 0;
 
     public User(final UUID uuid) {
         super(uuid);
@@ -32,6 +33,14 @@ public final class User extends PaperUser {
     public boolean toggleFlyBypassEnabled() {
         this.flyBypassEnabled(!this.flyBypassEnabled());
         return this.flyBypassEnabled();
+    }
+
+    public int netherBlindnessCount() {
+        return netherBlindnessCount;
+    }
+
+    public void netherBlindnessCount(final int netherBlindnessCount) {
+        this.netherBlindnessCount = netherBlindnessCount;
     }
 
     public @NonNull Piano piano() {

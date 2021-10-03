@@ -1,6 +1,13 @@
 package xyz.tehbrian.floatyplugin.listeners;
 
+import broccolai.corn.paper.item.PaperItemBuilder;
+import broccolai.corn.paper.item.special.BookBuilder;
+import broccolai.corn.paper.item.special.BundleBuilder;
+import broccolai.corn.paper.item.special.PotionBuilder;
 import com.google.inject.Inject;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -22,6 +29,7 @@ import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.world.PortalCreateEvent;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
@@ -32,6 +40,8 @@ import xyz.tehbrian.floatyplugin.FlightService;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
+import xyz.tehbrian.floatyplugin.user.User;
+import xyz.tehbrian.floatyplugin.user.UserService;
 
 /**
  * Ensures the following:
@@ -46,18 +56,21 @@ public final class TransportationListener implements Listener {
     private final FloatyPlugin floatyPlugin;
     private final FlightService flightService;
     private final ConfigConfig configConfig;
+    private final UserService userService;
 
     @Inject
     public TransportationListener(
             final @NonNull LangConfig langConfig,
             final @NonNull FloatyPlugin floatyPlugin,
             final @NonNull FlightService flightService,
-            final @NonNull ConfigConfig configConfig
+            final @NonNull ConfigConfig configConfig,
+            final @NonNull UserService userService
     ) {
         this.langConfig = langConfig;
         this.floatyPlugin = floatyPlugin;
         this.flightService = flightService;
         this.configConfig = configConfig;
+        this.userService = userService;
     }
 
     public void startTasks() {
@@ -241,8 +254,48 @@ public final class TransportationListener implements Listener {
 
         player.setSprinting(false);
 
+        final User user = this.userService.getUser(player);
+        final var netherBlindnessCount = user.netherBlindnessCount();
+
         if (event.isSprinting()) {
-            player.sendMessage(this.langConfig.c(NodePath.path("no_sprint")));
+            switch (netherBlindnessCount) {
+                case 0, 2, 5, 10, 15, 20 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "1")));
+                case 30 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "2")));
+                case 50 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "3")));
+                case 70 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "4")));
+                case 100 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "5")));
+                case 140 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "6")));
+                case 180 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "7")));
+                case 250 -> {
+                    player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "8")));
+                    player.getInventory().addItem(BundleBuilder.ofBundle()
+                            .name(Component.text("Nether Watcher's Gift").color(NamedTextColor.RED))
+                            .lore(Component.text("Maybe you should open it.").color(NamedTextColor.GRAY))
+                            .addItem(
+                                    PotionBuilder.ofType(Material.POTION)
+                                            .name(Component.text("Femboy Hooters Sauce").color(NamedTextColor.LIGHT_PURPLE))
+                                            .lore(Component.text("It doesn't smell very good..").color(NamedTextColor.GRAY))
+                                            .addFlag(ItemFlag.HIDE_POTION_EFFECTS)
+                                            .color(Color.WHITE)
+                                            .build(),
+                                    BookBuilder.ofType(Material.WRITTEN_BOOK)
+                                            .title(Component.text("A Letter"))
+                                            .author(Component.text("The Nether Watcher"))
+                                            .addPage(Component
+                                                    .text("listen, i appreciate ya givin' me company, but holy frik, the whole point of the nether is *not* to sprint, yet you somehow managed to do it upwards of 200 times!?? 'ave ya got somethin' wrong in the head??? love ya, but frik off")
+                                                    .color(NamedTextColor.DARK_GRAY))
+                                            .build(),
+                                    PaperItemBuilder
+                                            .ofType(Material.SLIME_BALL)
+                                            .name(Component.text("Ball of Slime"))
+                                            .lore(Component.text("It's uh.. a ball of slime.").color(NamedTextColor.GRAY))
+                                            .build()
+                            )
+                            .build());
+                }
+                default -> {
+                }
+            }
 
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 4, true, false, false));
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1000000000, 1, true, false, false));
@@ -250,6 +303,8 @@ public final class TransportationListener implements Listener {
             player.playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_DEATH, SoundCategory.MASTER, 100, 0);
             player.playSound(player.getLocation(), Sound.AMBIENT_WARPED_FOREST_MOOD, SoundCategory.MASTER, 100, 1);
         }
+
+        user.netherBlindnessCount(netherBlindnessCount + 1);
     }
 
     @EventHandler
