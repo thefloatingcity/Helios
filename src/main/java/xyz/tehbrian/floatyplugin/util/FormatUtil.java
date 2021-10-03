@@ -9,7 +9,11 @@ import org.jetbrains.annotations.NotNull;
 
 public final class FormatUtil {
 
-    public static final @NotNull LegacyComponentSerializer LEGACY_WITH_URLS = LegacyComponentSerializer.builder().extractUrls().build();
+    public static final @NotNull LegacyComponentSerializer LEGACY_WITH_URLS = LegacyComponentSerializer
+            .builder()
+            .character('&')
+            .extractUrls()
+            .build();
     public static final @NotNull LegacyComponentSerializer LEGACY = LegacyComponentSerializer.legacyAmpersand();
     public static final @NotNull PlainTextComponentSerializer PLAIN = PlainTextComponentSerializer.plainText();
     public static final @NotNull MiniMessage MINI_MESSAGE = MiniMessage.get();

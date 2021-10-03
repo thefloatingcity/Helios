@@ -8,9 +8,7 @@ import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
-import xyz.tehbrian.floatyplugin.LuckPermsService;
 import xyz.tehbrian.floatyplugin.config.BooksConfig;
-import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.util.BookDeserializer;
 import xyz.tehbrian.floatyplugin.util.SendMessage;
 
