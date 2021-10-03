@@ -18,6 +18,7 @@ import xyz.tehbrian.floatyplugin.command.FunCommands;
 import xyz.tehbrian.floatyplugin.command.GamemodeCommands;
 import xyz.tehbrian.floatyplugin.command.HatCommand;
 import xyz.tehbrian.floatyplugin.command.InfoCommand;
+import xyz.tehbrian.floatyplugin.command.MilkCommand;
 import xyz.tehbrian.floatyplugin.command.PianoCommand;
 import xyz.tehbrian.floatyplugin.command.PlaytimeCommands;
 import xyz.tehbrian.floatyplugin.command.RulesCommand;
@@ -36,6 +37,7 @@ import xyz.tehbrian.floatyplugin.listeners.AntiBuildListener;
 import xyz.tehbrian.floatyplugin.listeners.ChatListener;
 import xyz.tehbrian.floatyplugin.listeners.FishingListener;
 import xyz.tehbrian.floatyplugin.listeners.JoinQuitListener;
+import xyz.tehbrian.floatyplugin.listeners.MilkListener;
 import xyz.tehbrian.floatyplugin.listeners.ServerPingListener;
 import xyz.tehbrian.floatyplugin.listeners.TransportationListener;
 import xyz.tehbrian.floatyplugin.listeners.VoidLoopListener;
@@ -114,6 +116,7 @@ public final class FloatyPlugin extends TehPlugin {
                 this.injector.getInstance(ChatListener.class),
                 this.injector.getInstance(FishingListener.class),
                 this.injector.getInstance(JoinQuitListener.class),
+                this.injector.getInstance(MilkListener.class),
                 this.injector.getInstance(PianoListener.class),
                 this.injector.getInstance(ServerPingListener.class),
                 transportationListener,
@@ -144,6 +147,7 @@ public final class FloatyPlugin extends TehPlugin {
         this.injector.getInstance(GamemodeCommands.class).register(commandManager);
         this.injector.getInstance(HatCommand.class).register(commandManager);
         this.injector.getInstance(InfoCommand.class).register(commandManager);
+        this.injector.getInstance(MilkCommand.class).register(commandManager);
         this.injector.getInstance(PianoCommand.class).register(commandManager);
         this.injector.getInstance(PlaytimeCommands.class).register(commandManager);
         this.injector.getInstance(RulesCommand.class).register(commandManager);
