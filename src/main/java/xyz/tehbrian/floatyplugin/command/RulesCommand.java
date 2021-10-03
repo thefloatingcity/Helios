@@ -60,7 +60,7 @@ public class RulesCommand extends PaperCloudCommand<CommandSender> {
                     if (sender.hasPermission(Constants.Permissions.BUILD)) {
                         sender.sendMessage(this.langConfig.c(NodePath.path("rules", "already_accepted")));
                     } else {
-                        this.luckPermsService.promotePlayerTrack(sender, "player");
+                        this.luckPermsService.promote(sender, "player");
                         sender.sendMessage(this.langConfig.c(NodePath.path("rules", "accept")));
                     }
                 });

@@ -5,28 +5,33 @@ import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.Template;
-import org.bukkit.Statistic;
+import net.luckperms.api.model.group.Group;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.NodePath;
+import xyz.tehbrian.floatyplugin.LuckPermsService;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
-import xyz.tehbrian.floatyplugin.util.TimeFormatter;
+import xyz.tehbrian.floatyplugin.util.PlaytimeUtil;
 
+import java.time.Duration;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
 
     private final LangConfig langConfig;
+    private final LuckPermsService luckPermsService;
 
     @Inject
     public PlaytimeCommands(
-            final @NonNull LangConfig langConfig
+            final @NonNull LangConfig langConfig,
+            final @NonNull LuckPermsService luckPermsService
     ) {
         this.langConfig = langConfig;
+        this.luckPermsService = luckPermsService;
     }
 
     /**
@@ -45,26 +50,58 @@ public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
 
                     c.<Player>getOptional("player").ifPresentOrElse((target) -> sender.sendMessage(this.langConfig.c(
                             NodePath.path("playtime", "other"),
-                            Template.of("time", TimeFormatter.fancifyTime(this.getMillisPlayed(target))),
+                            Template.of("time", PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(target))),
                             Template.of("player", target.getName())
                     )), () -> sender.sendMessage(this.langConfig.c(
                             NodePath.path("playtime", "self"),
-                            Map.of("time", TimeFormatter.fancifyTime(this.getMillisPlayed(sender)))
+                            Template.of("time", PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(sender)))
                     )));
                 });
 
         final var ascend = commandManager.commandBuilder("ascend")
                 .meta(CommandMeta.DESCRIPTION, "Get fancy new perks!")
                 .senderType(Player.class)
-                .handler(c -> c.getSender().sendMessage(Component.text("coming soon..").color(NamedTextColor.GRAY)));
+                .handler(c -> {
+                    final var sender = (Player) c.getSender();
+                    final @Nullable Group nextGroup = this.luckPermsService.getNextGroup(sender, "player");
+
+                    if (nextGroup == null) {
+                        sender.sendMessage(this.langConfig.c(NodePath.path("ascend", "max")));
+                        return;
+                    }
+
+                    if (isEligibleForPlayerGroup(sender, nextGroup.getName())) {
+                        this.luckPermsService.promote(sender, "player");
+                        sender.sendMessage(this.langConfig.c(NodePath.path("ascend", "ascended"), Map.of("group", nextGroup.getName())));
+                    } else {
+                        sender.sendMessage(this.langConfig.c(
+                                NodePath.path("ascend", "ineligible"),
+                                Map.of(
+                                        "group", nextGroup.getName(),
+                                        "time", PlaytimeUtil.fancifyTime(getTimeRequired(nextGroup.getName()), TimeUnit.HOURS)
+                                )
+                        ));
+                    }
+                });
 
         commandManager.command(playtime);
         commandManager.command(ascend);
     }
 
-    private long getMillisPlayed(final Player player) {
-        // liars. why was it changed from PLAY_ONE_TICK to PLAY_ONE_MINUTE? it's incremented every tick, not minute
-        return (player.getStatistic(Statistic.PLAY_ONE_MINUTE) / 20) * 1000L;
+    private boolean isEligibleForPlayerGroup(final Player player, final String groupName) {
+        final var timePlayed = PlaytimeUtil.getTimePlayed(player);
+        return timePlayed.compareTo(getTimeRequired(groupName)) > 0;
+    }
+
+    private Duration getTimeRequired(final String groupName) {
+        return switch (groupName) {
+            case "passenger" -> Duration.ofHours(10000000);
+            case "navigator" -> Duration.ofHours(1);
+            case "pilot" -> Duration.ofHours(5);
+            case "captain" -> Duration.ofHours(25);
+            case "astronaut" -> Duration.ofHours(75);
+            default -> throw new IllegalStateException("Unexpected value: " + groupName);
+        };
     }
 
 }

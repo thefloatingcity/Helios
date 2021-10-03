@@ -15,8 +15,9 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
-import xyz.tehbrian.floatyplugin.util.TimeFormatter;
+import xyz.tehbrian.floatyplugin.util.PlaytimeUtil;
 
+import java.time.Duration;
 import java.util.Calendar;
 
 @SuppressWarnings({"unused", "ClassCanBeRecord"})
@@ -44,10 +45,10 @@ public final class JoinQuitListener implements Listener {
             event.joinMessage(this.langConfig.c(NodePath.path("join"), Template.of("player", player.displayName())));
 
             // TODO: use non-deprecated method
-            final long millisSinceLastPlayed = Calendar.getInstance().getTimeInMillis() - player.getLastPlayed();
+            final Duration timeSinceLastPlayed = Duration.ofMillis(Calendar.getInstance().getTimeInMillis() - player.getLastPlayed());
             player.sendMessage(this.langConfig.c(
                     NodePath.path("motd"),
-                    Template.of("last", TimeFormatter.fancifyTime(millisSinceLastPlayed))
+                    Template.of("last", PlaytimeUtil.fancifyTime(timeSinceLastPlayed))
             ));
         } else {
             event.joinMessage(this.langConfig.c(NodePath.path("join_new"), Template.of("player", player.displayName())));
