@@ -2,18 +2,13 @@ package xyz.tehbrian.floatyplugin.util;
 
 import broccolai.corn.paper.item.PaperItemBuilder;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.minimessage.Template;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.Inventory;
 import org.spongepowered.configurate.CommentedConfigurationNode;
-import org.spongepowered.configurate.serialize.SerializationException;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public final class ConfigDeserializers {

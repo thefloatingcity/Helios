@@ -7,7 +7,6 @@ import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -61,7 +60,7 @@ public class PianoCommand extends PaperCloudCommand<CommandSender> {
         final var main = commandManager.commandBuilder("piano")
                 .meta(CommandMeta.DESCRIPTION, "A fancy playable piano.")
                 .permission(Constants.Permissions.PIANO)
-                .handler(c -> SendMessage.s(c.getSender(), BookDeserializer.deserializePage(this.getBookNode(),1)));
+                .handler(c -> SendMessage.s(c.getSender(), BookDeserializer.deserializePage(this.getBookNode(), 1)));
 
         final var help = main.literal("help")
                 .argument(IntegerArgument.<CommandSender>newBuilder("page")

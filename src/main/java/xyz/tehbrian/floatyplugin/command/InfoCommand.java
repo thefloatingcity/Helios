@@ -17,18 +17,12 @@ import xyz.tehbrian.floatyplugin.util.SendMessage;
 public class InfoCommand extends PaperCloudCommand<CommandSender> {
 
     private final BooksConfig booksConfig;
-    private final LuckPermsService luckPermsService;
-    private final LangConfig langConfig;
 
     @Inject
     public InfoCommand(
-            final @NonNull BooksConfig booksConfig,
-            final @NonNull LuckPermsService luckPermsService,
-            final @NonNull LangConfig langConfig
+            final @NonNull BooksConfig booksConfig
     ) {
         this.booksConfig = booksConfig;
-        this.luckPermsService = luckPermsService;
-        this.langConfig = langConfig;
     }
 
     /**
