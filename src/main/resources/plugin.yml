@@ -16,3 +16,6 @@ permissions:
   floatyplugin.build:
     description: Permission to interact with the world.
     default: op
+  floatyplugin.spawn-build:
+    description: Permission to interact inside spawn.
+    default: op
