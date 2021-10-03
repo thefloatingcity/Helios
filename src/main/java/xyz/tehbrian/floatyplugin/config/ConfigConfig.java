@@ -27,7 +27,8 @@ public final class ConfigConfig extends AbstractConfig<HoconConfigurateWrapper> 
     private final FloatyPlugin floatyPlugin;
 
     private @Nullable Data data;
-    private @Nullable Spawn spawn;
+    private ConfigConfig.@Nullable Spawn spawn;
+    private ConfigConfig.@Nullable PlayerSpawn playerSpawn;
 
     @Inject
     public ConfigConfig(
@@ -72,6 +73,13 @@ public final class ConfigConfig extends AbstractConfig<HoconConfigurateWrapper> 
                 ConfigDeserializers.deserializeLocation(spawnNode.node("end"))
         );
 
+        final var playerSpawnNode = rootNode.node("player-spawn");
+        this.playerSpawn = new PlayerSpawn(
+                ConfigDeserializers.deserializeLocation(playerSpawnNode.node("overworld")),
+                ConfigDeserializers.deserializeLocation(playerSpawnNode.node("nether")),
+                ConfigDeserializers.deserializeLocation(playerSpawnNode.node("end"))
+        );
+
         this.logger.info("Successfully loaded configuration file {}", fileName);
     }
 
@@ -84,15 +92,29 @@ public final class ConfigConfig extends AbstractConfig<HoconConfigurateWrapper> 
         return this.data;
     }
 
-    public @Nullable Spawn spawn() {
+    public ConfigConfig.@Nullable Spawn spawn() {
         return this.spawn;
     }
 
+    public ConfigConfig.@Nullable PlayerSpawn playerSpawn() {
+        return this.playerSpawn;
+    }
+
     public @NonNull Location spawnLocation(final World.Environment environment) {
+        Objects.requireNonNull(this.spawn);
         return Objects.requireNonNull(switch (environment) {
-            case THE_END -> this.spawn().end();
-            case NETHER -> this.spawn().nether();
-            default -> this.spawn().overworld();
+            case THE_END -> this.spawn.end();
+            case NETHER -> this.spawn.nether();
+            default -> this.spawn.overworld();
+        });
+    }
+
+    public @NonNull Location playerSpawnLocation(final World.Environment environment) {
+        Objects.requireNonNull(this.playerSpawn);
+        return Objects.requireNonNull(switch (environment) {
+            case THE_END -> this.playerSpawn.end();
+            case NETHER -> this.playerSpawn.nether();
+            default -> this.playerSpawn.overworld();
         });
     }
 
@@ -109,6 +131,12 @@ public final class ConfigConfig extends AbstractConfig<HoconConfigurateWrapper> 
     public static record Spawn(Location overworld,
                                Location nether,
                                Location end) {
+
+    }
+
+    public static record PlayerSpawn(Location overworld,
+                                     Location nether,
+                                     Location end) {
 
     }
 

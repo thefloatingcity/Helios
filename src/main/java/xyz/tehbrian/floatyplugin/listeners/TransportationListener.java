@@ -137,16 +137,16 @@ public final class TransportationListener implements Listener {
             }
             case NETHER_PORTAL -> { // player is teleporting to/from nether but NOT making a new portal
                 if (environment == World.Environment.NETHER) {
-                    e.setTo(this.configConfig.spawn().overworld());
+                    e.setTo(this.configConfig.playerSpawn().overworld());
                 } else {
-                    e.setTo(this.configConfig.spawn().nether());
+                    e.setTo(this.configConfig.playerSpawn().nether());
                 }
             }
             case END_PORTAL -> { // player is teleporting to/from the end via end portal
                 if (environment == World.Environment.THE_END) {
-                    e.setTo(this.configConfig.spawn().overworld());
+                    e.setTo(this.configConfig.playerSpawn().overworld());
                 } else {
-                    e.setTo(this.configConfig.spawn().end());
+                    e.setTo(this.configConfig.playerSpawn().end());
                 }
             }
             default -> {
@@ -165,9 +165,9 @@ public final class TransportationListener implements Listener {
                 case NETHER_PAIR -> { // player is teleporting to/from the nether and making a new portal in the process
                     e.setCancelled(true); // no make the portal frame
                     if (environment == World.Environment.NETHER) {
-                        player.teleport(this.configConfig.spawn().overworld());
+                        player.teleport(this.configConfig.playerSpawn().overworld());
                     } else {
-                        player.teleport(this.configConfig.spawn().nether());
+                        player.teleport(this.configConfig.playerSpawn().nether());
                     }
                 }
                 case END_PLATFORM -> e.setCancelled(true); // player is teleporting to the end and making the platform in the process

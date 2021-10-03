@@ -28,17 +28,17 @@ public class WorldCommands extends PaperCloudCommand<CommandSender> {
         final var overworld = commandManager.commandBuilder("overworld")
                 .meta(CommandMeta.DESCRIPTION, "Go to the overworld.")
                 .senderType(Player.class)
-                .handler(c -> ((Player) c.getSender()).teleport(this.configConfig.spawn().overworld()));
+                .handler(c -> ((Player) c.getSender()).teleport(this.configConfig.playerSpawn().overworld()));
 
         final var nether = commandManager.commandBuilder("nether")
                 .meta(CommandMeta.DESCRIPTION, "Go to the nether.")
                 .senderType(Player.class)
-                .handler(c -> ((Player) c.getSender()).teleport(this.configConfig.spawn().nether()));
+                .handler(c -> ((Player) c.getSender()).teleport(this.configConfig.playerSpawn().nether()));
 
         final var end = commandManager.commandBuilder("end")
                 .meta(CommandMeta.DESCRIPTION, "Go to the end.")
                 .senderType(Player.class)
-                .handler(c -> ((Player) c.getSender()).teleport(this.configConfig.spawn().end()));
+                .handler(c -> ((Player) c.getSender()).teleport(this.configConfig.playerSpawn().end()));
 
 
         commandManager.command(overworld);

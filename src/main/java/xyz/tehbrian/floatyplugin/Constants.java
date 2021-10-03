@@ -10,6 +10,7 @@ public final class Constants {
         public static final String ROOT = "floatyplugin";
 
         public static final String FLY = ROOT + ".fly";
+        public static final String SPAWN_BUILD = ROOT + ".spawn-build";
         public static final String BROADCAST = ROOT + ".broadcast";
         public static final String RELOAD = ROOT + ".reload";
         public static final String GAMEMODE = ROOT + ".gamemode";

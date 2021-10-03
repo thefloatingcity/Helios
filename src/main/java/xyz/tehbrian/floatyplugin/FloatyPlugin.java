@@ -39,6 +39,7 @@ import xyz.tehbrian.floatyplugin.listeners.FishingListener;
 import xyz.tehbrian.floatyplugin.listeners.JoinQuitListener;
 import xyz.tehbrian.floatyplugin.listeners.MilkListener;
 import xyz.tehbrian.floatyplugin.listeners.ServerPingListener;
+import xyz.tehbrian.floatyplugin.listeners.SpawnProtectionListener;
 import xyz.tehbrian.floatyplugin.listeners.TransportationListener;
 import xyz.tehbrian.floatyplugin.listeners.VoidLoopListener;
 import xyz.tehbrian.floatyplugin.piano.PianoListener;
@@ -119,6 +120,7 @@ public final class FloatyPlugin extends TehPlugin {
                 this.injector.getInstance(MilkListener.class),
                 this.injector.getInstance(PianoListener.class),
                 this.injector.getInstance(ServerPingListener.class),
+                this.injector.getInstance(SpawnProtectionListener.class),
                 transportationListener,
                 voidLoop
         );
