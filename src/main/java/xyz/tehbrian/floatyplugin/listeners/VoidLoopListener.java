@@ -92,20 +92,30 @@ public final class VoidLoopListener implements Listener {
                         final float fallDistance = player.getFallDistance();
 
                         if (fallDistance >= 4000) {
-                            final Location spawnLocation = this.configConfig.spawnLocation(player.getWorld().getEnvironment());
-
-                            player.setFallDistance(0);
-                            player.teleport(spawnLocation);
-
-                            player.getWorld().strikeLightningEffect(spawnLocation);
-                            player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, spawnLocation, 1);
-                            player.getWorld().playSound(spawnLocation, Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 4, 1);
-
                             player.showTitle(Title.title(
                                     this.langConfig.c(NodePath.path("warp", "max")),
                                     this.langConfig.c(NodePath.path("warp", "max_sub")),
                                     INSTANT_IN_TIMES
                             ));
+
+                            scheduler.scheduleSyncDelayedTask(this.floatyPlugin,
+                                    () -> {
+                                        final Location spawnLocation = this.configConfig.spawnLocation(player.getWorld().getEnvironment());
+
+                                        player.setFallDistance(0);
+                                        player.teleport(spawnLocation);
+
+                                        player.getWorld().strikeLightningEffect(spawnLocation);
+                                        player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, spawnLocation, 1);
+                                        player.getWorld().playSound(
+                                                spawnLocation,
+                                                Sound.ENTITY_GENERIC_EXPLODE,
+                                                SoundCategory.MASTER,
+                                                4,
+                                                1
+                                        );
+                                    }, 5
+                            );
                         } else if (fallDistance >= 3800) {
                             player.showTitle(Title.title(
                                     Component.empty(),
