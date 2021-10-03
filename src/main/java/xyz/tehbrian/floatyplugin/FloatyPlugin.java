@@ -3,6 +3,8 @@ package xyz.tehbrian.floatyplugin;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import dev.tehbrian.tehlib.paper.TehPlugin;
+import org.bukkit.GameRule;
+import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -62,6 +64,21 @@ public final class FloatyPlugin extends TehPlugin {
             this.disableSelf();
             this.getLog4JLogger().error("Printing stack trace, please send this to the developers:", e);
             return;
+        }
+
+        for (final World world : this.getServer().getWorlds()) {
+            world.setGameRule(GameRule.MOB_GRIEFING, false);
+            world.setGameRule(GameRule.DO_MOB_SPAWNING, false);
+            world.setGameRule(GameRule.DO_FIRE_TICK, false);
+            world.setGameRule(GameRule.DISABLE_RAIDS, true);
+            world.setGameRule(GameRule.DO_PATROL_SPAWNING, false);
+
+            if (world.getEnvironment() == World.Environment.NETHER) {
+                world.setGameRule(GameRule.REDUCED_DEBUG_INFO, true);
+                world.setGameRule(GameRule.KEEP_INVENTORY, false);
+            } else {
+                world.setGameRule(GameRule.KEEP_INVENTORY, true);
+            }
         }
 
         this.loadConfigs();
