@@ -33,6 +33,8 @@ public final class MilkListener implements Listener {
         if (newEffect.getType().equals(PotionEffectType.DOLPHINS_GRACE)
                 && newEffect.getAmplifier() == 5
                 && event.getEntity() instanceof Player player) {
+            event.setCancelled(true);
+            player.removePotionEffect(PotionEffectType.DOLPHINS_GRACE);
 
             // can be abused if potion effects are cleared at the same time
             // you sprint. sprint + blindness go brrrrr
@@ -40,9 +42,9 @@ public final class MilkListener implements Listener {
                     && player.isSprinting()) {
                 player.setHealth(0.0D);
                 player.sendMessage(this.langConfig.c(NodePath.path("no_sprint_potion")));
+                return;
             }
 
-            event.setCancelled(true);
             for (final PotionEffect activeEffect : player.getActivePotionEffects()) {
                 player.removePotionEffect(activeEffect.getType());
             }
