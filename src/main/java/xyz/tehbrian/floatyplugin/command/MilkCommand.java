@@ -31,7 +31,7 @@ public class MilkCommand extends PaperCloudCommand<CommandSender> {
                     final var sender = (Player) c.getSender();
 
                     sender.getInventory().addItem(PotionBuilder.ofType(Material.POTION)
-                            .name(Component.text("Splash Potion of Milk"))
+                            .name(Component.text("Potion of Milk"))
                             .lore(
                                     Component.text("Milk XXXIV").color(NamedTextColor.BLUE),
                                     Component.empty(),
