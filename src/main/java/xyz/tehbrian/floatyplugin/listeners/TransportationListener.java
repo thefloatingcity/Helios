@@ -89,7 +89,11 @@ public final class TransportationListener implements Listener {
                         }
 
                         if (environment == World.Environment.NETHER) {
+                            if (player.isSprinting()) {
+                                player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1000000000, 1, true, false, false));
+                            }
                             player.setSprinting(false);
+
                             player.leaveVehicle();
 
                             switch (player.getLocation().add(0, -0.8, 0).getBlock().getType()) {
@@ -253,6 +257,8 @@ public final class TransportationListener implements Listener {
         }
 
         player.setSprinting(false);
+
+        player.getServer().getScheduler().scheduleSyncDelayedTask(this.floatyPlugin, () -> player.setSprinting(false), 5);
 
         final User user = this.userService.getUser(player);
         final var netherBlindnessCount = user.netherBlindnessCount();
