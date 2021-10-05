@@ -3,17 +3,16 @@ package xyz.tehbrian.floatyplugin.config;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import dev.tehbrian.tehlib.core.configurate.AbstractConfig;
-import org.apache.logging.log4j.Logger;
+import dev.tehbrian.tehlib.core.configurate.DataConfig;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
+import org.spongepowered.configurate.ConfigurateException;
 import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
-import org.spongepowered.configurate.serialize.SerializationException;
-import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.util.ConfigDeserializers;
 
 import java.nio.file.Path;
@@ -22,49 +21,25 @@ import java.util.Objects;
 /**
  * Loads and holds values for {@code config.conf}.
  */
-public final class ConfigConfig extends AbstractConfig<HoconConfigurateWrapper> {
-
-    private final FloatyPlugin floatyPlugin;
+public final class ConfigConfig extends AbstractConfig<HoconConfigurateWrapper> implements DataConfig<ConfigConfig.Data> {
 
     private @Nullable Data data;
     private ConfigConfig.@Nullable Spawn spawn;
     private ConfigConfig.@Nullable PlayerSpawn playerSpawn;
 
     @Inject
-    public ConfigConfig(
-            final @NotNull Logger logger,
-            final @NotNull @Named("dataFolder") Path dataFolder,
-            final @NotNull FloatyPlugin floatyPlugin
-    ) {
-        super(logger, new HoconConfigurateWrapper(logger, dataFolder.resolve("config.conf"), HoconConfigurationLoader.builder()
+    public ConfigConfig(final @NotNull @Named("dataFolder") Path dataFolder) {
+        super(new HoconConfigurateWrapper(dataFolder.resolve("config.conf"), HoconConfigurationLoader.builder()
                 .path(dataFolder.resolve("config.conf"))
                 .defaultOptions(opts -> opts.implicitInitialization(false))
                 .build()));
-        this.floatyPlugin = floatyPlugin;
     }
 
     @Override
-    public void load() {
+    public void load() throws ConfigurateException {
         this.configurateWrapper.load();
-        final CommentedConfigurationNode rootNode = this.configurateWrapper.get();
-        final String fileName = this.configurateWrapper.filePath().getFileName().toString();
-
-        try {
-            this.data = rootNode.get(Data.class);
-        } catch (final SerializationException e) {
-            this.logger.warn("Exception caught during configuration deserialization for {}", fileName);
-            this.logger.warn("Disabling plugin. Please check your {}", fileName);
-            this.floatyPlugin.disableSelf();
-            this.logger.warn("Printing stack trace:", e);
-            return;
-        }
-
-        if (this.data == null) {
-            this.logger.warn("The deserialized configuration for {} was null.", fileName);
-            this.logger.warn("Disabling plugin. Please check your {}", fileName);
-            this.floatyPlugin.disableSelf();
-            return;
-        }
+        final @NonNull CommentedConfigurationNode rootNode = Objects.requireNonNull(this.configurateWrapper.get());
+        this.data = Objects.requireNonNull(rootNode.get(Data.class), "Deserialized data is null");
 
         final var spawnNode = rootNode.node("spawn");
         this.spawn = new Spawn(
@@ -79,8 +54,6 @@ public final class ConfigConfig extends AbstractConfig<HoconConfigurateWrapper> 
                 ConfigDeserializers.deserializeLocation(playerSpawnNode.node("nether")),
                 ConfigDeserializers.deserializeLocation(playerSpawnNode.node("end"))
         );
-
-        this.logger.info("Successfully loaded configuration file {}", fileName);
     }
 
     /**
@@ -88,8 +61,8 @@ public final class ConfigConfig extends AbstractConfig<HoconConfigurateWrapper> 
      *
      * @return the data
      */
-    public @Nullable Data data() {
-        return this.data;
+    public @NonNull Data data() {
+        return Objects.requireNonNull(this.data, "Data is null");
     }
 
     public ConfigConfig.@Nullable Spawn spawn() {
@@ -119,7 +92,9 @@ public final class ConfigConfig extends AbstractConfig<HoconConfigurateWrapper> 
     }
 
     @ConfigSerializable
-    public static record Data(@NonNull PokeForce pokeForce) {
+    public static record Data(@NonNull PokeForce pokeForce,
+                              @NonNull String resourcePackUrl,
+                              @NonNull String resourcePackHash) {
 
         @ConfigSerializable
         public static record PokeForce(double minY, double maxY, double minXZ, double maxXZ) {

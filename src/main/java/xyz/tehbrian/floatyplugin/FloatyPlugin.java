@@ -2,6 +2,7 @@ package xyz.tehbrian.floatyplugin;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import dev.tehbrian.tehlib.core.configurate.AbstractConfig;
 import dev.tehbrian.tehlib.paper.TehPlugin;
 import org.bukkit.GameRule;
 import org.bukkit.World;
@@ -9,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.spongepowered.configurate.ConfigurateException;
 import xyz.tehbrian.floatyplugin.command.ActCommands;
 import xyz.tehbrian.floatyplugin.command.BroadcastCommand;
 import xyz.tehbrian.floatyplugin.command.CommandService;
@@ -43,6 +45,8 @@ import xyz.tehbrian.floatyplugin.listeners.SpawnProtectionListener;
 import xyz.tehbrian.floatyplugin.listeners.TransportationListener;
 import xyz.tehbrian.floatyplugin.listeners.VoidLoopListener;
 import xyz.tehbrian.floatyplugin.piano.PianoListener;
+
+import java.util.List;
 
 public final class FloatyPlugin extends TehPlugin {
 
@@ -84,28 +88,58 @@ public final class FloatyPlugin extends TehPlugin {
             }
         }
 
-        this.loadConfigs();
+        if (!this.loadConfigs()) {
+            return;
+        }
         this.setupListeners();
         this.setupCommands();
 
         if (!this.injector.getInstance(LuckPermsService.class).load()) {
-            this.getLogger().severe("No LuckPerms dependency found. Disabling plugin.");
+            this.getLogger().severe("LuckPerms dependency not found. Disabling plugin.");
             this.disableSelf();
         }
     }
 
-    public void loadConfigs() {
+    @Override
+    public void onDisable() {
+        this.getServer().getScheduler().cancelTasks(this);
+    }
+
+    /**
+     * Loads the plugin's config.
+     *
+     * @return whether or not it was successful
+     */
+    public boolean loadConfigs() {
         this.saveResourceSilently("books.conf");
         this.saveResourceSilently("config.conf");
         this.saveResourceSilently("emotes.conf");
         this.saveResourceSilently("inventories.conf");
         this.saveResourceSilently("lang.conf");
 
-        this.injector.getInstance(BooksConfig.class).load();
-        this.injector.getInstance(ConfigConfig.class).load();
-        this.injector.getInstance(EmotesConfig.class).load();
-        this.injector.getInstance(InventoriesConfig.class).load();
-        this.injector.getInstance(LangConfig.class).load();
+        final List<AbstractConfig<?>> configsToLoad = List.of(
+                this.injector.getInstance(BooksConfig.class),
+                this.injector.getInstance(ConfigConfig.class),
+                this.injector.getInstance(EmotesConfig.class),
+                this.injector.getInstance(InventoriesConfig.class),
+                this.injector.getInstance(LangConfig.class)
+        );
+
+        for (final AbstractConfig<?> config : configsToLoad) {
+            try {
+                config.load();
+            } catch (final ConfigurateException e) {
+                this.getLog4JLogger().error("Exception caught during configuration load for {}", config.configurateWrapper().filePath());
+                this.getLog4JLogger().error("Disabling plugin. Please check your config.");
+                this.getLog4JLogger().error("Printing stack trace:", e);
+                this.disableSelf();
+                return false;
+            }
+        }
+
+        this.getLog4JLogger().info("Successfully loaded configuration.");
+
+        return true;
     }
 
     private void setupListeners() {
@@ -135,7 +169,7 @@ public final class FloatyPlugin extends TehPlugin {
 
         final cloud.commandframework.paper.@Nullable PaperCommandManager<CommandSender> commandManager = commandService.get();
         if (commandManager == null) {
-            this.getLog4JLogger().error("The CommandService was null after initialization!");
+            this.getLog4JLogger().error("The CommandService was null after initialization.");
             this.getLog4JLogger().error("Disabling plugin.");
             this.disableSelf();
             return;

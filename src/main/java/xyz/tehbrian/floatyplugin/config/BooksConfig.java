@@ -2,7 +2,6 @@ package xyz.tehbrian.floatyplugin.config;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
@@ -13,11 +12,8 @@ import java.nio.file.Path;
 public final class BooksConfig extends AbstractRawHoconConfig {
 
     @Inject
-    public BooksConfig(
-            final @NotNull Logger logger,
-            final @NotNull @Named("dataFolder") Path dataFolder
-    ) {
-        super(logger, dataFolder.resolve("books.conf"));
+    public BooksConfig(final @NotNull @Named("dataFolder") Path dataFolder) {
+        super(dataFolder.resolve("books.conf"));
     }
 
 }
