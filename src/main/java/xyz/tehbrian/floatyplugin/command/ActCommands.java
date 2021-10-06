@@ -38,65 +38,6 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
      */
     @Override
     public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
-//        final var launch = commandManager.commandBuilder("launch")
-//                .senderType(Player.class)
-//                .permission(Constants.Permissions.LAUNCH)
-//                .meta(CommandMeta.DESCRIPTION, "Like a rocket!")
-//                .argument(PlayerArgument.optional("player"))
-//                .handler(c -> {
-//                    final Player sender = (Player) c.getSender();
-//                    final Player target = c.<Player>getOptional("player").orElse((sender));
-//
-//                    target.setVelocity(new Vector(0, 10, 0));
-//                    target.getWorld().playSound(target.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, SoundCategory.MASTER, 5, 0.75F);
-//
-//                    if (c.<Player>getOptional("player").isPresent()) {
-//                        sender.getServer().sendMessage(this.langConfig.c(
-//                                NodePath.path("act", "launch_other"),
-//                                Template.of("issuer", sender.displayName()),
-//                                Template.of("target", target.displayName())
-//                        ));
-//                    } else {
-//                        sender.getServer().sendMessage(this.langConfig.c(
-//                                NodePath.path("act", "launch_self"),
-//                                Template.of("issuer", sender.displayName())
-//                        ));
-//                    }
-//                });
-//
-//
-//        final var boost = commandManager.commandBuilder("boost")
-//                .senderType(Player.class)
-//                .permission(Constants.Permissions.BOOST)
-//                .meta(CommandMeta.DESCRIPTION, "Gives you a case of the zoomies.")
-//                .argument(PlayerArgument.optional("player"))
-//                .handler(c -> {
-//                    final Player sender = (Player) c.getSender();
-//                    final Player target = c.<Player>getOptional("player").orElse((sender));
-//
-//                    target.setVelocity(target.getLocation().getDirection().multiply(3));
-//                    target.getWorld().playSound(
-//                            target.getEyeLocation(),
-//                            Sound.ENTITY_FIREWORK_ROCKET_LAUNCH,
-//                            SoundCategory.MASTER,
-//                            5,
-//                            0.75F
-//                    );
-//
-//                    if (c.<Player>getOptional("player").isPresent()) {
-//                        sender.getServer().sendMessage(this.langConfig.c(
-//                                NodePath.path("act", "boost_other"),
-//                                Template.of("issuer", sender.displayName()),
-//                                Template.of("target", target.displayName())
-//                        ));
-//                    } else {
-//                        sender.getServer().sendMessage(this.langConfig.c(
-//                                NodePath.path("act", "boost_self"),
-//                                Template.of("issuer", sender.displayName())
-//                        ));
-//                    }
-//                });
-
         final var zap = commandManager.commandBuilder("zap")
                 .senderType(Player.class)
                 .permission(Constants.Permissions.ZAP)

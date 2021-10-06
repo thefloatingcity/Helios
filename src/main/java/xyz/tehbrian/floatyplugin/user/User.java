@@ -13,6 +13,7 @@ public final class User extends PaperUser {
     private final @NonNull Piano piano = new Piano(false, Instrument.HARP);
     private boolean flyBypassEnabled = false;
     private int netherBlindnessCount = 0;
+    private boolean elevatorMusicPlaying = false;
 
     public User(final UUID uuid) {
         super(uuid);
@@ -45,6 +46,14 @@ public final class User extends PaperUser {
 
     public @NonNull Piano piano() {
         return this.piano;
+    }
+
+    public boolean elevatorMusicPlaying() {
+        return elevatorMusicPlaying;
+    }
+
+    public void elevatorMusicPlaying(final boolean elevatorMusicPlaying) {
+        this.elevatorMusicPlaying = elevatorMusicPlaying;
     }
 
     public static final class Piano {

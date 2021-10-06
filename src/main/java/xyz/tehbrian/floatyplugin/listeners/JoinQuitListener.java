@@ -45,6 +45,7 @@ public final class JoinQuitListener implements Listener {
             event.joinMessage(this.langConfig.c(NodePath.path("join"), Template.of("player", player.displayName())));
 
             // TODO: use non-deprecated method
+            //noinspection deprecation
             final Duration timeSinceLastPlayed = Duration.ofMillis(Calendar.getInstance().getTimeInMillis() - player.getLastPlayed());
             player.sendMessage(this.langConfig.c(
                     NodePath.path("motd"),

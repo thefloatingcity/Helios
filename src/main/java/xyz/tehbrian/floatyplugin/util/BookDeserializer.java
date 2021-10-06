@@ -24,7 +24,7 @@ public final class BookDeserializer {
 
         final List<Component> messages = new ArrayList<>();
 
-        messages.add(MiniMessage.get().parse(
+        messages.add(MiniMessage.miniMessage().parse(
                 book.node("multistart").getString() + book.node("page_header").getString(),
                 Template.of("title", Objects.requireNonNull(page.node("title").getString())),
                 Template.of("page", pageNumber.toString()),

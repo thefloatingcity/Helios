@@ -20,7 +20,7 @@ import xyz.tehbrian.floatyplugin.util.FormatUtil;
 import java.util.List;
 import java.util.Objects;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "ClassCanBeRecord"})
 public final class PianoListener implements Listener {
 
     private final UserService userService;
@@ -70,12 +70,6 @@ public final class PianoListener implements Listener {
     }
 
     private void play(final @NonNull Player player, final @NonNull ItemStack item) {
-//        ItemStack itemStack = new ItemStack(Material.DIRT);
-//        NamespacedKey key = new NamespacedKey(main, "our-custom-key");
-//        ItemMeta itemMeta = itemfStack.getItemMeta();
-//        itemMeta.getPersistentDataContainer().set(key, PersistentDataType.DOUBLE, Math.PI);
-//        itemStack.setItemMeta(itemMeta);
-
         final @Nullable List<Component> lore = item.lore();
 
         if (lore == null

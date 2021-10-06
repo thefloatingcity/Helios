@@ -24,7 +24,7 @@ import xyz.tehbrian.floatyplugin.config.LangConfig;
 
 import java.time.Duration;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"ClassCanBeRecord", "unused"})
 public final class VoidLoopListener implements Listener {
 
     private static final Title.Times INSTANT_IN_TIMES = Title.Times.of(

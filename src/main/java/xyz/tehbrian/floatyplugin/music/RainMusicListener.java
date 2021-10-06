@@ -1,4 +1,4 @@
-package xyz.tehbrian.floatyplugin.listeners;
+package xyz.tehbrian.floatyplugin.music;
 
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
@@ -8,15 +8,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
-public final class MusicListener implements Listener {
+public final class RainMusicListener implements Listener {
 
     @EventHandler
-    public void onRain(final WeatherChangeEvent event) {
+    public void onWeatherChange(final WeatherChangeEvent event) {
         if (event.toWeatherState()) {
             for (final Player player : event.getWorld().getPlayers()) {
-                player.playSound(Sound.sound(Key.key("floating", "music.april_showers"),
-                        Sound.Source.MUSIC, 1, 1
-                ));
+                player.playSound(Sound.sound(
+                        Key.key("floating", "music.april_showers"), Sound.Source.MUSIC, 1, 1)
+                );
             }
         } else {
             for (final Player player : event.getWorld().getPlayers()) {

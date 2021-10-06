@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("ClassCanBeRecord")
 public final class ChatListener implements Listener {
 
     private final EmotesConfig emotesConfig;

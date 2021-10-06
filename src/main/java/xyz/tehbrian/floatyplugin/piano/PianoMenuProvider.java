@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("ClassCanBeRecord")
 public final class PianoMenuProvider {
 
     private final InventoriesConfig inventoriesConfig;
@@ -65,6 +66,8 @@ public final class PianoMenuProvider {
                 e.printStackTrace();
             }
 
+            // TODO: use persistent data?
+            // data.set(new NamespacedKey(main, "our-custom-key"), PersistentDataType.DOUBLE, Math.PI);
             items.add(PaperItemBuilder.ofType(Material.valueOf(Objects.requireNonNull(itemNode.node("material").getString())))
                     .amount(itemNode.node("amount").getInt(1))
                     .name(FormatUtil.miniMessage(Objects.requireNonNull(itemNode.node("name").getString())))

@@ -6,6 +6,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import xyz.tehbrian.floatyplugin.user.User;
 import xyz.tehbrian.floatyplugin.user.UserService;
 
+@SuppressWarnings("ClassCanBeRecord")
 public final class FlightService {
 
     private final UserService userService;
@@ -31,9 +32,7 @@ public final class FlightService {
     }
 
     public void enableFlight(final Player player) {
-        this.floatyPlugin.getServer().getScheduler().runTask(this.floatyPlugin, () -> {
-            player.setAllowFlight(true);
-        });
+        this.floatyPlugin.getServer().getScheduler().runTask(this.floatyPlugin, () -> player.setAllowFlight(true));
     }
 
     public void disableFlight(final Player player) {

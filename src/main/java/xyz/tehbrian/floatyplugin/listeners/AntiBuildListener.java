@@ -24,7 +24,7 @@ import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.Constants;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "ClassCanBeRecord"})
 public final class AntiBuildListener implements Listener {
 
     private final LangConfig langConfig;

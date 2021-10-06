@@ -16,7 +16,7 @@ public final class FormatUtil {
             .build();
     public static final @NotNull LegacyComponentSerializer LEGACY = LegacyComponentSerializer.legacyAmpersand();
     public static final @NotNull PlainTextComponentSerializer PLAIN = PlainTextComponentSerializer.plainText();
-    public static final @NotNull MiniMessage MINI_MESSAGE = MiniMessage.get();
+    public static final @NotNull MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
 
     private FormatUtil() {
     }
@@ -50,7 +50,7 @@ public final class FormatUtil {
     }
 
     public static @NonNull Component plain(final @NonNull String string) {
-        return plain(string);
+        return PLAIN.deserialize(string);
     }
 
     public static @NonNull String plain(final @NonNull Component component) {

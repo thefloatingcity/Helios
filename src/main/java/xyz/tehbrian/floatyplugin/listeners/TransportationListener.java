@@ -50,6 +50,7 @@ import xyz.tehbrian.floatyplugin.user.UserService;
  * - no flying anywhere
  * - no spectator
  */
+@SuppressWarnings("ClassCanBeRecord")
 public final class TransportationListener implements Listener {
 
     private final LangConfig langConfig;

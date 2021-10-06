@@ -41,11 +41,12 @@ import xyz.tehbrian.floatyplugin.listeners.ChatListener;
 import xyz.tehbrian.floatyplugin.listeners.FishingListener;
 import xyz.tehbrian.floatyplugin.listeners.JoinQuitListener;
 import xyz.tehbrian.floatyplugin.listeners.MilkListener;
-import xyz.tehbrian.floatyplugin.listeners.MusicListener;
 import xyz.tehbrian.floatyplugin.listeners.ServerPingListener;
 import xyz.tehbrian.floatyplugin.listeners.SpawnProtectionListener;
 import xyz.tehbrian.floatyplugin.listeners.TransportationListener;
 import xyz.tehbrian.floatyplugin.listeners.VoidLoopListener;
+import xyz.tehbrian.floatyplugin.music.ElevatorMusicTask;
+import xyz.tehbrian.floatyplugin.music.RainMusicListener;
 import xyz.tehbrian.floatyplugin.piano.PianoListener;
 
 import java.util.List;
@@ -154,7 +155,7 @@ public final class FloatyPlugin extends TehPlugin {
                 this.injector.getInstance(FishingListener.class),
                 this.injector.getInstance(JoinQuitListener.class),
                 this.injector.getInstance(MilkListener.class),
-                this.injector.getInstance(MusicListener.class),
+                this.injector.getInstance(RainMusicListener.class),
                 this.injector.getInstance(PianoListener.class),
                 this.injector.getInstance(ServerPingListener.class),
                 this.injector.getInstance(SpawnProtectionListener.class),
@@ -164,6 +165,8 @@ public final class FloatyPlugin extends TehPlugin {
 
         voidLoop.startTasks();
         transportationListener.startTasks();
+
+        this.getServer().getScheduler().scheduleSyncRepeatingTask(this, this.injector.getInstance(ElevatorMusicTask.class), 1, 20);
     }
 
     private void setupCommands() {
