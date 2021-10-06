@@ -2,12 +2,9 @@ package xyz.tehbrian.floatyplugin;
 
 import com.google.inject.Inject;
 import net.luckperms.api.LuckPerms;
-import net.luckperms.api.cacheddata.CachedMetaData;
 import net.luckperms.api.context.ImmutableContextSet;
 import net.luckperms.api.model.group.Group;
 import net.luckperms.api.model.user.User;
-import net.luckperms.api.node.types.InheritanceNode;
-import net.luckperms.api.query.QueryOptions;
 import net.luckperms.api.track.Track;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -42,45 +39,37 @@ public final class LuckPermsService {
         return true;
     }
 
-    public String getPrefix(final Player player) {
-        final User user = Objects.requireNonNull(this.luckPerms.getUserManager().getUser(player.getUniqueId()));
-        final QueryOptions queryOptions = this.luckPerms.getContextManager().getQueryOptions(player);
-        final CachedMetaData metaData = user.getCachedData().getMetaData(queryOptions);
-
-        return metaData.getPrefix() == null ? "" : metaData.getPrefix();
-    }
-
-    public String getSuffix(final Player player) {
-        final User user = Objects.requireNonNull(this.luckPerms.getUserManager().getUser(player.getUniqueId()));
-        final QueryOptions queryOptions = this.luckPerms.getContextManager().getQueryOptions(player);
-        final CachedMetaData metaData = user.getCachedData().getMetaData(queryOptions);
-
-        return metaData.getSuffix() == null ? "" : metaData.getSuffix();
-    }
-
-    public void promote(final Player player, final String trackName) {
-        final User user = Objects.requireNonNull(this.luckPerms.getUserManager().getUser(player.getUniqueId()));
-        final Track track = Objects.requireNonNull(this.luckPerms.getTrackManager().getTrack(trackName));
+    /**
+     * @param player    the player to promote
+     * @param trackName the track to promote the player on
+     * @throws IllegalArgumentException if the track does not exist
+     */
+    public void promoteInTrack(final @NonNull Player player, final @NonNull String trackName) throws IllegalArgumentException {
+        final User user = this.luckPerms.getPlayerAdapter(Player.class).getUser(player);
+        final @Nullable Track track = this.luckPerms.getTrackManager().getTrack(trackName);
+        if (track == null) {
+            throw new IllegalArgumentException("Track does not exist");
+        }
 
         track.promote(user, ImmutableContextSet.empty());
         this.luckPerms.getUserManager().saveUser(user);
     }
 
-    public void addGroup(final Player player, final String groupName) {
-        final User user = Objects.requireNonNull(this.luckPerms.getUserManager().getUser(player.getUniqueId()));
+    public @Nullable Group getNextGroupInTrack(final @NonNull Player player, final @NonNull String trackName) {
+        final @Nullable Track track = this.luckPerms.getTrackManager().getTrack(trackName);
+        if (track == null) {
+            throw new NullPointerException("Track does not exist");
+        }
 
-        user.data().add(InheritanceNode.builder(groupName).build());
-        this.luckPerms.getUserManager().saveUser(user);
-    }
+        final var groupManager = this.luckPerms.getGroupManager();
+        final var currentGroupName = this.luckPerms.getPlayerAdapter(Player.class).getUser(player).getPrimaryGroup();
 
-    public @Nullable Group getNextGroup(final Player player, final String trackName) {
-        final var playerTrack = Objects.requireNonNull(this.luckPerms).getTrackManager().getTrack(trackName);
-        final var groupManager = Objects.requireNonNull(this.luckPerms).getGroupManager();
+        final @Nullable Group currentGroup = groupManager.getGroup(currentGroupName);
+        if (currentGroup == null) {
+            throw new NullPointerException("Current group does not exist");
+        }
 
-        final var currentGroupName = this.getPrimaryGroup(player);
-        final var currentGroup = Objects.requireNonNull(groupManager.getGroup(currentGroupName));
-
-        final @Nullable String nextGroupName = Objects.requireNonNull(playerTrack).getNext(currentGroup);
+        final @Nullable String nextGroupName = Objects.requireNonNull(track).getNext(currentGroup);
         if (nextGroupName == null) {
             return null;
         }
@@ -88,13 +77,7 @@ public final class LuckPermsService {
         return groupManager.getGroup(nextGroupName);
     }
 
-    public String getPrimaryGroup(final Player player) {
-        final User user = Objects.requireNonNull(this.luckPerms.getUserManager().getUser(player.getUniqueId()));
-
-        return user.getPrimaryGroup();
-    }
-
-    public @Nullable LuckPerms getLuckPerms() {
+    public @MonotonicNonNull LuckPerms luckPerms() {
         return this.luckPerms;
     }
 

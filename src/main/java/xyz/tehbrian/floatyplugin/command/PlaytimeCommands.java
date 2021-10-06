@@ -63,7 +63,7 @@ public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
                 .senderType(Player.class)
                 .handler(c -> {
                     final var sender = (Player) c.getSender();
-                    final @Nullable Group nextGroup = this.luckPermsService.getNextGroup(sender, "player");
+                    final @Nullable Group nextGroup = this.luckPermsService.getNextGroupInTrack(sender, "player");
 
                     if (nextGroup == null) {
                         sender.sendMessage(this.langConfig.c(NodePath.path("ascend", "max")));
@@ -71,7 +71,7 @@ public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
                     }
 
                     if (isEligibleForPlayerGroup(sender, nextGroup.getName())) {
-                        this.luckPermsService.promote(sender, "player");
+                        this.luckPermsService.promoteInTrack(sender, "player");
                         sender.sendMessage(this.langConfig.c(NodePath.path("ascend", "ascended"), Map.of("group", nextGroup.getName())));
                     } else {
                         sender.sendMessage(this.langConfig.c(
