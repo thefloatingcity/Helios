@@ -38,7 +38,9 @@ public final class FlightService {
     public void disableFlight(final Player player) {
         this.floatyPlugin.getServer().getScheduler().runTask(this.floatyPlugin, () -> {
             player.setAllowFlight(false);
-            player.setFlying(false);
+            if (player.isFlying()) {
+                player.setFlying(false);
+            }
         });
     }
 
