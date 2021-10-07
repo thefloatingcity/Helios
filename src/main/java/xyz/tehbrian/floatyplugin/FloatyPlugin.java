@@ -2,7 +2,7 @@ package xyz.tehbrian.floatyplugin;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import dev.tehbrian.tehlib.core.configurate.AbstractConfig;
+import dev.tehbrian.tehlib.core.configurate.Config;
 import dev.tehbrian.tehlib.paper.TehPlugin;
 import org.bukkit.GameRule;
 import org.bukkit.World;
@@ -87,11 +87,12 @@ public final class FloatyPlugin extends TehPlugin {
                 world.setGameRule(GameRule.REDUCED_DEBUG_INFO, true);
                 world.setGameRule(GameRule.KEEP_INVENTORY, false);
             } else {
+                world.setGameRule(GameRule.REDUCED_DEBUG_INFO, false);
                 world.setGameRule(GameRule.KEEP_INVENTORY, true);
             }
         }
 
-        if (!this.loadConfigs()) {
+        if (!this.loadConfiguration()) {
             return;
         }
         this.setupListeners();
@@ -109,18 +110,18 @@ public final class FloatyPlugin extends TehPlugin {
     }
 
     /**
-     * Loads the plugin's config.
+     * Loads the plugin's configuration.
      *
-     * @return whether or not it was successful
+     * @return whether or not the loading was successful
      */
-    public boolean loadConfigs() {
+    public boolean loadConfiguration() {
         this.saveResourceSilently("books.conf");
         this.saveResourceSilently("config.conf");
         this.saveResourceSilently("emotes.conf");
         this.saveResourceSilently("inventories.conf");
         this.saveResourceSilently("lang.conf");
 
-        final List<AbstractConfig<?>> configsToLoad = List.of(
+        final List<Config> configsToLoad = List.of(
                 this.injector.getInstance(BooksConfig.class),
                 this.injector.getInstance(ConfigConfig.class),
                 this.injector.getInstance(EmotesConfig.class),
@@ -128,20 +129,19 @@ public final class FloatyPlugin extends TehPlugin {
                 this.injector.getInstance(LangConfig.class)
         );
 
-        for (final AbstractConfig<?> config : configsToLoad) {
+        for (final Config config : configsToLoad) {
             try {
                 config.load();
             } catch (final ConfigurateException e) {
-                this.getLog4JLogger().error("Exception caught during configuration load for {}", config.configurateWrapper().filePath());
+                this.getLog4JLogger().error("Exception caught during config load for {}", config.configurateWrapper().filePath());
                 this.getLog4JLogger().error("Disabling plugin. Please check your config.");
-                this.getLog4JLogger().error("Printing stack trace:", e);
                 this.disableSelf();
+                this.getLog4JLogger().error("Printing stack trace:", e);
                 return false;
             }
         }
 
         this.getLog4JLogger().info("Successfully loaded configuration.");
-
         return true;
     }
 

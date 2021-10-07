@@ -32,12 +32,18 @@ public final class FlightService {
     }
 
     public void enableFlight(final Player player) {
-        this.floatyPlugin.getServer().getScheduler().runTask(this.floatyPlugin, () -> player.setAllowFlight(true));
+        this.floatyPlugin.getServer().getScheduler().runTask(this.floatyPlugin, () -> {
+            if (!player.getAllowFlight()) {
+                player.setAllowFlight(true);
+            }
+        });
     }
 
     public void disableFlight(final Player player) {
         this.floatyPlugin.getServer().getScheduler().runTask(this.floatyPlugin, () -> {
-            player.setAllowFlight(false);
+            if (player.getAllowFlight()) {
+                player.setAllowFlight(false);
+            }
             if (player.isFlying()) {
                 player.setFlying(false);
             }
