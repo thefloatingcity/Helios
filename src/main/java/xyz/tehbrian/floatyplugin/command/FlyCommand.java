@@ -9,8 +9,8 @@ import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.Constants;
-import xyz.tehbrian.floatyplugin.FlightService;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
+import xyz.tehbrian.floatyplugin.transportation.FlightService;
 import xyz.tehbrian.floatyplugin.user.UserService;
 
 public class FlyCommand extends PaperCloudCommand<CommandSender> {

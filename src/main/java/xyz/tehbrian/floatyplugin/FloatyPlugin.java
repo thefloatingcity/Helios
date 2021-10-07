@@ -11,6 +11,8 @@ import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.ConfigurateException;
+import xyz.tehbrian.floatyplugin.build.AntiBuildListener;
+import xyz.tehbrian.floatyplugin.build.SpawnProtectionListener;
 import xyz.tehbrian.floatyplugin.command.ActCommands;
 import xyz.tehbrian.floatyplugin.command.BroadcastCommand;
 import xyz.tehbrian.floatyplugin.command.CommandService;
@@ -36,18 +38,18 @@ import xyz.tehbrian.floatyplugin.inject.FlightModule;
 import xyz.tehbrian.floatyplugin.inject.LuckPermsModule;
 import xyz.tehbrian.floatyplugin.inject.PluginModule;
 import xyz.tehbrian.floatyplugin.inject.UserModule;
-import xyz.tehbrian.floatyplugin.listeners.AntiBuildListener;
 import xyz.tehbrian.floatyplugin.listeners.ChatListener;
 import xyz.tehbrian.floatyplugin.listeners.FishingListener;
 import xyz.tehbrian.floatyplugin.listeners.JoinQuitListener;
 import xyz.tehbrian.floatyplugin.listeners.MilkListener;
 import xyz.tehbrian.floatyplugin.listeners.ServerPingListener;
-import xyz.tehbrian.floatyplugin.listeners.SpawnProtectionListener;
-import xyz.tehbrian.floatyplugin.listeners.TransportationListener;
-import xyz.tehbrian.floatyplugin.listeners.VoidLoopListener;
 import xyz.tehbrian.floatyplugin.music.ElevatorMusicTask;
 import xyz.tehbrian.floatyplugin.music.RainMusicListener;
 import xyz.tehbrian.floatyplugin.piano.PianoListener;
+import xyz.tehbrian.floatyplugin.transportation.TransportationListener;
+import xyz.tehbrian.floatyplugin.transportation.TransportationTask;
+import xyz.tehbrian.floatyplugin.transportation.VoidLoopListener;
+import xyz.tehbrian.floatyplugin.transportation.VoidLoopTask;
 
 import java.util.List;
 
@@ -92,16 +94,17 @@ public final class FloatyPlugin extends TehPlugin {
             }
         }
 
+        if (!this.injector.getInstance(LuckPermsService.class).load()) {
+            this.getLogger().severe("LuckPerms dependency not found. Disabling plugin.");
+            this.disableSelf();
+        }
+
         if (!this.loadConfiguration()) {
             return;
         }
         this.setupListeners();
         this.setupCommands();
-
-        if (!this.injector.getInstance(LuckPermsService.class).load()) {
-            this.getLogger().severe("LuckPerms dependency not found. Disabling plugin.");
-            this.disableSelf();
-        }
+        this.setupTasks();
     }
 
     @Override
@@ -146,9 +149,6 @@ public final class FloatyPlugin extends TehPlugin {
     }
 
     private void setupListeners() {
-        final VoidLoopListener voidLoop = this.injector.getInstance(VoidLoopListener.class);
-        final TransportationListener transportationListener = this.injector.getInstance(TransportationListener.class);
-
         registerListeners(
                 this.injector.getInstance(AntiBuildListener.class),
                 this.injector.getInstance(ChatListener.class),
@@ -159,14 +159,9 @@ public final class FloatyPlugin extends TehPlugin {
                 this.injector.getInstance(PianoListener.class),
                 this.injector.getInstance(ServerPingListener.class),
                 this.injector.getInstance(SpawnProtectionListener.class),
-                transportationListener,
-                voidLoop
+                this.injector.getInstance(TransportationListener.class),
+                this.injector.getInstance(VoidLoopListener.class)
         );
-
-        voidLoop.startTasks();
-        transportationListener.startTasks();
-
-        this.getServer().getScheduler().scheduleSyncRepeatingTask(this, this.injector.getInstance(ElevatorMusicTask.class), 1, 20);
     }
 
     private void setupCommands() {
@@ -195,6 +190,12 @@ public final class FloatyPlugin extends TehPlugin {
         this.injector.getInstance(PlaytimeCommands.class).register(commandManager);
         this.injector.getInstance(RulesCommand.class).register(commandManager);
         this.injector.getInstance(WorldCommands.class).register(commandManager);
+    }
+
+    private void setupTasks() {
+        this.injector.getInstance(ElevatorMusicTask.class).start();
+        this.injector.getInstance(TransportationTask.class).start();
+        this.injector.getInstance(VoidLoopTask.class).start();
     }
 
 }

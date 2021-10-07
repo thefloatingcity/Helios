@@ -8,7 +8,6 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.jetbrains.annotations.NotNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.ConfigurateException;
 import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
@@ -28,7 +27,7 @@ public final class ConfigConfig extends AbstractConfig<HoconConfigurateWrapper> 
     private ConfigConfig.@Nullable PlayerSpawn playerSpawn;
 
     @Inject
-    public ConfigConfig(final @NotNull @Named("dataFolder") Path dataFolder) {
+    public ConfigConfig(final @NonNull @Named("dataFolder") Path dataFolder) {
         super(new HoconConfigurateWrapper(dataFolder.resolve("config.conf"), HoconConfigurationLoader.builder()
                 .path(dataFolder.resolve("config.conf"))
                 .defaultOptions(opts -> opts.implicitInitialization(false))

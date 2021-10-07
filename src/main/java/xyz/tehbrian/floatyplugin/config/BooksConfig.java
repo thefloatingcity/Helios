@@ -2,7 +2,7 @@ package xyz.tehbrian.floatyplugin.config;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import org.jetbrains.annotations.NotNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.nio.file.Path;
 
@@ -12,7 +12,7 @@ import java.nio.file.Path;
 public final class BooksConfig extends AbstractRawHoconConfig {
 
     @Inject
-    public BooksConfig(final @NotNull @Named("dataFolder") Path dataFolder) {
+    public BooksConfig(final @NonNull @Named("dataFolder") Path dataFolder) {
         super(dataFolder.resolve("books.conf"));
     }
 

@@ -46,7 +46,7 @@ public final class ConfigDeserializers {
 
     public static Location deserializeLocation(final CommentedConfigurationNode section) {
         return new Location(
-                Bukkit.getWorld(Objects.requireNonNull(section.node("world").getString())),
+                Bukkit.getWorld(Objects.requireNonNull(section.node("world").getString("world"))),
                 section.node("x").getDouble(0),
                 section.node("y").getDouble(0),
                 section.node("z").getDouble(0),

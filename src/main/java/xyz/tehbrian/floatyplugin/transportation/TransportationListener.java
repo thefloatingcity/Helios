@@ -1,4 +1,4 @@
-package xyz.tehbrian.floatyplugin.listeners;
+package xyz.tehbrian.floatyplugin.transportation;
 
 import broccolai.corn.paper.item.PaperItemBuilder;
 import broccolai.corn.paper.item.special.BookBuilder;
@@ -11,7 +11,6 @@ import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Particle;
-import org.bukkit.Server;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.World;
@@ -36,20 +35,12 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
-import xyz.tehbrian.floatyplugin.FlightService;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.user.User;
 import xyz.tehbrian.floatyplugin.user.UserService;
 
-/**
- * Ensures the following:
- * - no elytra anywhere but the end
- * - no sprinting in the nether
- * - no flying anywhere
- * - no spectator
- */
 @SuppressWarnings("ClassCanBeRecord")
 public final class TransportationListener implements Listener {
 
@@ -72,45 +63,6 @@ public final class TransportationListener implements Listener {
         this.flightService = flightService;
         this.configConfig = configConfig;
         this.userService = userService;
-    }
-
-    public void startTasks() {
-        final Server server = this.floatyPlugin.getServer();
-
-        server.getScheduler().scheduleSyncRepeatingTask(
-                this.floatyPlugin,
-                () -> {
-                    for (final Player player : server.getOnlinePlayers()) {
-                        final World.Environment environment = player.getWorld().getEnvironment();
-
-                        this.flightService.checkFlight(player);
-
-                        if (environment != World.Environment.THE_END) {
-                            player.setGliding(false);
-                        }
-
-                        if (environment == World.Environment.NETHER) {
-                            if (player.isSprinting()) {
-                                player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1000000000, 1, true, false, false));
-                            }
-                            player.setSprinting(false);
-
-                            player.leaveVehicle();
-
-                            switch (player.getLocation().add(0, -0.8, 0).getBlock().getType()) {
-                                case ICE, PACKED_ICE, BLUE_ICE, FROSTED_ICE -> player.addPotionEffect(new PotionEffect(
-                                        PotionEffectType.SLOW, 40, 3, true, false, false
-                                ));
-                                case SOUL_SAND, SOUL_SOIL -> player.addPotionEffect(new PotionEffect(
-                                        PotionEffectType.SLOW, 40, 120, true, false, false
-                                ));
-                                default -> {
-                                }
-                            }
-                        }
-                    }
-                }, 1, 10
-        );
     }
 
     @EventHandler

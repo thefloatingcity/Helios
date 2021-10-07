@@ -5,18 +5,17 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.jetbrains.annotations.NotNull;
 
 public final class FormatUtil {
 
-    public static final @NotNull LegacyComponentSerializer LEGACY_WITH_URLS = LegacyComponentSerializer
+    public static final @NonNull LegacyComponentSerializer LEGACY_WITH_URLS = LegacyComponentSerializer
             .builder()
             .character('&')
             .extractUrls()
             .build();
-    public static final @NotNull LegacyComponentSerializer LEGACY = LegacyComponentSerializer.legacyAmpersand();
-    public static final @NotNull PlainTextComponentSerializer PLAIN = PlainTextComponentSerializer.plainText();
-    public static final @NotNull MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
+    public static final @NonNull LegacyComponentSerializer LEGACY = LegacyComponentSerializer.legacyAmpersand();
+    public static final @NonNull PlainTextComponentSerializer PLAIN = PlainTextComponentSerializer.plainText();
+    public static final @NonNull MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
 
     private FormatUtil() {
     }

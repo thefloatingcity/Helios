@@ -2,7 +2,7 @@ package xyz.tehbrian.floatyplugin.config;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import org.jetbrains.annotations.NotNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.nio.file.Path;
 
@@ -12,7 +12,7 @@ import java.nio.file.Path;
 public final class EmotesConfig extends AbstractRawHoconConfig {
 
     @Inject
-    public EmotesConfig(final @NotNull @Named("dataFolder") Path dataFolder) {
+    public EmotesConfig(final @NonNull @Named("dataFolder") Path dataFolder) {
         super(dataFolder.resolve("emotes.conf"));
     }
 

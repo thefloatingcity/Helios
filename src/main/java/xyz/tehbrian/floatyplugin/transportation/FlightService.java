@@ -1,9 +1,10 @@
-package xyz.tehbrian.floatyplugin;
+package xyz.tehbrian.floatyplugin.transportation;
 
 import com.google.inject.Inject;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import xyz.tehbrian.floatyplugin.user.User;
+import xyz.tehbrian.floatyplugin.Constants;
+import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.user.UserService;
 
 @SuppressWarnings("ClassCanBeRecord")
@@ -22,13 +23,15 @@ public final class FlightService {
     }
 
     public void checkFlight(final Player player) {
-        final User user = this.userService.getUser(player);
-
-        if (player.hasPermission(Constants.Permissions.FLY) && user.flyBypassEnabled()) {
+        if (this.canFly(player)) {
             this.enableFlight(player);
         } else {
             this.disableFlight(player);
         }
+    }
+
+    public boolean canFly(final Player player) {
+        return player.hasPermission(Constants.Permissions.FLY) && this.userService.getUser(player).flyBypassEnabled();
     }
 
     public void enableFlight(final Player player) {

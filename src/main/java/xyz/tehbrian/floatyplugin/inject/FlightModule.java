@@ -1,7 +1,7 @@
 package xyz.tehbrian.floatyplugin.inject;
 
 import com.google.inject.AbstractModule;
-import xyz.tehbrian.floatyplugin.FlightService;
+import xyz.tehbrian.floatyplugin.transportation.FlightService;
 
 public final class FlightModule extends AbstractModule {
 
