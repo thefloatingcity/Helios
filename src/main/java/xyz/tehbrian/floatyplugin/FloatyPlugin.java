@@ -27,6 +27,7 @@ import xyz.tehbrian.floatyplugin.command.PackCommand;
 import xyz.tehbrian.floatyplugin.command.PianoCommand;
 import xyz.tehbrian.floatyplugin.command.PlaytimeCommands;
 import xyz.tehbrian.floatyplugin.command.RulesCommand;
+import xyz.tehbrian.floatyplugin.command.TagCommand;
 import xyz.tehbrian.floatyplugin.command.WorldCommands;
 import xyz.tehbrian.floatyplugin.config.BooksConfig;
 import xyz.tehbrian.floatyplugin.config.ConfigConfig;
@@ -37,6 +38,7 @@ import xyz.tehbrian.floatyplugin.inject.ConfigModule;
 import xyz.tehbrian.floatyplugin.inject.FlightModule;
 import xyz.tehbrian.floatyplugin.inject.LuckPermsModule;
 import xyz.tehbrian.floatyplugin.inject.PluginModule;
+import xyz.tehbrian.floatyplugin.inject.TagModule;
 import xyz.tehbrian.floatyplugin.inject.UserModule;
 import xyz.tehbrian.floatyplugin.listeners.ChatListener;
 import xyz.tehbrian.floatyplugin.listeners.FishingListener;
@@ -46,6 +48,7 @@ import xyz.tehbrian.floatyplugin.listeners.ServerPingListener;
 import xyz.tehbrian.floatyplugin.music.ElevatorMusicTask;
 import xyz.tehbrian.floatyplugin.music.RainMusicListener;
 import xyz.tehbrian.floatyplugin.piano.PianoListener;
+import xyz.tehbrian.floatyplugin.tag.TagListener;
 import xyz.tehbrian.floatyplugin.transportation.TransportationListener;
 import xyz.tehbrian.floatyplugin.transportation.TransportationTask;
 import xyz.tehbrian.floatyplugin.transportation.VoidLoopListener;
@@ -68,6 +71,7 @@ public final class FloatyPlugin extends TehPlugin {
                     new FlightModule(),
                     new LuckPermsModule(),
                     new PluginModule(this),
+                    new TagModule(),
                     new UserModule()
             );
         } catch (final Exception e) {
@@ -160,7 +164,8 @@ public final class FloatyPlugin extends TehPlugin {
                 this.injector.getInstance(ServerPingListener.class),
                 this.injector.getInstance(SpawnProtectionListener.class),
                 this.injector.getInstance(TransportationListener.class),
-                this.injector.getInstance(VoidLoopListener.class)
+                this.injector.getInstance(VoidLoopListener.class),
+                this.injector.getInstance(TagListener.class)
         );
     }
 
@@ -189,6 +194,7 @@ public final class FloatyPlugin extends TehPlugin {
         this.injector.getInstance(PianoCommand.class).register(commandManager);
         this.injector.getInstance(PlaytimeCommands.class).register(commandManager);
         this.injector.getInstance(RulesCommand.class).register(commandManager);
+        this.injector.getInstance(TagCommand.class).register(commandManager);
         this.injector.getInstance(WorldCommands.class).register(commandManager);
     }
 
