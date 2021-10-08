@@ -4,21 +4,22 @@ import com.google.inject.Inject;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import xyz.tehbrian.floatyplugin.FloatyPlugin;
+import org.spongepowered.configurate.NodePath;
+import xyz.tehbrian.floatyplugin.config.LangConfig;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class TagService {
 
-    private final FloatyPlugin floatyPlugin;
+    private final LangConfig langConfig;
 
     private final Set<Player> playing = new HashSet<>();
     private Player it;
 
     @Inject
-    public TagService(final @NonNull FloatyPlugin floatyPlugin) {
-        this.floatyPlugin = floatyPlugin;
+    public TagService(final @NonNull LangConfig langConfig) {
+        this.langConfig = langConfig;
     }
 
     public Player it() {
@@ -44,6 +45,15 @@ public class TagService {
             player.setGameMode(GameMode.SURVIVAL);
         } else {
             playing.remove(player);
+
+            if (this.it == player) {
+                player.setGlowing(false);
+
+                if (this.playing.iterator().hasNext()) {
+                    this.it = this.playing.iterator().next();
+                    this.it.sendMessage(this.langConfig.c(NodePath.path("tag", "now_it_because_leave")));
+                }
+            }
         }
     }
 
