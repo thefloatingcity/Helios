@@ -6,6 +6,7 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -70,17 +71,17 @@ public final class AntiBuildListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOW)
     public void onItemPickup(final PlayerAttemptPickupItemEvent event) {
-        this.onAntiBuild(event, true);
+        this.onAntiBuild(event, false);
     }
 
     @EventHandler(priority = EventPriority.LOW)
     public void onItemDrop(final PlayerDropItemEvent event) {
-        this.onAntiBuild(event, true);
+        this.onAntiBuild(event, false);
     }
 
     @EventHandler(priority = EventPriority.LOW)
     public void onInteract(final PlayerInteractEvent event) {
-        this.onAntiBuild(event);
+        this.onAntiBuild(event, event.getAction() != Action.PHYSICAL);
     }
 
     @EventHandler(priority = EventPriority.LOW)
@@ -100,17 +101,17 @@ public final class AntiBuildListener implements Listener {
         this.onAntiBuild(event);
     }
 
-    private <T extends PlayerEvent & Cancellable> void onAntiBuild(final T event, final boolean silent) {
-        this.onAntiBuild(event, event.getPlayer(), silent);
+    private <T extends PlayerEvent & Cancellable> void onAntiBuild(final T event, final boolean sendMessage) {
+        this.onAntiBuild(event, event.getPlayer(), sendMessage);
     }
 
     private <T extends PlayerEvent & Cancellable> void onAntiBuild(final T event) {
-        this.onAntiBuild(event, false);
+        this.onAntiBuild(event, true);
     }
 
-    private <T extends Cancellable> void onAntiBuild(final T event, final Player player, final boolean silent) {
+    private <T extends Cancellable> void onAntiBuild(final T event, final Player player, final boolean sendMessage) {
         if (!player.hasPermission(Constants.Permissions.BUILD)) {
-            if (!silent) {
+            if (sendMessage) {
                 player.sendMessage(this.langConfig.c(NodePath.path("no_build")));
             }
             event.setCancelled(true);
@@ -118,7 +119,7 @@ public final class AntiBuildListener implements Listener {
     }
 
     private <T extends Cancellable> void onAntiBuild(final T event, final Player player) {
-        this.onAntiBuild(event, player, false);
+        this.onAntiBuild(event, player, true);
     }
 
 }
