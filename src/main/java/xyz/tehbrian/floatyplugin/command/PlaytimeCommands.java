@@ -50,10 +50,12 @@ public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
 
                     c.<Player>getOptional("player").ifPresentOrElse((target) -> sender.sendMessage(this.langConfig.c(
                             NodePath.path("playtime", "other"),
+                            Template.of("time_in_hours", PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(target), TimeUnit.HOURS)),
                             Template.of("time", PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(target))),
                             Template.of("player", target.getName())
                     )), () -> sender.sendMessage(this.langConfig.c(
                             NodePath.path("playtime", "self"),
+                            Template.of("time_in_hours", PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(sender), TimeUnit.HOURS)),
                             Template.of("time", PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(sender)))
                     )));
                 });
@@ -76,10 +78,8 @@ public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
                     } else {
                         sender.sendMessage(this.langConfig.c(
                                 NodePath.path("ascend", "ineligible"),
-                                Map.of(
-                                        "group", nextGroup.getName(),
-                                        "time", PlaytimeUtil.fancifyTime(this.getTimeRequired(nextGroup.getName()), TimeUnit.HOURS)
-                                )
+                                Template.of("group", nextGroup.getName()),
+                                Template.of("time", PlaytimeUtil.fancifyTime(this.getTimeRequired(nextGroup.getName()), TimeUnit.HOURS))
                         ));
                     }
                 });
