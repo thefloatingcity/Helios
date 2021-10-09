@@ -70,7 +70,7 @@ public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
                         return;
                     }
 
-                    if (isEligibleForPlayerGroup(sender, nextGroup.getName())) {
+                    if (this.isEligibleForPlayerGroup(sender, nextGroup.getName())) {
                         this.luckPermsService.promoteInTrack(sender, "player");
                         sender.sendMessage(this.langConfig.c(NodePath.path("ascend", "ascended"), Map.of("group", nextGroup.getName())));
                     } else {
@@ -78,7 +78,7 @@ public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
                                 NodePath.path("ascend", "ineligible"),
                                 Map.of(
                                         "group", nextGroup.getName(),
-                                        "time", PlaytimeUtil.fancifyTime(getTimeRequired(nextGroup.getName()), TimeUnit.HOURS)
+                                        "time", PlaytimeUtil.fancifyTime(this.getTimeRequired(nextGroup.getName()), TimeUnit.HOURS)
                                 )
                         ));
                     }
@@ -90,7 +90,7 @@ public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
 
     private boolean isEligibleForPlayerGroup(final Player player, final String groupName) {
         final var timePlayed = PlaytimeUtil.getTimePlayed(player);
-        return timePlayed.compareTo(getTimeRequired(groupName)) > 0;
+        return timePlayed.compareTo(this.getTimeRequired(groupName)) > 0;
     }
 
     private Duration getTimeRequired(final String groupName) {

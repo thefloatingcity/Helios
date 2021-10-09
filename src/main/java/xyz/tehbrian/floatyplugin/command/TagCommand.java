@@ -40,7 +40,7 @@ public class TagCommand extends PaperCloudCommand<CommandSender> {
                     if (this.tagService.togglePlaying(sender)) {
                         if (this.tagService.playing().size() <= 1) {
                             sender.sendMessage(this.langConfig.c(NodePath.path("tag", "join_first")));
-                            this.tagService.it(sender);
+                            this.tagService.setIt(sender);
                         } else {
                             sender.sendMessage(this.langConfig.c(NodePath.path("tag", "join")));
                         }

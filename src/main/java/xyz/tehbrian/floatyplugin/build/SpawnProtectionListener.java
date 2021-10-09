@@ -102,7 +102,7 @@ public final class SpawnProtectionListener implements Listener {
 
     private <T extends Cancellable> void onSpawnPlace(final T event, final Player player, final Location interactionLocation) {
         if (interactionLocation.distanceSquared(
-                configConfig.spawnLocation(interactionLocation.getWorld().getEnvironment())) < SPAWN_PROTECTION_RADIUS_SQUARED
+                this.configConfig.spawnLocation(interactionLocation.getWorld().getEnvironment())) < SPAWN_PROTECTION_RADIUS_SQUARED
                 && !player.hasPermission(Constants.Permissions.SPAWN_BUILD)) {
             event.setCancelled(true);
         }

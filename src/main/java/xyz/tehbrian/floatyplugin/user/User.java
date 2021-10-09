@@ -37,7 +37,7 @@ public final class User extends PaperUser {
     }
 
     public int netherBlindnessCount() {
-        return netherBlindnessCount;
+        return this.netherBlindnessCount;
     }
 
     public void netherBlindnessCount(final int netherBlindnessCount) {
@@ -49,7 +49,7 @@ public final class User extends PaperUser {
     }
 
     public boolean elevatorMusicPlaying() {
-        return elevatorMusicPlaying;
+        return this.elevatorMusicPlaying;
     }
 
     public void elevatorMusicPlaying(final boolean elevatorMusicPlaying) {

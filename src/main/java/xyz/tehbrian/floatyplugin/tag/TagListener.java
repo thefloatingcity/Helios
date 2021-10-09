@@ -9,12 +9,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
 @SuppressWarnings("ClassCanBeRecord")
-public class TagListener implements Listener {
+public final class TagListener implements Listener {
 
     private final TagService tagService;
     private final LangConfig langConfig;
@@ -32,10 +33,10 @@ public class TagListener implements Listener {
     public void onPunch(final EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Player damager
                 && event.getEntity() instanceof Player victim
-                && tagService.isPlaying(damager)
-                && tagService.isPlaying(victim)
-                && tagService.it().getUniqueId().equals(damager.getUniqueId())) {
-            tagService.it(victim);
+                && this.tagService.isPlaying(damager)
+                && this.tagService.isPlaying(victim)
+                && this.tagService.getIt().equals(damager)) {
+            this.tagService.setIt(victim);
             victim.sendMessage(this.langConfig.c(NodePath.path("tag", "now_it")));
             victim.playSound(victim.getEyeLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5F);
             damager.sendMessage(this.langConfig.c(NodePath.path("tag", "tagged_player"), Template.of("player", victim.displayName())));
@@ -45,11 +46,16 @@ public class TagListener implements Listener {
 
     @EventHandler
     public void onGameModeChange(final PlayerGameModeChangeEvent event) {
-        if (tagService.isPlaying(event.getPlayer())
-                && event.getNewGameMode() == GameMode.CREATIVE) {
+        if (this.tagService.isPlaying(event.getPlayer())
+                && event.getNewGameMode() != GameMode.ADVENTURE) {
             event.setCancelled(true);
-            event.getPlayer().sendMessage(this.langConfig.c(NodePath.path("tag", "no_creative")));
+            event.getPlayer().sendMessage(this.langConfig.c(NodePath.path("tag", "adventure_only")));
         }
+    }
+
+    @EventHandler
+    public void onQuit(final PlayerQuitEvent event) {
+        this.tagService.setPlaying(event.getPlayer(), false);
     }
 
 }

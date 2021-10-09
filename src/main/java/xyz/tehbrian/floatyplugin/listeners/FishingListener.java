@@ -48,7 +48,7 @@ public final class FishingListener implements Listener {
                             Component.text("to acquire your reward.").color(NamedTextColor.GRAY)
                     )
                     .build());
-            case CUSTOM -> player.getInventory().addItem(PaperItemBuilder.ofType(Material.PUFFERFISH)
+            default -> player.getInventory().addItem(PaperItemBuilder.ofType(Material.PUFFERFISH)
                     .name(Component.text("Odd Fish").color(NamedTextColor.GOLD))
                     .lore(
                             Component.text("It doesn't look very appetizing.").color(NamedTextColor.WHITE),

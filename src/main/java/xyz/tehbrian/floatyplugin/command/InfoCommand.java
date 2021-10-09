@@ -12,7 +12,7 @@ import xyz.tehbrian.floatyplugin.config.BooksConfig;
 import xyz.tehbrian.floatyplugin.util.BookDeserializer;
 import xyz.tehbrian.floatyplugin.util.SendMessage;
 
-public class InfoCommand extends PaperCloudCommand<CommandSender> {
+public final class InfoCommand extends PaperCloudCommand<CommandSender> {
 
     private final BooksConfig booksConfig;
 

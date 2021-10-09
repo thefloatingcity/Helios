@@ -12,7 +12,7 @@ import xyz.tehbrian.floatyplugin.user.User;
 import xyz.tehbrian.floatyplugin.user.UserService;
 
 @SuppressWarnings("ClassCanBeRecord")
-public class ElevatorMusicTask {
+public final class ElevatorMusicTask {
 
     public static final int FALL_DISTANCE_MIN = 150;
 

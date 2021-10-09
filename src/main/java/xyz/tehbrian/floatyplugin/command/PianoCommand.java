@@ -27,7 +27,7 @@ import xyz.tehbrian.floatyplugin.util.SendMessage;
 import java.util.List;
 import java.util.Map;
 
-public class PianoCommand extends PaperCloudCommand<CommandSender> {
+public final class PianoCommand extends PaperCloudCommand<CommandSender> {
 
     private final FloatyPlugin floatyPlugin;
     private final UserService userService;
