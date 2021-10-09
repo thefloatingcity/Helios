@@ -46,7 +46,7 @@ public final class TagService {
         return this.playing;
     }
 
-    public void setPlaying(final Player player, final boolean value) {
+    public void setPlaying(final @NonNull Player player, final boolean value) {
         if (value) {
             this.playing.add(player);
             this.setGameMode(player, GameMode.ADVENTURE);
@@ -54,7 +54,7 @@ public final class TagService {
             this.playing.remove(player);
             this.setPreviousGameMode(player);
 
-            if (this.it.equals(player)) {
+            if (player.equals(this.it)) {
                 if (this.playing.iterator().hasNext()) {
                     this.setIt(this.playing.iterator().next());
                     this.it.sendMessage(this.langConfig.c(NodePath.path("tag", "now_it_because_leave")));
