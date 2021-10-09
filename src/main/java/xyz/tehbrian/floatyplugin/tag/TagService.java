@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
@@ -30,13 +31,15 @@ public final class TagService {
         return this.it;
     }
 
-    public void setIt(final Player it) {
+    public void setIt(final @Nullable Player it) {
         if (this.it != null) {
             this.it.setGlowing(false);
         }
 
         this.it = it;
-        this.it.setGlowing(true);
+        if (this.it != null) {
+            this.it.setGlowing(true);
+        }
     }
 
     public Set<Player> playing() {
@@ -55,6 +58,8 @@ public final class TagService {
                 if (this.playing.iterator().hasNext()) {
                     this.setIt(this.playing.iterator().next());
                     this.it.sendMessage(this.langConfig.c(NodePath.path("tag", "now_it_because_leave")));
+                } else {
+                    this.setIt(null);
                 }
             }
         }
