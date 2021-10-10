@@ -37,7 +37,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
      * @param commandManager the command manager
      */
     @Override
-    public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
+    public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
         final var zap = commandManager.commandBuilder("zap")
                 .senderType(Player.class)
                 .permission(Constants.Permissions.ZAP)

@@ -31,7 +31,7 @@ public class TagCommand extends PaperCloudCommand<CommandSender> {
      * @param commandManager the command manager
      */
     @Override
-    public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
+    public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
         final var main = commandManager.commandBuilder("tag")
                 .meta(CommandMeta.DESCRIPTION, "Joins/leaves the game of tag.")
                 .senderType(Player.class)

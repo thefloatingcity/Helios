@@ -17,7 +17,7 @@ public class BroadcastCommand extends PaperCloudCommand<CommandSender> {
      * @param commandManager the command manager
      */
     @Override
-    public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
+    public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
         final var main = commandManager.commandBuilder("broadcast")
                 .meta(CommandMeta.DESCRIPTION, "Broadcast a server message.")
                 .permission(Constants.Permissions.BROADCAST)

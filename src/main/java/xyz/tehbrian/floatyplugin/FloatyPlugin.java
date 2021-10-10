@@ -117,7 +117,8 @@ public final class FloatyPlugin extends TehPlugin {
     }
 
     /**
-     * Loads the plugin's configuration.
+     * Loads the plugin's configuration. If an exception is caught, logs the
+     * error and returns false.
      *
      * @return whether or not the loading was successful
      */

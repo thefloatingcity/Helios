@@ -24,7 +24,7 @@ public class WorldCommands extends PaperCloudCommand<CommandSender> {
      * @param commandManager the command manager
      */
     @Override
-    public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
+    public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
         final var overworld = commandManager.commandBuilder("overworld")
                 .meta(CommandMeta.DESCRIPTION, "Go to the overworld.")
                 .senderType(Player.class)

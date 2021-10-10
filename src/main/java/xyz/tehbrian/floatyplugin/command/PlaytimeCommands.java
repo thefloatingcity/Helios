@@ -40,7 +40,7 @@ public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
      * @param commandManager the command manager
      */
     @Override
-    public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
+    public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
         final var playtime = commandManager.commandBuilder("playtime")
                 .meta(CommandMeta.DESCRIPTION, "Check how long you've played.")
                 .senderType(Player.class)

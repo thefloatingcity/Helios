@@ -29,7 +29,7 @@ public final class InfoCommand extends PaperCloudCommand<CommandSender> {
      * @param commandManager the command manager
      */
     @Override
-    public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
+    public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
         final var main = commandManager.commandBuilder("info")
                 .meta(CommandMeta.DESCRIPTION, "Might wanna read this first.")
                 .argument(IntegerArgument.<CommandSender>newBuilder("page")

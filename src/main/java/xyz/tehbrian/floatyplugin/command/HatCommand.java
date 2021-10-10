@@ -31,7 +31,7 @@ public class HatCommand extends PaperCloudCommand<CommandSender> {
      * @param commandManager the command manager
      */
     @Override
-    public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
+    public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
         final var main = commandManager.commandBuilder("hat")
                 .meta(CommandMeta.DESCRIPTION, "Put fancy things on your head!")
                 .permission(Constants.Permissions.HAT)

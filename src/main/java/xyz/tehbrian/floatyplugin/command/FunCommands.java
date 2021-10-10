@@ -34,7 +34,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
      * @param commandManager the command manager
      */
     @Override
-    public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
+    public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
         final var stringWithPlayerSuggestionsArgument = StringArgument
                 .<CommandSender>newBuilder("text")
                 .greedy()

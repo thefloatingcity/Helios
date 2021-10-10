@@ -36,7 +36,7 @@ public class FlyCommand extends PaperCloudCommand<CommandSender> {
      * @param commandManager the command manager
      */
     @Override
-    public void register(@NonNull final PaperCommandManager<CommandSender> commandManager) {
+    public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
         final var main = commandManager.commandBuilder("fly")
                 .meta(CommandMeta.DESCRIPTION, "Bends the space/time continuum.")
                 .permission(Constants.Permissions.FLY)
