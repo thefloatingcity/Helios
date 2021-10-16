@@ -8,8 +8,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.potion.PotionEffectType;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
@@ -27,6 +29,17 @@ public final class TagListener implements Listener {
     ) {
         this.tagService = tagService;
         this.langConfig = langConfig;
+    }
+
+    @EventHandler
+    public void onPotionEffect(final EntityPotionEffectEvent event) {
+        if (event.getEntity() instanceof Player player
+                && this.tagService.isPlaying(player)
+                && event.getNewEffect() != null
+                && !(event.getNewEffect().getType().equals(PotionEffectType.DAMAGE_RESISTANCE))
+                && !(event.getNewEffect().getType().equals(PotionEffectType.SATURATION))) {
+            event.setCancelled(true);
+        }
     }
 
     @EventHandler

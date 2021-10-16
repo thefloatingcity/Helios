@@ -3,6 +3,8 @@ package xyz.tehbrian.floatyplugin.tag;
 import com.google.inject.Inject;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.NodePath;
@@ -23,8 +25,16 @@ public final class TagService {
     private Player it;
 
     @Inject
-    public TagService(final @NonNull LangConfig langConfig) {
+    public TagService(
+            final @NonNull LangConfig langConfig
+    ) {
         this.langConfig = langConfig;
+    }
+
+    private void removeAllPotionEffects(final Player player) {
+        for (final PotionEffect effect : player.getActivePotionEffects()) {
+            player.removePotionEffect(effect.getType());
+        }
     }
 
     public Player getIt() {
@@ -50,9 +60,16 @@ public final class TagService {
         if (value) {
             this.playing.add(player);
             this.setGameMode(player, GameMode.ADVENTURE);
+
+            this.removeAllPotionEffects(player);
+
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, 100000, 100, true, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100000, 100, true, false));
         } else {
             this.playing.remove(player);
             this.setPreviousGameMode(player);
+
+            this.removeAllPotionEffects(player);
 
             if (player.equals(this.it)) {
                 if (this.playing.iterator().hasNext()) {
