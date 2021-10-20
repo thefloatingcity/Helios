@@ -49,7 +49,14 @@ public final class TagListener implements Listener {
                 && this.tagService.isPlaying(damager)
                 && this.tagService.isPlaying(victim)
                 && this.tagService.getIt().equals(damager)) {
+            if (this.tagService.isNoTagBacks() && victim.equals(this.tagService.getLastIt())) {
+                damager.sendMessage(this.langConfig.c(NodePath.path("tag", "no_tag_backs")));
+                damager.playSound(damager.getEyeLocation(), Sound.ITEM_SHIELD_BREAK, 1, 0.9F);
+                return;
+            }
+
             this.tagService.setIt(victim);
+            this.tagService.setLastIt(damager);
             victim.sendMessage(this.langConfig.c(NodePath.path("tag", "now_it")));
             victim.playSound(victim.getEyeLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5F);
             damager.sendMessage(this.langConfig.c(NodePath.path("tag", "tagged_player"), Template.of("player", victim.displayName())));

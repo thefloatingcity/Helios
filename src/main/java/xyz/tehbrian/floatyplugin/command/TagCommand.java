@@ -1,5 +1,6 @@
 package xyz.tehbrian.floatyplugin.command;
 
+import cloud.commandframework.ArgumentDescription;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
@@ -49,7 +50,17 @@ public class TagCommand extends PaperCloudCommand<CommandSender> {
                     }
                 });
 
+        final var ntb = main.literal("ntb", ArgumentDescription.of("Toggles no tag backs."))
+                .handler(c -> {
+                    if (this.tagService.toggleNoTagBacks()) {
+                        c.getSender().sendMessage(this.langConfig.c(NodePath.path("tag", "no_tag_backs_enabled")));
+                    } else {
+                        c.getSender().sendMessage(this.langConfig.c(NodePath.path("tag", "no_tag_backs_disabled")));
+                    }
+                });
+
         commandManager.command(main);
+        commandManager.command(ntb);
     }
 
 }

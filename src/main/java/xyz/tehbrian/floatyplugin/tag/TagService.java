@@ -23,6 +23,8 @@ public final class TagService {
     private final Map<Player, GameMode> previousGameModes = new HashMap<>();
     private final Set<Player> playing = new HashSet<>();
     private Player it;
+    private boolean noTagBacks;
+    private Player lastIt;
 
     @Inject
     public TagService(
@@ -98,6 +100,27 @@ public final class TagService {
 
     public void setPreviousGameMode(final Player player) {
         player.setGameMode(Optional.ofNullable(this.previousGameModes.get(player)).orElse(player.getServer().getDefaultGameMode()));
+    }
+
+    public boolean isNoTagBacks() {
+        return this.noTagBacks;
+    }
+
+    public void setNoTagBacks(final boolean noTagBacks) {
+        this.noTagBacks = noTagBacks;
+    }
+
+    public boolean toggleNoTagBacks() {
+        this.setNoTagBacks(!this.isNoTagBacks());
+        return this.isNoTagBacks();
+    }
+
+    public Player getLastIt() {
+        return this.lastIt;
+    }
+
+    public void setLastIt(final Player lastIt) {
+        this.lastIt = lastIt;
     }
 
 }
