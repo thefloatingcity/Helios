@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import net.kyori.adventure.text.minimessage.Template;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -33,10 +34,18 @@ public final class TagListener implements Listener {
 
     @EventHandler
     public void onPotionEffect(final EntityPotionEffectEvent event) {
-        if (event.getEntity() instanceof Player player
-                && this.tagService.isPlaying(player)
-                && event.getNewEffect() != null
-                && !(event.getNewEffect().getType().equals(PotionEffectType.DAMAGE_RESISTANCE))
+        if (!(event.getEntity() instanceof Player player)
+                || !this.tagService.isPlaying(player)
+                || event.getNewEffect() == null) {
+            return;
+        }
+
+        if (event.getNewEffect().getType().equals(PotionEffectType.BLINDNESS)
+                && event.getEntity().getWorld().getEnvironment() == World.Environment.NETHER) {
+            return;
+        }
+
+        if (!(event.getNewEffect().getType().equals(PotionEffectType.DAMAGE_RESISTANCE))
                 && !(event.getNewEffect().getType().equals(PotionEffectType.SATURATION))) {
             event.setCancelled(true);
         }
