@@ -6,6 +6,8 @@ import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -60,8 +62,9 @@ public final class RulesCommand extends PaperCloudCommand<CommandSender> {
                     if (sender.hasPermission(Constants.Permissions.BUILD)) {
                         sender.sendMessage(this.langConfig.c(NodePath.path("rules", "already_accepted")));
                     } else {
-                        this.luckPermsService.promoteInTrack(sender, "player");
-                        sender.sendMessage(this.langConfig.c(NodePath.path("rules", "accept")));
+//                        this.luckPermsService.promoteInTrack(sender, "player");
+//                        sender.sendMessage(this.langConfig.c(NodePath.path("rules", "accept")));
+                        sender.sendMessage(Component.text("Hah! I bet that you probably expected to get building permissions. Well, you'd be wrong! Sike! .. sorry. /rules accept has been temporarily disabled in favor of a gray-list system. Please ask Brian to give you building perms. Thank you!").color(NamedTextColor.GRAY));
                     }
                 });
 
