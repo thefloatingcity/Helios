@@ -218,14 +218,14 @@ public final class TransportationListener implements Listener {
 
         if (event.isSprinting()) {
             switch (netherBlindnessCount) {
-                case 0, 2, 5, 10, 15, 20 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "1")));
-                case 30 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "2")));
-                case 50 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "3")));
-                case 70 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "4")));
-                case 100 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "5")));
-                case 140 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "6")));
-                case 180 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "7")));
-                case 250 -> {
+                case 0, 2, 5, 10 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "1")));
+                case 20 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "2")));
+                case 30 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "3")));
+                case 40 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "4")));
+                case 50 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "5")));
+                case 60 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "6")));
+                case 70 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "7")));
+                case 90 -> {
                     player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "8")));
                     player.getInventory().addItem(BundleBuilder.ofBundle()
                             .name(Component.text("Nether Watcher's Gift").color(NamedTextColor.RED))
