@@ -5,6 +5,7 @@ import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
+import net.kyori.adventure.text.minimessage.template.TemplateResolver;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -43,7 +44,7 @@ public class GamemodeCommands extends PaperCloudCommand<CommandSender> {
                     sender.setGameMode(GameMode.SURVIVAL);
                     sender.sendMessage(this.langConfig.c(
                             NodePath.path("gamemode", "change"),
-                            Map.of("gamemode", "survival")
+                            TemplateResolver.pairs(Map.of("gamemode", "survival"))
                     ));
                 });
 
@@ -53,7 +54,7 @@ public class GamemodeCommands extends PaperCloudCommand<CommandSender> {
                     sender.setGameMode(GameMode.CREATIVE);
                     sender.sendMessage(this.langConfig.c(
                             NodePath.path("gamemode", "change"),
-                            Map.of("gamemode", "creative")
+                            TemplateResolver.pairs(Map.of("gamemode", "creative"))
                     ));
                 });
 
@@ -63,7 +64,7 @@ public class GamemodeCommands extends PaperCloudCommand<CommandSender> {
                     sender.setGameMode(GameMode.ADVENTURE);
                     sender.sendMessage(this.langConfig.c(
                             NodePath.path("gamemode", "change"),
-                            Map.of("gamemode", "adventure")
+                            TemplateResolver.pairs(Map.of("gamemode", "adventure"))
                     ));
                 });
 

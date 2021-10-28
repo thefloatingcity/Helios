@@ -7,6 +7,7 @@ import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
+import net.kyori.adventure.text.minimessage.template.TemplateResolver;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -120,7 +121,7 @@ public final class PianoCommand extends PaperCloudCommand<CommandSender> {
                     this.userService.getUser(sender).piano().instrument(inst);
                     sender.sendMessage(this.langConfig.c(
                             NodePath.path("piano", "instrument_change"),
-                            Map.of("instrument", inst.toString())
+                            TemplateResolver.pairs(Map.of("instrument", inst.toString()))
                     ));
                 });
 

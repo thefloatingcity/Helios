@@ -6,6 +6,7 @@ import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import net.kyori.adventure.text.minimessage.Template;
+import net.kyori.adventure.text.minimessage.template.TemplateResolver;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -52,13 +53,17 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
                     if (c.<Player>getOptional("player").isPresent()) {
                         sender.getServer().sendMessage(this.langConfig.c(
                                 NodePath.path("act", "zap_other"),
-                                Template.of("issuer", sender.displayName()),
-                                Template.of("target", target.displayName())
+                                TemplateResolver.templates(
+                                        Template.template("issuer", sender.displayName()),
+                                        Template.template("target", target.displayName())
+                                )
                         ));
                     } else {
                         sender.getServer().sendMessage(this.langConfig.c(
                                 NodePath.path("act", "zap_self"),
-                                Template.of("issuer", sender.displayName())
+                                TemplateResolver.templates(
+                                        Template.template("issuer", sender.displayName())
+                                )
                         ));
                     }
                 });
@@ -88,13 +93,17 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
                     if (c.<Player>getOptional("player").isPresent()) {
                         sender.getServer().sendMessage(this.langConfig.c(
                                 NodePath.path("act", "poke_other"),
-                                Template.of("issuer", sender.displayName()),
-                                Template.of("target", target.displayName())
+                                TemplateResolver.templates(
+                                        Template.template("issuer", sender.displayName()),
+                                        Template.template("target", target.displayName())
+                                )
                         ));
                     } else {
                         sender.getServer().sendMessage(this.langConfig.c(
                                 NodePath.path("act", "poke_self"),
-                                Template.of("issuer", sender.displayName())
+                                TemplateResolver.templates(
+                                        Template.template("issuer", sender.displayName())
+                                )
                         ));
                     }
                 });

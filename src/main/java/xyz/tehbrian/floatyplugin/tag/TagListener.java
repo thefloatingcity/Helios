@@ -2,6 +2,7 @@ package xyz.tehbrian.floatyplugin.tag;
 
 import com.google.inject.Inject;
 import net.kyori.adventure.text.minimessage.Template;
+import net.kyori.adventure.text.minimessage.template.TemplateResolver;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.World;
@@ -68,7 +69,10 @@ public final class TagListener implements Listener {
             this.tagService.setLastIt(damager);
             victim.sendMessage(this.langConfig.c(NodePath.path("tag", "now_it")));
             victim.playSound(victim.getEyeLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5F);
-            damager.sendMessage(this.langConfig.c(NodePath.path("tag", "tagged_player"), Template.of("player", victim.displayName())));
+            damager.sendMessage(this.langConfig.c(
+                    NodePath.path("tag", "tagged_player"),
+                    TemplateResolver.templates(Template.template("player", victim.displayName()))
+            ));
             damager.playSound(damager.getEyeLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 0.7F);
         }
     }

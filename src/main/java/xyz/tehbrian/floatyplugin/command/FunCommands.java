@@ -6,6 +6,7 @@ import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import net.kyori.adventure.text.minimessage.Template;
+import net.kyori.adventure.text.minimessage.template.TemplateResolver;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -53,7 +54,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .permission(Constants.Permissions.UNREADABLE)
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("fun", "unreadable"),
-                        Template.of("player", c.getSender().getName())
+                        TemplateResolver.templates(Template.template("player", c.getSender().getName()))
                 )));
 
         final var shrug = commandManager.commandBuilder("shrug")
@@ -61,7 +62,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .permission(Constants.Permissions.SHRUG)
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("fun", "shrug"),
-                        Template.of("player", c.getSender().getName())
+                        TemplateResolver.templates(Template.template("player", c.getSender().getName()))
                 )));
 
         final var spook = commandManager.commandBuilder("spook")
@@ -69,7 +70,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .permission(Constants.Permissions.SPOOK)
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("fun", "spook"),
-                        Template.of("player", c.getSender().getName())
+                        TemplateResolver.templates(Template.template("player", c.getSender().getName()))
                 )));
 
         final var hug = commandManager.commandBuilder("hug")
@@ -78,8 +79,10 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .argument(stringWithPlayerSuggestionsArgument.copy())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("fun", "hug"),
-                        Template.of("player", c.getSender().getName()),
-                        Template.of("text", c.<String>get("text"))
+                        TemplateResolver.templates(
+                                Template.template("player", c.getSender().getName()),
+                                Template.template("text", c.<String>get("text"))
+                        )
                 )));
 
         final var smooch = commandManager.commandBuilder("smooch")
@@ -88,8 +91,10 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .argument(stringWithPlayerSuggestionsArgument.copy())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("fun", "smooch"),
-                        Template.of("player", c.getSender().getName()),
-                        Template.of("text", c.<String>get("text"))
+                        TemplateResolver.templates(
+                                Template.template("player", c.getSender().getName()),
+                                Template.template("text", c.<String>get("text"))
+                        )
                 )));
 
         final var blame = commandManager.commandBuilder("blame")
@@ -98,8 +103,10 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .argument(stringWithPlayerSuggestionsArgument.copy())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("fun", "blame"),
-                        Template.of("player", c.getSender().getName()),
-                        Template.of("text", c.<String>get("text"))
+                        TemplateResolver.templates(
+                                Template.template("player", c.getSender().getName()),
+                                Template.template("text", c.<String>get("text"))
+                        )
                 )));
 
         final var highfive = commandManager.commandBuilder("highfive")
@@ -108,8 +115,10 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .argument(stringWithPlayerSuggestionsArgument.copy())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("fun", "highfive"),
-                        Template.of("player", c.getSender().getName()),
-                        Template.of("text", c.<String>get("text"))
+                        TemplateResolver.templates(
+                                Template.template("player", c.getSender().getName()),
+                                Template.template("text", c.<String>get("text"))
+                        )
                 )));
 
         final var sue = commandManager.commandBuilder("sue")
@@ -122,15 +131,17 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                                 .getServer()
                                 .sendMessage(this.langConfig.c(
                                         NodePath.path("fun", "sue_extra"),
-                                        Template.of("player", c.getSender().getName()),
-                                        Template.of("text", text)
+                                        TemplateResolver.templates(
+                                                Template.template("player", c.getSender().getName()),
+                                                Template.template("text", text)
+                                        )
                                 )),
                         () -> c
                                 .getSender()
                                 .getServer()
                                 .sendMessage(this.langConfig.c(
                                         NodePath.path("fun", "sue"),
-                                        Template.of("player", c.getSender().getName())
+                                        TemplateResolver.templates(Template.template("player", c.getSender().getName()))
                                 ))
                 ));
 

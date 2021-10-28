@@ -6,6 +6,7 @@ import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import net.kyori.adventure.text.minimessage.Template;
+import net.kyori.adventure.text.minimessage.template.TemplateResolver;
 import net.luckperms.api.model.group.Group;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -50,13 +51,23 @@ public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
 
                     c.<Player>getOptional("player").ifPresentOrElse((target) -> sender.sendMessage(this.langConfig.c(
                             NodePath.path("playtime", "other"),
-                            Template.of("time_in_hours", PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(target), TimeUnit.HOURS)),
-                            Template.of("time", PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(target))),
-                            Template.of("player", target.getName())
+                            TemplateResolver.templates(
+                                    Template.template(
+                                            "time_in_hours",
+                                            PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(target), TimeUnit.HOURS)
+                                    ),
+                                    Template.template("time", PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(target))),
+                                    Template.template("player", target.getName())
+                            )
                     )), () -> sender.sendMessage(this.langConfig.c(
                             NodePath.path("playtime", "self"),
-                            Template.of("time_in_hours", PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(sender), TimeUnit.HOURS)),
-                            Template.of("time", PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(sender)))
+                            TemplateResolver.templates(
+                                    Template.template(
+                                            "time_in_hours",
+                                            PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(sender), TimeUnit.HOURS)
+                                    ),
+                                    Template.template("time", PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(sender)))
+                            )
                     )));
                 });
 
@@ -74,12 +85,20 @@ public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
 
                     if (this.isEligibleForPlayerGroup(sender, nextGroup.getName())) {
                         this.luckPermsService.promoteInTrack(sender, "player");
-                        sender.sendMessage(this.langConfig.c(NodePath.path("ascend", "ascended"), Map.of("group", nextGroup.getName())));
+                        sender.sendMessage(this.langConfig.c(
+                                NodePath.path("ascend", "ascended"),
+                                TemplateResolver.pairs(Map.of("group", nextGroup.getName()))
+                        ));
                     } else {
                         sender.sendMessage(this.langConfig.c(
                                 NodePath.path("ascend", "ineligible"),
-                                Template.of("group", nextGroup.getName()),
-                                Template.of("time", PlaytimeUtil.fancifyTime(this.getTimeRequired(nextGroup.getName()), TimeUnit.HOURS))
+                                TemplateResolver.templates(
+                                        Template.template("group", nextGroup.getName()),
+                                        Template.template(
+                                                "time",
+                                                PlaytimeUtil.fancifyTime(this.getTimeRequired(nextGroup.getName()), TimeUnit.HOURS)
+                                        )
+                                )
                         ));
                     }
                 });

@@ -6,6 +6,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.Template;
+import net.kyori.adventure.text.minimessage.template.TemplateResolver;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -87,8 +88,10 @@ public final class ChatListener implements Listener {
 
             return this.langConfig.c(
                     NodePath.path("chat_format"),
-                    Template.of("sender", sourceDisplayName),
-                    Template.of("message", renderedMessage)
+                    TemplateResolver.templates(
+                            Template.template("sender", sourceDisplayName),
+                            Template.template("message", renderedMessage)
+                    )
             );
         });
     }

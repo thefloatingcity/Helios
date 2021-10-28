@@ -2,6 +2,7 @@ package xyz.tehbrian.floatyplugin.listeners;
 
 import com.google.inject.Inject;
 import net.kyori.adventure.text.minimessage.Template;
+import net.kyori.adventure.text.minimessage.template.TemplateResolver;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.entity.Firework;
@@ -42,19 +43,28 @@ public final class JoinQuitListener implements Listener {
         player.sendMessage(this.langConfig.c(NodePath.path("banner")));
 
         if (player.hasPlayedBefore()) {
-            event.joinMessage(this.langConfig.c(NodePath.path("join"), Template.of("player", player.displayName())));
+            event.joinMessage(this.langConfig.c(
+                    NodePath.path("join"),
+                    TemplateResolver.templates(Template.template("player", player.displayName()))
+            ));
 
             // TODO: use non-deprecated method
             //noinspection deprecation
             final Duration timeSinceLastPlayed = Duration.ofMillis(Calendar.getInstance().getTimeInMillis() - player.getLastPlayed());
             player.sendMessage(this.langConfig.c(
                     NodePath.path("motd"),
-                    Template.of("last", PlaytimeUtil.fancifyTime(timeSinceLastPlayed))
+                    TemplateResolver.templates(Template.template("last", PlaytimeUtil.fancifyTime(timeSinceLastPlayed)))
             ));
         } else {
-            event.joinMessage(this.langConfig.c(NodePath.path("join_new"), Template.of("player", player.displayName())));
+            event.joinMessage(this.langConfig.c(
+                    NodePath.path("join_new"),
+                    TemplateResolver.templates(Template.template("player", player.displayName()))
+            ));
 
-            player.sendMessage(this.langConfig.c(NodePath.path("motd_new"), Template.of("player", player.displayName())));
+            player.sendMessage(this.langConfig.c(
+                    NodePath.path("motd_new"),
+                    TemplateResolver.templates(Template.template("player", player.displayName()))
+            ));
         }
 
         player.getServer().getScheduler().scheduleSyncDelayedTask(this.floatyPlugin,
@@ -91,7 +101,7 @@ public final class JoinQuitListener implements Listener {
     public void onQuit(final PlayerQuitEvent event) {
         event.quitMessage(this.langConfig.c(
                 NodePath.path("leave"),
-                Template.of("player", event.getPlayer().displayName())
+                TemplateResolver.templates(Template.template("player", event.getPlayer().displayName()))
         ));
     }
 

@@ -26,9 +26,9 @@ public final class BookDeserializer {
 
         messages.add(MiniMessage.miniMessage().parse(
                 book.node("multistart").getString() + book.node("page_header").getString(),
-                Template.of("title", Objects.requireNonNull(page.node("title").getString())),
-                Template.of("page", pageNumber.toString()),
-                Template.of("page_count", String.valueOf(pages.size()))
+                Template.template("title", Objects.requireNonNull(page.node("title").getString())),
+                Template.template("page", pageNumber.toString()),
+                Template.template("page_count", String.valueOf(pages.size()))
         ));
 
         final String multi = book.node("multi").getString();
