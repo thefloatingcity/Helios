@@ -62,7 +62,7 @@ public final class RulesCommand extends PaperCloudCommand<CommandSender> {
                     } else {
 //                        this.luckPermsService.promoteInTrack(sender, "player");
 //                        sender.sendMessage(this.langConfig.c(NodePath.path("rules", "accept")));
-                        sender.sendMessage(Component.text("Hah! I bet that you probably expected to get building permissions. Well, you'd be wrong! Sike! .. sorry. /rules accept has been temporarily disabled in favor of a gray-list system. Please ask Brian to give you building perms. Thank you!").color(NamedTextColor.GRAY));
+                        sender.sendMessage(this.langConfig.c(NodePath.path("rules", "graylist")));
                     }
                 });
 
