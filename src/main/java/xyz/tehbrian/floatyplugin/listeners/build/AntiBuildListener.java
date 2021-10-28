@@ -1,4 +1,4 @@
-package xyz.tehbrian.floatyplugin.build;
+package xyz.tehbrian.floatyplugin.listeners.build;
 
 import com.google.inject.Inject;
 import org.bukkit.entity.Player;
