@@ -16,6 +16,7 @@ import xyz.tehbrian.floatyplugin.build.SpawnProtectionListener;
 import xyz.tehbrian.floatyplugin.command.ActCommands;
 import xyz.tehbrian.floatyplugin.command.BroadcastCommand;
 import xyz.tehbrian.floatyplugin.command.CommandService;
+import xyz.tehbrian.floatyplugin.command.DiscordCommand;
 import xyz.tehbrian.floatyplugin.command.FloatyPluginCommand;
 import xyz.tehbrian.floatyplugin.command.FlyCommand;
 import xyz.tehbrian.floatyplugin.command.FunCommands;
@@ -184,6 +185,7 @@ public final class FloatyPlugin extends TehPlugin {
 
         this.injector.getInstance(ActCommands.class).register(commandManager);
         this.injector.getInstance(BroadcastCommand.class).register(commandManager);
+        this.injector.getInstance(DiscordCommand.class).register(commandManager);
         this.injector.getInstance(FloatyPluginCommand.class).register(commandManager);
         this.injector.getInstance(FlyCommand.class).register(commandManager);
         this.injector.getInstance(FunCommands.class).register(commandManager);
