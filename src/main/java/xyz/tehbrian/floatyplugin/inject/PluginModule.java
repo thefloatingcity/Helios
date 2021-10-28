@@ -10,16 +10,10 @@ import xyz.tehbrian.floatyplugin.FloatyPlugin;
 
 import java.nio.file.Path;
 
-/**
- * Guice module which provides bindings for the plugin's instances.
- */
 public final class PluginModule extends AbstractModule {
 
     private final FloatyPlugin floatyPlugin;
 
-    /**
-     * @param floatyPlugin FloatyPlugin reference
-     */
     public PluginModule(final @NonNull FloatyPlugin floatyPlugin) {
         this.floatyPlugin = floatyPlugin;
     }
@@ -30,21 +24,11 @@ public final class PluginModule extends AbstractModule {
         this.bind(JavaPlugin.class).toInstance(this.floatyPlugin);
     }
 
-    /**
-     * Provides the plugin's Log4J logger.
-     *
-     * @return the plugin's Log4J logger
-     */
     @Provides
     public @NonNull Logger provideLog4JLogger() {
         return this.floatyPlugin.getLog4JLogger();
     }
 
-    /**
-     * Provides the plugin's data folder.
-     *
-     * @return the data folder
-     */
     @Provides
     @Named("dataFolder")
     public @NonNull Path provideDataFolder() {
