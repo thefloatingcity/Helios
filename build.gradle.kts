@@ -52,6 +52,7 @@ tasks {
 
     shadowJar {
         archiveBaseName.set("FloatyPlugin")
-        archiveClassifier.set("")
+
+        relocate("net.kyori.adventure.text.minimessage", "xyz.tehbrian.floatyplugin.lib.adventure.text.minimessage")
     }
 }
