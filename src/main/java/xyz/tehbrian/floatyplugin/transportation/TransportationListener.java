@@ -27,7 +27,6 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
-import org.bukkit.event.world.PortalCreateEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -39,8 +38,6 @@ import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.user.User;
 import xyz.tehbrian.floatyplugin.user.UserService;
-import xyz.tehbrian.floatyplugin.world.FloatingWorld;
-import xyz.tehbrian.floatyplugin.world.WorldService;
 
 @SuppressWarnings("ClassCanBeRecord")
 public final class TransportationListener implements Listener {
@@ -48,7 +45,6 @@ public final class TransportationListener implements Listener {
     private final LangConfig langConfig;
     private final FloatyPlugin floatyPlugin;
     private final FlightService flightService;
-    private final WorldService worldService;
     private final UserService userService;
 
     @Inject
@@ -56,13 +52,11 @@ public final class TransportationListener implements Listener {
             final @NonNull LangConfig langConfig,
             final @NonNull FloatyPlugin floatyPlugin,
             final @NonNull FlightService flightService,
-            final @NonNull WorldService worldService,
             final @NonNull UserService userService
     ) {
         this.langConfig = langConfig;
         this.floatyPlugin = floatyPlugin;
         this.flightService = flightService;
-        this.worldService = worldService;
         this.userService = userService;
     }
 
@@ -106,44 +100,7 @@ public final class TransportationListener implements Listener {
                 e.setCancelled(true);
                 e.getTo().getWorld().spawnParticle(Particle.SMOKE_NORMAL, e.getTo(), 200, 0.1, 0.1, 0.1, 0.1);
             }
-            case NETHER_PORTAL -> { // player is teleporting to/from nether but NOT making a new portal
-                if (environment == World.Environment.NETHER) {
-                    e.setTo(this.worldService.getPlayerSpawnLocation(FloatingWorld.OVERWORLD));
-                } else {
-                    e.setTo(this.worldService.getPlayerSpawnLocation(FloatingWorld.NETHER));
-                }
-            }
-            case END_PORTAL -> { // player is teleporting to/from the end via end portal
-                if (environment == World.Environment.THE_END) {
-                    e.setTo(this.worldService.getPlayerSpawnLocation(FloatingWorld.OVERWORLD));
-                } else {
-                    e.setTo(this.worldService.getPlayerSpawnLocation(FloatingWorld.END));
-                }
-            }
             default -> {
-            }
-        }
-    }
-
-    @EventHandler
-    public void onPortalCreate(final PortalCreateEvent e) {
-        if (e.getEntity() instanceof Player player) {
-            final PortalCreateEvent.CreateReason reason = e.getReason();
-            final World.Environment environment = player.getWorld().getEnvironment();
-
-            switch (reason) {
-                case FIRE -> player.sendMessage(this.langConfig.c(NodePath.path("use_nether"))); // player made nether portal
-                case NETHER_PAIR -> { // player is teleporting to/from the nether and making a new portal in the process
-                    e.setCancelled(true); // no make the portal frame
-                    if (environment == World.Environment.NETHER) {
-                        player.teleport(this.worldService.getPlayerSpawnLocation(FloatingWorld.OVERWORLD));
-                    } else {
-                        player.teleport(this.worldService.getPlayerSpawnLocation(FloatingWorld.NETHER));
-                    }
-                }
-                case END_PLATFORM -> e.setCancelled(true); // player is teleporting to the end and making the platform in the process
-                default -> {
-                }
             }
         }
     }
