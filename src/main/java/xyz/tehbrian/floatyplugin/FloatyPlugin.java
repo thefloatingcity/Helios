@@ -27,6 +27,7 @@ import xyz.tehbrian.floatyplugin.command.PianoCommand;
 import xyz.tehbrian.floatyplugin.command.PlaytimeCommands;
 import xyz.tehbrian.floatyplugin.command.RulesCommand;
 import xyz.tehbrian.floatyplugin.command.TagCommand;
+import xyz.tehbrian.floatyplugin.command.VoteCommand;
 import xyz.tehbrian.floatyplugin.command.WorldCommands;
 import xyz.tehbrian.floatyplugin.config.BooksConfig;
 import xyz.tehbrian.floatyplugin.config.ConfigConfig;
@@ -180,6 +181,7 @@ public final class FloatyPlugin extends TehPlugin {
         this.injector.getInstance(PlaytimeCommands.class).register(commandManager);
         this.injector.getInstance(RulesCommand.class).register(commandManager);
         this.injector.getInstance(TagCommand.class).register(commandManager);
+        this.injector.getInstance(VoteCommand.class).register(commandManager);
         this.injector.getInstance(WorldCommands.class).register(commandManager);
     }
 
