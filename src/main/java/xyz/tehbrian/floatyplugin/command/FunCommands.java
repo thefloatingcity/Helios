@@ -39,15 +39,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
         final var stringWithPlayerSuggestionsArgument = StringArgument
                 .<CommandSender>newBuilder("text")
                 .greedy()
-                .withSuggestionsProvider((c, i) -> this.onlinePlayerNames(c.getSender().getServer()))
-                .build();
-
-        final var optionalStringWithPlayerSuggestionsArgument = StringArgument
-                .<CommandSender>newBuilder("text")
-                .greedy()
-                .withSuggestionsProvider((c, i) -> this.onlinePlayerNames(c.getSender().getServer()))
-                .asOptional()
-                .build();
+                .withSuggestionsProvider((c, i) -> this.onlinePlayerNames(c.getSender().getServer()));
 
         final var unreadable = commandManager.commandBuilder("unreadable")
                 .meta(CommandMeta.DESCRIPTION, "Untransparent. Is that a word? Opaque?")
@@ -76,7 +68,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
         final var hug = commandManager.commandBuilder("hug")
                 .meta(CommandMeta.DESCRIPTION, "D'aww that's so cute!")
                 .permission(Constants.Permissions.HUG)
-                .argument(stringWithPlayerSuggestionsArgument.copy())
+                .argument(stringWithPlayerSuggestionsArgument.build())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("fun", "hug"),
                         TemplateResolver.templates(
@@ -88,7 +80,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
         final var smooch = commandManager.commandBuilder("smooch")
                 .meta(CommandMeta.DESCRIPTION, "Give 'em a smooch.")
                 .permission(Constants.Permissions.SMOOCH)
-                .argument(stringWithPlayerSuggestionsArgument.copy())
+                .argument(stringWithPlayerSuggestionsArgument.build())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("fun", "smooch"),
                         TemplateResolver.templates(
@@ -100,7 +92,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
         final var blame = commandManager.commandBuilder("blame")
                 .meta(CommandMeta.DESCRIPTION, "It's their fault, not yours.")
                 .permission(Constants.Permissions.BLAME)
-                .argument(stringWithPlayerSuggestionsArgument.copy())
+                .argument(stringWithPlayerSuggestionsArgument.build())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("fun", "blame"),
                         TemplateResolver.templates(
@@ -112,7 +104,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
         final var highfive = commandManager.commandBuilder("highfive")
                 .meta(CommandMeta.DESCRIPTION, "Up high! Down low! Too slow!")
                 .permission(Constants.Permissions.HIGHFIVE)
-                .argument(stringWithPlayerSuggestionsArgument.copy())
+                .argument(stringWithPlayerSuggestionsArgument.build())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("fun", "highfive"),
                         TemplateResolver.templates(
@@ -124,7 +116,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
         final var sue = commandManager.commandBuilder("sue")
                 .permission(Constants.Permissions.SUE)
                 .meta(CommandMeta.DESCRIPTION, "Court fixes everything.. right?")
-                .argument(optionalStringWithPlayerSuggestionsArgument.copy())
+                .argument(stringWithPlayerSuggestionsArgument.asOptional().build())
                 .handler(c -> c.<String>getOptional("text").ifPresentOrElse(
                         (text) -> c
                                 .getSender()

@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import xyz.tehbrian.floatyplugin.Constants;
 
 public class MilkCommand extends PaperCloudCommand<CommandSender> {
 
@@ -26,6 +27,7 @@ public class MilkCommand extends PaperCloudCommand<CommandSender> {
     public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
         final var main = commandManager.commandBuilder("milk")
                 .meta(CommandMeta.DESCRIPTION, "Milk.")
+                .permission(Constants.Permissions.MILK)
                 .senderType(Player.class)
                 .handler(c -> {
                     final var sender = (Player) c.getSender();

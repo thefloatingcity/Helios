@@ -67,7 +67,7 @@ public final class ChatListener implements Listener {
         final @Nullable Player finalPingedPlayer = pingedPlayer;
         event.renderer((source, sourceDisplayName, message, viewer) -> {
             var renderedMessage = message;
-            if (sender.hasPermission(Constants.Permissions.CHATCOLOR)) {
+            if (sender.hasPermission(Constants.Permissions.CHAT_COLOR)) {
                 renderedMessage = FormatUtil.legacyWithUrls(message);
             }
 
