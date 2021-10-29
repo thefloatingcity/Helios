@@ -47,6 +47,7 @@ import xyz.tehbrian.floatyplugin.music.ElevatorMusicTask;
 import xyz.tehbrian.floatyplugin.music.RainMusicListener;
 import xyz.tehbrian.floatyplugin.piano.PianoListener;
 import xyz.tehbrian.floatyplugin.tag.TagListener;
+import xyz.tehbrian.floatyplugin.transportation.PortalTask;
 import xyz.tehbrian.floatyplugin.transportation.TransportationListener;
 import xyz.tehbrian.floatyplugin.transportation.TransportationTask;
 import xyz.tehbrian.floatyplugin.transportation.VoidLoopListener;
@@ -186,6 +187,7 @@ public final class FloatyPlugin extends TehPlugin {
         this.injector.getInstance(ElevatorMusicTask.class).start();
         this.injector.getInstance(TransportationTask.class).start();
         this.injector.getInstance(VoidLoopTask.class).start();
+        this.injector.getInstance(PortalTask.class).start();
     }
 
     @Override

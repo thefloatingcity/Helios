@@ -40,9 +40,9 @@ public class FloatyPluginCommand extends PaperCloudCommand<CommandSender> {
                 .permission(Constants.Permissions.RELOAD)
                 .handler(c -> {
                     if (this.floatyPlugin.loadConfiguration()) {
-                        c.getSender().sendMessage(this.langConfig.c(NodePath.path("floatyplugin", "reload", "successful")));
+                        c.getSender().sendMessage(this.langConfig.c(NodePath.path("reload", "successful")));
                     } else {
-                        c.getSender().sendMessage(this.langConfig.c(NodePath.path("floatyplugin", "reload", "unsuccessful")));
+                        c.getSender().sendMessage(this.langConfig.c(NodePath.path("reload", "unsuccessful")));
                     }
                 });
 

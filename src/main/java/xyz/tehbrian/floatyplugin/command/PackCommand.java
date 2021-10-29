@@ -37,8 +37,8 @@ public final class PackCommand extends PaperCloudCommand<CommandSender> {
                 .meta(CommandMeta.DESCRIPTION, "Get the fancy server resource pack.")
                 .handler(c -> {
                     final Player sender = (Player) c.getSender();
-                    sender.sendMessage(this.langConfig.c(NodePath.path("resource_pack", "setting")));
                     sender.setResourcePack(this.configConfig.data().resourcePackUrl(), this.configConfig.data().resourcePackHash());
+                    sender.sendMessage(this.langConfig.c(NodePath.path("resource_pack", "sending")));
                 });
 
         commandManager.command(main);
