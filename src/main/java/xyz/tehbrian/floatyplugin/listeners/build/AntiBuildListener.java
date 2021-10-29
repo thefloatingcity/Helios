@@ -24,15 +24,18 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.Constants;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
+import xyz.tehbrian.floatyplugin.world.WorldService;
 
 @SuppressWarnings({"unused", "ClassCanBeRecord"})
 public final class AntiBuildListener implements Listener {
 
     private final LangConfig langConfig;
+    private final WorldService worldService;
 
     @Inject
-    public AntiBuildListener(final @NonNull LangConfig langConfig) {
+    public AntiBuildListener(final @NonNull LangConfig langConfig, final @NonNull WorldService worldService) {
         this.langConfig = langConfig;
+        this.worldService = worldService;
     }
 
     @EventHandler(priority = EventPriority.LOW)
@@ -110,7 +113,14 @@ public final class AntiBuildListener implements Listener {
     }
 
     private <T extends Cancellable> void onAntiBuild(final T event, final Player player, final boolean sendMessage) {
-        if (!player.hasPermission(Constants.Permissions.BUILD)) {
+        final var permission = switch (this.worldService.getFloatingWorld(player.getWorld())) {
+            case MADLANDS -> Constants.Permissions.BUILD_MADLANDS;
+            case OVERWORLD -> Constants.Permissions.BUILD_OVERWORLD;
+            case NETHER -> Constants.Permissions.BUILD_NETHER;
+            case END -> Constants.Permissions.BUILD_END;
+        };
+
+        if (!player.hasPermission(permission)) {
             if (sendMessage) {
                 player.sendMessage(this.langConfig.c(NodePath.path("no_build")));
             }

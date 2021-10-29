@@ -114,7 +114,7 @@ public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
 
     private Duration getTimeRequired(final String groupName) {
         return switch (groupName) {
-            case "passenger" -> Duration.ofHours(10000000);
+            case "boarding", "passenger" -> Duration.ofHours(10000000);
             case "navigator" -> Duration.ofHours(1);
             case "pilot" -> Duration.ofHours(5);
             case "captain" -> Duration.ofHours(25);

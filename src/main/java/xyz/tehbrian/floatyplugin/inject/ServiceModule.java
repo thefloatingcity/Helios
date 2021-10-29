@@ -15,6 +15,7 @@ public final class ServiceModule extends AbstractModule {
         this.bind(LuckPermsService.class).asEagerSingleton();
         this.bind(TagService.class).asEagerSingleton();
         this.bind(UserService.class).asEagerSingleton();
+        this.bind(WorldService.class).asEagerSingleton();
     }
 
 }

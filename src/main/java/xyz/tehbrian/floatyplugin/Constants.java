@@ -9,14 +9,25 @@ public final class Constants {
 
         public static final String ROOT = "floatyplugin";
 
+        public static final String BUILD = ROOT + ".build";
+        public static final String BUILD_SPAWN = BUILD + ".spawn";
+        public static final String BUILD_MADLANDS = BUILD + ".madlands";
+        public static final String BUILD_OVERWORLD = BUILD + ".overworld";
+        public static final String BUILD_NETHER = BUILD + ".nether";
+        public static final String BUILD_END = BUILD + ".end";
+
+        public static final String WORLD = ROOT + ".world";
+        public static final String WORLD_MADLANDS = WORLD + ".madlands";
+        public static final String WORLD_OVERWORLD = WORLD + ".overworld";
+        public static final String WORLD_NETHER = WORLD + ".nether";
+        public static final String WORLD_END = WORLD + ".end";
+
         public static final String FLY = ROOT + ".fly";
-        public static final String SPAWN_BUILD = ROOT + ".spawn-build";
         public static final String BROADCAST = ROOT + ".broadcast";
         public static final String RELOAD = ROOT + ".reload";
         public static final String GAMEMODE = ROOT + ".gamemode";
         public static final String HAT = ROOT + ".hat";
         public static final String PIANO = ROOT + ".piano";
-        public static final String BUILD = ROOT + ".build";
         public static final String CHATCOLOR = ROOT + ".chatcolor";
 
         public static final String ACT = ROOT + ".act";

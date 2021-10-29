@@ -4,15 +4,13 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import dev.tehbrian.tehlib.core.configurate.Config;
 import dev.tehbrian.tehlib.paper.TehPlugin;
-import org.bukkit.GameRule;
-import org.bukkit.World;
 import org.bukkit.command.CommandSender;
+import org.bukkit.generator.ChunkGenerator;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.configurate.ConfigurateException;
-import xyz.tehbrian.floatyplugin.listeners.build.AntiBuildListener;
-import xyz.tehbrian.floatyplugin.listeners.build.SpawnProtectionListener;
 import xyz.tehbrian.floatyplugin.command.ActCommands;
 import xyz.tehbrian.floatyplugin.command.BroadcastCommand;
 import xyz.tehbrian.floatyplugin.command.CommandService;
@@ -43,6 +41,8 @@ import xyz.tehbrian.floatyplugin.listeners.FishingListener;
 import xyz.tehbrian.floatyplugin.listeners.JoinQuitListener;
 import xyz.tehbrian.floatyplugin.listeners.MilkListener;
 import xyz.tehbrian.floatyplugin.listeners.ServerPingListener;
+import xyz.tehbrian.floatyplugin.listeners.build.AntiBuildListener;
+import xyz.tehbrian.floatyplugin.listeners.build.SpawnProtectionListener;
 import xyz.tehbrian.floatyplugin.music.ElevatorMusicTask;
 import xyz.tehbrian.floatyplugin.music.RainMusicListener;
 import xyz.tehbrian.floatyplugin.piano.PianoListener;
@@ -51,6 +51,7 @@ import xyz.tehbrian.floatyplugin.transportation.TransportationListener;
 import xyz.tehbrian.floatyplugin.transportation.TransportationTask;
 import xyz.tehbrian.floatyplugin.transportation.VoidLoopListener;
 import xyz.tehbrian.floatyplugin.transportation.VoidLoopTask;
+import xyz.tehbrian.floatyplugin.world.WorldService;
 
 import java.util.List;
 
@@ -77,22 +78,6 @@ public final class FloatyPlugin extends TehPlugin {
             return;
         }
 
-        for (final World world : this.getServer().getWorlds()) {
-            world.setGameRule(GameRule.MOB_GRIEFING, false);
-            world.setGameRule(GameRule.DO_MOB_SPAWNING, false);
-            world.setGameRule(GameRule.DO_FIRE_TICK, false);
-            world.setGameRule(GameRule.DISABLE_RAIDS, true);
-            world.setGameRule(GameRule.DO_PATROL_SPAWNING, false);
-
-            if (world.getEnvironment() == World.Environment.NETHER) {
-                world.setGameRule(GameRule.REDUCED_DEBUG_INFO, true);
-                world.setGameRule(GameRule.KEEP_INVENTORY, false);
-            } else {
-                world.setGameRule(GameRule.REDUCED_DEBUG_INFO, false);
-                world.setGameRule(GameRule.KEEP_INVENTORY, true);
-            }
-        }
-
         if (!this.injector.getInstance(LuckPermsService.class).load()) {
             this.getLogger().severe("LuckPerms dependency not found. Disabling plugin.");
             this.disableSelf();
@@ -105,6 +90,8 @@ public final class FloatyPlugin extends TehPlugin {
         this.setupListeners();
         this.setupCommands();
         this.setupTasks();
+
+        this.getServer().getScheduler().runTaskLater(this, () -> this.injector.getInstance(WorldService.class).init(), 10);
     }
 
     @Override
@@ -199,6 +186,14 @@ public final class FloatyPlugin extends TehPlugin {
         this.injector.getInstance(ElevatorMusicTask.class).start();
         this.injector.getInstance(TransportationTask.class).start();
         this.injector.getInstance(VoidLoopTask.class).start();
+    }
+
+    @Override
+    public @Nullable ChunkGenerator getDefaultWorldGenerator(
+            @NotNull final String worldName,
+            @Nullable final String id
+    ) {
+        return this.injector.getInstance(WorldService.class).getDefaultWorldGenerator(worldName, id);
     }
 
 }

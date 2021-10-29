@@ -8,14 +8,4 @@ main: xyz.tehbrian.floatyplugin.FloatyPlugin
 api-version: 1.17
 
 depend: [ LuckPerms ]
-
-permissions:
-  floatyplugin.chatcolor:
-    description: Permission to color chat text.
-    default: op
-  floatyplugin.build:
-    description: Permission to interact with the world.
-    default: op
-  floatyplugin.spawn-build:
-    description: Permission to interact inside spawn.
-    default: op
+load: STARTUP

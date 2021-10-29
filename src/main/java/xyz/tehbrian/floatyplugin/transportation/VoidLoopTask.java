@@ -14,24 +14,24 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
-import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
+import xyz.tehbrian.floatyplugin.world.WorldService;
 
 @SuppressWarnings({"ClassCanBeRecord", "unused"})
 public final class VoidLoopTask {
 
     private final FloatyPlugin floatyPlugin;
-    private final ConfigConfig configConfig;
+    private final WorldService worldService;
     private final LangConfig langConfig;
 
     @Inject
     public VoidLoopTask(
             final @NonNull FloatyPlugin floatyPlugin,
-            final @NonNull ConfigConfig configConfig,
+            final @NonNull WorldService worldService,
             final @NonNull LangConfig langConfig
     ) {
         this.floatyPlugin = floatyPlugin;
-        this.configConfig = configConfig;
+        this.worldService = worldService;
         this.langConfig = langConfig;
     }
 
@@ -75,7 +75,8 @@ public final class VoidLoopTask {
 
                     scheduler.scheduleSyncDelayedTask(this.floatyPlugin,
                             () -> {
-                                final Location spawnLocation = this.configConfig.spawnLocation(player.getWorld().getEnvironment());
+                                final Location spawnLocation = this.worldService.getPlayerSpawnLocation(
+                                        this.worldService.getFloatingWorld(player.getWorld()));
 
                                 player.setFallDistance(0);
                                 player.teleport(spawnLocation);
