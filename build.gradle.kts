@@ -54,5 +54,6 @@ tasks {
         archiveBaseName.set("FloatyPlugin")
 
         relocate("net.kyori.adventure.text.minimessage", "xyz.tehbrian.floatyplugin.lib.adventure.text.minimessage")
+        relocate("cloud.commandframework", "xyz.tehbrian.floatyplugin.lib.cloud")
     }
 }
