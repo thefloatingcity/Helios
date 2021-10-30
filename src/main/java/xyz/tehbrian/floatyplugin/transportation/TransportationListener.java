@@ -34,6 +34,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
+import xyz.tehbrian.floatyplugin.Constants;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.user.User;
@@ -185,30 +186,41 @@ public final class TransportationListener implements Listener {
                 case 70 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "7")));
                 case 90 -> {
                     player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "8")));
-                    player.getInventory().addItem(BundleBuilder.ofBundle()
+
+                    final BundleBuilder bundleBuilder = BundleBuilder.ofBundle()
                             .name(Component.text("Nether Watcher's Gift").color(NamedTextColor.RED))
                             .lore(Component.text("Maybe you should open it.").color(NamedTextColor.GRAY))
                             .addItem(
-                                    PotionBuilder.ofType(Material.POTION)
-                                            .name(Component.text("Femboy Hooters Sauce").color(NamedTextColor.LIGHT_PURPLE))
-                                            .lore(Component.text("It doesn't smell very good..").color(NamedTextColor.GRAY))
-                                            .addFlag(ItemFlag.HIDE_POTION_EFFECTS)
-                                            .color(Color.WHITE)
-                                            .build(),
                                     BookBuilder.ofType(Material.WRITTEN_BOOK)
                                             .title(Component.text("A Letter"))
                                             .author(Component.text("The Nether Watcher"))
                                             .addPage(Component
-                                                    .text("listen, i appreciate ya givin' me company, but holy frik, the whole point of the nether is *not* to sprint, yet you somehow managed to do it upwards of 200 times!?? 'ave ya got somethin' wrong in the head??? love ya, but frik off")
+                                                    .text("listen, i appreciate ya givin' me company, but holy frik, the whole point of the nether is *not* to sprint, yet you somehow managed to do it upwards of 50 times!?? 'ave ya got somethin' wrong in the head??? love ya, but frik off")
                                                     .color(NamedTextColor.DARK_GRAY))
                                             .build(),
                                     PaperItemBuilder
                                             .ofType(Material.SLIME_BALL)
                                             .name(Component.text("Ball of Slime"))
                                             .lore(Component.text("It's uh.. a ball of slime.").color(NamedTextColor.GRAY))
+                                            .build(),
+                                    PaperItemBuilder
+                                            .ofType(Material.GOLD_NUGGET)
+                                            .name(Component.text("Gold Medal"))
+                                            .lore(Component.text("There's an inscription on.").color(NamedTextColor.GRAY))
+                                            .lore(Component.text("the back. It says \"#1 Idiot\".").color(NamedTextColor.GRAY))
                                             .build()
-                            )
-                            .build());
+                            );
+
+                    if (player.hasPermission(Constants.Permissions.MILK)) {
+                        bundleBuilder.addItem(PotionBuilder.ofType(Material.POTION)
+                                .name(Component.text("Femboy Hooters Sauce").color(NamedTextColor.LIGHT_PURPLE))
+                                .lore(Component.text("It doesn't smell very good..").color(NamedTextColor.GRAY))
+                                .addFlag(ItemFlag.HIDE_POTION_EFFECTS)
+                                .color(Color.WHITE)
+                                .build());
+                    }
+
+                    player.getInventory().addItem(bundleBuilder.build());
                 }
                 default -> {
                 }
