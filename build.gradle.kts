@@ -52,8 +52,14 @@ tasks {
 
     shadowJar {
         archiveBaseName.set("FloatyPlugin")
+        archiveClassifier.set("")
 
-        relocate("net.kyori.adventure.text.minimessage", "xyz.tehbrian.floatyplugin.lib.adventure.text.minimessage")
-        relocate("cloud.commandframework", "xyz.tehbrian.floatyplugin.lib.cloud")
+        val libsPackage = "xyz.tehbrian.floatyplugin.libs"
+        relocate("com.google.inject", "$libsPackage.guice")
+        relocate("cloud.commandframework", "$libsPackage.cloud")
+        relocate("net.kyori.adventure.text.minimessage", "$libsPackage.adventure.text.minimessage")
+        relocate("org.spongepowered.configurate", "$libsPackage.configurate")
+        relocate("dev.tehbrian.tehlib", "$libsPackage.tehlib")
+        relocate("broccolai.corn", "$libsPackage.corn")
     }
 }
