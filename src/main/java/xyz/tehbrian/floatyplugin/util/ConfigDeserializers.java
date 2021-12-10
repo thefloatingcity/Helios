@@ -9,6 +9,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.Inventory;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 
+import java.util.List;
 import java.util.Objects;
 
 public final class ConfigDeserializers {
@@ -36,7 +37,7 @@ public final class ConfigDeserializers {
                             )))
                     .amount(item.isSet("amount") ? item.getInt("amount") : 1)
                     .name(FormatUtil.miniMessage(Objects.requireNonNull(item.getString("name"))))
-                    .lore(Component.text("uwu broke ur lore"))
+                    .lore(List.of(Component.text("uwu broke ur lore")))
                     .unbreakable(item.getBoolean("unbreakable"))
                     .build());
         }
