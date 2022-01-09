@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.Inventory;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 
 import java.util.List;
@@ -26,15 +27,13 @@ public final class ConfigDeserializers {
         );
 
         for (final String key : Objects.requireNonNull(items).getKeys(false)) {
-            final ConfigurationSection item = items.getConfigurationSection(key);
+            final @Nullable ConfigurationSection item = items.getConfigurationSection(key);
+            Objects.requireNonNull(item);
 
-            inventory.addItem(PaperItemBuilder.ofType(
-                    Objects.requireNonNull(
-                            Material.matchMaterial(
-                                    Objects.requireNonNull(
-                                            Objects.requireNonNull(item).getString("material")
-                                    )
-                            )))
+            final @Nullable Material material = Material.matchMaterial(Objects.requireNonNull(item.getString("material")));
+            Objects.requireNonNull(material);
+
+            inventory.addItem(PaperItemBuilder.ofType(material)
                     .amount(item.isSet("amount") ? item.getInt("amount") : 1)
                     .name(FormatUtil.miniMessage(Objects.requireNonNull(item.getString("name"))))
                     .lore(List.of(Component.text("uwu broke ur lore")))

@@ -5,8 +5,8 @@ import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
-import net.kyori.adventure.text.minimessage.Template;
-import net.kyori.adventure.text.minimessage.template.TemplateResolver;
+import net.kyori.adventure.text.minimessage.placeholder.Placeholder;
+import net.kyori.adventure.text.minimessage.placeholder.PlaceholderResolver;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -53,16 +53,16 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
                     if (c.<Player>getOptional("player").isPresent()) {
                         sender.getServer().sendMessage(this.langConfig.c(
                                 NodePath.path("act", "zap_other"),
-                                TemplateResolver.templates(
-                                        Template.template("issuer", sender.displayName()),
-                                        Template.template("target", target.displayName())
+                                PlaceholderResolver.placeholders(
+                                        Placeholder.component("issuer", sender.displayName()),
+                                        Placeholder.component("target", target.displayName())
                                 )
                         ));
                     } else {
                         sender.getServer().sendMessage(this.langConfig.c(
                                 NodePath.path("act", "zap_self"),
-                                TemplateResolver.templates(
-                                        Template.template("issuer", sender.displayName())
+                                PlaceholderResolver.placeholders(
+                                        Placeholder.component("issuer", sender.displayName())
                                 )
                         ));
                     }
@@ -93,16 +93,16 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
                     if (c.<Player>getOptional("player").isPresent()) {
                         sender.getServer().sendMessage(this.langConfig.c(
                                 NodePath.path("act", "poke_other"),
-                                TemplateResolver.templates(
-                                        Template.template("issuer", sender.displayName()),
-                                        Template.template("target", target.displayName())
+                                PlaceholderResolver.placeholders(
+                                        Placeholder.component("issuer", sender.displayName()),
+                                        Placeholder.component("target", target.displayName())
                                 )
                         ));
                     } else {
                         sender.getServer().sendMessage(this.langConfig.c(
                                 NodePath.path("act", "poke_self"),
-                                TemplateResolver.templates(
-                                        Template.template("issuer", sender.displayName())
+                                PlaceholderResolver.placeholders(
+                                        Placeholder.component("issuer", sender.displayName())
                                 )
                         ));
                     }

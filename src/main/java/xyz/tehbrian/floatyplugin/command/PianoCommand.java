@@ -7,7 +7,8 @@ import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
-import net.kyori.adventure.text.minimessage.template.TemplateResolver;
+import net.kyori.adventure.text.minimessage.placeholder.Placeholder;
+import net.kyori.adventure.text.minimessage.placeholder.PlaceholderResolver;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -26,7 +27,6 @@ import xyz.tehbrian.floatyplugin.util.BookDeserializer;
 import xyz.tehbrian.floatyplugin.util.SendMessage;
 
 import java.util.List;
-import java.util.Map;
 
 public final class PianoCommand extends PaperCloudCommand<CommandSender> {
 
@@ -121,7 +121,7 @@ public final class PianoCommand extends PaperCloudCommand<CommandSender> {
                     this.userService.getUser(sender).piano().instrument(inst);
                     sender.sendMessage(this.langConfig.c(
                             NodePath.path("piano", "instrument_change"),
-                            TemplateResolver.pairs(Map.of("instrument", inst.toString()))
+                            PlaceholderResolver.placeholders(Placeholder.miniMessage("instrument", inst.toString()))
                     ));
                 });
 

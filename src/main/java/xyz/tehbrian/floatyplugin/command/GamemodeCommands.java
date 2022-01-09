@@ -5,7 +5,8 @@ import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
-import net.kyori.adventure.text.minimessage.template.TemplateResolver;
+import net.kyori.adventure.text.minimessage.placeholder.Placeholder;
+import net.kyori.adventure.text.minimessage.placeholder.PlaceholderResolver;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -13,8 +14,6 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.Constants;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
-
-import java.util.Map;
 
 public class GamemodeCommands extends PaperCloudCommand<CommandSender> {
 
@@ -44,7 +43,7 @@ public class GamemodeCommands extends PaperCloudCommand<CommandSender> {
                     sender.setGameMode(GameMode.SURVIVAL);
                     sender.sendMessage(this.langConfig.c(
                             NodePath.path("gamemode", "change"),
-                            TemplateResolver.pairs(Map.of("gamemode", "survival"))
+                            PlaceholderResolver.placeholders(Placeholder.miniMessage("gamemode", "survival"))
                     ));
                 });
 
@@ -54,7 +53,7 @@ public class GamemodeCommands extends PaperCloudCommand<CommandSender> {
                     sender.setGameMode(GameMode.CREATIVE);
                     sender.sendMessage(this.langConfig.c(
                             NodePath.path("gamemode", "change"),
-                            TemplateResolver.pairs(Map.of("gamemode", "creative"))
+                            PlaceholderResolver.placeholders(Placeholder.miniMessage("gamemode", "creative"))
                     ));
                 });
 
@@ -64,7 +63,7 @@ public class GamemodeCommands extends PaperCloudCommand<CommandSender> {
                     sender.setGameMode(GameMode.ADVENTURE);
                     sender.sendMessage(this.langConfig.c(
                             NodePath.path("gamemode", "change"),
-                            TemplateResolver.pairs(Map.of("gamemode", "adventure"))
+                            PlaceholderResolver.placeholders(Placeholder.miniMessage("gamemode", "adventure"))
                     ));
                 });
 

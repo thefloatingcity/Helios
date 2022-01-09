@@ -46,12 +46,12 @@ public final class ConfigConfig extends AbstractConfig<HoconConfigurateWrapper> 
     }
 
     @ConfigSerializable
-    public static record Data(@NonNull PokeForce pokeForce,
-                              @NonNull String resourcePackUrl,
-                              @NonNull String resourcePackHash) {
+    public record Data(@NonNull PokeForce pokeForce,
+                       @NonNull String resourcePackUrl,
+                       @NonNull String resourcePackHash) {
 
         @ConfigSerializable
-        public static record PokeForce(double minY, double maxY, double minXZ, double maxXZ) {
+        public record PokeForce(double minY, double maxY, double minXZ, double maxXZ) {
 
         }
 

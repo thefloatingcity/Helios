@@ -2,7 +2,8 @@ package xyz.tehbrian.floatyplugin.util;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.minimessage.Template;
+import net.kyori.adventure.text.minimessage.placeholder.Placeholder;
+import net.kyori.adventure.text.minimessage.placeholder.PlaceholderResolver;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.serialize.SerializationException;
@@ -24,11 +25,13 @@ public final class BookDeserializer {
 
         final List<Component> messages = new ArrayList<>();
 
-        messages.add(MiniMessage.miniMessage().parse(
+        messages.add(MiniMessage.miniMessage().deserialize(
                 book.node("multistart").getString() + book.node("page_header").getString(),
-                Template.template("title", Objects.requireNonNull(page.node("title").getString())),
-                Template.template("page", pageNumber.toString()),
-                Template.template("page_count", String.valueOf(pages.size()))
+                PlaceholderResolver.placeholders(
+                        Placeholder.miniMessage("title", Objects.requireNonNull(page.node("title").getString())),
+                        Placeholder.miniMessage("page", pageNumber.toString()),
+                        Placeholder.miniMessage("page_count", String.valueOf(pages.size()))
+                )
         ));
 
         final String multi = book.node("multi").getString();

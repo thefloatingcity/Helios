@@ -11,11 +11,11 @@ public final class Constants {
 
         // Build in a world
         public static final String BUILD = ROOT + ".build";
-        public static final String BUILD_SPAWN = ROOT + ".build-spawn"; // heterogeneous to prevent `floatyplugin.build.*` allowing building in spawn
         public static final String BUILD_MADLANDS = BUILD + ".madlands";
         public static final String BUILD_OVERWORLD = BUILD + ".overworld";
         public static final String BUILD_NETHER = BUILD + ".nether";
         public static final String BUILD_END = BUILD + ".end";
+        public static final String BUILD_SPAWN = ROOT + ".build-spawn"; // heterogeneous to prevent `floatyplugin.build.*` allowing building in spawn
 
         // Go to a world
         public static final String WORLD = ROOT + ".world";
