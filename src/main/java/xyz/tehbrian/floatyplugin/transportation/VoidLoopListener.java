@@ -24,9 +24,9 @@ public final class VoidLoopListener implements Listener {
     }
 
     /**
-     * Ensures that no entity will be damaged due to true void damage, meaning
-     * void damage actually caused by the void. Additionally, offers a low-engage-only
-     * void loop for all entities; whereas the scheduler void loop is player-only.
+     * Ensures that no entity will be damaged due to true void damage (that is to say
+     * void damage actually caused by the void). Additionally, offers a low-engage-only
+     * void loop for all entities; the usual scheduled void loop is player-only.
      *
      * @param event the event
      */
