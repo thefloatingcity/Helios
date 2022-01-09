@@ -15,7 +15,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.NodePath;
-import xyz.tehbrian.floatyplugin.Constants;
+import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.EmotesConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.util.FormatUtil;
@@ -67,7 +67,7 @@ public final class ChatListener implements Listener {
         final @Nullable Player finalPingedPlayer = pingedPlayer;
         event.renderer((source, sourceDisplayName, message, viewer) -> {
             var renderedMessage = message;
-            if (sender.hasPermission(Constants.Permissions.CHAT_COLOR)) {
+            if (sender.hasPermission(Permissions.CHAT_COLOR)) {
                 renderedMessage = FormatUtil.legacyWithUrls(message);
             }
 

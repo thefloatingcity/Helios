@@ -21,7 +21,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import xyz.tehbrian.floatyplugin.Constants;
+import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 
 @SuppressWarnings({"unused", "ClassCanBeRecord"})
@@ -102,7 +102,7 @@ public final class SpawnProtectionListener implements Listener {
 
     private <T extends Cancellable> void onSpawnPlace(final T event, final Player player, final Location interactionLocation) {
         if (interactionLocation.distanceSquared(interactionLocation.getWorld().getSpawnLocation()) < SPAWN_PROTECTION_RADIUS_SQUARED
-                && !player.hasPermission(Constants.Permissions.BUILD_SPAWN)) {
+                && !player.hasPermission(Permissions.BUILD_SPAWN)) {
             event.setCancelled(true);
         }
     }

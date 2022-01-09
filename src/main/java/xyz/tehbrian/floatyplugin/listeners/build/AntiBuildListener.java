@@ -22,7 +22,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
-import xyz.tehbrian.floatyplugin.Constants;
+import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.world.WorldService;
 
@@ -114,10 +114,10 @@ public final class AntiBuildListener implements Listener {
 
     private <T extends Cancellable> void onAntiBuild(final T event, final Player player, final boolean sendMessage) {
         final var permission = switch (this.worldService.getFloatingWorld(player.getWorld())) {
-            case MADLANDS -> Constants.Permissions.BUILD_MADLANDS;
-            case OVERWORLD -> Constants.Permissions.BUILD_OVERWORLD;
-            case NETHER -> Constants.Permissions.BUILD_NETHER;
-            case END -> Constants.Permissions.BUILD_END;
+            case MADLANDS -> Permissions.BUILD_MADLANDS;
+            case OVERWORLD -> Permissions.BUILD_OVERWORLD;
+            case NETHER -> Permissions.BUILD_NETHER;
+            case END -> Permissions.BUILD_END;
         };
 
         if (!player.hasPermission(permission)) {

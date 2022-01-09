@@ -8,8 +8,8 @@ import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
-import xyz.tehbrian.floatyplugin.Constants;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
+import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
 public class FloatyPluginCommand extends PaperCloudCommand<CommandSender> {
@@ -37,7 +37,7 @@ public class FloatyPluginCommand extends PaperCloudCommand<CommandSender> {
                 .meta(CommandMeta.DESCRIPTION, "Core commands for FloatyPlugin.");
 
         final var reload = main.literal("reload", ArgumentDescription.of("Reload the plugin's configs."))
-                .permission(Constants.Permissions.RELOAD)
+                .permission(Permissions.RELOAD)
                 .handler(c -> {
                     if (this.floatyPlugin.loadConfiguration()) {
                         c.getSender().sendMessage(this.langConfig.c(NodePath.path("reload", "successful")));

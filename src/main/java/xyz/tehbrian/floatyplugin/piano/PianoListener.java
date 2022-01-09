@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import xyz.tehbrian.floatyplugin.Constants;
+import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.InventoriesConfig;
 import xyz.tehbrian.floatyplugin.user.UserService;
 import xyz.tehbrian.floatyplugin.util.FormatUtil;
@@ -39,7 +39,7 @@ public final class PianoListener implements Listener {
     public void onItemHeld(final PlayerItemHeldEvent event) {
         final Player player = event.getPlayer();
 
-        if (!player.hasPermission(Constants.Permissions.PIANO)
+        if (!player.hasPermission(Permissions.PIANO)
                 || !this.userService.getUser(player).piano().enabled()) {
             return;
         }
@@ -53,7 +53,7 @@ public final class PianoListener implements Listener {
     @EventHandler
     public void onInventoryClick(final InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof final Player player)
-                || !player.hasPermission(Constants.Permissions.PIANO)
+                || !player.hasPermission(Permissions.PIANO)
                 || event.getClickedInventory() == null
                 || !event.getView().title().equals(FormatUtil.miniMessage(
                 Objects.requireNonNull(this.inventoriesConfig.rootNode().node("piano_notes", "name").getString())))

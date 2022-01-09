@@ -34,8 +34,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
-import xyz.tehbrian.floatyplugin.Constants;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
+import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.user.User;
 import xyz.tehbrian.floatyplugin.user.UserService;
@@ -215,7 +215,7 @@ public final class TransportationListener implements Listener {
                                             .build()
                             );
 
-                    if (player.hasPermission(Constants.Permissions.MILK)) {
+                    if (player.hasPermission(Permissions.MILK)) {
                         bundleBuilder.addItem(PotionBuilder.ofType(Material.POTION)
                                 .name(Component.text("Femboy Hooters Sauce").color(NamedTextColor.LIGHT_PURPLE))
                                 .lore(List.of(Component.text("It doesn't smell very good..").color(NamedTextColor.GRAY)))

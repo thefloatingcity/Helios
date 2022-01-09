@@ -11,8 +11,8 @@ import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.NodePath;
-import xyz.tehbrian.floatyplugin.Constants;
 import xyz.tehbrian.floatyplugin.LuckPermsService;
+import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.BooksConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.util.BookDeserializer;
@@ -57,7 +57,7 @@ public final class RulesCommand extends PaperCloudCommand<CommandSender> {
                 .senderType(Player.class)
                 .handler(c -> {
                     final Player sender = (Player) c.getSender();
-                    if (sender.hasPermission(Constants.Permissions.BUILD_MADLANDS)) {
+                    if (sender.hasPermission(Permissions.BUILD_MADLANDS)) {
                         sender.sendMessage(this.langConfig.c(NodePath.path("rules", "already_accepted")));
                     } else {
                         this.luckPermsService.promoteInTrack(sender, "player");

@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
-import xyz.tehbrian.floatyplugin.Constants;
+import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
@@ -41,7 +41,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
     public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
         final var zap = commandManager.commandBuilder("zap")
                 .senderType(Player.class)
-                .permission(Constants.Permissions.ZAP)
+                .permission(Permissions.ZAP)
                 .meta(CommandMeta.DESCRIPTION, "Kentucky Fried Player")
                 .argument(PlayerArgument.optional("player"))
                 .handler(c -> {
@@ -70,7 +70,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
 
         final var poke = commandManager.commandBuilder("poke")
                 .senderType(Player.class)
-                .permission(Constants.Permissions.POKE)
+                .permission(Permissions.POKE)
                 .meta(CommandMeta.DESCRIPTION, "Useful for annoying others.")
                 .argument(PlayerArgument.optional("player"))
                 .handler(c -> {
