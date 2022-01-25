@@ -45,7 +45,7 @@ public final class FormatUtil {
     }
 
     public static @NonNull Component miniMessage(final @NonNull String string) {
-        return MINI_MESSAGE.parse(string);
+        return MINI_MESSAGE.deserialize(string);
     }
 
     public static @NonNull Component plain(final @NonNull String string) {
