@@ -35,7 +35,7 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT")
     compileOnly("net.luckperms:api:5.3")
 
-    implementation("com.google.inject:guice:5.0.1")
+    implementation("com.google.inject:guice:5.1.0")
     implementation("org.spongepowered:configurate-hocon:4.1.2")
 
     implementation("broccolai.corn:corn-minecraft-paper:3.0.0-SNAPSHOT")
