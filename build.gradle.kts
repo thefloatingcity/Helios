@@ -33,7 +33,7 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT")
-    compileOnly("net.luckperms:api:5.3")
+    compileOnly("net.luckperms:api:5.4")
 
     implementation("com.google.inject:guice:5.1.0")
     implementation("org.spongepowered:configurate-hocon:4.1.2")
