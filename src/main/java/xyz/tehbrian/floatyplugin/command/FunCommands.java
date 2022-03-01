@@ -5,8 +5,8 @@ import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
-import net.kyori.adventure.text.minimessage.placeholder.Placeholder;
-import net.kyori.adventure.text.minimessage.placeholder.PlaceholderResolver;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -46,7 +46,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .permission(Permissions.UNREADABLE)
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("fun", "unreadable"),
-                        PlaceholderResolver.placeholders(Placeholder.miniMessage("player", c.getSender().getName()))
+                        Placeholder.unparsed("player", c.getSender().getName())
                 )));
 
         final var shrug = commandManager.commandBuilder("shrug")
@@ -54,7 +54,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .permission(Permissions.SHRUG)
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("fun", "shrug"),
-                        PlaceholderResolver.placeholders(Placeholder.miniMessage("player", c.getSender().getName()))
+                        Placeholder.unparsed("player", c.getSender().getName())
                 )));
 
         final var spook = commandManager.commandBuilder("spook")
@@ -62,7 +62,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .permission(Permissions.SPOOK)
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("fun", "spook"),
-                        PlaceholderResolver.placeholders(Placeholder.miniMessage("player", c.getSender().getName()))
+                        Placeholder.unparsed("player", c.getSender().getName())
                 )));
 
         final var hug = commandManager.commandBuilder("hug")
@@ -71,9 +71,9 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .argument(stringWithPlayerSuggestionsArgument.build())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("fun", "hug"),
-                        PlaceholderResolver.placeholders(
-                                Placeholder.miniMessage("player", c.getSender().getName()),
-                                Placeholder.miniMessage("text", c.get("text"))
+                        TagResolver.resolver(
+                                Placeholder.unparsed("player", c.getSender().getName()),
+                                Placeholder.unparsed("text", c.get("text"))
                         )
                 )));
 
@@ -83,9 +83,9 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .argument(stringWithPlayerSuggestionsArgument.build())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("fun", "smooch"),
-                        PlaceholderResolver.placeholders(
-                                Placeholder.miniMessage("player", c.getSender().getName()),
-                                Placeholder.miniMessage("text", c.get("text"))
+                        TagResolver.resolver(
+                                Placeholder.unparsed("player", c.getSender().getName()),
+                                Placeholder.unparsed("text", c.get("text"))
                         )
                 )));
 
@@ -95,9 +95,9 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .argument(stringWithPlayerSuggestionsArgument.build())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("fun", "blame"),
-                        PlaceholderResolver.placeholders(
-                                Placeholder.miniMessage("player", c.getSender().getName()),
-                                Placeholder.miniMessage("text", c.get("text"))
+                        TagResolver.resolver(
+                                Placeholder.unparsed("player", c.getSender().getName()),
+                                Placeholder.unparsed("text", c.get("text"))
                         )
                 )));
 
@@ -107,9 +107,9 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                 .argument(stringWithPlayerSuggestionsArgument.build())
                 .handler(c -> c.getSender().getServer().sendMessage(this.langConfig.c(
                         NodePath.path("fun", "highfive"),
-                        PlaceholderResolver.placeholders(
-                                Placeholder.miniMessage("player", c.getSender().getName()),
-                                Placeholder.miniMessage("text", c.get("text"))
+                        TagResolver.resolver(
+                                Placeholder.unparsed("player", c.getSender().getName()),
+                                Placeholder.unparsed("text", c.get("text"))
                         )
                 )));
 
@@ -123,9 +123,9 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                                 .getServer()
                                 .sendMessage(this.langConfig.c(
                                         NodePath.path("fun", "sue_extra"),
-                                        PlaceholderResolver.placeholders(
-                                                Placeholder.miniMessage("player", c.getSender().getName()),
-                                                Placeholder.miniMessage("text", text)
+                                        TagResolver.resolver(
+                                                Placeholder.unparsed("player", c.getSender().getName()),
+                                                Placeholder.unparsed("text", text)
                                         )
                                 )),
                         () -> c
@@ -133,7 +133,7 @@ public class FunCommands extends PaperCloudCommand<CommandSender> {
                                 .getServer()
                                 .sendMessage(this.langConfig.c(
                                         NodePath.path("fun", "sue"),
-                                        PlaceholderResolver.placeholders(Placeholder.miniMessage("player", c.getSender().getName()))
+                                        Placeholder.unparsed("player", c.getSender().getName())
                                 ))
                 ));
 

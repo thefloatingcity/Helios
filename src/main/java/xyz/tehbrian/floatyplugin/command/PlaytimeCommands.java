@@ -5,8 +5,8 @@ import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
-import net.kyori.adventure.text.minimessage.placeholder.Placeholder;
-import net.kyori.adventure.text.minimessage.placeholder.PlaceholderResolver;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.luckperms.api.model.group.Group;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -50,22 +50,22 @@ public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
 
                     c.<Player>getOptional("player").ifPresentOrElse((target) -> sender.sendMessage(this.langConfig.c(
                             NodePath.path("playtime", "other"),
-                            PlaceholderResolver.placeholders(
-                                    Placeholder.miniMessage(
+                            TagResolver.resolver(
+                                    Placeholder.unparsed(
                                             "time_in_hours",
                                             PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(target), TimeUnit.HOURS)
                                     ),
-                                    Placeholder.miniMessage("time", PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(target))),
-                                    Placeholder.miniMessage("player", target.getName())
+                                    Placeholder.unparsed("time", PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(target))),
+                                    Placeholder.unparsed("player", target.getName())
                             )
                     )), () -> sender.sendMessage(this.langConfig.c(
                             NodePath.path("playtime", "self"),
-                            PlaceholderResolver.placeholders(
-                                    Placeholder.miniMessage(
+                            TagResolver.resolver(
+                                    Placeholder.unparsed(
                                             "time_in_hours",
                                             PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(sender), TimeUnit.HOURS)
                                     ),
-                                    Placeholder.miniMessage("time", PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(sender)))
+                                    Placeholder.unparsed("time", PlaytimeUtil.fancifyTime(PlaytimeUtil.getTimePlayed(sender)))
                             )
                     )));
                 });
@@ -86,14 +86,14 @@ public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
                         this.luckPermsService.promoteInTrack(sender, "player");
                         sender.sendMessage(this.langConfig.c(
                                 NodePath.path("ascend", "ascended"),
-                                PlaceholderResolver.placeholders(Placeholder.miniMessage("group", nextGroup.getName()))
+                                Placeholder.unparsed("group", nextGroup.getName())
                         ));
                     } else {
                         sender.sendMessage(this.langConfig.c(
                                 NodePath.path("ascend", "ineligible"),
-                                PlaceholderResolver.placeholders(
-                                        Placeholder.miniMessage("group", nextGroup.getName()),
-                                        Placeholder.miniMessage(
+                                TagResolver.resolver(
+                                        Placeholder.unparsed("group", nextGroup.getName()),
+                                        Placeholder.unparsed(
                                                 "time",
                                                 PlaytimeUtil.fancifyTime(this.getTimeRequired(nextGroup.getName()), TimeUnit.HOURS)
                                         )

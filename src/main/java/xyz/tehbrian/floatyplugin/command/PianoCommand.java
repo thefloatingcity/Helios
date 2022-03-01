@@ -7,8 +7,7 @@ import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
-import net.kyori.adventure.text.minimessage.placeholder.Placeholder;
-import net.kyori.adventure.text.minimessage.placeholder.PlaceholderResolver;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -121,8 +120,8 @@ public final class PianoCommand extends PaperCloudCommand<CommandSender> {
                     this.userService.getUser(sender).piano().instrument(inst);
                     sender.sendMessage(this.langConfig.c(
                             NodePath.path("piano", "instrument_change"),
-                            PlaceholderResolver.placeholders(Placeholder.miniMessage("instrument", inst.toString()))
-                    ));
+                            Placeholder.unparsed("instrument", inst.toString()))
+                    );
                 });
 
         final var menu = main.literal("menu", ArgumentDescription.of("Pick your notes!"))
