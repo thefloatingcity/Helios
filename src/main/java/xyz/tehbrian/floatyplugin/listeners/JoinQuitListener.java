@@ -1,8 +1,7 @@
 package xyz.tehbrian.floatyplugin.listeners;
 
 import com.google.inject.Inject;
-import net.kyori.adventure.text.minimessage.placeholder.Placeholder;
-import net.kyori.adventure.text.minimessage.placeholder.PlaceholderResolver;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.entity.Firework;
@@ -45,7 +44,7 @@ public final class JoinQuitListener implements Listener {
         if (player.hasPlayedBefore()) {
             event.joinMessage(this.langConfig.c(
                     NodePath.path("join"),
-                    PlaceholderResolver.placeholders(Placeholder.component("player", player.displayName()))
+                    Placeholder.component("player", player.displayName())
             ));
 
             // TODO: use non-deprecated method
@@ -53,17 +52,17 @@ public final class JoinQuitListener implements Listener {
             final Duration timeSinceLastPlayed = Duration.ofMillis(Calendar.getInstance().getTimeInMillis() - player.getLastPlayed());
             player.sendMessage(this.langConfig.c(
                     NodePath.path("motd"),
-                    PlaceholderResolver.placeholders(Placeholder.miniMessage("last", PlaytimeUtil.fancifyTime(timeSinceLastPlayed)))
+                    Placeholder.unparsed("last", PlaytimeUtil.fancifyTime(timeSinceLastPlayed))
             ));
         } else {
             event.joinMessage(this.langConfig.c(
                     NodePath.path("join_new"),
-                    PlaceholderResolver.placeholders(Placeholder.component("player", player.displayName()))
+                    Placeholder.component("player", player.displayName())
             ));
 
             player.sendMessage(this.langConfig.c(
                     NodePath.path("motd_new"),
-                    PlaceholderResolver.placeholders(Placeholder.component("player", player.displayName()))
+                    Placeholder.component("player", player.displayName())
             ));
         }
 
@@ -101,7 +100,7 @@ public final class JoinQuitListener implements Listener {
     public void onQuit(final PlayerQuitEvent event) {
         event.quitMessage(this.langConfig.c(
                 NodePath.path("leave"),
-                PlaceholderResolver.placeholders(Placeholder.component("player", event.getPlayer().displayName()))
+                Placeholder.component("player", event.getPlayer().displayName())
         ));
     }
 

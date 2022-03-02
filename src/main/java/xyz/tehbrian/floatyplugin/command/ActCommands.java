@@ -5,8 +5,8 @@ import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
-import net.kyori.adventure.text.minimessage.placeholder.Placeholder;
-import net.kyori.adventure.text.minimessage.placeholder.PlaceholderResolver;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -53,7 +53,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
                     if (c.<Player>getOptional("player").isPresent()) {
                         sender.getServer().sendMessage(this.langConfig.c(
                                 NodePath.path("act", "zap_other"),
-                                PlaceholderResolver.placeholders(
+                                TagResolver.resolver(
                                         Placeholder.component("issuer", sender.displayName()),
                                         Placeholder.component("target", target.displayName())
                                 )
@@ -61,7 +61,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
                     } else {
                         sender.getServer().sendMessage(this.langConfig.c(
                                 NodePath.path("act", "zap_self"),
-                                PlaceholderResolver.placeholders(
+                                TagResolver.resolver(
                                         Placeholder.component("issuer", sender.displayName())
                                 )
                         ));
@@ -82,6 +82,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
                     final double minY = pokeForce.minY();
                     final double maxXZ = pokeForce.maxXZ();
                     final double minXZ = pokeForce.minXZ();
+
                     final Random random = new Random();
                     final double randX = minXZ + random.nextDouble() * (maxXZ - minXZ);
                     final double randY = minY + random.nextDouble() * (maxY - minY);
@@ -93,7 +94,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
                     if (c.<Player>getOptional("player").isPresent()) {
                         sender.getServer().sendMessage(this.langConfig.c(
                                 NodePath.path("act", "poke_other"),
-                                PlaceholderResolver.placeholders(
+                                TagResolver.resolver(
                                         Placeholder.component("issuer", sender.displayName()),
                                         Placeholder.component("target", target.displayName())
                                 )
@@ -101,7 +102,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
                     } else {
                         sender.getServer().sendMessage(this.langConfig.c(
                                 NodePath.path("act", "poke_self"),
-                                PlaceholderResolver.placeholders(
+                                TagResolver.resolver(
                                         Placeholder.component("issuer", sender.displayName())
                                 )
                         ));
