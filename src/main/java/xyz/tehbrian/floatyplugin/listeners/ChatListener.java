@@ -5,8 +5,8 @@ import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.minimessage.placeholder.Placeholder;
-import net.kyori.adventure.text.minimessage.placeholder.PlaceholderResolver;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -88,7 +88,7 @@ public final class ChatListener implements Listener {
 
             return this.langConfig.c(
                     NodePath.path("chat_format"),
-                    PlaceholderResolver.placeholders(
+                    TagResolver.resolver(
                             Placeholder.component("sender", sourceDisplayName),
                             Placeholder.component("message", renderedMessage)
                     )

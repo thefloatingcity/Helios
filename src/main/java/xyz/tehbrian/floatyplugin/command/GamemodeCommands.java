@@ -5,8 +5,7 @@ import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
-import net.kyori.adventure.text.minimessage.placeholder.Placeholder;
-import net.kyori.adventure.text.minimessage.placeholder.PlaceholderResolver;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -43,7 +42,7 @@ public class GamemodeCommands extends PaperCloudCommand<CommandSender> {
                     sender.setGameMode(GameMode.SURVIVAL);
                     sender.sendMessage(this.langConfig.c(
                             NodePath.path("gamemode", "change"),
-                            PlaceholderResolver.placeholders(Placeholder.miniMessage("gamemode", "survival"))
+                            Placeholder.unparsed("gamemode", "survival")
                     ));
                 });
 
@@ -53,7 +52,7 @@ public class GamemodeCommands extends PaperCloudCommand<CommandSender> {
                     sender.setGameMode(GameMode.CREATIVE);
                     sender.sendMessage(this.langConfig.c(
                             NodePath.path("gamemode", "change"),
-                            PlaceholderResolver.placeholders(Placeholder.miniMessage("gamemode", "creative"))
+                            Placeholder.unparsed("gamemode", "creative")
                     ));
                 });
 
@@ -63,7 +62,7 @@ public class GamemodeCommands extends PaperCloudCommand<CommandSender> {
                     sender.setGameMode(GameMode.ADVENTURE);
                     sender.sendMessage(this.langConfig.c(
                             NodePath.path("gamemode", "change"),
-                            PlaceholderResolver.placeholders(Placeholder.miniMessage("gamemode", "adventure"))
+                            Placeholder.unparsed("gamemode", "adventure")
                     ));
                 });
 
