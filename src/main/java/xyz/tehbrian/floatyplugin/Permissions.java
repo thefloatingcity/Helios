@@ -4,15 +4,18 @@ public final class Permissions {
 
     public static final String ROOT = "floatyplugin";
 
-    // Build in a world
+    // build in a world
     public static final String BUILD = ROOT + ".build";
     public static final String BUILD_MADLANDS = BUILD + ".madlands";
     public static final String BUILD_OVERWORLD = BUILD + ".overworld";
     public static final String BUILD_NETHER = BUILD + ".nether";
     public static final String BUILD_END = BUILD + ".end";
-    public static final String BUILD_SPAWN = ROOT + ".build-spawn"; // heterogeneous to prevent `floatyplugin.build.*` allowing building in spawn
 
-    // Go to a world
+    // build in spawn
+    // purposefully heterogeneous to prevent `floatyplugin.build.*` allowing building in spawn
+    public static final String BUILD_SPAWN = ROOT + ".build-spawn";
+
+    // go to a world
     public static final String WORLD = ROOT + ".world";
     public static final String WORLD_MADLANDS = WORLD + ".madlands";
     public static final String WORLD_OVERWORLD = WORLD + ".overworld";

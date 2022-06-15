@@ -12,7 +12,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
 
-public class WorldService {
+public final class WorldService {
 
     private final JavaPlugin javaPlugin;
 
@@ -95,7 +95,7 @@ public class WorldService {
         this.getWorld(FloatingWorld.END).setSpawnLocation(this.getSpawnLocation(FloatingWorld.END));
     }
 
-    public @Nullable ChunkGenerator getDefaultWorldGenerator(
+    public @NonNull ChunkGenerator getDefaultWorldGenerator(
             @NotNull final String worldName,
             @Nullable final String id
     ) {

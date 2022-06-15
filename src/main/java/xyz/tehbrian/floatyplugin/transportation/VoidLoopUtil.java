@@ -23,7 +23,7 @@ public final class VoidLoopUtil implements Listener {
     private VoidLoopUtil() {
     }
 
-    // Trouble understanding? No worries, I gotchu.
+    // trouble understanding? no worries, I gotchu.
     // ibb.co/BtP8YZT
 
     public static int lowEngage(final World.Environment environment) {
