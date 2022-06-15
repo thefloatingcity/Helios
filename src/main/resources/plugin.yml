@@ -1,5 +1,5 @@
 name: FloatyPlugin
-description: The core, monolithic plugin for The Floating City.
+description: ${description}
 authors: [ TehBrian ]
 website: https://github.com/thefloatingcity/FloatyPlugin
 

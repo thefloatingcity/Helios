@@ -5,6 +5,7 @@ plugins {
 
 group = "xyz.tehbrian"
 version = "1.0.0"
+description = "The core, monolithic plugin for The Floating City."
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
@@ -37,7 +38,7 @@ dependencies {
 tasks {
     processResources {
         filesMatching("**/plugin.yml") {
-            expand("version" to project.version)
+            expand("version" to project.version, "description" to project.description)
         }
     }
 
