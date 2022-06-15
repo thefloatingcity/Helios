@@ -1,6 +1,8 @@
 plugins {
     id("java")
     id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("xyz.jpenilla.run-paper") version "1.0.6"
+    id("net.kyori.indra.checkstyle") version "2.1.1"
 }
 
 group = "xyz.tehbrian"
@@ -52,5 +54,9 @@ tasks {
         relocate("org.spongepowered.configurate", "$libsPackage.configurate")
         relocate("dev.tehbrian.tehlib", "$libsPackage.tehlib")
         relocate("broccolai.corn", "$libsPackage.corn")
+    }
+
+    runServer {
+        minecraftVersion("1.18.2")
     }
 }
