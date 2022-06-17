@@ -35,11 +35,11 @@ public final class WorldService {
 
             this.plugin.getLog4JLogger().info("Generating world {}", floatingWorld.bukkitName());
             final @NonNull NamespacedKey key = new NamespacedKey(this.plugin, floatingWorld.bukkitName());
-            this.plugin.getServer().createWorld(
-                    WorldCreator
-                            .ofNameAndKey(floatingWorld.bukkitName(), key)
-                            .environment(floatingWorld.environment())
-                            .generator(new VoidGenerator())
+
+            this.plugin.getServer().createWorld(WorldCreator
+                    .ofKey(key)
+                    .environment(floatingWorld.environment())
+                    .generator(new VoidGenerator())
             );
         }
     }
