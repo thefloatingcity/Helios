@@ -1,5 +1,6 @@
 package xyz.tehbrian.floatyplugin;
 
+import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import dev.tehbrian.tehlib.core.configurate.Config;
@@ -94,8 +95,12 @@ public final class FloatyPlugin extends TehPlugin {
             return;
         }
 
+        if (!this.setupCommands()) {
+            this.disableSelf();
+            return;
+        }
+
         this.setupListeners();
-        this.setupCommands();
         this.setupTasks();
 
         this.getServer().getScheduler().runTaskLater(this, () -> this.injector.getInstance(WorldService.class).init(), 10);
@@ -159,15 +164,23 @@ public final class FloatyPlugin extends TehPlugin {
         );
     }
 
-    private void setupCommands() {
+    /**
+     * @return whether it was successful
+     */
+    private boolean setupCommands() {
         final @NonNull CommandService commandService = this.injector.getInstance(CommandService.class);
-        commandService.init();
+        try {
+            commandService.init();
+        } catch (final Exception e) {
+            this.getSLF4JLogger().error("Failed to create the CommandManager.");
+            this.getSLF4JLogger().error("Printing stack trace, please send this to the developers:", e);
+            return false;
+        }
 
-        final cloud.commandframework.paper.@Nullable PaperCommandManager<CommandSender> commandManager = commandService.get();
+        final @Nullable PaperCommandManager<CommandSender> commandManager = commandService.get();
         if (commandManager == null) {
-            this.logger.error("The CommandService was null after initialization. Disabling plugin.");
-            this.disableSelf();
-            return;
+            this.getSLF4JLogger().error("The CommandService was null after initialization!");
+            return false;
         }
 
         this.injector.getInstance(ActCommands.class).register(commandManager);
@@ -187,6 +200,8 @@ public final class FloatyPlugin extends TehPlugin {
         this.injector.getInstance(TagCommand.class).register(commandManager);
         this.injector.getInstance(VoteCommand.class).register(commandManager);
         this.injector.getInstance(WorldCommands.class).register(commandManager);
+
+        return true;
     }
 
     private void setupTasks() {

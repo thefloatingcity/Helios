@@ -1,6 +1,5 @@
 package xyz.tehbrian.floatyplugin.listener.build;
 
-import com.google.inject.Inject;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -19,23 +18,14 @@ import org.bukkit.event.player.PlayerBucketFillEvent;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import xyz.tehbrian.floatyplugin.Permissions;
-import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 
 @SuppressWarnings({"unused", "ClassCanBeRecord"})
 public final class SpawnProtectionListener implements Listener {
 
     public static final int SPAWN_PROTECTION_RADIUS = 8;
     public static final int SPAWN_PROTECTION_RADIUS_SQUARED = SPAWN_PROTECTION_RADIUS * SPAWN_PROTECTION_RADIUS;
-
-    private final ConfigConfig configConfig;
-
-    @Inject
-    public SpawnProtectionListener(final @NonNull ConfigConfig configConfig) {
-        this.configConfig = configConfig;
-    }
 
     @EventHandler(priority = EventPriority.LOW)
     public void onBlockPlace(final BlockPlaceEvent event) {
