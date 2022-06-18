@@ -10,6 +10,7 @@ import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 import org.spongepowered.configurate.ConfigurateException;
 import xyz.tehbrian.floatyplugin.command.ActCommands;
 import xyz.tehbrian.floatyplugin.command.BroadcastCommand;
@@ -64,6 +65,8 @@ public final class FloatyPlugin extends TehPlugin {
      */
     private @MonotonicNonNull Injector injector;
 
+    private @MonotonicNonNull Logger logger;
+
     @Override
     public void onEnable() {
         try {
@@ -73,12 +76,14 @@ public final class FloatyPlugin extends TehPlugin {
                     new ServiceModule()
             );
         } catch (final Exception e) {
-            this.getLog4JLogger().error("Something went wrong while creating the Guice injector.");
-            this.getLog4JLogger().error("Disabling plugin.");
+            this.getSLF4JLogger().error("Something went wrong while creating the Guice injector.");
+            this.getSLF4JLogger().error("Disabling plugin.");
             this.disableSelf();
-            this.getLog4JLogger().error("Printing stack trace, please send this to the developers:", e);
+            this.getSLF4JLogger().error("Printing stack trace, please send this to the developers:", e);
             return;
         }
+
+        this.logger = this.injector.getInstance(Logger.class);
 
         if (!this.injector.getInstance(LuckPermsService.class).load()) {
             this.logger.error("LuckPerms dependency not found. Disabling plugin.");
@@ -90,6 +95,7 @@ public final class FloatyPlugin extends TehPlugin {
             this.disableSelf();
             return;
         }
+
         this.setupListeners();
         this.setupCommands();
         this.setupTasks();
@@ -106,7 +112,7 @@ public final class FloatyPlugin extends TehPlugin {
      * Loads the plugin's configuration. If an exception is caught, logs the
      * error and returns false.
      *
-     * @return whether or not the loading was successful
+     * @return whether the loading was successful
      */
     public boolean loadConfiguration() {
         this.saveResourceSilently("books.conf");
@@ -127,14 +133,14 @@ public final class FloatyPlugin extends TehPlugin {
             try {
                 config.load();
             } catch (final ConfigurateException e) {
-                this.getLog4JLogger().error("Exception caught during config load for {}", config.configurateWrapper().filePath());
-                this.getLog4JLogger().error("Please check your config.");
-                this.getLog4JLogger().error("Printing stack trace:", e);
+                this.logger.error("Exception caught during config load for {}", config.configurateWrapper().filePath());
+                this.logger.error("Please check your config.");
+                this.logger.error("Printing stack trace:", e);
                 return false;
             }
         }
 
-        this.getLog4JLogger().info("Successfully loaded configuration.");
+        this.logger.info("Successfully loaded configuration.");
         return true;
     }
 
@@ -161,8 +167,7 @@ public final class FloatyPlugin extends TehPlugin {
 
         final cloud.commandframework.paper.@Nullable PaperCommandManager<CommandSender> commandManager = commandService.get();
         if (commandManager == null) {
-            this.getLog4JLogger().error("The CommandService was null after initialization.");
-            this.getLog4JLogger().error("Disabling plugin.");
+            this.logger.error("The CommandService was null after initialization. Disabling plugin.");
             this.disableSelf();
             return;
         }
@@ -194,7 +199,7 @@ public final class FloatyPlugin extends TehPlugin {
     }
 
     @Override
-    public @Nullable ChunkGenerator getDefaultWorldGenerator(
+    public @NonNull ChunkGenerator getDefaultWorldGenerator(
             @NotNull final String worldName,
             @Nullable final String id
     ) {

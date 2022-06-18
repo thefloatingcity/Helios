@@ -4,9 +4,9 @@ import cloud.commandframework.execution.CommandExecutionCoordinator;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudService;
-import org.apache.logging.log4j.Logger;
 import org.bukkit.command.CommandSender;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.slf4j.Logger;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 
 import java.util.function.Function;
@@ -16,10 +16,6 @@ public class CommandService extends PaperCloudService<CommandSender> {
     private final FloatyPlugin floatyPlugin;
     private final Logger logger;
 
-    /**
-     * @param floatyPlugin injected
-     * @param logger       injected
-     */
     @Inject
     public CommandService(
             final @NonNull FloatyPlugin floatyPlugin,

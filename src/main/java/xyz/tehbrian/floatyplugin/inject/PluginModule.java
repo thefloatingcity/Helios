@@ -3,9 +3,10 @@ package xyz.tehbrian.floatyplugin.inject;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.name.Named;
-import org.apache.logging.log4j.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 
 import java.nio.file.Path;
@@ -25,8 +26,8 @@ public final class PluginModule extends AbstractModule {
     }
 
     @Provides
-    public @NonNull Logger provideLog4JLogger() {
-        return this.floatyPlugin.getLog4JLogger();
+    public @NotNull Logger provideSLF4JLogger() {
+        return this.floatyPlugin.getSLF4JLogger();
     }
 
     @Provides
