@@ -1,4 +1,4 @@
-package xyz.tehbrian.floatyplugin.listeners;
+package xyz.tehbrian.floatyplugin.listener;
 
 import com.destroystokyo.paper.event.server.PaperServerListPingEvent;
 import com.google.inject.Inject;

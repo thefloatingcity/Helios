@@ -7,14 +7,8 @@ import xyz.tehbrian.floatyplugin.config.EmotesConfig;
 import xyz.tehbrian.floatyplugin.config.InventoriesConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
-/**
- * Guice module which provides the various configs.
- */
 public final class ConfigModule extends AbstractModule {
 
-    /**
-     * Binds the configs as eager singletons.
-     */
     @Override
     protected void configure() {
         this.bind(BooksConfig.class).asEagerSingleton();

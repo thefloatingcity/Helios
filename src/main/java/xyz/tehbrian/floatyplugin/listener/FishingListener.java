@@ -1,4 +1,4 @@
-package xyz.tehbrian.floatyplugin.listeners;
+package xyz.tehbrian.floatyplugin.listener;
 
 import broccolai.corn.paper.item.PaperItemBuilder;
 import net.kyori.adventure.text.Component;

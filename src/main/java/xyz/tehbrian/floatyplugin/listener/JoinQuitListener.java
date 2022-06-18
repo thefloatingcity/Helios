@@ -1,4 +1,4 @@
-package xyz.tehbrian.floatyplugin.listeners;
+package xyz.tehbrian.floatyplugin.listener;
 
 import com.google.inject.Inject;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
