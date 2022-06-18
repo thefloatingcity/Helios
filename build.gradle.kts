@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "xyz.tehbrian"
-version = "1.0.0"
+version = "0.1.0-SNAPSHOT"
 description = "The core, monolithic plugin for The Floating City."
 
 java {
