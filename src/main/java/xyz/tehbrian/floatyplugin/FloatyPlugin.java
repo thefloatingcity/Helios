@@ -81,8 +81,9 @@ public final class FloatyPlugin extends TehPlugin {
         }
 
         if (!this.injector.getInstance(LuckPermsService.class).load()) {
-            this.getLogger().severe("LuckPerms dependency not found. Disabling plugin.");
+            this.logger.error("LuckPerms dependency not found. Disabling plugin.");
             this.disableSelf();
+            return;
         }
 
         if (!this.loadConfiguration()) {
