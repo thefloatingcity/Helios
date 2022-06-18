@@ -35,9 +35,8 @@ import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 import xyz.tehbrian.floatyplugin.config.EmotesConfig;
 import xyz.tehbrian.floatyplugin.config.InventoriesConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
-import xyz.tehbrian.floatyplugin.inject.ConfigModule;
 import xyz.tehbrian.floatyplugin.inject.PluginModule;
-import xyz.tehbrian.floatyplugin.inject.ServiceModule;
+import xyz.tehbrian.floatyplugin.inject.SingletonModule;
 import xyz.tehbrian.floatyplugin.listener.ChatListener;
 import xyz.tehbrian.floatyplugin.listener.FishingListener;
 import xyz.tehbrian.floatyplugin.listener.JoinQuitListener;
@@ -71,9 +70,8 @@ public final class FloatyPlugin extends TehPlugin {
     public void onEnable() {
         try {
             this.injector = Guice.createInjector(
-                    new ConfigModule(),
                     new PluginModule(this),
-                    new ServiceModule()
+                    new SingletonModule()
             );
         } catch (final Exception e) {
             this.getSLF4JLogger().error("Something went wrong while creating the Guice injector.");
@@ -112,7 +110,7 @@ public final class FloatyPlugin extends TehPlugin {
      * Loads the plugin's configuration. If an exception is caught, logs the
      * error and returns false.
      *
-     * @return whether the loading was successful
+     * @return whether it was successful
      */
     public boolean loadConfiguration() {
         this.saveResourceSilently("books.conf");

@@ -7,6 +7,9 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.nio.file.Path;
 
+/**
+ * Loads and holds values for {@code lang.conf}.
+ */
 public class LangConfig extends AbstractLangConfig<HoconConfigurateWrapper> {
 
     /**
