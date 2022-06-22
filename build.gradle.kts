@@ -37,7 +37,7 @@ dependencies {
     implementation("org.spongepowered:configurate-hocon:4.1.2")
 
     implementation("broccolai.corn:corn-minecraft-paper:3.0.0-SNAPSHOT")
-    implementation("dev.tehbrian:tehlib-paper:0.3.0")
+    implementation("dev.tehbrian:tehlib-paper:0.3.1")
 }
 
 tasks {
