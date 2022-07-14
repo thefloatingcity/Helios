@@ -10,7 +10,6 @@ import org.bukkit.inventory.Inventory;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 
-import java.util.List;
 import java.util.Objects;
 
 public final class ConfigDeserializers {
@@ -36,7 +35,7 @@ public final class ConfigDeserializers {
             inventory.addItem(PaperItemBuilder.ofType(material)
                     .amount(item.isSet("amount") ? item.getInt("amount") : 1)
                     .name(FormatUtil.miniMessage(Objects.requireNonNull(item.getString("name"))))
-                    .lore(List.of(Component.text("uwu broke ur lore")))
+                    .loreList(Component.text("uwu broke ur lore"))
                     .unbreakable(item.getBoolean("unbreakable"))
                     .build());
         }

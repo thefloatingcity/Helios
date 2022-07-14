@@ -40,8 +40,6 @@ import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.user.User;
 import xyz.tehbrian.floatyplugin.user.UserService;
 
-import java.util.List;
-
 @SuppressWarnings("ClassCanBeRecord")
 public final class TransportationListener implements Listener {
 
@@ -191,7 +189,7 @@ public final class TransportationListener implements Listener {
 
                     final BundleBuilder bundleBuilder = BundleBuilder.ofBundle()
                             .name(Component.text("Nether Watcher's Gift").color(NamedTextColor.RED))
-                            .lore(List.of(Component.text("Maybe you should open it.").color(NamedTextColor.GRAY)))
+                            .loreList(Component.text("Maybe you should open it.").color(NamedTextColor.GRAY))
                             .addItem(
                                     BookBuilder.ofType(Material.WRITTEN_BOOK)
                                             .title(Component.text("A Letter"))
@@ -206,22 +204,22 @@ public final class TransportationListener implements Listener {
                                     PaperItemBuilder
                                             .ofType(Material.SLIME_BALL)
                                             .name(Component.text("Ball of Slime"))
-                                            .lore(List.of(Component.text("It's uh.. a ball of slime.").color(NamedTextColor.GRAY)))
+                                            .loreList(Component.text("It's uh.. a ball of slime.").color(NamedTextColor.GRAY))
                                             .build(),
                                     PaperItemBuilder
                                             .ofType(Material.GOLD_NUGGET)
                                             .name(Component.text("Gold Medal"))
-                                            .lore(List.of(
+                                            .loreList(
                                                     Component.text("There's an inscription on").color(NamedTextColor.GRAY),
                                                     Component.text("the back. It says \"#1 Idiot\".").color(NamedTextColor.GRAY)
-                                            ))
+                                            )
                                             .build()
                             );
 
                     if (player.hasPermission(Permissions.MILK)) {
                         bundleBuilder.addItem(PotionBuilder.ofType(Material.POTION)
                                 .name(Component.text("Femboy Hooters Sauce").color(NamedTextColor.LIGHT_PURPLE))
-                                .lore(List.of(Component.text("It doesn't smell very good..").color(NamedTextColor.GRAY)))
+                                .loreList(Component.text("It doesn't smell very good..").color(NamedTextColor.GRAY))
                                 .addFlag(ItemFlag.HIDE_POTION_EFFECTS)
                                 .color(Color.WHITE)
                                 .build());

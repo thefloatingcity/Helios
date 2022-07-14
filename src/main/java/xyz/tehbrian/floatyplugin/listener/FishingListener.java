@@ -9,8 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
 
-import java.util.List;
-
 @SuppressWarnings("unused")
 public final class FishingListener implements Listener {
 
@@ -25,38 +23,38 @@ public final class FishingListener implements Listener {
         switch (player.getWorld().getEnvironment()) {
             case NETHER -> player.getInventory().addItem(PaperItemBuilder.ofType(Material.TROPICAL_FISH)
                     .name(Component.text("Fiery Fish").color(NamedTextColor.RED))
-                    .lore(List.of(
+                    .loreList(
                             Component.text("Likes to set things ablaze.").color(NamedTextColor.WHITE),
                             Component.empty(),
                             Component.text("Give this fish to a certain place").color(NamedTextColor.GRAY),
                             Component.text("to acquire your reward.").color(NamedTextColor.GRAY)
-                    ))
+                    )
                     .build());
             case THE_END -> player.getInventory().addItem(PaperItemBuilder.ofType(Material.SALMON)
                     .name(Component.text("Void Fish").color(NamedTextColor.DARK_PURPLE))
-                    .lore(List.of(
+                    .loreList(
                             Component.text("Has a mystical, purple-ish aura.").color(NamedTextColor.WHITE),
                             Component.empty(),
                             Component.text("Give this fish to a certain place").color(NamedTextColor.GRAY),
                             Component.text("to acquire your reward.").color(NamedTextColor.GRAY)
-                    ))
+                    )
                     .build());
             case NORMAL -> player.getInventory().addItem(PaperItemBuilder.ofType(Material.COD)
                     .name(Component.text("Floaty Fish").color(NamedTextColor.AQUA))
-                    .lore(List.of(
+                    .loreList(
                             Component.text("\"It's just.. floating there.\"").color(NamedTextColor.WHITE),
                             Component.empty(),
                             Component.text("Give this fish to a certain place").color(NamedTextColor.GRAY),
                             Component.text("to acquire your reward.").color(NamedTextColor.GRAY)
-                    ))
+                    )
                     .build());
             default -> player.getInventory().addItem(PaperItemBuilder.ofType(Material.PUFFERFISH)
                     .name(Component.text("Odd Fish").color(NamedTextColor.GOLD))
-                    .lore(List.of(
+                    .loreList(
                             Component.text("It doesn't look very appetizing.").color(NamedTextColor.WHITE),
                             Component.empty(),
                             Component.text("You can't do anything with this fish.").color(NamedTextColor.GRAY)
-                    )).build());
+                    ).build());
         }
     }
 

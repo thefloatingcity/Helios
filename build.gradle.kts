@@ -18,8 +18,8 @@ repositories {
     maven("https://papermc.io/repo/repository/maven-public/") {
         name = "papermc"
     }
-    maven("https://repo.broccol.ai/snapshots/") {
-        name = "broccolai-snapshots"
+    maven("https://repo.broccol.ai/releases/") {
+        name = "broccolai"
     }
     maven("https://repo.thbn.me/releases/") {
         name = "thbn"
@@ -33,7 +33,7 @@ dependencies {
     implementation("com.google.inject:guice:5.1.0")
     implementation("org.spongepowered:configurate-hocon:4.1.2")
 
-    implementation("broccolai.corn:corn-minecraft-paper:3.0.0-SNAPSHOT")
+    implementation("broccolai.corn:corn-minecraft-paper:3.1.0")
     implementation("dev.tehbrian:tehlib-paper:0.3.1")
 }
 
