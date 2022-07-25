@@ -14,21 +14,21 @@ import xyz.tehbrian.floatyplugin.world.WorldService;
 
 public final class SingletonModule extends AbstractModule {
 
-    @Override
-    protected void configure() {
-        /* Configs */
-        this.bind(BooksConfig.class).asEagerSingleton();
-        this.bind(ConfigConfig.class).asEagerSingleton();
-        this.bind(EmotesConfig.class).asEagerSingleton();
-        this.bind(InventoriesConfig.class).asEagerSingleton();
-        this.bind(LangConfig.class).asEagerSingleton();
+  @Override
+  protected void configure() {
+    /* Configs */
+    this.bind(BooksConfig.class).asEagerSingleton();
+    this.bind(ConfigConfig.class).asEagerSingleton();
+    this.bind(EmotesConfig.class).asEagerSingleton();
+    this.bind(InventoriesConfig.class).asEagerSingleton();
+    this.bind(LangConfig.class).asEagerSingleton();
 
-        /* Services */
-        this.bind(FlightService.class).asEagerSingleton();
-        this.bind(LuckPermsService.class).asEagerSingleton();
-        this.bind(TagService.class).asEagerSingleton();
-        this.bind(UserService.class).asEagerSingleton();
-        this.bind(WorldService.class).asEagerSingleton();
-    }
+    /* Services */
+    this.bind(FlightService.class).asEagerSingleton();
+    this.bind(LuckPermsService.class).asEagerSingleton();
+    this.bind(TagService.class).asEagerSingleton();
+    this.bind(UserService.class).asEagerSingleton();
+    this.bind(WorldService.class).asEagerSingleton();
+  }
 
 }

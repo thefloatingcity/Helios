@@ -18,34 +18,34 @@ import xyz.tehbrian.floatyplugin.Permissions;
 
 public class MilkCommand extends PaperCloudCommand<CommandSender> {
 
-    /**
-     * Register the command.
-     *
-     * @param commandManager the command manager
-     */
-    @Override
-    public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
-        final var main = commandManager.commandBuilder("milk")
-                .meta(CommandMeta.DESCRIPTION, "Milk.")
-                .permission(Permissions.MILK)
-                .senderType(Player.class)
-                .handler(c -> {
-                    final var sender = (Player) c.getSender();
+  /**
+   * Register the command.
+   *
+   * @param commandManager the command manager
+   */
+  @Override
+  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+    final var main = commandManager.commandBuilder("milk")
+        .meta(CommandMeta.DESCRIPTION, "Milk.")
+        .permission(Permissions.MILK)
+        .senderType(Player.class)
+        .handler(c -> {
+          final var sender = (Player) c.getSender();
 
-                    sender.getInventory().addItem(PotionBuilder.ofType(Material.POTION)
-                            .name(Component.text("Potion of Milk"))
-                            .loreList(
-                                    Component.text("Milk XXXIV").color(NamedTextColor.BLUE),
-                                    Component.empty(),
-                                    Component.text("Bottled at your local femboy hooters.").color(NamedTextColor.GRAY)
-                            )
-                            .addFlag(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_POTION_EFFECTS)
-                            .addCustomEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 100, 5), true)
-                            .color(Color.WHITE)
-                            .build());
-                });
+          sender.getInventory().addItem(PotionBuilder.ofType(Material.POTION)
+              .name(Component.text("Potion of Milk"))
+              .loreList(
+                  Component.text("Milk XXXIV").color(NamedTextColor.BLUE),
+                  Component.empty(),
+                  Component.text("Bottled at your local femboy hooters.").color(NamedTextColor.GRAY)
+              )
+              .addFlag(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_POTION_EFFECTS)
+              .addCustomEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 100, 5), true)
+              .color(Color.WHITE)
+              .build());
+        });
 
-        commandManager.command(main);
-    }
+    commandManager.command(main);
+  }
 
 }

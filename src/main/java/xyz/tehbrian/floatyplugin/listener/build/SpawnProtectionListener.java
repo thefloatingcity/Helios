@@ -24,77 +24,82 @@ import xyz.tehbrian.floatyplugin.Permissions;
 @SuppressWarnings({"unused", "ClassCanBeRecord"})
 public final class SpawnProtectionListener implements Listener {
 
-    public static final int SPAWN_PROTECTION_RADIUS = 8;
-    public static final int SPAWN_PROTECTION_RADIUS_SQUARED = SPAWN_PROTECTION_RADIUS * SPAWN_PROTECTION_RADIUS;
+  public static final int SPAWN_PROTECTION_RADIUS = 8;
+  public static final int SPAWN_PROTECTION_RADIUS_SQUARED = SPAWN_PROTECTION_RADIUS * SPAWN_PROTECTION_RADIUS;
 
-    @EventHandler(priority = EventPriority.LOW)
-    public void onBlockPlace(final BlockPlaceEvent event) {
-        this.onSpawnPlace(event, event.getPlayer(), event.getBlockPlaced().getLocation());
-    }
+  @EventHandler(priority = EventPriority.LOW)
+  public void onBlockPlace(final BlockPlaceEvent event) {
+    this.onSpawnPlace(event, event.getPlayer(), event.getBlockPlaced().getLocation());
+  }
 
-    @EventHandler(priority = EventPriority.LOW)
-    public void onBlockBreak(final BlockBreakEvent event) {
-        this.onSpawnPlace(event, event.getPlayer(), event.getBlock().getLocation());
-    }
+  @EventHandler(priority = EventPriority.LOW)
+  public void onBlockBreak(final BlockBreakEvent event) {
+    this.onSpawnPlace(event, event.getPlayer(), event.getBlock().getLocation());
+  }
 
-    @EventHandler(priority = EventPriority.LOW)
-    public void onHangingPlace(final HangingPlaceEvent event) {
-        if (event.getPlayer() != null) {
-            this.onSpawnPlace(event, event.getPlayer(), event.getEntity().getLocation());
-        }
+  @EventHandler(priority = EventPriority.LOW)
+  public void onHangingPlace(final HangingPlaceEvent event) {
+    if (event.getPlayer() != null) {
+      this.onSpawnPlace(event, event.getPlayer(), event.getEntity().getLocation());
     }
+  }
 
-    @EventHandler(priority = EventPriority.LOW)
-    public void onHangingBreak(final HangingBreakByEntityEvent event) {
-        if (event.getRemover() instanceof Player player) {
-            this.onSpawnPlace(event, player, event.getEntity().getLocation());
-        }
+  @EventHandler(priority = EventPriority.LOW)
+  public void onHangingBreak(final HangingBreakByEntityEvent event) {
+    if (event.getRemover() instanceof Player player) {
+      this.onSpawnPlace(event, player, event.getEntity().getLocation());
     }
+  }
 
-    @EventHandler(priority = EventPriority.LOW)
-    public void onBucketFill(final PlayerBucketFillEvent event) {
-        this.onSpawnPlace(event, event.getBlock().getLocation());
-    }
+  @EventHandler(priority = EventPriority.LOW)
+  public void onBucketFill(final PlayerBucketFillEvent event) {
+    this.onSpawnPlace(event, event.getBlock().getLocation());
+  }
 
-    @EventHandler(priority = EventPriority.LOW)
-    public void onBucketEmpty(final PlayerBucketEmptyEvent event) {
-        this.onSpawnPlace(event, event.getBlock().getLocation());
-    }
+  @EventHandler(priority = EventPriority.LOW)
+  public void onBucketEmpty(final PlayerBucketEmptyEvent event) {
+    this.onSpawnPlace(event, event.getBlock().getLocation());
+  }
 
-    @EventHandler(priority = EventPriority.LOW)
-    public void onInteract(final PlayerInteractEvent event) {
-        final @Nullable Block clickedBlock = event.getClickedBlock();
-        if (clickedBlock != null) {
-            this.onSpawnPlace(event, clickedBlock.getLocation());
-        }
+  @EventHandler(priority = EventPriority.LOW)
+  public void onInteract(final PlayerInteractEvent event) {
+    final @Nullable Block clickedBlock = event.getClickedBlock();
+    if (clickedBlock != null) {
+      this.onSpawnPlace(event, clickedBlock.getLocation());
     }
+  }
 
-    @EventHandler(priority = EventPriority.LOW)
-    public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {
-        if (event.getDamager() instanceof Player player) {
-            this.onSpawnPlace(event, player, event.getEntity().getLocation());
-        }
+  @EventHandler(priority = EventPriority.LOW)
+  public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {
+    if (event.getDamager() instanceof Player player) {
+      this.onSpawnPlace(event, player, event.getEntity().getLocation());
     }
+  }
 
-    @EventHandler(priority = EventPriority.LOW)
-    public void onArmorStandManipulate(final PlayerArmorStandManipulateEvent event) {
-        this.onSpawnPlace(event, event.getRightClicked().getLocation());
-    }
+  @EventHandler(priority = EventPriority.LOW)
+  public void onArmorStandManipulate(final PlayerArmorStandManipulateEvent event) {
+    this.onSpawnPlace(event, event.getRightClicked().getLocation());
+  }
 
-    @EventHandler(priority = EventPriority.LOW)
-    public void onInteractEntity(final PlayerInteractEntityEvent event) {
-        this.onSpawnPlace(event, event.getRightClicked().getLocation());
-    }
+  @EventHandler(priority = EventPriority.LOW)
+  public void onInteractEntity(final PlayerInteractEntityEvent event) {
+    this.onSpawnPlace(event, event.getRightClicked().getLocation());
+  }
 
-    private <T extends PlayerEvent & Cancellable> void onSpawnPlace(final T event, final Location interactionLocation) {
-        this.onSpawnPlace(event, event.getPlayer(), interactionLocation);
-    }
+  private <T extends PlayerEvent & Cancellable> void onSpawnPlace(final T event, final Location interactionLocation) {
+    this.onSpawnPlace(event, event.getPlayer(), interactionLocation);
+  }
 
-    private <T extends Cancellable> void onSpawnPlace(final T event, final Player player, final Location interactionLocation) {
-        if (interactionLocation.distanceSquared(interactionLocation.getWorld().getSpawnLocation()) < SPAWN_PROTECTION_RADIUS_SQUARED
-                && !player.hasPermission(Permissions.BUILD_SPAWN)) {
-            event.setCancelled(true);
-        }
+  private <T extends Cancellable> void onSpawnPlace(
+      final T event,
+      final Player player,
+      final Location interactionLocation
+  ) {
+    if (interactionLocation.distanceSquared(interactionLocation
+        .getWorld().getSpawnLocation()) < SPAWN_PROTECTION_RADIUS_SQUARED
+        && !player.hasPermission(Permissions.BUILD_SPAWN)) {
+      event.setCancelled(true);
     }
+  }
 
 }

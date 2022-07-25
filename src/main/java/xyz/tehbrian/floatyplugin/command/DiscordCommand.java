@@ -11,25 +11,25 @@ import xyz.tehbrian.floatyplugin.config.LangConfig;
 
 public final class DiscordCommand extends PaperCloudCommand<CommandSender> {
 
-    private final LangConfig langConfig;
+  private final LangConfig langConfig;
 
-    @Inject
-    public DiscordCommand(final @NonNull LangConfig langConfig) {
-        this.langConfig = langConfig;
-    }
+  @Inject
+  public DiscordCommand(final @NonNull LangConfig langConfig) {
+    this.langConfig = langConfig;
+  }
 
-    /**
-     * Register the command.
-     *
-     * @param commandManager the command manager
-     */
-    @Override
-    public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
-        final var main = commandManager.commandBuilder("discord")
-                .meta(CommandMeta.DESCRIPTION, "Links you to our Discord.")
-                .handler(c -> c.getSender().sendMessage(this.langConfig.c(NodePath.path("discord"))));
+  /**
+   * Register the command.
+   *
+   * @param commandManager the command manager
+   */
+  @Override
+  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+    final var main = commandManager.commandBuilder("discord")
+        .meta(CommandMeta.DESCRIPTION, "Links you to our Discord.")
+        .handler(c -> c.getSender().sendMessage(this.langConfig.c(NodePath.path("discord"))));
 
-        commandManager.command(main);
-    }
+    commandManager.command(main);
+  }
 
 }

@@ -29,116 +29,119 @@ import java.util.List;
 
 public final class PianoCommand extends PaperCloudCommand<CommandSender> {
 
-    private final FloatyPlugin floatyPlugin;
-    private final UserService userService;
-    private final PianoMenuProvider pianoMenuProvider;
-    private final BooksConfig booksConfig;
-    private final LangConfig langConfig;
+  private final FloatyPlugin floatyPlugin;
+  private final UserService userService;
+  private final PianoMenuProvider pianoMenuProvider;
+  private final BooksConfig booksConfig;
+  private final LangConfig langConfig;
 
-    @Inject
-    public PianoCommand(
-            final @NonNull FloatyPlugin floatyPlugin,
-            final @NonNull UserService userService,
-            final @NonNull PianoMenuProvider pianoMenuProvider,
-            final @NonNull BooksConfig booksConfig,
-            final @NonNull LangConfig langConfig
-    ) {
-        this.floatyPlugin = floatyPlugin;
-        this.userService = userService;
-        this.pianoMenuProvider = pianoMenuProvider;
-        this.booksConfig = booksConfig;
-        this.langConfig = langConfig;
-    }
+  @Inject
+  public PianoCommand(
+      final @NonNull FloatyPlugin floatyPlugin,
+      final @NonNull UserService userService,
+      final @NonNull PianoMenuProvider pianoMenuProvider,
+      final @NonNull BooksConfig booksConfig,
+      final @NonNull LangConfig langConfig
+  ) {
+    this.floatyPlugin = floatyPlugin;
+    this.userService = userService;
+    this.pianoMenuProvider = pianoMenuProvider;
+    this.booksConfig = booksConfig;
+    this.langConfig = langConfig;
+  }
 
-    /**
-     * Register the command.
-     *
-     * @param commandManager the command manager
-     */
-    @Override
-    public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
-        final var main = commandManager.commandBuilder("piano")
-                .meta(CommandMeta.DESCRIPTION, "A fancy playable piano.")
-                .permission(Permissions.PIANO)
-                .handler(c -> SendMessage.s(c.getSender(), BookDeserializer.deserializePage(this.getBookNode(), 1)));
+  /**
+   * Register the command.
+   *
+   * @param commandManager the command manager
+   */
+  @Override
+  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+    final var main = commandManager.commandBuilder("piano")
+        .meta(CommandMeta.DESCRIPTION, "A fancy playable piano.")
+        .permission(Permissions.PIANO)
+        .handler(c -> SendMessage.s(c.getSender(), BookDeserializer.deserializePage(this.getBookNode(), 1)));
 
-        final var help = main.literal("help")
-                .argument(IntegerArgument.<CommandSender>newBuilder("page")
-                        .withMin(1)
-                        .withMax(BookDeserializer.pageCount(this.getBookNode()))
-                        .asOptionalWithDefault(1)
-                        .build())
-                .handler(c -> SendMessage.s(c.getSender(), BookDeserializer.deserializePage(this.getBookNode(), c.<Integer>get("page"))));
+    final var help = main.literal("help")
+        .argument(IntegerArgument.<CommandSender>newBuilder("page")
+            .withMin(1)
+            .withMax(BookDeserializer.pageCount(this.getBookNode()))
+            .asOptionalWithDefault(1)
+            .build())
+        .handler(c -> SendMessage.s(
+            c.getSender(),
+            BookDeserializer.deserializePage(this.getBookNode(), c.<Integer>get("page"))
+        ));
 
-        final var toggle = main.literal("toggle", ArgumentDescription.of("Toggle your piano on and off."))
-                .senderType(Player.class)
-                .handler(c -> {
-                    final Player sender = (Player) c.getSender();
-                    if (this.userService.getUser(sender).piano().toggleEnabled()) {
-                        sender.sendMessage(this.langConfig.c(NodePath.path("piano", "enabled")));
-                    } else {
-                        sender.sendMessage(this.langConfig.c(NodePath.path("piano", "disabled")));
-                    }
-                });
+    final var toggle = main.literal("toggle", ArgumentDescription.of("Toggle your piano on and off."))
+        .senderType(Player.class)
+        .handler(c -> {
+          final Player sender = (Player) c.getSender();
+          if (this.userService.getUser(sender).piano().toggleEnabled()) {
+            sender.sendMessage(this.langConfig.c(NodePath.path("piano", "enabled")));
+          } else {
+            sender.sendMessage(this.langConfig.c(NodePath.path("piano", "disabled")));
+          }
+        });
 
-        final var collection = main.literal("collection", ArgumentDescription.of("Get a collection of notes!"))
-                .senderType(Player.class)
-                .argument(EnumArgument.of(PianoMenuProvider.NoteCollection.class, "note_collection"))
-                .argument(IntegerArgument.<CommandSender>newBuilder("max").withMin(1).asOptionalWithDefault(9).build())
-                .handler(c -> {
-                    final PianoMenuProvider.NoteCollection noteCollection = c.get("note_collection");
-                    final int max = c.get("max");
-                    final Player sender = (Player) c.getSender();
+    final var collection = main.literal("collection", ArgumentDescription.of("Get a collection of notes!"))
+        .senderType(Player.class)
+        .argument(EnumArgument.of(PianoMenuProvider.NoteCollection.class, "note_collection"))
+        .argument(IntegerArgument.<CommandSender>newBuilder("max").withMin(1).asOptionalWithDefault(9).build())
+        .handler(c -> {
+          final PianoMenuProvider.NoteCollection noteCollection = c.get("note_collection");
+          final int max = c.get("max");
+          final Player sender = (Player) c.getSender();
 
-                    var delay = 0;
-                    final List<ItemStack> noteItems = this.pianoMenuProvider.getCollection(noteCollection);
-                    for (final ItemStack item : noteItems.subList(0, Math.min(max, noteItems.size()))) {
-                        sender.getServer().getScheduler().scheduleSyncDelayedTask(
-                                this.floatyPlugin,
-                                () -> {
-                                    final var unaddedItem = sender.getInventory().addItem(item).get(0);
-                                    if (unaddedItem != null) {
-                                        sender.getWorld().dropItem(sender.getLocation(), unaddedItem);
-                                        sender.playSound(sender.getLocation(), Sound.ENTITY_ITEM_PICKUP, 0.7F, 0.7F);
-                                    } else {
-                                        sender.playSound(sender.getLocation(), Sound.ENTITY_ITEM_PICKUP, 0.7F, 1);
-                                    }
-                                },
-                                delay
-                        );
-                        delay = delay + 1;
-                    }
-                });
+          var delay = 0;
+          final List<ItemStack> noteItems = this.pianoMenuProvider.getCollection(noteCollection);
+          for (final ItemStack item : noteItems.subList(0, Math.min(max, noteItems.size()))) {
+            sender.getServer().getScheduler().scheduleSyncDelayedTask(
+                this.floatyPlugin,
+                () -> {
+                  final var unaddedItem = sender.getInventory().addItem(item).get(0);
+                  if (unaddedItem != null) {
+                    sender.getWorld().dropItem(sender.getLocation(), unaddedItem);
+                    sender.playSound(sender.getLocation(), Sound.ENTITY_ITEM_PICKUP, 0.7F, 0.7F);
+                  } else {
+                    sender.playSound(sender.getLocation(), Sound.ENTITY_ITEM_PICKUP, 0.7F, 1);
+                  }
+                },
+                delay
+            );
+            delay = delay + 1;
+          }
+        });
 
-        final var instrument = main.literal("instrument", ArgumentDescription.of("Pick your instrument!"))
-                .senderType(Player.class)
-                .argument(EnumArgument.of(Instrument.class, "instrument"))
-                .handler(c -> {
-                    final Instrument inst = c.get("instrument");
-                    final Player sender = (Player) c.getSender();
+    final var instrument = main.literal("instrument", ArgumentDescription.of("Pick your instrument!"))
+        .senderType(Player.class)
+        .argument(EnumArgument.of(Instrument.class, "instrument"))
+        .handler(c -> {
+          final Instrument inst = c.get("instrument");
+          final Player sender = (Player) c.getSender();
 
-                    this.userService.getUser(sender).piano().instrument(inst);
-                    sender.sendMessage(this.langConfig.c(
-                                    NodePath.path("piano", "instrument_change"),
-                                    Placeholder.unparsed("instrument", inst.toString())
-                            )
-                    );
-                });
+          this.userService.getUser(sender).piano().instrument(inst);
+          sender.sendMessage(this.langConfig.c(
+                  NodePath.path("piano", "instrument_change"),
+                  Placeholder.unparsed("instrument", inst.toString())
+              )
+          );
+        });
 
-        final var menu = main.literal("menu", ArgumentDescription.of("Pick your notes!"))
-                .senderType(Player.class)
-                .handler(c -> ((Player) c.getSender()).openInventory(this.pianoMenuProvider.generate()));
+    final var menu = main.literal("menu", ArgumentDescription.of("Pick your notes!"))
+        .senderType(Player.class)
+        .handler(c -> ((Player) c.getSender()).openInventory(this.pianoMenuProvider.generate()));
 
-        commandManager.command(main);
-        commandManager.command(help);
-        commandManager.command(toggle);
-        commandManager.command(collection);
-        commandManager.command(instrument);
-        commandManager.command(menu);
-    }
+    commandManager.command(main);
+    commandManager.command(help);
+    commandManager.command(toggle);
+    commandManager.command(collection);
+    commandManager.command(instrument);
+    commandManager.command(menu);
+  }
 
-    public CommentedConfigurationNode getBookNode() {
-        return this.booksConfig.rootNode().node("piano_manual");
-    }
+  public CommentedConfigurationNode getBookNode() {
+    return this.booksConfig.rootNode().node("piano_manual");
+  }
 
 }

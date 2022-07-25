@@ -12,54 +12,54 @@ import xyz.tehbrian.floatyplugin.FloatyPlugin;
 @SuppressWarnings("ClassCanBeRecord")
 public final class TransportationTask {
 
-    private final FloatyPlugin floatyPlugin;
-    private final FlightService flightService;
+  private final FloatyPlugin floatyPlugin;
+  private final FlightService flightService;
 
-    @Inject
-    public TransportationTask(
-            final @NonNull FloatyPlugin floatyPlugin,
-            final @NonNull FlightService flightService
-    ) {
-        this.floatyPlugin = floatyPlugin;
-        this.flightService = flightService;
-    }
+  @Inject
+  public TransportationTask(
+      final @NonNull FloatyPlugin floatyPlugin,
+      final @NonNull FlightService flightService
+  ) {
+    this.floatyPlugin = floatyPlugin;
+    this.flightService = flightService;
+  }
 
-    public void start() {
-        final Server server = this.floatyPlugin.getServer();
+  public void start() {
+    final Server server = this.floatyPlugin.getServer();
 
-        server.getScheduler().scheduleSyncRepeatingTask(this.floatyPlugin, () -> {
-            for (final Player player : server.getOnlinePlayers()) {
-                final World.Environment environment = player.getWorld().getEnvironment();
+    server.getScheduler().scheduleSyncRepeatingTask(this.floatyPlugin, () -> {
+      for (final Player player : server.getOnlinePlayers()) {
+        final World.Environment environment = player.getWorld().getEnvironment();
 
-                // no flight anywhere
-                this.flightService.checkFlight(player);
+        // no flight anywhere
+        this.flightService.checkFlight(player);
 
-                // elytra only in the end
-                if (environment != World.Environment.THE_END) {
-                    player.setGliding(false);
-                }
+        // elytra only in the end
+        if (environment != World.Environment.THE_END) {
+          player.setGliding(false);
+        }
 
-                if (environment == World.Environment.NETHER) {
-                    if (player.isSprinting()) {
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1000000000, 1, true, false, false));
-                        player.setSprinting(false);
-                    }
+        if (environment == World.Environment.NETHER) {
+          if (player.isSprinting()) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1000000000, 1, true, false, false));
+            player.setSprinting(false);
+          }
 
-                    player.leaveVehicle();
+          player.leaveVehicle();
 
-                    switch (player.getLocation().add(0, -0.8, 0).getBlock().getType()) {
-                        case ICE, PACKED_ICE, BLUE_ICE, FROSTED_ICE -> player.addPotionEffect(new PotionEffect(
-                                PotionEffectType.SLOW, 40, 3, true, false, false
-                        ));
-                        case SOUL_SAND, SOUL_SOIL -> player.addPotionEffect(new PotionEffect(
-                                PotionEffectType.SLOW, 40, 120, true, false, false
-                        ));
-                        default -> {
-                        }
-                    }
-                }
+          switch (player.getLocation().add(0, -0.8, 0).getBlock().getType()) {
+            case ICE, PACKED_ICE, BLUE_ICE, FROSTED_ICE -> player.addPotionEffect(new PotionEffect(
+                PotionEffectType.SLOW, 40, 3, true, false, false
+            ));
+            case SOUL_SAND, SOUL_SOIL -> player.addPotionEffect(new PotionEffect(
+                PotionEffectType.SLOW, 40, 120, true, false, false
+            ));
+            default -> {
             }
-        }, 1, 10);
-    }
+          }
+        }
+      }
+    }, 1, 10);
+  }
 
 }

@@ -12,32 +12,32 @@ import java.util.function.Function;
 
 public class CommandService extends PaperCloudService<CommandSender> {
 
-    private final FloatyPlugin floatyPlugin;
+  private final FloatyPlugin floatyPlugin;
 
-    @Inject
-    public CommandService(
-            final @NonNull FloatyPlugin floatyPlugin
-    ) {
-        this.floatyPlugin = floatyPlugin;
+  @Inject
+  public CommandService(
+      final @NonNull FloatyPlugin floatyPlugin
+  ) {
+    this.floatyPlugin = floatyPlugin;
+  }
+
+  /**
+   * Instantiates {@link #commandManager}.
+   *
+   * @throws IllegalStateException if {@link #commandManager} is already instantiated
+   * @throws Exception             if something goes wrong during instantiation
+   */
+  public void init() throws Exception {
+    if (this.commandManager != null) {
+      throw new IllegalStateException("The CommandManager is already instantiated.");
     }
 
-    /**
-     * Instantiates {@link #commandManager}.
-     *
-     * @throws IllegalStateException if {@link #commandManager} is already instantiated
-     * @throws Exception             if something goes wrong during instantiation
-     */
-    public void init() throws Exception {
-        if (this.commandManager != null) {
-            throw new IllegalStateException("The CommandManager is already instantiated.");
-        }
-
-        this.commandManager = new PaperCommandManager<>(
-                this.floatyPlugin,
-                CommandExecutionCoordinator.simpleCoordinator(),
-                Function.identity(),
-                Function.identity()
-        );
-    }
+    this.commandManager = new PaperCommandManager<>(
+        this.floatyPlugin,
+        CommandExecutionCoordinator.simpleCoordinator(),
+        Function.identity(),
+        Function.identity()
+    );
+  }
 
 }

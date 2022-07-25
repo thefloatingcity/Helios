@@ -60,163 +60,163 @@ import java.util.List;
 
 public final class FloatyPlugin extends TehPlugin {
 
-    /**
-     * The Guice injector.
-     */
-    private @MonotonicNonNull Injector injector;
+  /**
+   * The Guice injector.
+   */
+  private @MonotonicNonNull Injector injector;
 
-    private @MonotonicNonNull Logger logger;
+  private @MonotonicNonNull Logger logger;
 
-    @Override
-    public void onEnable() {
-        try {
-            this.injector = Guice.createInjector(
-                    new PluginModule(this),
-                    new SingletonModule()
-            );
-        } catch (final Exception e) {
-            this.getSLF4JLogger().error("Something went wrong while creating the Guice injector.");
-            this.getSLF4JLogger().error("Disabling plugin.");
-            this.disableSelf();
-            this.getSLF4JLogger().error("Printing stack trace, please send this to the developers:", e);
-            return;
-        }
-
-        this.logger = this.injector.getInstance(Logger.class);
-
-        if (!this.injector.getInstance(LuckPermsService.class).load()) {
-            this.logger.error("LuckPerms dependency not found. Disabling plugin.");
-            this.disableSelf();
-            return;
-        }
-
-        if (!this.loadConfiguration()) {
-            this.disableSelf();
-            return;
-        }
-
-        if (!this.setupCommands()) {
-            this.disableSelf();
-            return;
-        }
-
-        this.setupListeners();
-        this.setupTasks();
-
-        this.getServer().getScheduler().runTaskLater(this, () -> this.injector.getInstance(WorldService.class).init(), 10);
+  @Override
+  public void onEnable() {
+    try {
+      this.injector = Guice.createInjector(
+          new PluginModule(this),
+          new SingletonModule()
+      );
+    } catch (final Exception e) {
+      this.getSLF4JLogger().error("Something went wrong while creating the Guice injector.");
+      this.getSLF4JLogger().error("Disabling plugin.");
+      this.disableSelf();
+      this.getSLF4JLogger().error("Printing stack trace, please send this to the developers:", e);
+      return;
     }
 
-    @Override
-    public void onDisable() {
-        this.getServer().getScheduler().cancelTasks(this);
+    this.logger = this.injector.getInstance(Logger.class);
+
+    if (!this.injector.getInstance(LuckPermsService.class).load()) {
+      this.logger.error("LuckPerms dependency not found. Disabling plugin.");
+      this.disableSelf();
+      return;
     }
 
-    /**
-     * Loads the plugin's configuration. If an exception is caught, logs the
-     * error and returns false.
-     *
-     * @return whether it was successful
-     */
-    public boolean loadConfiguration() {
-        this.saveResourceSilently("books.conf");
-        this.saveResourceSilently("config.conf");
-        this.saveResourceSilently("emotes.conf");
-        this.saveResourceSilently("inventories.conf");
-        this.saveResourceSilently("lang.conf");
-
-        final List<Config> configsToLoad = List.of(
-                this.injector.getInstance(BooksConfig.class),
-                this.injector.getInstance(ConfigConfig.class),
-                this.injector.getInstance(EmotesConfig.class),
-                this.injector.getInstance(InventoriesConfig.class),
-                this.injector.getInstance(LangConfig.class)
-        );
-
-        for (final Config config : configsToLoad) {
-            try {
-                config.load();
-            } catch (final ConfigurateException e) {
-                this.logger.error("Exception caught during config load for {}", config.configurateWrapper().filePath());
-                this.logger.error("Please check your config.");
-                this.logger.error("Printing stack trace:", e);
-                return false;
-            }
-        }
-
-        this.logger.info("Successfully loaded configuration.");
-        return true;
+    if (!this.loadConfiguration()) {
+      this.disableSelf();
+      return;
     }
 
-    private void setupListeners() {
-        registerListeners(
-                this.injector.getInstance(AntiBuildListener.class),
-                this.injector.getInstance(ChatListener.class),
-                this.injector.getInstance(FishingListener.class),
-                this.injector.getInstance(JoinQuitListener.class),
-                this.injector.getInstance(MilkListener.class),
-                this.injector.getInstance(RainMusicListener.class),
-                this.injector.getInstance(PianoListener.class),
-                this.injector.getInstance(ServerPingListener.class),
-                this.injector.getInstance(SpawnProtectionListener.class),
-                this.injector.getInstance(TransportationListener.class),
-                this.injector.getInstance(VoidLoopListener.class),
-                this.injector.getInstance(TagListener.class)
-        );
+    if (!this.setupCommands()) {
+      this.disableSelf();
+      return;
     }
 
-    /**
-     * @return whether it was successful
-     */
-    private boolean setupCommands() {
-        final @NonNull CommandService commandService = this.injector.getInstance(CommandService.class);
-        try {
-            commandService.init();
-        } catch (final Exception e) {
-            this.getSLF4JLogger().error("Failed to create the CommandManager.");
-            this.getSLF4JLogger().error("Printing stack trace, please send this to the developers:", e);
-            return false;
-        }
+    this.setupListeners();
+    this.setupTasks();
 
-        final @Nullable PaperCommandManager<CommandSender> commandManager = commandService.get();
-        if (commandManager == null) {
-            this.getSLF4JLogger().error("The CommandService was null after initialization!");
-            return false;
-        }
+    this.getServer().getScheduler().runTaskLater(this, () -> this.injector.getInstance(WorldService.class).init(), 10);
+  }
 
-        this.injector.getInstance(ActCommands.class).register(commandManager);
-        this.injector.getInstance(BroadcastCommand.class).register(commandManager);
-        this.injector.getInstance(DiscordCommand.class).register(commandManager);
-        this.injector.getInstance(FloatyPluginCommand.class).register(commandManager);
-        this.injector.getInstance(FlyCommand.class).register(commandManager);
-        this.injector.getInstance(FunCommands.class).register(commandManager);
-        this.injector.getInstance(GamemodeCommands.class).register(commandManager);
-        this.injector.getInstance(HatCommand.class).register(commandManager);
-        this.injector.getInstance(InfoCommand.class).register(commandManager);
-        this.injector.getInstance(MilkCommand.class).register(commandManager);
-        this.injector.getInstance(PackCommand.class).register(commandManager);
-        this.injector.getInstance(PianoCommand.class).register(commandManager);
-        this.injector.getInstance(PlaytimeCommands.class).register(commandManager);
-        this.injector.getInstance(RulesCommand.class).register(commandManager);
-        this.injector.getInstance(TagCommand.class).register(commandManager);
-        this.injector.getInstance(VoteCommand.class).register(commandManager);
-        this.injector.getInstance(WorldCommands.class).register(commandManager);
+  @Override
+  public void onDisable() {
+    this.getServer().getScheduler().cancelTasks(this);
+  }
 
-        return true;
+  /**
+   * Loads the plugin's configuration. If an exception is caught, logs the
+   * error and returns false.
+   *
+   * @return whether it was successful
+   */
+  public boolean loadConfiguration() {
+    this.saveResourceSilently("books.conf");
+    this.saveResourceSilently("config.conf");
+    this.saveResourceSilently("emotes.conf");
+    this.saveResourceSilently("inventories.conf");
+    this.saveResourceSilently("lang.conf");
+
+    final List<Config> configsToLoad = List.of(
+        this.injector.getInstance(BooksConfig.class),
+        this.injector.getInstance(ConfigConfig.class),
+        this.injector.getInstance(EmotesConfig.class),
+        this.injector.getInstance(InventoriesConfig.class),
+        this.injector.getInstance(LangConfig.class)
+    );
+
+    for (final Config config : configsToLoad) {
+      try {
+        config.load();
+      } catch (final ConfigurateException e) {
+        this.logger.error("Exception caught during config load for {}", config.configurateWrapper().filePath());
+        this.logger.error("Please check your config.");
+        this.logger.error("Printing stack trace:", e);
+        return false;
+      }
     }
 
-    private void setupTasks() {
-        this.injector.getInstance(ElevatorMusicTask.class).start();
-        this.injector.getInstance(TransportationTask.class).start();
-        this.injector.getInstance(VoidLoopTask.class).start();
-        this.injector.getInstance(PortalTask.class).start();
+    this.logger.info("Successfully loaded configuration.");
+    return true;
+  }
+
+  private void setupListeners() {
+    registerListeners(
+        this.injector.getInstance(AntiBuildListener.class),
+        this.injector.getInstance(ChatListener.class),
+        this.injector.getInstance(FishingListener.class),
+        this.injector.getInstance(JoinQuitListener.class),
+        this.injector.getInstance(MilkListener.class),
+        this.injector.getInstance(RainMusicListener.class),
+        this.injector.getInstance(PianoListener.class),
+        this.injector.getInstance(ServerPingListener.class),
+        this.injector.getInstance(SpawnProtectionListener.class),
+        this.injector.getInstance(TransportationListener.class),
+        this.injector.getInstance(VoidLoopListener.class),
+        this.injector.getInstance(TagListener.class)
+    );
+  }
+
+  /**
+   * @return whether it was successful
+   */
+  private boolean setupCommands() {
+    final @NonNull CommandService commandService = this.injector.getInstance(CommandService.class);
+    try {
+      commandService.init();
+    } catch (final Exception e) {
+      this.getSLF4JLogger().error("Failed to create the CommandManager.");
+      this.getSLF4JLogger().error("Printing stack trace, please send this to the developers:", e);
+      return false;
     }
 
-    @Override
-    public @NonNull ChunkGenerator getDefaultWorldGenerator(
-            @NotNull final String worldName,
-            @Nullable final String id
-    ) {
-        return this.injector.getInstance(WorldService.class).getDefaultWorldGenerator(worldName, id);
+    final @Nullable PaperCommandManager<CommandSender> commandManager = commandService.get();
+    if (commandManager == null) {
+      this.getSLF4JLogger().error("The CommandService was null after initialization!");
+      return false;
     }
+
+    this.injector.getInstance(ActCommands.class).register(commandManager);
+    this.injector.getInstance(BroadcastCommand.class).register(commandManager);
+    this.injector.getInstance(DiscordCommand.class).register(commandManager);
+    this.injector.getInstance(FloatyPluginCommand.class).register(commandManager);
+    this.injector.getInstance(FlyCommand.class).register(commandManager);
+    this.injector.getInstance(FunCommands.class).register(commandManager);
+    this.injector.getInstance(GamemodeCommands.class).register(commandManager);
+    this.injector.getInstance(HatCommand.class).register(commandManager);
+    this.injector.getInstance(InfoCommand.class).register(commandManager);
+    this.injector.getInstance(MilkCommand.class).register(commandManager);
+    this.injector.getInstance(PackCommand.class).register(commandManager);
+    this.injector.getInstance(PianoCommand.class).register(commandManager);
+    this.injector.getInstance(PlaytimeCommands.class).register(commandManager);
+    this.injector.getInstance(RulesCommand.class).register(commandManager);
+    this.injector.getInstance(TagCommand.class).register(commandManager);
+    this.injector.getInstance(VoteCommand.class).register(commandManager);
+    this.injector.getInstance(WorldCommands.class).register(commandManager);
+
+    return true;
+  }
+
+  private void setupTasks() {
+    this.injector.getInstance(ElevatorMusicTask.class).start();
+    this.injector.getInstance(TransportationTask.class).start();
+    this.injector.getInstance(VoidLoopTask.class).start();
+    this.injector.getInstance(PortalTask.class).start();
+  }
+
+  @Override
+  public @NonNull ChunkGenerator getDefaultWorldGenerator(
+      @NotNull final String worldName,
+      @Nullable final String id
+  ) {
+    return this.injector.getInstance(WorldService.class).getDefaultWorldGenerator(worldName, id);
+  }
 
 }

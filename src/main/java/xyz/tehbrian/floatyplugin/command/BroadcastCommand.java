@@ -11,20 +11,20 @@ import xyz.tehbrian.floatyplugin.util.FormatUtil;
 
 public class BroadcastCommand extends PaperCloudCommand<CommandSender> {
 
-    /**
-     * Register the command.
-     *
-     * @param commandManager the command manager
-     */
-    @Override
-    public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
-        final var main = commandManager.commandBuilder("broadcast")
-                .meta(CommandMeta.DESCRIPTION, "Broadcast a server message.")
-                .permission(Permissions.BROADCAST)
-                .argument(StringArgument.greedy("message"))
-                .handler(c -> c.getSender().getServer().sendMessage(FormatUtil.miniMessage(c.<String>get("message"))));
+  /**
+   * Register the command.
+   *
+   * @param commandManager the command manager
+   */
+  @Override
+  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+    final var main = commandManager.commandBuilder("broadcast")
+        .meta(CommandMeta.DESCRIPTION, "Broadcast a server message.")
+        .permission(Permissions.BROADCAST)
+        .argument(StringArgument.greedy("message"))
+        .handler(c -> c.getSender().getServer().sendMessage(FormatUtil.miniMessage(c.<String>get("message"))));
 
-        commandManager.command(main);
-    }
+    commandManager.command(main);
+  }
 
 }

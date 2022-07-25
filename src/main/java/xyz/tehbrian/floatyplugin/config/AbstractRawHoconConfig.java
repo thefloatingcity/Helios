@@ -8,14 +8,14 @@ import java.nio.file.Path;
 
 public abstract class AbstractRawHoconConfig extends AbstractRawConfig<HoconConfigurateWrapper> {
 
-    /**
-     * @param file the config file
-     */
-    public AbstractRawHoconConfig(final @NonNull Path file) {
-        super(new HoconConfigurateWrapper(file, HoconConfigurationLoader.builder()
-                .path(file)
-                .defaultOptions(opts -> opts.implicitInitialization(false))
-                .build()));
-    }
+  /**
+   * @param file the config file
+   */
+  public AbstractRawHoconConfig(final @NonNull Path file) {
+    super(new HoconConfigurateWrapper(file, HoconConfigurationLoader.builder()
+        .path(file)
+        .defaultOptions(opts -> opts.implicitInitialization(false))
+        .build()));
+  }
 
 }

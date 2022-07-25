@@ -11,9 +11,9 @@ import java.nio.file.Path;
  */
 public final class InventoriesConfig extends AbstractRawHoconConfig {
 
-    @Inject
-    public InventoriesConfig(final @NonNull @Named("dataFolder") Path dataFolder) {
-        super(dataFolder.resolve("inventories.conf"));
-    }
+  @Inject
+  public InventoriesConfig(final @NonNull @Named("dataFolder") Path dataFolder) {
+    super(dataFolder.resolve("inventories.conf"));
+  }
 
 }

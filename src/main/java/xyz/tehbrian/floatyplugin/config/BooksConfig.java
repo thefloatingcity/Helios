@@ -11,9 +11,9 @@ import java.nio.file.Path;
  */
 public final class BooksConfig extends AbstractRawHoconConfig {
 
-    @Inject
-    public BooksConfig(final @NonNull @Named("dataFolder") Path dataFolder) {
-        super(dataFolder.resolve("books.conf"));
-    }
+  @Inject
+  public BooksConfig(final @NonNull @Named("dataFolder") Path dataFolder) {
+    super(dataFolder.resolve("books.conf"));
+  }
 
 }

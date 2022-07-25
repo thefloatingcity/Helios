@@ -11,25 +11,25 @@ import xyz.tehbrian.floatyplugin.config.LangConfig;
 
 public final class VoteCommand extends PaperCloudCommand<CommandSender> {
 
-    private final LangConfig langConfig;
+  private final LangConfig langConfig;
 
-    @Inject
-    public VoteCommand(final @NonNull LangConfig langConfig) {
-        this.langConfig = langConfig;
-    }
+  @Inject
+  public VoteCommand(final @NonNull LangConfig langConfig) {
+    this.langConfig = langConfig;
+  }
 
-    /**
-     * Register the command.
-     *
-     * @param commandManager the command manager
-     */
-    @Override
-    public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
-        final var main = commandManager.commandBuilder("vote")
-                .meta(CommandMeta.DESCRIPTION, "Show a list of voting sites.")
-                .handler(c -> c.getSender().sendMessage(this.langConfig.c(NodePath.path("vote"))));
+  /**
+   * Register the command.
+   *
+   * @param commandManager the command manager
+   */
+  @Override
+  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+    final var main = commandManager.commandBuilder("vote")
+        .meta(CommandMeta.DESCRIPTION, "Show a list of voting sites.")
+        .handler(c -> c.getSender().sendMessage(this.langConfig.c(NodePath.path("vote"))));
 
-        commandManager.command(main);
-    }
+    commandManager.command(main);
+  }
 
 }

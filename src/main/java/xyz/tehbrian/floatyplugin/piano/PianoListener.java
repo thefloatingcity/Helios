@@ -23,68 +23,68 @@ import java.util.Objects;
 @SuppressWarnings({"unused", "ClassCanBeRecord"})
 public final class PianoListener implements Listener {
 
-    private final UserService userService;
-    private final InventoriesConfig inventoriesConfig;
+  private final UserService userService;
+  private final InventoriesConfig inventoriesConfig;
 
-    @Inject
-    public PianoListener(
-            final @NonNull UserService userService,
-            final @NonNull InventoriesConfig inventoriesConfig
-    ) {
-        this.userService = userService;
-        this.inventoriesConfig = inventoriesConfig;
+  @Inject
+  public PianoListener(
+      final @NonNull UserService userService,
+      final @NonNull InventoriesConfig inventoriesConfig
+  ) {
+    this.userService = userService;
+    this.inventoriesConfig = inventoriesConfig;
+  }
+
+  @EventHandler
+  public void onItemHeld(final PlayerItemHeldEvent event) {
+    final Player player = event.getPlayer();
+
+    if (!player.hasPermission(Permissions.PIANO)
+        || !this.userService.getUser(player).piano().enabled()) {
+      return;
     }
 
-    @EventHandler
-    public void onItemHeld(final PlayerItemHeldEvent event) {
-        final Player player = event.getPlayer();
+    final @Nullable ItemStack newItem = player.getInventory().getItem(event.getNewSlot());
+    if (newItem != null) {
+      this.play(player, newItem);
+    }
+  }
 
-        if (!player.hasPermission(Permissions.PIANO)
-                || !this.userService.getUser(player).piano().enabled()) {
-            return;
-        }
-
-        final @Nullable ItemStack newItem = player.getInventory().getItem(event.getNewSlot());
-        if (newItem != null) {
-            this.play(player, newItem);
-        }
+  @EventHandler
+  public void onInventoryClick(final InventoryClickEvent event) {
+    if (!(event.getWhoClicked() instanceof final Player player)
+        || !player.hasPermission(Permissions.PIANO)
+        || event.getClickedInventory() == null
+        || !event.getView().title().equals(FormatUtil.miniMessage(
+        Objects.requireNonNull(this.inventoriesConfig.rootNode().node("piano_notes", "name").getString())))
+        || !event.isRightClick()) {
+      return;
     }
 
-    @EventHandler
-    public void onInventoryClick(final InventoryClickEvent event) {
-        if (!(event.getWhoClicked() instanceof final Player player)
-                || !player.hasPermission(Permissions.PIANO)
-                || event.getClickedInventory() == null
-                || !event.getView().title().equals(FormatUtil.miniMessage(
-                Objects.requireNonNull(this.inventoriesConfig.rootNode().node("piano_notes", "name").getString())))
-                || !event.isRightClick()) {
-            return;
-        }
+    event.setCancelled(true);
 
-        event.setCancelled(true);
+    final @Nullable ItemStack currentItem = event.getCurrentItem();
+    if (currentItem != null) {
+      this.play(player, currentItem);
+    }
+  }
 
-        final @Nullable ItemStack currentItem = event.getCurrentItem();
-        if (currentItem != null) {
-            this.play(player, currentItem);
-        }
+  private void play(final @NonNull Player player, final @NonNull ItemStack item) {
+    final @Nullable List<Component> lore = item.lore();
+
+    if (lore == null
+        || !MaterialTags.STAINED_GLASS_PANES.isTagged(item)
+        || FormatUtil.plain(lore.get(0)).equals("Note")) {
+      return;
     }
 
-    private void play(final @NonNull Player player, final @NonNull ItemStack item) {
-        final @Nullable List<Component> lore = item.lore();
-
-        if (lore == null
-                || !MaterialTags.STAINED_GLASS_PANES.isTagged(item)
-                || FormatUtil.plain(lore.get(0)).equals("Note")) {
-            return;
-        }
-
-        player.getWorld().playSound(
-                player.getEyeLocation(),
-                this.userService.getUser(player).piano().instrument().asBukkitSound(),
-                SoundCategory.MASTER,
-                3,
-                Float.parseFloat(FormatUtil.plain(lore.get(1)))
-        );
-    }
+    player.getWorld().playSound(
+        player.getEyeLocation(),
+        this.userService.getUser(player).piano().instrument().asBukkitSound(),
+        SoundCategory.MASTER,
+        3,
+        Float.parseFloat(FormatUtil.plain(lore.get(1)))
+    );
+  }
 
 }

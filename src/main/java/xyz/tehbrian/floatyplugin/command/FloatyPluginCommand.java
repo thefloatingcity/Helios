@@ -14,40 +14,40 @@ import xyz.tehbrian.floatyplugin.config.LangConfig;
 
 public class FloatyPluginCommand extends PaperCloudCommand<CommandSender> {
 
-    private final FloatyPlugin floatyPlugin;
-    private final LangConfig langConfig;
+  private final FloatyPlugin floatyPlugin;
+  private final LangConfig langConfig;
 
-    @Inject
-    public FloatyPluginCommand(
-            final @NonNull FloatyPlugin floatyPlugin,
-            final @NonNull LangConfig langConfig
-    ) {
-        this.floatyPlugin = floatyPlugin;
-        this.langConfig = langConfig;
-    }
+  @Inject
+  public FloatyPluginCommand(
+      final @NonNull FloatyPlugin floatyPlugin,
+      final @NonNull LangConfig langConfig
+  ) {
+    this.floatyPlugin = floatyPlugin;
+    this.langConfig = langConfig;
+  }
 
-    /**
-     * Register the command.
-     *
-     * @param commandManager the command manager
-     */
-    @Override
-    public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
-        final var main = commandManager.commandBuilder("floatyplugin")
-                .meta(CommandMeta.DESCRIPTION, "Core commands for FloatyPlugin.");
+  /**
+   * Register the command.
+   *
+   * @param commandManager the command manager
+   */
+  @Override
+  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+    final var main = commandManager.commandBuilder("floatyplugin")
+        .meta(CommandMeta.DESCRIPTION, "Core commands for FloatyPlugin.");
 
-        final var reload = main.literal("reload", ArgumentDescription.of("Reload the plugin's configs."))
-                .permission(Permissions.RELOAD)
-                .handler(c -> {
-                    if (this.floatyPlugin.loadConfiguration()) {
-                        c.getSender().sendMessage(this.langConfig.c(NodePath.path("reload", "successful")));
-                    } else {
-                        c.getSender().sendMessage(this.langConfig.c(NodePath.path("reload", "unsuccessful")));
-                    }
-                });
+    final var reload = main.literal("reload", ArgumentDescription.of("Reload the plugin's configs."))
+        .permission(Permissions.RELOAD)
+        .handler(c -> {
+          if (this.floatyPlugin.loadConfiguration()) {
+            c.getSender().sendMessage(this.langConfig.c(NodePath.path("reload", "successful")));
+          } else {
+            c.getSender().sendMessage(this.langConfig.c(NodePath.path("reload", "unsuccessful")));
+          }
+        });
 
-        commandManager.command(main);
-        commandManager.command(reload);
-    }
+    commandManager.command(main);
+    commandManager.command(reload);
+  }
 
 }

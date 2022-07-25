@@ -8,52 +8,52 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 public final class FormatUtil {
 
-    public static final @NonNull LegacyComponentSerializer LEGACY_WITH_URLS = LegacyComponentSerializer
-            .builder()
-            .character('&')
-            .extractUrls()
-            .build();
-    public static final @NonNull LegacyComponentSerializer LEGACY = LegacyComponentSerializer.legacyAmpersand();
-    public static final @NonNull PlainTextComponentSerializer PLAIN = PlainTextComponentSerializer.plainText();
-    public static final @NonNull MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
+  public static final @NonNull LegacyComponentSerializer LEGACY_WITH_URLS = LegacyComponentSerializer
+      .builder()
+      .character('&')
+      .extractUrls()
+      .build();
+  public static final @NonNull LegacyComponentSerializer LEGACY = LegacyComponentSerializer.legacyAmpersand();
+  public static final @NonNull PlainTextComponentSerializer PLAIN = PlainTextComponentSerializer.plainText();
+  public static final @NonNull MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
 
-    private FormatUtil() {
-    }
+  private FormatUtil() {
+  }
 
-    public static @NonNull Component legacyWithUrls(final @NonNull Component component) {
-        return LEGACY_WITH_URLS.deserialize(plain(component));
-    }
+  public static @NonNull Component legacyWithUrls(final @NonNull Component component) {
+    return LEGACY_WITH_URLS.deserialize(plain(component));
+  }
 
-    public static @NonNull Component reverseLegacy(final @NonNull Component component) {
-        return plain(LEGACY.serialize(component));
-    }
+  public static @NonNull Component reverseLegacy(final @NonNull Component component) {
+    return plain(LEGACY.serialize(component));
+  }
 
-    public static @NonNull Component legacy(final @NonNull Component component) {
-        return legacy(plain(component));
-    }
+  public static @NonNull Component legacy(final @NonNull Component component) {
+    return legacy(plain(component));
+  }
 
-    public static @NonNull Component legacy(final @NonNull String string) {
-        return LEGACY.deserialize(string);
-    }
+  public static @NonNull Component legacy(final @NonNull String string) {
+    return LEGACY.deserialize(string);
+  }
 
-    public static @NonNull Component reverseMiniMessage(final @NonNull Component component) {
-        return plain(MINI_MESSAGE.serialize(component));
-    }
+  public static @NonNull Component reverseMiniMessage(final @NonNull Component component) {
+    return plain(MINI_MESSAGE.serialize(component));
+  }
 
-    public static @NonNull Component miniMessage(final @NonNull Component component) {
-        return miniMessage(plain(component));
-    }
+  public static @NonNull Component miniMessage(final @NonNull Component component) {
+    return miniMessage(plain(component));
+  }
 
-    public static @NonNull Component miniMessage(final @NonNull String string) {
-        return MINI_MESSAGE.deserialize(string);
-    }
+  public static @NonNull Component miniMessage(final @NonNull String string) {
+    return MINI_MESSAGE.deserialize(string);
+  }
 
-    public static @NonNull Component plain(final @NonNull String string) {
-        return PLAIN.deserialize(string);
-    }
+  public static @NonNull Component plain(final @NonNull String string) {
+    return PLAIN.deserialize(string);
+  }
 
-    public static @NonNull String plain(final @NonNull Component component) {
-        return PLAIN.serialize(component);
-    }
+  public static @NonNull String plain(final @NonNull Component component) {
+    return PLAIN.serialize(component);
+  }
 
 }

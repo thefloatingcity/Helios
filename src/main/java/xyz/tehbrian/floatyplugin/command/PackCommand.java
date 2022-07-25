@@ -13,35 +13,38 @@ import xyz.tehbrian.floatyplugin.config.LangConfig;
 
 public final class PackCommand extends PaperCloudCommand<CommandSender> {
 
-    private final LangConfig langConfig;
-    private final ConfigConfig configConfig;
+  private final LangConfig langConfig;
+  private final ConfigConfig configConfig;
 
-    @Inject
-    public PackCommand(
-            final @NonNull LangConfig langConfig,
-            final @NonNull ConfigConfig configConfig
-    ) {
-        this.langConfig = langConfig;
-        this.configConfig = configConfig;
-    }
+  @Inject
+  public PackCommand(
+      final @NonNull LangConfig langConfig,
+      final @NonNull ConfigConfig configConfig
+  ) {
+    this.langConfig = langConfig;
+    this.configConfig = configConfig;
+  }
 
-    /**
-     * Register the command.
-     *
-     * @param commandManager the command manager
-     */
-    @Override
-    public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
-        final var main = commandManager.commandBuilder("pack")
-                .senderType(Player.class)
-                .meta(CommandMeta.DESCRIPTION, "Get the fancy server resource pack.")
-                .handler(c -> {
-                    final Player sender = (Player) c.getSender();
-                    sender.setResourcePack(this.configConfig.data().resourcePackUrl(), this.configConfig.data().resourcePackHash());
-                    sender.sendMessage(this.langConfig.c(NodePath.path("resource_pack", "sending")));
-                });
+  /**
+   * Register the command.
+   *
+   * @param commandManager the command manager
+   */
+  @Override
+  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+    final var main = commandManager.commandBuilder("pack")
+        .senderType(Player.class)
+        .meta(CommandMeta.DESCRIPTION, "Get the fancy server resource pack.")
+        .handler(c -> {
+          final Player sender = (Player) c.getSender();
+          sender.setResourcePack(
+              this.configConfig.data().resourcePackUrl(),
+              this.configConfig.data().resourcePackHash()
+          );
+          sender.sendMessage(this.langConfig.c(NodePath.path("resource_pack", "sending")));
+        });
 
-        commandManager.command(main);
-    }
+    commandManager.command(main);
+  }
 
 }

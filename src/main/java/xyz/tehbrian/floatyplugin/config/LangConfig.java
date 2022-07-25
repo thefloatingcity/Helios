@@ -12,12 +12,12 @@ import java.nio.file.Path;
  */
 public class LangConfig extends AbstractLangConfig<HoconConfigurateWrapper> {
 
-    /**
-     * @param dataFolder the data folder
-     */
-    @Inject
-    public LangConfig(final @NonNull @Named("dataFolder") Path dataFolder) {
-        super(new HoconConfigurateWrapper(dataFolder.resolve("lang.conf")));
-    }
+  /**
+   * @param dataFolder the data folder
+   */
+  @Inject
+  public LangConfig(final @NonNull @Named("dataFolder") Path dataFolder) {
+    super(new HoconConfigurateWrapper(dataFolder.resolve("lang.conf")));
+  }
 
 }

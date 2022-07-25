@@ -15,44 +15,44 @@ import xyz.tehbrian.floatyplugin.user.UserService;
 
 public class FlyCommand extends PaperCloudCommand<CommandSender> {
 
-    private final UserService userService;
-    private final LangConfig langConfig;
-    private final FlightService flightService;
+  private final UserService userService;
+  private final LangConfig langConfig;
+  private final FlightService flightService;
 
-    @Inject
-    public FlyCommand(
-            final @NonNull UserService userService,
-            final @NonNull LangConfig langConfig,
-            final @NonNull FlightService flightService
-    ) {
-        this.userService = userService;
-        this.langConfig = langConfig;
-        this.flightService = flightService;
-    }
+  @Inject
+  public FlyCommand(
+      final @NonNull UserService userService,
+      final @NonNull LangConfig langConfig,
+      final @NonNull FlightService flightService
+  ) {
+    this.userService = userService;
+    this.langConfig = langConfig;
+    this.flightService = flightService;
+  }
 
-    /**
-     * Register the command.
-     *
-     * @param commandManager the command manager
-     */
-    @Override
-    public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
-        final var main = commandManager.commandBuilder("fly")
-                .meta(CommandMeta.DESCRIPTION, "Bends the space/time continuum.")
-                .permission(Permissions.FLY)
-                .senderType(Player.class)
-                .handler(c -> {
-                    final Player sender = (Player) c.getSender();
-                    if (this.userService.getUser(sender).toggleFlyBypassEnabled()) {
-                        sender.sendMessage(this.langConfig.c(NodePath.path("fly", "enabled")));
-                        this.flightService.enableFlight(sender);
-                    } else {
-                        sender.sendMessage(this.langConfig.c(NodePath.path("fly", "disabled")));
-                        this.flightService.disableFlight(sender);
-                    }
-                });
+  /**
+   * Register the command.
+   *
+   * @param commandManager the command manager
+   */
+  @Override
+  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+    final var main = commandManager.commandBuilder("fly")
+        .meta(CommandMeta.DESCRIPTION, "Bends the space/time continuum.")
+        .permission(Permissions.FLY)
+        .senderType(Player.class)
+        .handler(c -> {
+          final Player sender = (Player) c.getSender();
+          if (this.userService.getUser(sender).toggleFlyBypassEnabled()) {
+            sender.sendMessage(this.langConfig.c(NodePath.path("fly", "enabled")));
+            this.flightService.enableFlight(sender);
+          } else {
+            sender.sendMessage(this.langConfig.c(NodePath.path("fly", "disabled")));
+            this.flightService.disableFlight(sender);
+          }
+        });
 
-        commandManager.command(main);
-    }
+    commandManager.command(main);
+  }
 
 }

@@ -10,19 +10,19 @@ import org.bukkit.event.weather.WeatherChangeEvent;
 
 public final class RainMusicListener implements Listener {
 
-    @EventHandler
-    public void onWeatherChange(final WeatherChangeEvent event) {
-        if (event.toWeatherState()) {
-            for (final Player player : event.getWorld().getPlayers()) {
-                player.playSound(Sound.sound(
-                        Key.key("floating", "music.april_showers"), Sound.Source.MUSIC, 1, 1)
-                );
-            }
-        } else {
-            for (final Player player : event.getWorld().getPlayers()) {
-                player.stopSound(SoundStop.named(Key.key("floating", "music.april_showers")));
-            }
-        }
+  @EventHandler
+  public void onWeatherChange(final WeatherChangeEvent event) {
+    if (event.toWeatherState()) {
+      for (final Player player : event.getWorld().getPlayers()) {
+        player.playSound(Sound.sound(
+            Key.key("floating", "music.april_showers"), Sound.Source.MUSIC, 1, 1)
+        );
+      }
+    } else {
+      for (final Player player : event.getWorld().getPlayers()) {
+        player.stopSound(SoundStop.named(Key.key("floating", "music.april_showers")));
+      }
     }
+  }
 
 }
