@@ -3,7 +3,7 @@ package xyz.tehbrian.floatyplugin;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import dev.tehbrian.tehlib.core.configurate.Config;
+import dev.tehbrian.tehlib.configurate.Config;
 import dev.tehbrian.tehlib.paper.TehPlugin;
 import org.bukkit.command.CommandSender;
 import org.bukkit.generator.ChunkGenerator;

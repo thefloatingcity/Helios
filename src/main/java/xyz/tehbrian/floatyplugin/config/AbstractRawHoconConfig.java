@@ -1,6 +1,6 @@
 package xyz.tehbrian.floatyplugin.config;
 
-import dev.tehbrian.tehlib.core.configurate.AbstractRawConfig;
+import dev.tehbrian.tehlib.configurate.AbstractRawConfig;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
 
