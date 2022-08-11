@@ -71,11 +71,17 @@ public final class WorldService {
 
   public void setGameRules() {
     for (final World world : this.plugin.getServer().getWorlds()) {
-      world.setGameRule(GameRule.MOB_GRIEFING, false);
-      world.setGameRule(GameRule.DO_MOB_SPAWNING, false);
+      world.setGameRule(GameRule.SPAWN_RADIUS, 0);
       world.setGameRule(GameRule.DO_FIRE_TICK, false);
-      world.setGameRule(GameRule.DISABLE_RAIDS, true);
+      world.setGameRule(GameRule.MOB_GRIEFING, false);
+
+      // no mob spawning! >:(
+      world.setGameRule(GameRule.DO_MOB_SPAWNING, false);
       world.setGameRule(GameRule.DO_PATROL_SPAWNING, false);
+      world.setGameRule(GameRule.DO_TRADER_SPAWNING, false);
+      world.setGameRule(GameRule.DO_WARDEN_SPAWNING, false);
+      world.setGameRule(GameRule.DO_INSOMNIA, false);
+      world.setGameRule(GameRule.DISABLE_RAIDS, true);
 
       if (world.getEnvironment() == World.Environment.NETHER) {
         world.setGameRule(GameRule.REDUCED_DEBUG_INFO, true);
