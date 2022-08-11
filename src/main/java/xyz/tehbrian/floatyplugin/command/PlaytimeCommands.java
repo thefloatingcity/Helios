@@ -34,11 +34,6 @@ public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
     this.luckPermsService = luckPermsService;
   }
 
-  /**
-   * Register the command.
-   *
-   * @param commandManager the command manager
-   */
   @Override
   public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
     final var playtime = commandManager.commandBuilder("playtime")

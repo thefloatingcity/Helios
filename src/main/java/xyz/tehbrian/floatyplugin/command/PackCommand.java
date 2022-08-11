@@ -25,11 +25,6 @@ public final class PackCommand extends PaperCloudCommand<CommandSender> {
     this.configConfig = configConfig;
   }
 
-  /**
-   * Register the command.
-   *
-   * @param commandManager the command manager
-   */
   @Override
   public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("pack")

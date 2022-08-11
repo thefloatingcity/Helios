@@ -11,11 +11,6 @@ import xyz.tehbrian.floatyplugin.util.FormatUtil;
 
 public class BroadcastCommand extends PaperCloudCommand<CommandSender> {
 
-  /**
-   * Register the command.
-   *
-   * @param commandManager the command manager
-   */
   @Override
   public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("broadcast")

@@ -26,11 +26,6 @@ public class FloatyPluginCommand extends PaperCloudCommand<CommandSender> {
     this.langConfig = langConfig;
   }
 
-  /**
-   * Register the command.
-   *
-   * @param commandManager the command manager
-   */
   @Override
   public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("floatyplugin")

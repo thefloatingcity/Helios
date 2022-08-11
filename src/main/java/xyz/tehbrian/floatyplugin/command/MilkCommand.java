@@ -18,11 +18,6 @@ import xyz.tehbrian.floatyplugin.Permissions;
 
 public class MilkCommand extends PaperCloudCommand<CommandSender> {
 
-  /**
-   * Register the command.
-   *
-   * @param commandManager the command manager
-   */
   @Override
   public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("milk")

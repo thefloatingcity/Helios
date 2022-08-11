@@ -22,11 +22,6 @@ public class WorldCommands extends PaperCloudCommand<CommandSender> {
     this.worldService = worldService;
   }
 
-  /**
-   * Register the command.
-   *
-   * @param commandManager the command manager
-   */
   @Override
   public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
     final var overworld = commandManager.commandBuilder("overworld")
