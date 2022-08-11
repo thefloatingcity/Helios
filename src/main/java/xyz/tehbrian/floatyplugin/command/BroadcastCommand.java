@@ -9,7 +9,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.util.FormatUtil;
 
-public class BroadcastCommand extends PaperCloudCommand<CommandSender> {
+public final class BroadcastCommand extends PaperCloudCommand<CommandSender> {
 
   @Override
   public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {

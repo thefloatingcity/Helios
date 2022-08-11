@@ -12,7 +12,7 @@ import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.tag.TagService;
 
-public class TagCommand extends PaperCloudCommand<CommandSender> {
+public final class TagCommand extends PaperCloudCommand<CommandSender> {
 
   private final LangConfig langConfig;
   private final TagService tagService;

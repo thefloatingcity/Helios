@@ -11,7 +11,7 @@ import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.world.FloatingWorld;
 import xyz.tehbrian.floatyplugin.world.WorldService;
 
-public class WorldCommands extends PaperCloudCommand<CommandSender> {
+public final class WorldCommands extends PaperCloudCommand<CommandSender> {
 
   private final WorldService worldService;
 

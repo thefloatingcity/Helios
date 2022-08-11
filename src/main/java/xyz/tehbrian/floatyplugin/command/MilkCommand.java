@@ -16,7 +16,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import xyz.tehbrian.floatyplugin.Permissions;
 
-public class MilkCommand extends PaperCloudCommand<CommandSender> {
+public final class MilkCommand extends PaperCloudCommand<CommandSender> {
 
   @Override
   public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {

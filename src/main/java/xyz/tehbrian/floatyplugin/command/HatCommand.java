@@ -14,7 +14,7 @@ import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
-public class HatCommand extends PaperCloudCommand<CommandSender> {
+public final class HatCommand extends PaperCloudCommand<CommandSender> {
 
   private final LangConfig langConfig;
 

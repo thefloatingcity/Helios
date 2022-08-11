@@ -20,7 +20,7 @@ import xyz.tehbrian.floatyplugin.util.PlaytimeUtil;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-public class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
+public final class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
 
   private final LangConfig langConfig;
   private final LuckPermsService luckPermsService;

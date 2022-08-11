@@ -12,7 +12,7 @@ import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
-public class FloatyPluginCommand extends PaperCloudCommand<CommandSender> {
+public final class FloatyPluginCommand extends PaperCloudCommand<CommandSender> {
 
   private final FloatyPlugin floatyPlugin;
   private final LangConfig langConfig;

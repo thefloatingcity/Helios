@@ -18,7 +18,7 @@ import xyz.tehbrian.floatyplugin.config.LangConfig;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FunCommands extends PaperCloudCommand<CommandSender> {
+public final class FunCommands extends PaperCloudCommand<CommandSender> {
 
   private final LangConfig langConfig;
 

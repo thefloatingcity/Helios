@@ -13,7 +13,7 @@ import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.transportation.FlightService;
 import xyz.tehbrian.floatyplugin.user.UserService;
 
-public class FlyCommand extends PaperCloudCommand<CommandSender> {
+public final class FlyCommand extends PaperCloudCommand<CommandSender> {
 
   private final UserService userService;
   private final LangConfig langConfig;
