@@ -15,26 +15,19 @@ java {
 
 repositories {
   mavenCentral()
-  maven("https://papermc.io/repo/repository/maven-public/") {
-    name = "papermc"
-  }
-  maven("https://repo.broccol.ai/releases/") {
-    name = "broccolai"
-  }
-  maven("https://repo.thbn.me/releases/") {
-    name = "thbn"
-  }
+  maven("https://papermc.io/repo/repository/maven-public/");
+  maven("https://repo.broccol.ai/releases/");
+  maven("https://repo.thbn.me/releases/");
 }
 
 dependencies {
   compileOnly("io.papermc.paper:paper-api:1.19-R0.1-SNAPSHOT")
   compileOnly("net.luckperms:api:5.4")
 
-  implementation("com.google.inject:guice:5.1.0")
-  implementation("org.spongepowered:configurate-hocon:4.1.2")
-
   implementation("broccolai.corn:corn-minecraft-paper:3.1.0")
+  implementation("com.google.inject:guice:5.1.0")
   implementation("dev.tehbrian:tehlib-paper:0.4.0")
+  implementation("org.spongepowered:configurate-hocon:4.1.2")
 }
 
 tasks {
@@ -52,12 +45,12 @@ tasks {
     archiveBaseName.set("FloatyPlugin")
     archiveClassifier.set("")
 
-    val libsPackage = "xyz.tehbrian.floatyplugin.libs"
-    relocate("com.google.inject", "$libsPackage.guice")
-    relocate("cloud.commandframework", "$libsPackage.cloud")
-    relocate("org.spongepowered.configurate", "$libsPackage.configurate")
-    relocate("dev.tehbrian.tehlib", "$libsPackage.tehlib")
+    val libsPackage = "${project.group}.${project.name}.libs"
     relocate("broccolai.corn", "$libsPackage.corn")
+    relocate("cloud.commandframework", "$libsPackage.cloud")
+    relocate("com.google.inject", "$libsPackage.guice")
+    relocate("dev.tehbrian.tehlib", "$libsPackage.tehlib")
+    relocate("org.spongepowered.configurate", "$libsPackage.configurate")
   }
 
   runServer {
