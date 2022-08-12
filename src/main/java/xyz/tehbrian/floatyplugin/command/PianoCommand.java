@@ -23,7 +23,6 @@ import xyz.tehbrian.floatyplugin.piano.Instrument;
 import xyz.tehbrian.floatyplugin.piano.PianoMenuProvider;
 import xyz.tehbrian.floatyplugin.user.UserService;
 import xyz.tehbrian.floatyplugin.util.config.BookDeserializer;
-import xyz.tehbrian.floatyplugin.util.SendMessage;
 
 import java.util.List;
 
@@ -55,7 +54,9 @@ public final class PianoCommand extends PaperCloudCommand<CommandSender> {
     final var main = commandManager.commandBuilder("piano")
         .meta(CommandMeta.DESCRIPTION, "A fancy playable piano.")
         .permission(Permissions.PIANO)
-        .handler(c -> SendMessage.s(c.getSender(), BookDeserializer.deserializePage(this.getBookNode(), 1)));
+        .handler(c -> c.getSender().sendMessage(
+            BookDeserializer.deserializePage(this.getBookNode(), 1)
+        ));
 
     final var help = main.literal("help")
         .argument(IntegerArgument.<CommandSender>newBuilder("page")
@@ -63,8 +64,7 @@ public final class PianoCommand extends PaperCloudCommand<CommandSender> {
             .withMax(BookDeserializer.pageCount(this.getBookNode()))
             .asOptionalWithDefault(1)
             .build())
-        .handler(c -> SendMessage.s(
-            c.getSender(),
+        .handler(c -> c.getSender().sendMessage(
             BookDeserializer.deserializePage(this.getBookNode(), c.<Integer>get("page"))
         ));
 

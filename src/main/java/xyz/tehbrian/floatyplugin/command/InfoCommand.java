@@ -10,7 +10,6 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import xyz.tehbrian.floatyplugin.config.BooksConfig;
 import xyz.tehbrian.floatyplugin.util.config.BookDeserializer;
-import xyz.tehbrian.floatyplugin.util.SendMessage;
 
 public final class InfoCommand extends PaperCloudCommand<CommandSender> {
 
@@ -32,8 +31,7 @@ public final class InfoCommand extends PaperCloudCommand<CommandSender> {
             .withMax(BookDeserializer.pageCount(this.getBookNode())) // .withMax doesn't take a supplier, cri every day
             .asOptionalWithDefault(1)
             .build())
-        .handler(c -> SendMessage.s(
-            c.getSender(),
+        .handler(c -> c.getSender().sendMessage(
             BookDeserializer.deserializePage(this.getBookNode(), c.<Integer>get("page"))
         ));
 

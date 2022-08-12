@@ -8,7 +8,6 @@ import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.serialize.SerializationException;
 import xyz.tehbrian.floatyplugin.util.FormatUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,15 +16,15 @@ public final class BookDeserializer {
   private BookDeserializer() {
   }
 
-  public static List<Component> deserializePage(final ConfigurationNode book, final Integer pageNumber) {
+  public static Component deserializePage(final ConfigurationNode book, final Integer pageNumber) {
     final int pageIndex = pageNumber - 1;
 
     final List<? extends ConfigurationNode> pages = book.node("pages").childrenList();
     final ConfigurationNode page = pages.get(pageIndex);
 
-    final List<Component> messages = new ArrayList<>();
+    Component finalComponent = Component.empty();
 
-    messages.add(MiniMessage.miniMessage().deserialize(
+    finalComponent = finalComponent.append(MiniMessage.miniMessage().deserialize(
         book.node("multistart").getString() + book.node("page_header").getString(),
         TagResolver.resolver(
             Placeholder.unparsed("title", Objects.requireNonNull(page.node("title").getString())),
@@ -37,14 +36,15 @@ public final class BookDeserializer {
     final String multi = book.node("multi").getString();
     try {
       for (final String line : Objects.requireNonNull(page.node("content").getList(String.class))) {
-        messages.add(FormatUtil.miniMessage(multi + line));
+        finalComponent = finalComponent
+            .append(Component.newline())
+            .append(FormatUtil.miniMessage(multi + line));
       }
     } catch (final SerializationException e) {
-      e.printStackTrace();
-      return List.of();
+      return Component.empty();
     }
 
-    return messages;
+    return finalComponent;
   }
 
   public static int pageCount(final ConfigurationNode book) {
