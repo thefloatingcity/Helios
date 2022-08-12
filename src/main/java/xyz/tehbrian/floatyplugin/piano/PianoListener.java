@@ -10,7 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.InventoriesConfig;
@@ -28,8 +27,8 @@ public final class PianoListener implements Listener {
 
   @Inject
   public PianoListener(
-      final @NonNull UserService userService,
-      final @NonNull InventoriesConfig inventoriesConfig
+      final UserService userService,
+      final InventoriesConfig inventoriesConfig
   ) {
     this.userService = userService;
     this.inventoriesConfig = inventoriesConfig;
@@ -69,7 +68,7 @@ public final class PianoListener implements Listener {
     }
   }
 
-  private void play(final @NonNull Player player, final @NonNull ItemStack item) {
+  private void play(final Player player, final ItemStack item) {
     final @Nullable List<Component> lore = item.lore();
 
     if (lore == null

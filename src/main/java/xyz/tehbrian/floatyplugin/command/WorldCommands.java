@@ -6,7 +6,6 @@ import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.world.FloatingWorld;
 import xyz.tehbrian.floatyplugin.world.WorldService;
@@ -17,13 +16,13 @@ public final class WorldCommands extends PaperCloudCommand<CommandSender> {
 
   @Inject
   public WorldCommands(
-      final @NonNull WorldService worldService
+      final WorldService worldService
   ) {
     this.worldService = worldService;
   }
 
   @Override
-  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+  public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var overworld = commandManager.commandBuilder("overworld")
         .meta(CommandMeta.DESCRIPTION, "Go to the overworld.")
         .permission(Permissions.WORLD_OVERWORLD)

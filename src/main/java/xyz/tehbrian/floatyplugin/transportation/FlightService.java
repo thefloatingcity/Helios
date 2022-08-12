@@ -2,7 +2,6 @@ package xyz.tehbrian.floatyplugin.transportation;
 
 import com.google.inject.Inject;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.user.UserService;
@@ -15,8 +14,8 @@ public final class FlightService {
 
   @Inject
   public FlightService(
-      final @NonNull UserService userService,
-      final @NonNull FloatyPlugin floatyPlugin
+      final UserService userService,
+      final FloatyPlugin floatyPlugin
   ) {
     this.userService = userService;
     this.floatyPlugin = floatyPlugin;

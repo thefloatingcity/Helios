@@ -8,7 +8,6 @@ import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.serialize.SerializationException;
 import xyz.tehbrian.floatyplugin.config.InventoriesConfig;
@@ -26,7 +25,7 @@ public final class PianoMenuProvider {
 
   @Inject
   public PianoMenuProvider(
-      final @NonNull InventoriesConfig inventoriesConfig
+      final InventoriesConfig inventoriesConfig
   ) {
     this.inventoriesConfig = inventoriesConfig;
   }

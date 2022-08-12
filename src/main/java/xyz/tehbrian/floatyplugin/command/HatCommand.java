@@ -9,7 +9,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
@@ -20,13 +19,13 @@ public final class HatCommand extends PaperCloudCommand<CommandSender> {
 
   @Inject
   public HatCommand(
-      final @NonNull LangConfig langConfig
+      final LangConfig langConfig
   ) {
     this.langConfig = langConfig;
   }
 
   @Override
-  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+  public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("hat")
         .meta(CommandMeta.DESCRIPTION, "Put fancy things on your head!")
         .permission(Permissions.HAT)

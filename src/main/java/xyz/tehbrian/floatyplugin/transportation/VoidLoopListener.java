@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 
 @SuppressWarnings({"ClassCanBeRecord", "unused"})
@@ -18,7 +17,7 @@ public final class VoidLoopListener implements Listener {
 
   @Inject
   public VoidLoopListener(
-      final @NonNull FloatyPlugin floatyPlugin
+      final FloatyPlugin floatyPlugin
   ) {
     this.floatyPlugin = floatyPlugin;
   }

@@ -12,7 +12,6 @@ import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
@@ -36,11 +35,11 @@ public final class PianoCommand extends PaperCloudCommand<CommandSender> {
 
   @Inject
   public PianoCommand(
-      final @NonNull FloatyPlugin floatyPlugin,
-      final @NonNull UserService userService,
-      final @NonNull PianoMenuProvider pianoMenuProvider,
-      final @NonNull BooksConfig booksConfig,
-      final @NonNull LangConfig langConfig
+      final FloatyPlugin floatyPlugin,
+      final UserService userService,
+      final PianoMenuProvider pianoMenuProvider,
+      final BooksConfig booksConfig,
+      final LangConfig langConfig
   ) {
     this.floatyPlugin = floatyPlugin;
     this.userService = userService;
@@ -50,7 +49,7 @@ public final class PianoCommand extends PaperCloudCommand<CommandSender> {
   }
 
   @Override
-  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+  public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("piano")
         .meta(CommandMeta.DESCRIPTION, "A fancy playable piano.")
         .permission(Permissions.PIANO)

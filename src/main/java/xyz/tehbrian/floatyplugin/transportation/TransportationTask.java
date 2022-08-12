@@ -6,7 +6,6 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 
 @SuppressWarnings("ClassCanBeRecord")
@@ -17,8 +16,8 @@ public final class TransportationTask {
 
   @Inject
   public TransportationTask(
-      final @NonNull FloatyPlugin floatyPlugin,
-      final @NonNull FlightService flightService
+      final FloatyPlugin floatyPlugin,
+      final FlightService flightService
   ) {
     this.floatyPlugin = floatyPlugin;
     this.flightService = flightService;

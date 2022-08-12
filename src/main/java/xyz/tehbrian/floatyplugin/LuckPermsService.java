@@ -8,7 +8,6 @@ import net.luckperms.api.model.user.User;
 import net.luckperms.api.track.Track;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Objects;
@@ -21,7 +20,7 @@ public final class LuckPermsService {
 
   @Inject
   public LuckPermsService(
-      final @NonNull FloatyPlugin floatyPlugin
+      final FloatyPlugin floatyPlugin
   ) {
     this.floatyPlugin = floatyPlugin;
   }
@@ -43,7 +42,7 @@ public final class LuckPermsService {
    * @param trackName the track to promote the player on
    * @throws IllegalArgumentException if the track does not exist
    */
-  public void promoteInTrack(final @NonNull Player player, final @NonNull String trackName)
+  public void promoteInTrack(final Player player, final String trackName)
       throws IllegalArgumentException {
     final User user = this.luckPerms.getPlayerAdapter(Player.class).getUser(player);
     final @Nullable Track track = this.luckPerms.getTrackManager().getTrack(trackName);
@@ -55,7 +54,7 @@ public final class LuckPermsService {
     this.luckPerms.getUserManager().saveUser(user);
   }
 
-  public @Nullable Group getNextGroupInTrack(final @NonNull Player player, final @NonNull String trackName) {
+  public @Nullable Group getNextGroupInTrack(final Player player, final String trackName) {
     final @Nullable Track track = this.luckPerms.getTrackManager().getTrack(trackName);
     if (track == null) {
       throw new NullPointerException("Track does not exist");

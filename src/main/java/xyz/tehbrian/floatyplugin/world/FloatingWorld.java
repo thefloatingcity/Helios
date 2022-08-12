@@ -1,7 +1,6 @@
 package xyz.tehbrian.floatyplugin.world;
 
 import org.bukkit.World;
-import org.checkerframework.checker.nullness.qual.NonNull;
 
 public enum FloatingWorld {
   MADLANDS("madlands", World.Environment.NORMAL),
@@ -18,11 +17,11 @@ public enum FloatingWorld {
     this.environment = environment;
   }
 
-  public @NonNull String bukkitName() {
+  public String bukkitName() {
     return this.bukkitName;
   }
 
-  public World.@NonNull Environment environment() {
+  public World.Environment environment() {
     return this.environment;
   }
 }

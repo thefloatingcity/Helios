@@ -10,7 +10,6 @@ import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.luckperms.api.model.group.Group;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.LuckPermsService;
@@ -27,15 +26,15 @@ public final class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
 
   @Inject
   public PlaytimeCommands(
-      final @NonNull LangConfig langConfig,
-      final @NonNull LuckPermsService luckPermsService
+      final LangConfig langConfig,
+      final LuckPermsService luckPermsService
   ) {
     this.langConfig = langConfig;
     this.luckPermsService = luckPermsService;
   }
 
   @Override
-  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+  public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var playtime = commandManager.commandBuilder("playtime")
         .meta(CommandMeta.DESCRIPTION, "Check how long you've played.")
         .senderType(Player.class)

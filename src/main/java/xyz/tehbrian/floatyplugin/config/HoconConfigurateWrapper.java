@@ -1,7 +1,6 @@
 package xyz.tehbrian.floatyplugin.config;
 
 import dev.tehbrian.tehlib.configurate.ConfigurateWrapper;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
 
 import java.nio.file.Path;
@@ -11,7 +10,7 @@ public class HoconConfigurateWrapper extends ConfigurateWrapper<HoconConfigurati
   /**
    * @param filePath the file path for the config
    */
-  public HoconConfigurateWrapper(final @NonNull Path filePath) {
+  public HoconConfigurateWrapper(final Path filePath) {
     super(filePath, HoconConfigurationLoader.builder()
         .path(filePath)
         .build());
@@ -21,7 +20,7 @@ public class HoconConfigurateWrapper extends ConfigurateWrapper<HoconConfigurati
    * @param filePath the file path for the config
    * @param loader   the loader
    */
-  public HoconConfigurateWrapper(final @NonNull Path filePath, final @NonNull HoconConfigurationLoader loader) {
+  public HoconConfigurateWrapper(final Path filePath, final HoconConfigurationLoader loader) {
     super(filePath, loader);
   }
 

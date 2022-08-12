@@ -6,7 +6,6 @@ import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.Permissions;
@@ -19,15 +18,15 @@ public final class FloatyPluginCommand extends PaperCloudCommand<CommandSender> 
 
   @Inject
   public FloatyPluginCommand(
-      final @NonNull FloatyPlugin floatyPlugin,
-      final @NonNull LangConfig langConfig
+      final FloatyPlugin floatyPlugin,
+      final LangConfig langConfig
   ) {
     this.floatyPlugin = floatyPlugin;
     this.langConfig = langConfig;
   }
 
   @Override
-  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+  public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("floatyplugin")
         .meta(CommandMeta.DESCRIPTION, "Core commands for FloatyPlugin.");
 

@@ -8,7 +8,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
@@ -19,7 +18,7 @@ public final class MilkListener implements Listener {
   private final LangConfig langConfig;
 
   @Inject
-  public MilkListener(final @NonNull LangConfig langConfig) {
+  public MilkListener(final LangConfig langConfig) {
     this.langConfig = langConfig;
   }
 

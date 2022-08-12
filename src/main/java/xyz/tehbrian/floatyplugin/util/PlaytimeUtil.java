@@ -3,7 +3,6 @@ package xyz.tehbrian.floatyplugin.util;
 import net.kyori.adventure.util.Ticks;
 import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.text.DecimalFormat;
 import java.time.Duration;
@@ -19,7 +18,7 @@ public final class PlaytimeUtil {
   private PlaytimeUtil() {
   }
 
-  public static @NonNull String fancifyTime(final Duration duration) {
+  public static String fancifyTime(final Duration duration) {
     final var ms = duration.toMillis();
     if (ms >= MILLIS_IN_DAY) {
       return fancifyTime(duration, TimeUnit.DAYS);
@@ -32,7 +31,7 @@ public final class PlaytimeUtil {
     }
   }
 
-  public static @NonNull String fancifyTime(final Duration duration, final TimeUnit timeUnit) {
+  public static String fancifyTime(final Duration duration, final TimeUnit timeUnit) {
     final var decimalFormat = new DecimalFormat("#.##");
 
     final var ms = duration.toMillis();
@@ -57,7 +56,7 @@ public final class PlaytimeUtil {
     };
   }
 
-  public static @NonNull Duration getTimePlayed(final Player player) {
+  public static Duration getTimePlayed(final Player player) {
     return Ticks.duration(player.getStatistic(Statistic.PLAY_ONE_MINUTE));
   }
 

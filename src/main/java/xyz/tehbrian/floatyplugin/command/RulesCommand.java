@@ -8,7 +8,6 @@ import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.LuckPermsService;
@@ -25,9 +24,9 @@ public final class RulesCommand extends PaperCloudCommand<CommandSender> {
 
   @Inject
   public RulesCommand(
-      final @NonNull BooksConfig booksConfig,
-      final @NonNull LuckPermsService luckPermsService,
-      final @NonNull LangConfig langConfig
+      final BooksConfig booksConfig,
+      final LuckPermsService luckPermsService,
+      final LangConfig langConfig
   ) {
     this.booksConfig = booksConfig;
     this.luckPermsService = luckPermsService;
@@ -35,7 +34,7 @@ public final class RulesCommand extends PaperCloudCommand<CommandSender> {
   }
 
   @Override
-  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+  public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("rules")
         .meta(CommandMeta.DESCRIPTION, "Um, the rules.");
 

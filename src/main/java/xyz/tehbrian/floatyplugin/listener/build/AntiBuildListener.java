@@ -20,7 +20,6 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
@@ -33,7 +32,7 @@ public final class AntiBuildListener implements Listener {
   private final WorldService worldService;
 
   @Inject
-  public AntiBuildListener(final @NonNull LangConfig langConfig, final @NonNull WorldService worldService) {
+  public AntiBuildListener(final LangConfig langConfig, final WorldService worldService) {
     this.langConfig = langConfig;
     this.worldService = worldService;
   }

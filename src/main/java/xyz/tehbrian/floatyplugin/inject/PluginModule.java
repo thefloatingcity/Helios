@@ -4,7 +4,6 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.name.Named;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
@@ -15,7 +14,7 @@ public final class PluginModule extends AbstractModule {
 
   private final FloatyPlugin floatyPlugin;
 
-  public PluginModule(final @NonNull FloatyPlugin floatyPlugin) {
+  public PluginModule(final FloatyPlugin floatyPlugin) {
     this.floatyPlugin = floatyPlugin;
   }
 
@@ -32,7 +31,7 @@ public final class PluginModule extends AbstractModule {
 
   @Provides
   @Named("dataFolder")
-  public @NonNull Path provideDataFolder() {
+  public Path provideDataFolder() {
     return this.floatyPlugin.getDataFolder().toPath();
   }
 

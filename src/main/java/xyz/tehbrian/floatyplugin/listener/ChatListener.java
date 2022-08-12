@@ -11,7 +11,6 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.NodePath;
@@ -33,8 +32,8 @@ public final class ChatListener implements Listener {
 
   @Inject
   public ChatListener(
-      final @NonNull EmotesConfig emotesConfig,
-      final @NonNull LangConfig langConfig
+      final EmotesConfig emotesConfig,
+      final LangConfig langConfig
   ) {
     this.emotesConfig = emotesConfig;
     this.langConfig = langConfig;

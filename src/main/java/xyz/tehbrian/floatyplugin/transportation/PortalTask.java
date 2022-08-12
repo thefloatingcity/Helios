@@ -6,7 +6,6 @@ import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
@@ -36,9 +35,9 @@ public final class PortalTask implements Listener {
 
   @Inject
   public PortalTask(
-      final @NonNull FloatyPlugin floatyPlugin,
-      final @NonNull WorldService worldService,
-      final @NonNull LangConfig langConfig
+      final FloatyPlugin floatyPlugin,
+      final WorldService worldService,
+      final LangConfig langConfig
   ) {
     this.floatyPlugin = floatyPlugin;
     this.worldService = worldService;
@@ -77,7 +76,7 @@ public final class PortalTask implements Listener {
   }
 
   private void onNetherPortal(final Player player) {
-    final @NonNull FloatingWorld floatingWorld = this.worldService.getFloatingWorld(player.getWorld());
+    final FloatingWorld floatingWorld = this.worldService.getFloatingWorld(player.getWorld());
 
     switch (floatingWorld) {
       case MADLANDS -> {
@@ -93,7 +92,7 @@ public final class PortalTask implements Listener {
   }
 
   private void onEndPortal(final Player player) {
-    final @NonNull FloatingWorld floatingWorld = this.worldService.getFloatingWorld(player.getWorld());
+    final FloatingWorld floatingWorld = this.worldService.getFloatingWorld(player.getWorld());
 
     switch (floatingWorld) {
       case MADLANDS -> {

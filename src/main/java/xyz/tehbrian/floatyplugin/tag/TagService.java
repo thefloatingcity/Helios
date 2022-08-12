@@ -5,7 +5,6 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
@@ -28,7 +27,7 @@ public final class TagService {
 
   @Inject
   public TagService(
-      final @NonNull LangConfig langConfig
+      final LangConfig langConfig
   ) {
     this.langConfig = langConfig;
   }
@@ -58,7 +57,7 @@ public final class TagService {
     return this.playing;
   }
 
-  public void setPlaying(final @NonNull Player player, final boolean value) {
+  public void setPlaying(final Player player, final boolean value) {
     if (value) {
       this.playing.add(player);
       this.setGameMode(player, GameMode.ADVENTURE);

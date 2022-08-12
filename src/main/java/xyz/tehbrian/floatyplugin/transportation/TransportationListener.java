@@ -32,7 +32,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.Permissions;
@@ -50,10 +49,10 @@ public final class TransportationListener implements Listener {
 
   @Inject
   public TransportationListener(
-      final @NonNull LangConfig langConfig,
-      final @NonNull FloatyPlugin floatyPlugin,
-      final @NonNull FlightService flightService,
-      final @NonNull UserService userService
+      final LangConfig langConfig,
+      final FloatyPlugin floatyPlugin,
+      final FlightService flightService,
+      final UserService userService
   ) {
     this.langConfig = langConfig;
     this.floatyPlugin = floatyPlugin;

@@ -6,7 +6,6 @@ import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import xyz.tehbrian.floatyplugin.config.BooksConfig;
 import xyz.tehbrian.floatyplugin.util.config.BookDeserializer;
@@ -17,13 +16,13 @@ public final class InfoCommand extends PaperCloudCommand<CommandSender> {
 
   @Inject
   public InfoCommand(
-      final @NonNull BooksConfig booksConfig
+      final BooksConfig booksConfig
   ) {
     this.booksConfig = booksConfig;
   }
 
   @Override
-  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+  public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("info")
         .meta(CommandMeta.DESCRIPTION, "Might wanna read this first.")
         .argument(IntegerArgument.<CommandSender>newBuilder("page")

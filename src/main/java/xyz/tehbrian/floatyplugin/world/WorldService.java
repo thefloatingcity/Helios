@@ -9,7 +9,6 @@ import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -20,12 +19,12 @@ public final class WorldService {
   private final Logger logger;
 
   @Inject
-  public WorldService(final @NonNull JavaPlugin plugin, final @NonNull Logger logger) {
+  public WorldService(final JavaPlugin plugin, final Logger logger) {
     this.plugin = plugin;
     this.logger = logger;
   }
 
-  public @NonNull World getWorld(final FloatingWorld floatingWorld) {
+  public World getWorld(final FloatingWorld floatingWorld) {
     final @Nullable World world = this.plugin.getServer().getWorld(floatingWorld.bukkitName());
     if (world == null) {
       throw new RuntimeException("Tried to get the world by name, but it didn't exist.");
@@ -33,7 +32,7 @@ public final class WorldService {
     return world;
   }
 
-  public @NonNull FloatingWorld getFloatingWorld(final World world) {
+  public FloatingWorld getFloatingWorld(final World world) {
     return switch (world.getName()) {
       case "madlands" -> FloatingWorld.MADLANDS;
       case "overworld" -> FloatingWorld.OVERWORLD;
@@ -56,7 +55,7 @@ public final class WorldService {
       }
 
       this.logger.info("Creating world {}", floatingWorld.bukkitName());
-      final @NonNull NamespacedKey key = new NamespacedKey(this.plugin, floatingWorld.bukkitName());
+      final NamespacedKey key = new NamespacedKey(this.plugin, floatingWorld.bukkitName());
 
       final ChunkGenerator generator;
       if (floatingWorld == FloatingWorld.BACKROOMS) {
@@ -99,7 +98,7 @@ public final class WorldService {
     }
   }
 
-  public @NonNull Location getPlayerSpawnLocation(final FloatingWorld floatingWorld) {
+  public Location getPlayerSpawnLocation(final FloatingWorld floatingWorld) {
     final var worldSpawn = this.getSpawnLocation(floatingWorld);
     return switch (floatingWorld) {
       case MADLANDS, OVERWORLD, NETHER, END -> {
@@ -111,11 +110,11 @@ public final class WorldService {
     };
   }
 
-  public @NonNull Location getSpawnLocation(final FloatingWorld floatingWorld) {
+  public Location getSpawnLocation(final FloatingWorld floatingWorld) {
     return this.getWorld(floatingWorld).getSpawnLocation().add(0.5, 0, 0.5);
   }
 
-  public @NonNull ChunkGenerator getDefaultWorldGenerator(
+  public ChunkGenerator getDefaultWorldGenerator(
       @NotNull final String worldName,
       @Nullable final String id
   ) {

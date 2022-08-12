@@ -6,7 +6,6 @@ import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
@@ -18,15 +17,15 @@ public final class PackCommand extends PaperCloudCommand<CommandSender> {
 
   @Inject
   public PackCommand(
-      final @NonNull LangConfig langConfig,
-      final @NonNull ConfigConfig configConfig
+      final LangConfig langConfig,
+      final ConfigConfig configConfig
   ) {
     this.langConfig = langConfig;
     this.configConfig = configConfig;
   }
 
   @Override
-  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+  public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("pack")
         .senderType(Player.class)
         .meta(CommandMeta.DESCRIPTION, "Get the fancy server resource pack.")

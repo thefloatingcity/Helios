@@ -11,7 +11,6 @@ import org.bukkit.SoundCategory;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
@@ -26,9 +25,9 @@ public final class VoidLoopTask {
 
   @Inject
   public VoidLoopTask(
-      final @NonNull FloatyPlugin floatyPlugin,
-      final @NonNull WorldService worldService,
-      final @NonNull LangConfig langConfig
+      final FloatyPlugin floatyPlugin,
+      final WorldService worldService,
+      final LangConfig langConfig
   ) {
     this.floatyPlugin = floatyPlugin;
     this.worldService = worldService;

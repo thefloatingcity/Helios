@@ -11,7 +11,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
@@ -28,8 +27,8 @@ public final class JoinQuitListener implements Listener {
 
   @Inject
   public JoinQuitListener(
-      final @NonNull FloatyPlugin floatyPlugin,
-      final @NonNull LangConfig langConfig
+      final FloatyPlugin floatyPlugin,
+      final LangConfig langConfig
   ) {
     this.floatyPlugin = floatyPlugin;
     this.langConfig = langConfig;

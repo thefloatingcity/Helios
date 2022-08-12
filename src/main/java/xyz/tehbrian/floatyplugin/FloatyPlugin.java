@@ -7,8 +7,6 @@ import dev.tehbrian.tehlib.configurate.Config;
 import dev.tehbrian.tehlib.paper.TehPlugin;
 import org.bukkit.command.CommandSender;
 import org.bukkit.generator.ChunkGenerator;
-import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -164,7 +162,7 @@ public final class FloatyPlugin extends TehPlugin {
    * @return whether it was successful
    */
   private boolean setupCommands() {
-    final @NonNull CommandService commandService = this.injector.getInstance(CommandService.class);
+    final CommandService commandService = this.injector.getInstance(CommandService.class);
     try {
       commandService.init();
     } catch (final Exception e) {
@@ -209,7 +207,7 @@ public final class FloatyPlugin extends TehPlugin {
   }
 
   @Override
-  public @NonNull ChunkGenerator getDefaultWorldGenerator(
+  public ChunkGenerator getDefaultWorldGenerator(
       @NotNull final String worldName,
       @Nullable final String id
   ) {

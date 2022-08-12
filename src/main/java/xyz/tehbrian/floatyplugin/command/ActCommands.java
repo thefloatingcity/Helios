@@ -10,7 +10,6 @@ import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.ConfigConfig;
@@ -25,15 +24,15 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
 
   @Inject
   public ActCommands(
-      final @NonNull LangConfig langConfig,
-      final @NonNull ConfigConfig configConfig
+      final LangConfig langConfig,
+      final ConfigConfig configConfig
   ) {
     this.langConfig = langConfig;
     this.configConfig = configConfig;
   }
 
   @Override
-  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+  public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var zap = commandManager.commandBuilder("zap")
         .senderType(Player.class)
         .permission(Permissions.ZAP)

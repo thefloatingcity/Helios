@@ -1,14 +1,13 @@
 package xyz.tehbrian.floatyplugin.user;
 
 import dev.tehbrian.tehlib.paper.user.PaperUser;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import xyz.tehbrian.floatyplugin.piano.Instrument;
 
 import java.util.UUID;
 
 public final class User extends PaperUser {
 
-  private final @NonNull Piano piano = new Piano(false, Instrument.HARP);
+  private final Piano piano = new Piano(false, Instrument.HARP);
   private boolean flyBypassEnabled = false;
   private int netherBlindnessCount = 0;
   private boolean elevatorMusicPlaying = false;
@@ -46,7 +45,7 @@ public final class User extends PaperUser {
     this.elevatorMusicPlaying = elevatorMusicPlaying;
   }
 
-  public @NonNull Piano piano() {
+  public Piano piano() {
     return this.piano;
   }
 

@@ -6,7 +6,6 @@ import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
@@ -21,9 +20,9 @@ public final class FlyCommand extends PaperCloudCommand<CommandSender> {
 
   @Inject
   public FlyCommand(
-      final @NonNull UserService userService,
-      final @NonNull LangConfig langConfig,
-      final @NonNull FlightService flightService
+      final UserService userService,
+      final LangConfig langConfig,
+      final FlightService flightService
   ) {
     this.userService = userService;
     this.langConfig = langConfig;
@@ -31,7 +30,7 @@ public final class FlyCommand extends PaperCloudCommand<CommandSender> {
   }
 
   @Override
-  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+  public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("fly")
         .meta(CommandMeta.DESCRIPTION, "Bends the space/time continuum.")
         .permission(Permissions.FLY)

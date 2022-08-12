@@ -4,7 +4,6 @@ import com.destroystokyo.paper.event.server.PaperServerListPingEvent;
 import com.google.inject.Inject;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
@@ -15,7 +14,7 @@ public final class ServerPingListener implements Listener {
 
   @Inject
   public ServerPingListener(
-      final @NonNull LangConfig langConfig
+      final LangConfig langConfig
   ) {
     this.langConfig = langConfig;
   }

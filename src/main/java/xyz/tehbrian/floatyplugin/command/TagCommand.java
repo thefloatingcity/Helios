@@ -7,7 +7,6 @@ import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.tag.TagService;
@@ -19,15 +18,15 @@ public final class TagCommand extends PaperCloudCommand<CommandSender> {
 
   @Inject
   public TagCommand(
-      final @NonNull LangConfig langConfig,
-      final @NonNull TagService tagService
+      final LangConfig langConfig,
+      final TagService tagService
   ) {
     this.langConfig = langConfig;
     this.tagService = tagService;
   }
 
   @Override
-  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+  public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("tag")
         .meta(CommandMeta.DESCRIPTION, "Joins/leaves the game of tag.")
         .senderType(Player.class)

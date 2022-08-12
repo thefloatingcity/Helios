@@ -9,7 +9,6 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
@@ -20,13 +19,13 @@ public final class GamemodeCommands extends PaperCloudCommand<CommandSender> {
 
   @Inject
   public GamemodeCommands(
-      final @NonNull LangConfig langConfig
+      final LangConfig langConfig
   ) {
     this.langConfig = langConfig;
   }
 
   @Override
-  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+  public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("gamemode", "gm")
         .permission(Permissions.GAMEMODE)
         .meta(CommandMeta.DESCRIPTION, "Change gamemodes.");

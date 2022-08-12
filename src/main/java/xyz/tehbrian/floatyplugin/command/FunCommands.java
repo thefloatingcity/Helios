@@ -10,7 +10,6 @@ import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
@@ -24,13 +23,13 @@ public final class FunCommands extends PaperCloudCommand<CommandSender> {
 
   @Inject
   public FunCommands(
-      final @NonNull LangConfig langConfig
+      final LangConfig langConfig
   ) {
     this.langConfig = langConfig;
   }
 
   @Override
-  public void register(final @NonNull PaperCommandManager<CommandSender> commandManager) {
+  public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var stringWithPlayerSuggestionsArgument = StringArgument
         .<CommandSender>newBuilder("text")
         .greedy()
@@ -142,7 +141,7 @@ public final class FunCommands extends PaperCloudCommand<CommandSender> {
     commandManager.command(sue);
   }
 
-  private @NonNull List<@NonNull String> onlinePlayerNames(final Server server) {
+  private List<String> onlinePlayerNames(final Server server) {
     final List<String> output = new ArrayList<>();
 
     for (final Player player : server.getOnlinePlayers()) {

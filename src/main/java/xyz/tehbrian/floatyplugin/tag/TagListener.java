@@ -13,7 +13,6 @@ import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffectType;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
@@ -25,8 +24,8 @@ public final class TagListener implements Listener {
 
   @Inject
   public TagListener(
-      final @NonNull TagService tagService,
-      final @NonNull LangConfig langConfig
+      final TagService tagService,
+      final LangConfig langConfig
   ) {
     this.tagService = tagService;
     this.langConfig = langConfig;
