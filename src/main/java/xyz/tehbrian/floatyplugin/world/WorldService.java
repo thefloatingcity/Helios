@@ -94,11 +94,14 @@ public final class WorldService {
   }
 
   public @NonNull Location getPlayerSpawnLocation(final FloatingWorld floatingWorld) {
-    return new Location(this.getWorld(floatingWorld), 0.5, 65, -3.5, 0, 3);
+    final var worldSpawn = this.getSpawnLocation(floatingWorld);
+    worldSpawn.add(0, 0, -3);
+    worldSpawn.setPitch(3);
+    return worldSpawn;
   }
 
   public @NonNull Location getSpawnLocation(final FloatingWorld floatingWorld) {
-    return new Location(this.getWorld(floatingWorld), 0.5, 65, 0.5, 0, 0);
+    return this.getWorld(floatingWorld).getSpawnLocation().add(0.5, 0, 0.5);
   }
 
   public void setSpawnLocations() {
