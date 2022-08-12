@@ -8,7 +8,6 @@ import net.luckperms.api.model.user.User;
 import net.luckperms.api.track.Track;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
-import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -18,7 +17,7 @@ public final class LuckPermsService {
 
   private final FloatyPlugin floatyPlugin;
 
-  private @MonotonicNonNull LuckPerms luckPerms;
+  private @Nullable LuckPerms luckPerms;
 
   @Inject
   public LuckPermsService(
@@ -76,10 +75,6 @@ public final class LuckPermsService {
     }
 
     return groupManager.getGroup(nextGroupName);
-  }
-
-  public @MonotonicNonNull LuckPerms luckPerms() {
-    return this.luckPerms;
   }
 
 }

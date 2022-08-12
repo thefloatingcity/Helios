@@ -48,10 +48,17 @@ public final class WorldCommands extends PaperCloudCommand<CommandSender> {
         .senderType(Player.class)
         .handler(c -> ((Player) c.getSender()).teleport(this.worldService.getPlayerSpawnLocation(FloatingWorld.MADLANDS)));
 
+    final var backrooms = commandManager.commandBuilder("backrooms")
+        .meta(CommandMeta.DESCRIPTION, "Go to the backrooms.")
+        .permission(Permissions.WORLD_BACKROOMS)
+        .senderType(Player.class)
+        .handler(c -> ((Player) c.getSender()).teleport(this.worldService.getPlayerSpawnLocation(FloatingWorld.BACKROOMS)));
+
     commandManager.command(overworld);
     commandManager.command(nether);
     commandManager.command(end);
     commandManager.command(madlands);
+    commandManager.command(backrooms);
   }
 
 }

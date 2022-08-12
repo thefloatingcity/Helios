@@ -10,8 +10,9 @@ public final class Permissions {
   public static final String BUILD_OVERWORLD = BUILD + ".overworld";
   public static final String BUILD_NETHER = BUILD + ".nether";
   public static final String BUILD_END = BUILD + ".end";
+  public static final String BUILD_BACKROOMS = BUILD + ".backrooms";
 
-  // build in spawn
+  // build in a world's spawn
   // purposefully heterogeneous to prevent `floatyplugin.build.*` allowing building in spawn
   public static final String BUILD_SPAWN = ROOT + ".build-spawn";
 
@@ -21,6 +22,7 @@ public final class Permissions {
   public static final String WORLD_OVERWORLD = WORLD + ".overworld";
   public static final String WORLD_NETHER = WORLD + ".nether";
   public static final String WORLD_END = WORLD + ".end";
+  public static final String WORLD_BACKROOMS = WORLD + ".backrooms";
 
   public static final String MILK = ROOT + ".milk";
   public static final String FLY = ROOT + ".fly";

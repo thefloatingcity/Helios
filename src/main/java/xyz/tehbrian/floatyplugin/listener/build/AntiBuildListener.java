@@ -118,6 +118,7 @@ public final class AntiBuildListener implements Listener {
       case OVERWORLD -> Permissions.BUILD_OVERWORLD;
       case NETHER -> Permissions.BUILD_NETHER;
       case END -> Permissions.BUILD_END;
+      case BACKROOMS -> Permissions.BUILD_BACKROOMS;
     };
 
     if (!player.hasPermission(permission)) {
