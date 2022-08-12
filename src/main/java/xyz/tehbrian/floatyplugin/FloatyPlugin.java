@@ -60,12 +60,8 @@ import java.util.List;
 
 public final class FloatyPlugin extends TehPlugin {
 
-  /**
-   * The Guice injector.
-   */
-  private @MonotonicNonNull Injector injector;
-
-  private @MonotonicNonNull Logger logger;
+  private @Nullable Injector injector;
+  private @Nullable Logger logger;
 
   @Override
   public void onEnable() {
@@ -76,9 +72,8 @@ public final class FloatyPlugin extends TehPlugin {
       );
     } catch (final Exception e) {
       this.getSLF4JLogger().error("Something went wrong while creating the Guice injector.");
-      this.getSLF4JLogger().error("Disabling plugin.");
-      this.disableSelf();
       this.getSLF4JLogger().error("Printing stack trace, please send this to the developers:", e);
+      this.disableSelf();
       return;
     }
 
