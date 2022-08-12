@@ -1,4 +1,4 @@
-package xyz.tehbrian.floatyplugin.transportation;
+package xyz.tehbrian.floatyplugin.voidloop;
 
 import net.kyori.adventure.title.Title;
 import org.bukkit.World;

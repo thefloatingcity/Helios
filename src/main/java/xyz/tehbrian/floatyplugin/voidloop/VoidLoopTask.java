@@ -1,4 +1,4 @@
-package xyz.tehbrian.floatyplugin.transportation;
+package xyz.tehbrian.floatyplugin.voidloop;
 
 import com.google.inject.Inject;
 import net.kyori.adventure.text.Component;

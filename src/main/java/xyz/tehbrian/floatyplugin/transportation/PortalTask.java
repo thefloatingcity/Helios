@@ -24,7 +24,7 @@ import java.util.Map;
  * allow-nether are false in bukkit.yml and server.properties respectively.</b>
  */
 @SuppressWarnings("ClassCanBeRecord")
-public final class PortalTask implements Listener {
+public final class PortalTask {
 
   private static final Duration MESSAGE_COOLDOWN = Duration.ofSeconds(15);
   private static final Map<Player, Instant> LAST_MESSAGE_TIME = new HashMap<>();

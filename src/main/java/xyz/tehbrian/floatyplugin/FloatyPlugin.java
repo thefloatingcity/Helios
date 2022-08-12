@@ -51,8 +51,8 @@ import xyz.tehbrian.floatyplugin.tag.TagListener;
 import xyz.tehbrian.floatyplugin.transportation.PortalTask;
 import xyz.tehbrian.floatyplugin.transportation.TransportationListener;
 import xyz.tehbrian.floatyplugin.transportation.TransportationTask;
-import xyz.tehbrian.floatyplugin.transportation.VoidLoopListener;
-import xyz.tehbrian.floatyplugin.transportation.VoidLoopTask;
+import xyz.tehbrian.floatyplugin.voidloop.VoidLoopListener;
+import xyz.tehbrian.floatyplugin.voidloop.VoidLoopTask;
 import xyz.tehbrian.floatyplugin.world.WorldService;
 
 import java.util.List;
