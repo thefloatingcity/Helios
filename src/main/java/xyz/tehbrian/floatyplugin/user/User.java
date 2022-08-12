@@ -1,8 +1,6 @@
 package xyz.tehbrian.floatyplugin.user;
 
 import dev.tehbrian.tehlib.paper.user.PaperUser;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import xyz.tehbrian.floatyplugin.piano.Instrument;
 
@@ -17,10 +15,6 @@ public final class User extends PaperUser {
 
   public User(final UUID uuid) {
     super(uuid);
-  }
-
-  public Player getPlayer() {
-    return Bukkit.getPlayer(this.uuid);
   }
 
   public boolean flyBypassEnabled() {
@@ -44,16 +38,16 @@ public final class User extends PaperUser {
     this.netherBlindnessCount = netherBlindnessCount;
   }
 
-  public @NonNull Piano piano() {
-    return this.piano;
-  }
-
   public boolean elevatorMusicPlaying() {
     return this.elevatorMusicPlaying;
   }
 
   public void elevatorMusicPlaying(final boolean elevatorMusicPlaying) {
     this.elevatorMusicPlaying = elevatorMusicPlaying;
+  }
+
+  public @NonNull Piano piano() {
+    return this.piano;
   }
 
   public static final class Piano {

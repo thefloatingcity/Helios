@@ -22,7 +22,7 @@ import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.piano.Instrument;
 import xyz.tehbrian.floatyplugin.piano.PianoMenuProvider;
 import xyz.tehbrian.floatyplugin.user.UserService;
-import xyz.tehbrian.floatyplugin.util.BookDeserializer;
+import xyz.tehbrian.floatyplugin.util.config.BookDeserializer;
 import xyz.tehbrian.floatyplugin.util.SendMessage;
 
 import java.util.List;

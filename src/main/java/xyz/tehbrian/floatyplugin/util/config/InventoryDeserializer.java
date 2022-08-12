@@ -1,24 +1,23 @@
-package xyz.tehbrian.floatyplugin.util;
+package xyz.tehbrian.floatyplugin.util.config;
 
 import broccolai.corn.paper.item.PaperItemBuilder;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.Inventory;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.spongepowered.configurate.CommentedConfigurationNode;
+import xyz.tehbrian.floatyplugin.util.FormatUtil;
 
 import java.util.Objects;
 
-public final class ConfigDeserializers {
+public final class InventoryDeserializer {
 
-  private ConfigDeserializers() {
+  public InventoryDeserializer() {
   }
 
   public static Inventory deserializeInventory(final ConfigurationSection section) {
-    final ConfigurationSection items = Objects.requireNonNull(section).getConfigurationSection("items");
+    final ConfigurationSection items = section.getConfigurationSection("items");
     final Inventory inventory = Bukkit.createInventory(
         null,
         section.getInt("size"),
@@ -41,17 +40,6 @@ public final class ConfigDeserializers {
     }
 
     return inventory;
-  }
-
-  public static Location deserializeLocation(final CommentedConfigurationNode section) {
-    return new Location(
-        Bukkit.getWorld(Objects.requireNonNull(section.node("world").getString("world"))),
-        section.node("x").getDouble(0),
-        section.node("y").getDouble(0),
-        section.node("z").getDouble(0),
-        section.node("yaw").getFloat(0),
-        section.node("pitch").getFloat(0)
-    );
   }
 
 }

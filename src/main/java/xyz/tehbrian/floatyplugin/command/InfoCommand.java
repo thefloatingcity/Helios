@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import xyz.tehbrian.floatyplugin.config.BooksConfig;
-import xyz.tehbrian.floatyplugin.util.BookDeserializer;
+import xyz.tehbrian.floatyplugin.util.config.BookDeserializer;
 import xyz.tehbrian.floatyplugin.util.SendMessage;
 
 public final class InfoCommand extends PaperCloudCommand<CommandSender> {

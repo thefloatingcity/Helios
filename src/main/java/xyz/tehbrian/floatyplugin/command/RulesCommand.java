@@ -15,7 +15,7 @@ import xyz.tehbrian.floatyplugin.LuckPermsService;
 import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.BooksConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
-import xyz.tehbrian.floatyplugin.util.BookDeserializer;
+import xyz.tehbrian.floatyplugin.util.config.BookDeserializer;
 import xyz.tehbrian.floatyplugin.util.SendMessage;
 
 public final class RulesCommand extends PaperCloudCommand<CommandSender> {

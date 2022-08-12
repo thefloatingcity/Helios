@@ -1,12 +1,12 @@
-package xyz.tehbrian.floatyplugin.util;
+package xyz.tehbrian.floatyplugin.util.config;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.spongepowered.configurate.CommentedConfigurationNode;
+import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.serialize.SerializationException;
+import xyz.tehbrian.floatyplugin.util.FormatUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +17,11 @@ public final class BookDeserializer {
   private BookDeserializer() {
   }
 
-  public static List<Component> deserializePage(
-      final @NonNull CommentedConfigurationNode book,
-      final @NonNull Integer pageNumber
-  ) {
+  public static List<Component> deserializePage(final ConfigurationNode book, final Integer pageNumber) {
     final int pageIndex = pageNumber - 1;
 
-    final List<CommentedConfigurationNode> pages = Objects.requireNonNull(book).node("pages").childrenList();
-    final CommentedConfigurationNode page = pages.get(pageIndex);
+    final List<? extends ConfigurationNode> pages = book.node("pages").childrenList();
+    final ConfigurationNode page = pages.get(pageIndex);
 
     final List<Component> messages = new ArrayList<>();
 
@@ -50,8 +47,8 @@ public final class BookDeserializer {
     return messages;
   }
 
-  public static int pageCount(final @NonNull CommentedConfigurationNode book) {
-    return Objects.requireNonNull(book).node("pages").childrenList().size();
+  public static int pageCount(final ConfigurationNode book) {
+    return book.node("pages").childrenList().size();
   }
 
 }
