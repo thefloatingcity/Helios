@@ -13,7 +13,7 @@ import java.util.Objects;
 
 public final class InventoryDeserializer {
 
-  public InventoryDeserializer() {
+  private InventoryDeserializer() {
   }
 
   public static Inventory deserializeInventory(final ConfigurationSection section) {
