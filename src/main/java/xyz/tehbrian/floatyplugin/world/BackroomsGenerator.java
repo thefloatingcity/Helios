@@ -79,7 +79,7 @@ public final class BackroomsGenerator extends ChunkGenerator {
         // approach to looping over positions.
         final int openSides = openSides(x, middleY, z, chunkData);
         final boolean generateWall = (openSides == 4 && random.nextFloat() < 0.1F)
-            || (openSides == 3 && random.nextFloat() < 0.8F);
+            || (openSides == 3 && random.nextFloat() < 0.7F);
 
         if (generateWall) {
           // wall column.
