@@ -1,8 +1,9 @@
-package xyz.tehbrian.floatyplugin.music;
+package xyz.tehbrian.floatyplugin.backrooms;
 
 import com.google.inject.Inject;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.Server;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.world.FloatingWorld;
@@ -33,19 +34,23 @@ public final class BackroomsAmbianceTask {
 
     final var oneTick = 1;
     final var oneSecond = oneTick * 20;
-    final var oneMinute = oneSecond * 60;
 
     server.getScheduler().scheduleSyncRepeatingTask(this.floatyPlugin, () -> {
-      for (final Player player : server.getOnlinePlayers()) {
-        if (this.worldService.getFloatingWorld(player.getWorld()) != FloatingWorld.BACKROOMS) {
-          continue;
-        }
+      final World backrooms;
+      try {
+        backrooms = this.worldService.getWorld(FloatingWorld.BACKROOMS);
+      } catch (final RuntimeException ignored) {
+        // occurs when the server is started before the world is loaded.
+        // FIXME: find out how to load world before enable. #onLoad, maybe?
+        return;
+      }
 
+      for (final Player player : backrooms.getPlayers()) {
         if (RANDOM.nextFloat() < 0.2F) {
           player.playSound(Sound.sound(org.bukkit.Sound.AMBIENT_CAVE.key(), Sound.Source.MASTER, 10F, 0.6F));
         }
       }
-    }, 1, oneMinute);
+    }, 1, 29 * oneSecond);
   }
 
 }

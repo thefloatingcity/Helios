@@ -27,7 +27,7 @@ public final class WorldService {
   public World getWorld(final FloatingWorld floatingWorld) {
     final @Nullable World world = this.plugin.getServer().getWorld(floatingWorld.bukkitName());
     if (world == null) {
-      throw new RuntimeException("Tried to get the world by name, but it didn't exist.");
+      throw new RuntimeException("Floating world `" + floatingWorld.bukkitName() + "` doesn't exist.");
     }
     return world;
   }
