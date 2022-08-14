@@ -11,6 +11,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.spongepowered.configurate.ConfigurateException;
+import xyz.tehbrian.floatyplugin.backrooms.BackroomsBlockListener;
 import xyz.tehbrian.floatyplugin.command.ActCommands;
 import xyz.tehbrian.floatyplugin.command.BroadcastCommand;
 import xyz.tehbrian.floatyplugin.command.CommandService;
@@ -43,7 +44,6 @@ import xyz.tehbrian.floatyplugin.listener.MilkListener;
 import xyz.tehbrian.floatyplugin.listener.ServerPingListener;
 import xyz.tehbrian.floatyplugin.listener.build.AntiBuildListener;
 import xyz.tehbrian.floatyplugin.listener.build.SpawnProtectionListener;
-import xyz.tehbrian.floatyplugin.music.BackroomsAmbianceTask;
 import xyz.tehbrian.floatyplugin.music.ElevatorMusicTask;
 import xyz.tehbrian.floatyplugin.music.RainMusicListener;
 import xyz.tehbrian.floatyplugin.piano.PianoListener;
@@ -143,6 +143,7 @@ public final class FloatyPlugin extends TehPlugin {
 
   private void setupListeners() {
     registerListeners(
+        this.injector.getInstance(BackroomsBlockListener.class),
         this.injector.getInstance(AntiBuildListener.class),
         this.injector.getInstance(ChatListener.class),
         this.injector.getInstance(FishingListener.class),
