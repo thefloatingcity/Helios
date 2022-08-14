@@ -68,8 +68,8 @@ public final class BackroomsGenerator extends ChunkGenerator {
     // the main area will be placed at middle y.
     final int middleY = middleY(chunkData.getMinHeight(), chunkData.getMaxHeight());
 
-    for (int x = 0; x <= 15; x++) {
-      for (int z = 0; z <= 15; z++) {
+    for (int x = 0; x < 16; x++) {
+      for (int z = 0; z < 16; z++) {
         // entire world other than the main area is solid.
         for (int y = chunkData.getMinHeight(); y < chunkData.getMaxHeight(); y++) {
           chunkData.setBlock(x, y, z, SPACE);
