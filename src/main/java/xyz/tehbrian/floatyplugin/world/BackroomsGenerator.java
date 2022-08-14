@@ -4,19 +4,15 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.block.data.type.Light;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.generator.WorldInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
+import xyz.tehbrian.floatyplugin.backrooms.BackroomsBlocks;
 
 import java.util.Random;
 
 public final class BackroomsGenerator extends ChunkGenerator {
-
-  public static final Material LIGHT = Material.LIGHT;
-  public static final Material WALL = Material.SMOOTH_SANDSTONE;
-  public static final Material SPACE = Material.STONE_BRICKS;
 
   private static int middleY(final int minY, final int maxY) {
     return (minY + maxY) / 2;
@@ -30,19 +26,19 @@ public final class BackroomsGenerator extends ChunkGenerator {
   ) {
     int result = 0;
     final var posX = chunkData.getBlockData(x + 1, y, z).getMaterial();
-    if (posX != WALL) {
+    if (posX != BackroomsBlocks.WALL) {
       result++;
     }
     final var negX = chunkData.getBlockData(x - 1, y, z).getMaterial();
-    if (negX != WALL) {
+    if (negX != BackroomsBlocks.WALL) {
       result++;
     }
     final var posZ = chunkData.getBlockData(x, y, z + 1).getMaterial();
-    if (posZ != WALL) {
+    if (posZ != BackroomsBlocks.WALL) {
       result++;
     }
     final var negZ = chunkData.getBlockData(x, y, z - 1).getMaterial();
-    if (negZ != WALL) {
+    if (negZ != BackroomsBlocks.WALL) {
       result++;
     }
     return result;
@@ -89,12 +85,8 @@ public final class BackroomsGenerator extends ChunkGenerator {
     chunkData.setRegion(
         0, chunkData.getMinHeight(), 0,
         16, chunkData.getMaxHeight(), 16,
-        SPACE
+        BackroomsBlocks.SPACE
     );
-
-    // dimmed light data for use in light blocks.
-    final Light lightData = ((Light) LIGHT.createBlockData());
-    lightData.setLevel(10);
 
     // the main area will be placed at middle y.
     final int middleY = middleY(chunkData.getMinHeight(), chunkData.getMaxHeight());
@@ -109,22 +101,22 @@ public final class BackroomsGenerator extends ChunkGenerator {
 
         if (generateWall) {
           // wall column.
-          setColumn(chunkData, x, middleY, z, WALL);
+          setColumn(chunkData, x, middleY, z, BackroomsBlocks.WALL);
 
           // add variety to the wall.
           if (random.nextFloat() < 0.01F) {
-            chunkData.setBlock(x, middleY + 1, z, Material.CHISELED_SANDSTONE);
+            chunkData.setBlock(x, middleY + 1, z, BackroomsBlocks.ACCENT);
           }
           if (random.nextFloat() < 0.01F) {
-            chunkData.setBlock(x, middleY, z, Material.CHISELED_SANDSTONE);
+            chunkData.setBlock(x, middleY, z, BackroomsBlocks.ACCENT);
           }
           if (random.nextFloat() < 0.01F) {
-            chunkData.setBlock(x, middleY - 1, z, Material.CHISELED_SANDSTONE);
+            chunkData.setBlock(x, middleY - 1, z, BackroomsBlocks.ACCENT);
           }
         } else {
           // empty column of light blocks.
-          setColumn(chunkData, x, middleY, z, LIGHT);
-          setColumn(chunkData, x, middleY, z, lightData);
+          setColumn(chunkData, x, middleY, z, BackroomsBlocks.LIGHT);
+          setColumn(chunkData, x, middleY, z, BackroomsBlocks.LIGHT_DATA);
         }
       }
     }
