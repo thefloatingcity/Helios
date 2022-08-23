@@ -9,17 +9,17 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
-import xyz.tehbrian.floatyplugin.tag.TagService;
+import xyz.tehbrian.floatyplugin.tag.TagGame;
 
 public final class TagCommand extends PaperCloudCommand<CommandSender> {
 
   private final LangConfig langConfig;
-  private final TagService tagService;
+  private final TagGame tagService;
 
   @Inject
   public TagCommand(
       final LangConfig langConfig,
-      final TagService tagService
+      final TagGame tagService
   ) {
     this.langConfig = langConfig;
     this.tagService = tagService;
@@ -33,9 +33,9 @@ public final class TagCommand extends PaperCloudCommand<CommandSender> {
         .handler(c -> {
           final Player sender = (Player) c.getSender();
           if (this.tagService.togglePlaying(sender)) {
-            if (this.tagService.playing().size() <= 1) {
+            if (this.tagService.players().size() <= 1) {
               sender.sendMessage(this.langConfig.c(NodePath.path("tag", "join_first")));
-              this.tagService.setIt(sender);
+              this.tagService.it(sender);
             } else {
               sender.sendMessage(this.langConfig.c(NodePath.path("tag", "join")));
             }

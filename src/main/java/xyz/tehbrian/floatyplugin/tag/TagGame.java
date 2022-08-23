@@ -15,45 +15,42 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-public final class TagService {
+public final class TagGame {
 
   private final LangConfig langConfig;
 
-  private final Map<Player, GameMode> previousGameModes = new HashMap<>();
   private final Set<Player> playing = new HashSet<>();
+  private final Map<Player, GameMode> previousGameModes = new HashMap<>();
   private Player it;
+
   private boolean noTagBacks;
   private Player lastIt;
 
   @Inject
-  public TagService(
+  public TagGame(
       final LangConfig langConfig
   ) {
     this.langConfig = langConfig;
   }
 
-  private void removeAllPotionEffects(final Player player) {
+  private static void removeAllPotionEffects(final Player player) {
     for (final PotionEffect effect : player.getActivePotionEffects()) {
       player.removePotionEffect(effect.getType());
     }
   }
 
-  public Player getIt() {
-    return this.it;
+  private void setGameMode(final Player player, final GameMode gameMode) {
+    this.previousGameModes.put(player, player.getGameMode());
+    player.setGameMode(gameMode);
   }
 
-  public void setIt(final @Nullable Player it) {
-    if (this.it != null) {
-      this.it.setGlowing(false);
-    }
-
-    this.it = it;
-    if (this.it != null) {
-      this.it.setGlowing(true);
-    }
+  private void setPreviousGameMode(final Player player) {
+    player.setGameMode(Optional
+        .ofNullable(this.previousGameModes.get(player))
+        .orElse(player.getServer().getDefaultGameMode()));
   }
 
-  public Set<Player> playing() {
+  public Set<Player> players() {
     return this.playing;
   }
 
@@ -62,7 +59,7 @@ public final class TagService {
       this.playing.add(player);
       this.setGameMode(player, GameMode.ADVENTURE);
 
-      this.removeAllPotionEffects(player);
+      removeAllPotionEffects(player);
 
       player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, 100000, 100, true, false));
       player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100000, 100, true, false));
@@ -70,14 +67,14 @@ public final class TagService {
       this.playing.remove(player);
       this.setPreviousGameMode(player);
 
-      this.removeAllPotionEffects(player);
+      removeAllPotionEffects(player);
 
       if (player.equals(this.it)) {
         if (this.playing.iterator().hasNext()) {
-          this.setIt(this.playing.iterator().next());
+          this.it(this.playing.iterator().next());
           this.it.sendMessage(this.langConfig.c(NodePath.path("tag", "now_it_because_leave")));
         } else {
-          this.setIt(null);
+          this.it(null);
         }
       }
     }
@@ -92,35 +89,39 @@ public final class TagService {
     return this.isPlaying(player);
   }
 
-  public void setGameMode(final Player player, final GameMode gameMode) {
-    this.previousGameModes.put(player, player.getGameMode());
-    player.setGameMode(gameMode);
+  public Player it() {
+    return this.it;
   }
 
-  public void setPreviousGameMode(final Player player) {
-    player.setGameMode(Optional
-        .ofNullable(this.previousGameModes.get(player))
-        .orElse(player.getServer().getDefaultGameMode()));
+  public void it(final @Nullable Player it) {
+    if (this.it != null) {
+      this.it.setGlowing(false);
+    }
+
+    this.it = it;
+    if (this.it != null) {
+      this.it.setGlowing(true);
+    }
   }
 
-  public boolean isNoTagBacks() {
+  public boolean noTagBacks() {
     return this.noTagBacks;
   }
 
-  public void setNoTagBacks(final boolean noTagBacks) {
+  public void noTagBacks(final boolean noTagBacks) {
     this.noTagBacks = noTagBacks;
   }
 
   public boolean toggleNoTagBacks() {
-    this.setNoTagBacks(!this.isNoTagBacks());
-    return this.isNoTagBacks();
+    this.noTagBacks(!this.noTagBacks());
+    return this.noTagBacks();
   }
 
-  public Player getLastIt() {
+  public Player lastIt() {
     return this.lastIt;
   }
 
-  public void setLastIt(final Player lastIt) {
+  public void lastIt(final Player lastIt) {
     this.lastIt = lastIt;
   }
 

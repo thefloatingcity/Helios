@@ -7,7 +7,7 @@ import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 import xyz.tehbrian.floatyplugin.config.EmotesConfig;
 import xyz.tehbrian.floatyplugin.config.InventoriesConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
-import xyz.tehbrian.floatyplugin.tag.TagService;
+import xyz.tehbrian.floatyplugin.tag.TagGame;
 import xyz.tehbrian.floatyplugin.transportation.FlightService;
 import xyz.tehbrian.floatyplugin.user.UserService;
 import xyz.tehbrian.floatyplugin.world.WorldService;
@@ -26,7 +26,7 @@ public final class SingletonModule extends AbstractModule {
     /* Services */
     this.bind(FlightService.class).asEagerSingleton();
     this.bind(LuckPermsService.class).asEagerSingleton();
-    this.bind(TagService.class).asEagerSingleton();
+    this.bind(TagGame.class).asEagerSingleton();
     this.bind(UserService.class).asEagerSingleton();
     this.bind(WorldService.class).asEagerSingleton();
   }

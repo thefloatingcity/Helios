@@ -19,12 +19,12 @@ import xyz.tehbrian.floatyplugin.config.LangConfig;
 @SuppressWarnings("ClassCanBeRecord")
 public final class TagListener implements Listener {
 
-  private final TagService tagService;
+  private final TagGame tagService;
   private final LangConfig langConfig;
 
   @Inject
   public TagListener(
-      final TagService tagService,
+      final TagGame tagService,
       final LangConfig langConfig
   ) {
     this.tagService = tagService;
@@ -56,15 +56,15 @@ public final class TagListener implements Listener {
         && event.getEntity() instanceof Player victim
         && this.tagService.isPlaying(damager)
         && this.tagService.isPlaying(victim)
-        && this.tagService.getIt().equals(damager)) {
-      if (this.tagService.isNoTagBacks() && victim.equals(this.tagService.getLastIt())) {
+        && this.tagService.it().equals(damager)) {
+      if (this.tagService.noTagBacks() && victim.equals(this.tagService.lastIt())) {
         damager.sendMessage(this.langConfig.c(NodePath.path("tag", "no_tag_backs")));
         damager.playSound(damager.getEyeLocation(), Sound.ITEM_SHIELD_BREAK, 1, 0.9F);
         return;
       }
 
-      this.tagService.setIt(victim);
-      this.tagService.setLastIt(damager);
+      this.tagService.it(victim);
+      this.tagService.lastIt(damager);
       victim.sendMessage(this.langConfig.c(NodePath.path("tag", "now_it")));
       victim.playSound(victim.getEyeLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5F);
       damager.sendMessage(this.langConfig.c(
