@@ -1,6 +1,7 @@
 package xyz.tehbrian.floatyplugin.listener;
 
 import com.google.inject.Inject;
+import io.papermc.paper.event.player.AsyncChatDecorateEvent;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
@@ -40,59 +41,92 @@ public final class ChatListener implements Listener {
   }
 
   @EventHandler
-  public void onChat(final AsyncChatEvent event) {
-    final Player sender = event.getPlayer();
+  public void onDecorate(final AsyncChatDecorateEvent event) {
+    final @Nullable Player source = event.player();
+    if (source == null) {
+      // no use!
+      return;
+    }
 
-    @Nullable Player pingedPlayer = null;
-    for (final Player onlinePlayer : sender.getServer().getOnlinePlayers()) {
-      if (onlinePlayer.getUniqueId().equals(sender.getUniqueId())) {
+    Component result = event.originalMessage();
+
+    result = this.color(result, source);
+    result = this.decoratePing(result, source, false);
+    result = this.replaceEmotes(result);
+
+    event.result(result);
+  }
+
+  @EventHandler
+  public void onChat(final AsyncChatEvent event) {
+    final @Nullable Player source = event.getPlayer();
+
+    Component result = event.originalMessage();
+
+    result = this.color(result, source);
+    result = this.decoratePing(result, source, true);
+    result = this.replaceEmotes(result);
+    result = this.chatFormat(result, source.displayName());
+
+    // I can't be bothered to deal with this right now.
+    event.setCancelled(true);
+    source.getServer().sendMessage(result);
+  }
+
+  private Component color(final Component component, final Player source) {
+    if (source.hasPermission(Permissions.CHAT_COLOR)) {
+      return FormatUtil.legacyWithUrls(component);
+    }
+    return component;
+  }
+
+  private Component decoratePing(final Component component, final Player source, final boolean playSound) {
+    Component result = component;
+
+    for (final Player onlinePlayer : source.getServer().getOnlinePlayers()) {
+      if (onlinePlayer.getUniqueId().equals(source.getUniqueId())) {
         continue;
       }
 
       final String playerName = FormatUtil.plain(onlinePlayer.displayName());
 
-      if (this.containsIgnoreCase(FormatUtil.plain(event.message()), playerName)) {
-        pingedPlayer = onlinePlayer;
-        onlinePlayer.playSound(onlinePlayer.getEyeLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 2);
-      }
-    }
+      if (this.containsIgnoreCase(FormatUtil.plain(component), playerName)) {
+        if (playSound) { // FIXME: should be separated into another method tbh
+          onlinePlayer.playSound(onlinePlayer.getEyeLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 2);
+        }
 
-//         * @param source            the message source
-//         * @param sourceDisplayName the display name of the source player
-//         * @param message           the chat message
-//         * @param viewer            the receiving {@link Audience}
-//         * @return a rendered chat message
-
-    final @Nullable Player finalPingedPlayer = pingedPlayer;
-    event.renderer((source, sourceDisplayName, message, viewer) -> {
-      var renderedMessage = message;
-      if (sender.hasPermission(Permissions.CHAT_COLOR)) {
-        renderedMessage = FormatUtil.legacyWithUrls(message);
-      }
-
-      if (finalPingedPlayer != null) {
-        renderedMessage = renderedMessage.replaceText(TextReplacementConfig.builder()
-            .match(Pattern.compile(FormatUtil.plain(finalPingedPlayer.displayName()), Pattern.CASE_INSENSITIVE))
+        result = result.replaceText(TextReplacementConfig.builder()
+            .match(Pattern.compile(FormatUtil.plain(onlinePlayer.displayName()), Pattern.CASE_INSENSITIVE))
             .replacement((m, b) -> Component.text(m.group(0)).color(NamedTextColor.GOLD))
             .build());
       }
+    }
 
-      final CommentedConfigurationNode emotes = this.emotesConfig.rootNode();
-      for (final Map.Entry<Object, CommentedConfigurationNode> entry : emotes.childrenMap().entrySet()) {
-        renderedMessage = renderedMessage.replaceText(TextReplacementConfig.builder()
-            .match("(" + entry.getKey() + ")")
-            .replacement(FormatUtil.miniMessage(Objects.requireNonNull(entry.getValue().getString())))
-            .build());
-      }
+    return result;
+  }
 
-      return this.langConfig.c(
-          NodePath.path("chat_format"),
-          TagResolver.resolver(
-              Placeholder.component("sender", sourceDisplayName),
-              Placeholder.component("message", renderedMessage)
-          )
-      );
-    });
+  private Component replaceEmotes(final Component component) {
+    Component result = component;
+
+    final CommentedConfigurationNode emotes = this.emotesConfig.rootNode();
+    for (final Map.Entry<Object, CommentedConfigurationNode> entry : emotes.childrenMap().entrySet()) {
+      result = result.replaceText(TextReplacementConfig.builder()
+          .match("(" + entry.getKey() + ")")
+          .replacement(FormatUtil.miniMessage(Objects.requireNonNull(entry.getValue().getString())))
+          .build());
+    }
+
+    return result;
+  }
+
+  private Component chatFormat(final Component component, final Component sourceDisplayName) {
+    return this.langConfig.c(
+        NodePath.path("chat_format"),
+        TagResolver.resolver(
+            Placeholder.component("sender", sourceDisplayName),
+            Placeholder.component("message", component)
+        )
+    );
   }
 
   private boolean containsIgnoreCase(final String string, final String that) {
