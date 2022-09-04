@@ -41,28 +41,28 @@ public final class TagGame {
     return this.playing;
   }
 
-  public void setPlaying(final Player player, final boolean value) {
-    if (value) {
-      this.playing.add(player);
-      this.gameMode.set(player, GameMode.ADVENTURE);
+  public void addPlayer(final Player player) {
+    this.playing.add(player);
+    this.gameMode.set(player, GameMode.ADVENTURE);
 
-      removeAllPotionEffects(player);
+    removeAllPotionEffects(player);
 
-      player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, 100000, 100, true, false));
-      player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100000, 100, true, false));
-    } else {
-      this.playing.remove(player);
-      this.gameMode.setPrevious(player);
+    player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, 100000, 100, true, false));
+    player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100000, 100, true, false));
+  }
 
-      removeAllPotionEffects(player);
+  public void removePlayer(final Player player) {
+    this.playing.remove(player);
+    this.gameMode.setPrevious(player);
 
-      if (player.equals(this.it)) {
-        if (this.playing.iterator().hasNext()) {
-          this.it(this.playing.iterator().next());
-          this.it.sendMessage(this.langConfig.c(NodePath.path("tag", "now_it_because_leave")));
-        } else {
-          this.it(null);
-        }
+    removeAllPotionEffects(player);
+
+    if (player.equals(this.it)) {
+      if (this.playing.iterator().hasNext()) {
+        this.it(this.playing.iterator().next());
+        this.it.sendMessage(this.langConfig.c(NodePath.path("tag", "now_it_because_leave")));
+      } else {
+        this.it(null);
       }
     }
   }
@@ -72,7 +72,11 @@ public final class TagGame {
   }
 
   public boolean togglePlaying(final Player player) {
-    this.setPlaying(player, !this.isPlaying(player));
+    if (this.isPlaying(player)) {
+      this.removePlayer(player);
+    } else {
+      this.addPlayer(player);
+    }
     return this.isPlaying(player);
   }
 

@@ -19,22 +19,22 @@ import xyz.tehbrian.floatyplugin.config.LangConfig;
 @SuppressWarnings("ClassCanBeRecord")
 public final class TagListener implements Listener {
 
-  private final TagGame tagService;
+  private final TagGame tagGame;
   private final LangConfig langConfig;
 
   @Inject
   public TagListener(
-      final TagGame tagService,
+      final TagGame tagGame,
       final LangConfig langConfig
   ) {
-    this.tagService = tagService;
+    this.tagGame = tagGame;
     this.langConfig = langConfig;
   }
 
   @EventHandler
   public void onPotionEffect(final EntityPotionEffectEvent event) {
     if (!(event.getEntity() instanceof Player player)
-        || !this.tagService.isPlaying(player)
+        || !this.tagGame.isPlaying(player)
         || event.getNewEffect() == null) {
       return;
     }
@@ -54,17 +54,17 @@ public final class TagListener implements Listener {
   public void onPunch(final EntityDamageByEntityEvent event) {
     if (event.getDamager() instanceof Player damager
         && event.getEntity() instanceof Player victim
-        && this.tagService.isPlaying(damager)
-        && this.tagService.isPlaying(victim)
-        && this.tagService.it().equals(damager)) {
-      if (this.tagService.noTagBacks() && victim.equals(this.tagService.lastIt())) {
+        && this.tagGame.isPlaying(damager)
+        && this.tagGame.isPlaying(victim)
+        && this.tagGame.it().equals(damager)) {
+      if (this.tagGame.noTagBacks() && victim.equals(this.tagGame.lastIt())) {
         damager.sendMessage(this.langConfig.c(NodePath.path("tag", "no_tag_backs")));
         damager.playSound(damager.getEyeLocation(), Sound.ITEM_SHIELD_BREAK, 1, 0.9F);
         return;
       }
 
-      this.tagService.it(victim);
-      this.tagService.lastIt(damager);
+      this.tagGame.it(victim);
+      this.tagGame.lastIt(damager);
       victim.sendMessage(this.langConfig.c(NodePath.path("tag", "now_it")));
       victim.playSound(victim.getEyeLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5F);
       damager.sendMessage(this.langConfig.c(
@@ -77,7 +77,7 @@ public final class TagListener implements Listener {
 
   @EventHandler
   public void onGameModeChange(final PlayerGameModeChangeEvent event) {
-    if (this.tagService.isPlaying(event.getPlayer())
+    if (this.tagGame.isPlaying(event.getPlayer())
         && event.getNewGameMode() != GameMode.ADVENTURE) {
       event.setCancelled(true);
       event.getPlayer().sendMessage(this.langConfig.c(NodePath.path("tag", "adventure_only")));
@@ -86,7 +86,7 @@ public final class TagListener implements Listener {
 
   @EventHandler
   public void onQuit(final PlayerQuitEvent event) {
-    this.tagService.setPlaying(event.getPlayer(), false);
+    this.tagGame.removePlayer(event.getPlayer());
   }
 
 }
