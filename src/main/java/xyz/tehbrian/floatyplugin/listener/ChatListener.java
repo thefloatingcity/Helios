@@ -105,6 +105,10 @@ public final class ChatListener implements Listener {
     return result;
   }
 
+  private boolean containsIgnoreCase(final String string, final String that) {
+    return string.toLowerCase(Locale.ROOT).contains(that.toLowerCase(Locale.ROOT));
+  }
+
   private Component replaceEmotes(final Component component) {
     Component result = component;
 
@@ -127,10 +131,6 @@ public final class ChatListener implements Listener {
             Placeholder.component("message", component)
         )
     );
-  }
-
-  private boolean containsIgnoreCase(final String string, final String that) {
-    return string.toLowerCase(Locale.ROOT).contains(that.toLowerCase(Locale.ROOT));
   }
 
 }
