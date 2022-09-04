@@ -56,7 +56,7 @@ public final class TagListener implements Listener {
         && event.getEntity() instanceof Player victim
         && this.tagGame.isPlaying(damager)
         && this.tagGame.isPlaying(victim)
-        && this.tagGame.it().equals(damager)) {
+        && damager.equals(this.tagGame.it())) {
       if (this.tagGame.noTagBacks() && victim.equals(this.tagGame.lastIt())) {
         damager.sendMessage(this.langConfig.c(NodePath.path("tag", "no_tag_backs")));
         damager.playSound(damager.getEyeLocation(), Sound.ITEM_SHIELD_BREAK, 1, 0.9F);
@@ -64,7 +64,6 @@ public final class TagListener implements Listener {
       }
 
       this.tagGame.it(victim);
-      this.tagGame.lastIt(damager);
       victim.sendMessage(this.langConfig.c(NodePath.path("tag", "now_it")));
       victim.playSound(victim.getEyeLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5F);
       damager.sendMessage(this.langConfig.c(

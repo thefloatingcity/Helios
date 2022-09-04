@@ -21,7 +21,8 @@ public final class TagGame {
   private final Set<Player> playing = new HashSet<>();
   private Player it;
 
-  private boolean noTagBacks;
+  private GlowSetting glowSetting = GlowSetting.IT;
+  private boolean noTagBacks = false;
   private Player lastIt;
 
   @Inject
@@ -37,6 +38,22 @@ public final class TagGame {
     }
   }
 
+  private void setGlowing(final Player player) {
+    if (!this.isPlaying(player)) {
+      player.setGlowing(false);
+      return;
+    }
+
+    switch (this.glowSetting) {
+      case ALL -> player.setGlowing(true);
+      case NOT_IT -> player.setGlowing(!player.equals(this.it()));
+      case IT -> player.setGlowing(player.equals(this.it()));
+      case NONE -> player.setGlowing(false);
+      default -> {
+      }
+    }
+  }
+
   public Set<Player> players() {
     return this.playing;
   }
@@ -46,6 +63,7 @@ public final class TagGame {
     this.gameMode.set(player, GameMode.ADVENTURE);
 
     removeAllPotionEffects(player);
+    this.setGlowing(player);
 
     player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, 100000, 100, true, false));
     player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100000, 100, true, false));
@@ -56,11 +74,12 @@ public final class TagGame {
     this.gameMode.setPrevious(player);
 
     removeAllPotionEffects(player);
+    this.setGlowing(player);
 
-    if (player.equals(this.it)) {
+    if (player.equals(this.it())) {
       if (this.playing.iterator().hasNext()) {
         this.it(this.playing.iterator().next());
-        this.it.sendMessage(this.langConfig.c(NodePath.path("tag", "now_it_because_leave")));
+        this.it().sendMessage(this.langConfig.c(NodePath.path("tag", "now_it_because_leave")));
       } else {
         this.it(null);
       }
@@ -80,18 +99,34 @@ public final class TagGame {
     return this.isPlaying(player);
   }
 
-  public Player it() {
+  public @Nullable Player it() {
     return this.it;
   }
 
   public void it(final @Nullable Player it) {
-    if (this.it != null) {
-      this.it.setGlowing(false);
-    }
-
+    this.lastIt = this.it;
     this.it = it;
+
+    if (this.lastIt != null) {
+      this.setGlowing(this.lastIt);
+    }
     if (this.it != null) {
-      this.it.setGlowing(true);
+      this.setGlowing(this.it);
+    }
+  }
+
+  public Player lastIt() {
+    return this.lastIt;
+  }
+
+  public GlowSetting glowSetting() {
+    return this.glowSetting;
+  }
+
+  public void glowSetting(final GlowSetting glowSetting) {
+    this.glowSetting = glowSetting;
+    for (final var player : this.playing) {
+      this.setGlowing(player);
     }
   }
 
@@ -106,14 +141,6 @@ public final class TagGame {
   public boolean toggleNoTagBacks() {
     this.noTagBacks(!this.noTagBacks());
     return this.noTagBacks();
-  }
-
-  public Player lastIt() {
-    return this.lastIt;
-  }
-
-  public void lastIt(final Player lastIt) {
-    this.lastIt = lastIt;
   }
 
 }

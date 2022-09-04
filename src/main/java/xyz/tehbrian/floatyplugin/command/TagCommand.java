@@ -1,28 +1,31 @@
 package xyz.tehbrian.floatyplugin.command;
 
 import cloud.commandframework.ArgumentDescription;
+import cloud.commandframework.arguments.standard.EnumArgument;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
+import xyz.tehbrian.floatyplugin.tag.GlowSetting;
 import xyz.tehbrian.floatyplugin.tag.TagGame;
 
 public final class TagCommand extends PaperCloudCommand<CommandSender> {
 
   private final LangConfig langConfig;
-  private final TagGame tagService;
+  private final TagGame tagGame;
 
   @Inject
   public TagCommand(
       final LangConfig langConfig,
-      final TagGame tagService
+      final TagGame tagGame
   ) {
     this.langConfig = langConfig;
-    this.tagService = tagService;
+    this.tagGame = tagGame;
   }
 
   @Override
@@ -32,10 +35,10 @@ public final class TagCommand extends PaperCloudCommand<CommandSender> {
         .senderType(Player.class)
         .handler(c -> {
           final Player sender = (Player) c.getSender();
-          if (this.tagService.togglePlaying(sender)) {
-            if (this.tagService.players().size() <= 1) {
+          if (this.tagGame.togglePlaying(sender)) {
+            if (this.tagGame.players().size() <= 1) {
               sender.sendMessage(this.langConfig.c(NodePath.path("tag", "join_first")));
-              this.tagService.it(sender);
+              this.tagGame.it(sender);
             } else {
               sender.sendMessage(this.langConfig.c(NodePath.path("tag", "join")));
             }
@@ -46,15 +49,28 @@ public final class TagCommand extends PaperCloudCommand<CommandSender> {
 
     final var ntb = main.literal("ntb", ArgumentDescription.of("Toggles no tag backs."))
         .handler(c -> {
-          if (this.tagService.toggleNoTagBacks()) {
+          if (this.tagGame.toggleNoTagBacks()) {
             c.getSender().sendMessage(this.langConfig.c(NodePath.path("tag", "no_tag_backs_enabled")));
           } else {
             c.getSender().sendMessage(this.langConfig.c(NodePath.path("tag", "no_tag_backs_disabled")));
           }
         });
 
+    final var glow = main.literal("glow", ArgumentDescription.of("Sets the glow setting."))
+        .argument(EnumArgument.of(GlowSetting.class, "glow_setting"))
+        .handler(c -> {
+          final GlowSetting glowSetting = c.get("glow_setting");
+          this.tagGame.glowSetting(glowSetting);
+
+          c.getSender().sendMessage(this.langConfig.c(
+              NodePath.path("tag", "glow"),
+              Placeholder.unparsed("glow_setting", glowSetting.name())
+          ));
+        });
+
     commandManager.command(main);
     commandManager.command(ntb);
+    commandManager.command(glow);
   }
 
 }
