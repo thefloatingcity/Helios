@@ -9,18 +9,16 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 
 public final class TagGame {
 
   private final LangConfig langConfig;
 
+  private final MemoriousGameMode gameMode = new MemoriousGameMode();
+
   private final Set<Player> playing = new HashSet<>();
-  private final Map<Player, GameMode> previousGameModes = new HashMap<>();
   private Player it;
 
   private boolean noTagBacks;
@@ -39,17 +37,6 @@ public final class TagGame {
     }
   }
 
-  private void setGameMode(final Player player, final GameMode gameMode) {
-    this.previousGameModes.put(player, player.getGameMode());
-    player.setGameMode(gameMode);
-  }
-
-  private void setPreviousGameMode(final Player player) {
-    player.setGameMode(Optional
-        .ofNullable(this.previousGameModes.get(player))
-        .orElse(player.getServer().getDefaultGameMode()));
-  }
-
   public Set<Player> players() {
     return this.playing;
   }
@@ -57,7 +44,7 @@ public final class TagGame {
   public void setPlaying(final Player player, final boolean value) {
     if (value) {
       this.playing.add(player);
-      this.setGameMode(player, GameMode.ADVENTURE);
+      this.gameMode.set(player, GameMode.ADVENTURE);
 
       removeAllPotionEffects(player);
 
@@ -65,7 +52,7 @@ public final class TagGame {
       player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100000, 100, true, false));
     } else {
       this.playing.remove(player);
-      this.setPreviousGameMode(player);
+      this.gameMode.setPrevious(player);
 
       removeAllPotionEffects(player);
 
