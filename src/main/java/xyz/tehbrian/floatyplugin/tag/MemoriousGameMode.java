@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class MemoriousGameMode {
+public final class MemoriousGameMode {
 
   private final Map<Player, GameMode> previousGameModes = new HashMap<>();
 
