@@ -10,7 +10,6 @@ import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.luckperms.api.model.group.Group;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.LuckPermsService;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
@@ -69,8 +68,8 @@ public final class PlaytimeCommands extends PaperCloudCommand<CommandSender> {
         .senderType(Player.class)
         .handler(c -> {
           final var sender = (Player) c.getSender();
-          final @Nullable Group nextGroup = this.luckPermsService.getNextGroupInTrack(sender, "player");
 
+          final Group nextGroup = this.luckPermsService.getNextGroupInTrack(sender, "player");
           if (nextGroup == null) {
             sender.sendMessage(this.langConfig.c(NodePath.path("ascend", "max")));
             return;
