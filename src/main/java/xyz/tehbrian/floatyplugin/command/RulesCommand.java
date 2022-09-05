@@ -41,11 +41,11 @@ public final class RulesCommand extends PaperCloudCommand<CommandSender> {
     final var page = main
         .argument(IntegerArgument.<CommandSender>newBuilder("page")
             .withMin(1)
-            .withMax(BookDeserializer.pageCount(this.getBookNode())) // FIXME: won't work with plugin reload
+            .withMax(BookDeserializer.pageCount(this.bookNode())) // FIXME: won't work with plugin reload
             .asOptionalWithDefault(1)
             .build())
         .handler(c -> c.getSender().sendMessage(
-            BookDeserializer.deserializePage(this.getBookNode(), c.<Integer>get("page"))
+            BookDeserializer.deserializePage(this.bookNode(), c.<Integer>get("page"))
         ));
 
     final var accept = main.literal("accept", ArgumentDescription.of("Whew, that was a lot of reading."))
@@ -65,7 +65,7 @@ public final class RulesCommand extends PaperCloudCommand<CommandSender> {
     commandManager.command(accept);
   }
 
-  public CommentedConfigurationNode getBookNode() {
+  private CommentedConfigurationNode bookNode() {
     return this.booksConfig.rootNode().node("rules");
   }
 
