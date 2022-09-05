@@ -41,7 +41,7 @@ public final class RulesCommand extends PaperCloudCommand<CommandSender> {
     final var page = main
         .argument(IntegerArgument.<CommandSender>newBuilder("page")
             .withMin(1)
-            .withMax(BookDeserializer.pageCount(this.getBookNode())) // FIXME: won't work with /reload
+            .withMax(BookDeserializer.pageCount(this.getBookNode())) // FIXME: won't work with plugin reload
             .asOptionalWithDefault(1)
             .build())
         .handler(c -> c.getSender().sendMessage(

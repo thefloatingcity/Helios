@@ -98,7 +98,7 @@ public final class FloatyPlugin extends TehPlugin {
     this.setupListeners();
     this.setupTasks();
 
-    this.getServer().getScheduler().runTaskLater(this, () -> this.injector.getInstance(WorldService.class).init(), 10);
+    this.getServer().getScheduler().runTask(this, () -> this.injector.getInstance(WorldService.class).init());
   }
 
   @Override

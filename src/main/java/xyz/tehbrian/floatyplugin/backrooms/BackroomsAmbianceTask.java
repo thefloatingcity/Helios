@@ -37,13 +37,7 @@ public final class BackroomsAmbianceTask {
 
     server.getScheduler().scheduleSyncRepeatingTask(this.floatyPlugin, () -> {
       final World backrooms;
-      try {
-        backrooms = this.worldService.getWorld(FloatingWorld.BACKROOMS);
-      } catch (final RuntimeException ignored) {
-        // occurs when the server is started before the world is loaded.
-        // FIXME: find out how to load world before enable. #onLoad, maybe?
-        return;
-      }
+      backrooms = this.worldService.getWorld(FloatingWorld.BACKROOMS);
 
       for (final Player player : backrooms.getPlayers()) {
         if (RANDOM.nextFloat() < 0.2F) {
