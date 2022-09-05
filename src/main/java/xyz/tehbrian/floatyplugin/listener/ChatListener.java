@@ -20,6 +20,8 @@ import xyz.tehbrian.floatyplugin.config.EmotesConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.util.FormatUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -27,6 +29,13 @@ import java.util.regex.Pattern;
 
 @SuppressWarnings("ClassCanBeRecord")
 public final class ChatListener implements Listener {
+
+  private static final net.kyori.adventure.sound.Sound PING_SOUND = net.kyori.adventure.sound.Sound.sound(
+      Sound.BLOCK_NOTE_BLOCK_PLING.key(),
+      net.kyori.adventure.sound.Sound.Source.MASTER,
+      1000,
+      2
+  );
 
   private final EmotesConfig emotesConfig;
   private final LangConfig langConfig;
@@ -48,40 +57,50 @@ public final class ChatListener implements Listener {
       return;
     }
 
-    Component result = event.originalMessage();
-
-    result = this.color(result, source);
-    result = this.decoratePing(result, source, false);
-    result = this.replaceEmotes(result);
-
-    event.result(result);
+    event.result(this.colorCodes(event.result(), source));
+    event.result(this.colorPingedPlayers(event.result(), source));
+    event.result(this.replaceEmotes(event.result()));
   }
 
   @EventHandler
   public void onChat(final AsyncChatEvent event) {
-    final @Nullable Player source = event.getPlayer();
+    final Player source = event.getPlayer();
 
-    Component result = event.originalMessage();
+    this.annoyPingedPlayers(event.message(), source);
+    event.message(this.chatFormat(event.message(), source.displayName()));
 
-    result = this.color(result, source);
-    result = this.decoratePing(result, source, true);
-    result = this.replaceEmotes(result);
-    result = this.chatFormat(result, source.displayName());
-
-    // I can't be bothered to deal with this right now.
-    event.setCancelled(true);
-    source.getServer().sendMessage(result);
+    event.setCancelled(true); // I can't be bothered to deal with that.
+    source.getServer().sendMessage(event.message());
   }
 
-  private Component color(final Component component, final Player source) {
+  private Component colorCodes(final Component component, final Player source) {
     if (source.hasPermission(Permissions.CHAT_COLOR)) {
       return FormatUtil.legacyWithUrls(component);
     }
     return component;
   }
 
-  private Component decoratePing(final Component component, final Player source, final boolean playSound) {
+  private Component colorPingedPlayers(final Component component, final Player source) {
     Component result = component;
+
+    for (final Player player : this.getPingedPlayers(component, source)) {
+      result = result.replaceText(TextReplacementConfig.builder()
+          .match(Pattern.compile(FormatUtil.plain(player.displayName()), Pattern.CASE_INSENSITIVE))
+          .replacement((m, b) -> Component.text(m.group(0)).color(NamedTextColor.GOLD))
+          .build());
+    }
+
+    return result;
+  }
+
+  private void annoyPingedPlayers(final Component component, final Player source) {
+    for (final Player player : this.getPingedPlayers(component, source)) {
+      player.playSound(PING_SOUND);
+    }
+  }
+
+  private List<Player> getPingedPlayers(final Component component, final Player source) {
+    final List<Player> list = new ArrayList<>();
 
     for (final Player onlinePlayer : source.getServer().getOnlinePlayers()) {
       if (onlinePlayer.getUniqueId().equals(source.getUniqueId())) {
@@ -89,20 +108,12 @@ public final class ChatListener implements Listener {
       }
 
       final String playerName = FormatUtil.plain(onlinePlayer.displayName());
-
       if (this.containsIgnoreCase(FormatUtil.plain(component), playerName)) {
-        if (playSound) { // FIXME: should be separated into another method tbh
-          onlinePlayer.playSound(onlinePlayer.getEyeLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 2);
-        }
-
-        result = result.replaceText(TextReplacementConfig.builder()
-            .match(Pattern.compile(FormatUtil.plain(onlinePlayer.displayName()), Pattern.CASE_INSENSITIVE))
-            .replacement((m, b) -> Component.text(m.group(0)).color(NamedTextColor.GOLD))
-            .build());
+        list.add(onlinePlayer);
       }
     }
 
-    return result;
+    return list;
   }
 
   private boolean containsIgnoreCase(final String string, final String that) {

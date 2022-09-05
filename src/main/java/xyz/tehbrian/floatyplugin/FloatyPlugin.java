@@ -107,9 +107,6 @@ public final class FloatyPlugin extends TehPlugin {
   }
 
   /**
-   * Loads the plugin's configuration. If an exception is caught, logs the
-   * error and returns false.
-   *
    * @return whether it was successful
    */
   public boolean loadConfiguration() {
