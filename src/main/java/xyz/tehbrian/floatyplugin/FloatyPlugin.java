@@ -205,8 +205,8 @@ public final class FloatyPlugin extends TehPlugin {
 
   @Override
   public ChunkGenerator getDefaultWorldGenerator(
-      @NotNull final String worldName,
-      @Nullable final String id
+      final @NotNull String worldName,
+      final @Nullable String id
   ) {
     return this.injector.getInstance(WorldService.class).getDefaultWorldGenerator(worldName, id);
   }

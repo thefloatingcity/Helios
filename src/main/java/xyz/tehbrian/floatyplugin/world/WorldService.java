@@ -115,8 +115,8 @@ public final class WorldService {
   }
 
   public ChunkGenerator getDefaultWorldGenerator(
-      @NotNull final String worldName,
-      @Nullable final String id
+      final String worldName,
+      final @Nullable String id
   ) {
     return new VoidGenerator();
   }

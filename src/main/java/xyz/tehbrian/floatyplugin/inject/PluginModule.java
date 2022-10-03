@@ -25,7 +25,7 @@ public final class PluginModule extends AbstractModule {
   }
 
   @Provides
-  public @NotNull Logger provideSLF4JLogger() {
+  public Logger provideSLF4JLogger() {
     return this.floatyPlugin.getSLF4JLogger();
   }
 

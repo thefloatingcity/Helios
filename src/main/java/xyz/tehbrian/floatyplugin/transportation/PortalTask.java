@@ -64,7 +64,7 @@ public final class PortalTask {
 
     server.getScheduler().scheduleSyncRepeatingTask(this.floatyPlugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
-        final @NotNull Material blockType = player.getLocation().getBlock().getType();
+        final Material blockType = player.getLocation().getBlock().getType();
         if (blockType == Material.NETHER_PORTAL) {
           this.onNetherPortal(player);
         } else if (blockType == Material.END_PORTAL) {

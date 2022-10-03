@@ -10,7 +10,7 @@ import java.util.Random;
 public final class VoidGenerator extends ChunkGenerator {
 
   @Override
-  public Location getFixedSpawnLocation(@NotNull final World world, @NotNull final Random random) {
+  public Location getFixedSpawnLocation(final @NotNull World world, final @NotNull Random random) {
     return new Location(world, 0.5D, 65.0D, 0.5D);
   }
 
