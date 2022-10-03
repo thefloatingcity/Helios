@@ -1,6 +1,5 @@
 package xyz.tehbrian.floatyplugin.command;
 
-import cloud.commandframework.ArgumentDescription;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
@@ -28,35 +27,35 @@ public final class GamemodeCommands extends PaperCloudCommand<CommandSender> {
   public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("gamemode", "gm")
         .permission(Permissions.GAMEMODE)
-        .meta(CommandMeta.DESCRIPTION, "Change gamemodes.");
+        .meta(CommandMeta.DESCRIPTION, "Change your game mode.");
 
-    final var survival = main.literal("survival", ArgumentDescription.of("Change to survival."), "s", "0")
+    final var survival = main.literal("survival", "s")
         .handler(c -> {
           final Player sender = (Player) c.getSender();
           sender.setGameMode(GameMode.SURVIVAL);
           sender.sendMessage(this.langConfig.c(
               NodePath.path("gamemode", "change"),
-              Placeholder.unparsed("gamemode", "survival")
+              Placeholder.unparsed("gamemode", "Survival")
           ));
         });
 
-    final var creative = main.literal("creative", ArgumentDescription.of("Change to creative."), "c", "1")
+    final var creative = main.literal("creative", "c")
         .handler(c -> {
           final Player sender = (Player) c.getSender();
           sender.setGameMode(GameMode.CREATIVE);
           sender.sendMessage(this.langConfig.c(
               NodePath.path("gamemode", "change"),
-              Placeholder.unparsed("gamemode", "creative")
+              Placeholder.unparsed("gamemode", "Creative")
           ));
         });
 
-    final var adventure = main.literal("adventure", ArgumentDescription.of("Change to adventure."), "a", "2")
+    final var adventure = main.literal("adventure", "a")
         .handler(c -> {
           final Player sender = (Player) c.getSender();
           sender.setGameMode(GameMode.ADVENTURE);
           sender.sendMessage(this.langConfig.c(
               NodePath.path("gamemode", "change"),
-              Placeholder.unparsed("gamemode", "adventure")
+              Placeholder.unparsed("gamemode", "Adventure")
           ));
         });
 
