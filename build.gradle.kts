@@ -41,8 +41,11 @@ tasks {
     }
   }
 
-  shadowJar {
+  jar {
     archiveBaseName.set("FloatyPlugin")
+  }
+
+  shadowJar {
     archiveClassifier.set("")
 
     val libsPackage = "${project.group}.${project.name}.libs"
