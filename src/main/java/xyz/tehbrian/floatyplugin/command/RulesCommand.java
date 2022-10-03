@@ -36,7 +36,7 @@ public final class RulesCommand extends PaperCloudCommand<CommandSender> {
   @Override
   public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("rules")
-        .meta(CommandMeta.DESCRIPTION, "Um, the rules.");
+        .meta(CommandMeta.DESCRIPTION, "The rules for the server.");
 
     final var page = main
         .argument(IntegerArgument.<CommandSender>newBuilder("page")
