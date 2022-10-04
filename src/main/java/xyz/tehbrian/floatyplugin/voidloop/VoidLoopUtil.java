@@ -6,15 +6,14 @@ import org.bukkit.event.Listener;
 
 import java.time.Duration;
 
-@SuppressWarnings({"unused"})
 public final class VoidLoopUtil implements Listener {
 
-  public static final Title.Times INSTANT_IN_TIMES = Title.Times.of(
+  public static final Title.Times INSTANT_IN_TIMES = Title.Times.times(
       Duration.ZERO,
       Duration.ofSeconds(4),
       Duration.ofSeconds(1)
   );
-  public static final Title.Times FLASHING_TIMES = Title.Times.of(
+  public static final Title.Times FLASHING_TIMES = Title.Times.times(
       Duration.ofSeconds(1),
       Duration.ofSeconds(3),
       Duration.ofSeconds(1)
@@ -23,8 +22,9 @@ public final class VoidLoopUtil implements Listener {
   private VoidLoopUtil() {
   }
 
-  // trouble understanding? no worries, I gotchu.
-  // ibb.co/BtP8YZT
+  // trouble understanding? no worries, I got you.
+  // https://i.ibb.co/VtNXkSM/961-F66-F1-48-A7-4-E48-AEA4-6-AC469-E7-A052.jpg
+  // mirror: https://i.imgur.com/OubxQoa.jpeg
 
   public static int lowEngage(final World.Environment environment) {
     return switch (environment) {

@@ -16,7 +16,6 @@ import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.world.WorldService;
 
-@SuppressWarnings({"ClassCanBeRecord", "unused"})
 public final class VoidLoopTask {
 
   private final FloatyPlugin floatyPlugin;
@@ -38,29 +37,31 @@ public final class VoidLoopTask {
     final Server server = this.floatyPlugin.getServer();
     final BukkitScheduler scheduler = server.getScheduler();
 
+    // void loop.
     scheduler.scheduleSyncRepeatingTask(this.floatyPlugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
         final World.Environment environment = player.getWorld().getEnvironment();
         final Location location = player.getLocation();
 
-        if (location.getY() < VoidLoopUtil.lowEngage(environment)) { // they too low
+        if (location.getY() < VoidLoopUtil.lowEngage(environment)) { // they're too low.
           scheduler.runTask(this.floatyPlugin, () -> {
             location.setY(VoidLoopUtil.lowTeleport(environment));
             final var oldVelocity = player.getVelocity();
             player.teleport(location);
             player.setVelocity(oldVelocity);
           });
-        } else if (location.getY() > VoidLoopUtil.highEngage(environment)) { // they too high
+        } else if (location.getY() > VoidLoopUtil.highEngage(environment)) { // they're too high.
           scheduler.runTask(this.floatyPlugin, () -> {
             location.setY(VoidLoopUtil.highTeleport(environment));
             final var oldVelocity = player.getVelocity();
             player.teleport(location);
             player.setVelocity(oldVelocity);
           });
-        }  // they're in the non-epic zone
+        }  // they're in the non-epic zone.
       }
     }, 0, 20);
 
+    // warp.
     scheduler.scheduleSyncRepeatingTask(this.floatyPlugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
         final float fallDistance = player.getFallDistance();
