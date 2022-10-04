@@ -7,6 +7,7 @@ import dev.tehbrian.tehlib.configurate.Config;
 import dev.tehbrian.tehlib.paper.TehPlugin;
 import org.bukkit.command.CommandSender;
 import org.bukkit.generator.ChunkGenerator;
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -53,14 +54,15 @@ import xyz.tehbrian.floatyplugin.transportation.TransportationListener;
 import xyz.tehbrian.floatyplugin.transportation.TransportationTask;
 import xyz.tehbrian.floatyplugin.voidloop.VoidLoopListener;
 import xyz.tehbrian.floatyplugin.voidloop.VoidLoopTask;
+import xyz.tehbrian.floatyplugin.world.DeathListener;
 import xyz.tehbrian.floatyplugin.world.WorldService;
 
 import java.util.List;
 
 public final class FloatyPlugin extends TehPlugin {
 
-  private @Nullable Injector injector;
-  private @Nullable Logger logger;
+  private @MonotonicNonNull Injector injector;
+  private @MonotonicNonNull Logger logger;
 
   @Override
   public void onEnable() {
@@ -140,19 +142,20 @@ public final class FloatyPlugin extends TehPlugin {
 
   private void setupListeners() {
     registerListeners(
-        this.injector.getInstance(BackroomsBlockListener.class),
         this.injector.getInstance(AntiBuildListener.class),
+        this.injector.getInstance(BackroomsBlockListener.class),
         this.injector.getInstance(ChatListener.class),
+        this.injector.getInstance(DeathListener.class),
         this.injector.getInstance(FishingListener.class),
         this.injector.getInstance(JoinQuitListener.class),
         this.injector.getInstance(MilkListener.class),
-        this.injector.getInstance(RainMusicListener.class),
         this.injector.getInstance(PianoListener.class),
+        this.injector.getInstance(RainMusicListener.class),
         this.injector.getInstance(ServerPingListener.class),
         this.injector.getInstance(SpawnProtectionListener.class),
+        this.injector.getInstance(TagListener.class),
         this.injector.getInstance(TransportationListener.class),
-        this.injector.getInstance(VoidLoopListener.class),
-        this.injector.getInstance(TagListener.class)
+        this.injector.getInstance(VoidLoopListener.class)
     );
   }
 
