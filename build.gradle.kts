@@ -24,7 +24,7 @@ dependencies {
   compileOnly("io.papermc.paper:paper-api:1.19.2-R0.1-SNAPSHOT")
   compileOnly("net.luckperms:api:5.4")
 
-  implementation("broccolai.corn:corn-minecraft-paper:3.1.0")
+  implementation("broccolai.corn:corn-minecraft-paper:3.2.0")
   implementation("com.google.inject:guice:5.1.0")
   implementation("dev.tehbrian:tehlib-paper:0.4.0")
   implementation("org.spongepowered:configurate-hocon:4.1.2")
