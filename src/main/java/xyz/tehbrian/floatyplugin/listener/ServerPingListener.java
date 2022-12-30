@@ -7,7 +7,6 @@ import org.bukkit.event.Listener;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
-@SuppressWarnings("ClassCanBeRecord")
 public final class ServerPingListener implements Listener {
 
   private final LangConfig langConfig;

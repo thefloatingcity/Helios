@@ -27,7 +27,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-@SuppressWarnings("ClassCanBeRecord")
 public final class ChatListener implements Listener {
 
   private static final net.kyori.adventure.sound.Sound PING_SOUND = net.kyori.adventure.sound.Sound.sound(

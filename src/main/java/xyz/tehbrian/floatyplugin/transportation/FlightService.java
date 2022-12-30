@@ -6,7 +6,6 @@ import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.user.UserService;
 
-@SuppressWarnings("ClassCanBeRecord")
 public final class FlightService {
 
   private final UserService userService;

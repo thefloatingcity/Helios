@@ -31,7 +31,7 @@ public final class FunCommands extends PaperCloudCommand<CommandSender> {
   @Override
   public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var stringWithPlayerSuggestionsArgument = StringArgument
-        .<CommandSender>newBuilder("text")
+        .<CommandSender>builder("text")
         .greedy()
         .withSuggestionsProvider((c, i) -> this.onlinePlayerNames(c.getSender().getServer()));
 

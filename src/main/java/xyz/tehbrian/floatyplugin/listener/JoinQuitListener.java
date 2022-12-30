@@ -19,7 +19,7 @@ import xyz.tehbrian.floatyplugin.util.PlaytimeUtil;
 import java.time.Duration;
 import java.util.Calendar;
 
-@SuppressWarnings({"unused", "ClassCanBeRecord"})
+@SuppressWarnings({"unused"})
 public final class JoinQuitListener implements Listener {
 
   private final FloatyPlugin floatyPlugin;

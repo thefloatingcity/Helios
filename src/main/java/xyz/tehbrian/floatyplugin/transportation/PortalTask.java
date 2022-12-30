@@ -21,7 +21,6 @@ import java.util.Map;
  * <b>This task functions under the assumption that allow-end and
  * allow-nether are false in bukkit.yml and server.properties respectively.</b>
  */
-@SuppressWarnings("ClassCanBeRecord")
 public final class PortalTask {
 
   private static final Duration MESSAGE_COOLDOWN = Duration.ofSeconds(15);

@@ -39,7 +39,7 @@ public final class RulesCommand extends PaperCloudCommand<CommandSender> {
         .meta(CommandMeta.DESCRIPTION, "The rules for the server.");
 
     final var page = main
-        .argument(IntegerArgument.<CommandSender>newBuilder("page")
+        .argument(IntegerArgument.<CommandSender>builder("page")
             .withMin(1)
             .withMax(BookDeserializer.pageCount(this.bookNode())) // FIXME: won't work with plugin reload
             .asOptionalWithDefault(1)

@@ -25,7 +25,7 @@ import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.world.WorldService;
 
-@SuppressWarnings({"unused", "ClassCanBeRecord"})
+@SuppressWarnings({"unused"})
 public final class AntiBuildListener implements Listener {
 
   private final LangConfig langConfig;

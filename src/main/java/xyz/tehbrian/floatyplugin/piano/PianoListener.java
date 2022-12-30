@@ -19,7 +19,7 @@ import xyz.tehbrian.floatyplugin.util.FormatUtil;
 import java.util.List;
 import java.util.Objects;
 
-@SuppressWarnings({"unused", "ClassCanBeRecord"})
+@SuppressWarnings({"unused"})
 public final class PianoListener implements Listener {
 
   private final UserService userService;

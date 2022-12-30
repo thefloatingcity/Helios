@@ -21,7 +21,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import xyz.tehbrian.floatyplugin.Permissions;
 
-@SuppressWarnings({"unused", "ClassCanBeRecord"})
+@SuppressWarnings({"unused"})
 public final class SpawnProtectionListener implements Listener {
 
   public static final int SPAWN_PROTECTION_RADIUS = 8;

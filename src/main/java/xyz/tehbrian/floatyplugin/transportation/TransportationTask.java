@@ -8,7 +8,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 
-@SuppressWarnings("ClassCanBeRecord")
 public final class TransportationTask {
 
   private final FloatyPlugin floatyPlugin;

@@ -58,7 +58,7 @@ public final class PianoCommand extends PaperCloudCommand<CommandSender> {
         ));
 
     final var help = main.literal("help")
-        .argument(IntegerArgument.<CommandSender>newBuilder("page")
+        .argument(IntegerArgument.<CommandSender>builder("page")
             .withMin(1)
             .withMax(BookDeserializer.pageCount(this.getBookNode()))
             .asOptionalWithDefault(1)
@@ -81,7 +81,7 @@ public final class PianoCommand extends PaperCloudCommand<CommandSender> {
     final var collection = main.literal("collection", ArgumentDescription.of("Get a collection of notes!"))
         .senderType(Player.class)
         .argument(EnumArgument.of(PianoMenuProvider.NoteCollection.class, "note_collection"))
-        .argument(IntegerArgument.<CommandSender>newBuilder("max").withMin(1).asOptionalWithDefault(9).build())
+        .argument(IntegerArgument.<CommandSender>builder("max").withMin(1).asOptionalWithDefault(9).build())
         .handler(c -> {
           final PianoMenuProvider.NoteCollection noteCollection = c.get("note_collection");
           final int max = c.get("max");

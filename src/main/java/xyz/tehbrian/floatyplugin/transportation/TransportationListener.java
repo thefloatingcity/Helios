@@ -39,7 +39,6 @@ import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.user.User;
 import xyz.tehbrian.floatyplugin.user.UserService;
 
-@SuppressWarnings("ClassCanBeRecord")
 public final class TransportationListener implements Listener {
 
   private final LangConfig langConfig;

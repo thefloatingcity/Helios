@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-@SuppressWarnings("ClassCanBeRecord")
 public final class PianoMenuProvider {
 
   private final InventoriesConfig inventoriesConfig;

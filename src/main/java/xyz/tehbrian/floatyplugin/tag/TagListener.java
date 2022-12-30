@@ -16,7 +16,6 @@ import org.bukkit.potion.PotionEffectType;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
-@SuppressWarnings("ClassCanBeRecord")
 public final class TagListener implements Listener {
 
   private final TagGame tagGame;
