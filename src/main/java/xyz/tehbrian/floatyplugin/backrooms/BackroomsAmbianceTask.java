@@ -12,7 +12,6 @@ import xyz.tehbrian.floatyplugin.world.WorldService;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-@SuppressWarnings("ClassCanBeRecord")
 public final class BackroomsAmbianceTask {
 
   private static final Random RANDOM = ThreadLocalRandom.current();
