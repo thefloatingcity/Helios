@@ -12,12 +12,12 @@ import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.Permissions;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
-public final class GamemodeCommands extends PaperCloudCommand<CommandSender> {
+public final class GameModeCommands extends PaperCloudCommand<CommandSender> {
 
   private final LangConfig langConfig;
 
   @Inject
-  public GamemodeCommands(
+  public GameModeCommands(
       final LangConfig langConfig
   ) {
     this.langConfig = langConfig;
