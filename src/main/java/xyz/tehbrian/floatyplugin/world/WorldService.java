@@ -11,6 +11,7 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.Logger;
+import xyz.tehbrian.floatyplugin.world.backrooms.BackroomsGenerator;
 
 public final class WorldService {
 

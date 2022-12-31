@@ -12,8 +12,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.spongepowered.configurate.ConfigurateException;
-import xyz.tehbrian.floatyplugin.backrooms.BackroomsAmbianceTask;
-import xyz.tehbrian.floatyplugin.backrooms.BackroomsBlockListener;
+import xyz.tehbrian.floatyplugin.world.backrooms.AmbianceTask;
+import xyz.tehbrian.floatyplugin.world.backrooms.SpaceBreakListener;
 import xyz.tehbrian.floatyplugin.command.ActCommands;
 import xyz.tehbrian.floatyplugin.command.BroadcastCommand;
 import xyz.tehbrian.floatyplugin.command.CommandService;
@@ -143,7 +143,7 @@ public final class FloatyPlugin extends TehPlugin {
   private void setupListeners() {
     registerListeners(
         this.injector.getInstance(AntiBuildListener.class),
-        this.injector.getInstance(BackroomsBlockListener.class),
+        this.injector.getInstance(SpaceBreakListener.class),
         this.injector.getInstance(ChatListener.class),
         this.injector.getInstance(DeathListener.class),
         this.injector.getInstance(FishingListener.class),
@@ -203,7 +203,7 @@ public final class FloatyPlugin extends TehPlugin {
     this.injector.getInstance(TransportationTask.class).start();
     this.injector.getInstance(VoidLoopTask.class).start();
     this.injector.getInstance(PortalTask.class).start();
-    this.injector.getInstance(BackroomsAmbianceTask.class).start();
+    this.injector.getInstance(AmbianceTask.class).start();
   }
 
   @Override

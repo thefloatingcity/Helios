@@ -1,4 +1,4 @@
-package xyz.tehbrian.floatyplugin.backrooms;
+package xyz.tehbrian.floatyplugin.world.backrooms;
 
 import com.google.inject.Inject;
 import net.kyori.adventure.sound.Sound;
@@ -12,7 +12,7 @@ import xyz.tehbrian.floatyplugin.world.WorldService;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-public final class BackroomsAmbianceTask {
+public final class AmbianceTask {
 
   private static final Random RANDOM = ThreadLocalRandom.current();
 
@@ -20,7 +20,7 @@ public final class BackroomsAmbianceTask {
   private final WorldService worldService;
 
   @Inject
-  public BackroomsAmbianceTask(
+  public AmbianceTask(
       final FloatyPlugin floatyPlugin,
       final WorldService worldService
   ) {
