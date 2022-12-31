@@ -12,8 +12,6 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.spongepowered.configurate.ConfigurateException;
-import xyz.tehbrian.floatyplugin.world.backrooms.AmbianceTask;
-import xyz.tehbrian.floatyplugin.world.backrooms.SpaceBreakListener;
 import xyz.tehbrian.floatyplugin.command.ActCommands;
 import xyz.tehbrian.floatyplugin.command.BroadcastCommand;
 import xyz.tehbrian.floatyplugin.command.CommandService;
@@ -56,6 +54,8 @@ import xyz.tehbrian.floatyplugin.voidloop.VoidLoopListener;
 import xyz.tehbrian.floatyplugin.voidloop.VoidLoopTask;
 import xyz.tehbrian.floatyplugin.world.DeathListener;
 import xyz.tehbrian.floatyplugin.world.WorldService;
+import xyz.tehbrian.floatyplugin.world.backrooms.AmbianceTask;
+import xyz.tehbrian.floatyplugin.world.backrooms.SpaceBreakListener;
 
 import java.util.List;
 
