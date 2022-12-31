@@ -12,6 +12,8 @@ import org.bukkit.generator.WorldInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public final class BackroomsGenerator extends ChunkGenerator {
@@ -36,6 +38,30 @@ public final class BackroomsGenerator extends ChunkGenerator {
         chunkX, middleY + 2, chunkZ,
         blockData, chunkData
     );
+  }
+
+  private static void setWall(
+      final int chunkX, final int middleY, final int chunkZ,
+      final ChunkData chunkData
+  ) {
+    ChunkUtil.setRegionInclusive(
+        chunkX, middleY - 2, chunkZ,
+        chunkX, middleY + 2, chunkZ,
+        Palette.WALL, chunkData
+    );
+    chunkData.setBlock(chunkX, middleY - 2, chunkZ, Palette.WALL_BASE);
+  }
+
+  private static void setShortWall(
+      final int chunkX, final int middleY, final int chunkZ,
+      final ChunkData chunkData
+  ) {
+    ChunkUtil.setRegionInclusive(
+        chunkX, middleY - 2, chunkZ,
+        chunkX, middleY + 1, chunkZ,
+        Palette.WALL, chunkData
+    );
+    chunkData.setBlock(chunkX, middleY - 2, chunkZ, Palette.WALL_BASE);
   }
 
   private static void setLight(
@@ -132,25 +158,65 @@ public final class BackroomsGenerator extends ChunkGenerator {
     setLight(15, middleY, 7, chunkData);
     setLight(15, middleY, 15, chunkData);
 
-    // walls. iterate over every column.
-    for (int x = 0; x < 16; x++) {
-      for (int z = 0; z < 16; z++) {
-        // open sides won't ever be less than 2 because of our line-by-line
-        // approach to looping over positions.
-        final int openSides = openSides(x, middleY, z, chunkData);
-        final boolean generateWall = (openSides == 4 && random.nextFloat() < 0.05F)
-            || (openSides == 3 && random.nextFloat() < 0.8F);
+    // air area.
+    ChunkUtil.setRegionInclusive(0, middleY - 2, 0, 15, middleY + 2, 15, Material.AIR, chunkData);
 
-        if (generateWall) {
-          // wall column.
-          setColumn(x, middleY, z, Palette.WALL, chunkData);
-          chunkData.setBlock(x, middleY - 2, z, Palette.WALL_BASE);
+    // walls.
+    final int minLengthToChangeDirections = 3;
+    for (int iteration = 0; iteration < 9; iteration++) {
+      final int maxLength = random.nextInt(5, 26);
+      final boolean isShort = random.nextFloat() < 0.15F; // 15% chance.
+
+      int length = 0; // the overall length of the line.
+      int directionLength = 0; // the length since the last direction change.
+      Direction direction = randomDirection();
+      int x = random.nextInt(0, 16);
+      int z = random.nextInt(0, 16);
+      while (!hasHitWall(x, z) && length < maxLength) {
+        if (isShort) {
+          setShortWall(x, middleY, z, chunkData);
         } else {
-          // empty column.
-          setColumn(x, middleY, z, Material.AIR, chunkData);
+          setWall(x, middleY, z, chunkData);
         }
+
+        switch (direction) {
+          case NORTH -> z--;
+          case SOUTH -> z++;
+          case EAST -> x++;
+          case WEST -> x--;
+          default -> throw new IllegalArgumentException("wtf");
+        }
+
+        if (directionLength >= minLengthToChangeDirections && random.nextFloat() < 0.20F) { // 20% chance to pick a new direction.
+          direction = randomDirectionNot(direction);
+        }
+
+        length += 1;
+        directionLength += 1;
       }
     }
+  }
+
+  private static boolean hasHitWall(final int x, final int z) {
+    return x < 0 || x > 15 || z < 0 || z > 15;
+  }
+
+  private static Direction randomDirection() {
+    return Direction.values()[new Random().nextInt(Direction.values().length)];
+  }
+
+  /**
+   * Gives a new random direction that is not the current direction.
+   *
+   * @param current the banned direction
+   * @return a new random direction
+   */
+  private static Direction randomDirectionNot(final Direction current) {
+    final List<Direction> available = Arrays.stream(Direction.values())
+        .filter(d -> d != current)
+        .toList();
+    assert available.size() == 3;
+    return available.get(new Random().nextInt(available.size()));
   }
 
   /**
