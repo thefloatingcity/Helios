@@ -19,22 +19,22 @@ public final class ElevatorMusicTask {
   private static final Sound SOUND = Sound.sound(SOUND_KEY, Sound.Source.MUSIC, 1, 1);
   private static final SoundStop SOUND_STOP = SoundStop.named(SOUND_KEY);
 
-  private final FloatyPlugin floatyPlugin;
+  private final FloatyPlugin plugin;
   private final UserService userService;
 
   @Inject
   public ElevatorMusicTask(
-      final FloatyPlugin floatyPlugin,
+      final FloatyPlugin plugin,
       final UserService userService
   ) {
-    this.floatyPlugin = floatyPlugin;
+    this.plugin = plugin;
     this.userService = userService;
   }
 
   public void start() {
-    final Server server = this.floatyPlugin.getServer();
+    final Server server = this.plugin.getServer();
 
-    server.getScheduler().scheduleSyncRepeatingTask(this.floatyPlugin, () -> {
+    server.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
         if (player.getWorld().getEnvironment() != World.Environment.NORMAL) {
           return;

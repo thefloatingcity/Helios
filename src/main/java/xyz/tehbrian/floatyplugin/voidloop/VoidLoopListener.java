@@ -12,13 +12,13 @@ import xyz.tehbrian.floatyplugin.FloatyPlugin;
 
 public final class VoidLoopListener implements Listener {
 
-  private final FloatyPlugin floatyPlugin;
+  private final FloatyPlugin plugin;
 
   @Inject
   public VoidLoopListener(
-      final FloatyPlugin floatyPlugin
+      final FloatyPlugin plugin
   ) {
-    this.floatyPlugin = floatyPlugin;
+    this.plugin = plugin;
   }
 
   /**
@@ -64,7 +64,7 @@ public final class VoidLoopListener implements Listener {
       return;
     }
 
-    this.floatyPlugin.getServer().getScheduler().runTask(this.floatyPlugin, () -> {
+    this.plugin.getServer().getScheduler().runTask(this.plugin, () -> {
       loc.setY(VoidLoopUtil.lowTeleport(environment));
       final var oldVelocity = entity.getVelocity();
       entity.teleport(loc);

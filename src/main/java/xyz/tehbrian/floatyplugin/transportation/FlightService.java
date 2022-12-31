@@ -9,15 +9,15 @@ import xyz.tehbrian.floatyplugin.user.UserService;
 public final class FlightService {
 
   private final UserService userService;
-  private final FloatyPlugin floatyPlugin;
+  private final FloatyPlugin plugin;
 
   @Inject
   public FlightService(
       final UserService userService,
-      final FloatyPlugin floatyPlugin
+      final FloatyPlugin plugin
   ) {
     this.userService = userService;
-    this.floatyPlugin = floatyPlugin;
+    this.plugin = plugin;
   }
 
   public void checkFlight(final Player player) {
@@ -33,7 +33,7 @@ public final class FlightService {
   }
 
   public void enableFlight(final Player player) {
-    this.floatyPlugin.getServer().getScheduler().runTask(this.floatyPlugin, () -> {
+    this.plugin.getServer().getScheduler().runTask(this.plugin, () -> {
       if (!player.getAllowFlight()) {
         player.setAllowFlight(true);
       }
@@ -41,7 +41,7 @@ public final class FlightService {
   }
 
   public void disableFlight(final Player player) {
-    this.floatyPlugin.getServer().getScheduler().runTask(this.floatyPlugin, () -> {
+    this.plugin.getServer().getScheduler().runTask(this.plugin, () -> {
       if (player.getAllowFlight()) {
         player.setAllowFlight(false);
       }

@@ -21,8 +21,8 @@ public final class AmbianceTask {
 
   private static final Random RANDOM = ThreadLocalRandom.current();
 
-  private static final Duration MIN_TIME_BETWEEN_SPOOKS = Duration.ofSeconds(269);
-  private final Map<UUID, Instant> lastSpooks = new HashMap<>();
+  private static final Duration SPOOK_COOLDOWN = Duration.ofSeconds(269);
+  private final Map<UUID, Instant> lastSpook = new HashMap<>();
 
   private final FloatyPlugin plugin;
   private final WorldService worldService;
@@ -42,7 +42,7 @@ public final class AmbianceTask {
     final var oneTick = 1;
     final var oneSecond = oneTick * 20;
 
-    // random spooky noises.
+    // random noises.
     server.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> {
       final World backrooms = this.worldService.getWorld(FloatingWorld.BACKROOMS);
       for (final Player player : backrooms.getPlayers()) {
@@ -52,7 +52,7 @@ public final class AmbianceTask {
       }
     }, 1, 29 * oneSecond);
 
-    // scare.
+    // spook.
     server.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> {
       final World backrooms = this.worldService.getWorld(FloatingWorld.BACKROOMS);
       final var now = Instant.now();
@@ -62,13 +62,13 @@ public final class AmbianceTask {
         }
 
         if (player.getLocation().getBlock().getLightLevel() >= 4) {
-          continue; // dark area.
+          continue; // player must be in dark area.
         }
 
-        if (this.lastSpooks.containsKey(player.getUniqueId())
+        if (this.lastSpook.containsKey(player.getUniqueId())
             && Duration
-            .between(now, this.lastSpooks.get(player.getUniqueId()))
-            .compareTo(MIN_TIME_BETWEEN_SPOOKS) < 0) {
+            .between(now, this.lastSpook.get(player.getUniqueId()))
+            .compareTo(SPOOK_COOLDOWN) < 0) {
           continue; // not too often.
         }
 
@@ -83,7 +83,7 @@ public final class AmbianceTask {
         loc.setPitch(loc.getPitch() + RANDOM.nextInt(-10, 10));
         player.teleport(loc);
 
-        this.lastSpooks.put(player.getUniqueId(), Instant.now());
+        this.lastSpook.put(player.getUniqueId(), Instant.now());
       }
     }, 1, 5 * oneSecond);
   }

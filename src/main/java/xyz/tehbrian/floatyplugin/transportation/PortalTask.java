@@ -26,17 +26,17 @@ public final class PortalTask {
   private static final Duration MESSAGE_COOLDOWN = Duration.ofSeconds(15);
   private static final Map<Player, Instant> LAST_MESSAGE_TIME = new HashMap<>();
 
-  private final FloatyPlugin floatyPlugin;
+  private final FloatyPlugin plugin;
   private final WorldService worldService;
   private final LangConfig langConfig;
 
   @Inject
   public PortalTask(
-      final FloatyPlugin floatyPlugin,
+      final FloatyPlugin plugin,
       final WorldService worldService,
       final LangConfig langConfig
   ) {
-    this.floatyPlugin = floatyPlugin;
+    this.plugin = plugin;
     this.worldService = worldService;
     this.langConfig = langConfig;
   }
@@ -58,9 +58,9 @@ public final class PortalTask {
   }
 
   public void start() {
-    final Server server = this.floatyPlugin.getServer();
+    final Server server = this.plugin.getServer();
 
-    server.getScheduler().scheduleSyncRepeatingTask(this.floatyPlugin, () -> {
+    server.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
         final Material blockType = player.getLocation().getBlock().getType();
         if (blockType == Material.NETHER_PORTAL) {

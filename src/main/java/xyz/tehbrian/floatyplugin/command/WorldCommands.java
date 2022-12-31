@@ -21,17 +21,17 @@ import javax.annotation.Nullable;
 
 public final class WorldCommands extends PaperCloudCommand<CommandSender> {
 
-  private final FloatyPlugin floatyPlugin;
+  private final FloatyPlugin plugin;
   private final WorldService worldService;
   private final LangConfig langConfig;
 
   @Inject
   public WorldCommands(
-      final FloatyPlugin floatyPlugin,
+      final FloatyPlugin plugin,
       final WorldService worldService,
       final LangConfig langConfig
   ) {
-    this.floatyPlugin = floatyPlugin;
+    this.plugin = plugin;
     this.worldService = worldService;
     this.langConfig = langConfig;
   }
@@ -154,7 +154,7 @@ public final class WorldCommands extends PaperCloudCommand<CommandSender> {
   }
 
   private NamespacedKey key(final String key) {
-    return new NamespacedKey(this.floatyPlugin, key);
+    return new NamespacedKey(this.plugin, key);
   }
 
   private record WorldlessLocation(

@@ -11,13 +11,13 @@ import java.util.function.Function;
 
 public class CommandService extends PaperCloudService<CommandSender> {
 
-  private final FloatyPlugin floatyPlugin;
+  private final FloatyPlugin plugin;
 
   @Inject
   public CommandService(
-      final FloatyPlugin floatyPlugin
+      final FloatyPlugin plugin
   ) {
-    this.floatyPlugin = floatyPlugin;
+    this.plugin = plugin;
   }
 
   /**
@@ -32,7 +32,7 @@ public class CommandService extends PaperCloudService<CommandSender> {
     }
 
     this.commandManager = new PaperCommandManager<>(
-        this.floatyPlugin,
+        this.plugin,
         CommandExecutionCoordinator.simpleCoordinator(),
         Function.identity(),
         Function.identity()

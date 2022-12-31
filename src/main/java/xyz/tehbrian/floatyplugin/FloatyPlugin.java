@@ -53,6 +53,7 @@ import xyz.tehbrian.floatyplugin.transportation.TransportationTask;
 import xyz.tehbrian.floatyplugin.voidloop.VoidLoopListener;
 import xyz.tehbrian.floatyplugin.voidloop.VoidLoopTask;
 import xyz.tehbrian.floatyplugin.world.DeathListener;
+import xyz.tehbrian.floatyplugin.world.VoidGenerator;
 import xyz.tehbrian.floatyplugin.world.WorldService;
 import xyz.tehbrian.floatyplugin.world.backrooms.AmbianceTask;
 import xyz.tehbrian.floatyplugin.world.backrooms.SpaceBreakListener;
@@ -211,7 +212,7 @@ public final class FloatyPlugin extends TehPlugin {
       final @NotNull String worldName,
       final @Nullable String id
   ) {
-    return this.injector.getInstance(WorldService.class).getDefaultWorldGenerator(worldName, id);
+    return new VoidGenerator();
   }
 
 }

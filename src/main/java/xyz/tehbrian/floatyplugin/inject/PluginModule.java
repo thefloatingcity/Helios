@@ -11,27 +11,27 @@ import java.nio.file.Path;
 
 public final class PluginModule extends AbstractModule {
 
-  private final FloatyPlugin floatyPlugin;
+  private final FloatyPlugin plugin;
 
-  public PluginModule(final FloatyPlugin floatyPlugin) {
-    this.floatyPlugin = floatyPlugin;
+  public PluginModule(final FloatyPlugin plugin) {
+    this.plugin = plugin;
   }
 
   @Override
   protected void configure() {
-    this.bind(FloatyPlugin.class).toInstance(this.floatyPlugin);
-    this.bind(JavaPlugin.class).toInstance(this.floatyPlugin);
+    this.bind(FloatyPlugin.class).toInstance(this.plugin);
+    this.bind(JavaPlugin.class).toInstance(this.plugin);
   }
 
   @Provides
   public Logger provideSLF4JLogger() {
-    return this.floatyPlugin.getSLF4JLogger();
+    return this.plugin.getSLF4JLogger();
   }
 
   @Provides
   @Named("dataFolder")
   public Path provideDataFolder() {
-    return this.floatyPlugin.getDataFolder().toPath();
+    return this.plugin.getDataFolder().toPath();
   }
 
 }

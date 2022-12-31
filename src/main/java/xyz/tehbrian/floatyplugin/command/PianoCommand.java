@@ -27,7 +27,7 @@ import java.util.List;
 
 public final class PianoCommand extends PaperCloudCommand<CommandSender> {
 
-  private final FloatyPlugin floatyPlugin;
+  private final FloatyPlugin plugin;
   private final UserService userService;
   private final PianoMenuProvider pianoMenuProvider;
   private final BooksConfig booksConfig;
@@ -35,13 +35,13 @@ public final class PianoCommand extends PaperCloudCommand<CommandSender> {
 
   @Inject
   public PianoCommand(
-      final FloatyPlugin floatyPlugin,
+      final FloatyPlugin plugin,
       final UserService userService,
       final PianoMenuProvider pianoMenuProvider,
       final BooksConfig booksConfig,
       final LangConfig langConfig
   ) {
-    this.floatyPlugin = floatyPlugin;
+    this.plugin = plugin;
     this.userService = userService;
     this.pianoMenuProvider = pianoMenuProvider;
     this.booksConfig = booksConfig;
@@ -91,7 +91,7 @@ public final class PianoCommand extends PaperCloudCommand<CommandSender> {
           final List<ItemStack> noteItems = this.pianoMenuProvider.getCollection(noteCollection);
           for (final ItemStack item : noteItems.subList(0, Math.min(max, noteItems.size()))) {
             sender.getServer().getScheduler().scheduleSyncDelayedTask(
-                this.floatyPlugin,
+                this.plugin,
                 () -> {
                   final var unaddedItem = sender.getInventory().addItem(item).get(0);
                   if (unaddedItem != null) {

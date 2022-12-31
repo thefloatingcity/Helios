@@ -4,7 +4,7 @@ public final class Permissions {
 
   public static final String ROOT = "floatyplugin";
 
-  // build in a world
+  // build in a world.
   public static final String BUILD = ROOT + ".build";
   public static final String BUILD_MADLANDS = BUILD + ".madlands";
   public static final String BUILD_OVERWORLD = BUILD + ".overworld";
@@ -12,11 +12,11 @@ public final class Permissions {
   public static final String BUILD_END = BUILD + ".end";
   public static final String BUILD_BACKROOMS = BUILD + ".backrooms";
 
-  // build in a world's spawn
-  // purposefully heterogeneous to prevent `floatyplugin.build.*` allowing building in spawn
+  // build in a world's spawn.
+  // purposefully heterogeneous to prevent `floatyplugin.build.*` allowing building in spawn.
   public static final String BUILD_SPAWN = ROOT + ".build-spawn";
 
-  // go to a world
+  // go to a world.
   public static final String WORLD = ROOT + ".world";
   public static final String WORLD_MADLANDS = WORLD + ".madlands";
   public static final String WORLD_OVERWORLD = WORLD + ".overworld";
@@ -44,7 +44,6 @@ public final class Permissions {
   public static final String HUG = EMOTE + ".hug";
   public static final String SMOOCH = EMOTE + ".smooch";
   public static final String BLAME = EMOTE + ".blame";
-  @SuppressWarnings("SpellCheckingInspection")
   public static final String HIGHFIVE = EMOTE + ".highfive";
   public static final String SUE = EMOTE + ".sue";
 

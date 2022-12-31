@@ -42,19 +42,19 @@ import xyz.tehbrian.floatyplugin.user.UserService;
 public final class TransportationListener implements Listener {
 
   private final LangConfig langConfig;
-  private final FloatyPlugin floatyPlugin;
+  private final FloatyPlugin plugin;
   private final FlightService flightService;
   private final UserService userService;
 
   @Inject
   public TransportationListener(
       final LangConfig langConfig,
-      final FloatyPlugin floatyPlugin,
+      final FloatyPlugin plugin,
       final FlightService flightService,
       final UserService userService
   ) {
     this.langConfig = langConfig;
-    this.floatyPlugin = floatyPlugin;
+    this.plugin = plugin;
     this.flightService = flightService;
     this.userService = userService;
   }
@@ -168,7 +168,7 @@ public final class TransportationListener implements Listener {
 
     player.setSprinting(false);
 
-    player.getServer().getScheduler().scheduleSyncDelayedTask(this.floatyPlugin, () -> player.setSprinting(false), 5);
+    player.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, () -> player.setSprinting(false), 5);
 
     final User user = this.userService.getUser(player);
     final var netherBlindnessCount = user.netherBlindnessCount();

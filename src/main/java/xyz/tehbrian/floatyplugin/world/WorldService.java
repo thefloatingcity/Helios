@@ -100,25 +100,13 @@ public final class WorldService {
 
   public Location getPlayerSpawnLocation(final FloatingWorld floatingWorld) {
     final var worldSpawn = this.getSpawnLocation(floatingWorld);
-    return switch (floatingWorld) {
-      case MADLANDS, OVERWORLD, NETHER, END -> {
-        worldSpawn.add(0, 0, -3);
-        worldSpawn.setPitch(3);
-        yield worldSpawn;
-      }
-      case BACKROOMS -> worldSpawn;
-    };
+    worldSpawn.add(0, 0, -3);
+    worldSpawn.setPitch(3);
+    return worldSpawn;
   }
 
   public Location getSpawnLocation(final FloatingWorld floatingWorld) {
     return this.getWorld(floatingWorld).getSpawnLocation().add(0.5, 0, 0.5);
-  }
-
-  public ChunkGenerator getDefaultWorldGenerator(
-      final String worldName,
-      final @Nullable String id
-  ) {
-    return new VoidGenerator();
   }
 
 }

@@ -22,15 +22,15 @@ import java.util.Calendar;
 @SuppressWarnings({"unused"})
 public final class JoinQuitListener implements Listener {
 
-  private final FloatyPlugin floatyPlugin;
+  private final FloatyPlugin plugin;
   private final LangConfig langConfig;
 
   @Inject
   public JoinQuitListener(
-      final FloatyPlugin floatyPlugin,
+      final FloatyPlugin plugin,
       final LangConfig langConfig
   ) {
-    this.floatyPlugin = floatyPlugin;
+    this.plugin = plugin;
     this.langConfig = langConfig;
   }
 
@@ -64,7 +64,7 @@ public final class JoinQuitListener implements Listener {
       ));
     }
 
-    player.getServer().getScheduler().scheduleSyncDelayedTask(this.floatyPlugin,
+    player.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin,
         () -> {
           final Firework firework = player.getWorld().spawn(player.getLocation().add(0, 2, 0), Firework.class);
           final FireworkMeta fireworkMeta = firework.getFireworkMeta();

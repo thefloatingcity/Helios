@@ -10,22 +10,22 @@ import xyz.tehbrian.floatyplugin.FloatyPlugin;
 
 public final class TransportationTask {
 
-  private final FloatyPlugin floatyPlugin;
+  private final FloatyPlugin plugin;
   private final FlightService flightService;
 
   @Inject
   public TransportationTask(
-      final FloatyPlugin floatyPlugin,
+      final FloatyPlugin plugin,
       final FlightService flightService
   ) {
-    this.floatyPlugin = floatyPlugin;
+    this.plugin = plugin;
     this.flightService = flightService;
   }
 
   public void start() {
-    final Server server = this.floatyPlugin.getServer();
+    final Server server = this.plugin.getServer();
 
-    server.getScheduler().scheduleSyncRepeatingTask(this.floatyPlugin, () -> {
+    server.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
         final World.Environment environment = player.getWorld().getEnvironment();
 

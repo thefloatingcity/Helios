@@ -18,40 +18,40 @@ import xyz.tehbrian.floatyplugin.world.WorldService;
 
 public final class VoidLoopTask {
 
-  private final FloatyPlugin floatyPlugin;
+  private final FloatyPlugin plugin;
   private final WorldService worldService;
   private final LangConfig langConfig;
 
   @Inject
   public VoidLoopTask(
-      final FloatyPlugin floatyPlugin,
+      final FloatyPlugin plugin,
       final WorldService worldService,
       final LangConfig langConfig
   ) {
-    this.floatyPlugin = floatyPlugin;
+    this.plugin = plugin;
     this.worldService = worldService;
     this.langConfig = langConfig;
   }
 
   public void start() {
-    final Server server = this.floatyPlugin.getServer();
+    final Server server = this.plugin.getServer();
     final BukkitScheduler scheduler = server.getScheduler();
 
     // void loop.
-    scheduler.scheduleSyncRepeatingTask(this.floatyPlugin, () -> {
+    scheduler.scheduleSyncRepeatingTask(this.plugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
         final World.Environment environment = player.getWorld().getEnvironment();
         final Location location = player.getLocation();
 
         if (location.getY() < VoidLoopUtil.lowEngage(environment)) { // they're too low.
-          scheduler.runTask(this.floatyPlugin, () -> {
+          scheduler.runTask(this.plugin, () -> {
             location.setY(VoidLoopUtil.lowTeleport(environment));
             final var oldVelocity = player.getVelocity();
             player.teleport(location);
             player.setVelocity(oldVelocity);
           });
         } else if (location.getY() > VoidLoopUtil.highEngage(environment)) { // they're too high.
-          scheduler.runTask(this.floatyPlugin, () -> {
+          scheduler.runTask(this.plugin, () -> {
             location.setY(VoidLoopUtil.highTeleport(environment));
             final var oldVelocity = player.getVelocity();
             player.teleport(location);
@@ -62,7 +62,7 @@ public final class VoidLoopTask {
     }, 0, 20);
 
     // warp.
-    scheduler.scheduleSyncRepeatingTask(this.floatyPlugin, () -> {
+    scheduler.scheduleSyncRepeatingTask(this.plugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
         final float fallDistance = player.getFallDistance();
 
@@ -73,7 +73,7 @@ public final class VoidLoopTask {
               VoidLoopUtil.INSTANT_IN_TIMES
           ));
 
-          scheduler.scheduleSyncDelayedTask(this.floatyPlugin,
+          scheduler.scheduleSyncDelayedTask(this.plugin,
               () -> {
                 final Location spawnLocation = this.worldService.getPlayerSpawnLocation(
                     this.worldService.getFloatingWorld(player.getWorld()));
@@ -101,7 +101,7 @@ public final class VoidLoopTask {
 
           final Location location = player.getLocation();
           for (int i = 0; i < 100; i = i + 2) {
-            scheduler.scheduleSyncDelayedTask(this.floatyPlugin,
+            scheduler.scheduleSyncDelayedTask(this.plugin,
                 () -> player.playSound(location, Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 2), i
             );
           }
@@ -114,7 +114,7 @@ public final class VoidLoopTask {
 
           final Location location = player.getLocation();
           for (int i = 0; i < 100; i = i + 5) {
-            scheduler.scheduleSyncDelayedTask(this.floatyPlugin,
+            scheduler.scheduleSyncDelayedTask(this.plugin,
                 () -> player.playSound(location, Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 1.6F), i
             );
           }
@@ -127,7 +127,7 @@ public final class VoidLoopTask {
 
           final Location location = player.getLocation();
           for (int i = 0; i < 100; i = i + 10) {
-            scheduler.scheduleSyncDelayedTask(this.floatyPlugin,
+            scheduler.scheduleSyncDelayedTask(this.plugin,
                 () -> player.playSound(location, Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 0.9F), i
             );
           }
@@ -140,7 +140,7 @@ public final class VoidLoopTask {
 
           final Location location = player.getLocation();
           for (int i = 0; i < 100; i = i + 20) {
-            scheduler.scheduleSyncDelayedTask(this.floatyPlugin,
+            scheduler.scheduleSyncDelayedTask(this.plugin,
                 () -> player.playSound(location, Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 0.5F), i
             );
           }

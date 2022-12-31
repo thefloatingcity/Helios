@@ -16,15 +16,15 @@ import java.util.List;
 
 public final class LuckPermsService {
 
-  private final FloatyPlugin floatyPlugin;
+  private final FloatyPlugin plugin;
 
   private @Nullable LuckPerms luckPerms;
 
   @Inject
   public LuckPermsService(
-      final FloatyPlugin floatyPlugin
+      final FloatyPlugin plugin
   ) {
-    this.floatyPlugin = floatyPlugin;
+    this.plugin = plugin;
   }
 
   private static @Nullable String getGroupInTrack(final Player player, final Track track) {
@@ -48,7 +48,7 @@ public final class LuckPermsService {
   }
 
   public boolean load() {
-    final RegisteredServiceProvider<LuckPerms> provider = this.floatyPlugin.getServer()
+    final RegisteredServiceProvider<LuckPerms> provider = this.plugin.getServer()
         .getServicesManager().getRegistration(LuckPerms.class);
     if (provider == null) {
       return false;
