@@ -121,7 +121,7 @@ public final class BackroomsGenerator extends ChunkGenerator {
 
   @Override
   public Location getFixedSpawnLocation(final @NotNull World world, final @NotNull Random random) {
-    return new Location(world, 0.0D, ChunkUtil.middleY(world), 0.0D);
+    return new Location(world, 0.0, ChunkUtil.middleY(world) - 2, 0.0);
   }
 
   @Override
