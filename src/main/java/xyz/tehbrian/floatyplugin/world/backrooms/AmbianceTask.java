@@ -5,7 +5,9 @@ import net.kyori.adventure.sound.Sound;
 import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitScheduler;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
+import xyz.tehbrian.floatyplugin.util.Ticks;
 import xyz.tehbrian.floatyplugin.world.FloatingWorld;
 import xyz.tehbrian.floatyplugin.world.WorldService;
 
@@ -38,22 +40,20 @@ public final class AmbianceTask {
 
   public void start() {
     final Server server = this.plugin.getServer();
-
-    final var oneTick = 1;
-    final var oneSecond = oneTick * 20;
+    final BukkitScheduler scheduler = server.getScheduler();
 
     // random noises.
-    server.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> {
+    scheduler.scheduleSyncRepeatingTask(this.plugin, () -> {
       final World backrooms = this.worldService.getWorld(FloatingWorld.BACKROOMS);
       for (final Player player : backrooms.getPlayers()) {
         if (RANDOM.nextFloat() < 0.2F) {
           player.playSound(Sound.sound(org.bukkit.Sound.AMBIENT_CAVE, Sound.Source.MASTER, 10F, 0.6F));
         }
       }
-    }, 1, 29 * oneSecond);
+    }, 1, Ticks.in(Duration.ofSeconds(29)));
 
     // spook.
-    server.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> {
+    scheduler.scheduleSyncRepeatingTask(this.plugin, () -> {
       final World backrooms = this.worldService.getWorld(FloatingWorld.BACKROOMS);
       final var now = Instant.now();
       for (final Player player : backrooms.getPlayers()) {
@@ -85,7 +85,30 @@ public final class AmbianceTask {
 
         this.lastSpook.put(player.getUniqueId(), Instant.now());
       }
-    }, 1, 5 * oneSecond);
+    }, 1, Ticks.in(Duration.ofSeconds(6)));
+
+    // random teleport up + spooky noise.
+    scheduler.runTaskTimer(this.plugin, () -> {
+      final World backrooms = this.worldService.getWorld(FloatingWorld.BACKROOMS);
+      for (final Player player : backrooms.getPlayers()) {
+        if (RANDOM.nextFloat() > 0.05F) {
+          continue;
+        }
+
+        player.playSound(Sound.sound(
+            org.bukkit.Sound.ENTITY_ALLAY_HURT,
+            Sound.Source.MASTER,
+            100,
+            RANDOM.nextFloat(0.5F, 0.6F)
+        ));
+
+        final var previous = player.getLocation();
+        final var up = previous.clone().add(0, 50, 0);
+
+        player.teleport(up);
+        scheduler.runTaskLater(this.plugin, () -> player.teleport(previous), 7);
+      }
+    }, 1, Ticks.in(Duration.ofSeconds(57)) - 7);
   }
 
 }
