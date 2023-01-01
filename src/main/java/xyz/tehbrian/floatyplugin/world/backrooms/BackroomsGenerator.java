@@ -4,13 +4,11 @@ import org.bukkit.Axis;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.Orientable;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.generator.WorldInfo;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Range;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,27 +16,7 @@ import java.util.Random;
 
 public final class BackroomsGenerator extends ChunkGenerator {
 
-  private static void setColumn(
-      final int chunkX, final int middleY, final int chunkZ,
-      final Material material, final ChunkData chunkData
-  ) {
-    ChunkUtil.setRegionInclusive(
-        chunkX, middleY - 2, chunkZ,
-        chunkX, middleY + 2, chunkZ,
-        material, chunkData
-    );
-  }
-
-  private static void setColumn(
-      final int chunkX, final int middleY, final int chunkZ,
-      final BlockData blockData, final ChunkData chunkData
-  ) {
-    ChunkUtil.setRegionInclusive(
-        chunkX, middleY - 2, chunkZ,
-        chunkX, middleY + 2, chunkZ,
-        blockData, chunkData
-    );
-  }
+  public static final int MIN_LENGTH_TO_CHANGE_DIRECTIONS = 3;
 
   private static void setWall(
       final int chunkX, final int middleY, final int chunkZ,
@@ -71,52 +49,6 @@ public final class BackroomsGenerator extends ChunkGenerator {
     chunkData.setBlock(chunkX, middleY + 3, chunkZ, Palette.LAMP_GLASS);
     chunkData.setBlock(chunkX, middleY + 4, chunkZ, Palette.LAMP);
     chunkData.setBlock(chunkX, middleY + 4, chunkZ, Palette.LAMP_DATA);
-  }
-
-  /**
-   * Calculates the number of sides of a block that are not taken by
-   * {@link Material#AIR} or {@link Palette#SPACE}.
-   * <p>
-   * This does not take into account the bottom or top sides of the block.
-   *
-   * @param x         the x of the block
-   * @param y         the y of the block
-   * @param z         the z of the block
-   * @param chunkData the chunk to search within
-   * @return the number of sides that are air
-   */
-  private static @Range(from = 0, to = 4) Integer openSides(
-      final int x,
-      final int y,
-      final int z,
-      final ChunkGenerator.ChunkData chunkData
-  ) {
-    int result = 0;
-    final var posX = chunkData.getBlockData(x + 1, y, z).getMaterial();
-    if (isSpace(posX)) {
-      result++;
-    }
-    final var negX = chunkData.getBlockData(x - 1, y, z).getMaterial();
-    if (isSpace(negX)) {
-      result++;
-    }
-    final var posZ = chunkData.getBlockData(x, y, z + 1).getMaterial();
-    if (isSpace(posZ)) {
-      result++;
-    }
-    final var negZ = chunkData.getBlockData(x, y, z - 1).getMaterial();
-    if (isSpace(negZ)) {
-      result++;
-    }
-    return result;
-  }
-
-  /**
-   * @param material the material to check
-   * @return whether the material is {@link Palette#SPACE} or {@link Material#AIR}
-   */
-  private static boolean isSpace(final Material material) {
-    return material == Palette.SPACE || material == Material.AIR;
   }
 
   @Override
@@ -158,36 +90,42 @@ public final class BackroomsGenerator extends ChunkGenerator {
     setLight(15, middleY, 7, chunkData);
     setLight(15, middleY, 15, chunkData);
 
-    // air area.
+    // set main area to air before walls are placed.
     ChunkUtil.setRegionInclusive(0, middleY - 2, 0, 15, middleY + 2, 15, Material.AIR, chunkData);
 
     // walls.
-    final int minLengthToChangeDirections = 3;
     for (int iteration = 0; iteration < 9; iteration++) {
       final int maxLength = random.nextInt(5, 26);
       final boolean isShort = random.nextFloat() < 0.15F; // 15% chance.
 
-      int length = 0; // the overall length of the line.
-      int directionLength = 0; // the length since the last direction change.
-      Direction direction = randomDirection();
+      int length = 0; // the current total length of the line.
+      int directionLength = 0; // the current length since the last direction change.
+      Direction direction = randomDirection(); // the current direction.
+
+      // current point.
       int x = random.nextInt(0, 16);
       int z = random.nextInt(0, 16);
+
       while (!hasHitWall(x, z) && length < maxLength) {
+        // place the wall at the current point.
         if (isShort) {
           setShortWall(x, middleY, z, chunkData);
         } else {
           setWall(x, middleY, z, chunkData);
         }
 
+        // move the point in the current direction.
         switch (direction) {
           case NORTH -> z--;
           case SOUTH -> z++;
           case EAST -> x++;
           case WEST -> x--;
-          default -> throw new IllegalArgumentException("wtf");
+          default -> throw new IllegalArgumentException("wtf?");
         }
 
-        if (directionLength >= minLengthToChangeDirections && random.nextFloat() < 0.20F) { // 20% chance to pick a new direction.
+        // 20% chance to pick a new direction.
+        if (directionLength >= MIN_LENGTH_TO_CHANGE_DIRECTIONS
+            && random.nextFloat() < 0.20F) {
           direction = randomDirectionNot(direction);
         }
 
@@ -206,16 +144,16 @@ public final class BackroomsGenerator extends ChunkGenerator {
   }
 
   /**
-   * Gives a new random direction that is not the current direction.
+   * Returns a random direction that is not the current direction.
    *
    * @param current the banned direction
-   * @return a new random direction
+   * @return a new, random direction
    */
   private static Direction randomDirectionNot(final Direction current) {
     final List<Direction> available = Arrays.stream(Direction.values())
-        .filter(d -> d != current)
+        .filter(d -> d != current) // filter out the current one.
         .toList();
-    assert available.size() == 3;
+    assert available.size() == 3; // four directions with one omitted.
     return available.get(new Random().nextInt(available.size()));
   }
 
