@@ -13,11 +13,11 @@ import xyz.tehbrian.floatyplugin.user.UserService;
 
 public final class ElevatorMusicTask {
 
-  public static final int FALL_DISTANCE_MIN = 150;
+  private static final int FALL_DISTANCE_TO_ACTIVATE = 150;
 
-  private static final Key SOUND_KEY = Key.key("floating", "music.elevator");
-  private static final Sound SOUND = Sound.sound(SOUND_KEY, Sound.Source.MUSIC, 1, 1);
-  private static final SoundStop SOUND_STOP = SoundStop.named(SOUND_KEY);
+  private static final Key ELEVATOR_MUSIC = Key.key("floating", "music.elevator");
+  private static final Sound SOUND = Sound.sound(ELEVATOR_MUSIC, Sound.Source.MUSIC, 1, 1);
+  private static final SoundStop SOUND_STOP = SoundStop.named(ELEVATOR_MUSIC);
 
   private final FloatyPlugin plugin;
   private final UserService userService;
@@ -33,16 +33,14 @@ public final class ElevatorMusicTask {
 
   public void start() {
     final Server server = this.plugin.getServer();
-
     server.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
         if (player.getWorld().getEnvironment() != World.Environment.NORMAL) {
-          return;
+          continue;
         }
 
         final User user = this.userService.getUser(player);
-
-        if (player.getFallDistance() > FALL_DISTANCE_MIN) {
+        if (player.getFallDistance() > FALL_DISTANCE_TO_ACTIVATE) {
           if (!user.elevatorMusicPlaying()) {
             player.playSound(SOUND);
             user.elevatorMusicPlaying(true);
