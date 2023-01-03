@@ -55,14 +55,14 @@ public final class WarpTask {
       for (final Player player : server.getOnlinePlayers()) {
         final float fallDistance = player.getFallDistance();
         if (fallDistance >= 4000) {
-          player.showTitle(Title.title(
-              this.langConfig.c(NodePath.path("warp", "max")),
-              this.langConfig.c(NodePath.path("warp", "max_sub")),
-              INSTANT_IN_TIMES
-          ));
-
           scheduler.scheduleSyncDelayedTask(this.plugin,
               () -> {
+                player.showTitle(Title.title(
+                    this.langConfig.c(NodePath.path("warp", "max")),
+                    this.langConfig.c(NodePath.path("warp", "max_sub")),
+                    INSTANT_IN_TIMES
+                ));
+
                 final Location spawn = this.worldService.getSpawnPoint(Realm.from(player.getWorld()));
 
                 player.setFallDistance(0);
