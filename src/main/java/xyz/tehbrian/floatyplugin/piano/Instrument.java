@@ -26,7 +26,7 @@ public enum Instrument {
     this.sound = sound;
   }
 
-  public Sound asBukkitSound() {
+  public Sound sound() {
     return this.sound;
   }
 }

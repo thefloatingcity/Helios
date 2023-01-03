@@ -1,21 +1,19 @@
-package xyz.tehbrian.floatyplugin.playtime;
-
-import net.kyori.adventure.util.Ticks;
-import org.bukkit.Statistic;
-import org.bukkit.entity.Player;
+package xyz.tehbrian.floatyplugin;
 
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-public final class PlaytimeUtil {
+public final class DurationFormatter {
 
   private static final float MILLIS_IN_SECOND = 1000;
   private static final float MILLIS_IN_MINUTE = MILLIS_IN_SECOND * 60;
   private static final float MILLIS_IN_HOUR = MILLIS_IN_MINUTE * 60;
   private static final float MILLIS_IN_DAY = MILLIS_IN_HOUR * 24;
 
-  private PlaytimeUtil() {
+  private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.##");
+
+  private DurationFormatter() {
   }
 
   public static String fancifyTime(final Duration duration) {
@@ -32,32 +30,26 @@ public final class PlaytimeUtil {
   }
 
   public static String fancifyTime(final Duration duration, final TimeUnit timeUnit) {
-    final var decimalFormat = new DecimalFormat("#.##");
-
     final var ms = duration.toMillis();
     return switch (timeUnit) {
       case DAYS -> {
         final var value = ms / MILLIS_IN_DAY;
-        yield decimalFormat.format(value) + " " + (value == 1 ? "day" : "days");
+        yield DECIMAL_FORMAT.format(value) + " " + (value == 1 ? "day" : "days");
       }
       case HOURS -> {
         final var value = ms / MILLIS_IN_HOUR;
-        yield decimalFormat.format(value) + " " + (value == 1 ? "hour" : "hours");
+        yield DECIMAL_FORMAT.format(value) + " " + (value == 1 ? "hour" : "hours");
       }
       case MINUTES -> {
         final var value = ms / MILLIS_IN_MINUTE;
-        yield decimalFormat.format(value) + " " + (value == 1 ? "minute" : "minutes");
+        yield DECIMAL_FORMAT.format(value) + " " + (value == 1 ? "minute" : "minutes");
       }
       case SECONDS -> {
         final var value = ms / MILLIS_IN_SECOND;
-        yield decimalFormat.format(value) + " " + (value == 1 ? "second" : "seconds");
+        yield DECIMAL_FORMAT.format(value) + " " + (value == 1 ? "second" : "seconds");
       }
-      default -> decimalFormat.format(ms) + " " + (ms == 1 ? "millisecond" : "milliseconds");
+      default -> DECIMAL_FORMAT.format(ms) + " " + (ms == 1 ? "millisecond" : "milliseconds");
     };
-  }
-
-  public static Duration getTimePlayed(final Player player) {
-    return Ticks.duration(player.getStatistic(Statistic.PLAY_ONE_MINUTE));
   }
 
 }

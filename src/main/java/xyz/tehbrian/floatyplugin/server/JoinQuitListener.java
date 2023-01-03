@@ -12,9 +12,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.spongepowered.configurate.NodePath;
+import xyz.tehbrian.floatyplugin.DurationFormatter;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
-import xyz.tehbrian.floatyplugin.playtime.PlaytimeUtil;
 
 import java.time.Duration;
 import java.util.Calendar;
@@ -49,7 +49,7 @@ public final class JoinQuitListener implements Listener {
           Calendar.getInstance().getTimeInMillis() - player.getLastPlayed());
       player.sendMessage(this.langConfig.c(
           NodePath.path("motd"),
-          Placeholder.unparsed("last", PlaytimeUtil.fancifyTime(timeSinceLastPlayed))
+          Placeholder.unparsed("last", DurationFormatter.fancifyTime(timeSinceLastPlayed))
       ));
     } else {
       event.joinMessage(this.langConfig.c(

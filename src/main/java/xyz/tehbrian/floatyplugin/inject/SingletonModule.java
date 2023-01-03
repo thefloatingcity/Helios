@@ -7,11 +7,11 @@ import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 import xyz.tehbrian.floatyplugin.config.EmotesConfig;
 import xyz.tehbrian.floatyplugin.config.InventoriesConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
-import xyz.tehbrian.floatyplugin.realm.Transposer;
-import xyz.tehbrian.floatyplugin.transportation.FlightService;
-import xyz.tehbrian.floatyplugin.tag.TagGame;
-import xyz.tehbrian.floatyplugin.user.UserService;
 import xyz.tehbrian.floatyplugin.realm.RealmService;
+import xyz.tehbrian.floatyplugin.realm.Transposer;
+import xyz.tehbrian.floatyplugin.tag.TagGame;
+import xyz.tehbrian.floatyplugin.transportation.FlightService;
+import xyz.tehbrian.floatyplugin.user.UserService;
 
 public final class SingletonModule extends AbstractModule {
 

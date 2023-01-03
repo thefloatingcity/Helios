@@ -12,6 +12,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.spongepowered.configurate.ConfigurateException;
+import xyz.tehbrian.floatyplugin.ascension.AscendCommand;
+import xyz.tehbrian.floatyplugin.ascension.PlaytimeCommand;
 import xyz.tehbrian.floatyplugin.backrooms.RandomSpooks;
 import xyz.tehbrian.floatyplugin.backrooms.SpaceBreakListener;
 import xyz.tehbrian.floatyplugin.config.BooksConfig;
@@ -19,9 +21,6 @@ import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 import xyz.tehbrian.floatyplugin.config.EmotesConfig;
 import xyz.tehbrian.floatyplugin.config.InventoriesConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
-import xyz.tehbrian.floatyplugin.inject.PluginModule;
-import xyz.tehbrian.floatyplugin.inject.SingletonModule;
-import xyz.tehbrian.floatyplugin.transportation.FlyCommand;
 import xyz.tehbrian.floatyplugin.fun.ActCommands;
 import xyz.tehbrian.floatyplugin.fun.ElevatorMusicTask;
 import xyz.tehbrian.floatyplugin.fun.FishingListener;
@@ -29,11 +28,18 @@ import xyz.tehbrian.floatyplugin.fun.FunCommands;
 import xyz.tehbrian.floatyplugin.fun.HatCommand;
 import xyz.tehbrian.floatyplugin.fun.PackCommand;
 import xyz.tehbrian.floatyplugin.fun.RainMusicListener;
+import xyz.tehbrian.floatyplugin.inject.PluginModule;
+import xyz.tehbrian.floatyplugin.inject.SingletonModule;
 import xyz.tehbrian.floatyplugin.milk.MilkCommand;
 import xyz.tehbrian.floatyplugin.milk.MilkListener;
 import xyz.tehbrian.floatyplugin.piano.PianoCommand;
 import xyz.tehbrian.floatyplugin.piano.PianoListener;
-import xyz.tehbrian.floatyplugin.playtime.PlaytimeCommands;
+import xyz.tehbrian.floatyplugin.realm.AntiBuildListener;
+import xyz.tehbrian.floatyplugin.realm.RealmService;
+import xyz.tehbrian.floatyplugin.realm.RespawnListener;
+import xyz.tehbrian.floatyplugin.realm.SpawnProtectionListener;
+import xyz.tehbrian.floatyplugin.realm.TransposeCommands;
+import xyz.tehbrian.floatyplugin.realm.VoidGenerator;
 import xyz.tehbrian.floatyplugin.server.ChatListener;
 import xyz.tehbrian.floatyplugin.server.DiscordCommand;
 import xyz.tehbrian.floatyplugin.server.JoinQuitListener;
@@ -44,18 +50,13 @@ import xyz.tehbrian.floatyplugin.staff.BroadcastCommand;
 import xyz.tehbrian.floatyplugin.staff.FloatyPluginCommand;
 import xyz.tehbrian.floatyplugin.tag.TagCommand;
 import xyz.tehbrian.floatyplugin.tag.TagListener;
-import xyz.tehbrian.floatyplugin.transportation.PortalTask;
+import xyz.tehbrian.floatyplugin.transportation.FlyCommand;
+import xyz.tehbrian.floatyplugin.transportation.PortalUseMessageTask;
 import xyz.tehbrian.floatyplugin.transportation.TransportationListener;
 import xyz.tehbrian.floatyplugin.transportation.TransportationTask;
 import xyz.tehbrian.floatyplugin.void_loop.DamageListener;
 import xyz.tehbrian.floatyplugin.void_loop.MobVoidLoopListener;
 import xyz.tehbrian.floatyplugin.void_loop.PlayerVoidLoopTask;
-import xyz.tehbrian.floatyplugin.realm.AntiBuildListener;
-import xyz.tehbrian.floatyplugin.realm.RespawnListener;
-import xyz.tehbrian.floatyplugin.realm.SpawnProtectionListener;
-import xyz.tehbrian.floatyplugin.realm.VoidGenerator;
-import xyz.tehbrian.floatyplugin.realm.TransposeCommands;
-import xyz.tehbrian.floatyplugin.realm.RealmService;
 import xyz.tehbrian.floatyplugin.void_loop.WarpTask;
 
 import java.util.List;
@@ -100,6 +101,7 @@ public final class FloatyPlugin extends TehPlugin {
     this.setupListeners();
     this.setupTasks();
 
+    // world creation must occur as a delayed init task.
     this.getServer().getScheduler().runTask(this, () -> this.injector.getInstance(RealmService.class).init());
   }
 
@@ -181,6 +183,7 @@ public final class FloatyPlugin extends TehPlugin {
     }
 
     this.injector.getInstance(ActCommands.class).register(commandManager);
+    this.injector.getInstance(AscendCommand.class).register(commandManager);
     this.injector.getInstance(BroadcastCommand.class).register(commandManager);
     this.injector.getInstance(DiscordCommand.class).register(commandManager);
     this.injector.getInstance(FloatyPluginCommand.class).register(commandManager);
@@ -191,22 +194,22 @@ public final class FloatyPlugin extends TehPlugin {
     this.injector.getInstance(MilkCommand.class).register(commandManager);
     this.injector.getInstance(PackCommand.class).register(commandManager);
     this.injector.getInstance(PianoCommand.class).register(commandManager);
-    this.injector.getInstance(PlaytimeCommands.class).register(commandManager);
+    this.injector.getInstance(PlaytimeCommand.class).register(commandManager);
     this.injector.getInstance(RulesCommand.class).register(commandManager);
     this.injector.getInstance(TagCommand.class).register(commandManager);
-    this.injector.getInstance(VoteCommand.class).register(commandManager);
     this.injector.getInstance(TransposeCommands.class).register(commandManager);
+    this.injector.getInstance(VoteCommand.class).register(commandManager);
 
     return true;
   }
 
   private void setupTasks() {
     this.injector.getInstance(ElevatorMusicTask.class).start();
-    this.injector.getInstance(TransportationTask.class).start();
     this.injector.getInstance(PlayerVoidLoopTask.class).start();
-    this.injector.getInstance(WarpTask.class).start();
-    this.injector.getInstance(PortalTask.class).start();
+    this.injector.getInstance(PortalUseMessageTask.class).start();
     this.injector.getInstance(RandomSpooks.class).start();
+    this.injector.getInstance(TransportationTask.class).start();
+    this.injector.getInstance(WarpTask.class).start();
   }
 
   @Override

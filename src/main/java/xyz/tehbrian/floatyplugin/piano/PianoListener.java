@@ -78,7 +78,7 @@ public final class PianoListener implements Listener {
 
     player.getWorld().playSound(
         player.getEyeLocation(),
-        this.userService.getUser(player).piano().instrument().asBukkitSound(),
+        this.userService.getUser(player).piano().instrument().sound(),
         SoundCategory.MASTER,
         3,
         Float.parseFloat(Format.plain(lore.get(1)))

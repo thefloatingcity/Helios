@@ -23,7 +23,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.Permission;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
-import xyz.tehbrian.floatyplugin.realm.RealmService;
 
 public final class AntiBuildListener implements Listener {
 

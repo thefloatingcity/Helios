@@ -14,7 +14,7 @@ import java.util.Objects;
 /**
  * Responsible for transposing players to the different realms.
  */
-public class Transposer {
+public final class Transposer {
 
   private final FloatyPlugin plugin;
   private final RealmService realmService;
