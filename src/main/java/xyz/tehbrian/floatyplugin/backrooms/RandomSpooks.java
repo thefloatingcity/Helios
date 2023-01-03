@@ -8,8 +8,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.Ticks;
-import xyz.tehbrian.floatyplugin.world.FloatingWorld;
-import xyz.tehbrian.floatyplugin.world.WorldService;
+import xyz.tehbrian.floatyplugin.realm.Realm;
+import xyz.tehbrian.floatyplugin.realm.RealmService;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -27,15 +27,15 @@ public final class RandomSpooks {
   private final Map<UUID, Instant> lastJitter = new HashMap<>();
 
   private final FloatyPlugin plugin;
-  private final WorldService worldService;
+  private final RealmService realmService;
 
   @Inject
   public RandomSpooks(
       final FloatyPlugin plugin,
-      final WorldService worldService
+      final RealmService realmService
   ) {
     this.plugin = plugin;
-    this.worldService = worldService;
+    this.realmService = realmService;
   }
 
   public void start() {
@@ -44,7 +44,7 @@ public final class RandomSpooks {
 
     // slowed down cave noises.
     scheduler.scheduleSyncRepeatingTask(this.plugin, () -> {
-      final World backrooms = this.worldService.getWorld(FloatingWorld.BACKROOMS);
+      final World backrooms = this.realmService.getWorld(Realm.BACKROOMS);
       for (final Player player : backrooms.getPlayers()) {
         if (RANDOM.nextFloat() < 0.2F) {
           player.playSound(Sound.sound(org.bukkit.Sound.AMBIENT_CAVE, Sound.Source.MASTER, 10F, 0.6F));
@@ -54,7 +54,7 @@ public final class RandomSpooks {
 
     // high-pitched noise and jitter camera.
     scheduler.scheduleSyncRepeatingTask(this.plugin, () -> {
-      final World backrooms = this.worldService.getWorld(FloatingWorld.BACKROOMS);
+      final World backrooms = this.realmService.getWorld(Realm.BACKROOMS);
       final var now = Instant.now();
       for (final Player player : backrooms.getPlayers()) {
         if (RANDOM.nextFloat() > 0.1F) {
@@ -89,7 +89,7 @@ public final class RandomSpooks {
 
     // temporary teleport to black area and slower noise.
     scheduler.runTaskTimer(this.plugin, () -> {
-      final World backrooms = this.worldService.getWorld(FloatingWorld.BACKROOMS);
+      final World backrooms = this.realmService.getWorld(Realm.BACKROOMS);
       for (final Player player : backrooms.getPlayers()) {
         if (RANDOM.nextFloat() > 0.05F) {
           continue;

@@ -47,12 +47,12 @@ import xyz.tehbrian.floatyplugin.transportation.TransportationListener;
 import xyz.tehbrian.floatyplugin.transportation.TransportationTask;
 import xyz.tehbrian.floatyplugin.void_loop.VoidLoopListener;
 import xyz.tehbrian.floatyplugin.void_loop.VoidLoopTask;
-import xyz.tehbrian.floatyplugin.world.AntiBuildListener;
-import xyz.tehbrian.floatyplugin.world.DeathListener;
-import xyz.tehbrian.floatyplugin.world.SpawnProtectionListener;
-import xyz.tehbrian.floatyplugin.world.VoidGenerator;
-import xyz.tehbrian.floatyplugin.world.WorldCommands;
-import xyz.tehbrian.floatyplugin.world.WorldService;
+import xyz.tehbrian.floatyplugin.realm.AntiBuildListener;
+import xyz.tehbrian.floatyplugin.realm.RespawnListener;
+import xyz.tehbrian.floatyplugin.realm.SpawnProtectionListener;
+import xyz.tehbrian.floatyplugin.realm.VoidGenerator;
+import xyz.tehbrian.floatyplugin.realm.TransposeCommands;
+import xyz.tehbrian.floatyplugin.realm.RealmService;
 
 import java.util.List;
 
@@ -96,7 +96,7 @@ public final class FloatyPlugin extends TehPlugin {
     this.setupListeners();
     this.setupTasks();
 
-    this.getServer().getScheduler().runTask(this, () -> this.injector.getInstance(WorldService.class).init());
+    this.getServer().getScheduler().runTask(this, () -> this.injector.getInstance(RealmService.class).init());
   }
 
   @Override
@@ -142,7 +142,7 @@ public final class FloatyPlugin extends TehPlugin {
         this.injector.getInstance(AntiBuildListener.class),
         this.injector.getInstance(SpaceBreakListener.class),
         this.injector.getInstance(ChatListener.class),
-        this.injector.getInstance(DeathListener.class),
+        this.injector.getInstance(RespawnListener.class),
         this.injector.getInstance(FishingListener.class),
         this.injector.getInstance(JoinQuitListener.class),
         this.injector.getInstance(MilkListener.class),
@@ -190,7 +190,7 @@ public final class FloatyPlugin extends TehPlugin {
     this.injector.getInstance(RulesCommand.class).register(commandManager);
     this.injector.getInstance(TagCommand.class).register(commandManager);
     this.injector.getInstance(VoteCommand.class).register(commandManager);
-    this.injector.getInstance(WorldCommands.class).register(commandManager);
+    this.injector.getInstance(TransposeCommands.class).register(commandManager);
 
     return true;
   }

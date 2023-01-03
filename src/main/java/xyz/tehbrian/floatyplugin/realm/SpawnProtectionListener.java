@@ -1,4 +1,4 @@
-package xyz.tehbrian.floatyplugin.world;
+package xyz.tehbrian.floatyplugin.realm;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -94,8 +94,8 @@ public final class SpawnProtectionListener implements Listener {
       final Player player,
       final Location interactionLocation
   ) {
-    if (interactionLocation.distanceSquared(interactionLocation
-        .getWorld().getSpawnLocation()) < SPAWN_PROTECTION_RADIUS_SQUARED
+    final Location worldSpawn = interactionLocation.getWorld().getSpawnLocation();
+    if (interactionLocation.distanceSquared(worldSpawn) < SPAWN_PROTECTION_RADIUS_SQUARED
         && !player.hasPermission(Permission.BUILD_SPAWN)) {
       event.setCancelled(true);
     }

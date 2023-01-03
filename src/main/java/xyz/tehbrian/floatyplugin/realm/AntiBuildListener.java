@@ -1,4 +1,4 @@
-package xyz.tehbrian.floatyplugin.world;
+package xyz.tehbrian.floatyplugin.realm;
 
 import com.google.inject.Inject;
 import org.bukkit.entity.Player;
@@ -23,16 +23,17 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.Permission;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
+import xyz.tehbrian.floatyplugin.realm.RealmService;
 
 public final class AntiBuildListener implements Listener {
 
   private final LangConfig langConfig;
-  private final WorldService worldService;
+  private final RealmService realmService;
 
   @Inject
-  public AntiBuildListener(final LangConfig langConfig, final WorldService worldService) {
+  public AntiBuildListener(final LangConfig langConfig, final RealmService realmService) {
     this.langConfig = langConfig;
-    this.worldService = worldService;
+    this.realmService = realmService;
   }
 
   @EventHandler(priority = EventPriority.LOW)
@@ -110,7 +111,7 @@ public final class AntiBuildListener implements Listener {
   }
 
   private <T extends Cancellable> void onAntiBuild(final T event, final Player player, final boolean sendMessage) {
-    final var permission = switch (this.worldService.getFloatingWorld(player.getWorld())) {
+    final var permission = switch (this.realmService.getRealm(player.getWorld())) {
       case MADLANDS -> Permission.BUILD_MADLANDS;
       case OVERWORLD -> Permission.BUILD_OVERWORLD;
       case NETHER -> Permission.BUILD_NETHER;

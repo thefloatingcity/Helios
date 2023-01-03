@@ -14,7 +14,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
-import xyz.tehbrian.floatyplugin.world.WorldService;
+import xyz.tehbrian.floatyplugin.realm.RealmService;
 
 import java.time.Duration;
 
@@ -31,17 +31,17 @@ public final class VoidLoopTask {
       Duration.ofSeconds(1)
   );
   private final FloatyPlugin plugin;
-  private final WorldService worldService;
+  private final RealmService realmService;
   private final LangConfig langConfig;
 
   @Inject
   public VoidLoopTask(
       final FloatyPlugin plugin,
-      final WorldService worldService,
+      final RealmService realmService,
       final LangConfig langConfig
   ) {
     this.plugin = plugin;
-    this.worldService = worldService;
+    this.realmService = realmService;
     this.langConfig = langConfig;
   }
 
@@ -87,8 +87,8 @@ public final class VoidLoopTask {
 
           scheduler.scheduleSyncDelayedTask(this.plugin,
               () -> {
-                final Location spawnLocation = this.worldService.getPlayerSpawnLocation(
-                    this.worldService.getFloatingWorld(player.getWorld()));
+                final Location spawnLocation = this.realmService.getSpawnPoint(
+                    this.realmService.getRealm(player.getWorld()));
 
                 player.setFallDistance(0);
                 player.teleport(spawnLocation);

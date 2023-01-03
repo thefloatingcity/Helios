@@ -1,4 +1,4 @@
-package xyz.tehbrian.floatyplugin.world;
+package xyz.tehbrian.floatyplugin.realm;
 
 import org.bukkit.Location;
 import org.bukkit.World;

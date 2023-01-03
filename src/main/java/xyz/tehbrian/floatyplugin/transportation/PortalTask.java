@@ -9,8 +9,8 @@ import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.Permission;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
-import xyz.tehbrian.floatyplugin.world.FloatingWorld;
-import xyz.tehbrian.floatyplugin.world.WorldService;
+import xyz.tehbrian.floatyplugin.realm.Realm;
+import xyz.tehbrian.floatyplugin.realm.RealmService;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -27,17 +27,17 @@ public final class PortalTask {
   private static final Map<Player, Instant> LAST_MESSAGE_TIME = new HashMap<>();
 
   private final FloatyPlugin plugin;
-  private final WorldService worldService;
+  private final RealmService realmService;
   private final LangConfig langConfig;
 
   @Inject
   public PortalTask(
       final FloatyPlugin plugin,
-      final WorldService worldService,
+      final RealmService realmService,
       final LangConfig langConfig
   ) {
     this.plugin = plugin;
-    this.worldService = worldService;
+    this.realmService = realmService;
     this.langConfig = langConfig;
   }
 
@@ -73,9 +73,9 @@ public final class PortalTask {
   }
 
   private void onNetherPortal(final Player player) {
-    final FloatingWorld floatingWorld = this.worldService.getFloatingWorld(player.getWorld());
+    final Realm realm = this.realmService.getRealm(player.getWorld());
 
-    switch (floatingWorld) {
+    switch (realm) {
       case MADLANDS -> {
         if (player.hasPermission(Permission.WORLD_NETHER)) {
           this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "wrong_world")));
@@ -83,15 +83,15 @@ public final class PortalTask {
           this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "no_permission")));
         }
       }
-      case NETHER -> player.teleport(this.worldService.getPlayerSpawnLocation(FloatingWorld.OVERWORLD));
-      default -> player.teleport(this.worldService.getPlayerSpawnLocation(FloatingWorld.NETHER));
+      case NETHER -> player.teleport(this.realmService.getSpawnPoint(Realm.OVERWORLD));
+      default -> player.teleport(this.realmService.getSpawnPoint(Realm.NETHER));
     }
   }
 
   private void onEndPortal(final Player player) {
-    final FloatingWorld floatingWorld = this.worldService.getFloatingWorld(player.getWorld());
+    final Realm realm = this.realmService.getRealm(player.getWorld());
 
-    switch (floatingWorld) {
+    switch (realm) {
       case MADLANDS -> {
         if (player.hasPermission(Permission.WORLD_END)) {
           this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "wrong_world")));
@@ -101,7 +101,7 @@ public final class PortalTask {
       }
       case END -> { // vanilla behavior takes over, player goes to overworld
       }
-      default -> player.teleport(this.worldService.getPlayerSpawnLocation(FloatingWorld.END));
+      default -> player.teleport(this.realmService.getSpawnPoint(Realm.END));
     }
   }
 

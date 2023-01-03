@@ -7,18 +7,18 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import xyz.tehbrian.floatyplugin.world.FloatingWorld;
-import xyz.tehbrian.floatyplugin.world.WorldService;
+import xyz.tehbrian.floatyplugin.realm.Realm;
+import xyz.tehbrian.floatyplugin.realm.RealmService;
 
 public final class SpaceBreakListener implements Listener {
 
-  private final WorldService worldService;
+  private final RealmService realmService;
 
   @Inject
   public SpaceBreakListener(
-      final WorldService worldService
+      final RealmService realmService
   ) {
-    this.worldService = worldService;
+    this.realmService = realmService;
   }
 
   /**
@@ -30,7 +30,7 @@ public final class SpaceBreakListener implements Listener {
   public void onSpaceBreak(final BlockBreakEvent event) {
     final Block block = event.getBlock();
     final World world = block.getWorld();
-    if (this.worldService.getFloatingWorld(world) != FloatingWorld.BACKROOMS) {
+    if (this.realmService.getRealm(world) != Realm.BACKROOMS) {
       return;
     }
 
