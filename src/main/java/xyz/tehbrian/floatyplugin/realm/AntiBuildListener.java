@@ -27,12 +27,12 @@ import xyz.tehbrian.floatyplugin.config.LangConfig;
 public final class AntiBuildListener implements Listener {
 
   private final LangConfig langConfig;
-  private final RealmService realmService;
 
   @Inject
-  public AntiBuildListener(final LangConfig langConfig, final RealmService realmService) {
+  public AntiBuildListener(
+      final LangConfig langConfig
+  ) {
     this.langConfig = langConfig;
-    this.realmService = realmService;
   }
 
   @EventHandler(priority = EventPriority.LOW)
@@ -110,7 +110,7 @@ public final class AntiBuildListener implements Listener {
   }
 
   private <T extends Cancellable> void onAntiBuild(final T event, final Player player, final boolean sendMessage) {
-    final var permission = switch (this.realmService.getRealm(player.getWorld())) {
+    final var permission = switch (Realm.from(player.getWorld())) {
       case MADLANDS -> Permission.BUILD_MADLANDS;
       case OVERWORLD -> Permission.BUILD_OVERWORLD;
       case NETHER -> Permission.BUILD_NETHER;

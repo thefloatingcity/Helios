@@ -17,24 +17,24 @@ import java.util.Objects;
 public final class Transposer {
 
   private final FloatyPlugin plugin;
-  private final RealmService realmService;
+  private final WorldService worldService;
 
   @Inject
   public Transposer(
       final FloatyPlugin plugin,
-      final RealmService realmService
+      final WorldService worldService
   ) {
     this.plugin = plugin;
-    this.realmService = realmService;
+    this.worldService = worldService;
   }
 
   public void transpose(final Player player, final Realm destination) {
-    final Realm current = this.realmService.getRealm(player.getWorld());
+    final Realm current = Realm.from(player.getWorld());
     this.setPreviousLocation(player, current);
 
     player.teleport(Objects.requireNonNullElseGet(
         this.getPreviousLocation(player, destination),
-        () -> this.realmService.getSpawnPoint(destination)
+        () -> this.worldService.getSpawnPoint(destination)
     ));
     player.setFallDistance(0);
   }
@@ -45,7 +45,7 @@ public final class Transposer {
       return null;
     }
     return new Location(
-        this.realmService.getWorld(realm),
+        this.worldService.getWorld(realm),
         wLoc.x(), wLoc.y(), wLoc.z(),
         wLoc.yaw(), wLoc.pitch()
     );

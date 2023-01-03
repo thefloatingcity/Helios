@@ -10,7 +10,7 @@ import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.Permission;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.realm.Realm;
-import xyz.tehbrian.floatyplugin.realm.RealmService;
+import xyz.tehbrian.floatyplugin.realm.WorldService;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -30,17 +30,17 @@ public final class PortalUseTask {
   private static final Map<Player, Instant> LAST_MESSAGE_TIME = new HashMap<>();
 
   private final FloatyPlugin plugin;
-  private final RealmService realmService;
+  private final WorldService worldService;
   private final LangConfig langConfig;
 
   @Inject
   public PortalUseTask(
       final FloatyPlugin plugin,
-      final RealmService realmService,
+      final WorldService worldService,
       final LangConfig langConfig
   ) {
     this.plugin = plugin;
-    this.realmService = realmService;
+    this.worldService = worldService;
     this.langConfig = langConfig;
   }
 
@@ -76,7 +76,7 @@ public final class PortalUseTask {
   }
 
   private void onNetherPortal(final Player player) {
-    final Realm realm = this.realmService.getRealm(player.getWorld());
+    final Realm realm = Realm.from(player.getWorld());
 
     switch (realm) {
       case MADLANDS -> {
@@ -86,13 +86,13 @@ public final class PortalUseTask {
           this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "no_permission")));
         }
       }
-      case NETHER -> player.teleport(this.realmService.getSpawnPoint(Realm.OVERWORLD));
-      default -> player.teleport(this.realmService.getSpawnPoint(Realm.NETHER));
+      case NETHER -> player.teleport(this.worldService.getSpawnPoint(Realm.OVERWORLD));
+      default -> player.teleport(this.worldService.getSpawnPoint(Realm.NETHER));
     }
   }
 
   private void onEndPortal(final Player player) {
-    final Realm realm = this.realmService.getRealm(player.getWorld());
+    final Realm realm = Realm.from(player.getWorld());
 
     switch (realm) {
       case MADLANDS -> {
@@ -104,7 +104,7 @@ public final class PortalUseTask {
       }
       case END -> { // vanilla behavior takes over, player goes to overworld
       }
-      default -> player.teleport(this.realmService.getSpawnPoint(Realm.END));
+      default -> player.teleport(this.worldService.getSpawnPoint(Realm.END));
     }
   }
 

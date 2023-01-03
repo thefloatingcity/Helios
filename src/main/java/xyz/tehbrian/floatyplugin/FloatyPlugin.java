@@ -35,11 +35,11 @@ import xyz.tehbrian.floatyplugin.milk.MilkListener;
 import xyz.tehbrian.floatyplugin.piano.PianoCommand;
 import xyz.tehbrian.floatyplugin.piano.PianoListener;
 import xyz.tehbrian.floatyplugin.realm.AntiBuildListener;
-import xyz.tehbrian.floatyplugin.realm.RealmService;
 import xyz.tehbrian.floatyplugin.realm.RespawnListener;
 import xyz.tehbrian.floatyplugin.realm.SpawnProtectionListener;
 import xyz.tehbrian.floatyplugin.realm.TransposeCommands;
 import xyz.tehbrian.floatyplugin.realm.VoidGenerator;
+import xyz.tehbrian.floatyplugin.realm.WorldService;
 import xyz.tehbrian.floatyplugin.server.ChatListener;
 import xyz.tehbrian.floatyplugin.server.DiscordCommand;
 import xyz.tehbrian.floatyplugin.server.JoinQuitDisplayListener;
@@ -103,7 +103,7 @@ public final class FloatyPlugin extends TehPlugin {
     this.setupTasks();
 
     // world creation must occur as a delayed init task.
-    this.getServer().getScheduler().runTask(this, () -> this.injector.getInstance(RealmService.class).init());
+    this.getServer().getScheduler().runTask(this, () -> this.injector.getInstance(WorldService.class).init());
   }
 
   @Override

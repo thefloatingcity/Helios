@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,6 +14,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffectType;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
+import xyz.tehbrian.floatyplugin.realm.Realm;
 
 public final class TagListener implements Listener {
 
@@ -30,6 +30,12 @@ public final class TagListener implements Listener {
     this.langConfig = langConfig;
   }
 
+  /**
+   * Prevents potion effects other than damage resistance and saturation during tag.
+   * (Grants an exception for blindness in the nether.)
+   *
+   * @param event the event
+   */
   @EventHandler
   public void onPotionEffect(final EntityPotionEffectEvent event) {
     if (!(event.getEntity() instanceof Player player)
@@ -39,7 +45,7 @@ public final class TagListener implements Listener {
     }
 
     if (event.getNewEffect().getType().equals(PotionEffectType.BLINDNESS)
-        && event.getEntity().getWorld().getEnvironment() == World.Environment.NETHER) {
+        && Realm.from(event.getEntity().getWorld()) == Realm.NETHER) {
       return;
     }
 
@@ -73,6 +79,11 @@ public final class TagListener implements Listener {
     }
   }
 
+  /**
+   * Prevents game modes other than adventure mode during tag.
+   *
+   * @param event the event
+   */
   @EventHandler
   public void onGameModeChange(final PlayerGameModeChangeEvent event) {
     if (this.tagGame.isPlaying(event.getPlayer())

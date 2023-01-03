@@ -14,7 +14,8 @@ import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.Ticks;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
-import xyz.tehbrian.floatyplugin.realm.RealmService;
+import xyz.tehbrian.floatyplugin.realm.Realm;
+import xyz.tehbrian.floatyplugin.realm.WorldService;
 
 import java.time.Duration;
 
@@ -32,17 +33,17 @@ public final class WarpTask {
   );
 
   private final FloatyPlugin plugin;
-  private final RealmService realmService;
+  private final WorldService worldService;
   private final LangConfig langConfig;
 
   @Inject
   public WarpTask(
       final FloatyPlugin plugin,
-      final RealmService realmService,
+      final WorldService worldService,
       final LangConfig langConfig
   ) {
     this.plugin = plugin;
-    this.realmService = realmService;
+    this.worldService = worldService;
     this.langConfig = langConfig;
   }
 
@@ -62,7 +63,7 @@ public final class WarpTask {
 
           scheduler.scheduleSyncDelayedTask(this.plugin,
               () -> {
-                final Location spawn = this.realmService.getSpawnPoint(this.realmService.getRealm(player.getWorld()));
+                final Location spawn = this.worldService.getSpawnPoint(Realm.from(player.getWorld()));
 
                 player.setFallDistance(0);
                 player.teleport(spawn);

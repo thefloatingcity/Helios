@@ -7,23 +7,19 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.realm.Realm;
-import xyz.tehbrian.floatyplugin.realm.RealmService;
 
 public final class TransportationTask {
 
   private final FloatyPlugin plugin;
   private final FlightService flightService;
-  private final RealmService realmService;
 
   @Inject
   public TransportationTask(
       final FloatyPlugin plugin,
-      final FlightService flightService,
-      final RealmService realmService
+      final FlightService flightService
   ) {
     this.plugin = plugin;
     this.flightService = flightService;
-    this.realmService = realmService;
   }
 
   public void start() {
@@ -31,7 +27,7 @@ public final class TransportationTask {
 
     server.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
-        final Realm realm = this.realmService.getRealm((player.getWorld()));
+        final Realm realm = Realm.from((player.getWorld()));
 
         // no flight anywhere.
         this.flightService.checkFlight(player);

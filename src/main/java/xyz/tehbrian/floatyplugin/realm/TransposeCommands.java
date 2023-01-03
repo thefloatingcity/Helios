@@ -12,17 +12,14 @@ import xyz.tehbrian.floatyplugin.config.LangConfig;
 
 public final class TransposeCommands extends PaperCloudCommand<CommandSender> {
 
-  private final RealmService realmService;
   private final LangConfig langConfig;
   private final Transposer transposer;
 
   @Inject
   public TransposeCommands(
-      final RealmService realmService,
       final LangConfig langConfig,
       final Transposer transposer
   ) {
-    this.realmService = realmService;
     this.langConfig = langConfig;
     this.transposer = transposer;
   }
@@ -67,7 +64,7 @@ public final class TransposeCommands extends PaperCloudCommand<CommandSender> {
   }
 
   private void tryTranspose(final Player player, final Realm destination) {
-    final Realm current = this.realmService.getRealm(player.getWorld());
+    final Realm current = Realm.from(player.getWorld());
     if (current == destination) {
       player.sendMessage(this.langConfig.c(NodePath.path("transpose", "already_there")));
       return;

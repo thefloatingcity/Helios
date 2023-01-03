@@ -1,7 +1,6 @@
 package xyz.tehbrian.floatyplugin.milk;
 
 import com.google.inject.Inject;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,13 +10,16 @@ import org.bukkit.potion.PotionEffectType;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
+import xyz.tehbrian.floatyplugin.realm.Realm;
 
 public final class MilkListener implements Listener {
 
   private final LangConfig langConfig;
 
   @Inject
-  public MilkListener(final LangConfig langConfig) {
+  public MilkListener(
+      final LangConfig langConfig
+  ) {
     this.langConfig = langConfig;
   }
 
@@ -37,7 +39,7 @@ public final class MilkListener implements Listener {
       // if potion effects are cleared the same tick a player starts sprinting,
       // it can allow them to sprint in the nether by bypassing blindness.
       // we prevent that by killing them. :)
-      if (player.getWorld().getEnvironment() == World.Environment.NETHER
+      if (Realm.from(player.getWorld()) == Realm.NETHER
           && player.isSprinting()) {
         player.setHealth(0.0D);
         player.sendMessage(this.langConfig.c(NodePath.path("no_sprint_potion")));

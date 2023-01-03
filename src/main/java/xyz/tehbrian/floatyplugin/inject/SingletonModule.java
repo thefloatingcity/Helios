@@ -7,8 +7,8 @@ import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 import xyz.tehbrian.floatyplugin.config.EmotesConfig;
 import xyz.tehbrian.floatyplugin.config.InventoriesConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
-import xyz.tehbrian.floatyplugin.realm.RealmService;
 import xyz.tehbrian.floatyplugin.realm.Transposer;
+import xyz.tehbrian.floatyplugin.realm.WorldService;
 import xyz.tehbrian.floatyplugin.tag.TagGame;
 import xyz.tehbrian.floatyplugin.transportation.FlightService;
 import xyz.tehbrian.floatyplugin.user.UserService;
@@ -21,7 +21,7 @@ public final class SingletonModule extends AbstractModule {
     this.bind(LuckPermsService.class).asEagerSingleton();
     this.bind(TagGame.class).asEagerSingleton();
     this.bind(UserService.class).asEagerSingleton();
-    this.bind(RealmService.class).asEagerSingleton();
+    this.bind(WorldService.class).asEagerSingleton();
     this.bind(Transposer.class).asEagerSingleton();
 
     // configs.

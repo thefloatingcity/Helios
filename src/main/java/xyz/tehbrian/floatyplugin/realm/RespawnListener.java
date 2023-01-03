@@ -8,13 +8,13 @@ import javax.inject.Inject;
 
 public class RespawnListener implements Listener {
 
-  private final RealmService realmService;
+  private final WorldService worldService;
 
   @Inject
   public RespawnListener(
-      final RealmService realmService
+      final WorldService worldService
   ) {
-    this.realmService = realmService;
+    this.worldService = worldService;
   }
 
   /**
@@ -25,8 +25,8 @@ public class RespawnListener implements Listener {
    */
   @EventHandler
   public void onRespawn(final PlayerRespawnEvent event) {
-    final Realm current = this.realmService.getRealm(event.getPlayer().getWorld());
-    event.setRespawnLocation(this.realmService.getSpawnPoint(current));
+    final Realm current = Realm.from(event.getPlayer().getWorld());
+    event.setRespawnLocation(this.worldService.getSpawnPoint(current));
   }
 
 }

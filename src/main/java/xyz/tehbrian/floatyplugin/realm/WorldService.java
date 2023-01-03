@@ -16,13 +16,13 @@ import xyz.tehbrian.floatyplugin.backrooms.BackroomsGenerator;
 /**
  * Handles the creation of abstract realms into concrete worlds.
  */
-public final class RealmService {
+public final class WorldService {
 
   private final JavaPlugin plugin;
   private final Logger logger;
 
   @Inject
-  public RealmService(final JavaPlugin plugin, final Logger logger) {
+  public WorldService(final JavaPlugin plugin, final Logger logger) {
     this.plugin = plugin;
     this.logger = logger;
   }
@@ -33,17 +33,6 @@ public final class RealmService {
       throw new RuntimeException("Could not find world for realm `" + realm + "`.");
     }
     return world;
-  }
-
-  public Realm getRealm(final World world) {
-    return switch (world.getName()) {
-      case "madlands" -> Realm.MADLANDS;
-      case "overworld" -> Realm.OVERWORLD;
-      case "nether" -> Realm.NETHER;
-      case "end" -> Realm.END;
-      case "backrooms" -> Realm.BACKROOMS;
-      default -> throw new RuntimeException("Could not find realm for world `" + world.getName() + "`.");
-    };
   }
 
   public void init() {

@@ -34,7 +34,6 @@ import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.Permission;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.realm.Realm;
-import xyz.tehbrian.floatyplugin.realm.RealmService;
 import xyz.tehbrian.floatyplugin.user.User;
 import xyz.tehbrian.floatyplugin.user.UserService;
 
@@ -43,19 +42,16 @@ public final class TransportationListener implements Listener {
   private final LangConfig langConfig;
   private final FloatyPlugin plugin;
   private final UserService userService;
-  private final RealmService realmService;
 
   @Inject
   public TransportationListener(
       final LangConfig langConfig,
       final FloatyPlugin plugin,
-      final UserService userService,
-      final RealmService realmService
+      final UserService userService
   ) {
     this.langConfig = langConfig;
     this.plugin = plugin;
     this.userService = userService;
-    this.realmService = realmService;
   }
 
   /**
@@ -89,7 +85,7 @@ public final class TransportationListener implements Listener {
     }
 
     // allow teleportation in the end.
-    if (this.realmService.getRealm(event.getPlayer().getWorld()) == Realm.END) {
+    if (Realm.from(event.getPlayer().getWorld()) == Realm.END) {
       return;
     }
 
@@ -104,7 +100,7 @@ public final class TransportationListener implements Listener {
    */
   @EventHandler
   public void onVehicleEnter(final VehicleEnterEvent event) {
-    if (this.realmService.getRealm(event.getEntered().getWorld()) != Realm.NETHER) {
+    if (Realm.from(event.getEntered().getWorld()) != Realm.NETHER) {
       return;
     }
 
@@ -126,7 +122,7 @@ public final class TransportationListener implements Listener {
   @EventHandler
   public void onPotionEffect(final EntityPotionEffectEvent event) {
     if (!(event.getEntity() instanceof Player player)
-        || this.realmService.getRealm(player.getWorld()) != Realm.NETHER
+        || Realm.from(player.getWorld()) != Realm.NETHER
         || event.getNewEffect() == null) {
       return;
     }
@@ -149,7 +145,7 @@ public final class TransportationListener implements Listener {
    */
   @EventHandler
   public void onElytra(final EntityToggleGlideEvent event) {
-    if (this.realmService.getRealm(event.getEntity().getWorld()) != Realm.END
+    if (Realm.from(event.getEntity().getWorld()) != Realm.END
         || !event.isGliding()
         || !(event.getEntity() instanceof Player player)) {
       return;
@@ -175,7 +171,7 @@ public final class TransportationListener implements Listener {
   @EventHandler
   public void onSprint(final PlayerToggleSprintEvent event) {
     final Player player = event.getPlayer();
-    if (this.realmService.getRealm(player.getWorld()) != Realm.NETHER
+    if (Realm.from(player.getWorld()) != Realm.NETHER
         || !event.isSprinting()) {
       return;
     }
