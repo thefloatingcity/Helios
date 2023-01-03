@@ -3,7 +3,7 @@ package xyz.tehbrian.floatyplugin.transportation;
 import com.google.inject.Inject;
 import org.bukkit.entity.Player;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
-import xyz.tehbrian.floatyplugin.Permissions;
+import xyz.tehbrian.floatyplugin.Permission;
 import xyz.tehbrian.floatyplugin.user.UserService;
 
 public final class FlightService {
@@ -29,7 +29,7 @@ public final class FlightService {
   }
 
   public boolean canFly(final Player player) {
-    return player.hasPermission(Permissions.FLY) && this.userService.getUser(player).flyBypassEnabled();
+    return player.hasPermission(Permission.FLY) && this.userService.getUser(player).flyBypassEnabled();
   }
 
   public void enableFlight(final Player player) {

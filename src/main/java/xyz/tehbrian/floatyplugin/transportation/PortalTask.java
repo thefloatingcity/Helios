@@ -7,7 +7,7 @@ import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
-import xyz.tehbrian.floatyplugin.Permissions;
+import xyz.tehbrian.floatyplugin.Permission;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.world.FloatingWorld;
 import xyz.tehbrian.floatyplugin.world.WorldService;
@@ -77,7 +77,7 @@ public final class PortalTask {
 
     switch (floatingWorld) {
       case MADLANDS -> {
-        if (player.hasPermission(Permissions.WORLD_NETHER)) {
+        if (player.hasPermission(Permission.WORLD_NETHER)) {
           this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "wrong_world")));
         } else {
           this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "no_permission")));
@@ -93,7 +93,7 @@ public final class PortalTask {
 
     switch (floatingWorld) {
       case MADLANDS -> {
-        if (player.hasPermission(Permissions.WORLD_END)) {
+        if (player.hasPermission(Permission.WORLD_END)) {
           this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "wrong_world")));
         } else {
           this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "no_permission")));

@@ -11,15 +11,14 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import xyz.tehbrian.floatyplugin.Permissions;
+import xyz.tehbrian.floatyplugin.Format;
+import xyz.tehbrian.floatyplugin.Permission;
 import xyz.tehbrian.floatyplugin.config.InventoriesConfig;
 import xyz.tehbrian.floatyplugin.user.UserService;
-import xyz.tehbrian.floatyplugin.util.FormatUtil;
 
 import java.util.List;
 import java.util.Objects;
 
-@SuppressWarnings({"unused"})
 public final class PianoListener implements Listener {
 
   private final UserService userService;
@@ -38,7 +37,7 @@ public final class PianoListener implements Listener {
   public void onItemHeld(final PlayerItemHeldEvent event) {
     final Player player = event.getPlayer();
 
-    if (!player.hasPermission(Permissions.PIANO)
+    if (!player.hasPermission(Permission.PIANO)
         || !this.userService.getUser(player).piano().enabled()) {
       return;
     }
@@ -52,9 +51,9 @@ public final class PianoListener implements Listener {
   @EventHandler
   public void onInventoryClick(final InventoryClickEvent event) {
     if (!(event.getWhoClicked() instanceof final Player player)
-        || !player.hasPermission(Permissions.PIANO)
+        || !player.hasPermission(Permission.PIANO)
         || event.getClickedInventory() == null
-        || !event.getView().title().equals(FormatUtil.miniMessage(
+        || !event.getView().title().equals(Format.miniMessage(
         Objects.requireNonNull(this.inventoriesConfig.rootNode().node("piano_notes", "name").getString())))
         || !event.isRightClick()) {
       return;
@@ -73,7 +72,7 @@ public final class PianoListener implements Listener {
 
     if (lore == null
         || !MaterialTags.STAINED_GLASS_PANES.isTagged(item)
-        || FormatUtil.plain(lore.get(0)).equals("Note")) {
+        || Format.plain(lore.get(0)).equals("Note")) {
       return;
     }
 
@@ -82,7 +81,7 @@ public final class PianoListener implements Listener {
         this.userService.getUser(player).piano().instrument().asBukkitSound(),
         SoundCategory.MASTER,
         3,
-        Float.parseFloat(FormatUtil.plain(lore.get(1)))
+        Float.parseFloat(Format.plain(lore.get(1)))
     );
   }
 

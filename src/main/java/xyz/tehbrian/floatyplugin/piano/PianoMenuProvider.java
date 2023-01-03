@@ -10,8 +10,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.serialize.SerializationException;
+import xyz.tehbrian.floatyplugin.Format;
 import xyz.tehbrian.floatyplugin.config.InventoriesConfig;
-import xyz.tehbrian.floatyplugin.util.FormatUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +36,7 @@ public final class PianoMenuProvider {
     final var inventory = Bukkit.createInventory(
         null,
         InventoryType.CHEST,
-        FormatUtil.miniMessage(Objects.requireNonNull(pianoNotesNode.node("name").getString()))
+        Format.miniMessage(Objects.requireNonNull(pianoNotesNode.node("name").getString()))
     );
 
     for (final ItemStack item : this.getCollection(NoteCollection.ALL)) {
@@ -60,7 +60,7 @@ public final class PianoMenuProvider {
       final List<Component> lore = new ArrayList<>();
       try {
         for (final String s : Objects.requireNonNull(itemNode.node("lore").getList(String.class))) {
-          lore.add(FormatUtil.miniMessage(s));
+          lore.add(Format.miniMessage(s));
         }
       } catch (final SerializationException e) {
         e.printStackTrace();
@@ -70,7 +70,7 @@ public final class PianoMenuProvider {
       // data.set(new NamespacedKey(main, "our-custom-key"), PersistentDataType.DOUBLE, Math.PI);
       items.add(PaperItemBuilder.ofType(Material.valueOf(Objects.requireNonNull(itemNode.node("material").getString())))
           .amount(itemNode.node("amount").getInt(1))
-          .name(FormatUtil.miniMessage(Objects.requireNonNull(itemNode.node("name").getString())))
+          .name(Format.miniMessage(Objects.requireNonNull(itemNode.node("name").getString())))
           .lore(lore)
           .unbreakable(itemNode.node("unbreakable").getBoolean(false))
           .build());
