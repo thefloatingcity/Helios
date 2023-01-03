@@ -16,9 +16,9 @@ public final class VoidLoopPositions implements Listener {
 
   public static int lowEngage(final Habitat habitat) {
     return switch (habitat) {
-      case WHITE -> -260;
+      case WHITE -> -250;
       case RED -> -100;
-      case BLACK -> -170;
+      case BLACK -> -180;
     };
   }
 
@@ -28,9 +28,9 @@ public final class VoidLoopPositions implements Listener {
 
   public static int highEngage(final Habitat habitat) {
     return switch (habitat) {
-      case WHITE -> 470;
+      case WHITE -> 510;
       case RED -> 350;
-      case BLACK -> 460;
+      case BLACK -> 440;
     };
   }
 
