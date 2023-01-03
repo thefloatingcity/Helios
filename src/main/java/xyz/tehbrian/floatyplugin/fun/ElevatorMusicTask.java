@@ -5,9 +5,9 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.sound.SoundStop;
 import org.bukkit.Server;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
+import xyz.tehbrian.floatyplugin.realm.Habitat;
 import xyz.tehbrian.floatyplugin.user.User;
 import xyz.tehbrian.floatyplugin.user.UserService;
 
@@ -35,7 +35,7 @@ public final class ElevatorMusicTask {
     final Server server = this.plugin.getServer();
     server.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
-        if (player.getWorld().getEnvironment() != World.Environment.NORMAL) {
+        if (Habitat.of(player.getWorld()) != Habitat.WHITE) {
           continue;
         }
 
