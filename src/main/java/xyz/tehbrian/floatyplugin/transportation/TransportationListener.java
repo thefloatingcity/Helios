@@ -202,14 +202,14 @@ public final class TransportationListener implements Listener {
                       .build()
               );
 
-          if (player.hasPermission(Permission.MILK)) {
-            bundleBuilder.addItem(PotionBuilder.ofType(Material.POTION)
-                .name(Component.text("Femboy Hooters Sauce").color(NamedTextColor.LIGHT_PURPLE))
-                .loreList(Component.text("It doesn't smell very good..").color(NamedTextColor.GRAY))
-                .addFlag(ItemFlag.HIDE_POTION_EFFECTS)
-                .color(Color.WHITE)
-                .build());
-          }
+        if (player.hasPermission(Permission.MILK)) {
+          bundleBuilder.addItem(PotionBuilder.ofType(Material.SPLASH_POTION)
+              .name(Component.text("Femboy Hooters Sauce").color(NamedTextColor.LIGHT_PURPLE))
+              .loreList(Component.text("It doesn't smell very good..").color(NamedTextColor.GRAY))
+              .addFlag(ItemFlag.HIDE_POTION_EFFECTS)
+              .color(Color.WHITE)
+              .build());
+        }
 
           player.getInventory().addItem(bundleBuilder.build());
         }
