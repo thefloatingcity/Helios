@@ -19,8 +19,8 @@ import xyz.tehbrian.floatyplugin.backrooms.SpaceBreakListener;
 import xyz.tehbrian.floatyplugin.config.BooksConfig;
 import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 import xyz.tehbrian.floatyplugin.config.EmotesConfig;
-import xyz.tehbrian.floatyplugin.config.InventoriesConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
+import xyz.tehbrian.floatyplugin.config.PianoNotesConfig;
 import xyz.tehbrian.floatyplugin.fun.ActCommands;
 import xyz.tehbrian.floatyplugin.fun.ElevatorMusicTask;
 import xyz.tehbrian.floatyplugin.fun.FishingListener;
@@ -33,7 +33,7 @@ import xyz.tehbrian.floatyplugin.inject.SingletonModule;
 import xyz.tehbrian.floatyplugin.milk.MilkCommand;
 import xyz.tehbrian.floatyplugin.milk.MilkListener;
 import xyz.tehbrian.floatyplugin.piano.PianoCommand;
-import xyz.tehbrian.floatyplugin.piano.PianoListener;
+import xyz.tehbrian.floatyplugin.piano.PianoPlayListener;
 import xyz.tehbrian.floatyplugin.realm.AntiBuildListener;
 import xyz.tehbrian.floatyplugin.realm.RespawnListener;
 import xyz.tehbrian.floatyplugin.realm.SpawnProtectionListener;
@@ -118,15 +118,15 @@ public final class FloatyPlugin extends TehPlugin {
     this.saveResourceSilently("books.conf");
     this.saveResourceSilently("config.conf");
     this.saveResourceSilently("emotes.conf");
-    this.saveResourceSilently("inventories.conf");
     this.saveResourceSilently("lang.conf");
+    this.saveResourceSilently("piano_notes.conf");
 
     final List<Config> configsToLoad = List.of(
         this.injector.getInstance(BooksConfig.class),
         this.injector.getInstance(ConfigConfig.class),
         this.injector.getInstance(EmotesConfig.class),
-        this.injector.getInstance(InventoriesConfig.class),
-        this.injector.getInstance(LangConfig.class)
+        this.injector.getInstance(LangConfig.class),
+        this.injector.getInstance(PianoNotesConfig.class)
     );
 
     for (final Config config : configsToLoad) {
@@ -154,7 +154,7 @@ public final class FloatyPlugin extends TehPlugin {
         this.injector.getInstance(JoinQuitDisplayListener.class),
         this.injector.getInstance(MilkListener.class),
         this.injector.getInstance(MobVoidLoopListener.class),
-        this.injector.getInstance(PianoListener.class),
+        this.injector.getInstance(PianoPlayListener.class),
         this.injector.getInstance(RainMusicListener.class),
         this.injector.getInstance(RespawnListener.class),
         this.injector.getInstance(ServerPingListener.class),

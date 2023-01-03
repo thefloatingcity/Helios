@@ -1,6 +1,5 @@
 package xyz.tehbrian.floatyplugin.piano;
 
-import broccolai.corn.paper.item.PaperItemBuilder;
 import com.google.inject.Inject;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -9,9 +8,8 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.spongepowered.configurate.CommentedConfigurationNode;
-import org.spongepowered.configurate.serialize.SerializationException;
 import xyz.tehbrian.floatyplugin.Format;
-import xyz.tehbrian.floatyplugin.config.InventoriesConfig;
+import xyz.tehbrian.floatyplugin.config.PianoNotesConfig;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,23 +18,27 @@ import java.util.Objects;
 
 public final class PianoMenuProvider {
 
-  private final InventoriesConfig inventoriesConfig;
+  private final PianoNotesConfig pianoNotesConfig;
+  private final PianoNoteItems pianoNoteItems;
 
   @Inject
   public PianoMenuProvider(
-      final InventoriesConfig inventoriesConfig
+      final PianoNotesConfig pianoNotesConfig,
+      final PianoNoteItems pianoNoteItems
   ) {
-    this.inventoriesConfig = inventoriesConfig;
+    this.pianoNotesConfig = pianoNotesConfig;
+    this.pianoNoteItems = pianoNoteItems;
   }
 
   public Inventory generate() {
-    final CommentedConfigurationNode pianoNotesNode = Objects.requireNonNull(
-        this.inventoriesConfig.rootNode()).node("piano_notes");
+    final var rootNode = Objects.requireNonNull(this.pianoNotesConfig.rootNode());
+    final var pianoNotesNode = rootNode.node("piano_notes");
 
+    final String name = Objects.requireNonNull(pianoNotesNode.node("name").getString());
     final var inventory = Bukkit.createInventory(
         null,
         InventoryType.CHEST,
-        Format.miniMessage(Objects.requireNonNull(pianoNotesNode.node("name").getString()))
+        Format.miniMessage(name)
     );
 
     for (final ItemStack item : this.getCollection(NoteCollection.ALL)) {
@@ -47,33 +49,21 @@ public final class PianoMenuProvider {
   }
 
   public List<ItemStack> getCollection(final NoteCollection collection) {
-    final CommentedConfigurationNode pianoNotesNode = Objects.requireNonNull(
-        this.inventoriesConfig.rootNode()).node("piano_notes");
-    final CommentedConfigurationNode itemsNode = Objects.requireNonNull(pianoNotesNode).node("items");
+    final var rootNode = Objects.requireNonNull(this.pianoNotesConfig.rootNode());
+    final var pianoNotesNode = Objects.requireNonNull(rootNode.node("piano_notes"));
+    final var itemsNode = Objects.requireNonNull(pianoNotesNode.node("items"));
 
     final List<ItemStack> items = new ArrayList<>();
 
-    final List<CommentedConfigurationNode> itemNodes = Objects.requireNonNull(itemsNode).childrenList();
+    final List<CommentedConfigurationNode> itemNodes = itemsNode.childrenList();
     for (final int i : collection.indexes()) {
-      final var itemNode = itemNodes.get(i);
+      final var itemNode = Objects.requireNonNull(itemNodes.get(i));
 
-      final List<Component> lore = new ArrayList<>();
-      try {
-        for (final String s : Objects.requireNonNull(itemNode.node("lore").getList(String.class))) {
-          lore.add(Format.miniMessage(s));
-        }
-      } catch (final SerializationException e) {
-        e.printStackTrace();
-      }
+      final Material material = Material.valueOf(Objects.requireNonNull(itemNode.node("material").getString()));
+      final Component name = Format.miniMessage(Objects.requireNonNull(itemNode.node("name").getString()));
+      final float pitch = itemNode.node("pitch").getFloat();
 
-      // TODO: use persistent data?
-      // data.set(new NamespacedKey(main, "our-custom-key"), PersistentDataType.DOUBLE, Math.PI);
-      items.add(PaperItemBuilder.ofType(Material.valueOf(Objects.requireNonNull(itemNode.node("material").getString())))
-          .amount(itemNode.node("amount").getInt(1))
-          .name(Format.miniMessage(Objects.requireNonNull(itemNode.node("name").getString())))
-          .lore(lore)
-          .unbreakable(itemNode.node("unbreakable").getBoolean(false))
-          .build());
+      items.add(this.pianoNoteItems.createItem(material, name, pitch));
     }
 
     return items;

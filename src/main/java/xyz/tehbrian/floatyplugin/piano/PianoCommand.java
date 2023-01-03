@@ -114,10 +114,9 @@ public final class PianoCommand extends PaperCloudCommand<CommandSender> {
 
           this.userService.getUser(sender).piano().instrument(inst);
           sender.sendMessage(this.langConfig.c(
-                  NodePath.path("piano", "instrument_change"),
-                  Placeholder.unparsed("instrument", inst.toString())
-              )
-          );
+              NodePath.path("piano", "instrument_change"),
+              Placeholder.unparsed("instrument", inst.toString())
+          ));
         });
 
     final var menu = main.literal("menu", ArgumentDescription.of("Pick your notes!"))
