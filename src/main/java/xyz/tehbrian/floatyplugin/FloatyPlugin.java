@@ -19,6 +19,8 @@ import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 import xyz.tehbrian.floatyplugin.config.EmotesConfig;
 import xyz.tehbrian.floatyplugin.config.InventoriesConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
+import xyz.tehbrian.floatyplugin.inject.PluginModule;
+import xyz.tehbrian.floatyplugin.inject.SingletonModule;
 import xyz.tehbrian.floatyplugin.transportation.FlyCommand;
 import xyz.tehbrian.floatyplugin.fun.ActCommands;
 import xyz.tehbrian.floatyplugin.fun.ElevatorMusicTask;
@@ -45,14 +47,16 @@ import xyz.tehbrian.floatyplugin.tag.TagListener;
 import xyz.tehbrian.floatyplugin.transportation.PortalTask;
 import xyz.tehbrian.floatyplugin.transportation.TransportationListener;
 import xyz.tehbrian.floatyplugin.transportation.TransportationTask;
-import xyz.tehbrian.floatyplugin.void_loop.VoidLoopListener;
-import xyz.tehbrian.floatyplugin.void_loop.VoidLoopTask;
+import xyz.tehbrian.floatyplugin.void_loop.DamageListener;
+import xyz.tehbrian.floatyplugin.void_loop.MobVoidLoopListener;
+import xyz.tehbrian.floatyplugin.void_loop.PlayerVoidLoopTask;
 import xyz.tehbrian.floatyplugin.realm.AntiBuildListener;
 import xyz.tehbrian.floatyplugin.realm.RespawnListener;
 import xyz.tehbrian.floatyplugin.realm.SpawnProtectionListener;
 import xyz.tehbrian.floatyplugin.realm.VoidGenerator;
 import xyz.tehbrian.floatyplugin.realm.TransposeCommands;
 import xyz.tehbrian.floatyplugin.realm.RealmService;
+import xyz.tehbrian.floatyplugin.void_loop.WarpTask;
 
 import java.util.List;
 
@@ -140,19 +144,20 @@ public final class FloatyPlugin extends TehPlugin {
   private void setupListeners() {
     registerListeners(
         this.injector.getInstance(AntiBuildListener.class),
-        this.injector.getInstance(SpaceBreakListener.class),
         this.injector.getInstance(ChatListener.class),
-        this.injector.getInstance(RespawnListener.class),
+        this.injector.getInstance(DamageListener.class),
         this.injector.getInstance(FishingListener.class),
         this.injector.getInstance(JoinQuitListener.class),
         this.injector.getInstance(MilkListener.class),
+        this.injector.getInstance(MobVoidLoopListener.class),
         this.injector.getInstance(PianoListener.class),
         this.injector.getInstance(RainMusicListener.class),
+        this.injector.getInstance(RespawnListener.class),
         this.injector.getInstance(ServerPingListener.class),
+        this.injector.getInstance(SpaceBreakListener.class),
         this.injector.getInstance(SpawnProtectionListener.class),
         this.injector.getInstance(TagListener.class),
-        this.injector.getInstance(TransportationListener.class),
-        this.injector.getInstance(VoidLoopListener.class)
+        this.injector.getInstance(TransportationListener.class)
     );
   }
 
@@ -198,7 +203,8 @@ public final class FloatyPlugin extends TehPlugin {
   private void setupTasks() {
     this.injector.getInstance(ElevatorMusicTask.class).start();
     this.injector.getInstance(TransportationTask.class).start();
-    this.injector.getInstance(VoidLoopTask.class).start();
+    this.injector.getInstance(PlayerVoidLoopTask.class).start();
+    this.injector.getInstance(WarpTask.class).start();
     this.injector.getInstance(PortalTask.class).start();
     this.injector.getInstance(RandomSpooks.class).start();
   }

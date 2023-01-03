@@ -1,6 +1,7 @@
-package xyz.tehbrian.floatyplugin;
+package xyz.tehbrian.floatyplugin.inject;
 
 import com.google.inject.AbstractModule;
+import xyz.tehbrian.floatyplugin.LuckPermsService;
 import xyz.tehbrian.floatyplugin.config.BooksConfig;
 import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 import xyz.tehbrian.floatyplugin.config.EmotesConfig;

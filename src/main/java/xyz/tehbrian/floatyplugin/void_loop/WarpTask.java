@@ -8,17 +8,17 @@ import org.bukkit.Particle;
 import org.bukkit.Server;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
+import xyz.tehbrian.floatyplugin.Ticks;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 import xyz.tehbrian.floatyplugin.realm.RealmService;
 
 import java.time.Duration;
 
-public final class VoidLoopTask {
+public final class WarpTask {
 
   private static final Title.Times INSTANT_IN_TIMES = Title.Times.times(
       Duration.ZERO,
@@ -30,12 +30,13 @@ public final class VoidLoopTask {
       Duration.ofSeconds(3),
       Duration.ofSeconds(1)
   );
+
   private final FloatyPlugin plugin;
   private final RealmService realmService;
   private final LangConfig langConfig;
 
   @Inject
-  public VoidLoopTask(
+  public WarpTask(
       final FloatyPlugin plugin,
       final RealmService realmService,
       final LangConfig langConfig
@@ -49,35 +50,9 @@ public final class VoidLoopTask {
     final Server server = this.plugin.getServer();
     final BukkitScheduler scheduler = server.getScheduler();
 
-    // void loop.
-    scheduler.scheduleSyncRepeatingTask(this.plugin, () -> {
-      for (final Player player : server.getOnlinePlayers()) {
-        final World.Environment environment = player.getWorld().getEnvironment();
-        final Location location = player.getLocation();
-
-        if (location.getY() < VoidLoopUtil.lowEngage(environment)) { // they're too low.
-          scheduler.runTask(this.plugin, () -> {
-            location.setY(VoidLoopUtil.lowTeleport(environment));
-            final var oldVelocity = player.getVelocity();
-            player.teleport(location);
-            player.setVelocity(oldVelocity);
-          });
-        } else if (location.getY() > VoidLoopUtil.highEngage(environment)) { // they're too high.
-          scheduler.runTask(this.plugin, () -> {
-            location.setY(VoidLoopUtil.highTeleport(environment));
-            final var oldVelocity = player.getVelocity();
-            player.teleport(location);
-            player.setVelocity(oldVelocity);
-          });
-        }  // they're in the non-epic zone.
-      }
-    }, 0, 20);
-
-    // warp.
     scheduler.scheduleSyncRepeatingTask(this.plugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
         final float fallDistance = player.getFallDistance();
-
         if (fallDistance >= 4000) {
           player.showTitle(Title.title(
               this.langConfig.c(NodePath.path("warp", "max")),
@@ -87,16 +62,15 @@ public final class VoidLoopTask {
 
           scheduler.scheduleSyncDelayedTask(this.plugin,
               () -> {
-                final Location spawnLocation = this.realmService.getSpawnPoint(
-                    this.realmService.getRealm(player.getWorld()));
+                final Location spawn = this.realmService.getSpawnPoint(this.realmService.getRealm(player.getWorld()));
 
                 player.setFallDistance(0);
-                player.teleport(spawnLocation);
+                player.teleport(spawn);
 
-                player.getWorld().strikeLightningEffect(spawnLocation);
-                player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, spawnLocation, 1);
+                player.getWorld().strikeLightningEffect(spawn);
+                player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, spawn, 1);
                 player.getWorld().playSound(
-                    spawnLocation,
+                    spawn,
                     Sound.ENTITY_GENERIC_EXPLODE,
                     SoundCategory.MASTER,
                     4,
@@ -158,7 +132,7 @@ public final class VoidLoopTask {
           }
         }
       }
-    }, 0, 100);
+    }, 0, Ticks.in(Duration.ofSeconds(5)));
   }
 
 }

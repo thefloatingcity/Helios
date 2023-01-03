@@ -20,6 +20,10 @@ public enum Habitat {
     };
   }
 
+  public static Habitat of(final World world) {
+    return from(world.getEnvironment());
+  }
+
   public World.Environment environment() {
     return switch (this) {
       case WHITE -> World.Environment.NORMAL;

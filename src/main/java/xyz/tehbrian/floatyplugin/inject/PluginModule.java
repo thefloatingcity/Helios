@@ -1,10 +1,11 @@
-package xyz.tehbrian.floatyplugin;
+package xyz.tehbrian.floatyplugin.inject;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.name.Named;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.slf4j.Logger;
+import xyz.tehbrian.floatyplugin.FloatyPlugin;
 
 import java.nio.file.Path;
 

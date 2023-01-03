@@ -58,6 +58,7 @@ public final class LuckPermsService {
   }
 
   public void promoteInTrack(final Player player, final String trackName) throws IllegalArgumentException {
+    assert this.luckPerms != null;
     final Track track = this.luckPerms.getTrackManager().getTrack(trackName);
     if (track == null) {
       throw new IllegalArgumentException("track does not exist");
