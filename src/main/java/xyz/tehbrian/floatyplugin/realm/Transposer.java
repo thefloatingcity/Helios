@@ -36,6 +36,7 @@ public class Transposer {
         this.getPreviousLocation(player, destination),
         () -> this.realmService.getSpawnPoint(destination)
     ));
+    player.setFallDistance(0);
   }
 
   private @Nullable Location getPreviousLocation(final Player player, final Realm realm) {
