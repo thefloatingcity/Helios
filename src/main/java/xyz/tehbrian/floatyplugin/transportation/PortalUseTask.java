@@ -86,6 +86,7 @@ public final class PortalUseTask {
           this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "no_permission")));
         }
       }
+      case BACKROOMS -> this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "backrooms")));
       case NETHER -> player.teleport(this.worldService.getSpawnPoint(Realm.OVERWORLD));
       default -> player.teleport(this.worldService.getSpawnPoint(Realm.NETHER));
     }
@@ -102,7 +103,8 @@ public final class PortalUseTask {
           this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "no_permission")));
         }
       }
-      case END -> { // vanilla behavior takes over, player goes to overworld
+      case BACKROOMS -> this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "backrooms")));
+      case END -> { // vanilla behavior takes over, player goes to overworld.
       }
       default -> player.teleport(this.worldService.getSpawnPoint(Realm.END));
     }
