@@ -6,5 +6,6 @@
  *   <li>No flying.</li>
  *   <li>No spectator.</li>
  * </ul>
+ * And other things that can be found in the Notion document for the realms.
  */
 package xyz.tehbrian.floatyplugin.transportation;

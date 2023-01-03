@@ -42,7 +42,7 @@ import xyz.tehbrian.floatyplugin.realm.TransposeCommands;
 import xyz.tehbrian.floatyplugin.realm.VoidGenerator;
 import xyz.tehbrian.floatyplugin.server.ChatListener;
 import xyz.tehbrian.floatyplugin.server.DiscordCommand;
-import xyz.tehbrian.floatyplugin.server.JoinQuitListener;
+import xyz.tehbrian.floatyplugin.server.JoinQuitDisplayListener;
 import xyz.tehbrian.floatyplugin.server.RulesCommand;
 import xyz.tehbrian.floatyplugin.server.ServerPingListener;
 import xyz.tehbrian.floatyplugin.server.VoteCommand;
@@ -50,8 +50,9 @@ import xyz.tehbrian.floatyplugin.staff.BroadcastCommand;
 import xyz.tehbrian.floatyplugin.staff.FloatyPluginCommand;
 import xyz.tehbrian.floatyplugin.tag.TagCommand;
 import xyz.tehbrian.floatyplugin.tag.TagListener;
+import xyz.tehbrian.floatyplugin.transportation.FlightListener;
 import xyz.tehbrian.floatyplugin.transportation.FlyCommand;
-import xyz.tehbrian.floatyplugin.transportation.PortalUseMessageTask;
+import xyz.tehbrian.floatyplugin.transportation.PortalUseTask;
 import xyz.tehbrian.floatyplugin.transportation.TransportationListener;
 import xyz.tehbrian.floatyplugin.transportation.TransportationTask;
 import xyz.tehbrian.floatyplugin.void_loop.DamageListener;
@@ -149,7 +150,8 @@ public final class FloatyPlugin extends TehPlugin {
         this.injector.getInstance(ChatListener.class),
         this.injector.getInstance(DamageListener.class),
         this.injector.getInstance(FishingListener.class),
-        this.injector.getInstance(JoinQuitListener.class),
+        this.injector.getInstance(FlightListener.class),
+        this.injector.getInstance(JoinQuitDisplayListener.class),
         this.injector.getInstance(MilkListener.class),
         this.injector.getInstance(MobVoidLoopListener.class),
         this.injector.getInstance(PianoListener.class),
@@ -206,7 +208,7 @@ public final class FloatyPlugin extends TehPlugin {
   private void setupTasks() {
     this.injector.getInstance(ElevatorMusicTask.class).start();
     this.injector.getInstance(PlayerVoidLoopTask.class).start();
-    this.injector.getInstance(PortalUseMessageTask.class).start();
+    this.injector.getInstance(PortalUseTask.class).start();
     this.injector.getInstance(RandomSpooks.class).start();
     this.injector.getInstance(TransportationTask.class).start();
     this.injector.getInstance(WarpTask.class).start();

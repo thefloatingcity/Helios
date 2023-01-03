@@ -22,9 +22,7 @@ import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.inventory.ItemFlag;
@@ -43,38 +41,28 @@ public final class TransportationListener implements Listener {
 
   private final LangConfig langConfig;
   private final FloatyPlugin plugin;
-  private final FlightService flightService;
   private final UserService userService;
 
   @Inject
   public TransportationListener(
       final LangConfig langConfig,
       final FloatyPlugin plugin,
-      final FlightService flightService,
-      final UserService userService
+      final UserService userService,
+      final RealmService realmService
   ) {
     this.langConfig = langConfig;
     this.plugin = plugin;
-    this.flightService = flightService;
     this.userService = userService;
   }
 
+  /**
+   * Prevents spectator mode.
+   *
+   * @param event the event
+   */
   @EventHandler
-  public void onToggleFlight(final PlayerToggleFlightEvent event) {
-    this.flightService.checkFlight(event.getPlayer());
-  }
-
-  @EventHandler
-  public void onJoin(final PlayerJoinEvent event) {
-    this.flightService.checkFlight(event.getPlayer());
-  }
-
-  @EventHandler
-  public void onGameModeChange(final PlayerGameModeChangeEvent event) {
-    final Player player = event.getPlayer();
-
-    this.flightService.checkFlight(player);
-
+  public void onModeToSpectator(final PlayerGameModeChangeEvent event) {
+    final var player = event.getPlayer();
     if (event.getNewGameMode() == GameMode.SPECTATOR) {
       event.setCancelled(true);
       player.setGameMode(GameMode.ADVENTURE);

@@ -31,7 +31,7 @@ public final class FlyCommand extends PaperCloudCommand<CommandSender> {
   @Override
   public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("fly")
-        .meta(CommandMeta.DESCRIPTION, "Bends the space/time continuum.")
+        .meta(CommandMeta.DESCRIPTION, "Bends the space-time continuum.")
         .permission(Permission.FLY)
         .senderType(Player.class)
         .handler(c -> {

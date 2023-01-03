@@ -19,13 +19,13 @@ import xyz.tehbrian.floatyplugin.config.LangConfig;
 import java.time.Duration;
 import java.util.Calendar;
 
-public final class JoinQuitListener implements Listener {
+public final class JoinQuitDisplayListener implements Listener {
 
   private final FloatyPlugin plugin;
   private final LangConfig langConfig;
 
   @Inject
-  public JoinQuitListener(
+  public JoinQuitDisplayListener(
       final FloatyPlugin plugin,
       final LangConfig langConfig
   ) {

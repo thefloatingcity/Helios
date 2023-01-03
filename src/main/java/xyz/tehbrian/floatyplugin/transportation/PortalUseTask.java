@@ -18,10 +18,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Sends players messages regarding portal functionality on attempted use if
+ * they're in the madlands. Sends them to the correct realms if they are not.
+ * <p>
  * <b>This task functions under the assumption that allow-end and
  * allow-nether are false in bukkit.yml and server.properties respectively.</b>
  */
-public final class PortalTask {
+public final class PortalUseTask {
 
   private static final Duration MESSAGE_COOLDOWN = Duration.ofSeconds(15);
   private static final Map<Player, Instant> LAST_MESSAGE_TIME = new HashMap<>();
@@ -31,7 +34,7 @@ public final class PortalTask {
   private final LangConfig langConfig;
 
   @Inject
-  public PortalTask(
+  public PortalUseTask(
       final FloatyPlugin plugin,
       final RealmService realmService,
       final LangConfig langConfig

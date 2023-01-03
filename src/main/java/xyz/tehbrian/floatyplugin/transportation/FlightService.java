@@ -6,6 +6,9 @@ import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.Permission;
 import xyz.tehbrian.floatyplugin.user.UserService;
 
+/**
+ * Checks the players' flight.
+ */
 public final class FlightService {
 
   private final UserService userService;
