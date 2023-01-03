@@ -60,9 +60,18 @@ public final class PianoPlayListener implements Listener {
     if (event.isRightClick()) {
       event.setCancelled(true);
 
-    final @Nullable ItemStack currentItem = event.getCurrentItem();
-    if (currentItem != null) {
-      this.play(player, currentItem);
+      final @Nullable ItemStack item = event.getCurrentItem();
+      if (item != null) {
+        this.tryPlay(player, item);
+      }
+    } else if (event.getAction() == InventoryAction.HOTBAR_SWAP
+        || event.getAction() == InventoryAction.HOTBAR_MOVE_AND_READD) {
+      event.setCancelled(true);
+
+      final @Nullable ItemStack hotbarItem = player.getInventory().getItem(event.getHotbarButton());
+      if (hotbarItem != null) {
+        this.tryPlay(player, hotbarItem);
+      }
     }
   }
 
