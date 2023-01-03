@@ -145,7 +145,7 @@ public final class TransportationListener implements Listener {
    */
   @EventHandler
   public void onElytra(final EntityToggleGlideEvent event) {
-    if (Realm.from(event.getEntity().getWorld()) != Realm.END
+    if (Realm.from(event.getEntity().getWorld()) == Realm.END
         || !event.isGliding()
         || !(event.getEntity() instanceof Player player)) {
       return;
