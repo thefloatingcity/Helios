@@ -3,11 +3,9 @@ package xyz.tehbrian.floatyplugin.transportation;
 import broccolai.corn.paper.item.PaperItemBuilder;
 import broccolai.corn.paper.item.special.BookBuilder;
 import broccolai.corn.paper.item.special.BundleBuilder;
-import broccolai.corn.paper.item.special.PotionBuilder;
 import com.google.inject.Inject;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -24,15 +22,14 @@ import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
-import xyz.tehbrian.floatyplugin.Permission;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
+import xyz.tehbrian.floatyplugin.milk.MilkProvider;
 import xyz.tehbrian.floatyplugin.realm.Realm;
 import xyz.tehbrian.floatyplugin.user.User;
 import xyz.tehbrian.floatyplugin.user.UserService;
@@ -209,29 +206,19 @@ public final class TransportationListener implements Listener {
                             + " 'ave ya got somethin' wrong in the head??? love ya, but frik off")
                         .color(NamedTextColor.DARK_GRAY))
                     .build(),
-                PaperItemBuilder
-                    .ofType(Material.SLIME_BALL)
+                PaperItemBuilder.ofType(Material.SLIME_BALL)
                     .name(Component.text("Ball of Slime"))
                     .loreList(Component.text("It's uh.. a ball of slime.").color(NamedTextColor.GRAY))
                     .build(),
-                PaperItemBuilder
-                    .ofType(Material.GOLD_NUGGET)
+                PaperItemBuilder.ofType(Material.GOLD_NUGGET)
                     .name(Component.text("Gold Medal"))
                     .loreList(
                         Component.text("There's an inscription on").color(NamedTextColor.GRAY),
                         Component.text("the back. It says \"#1 Idiot\".").color(NamedTextColor.GRAY)
                     )
-                    .build()
+                    .build(),
+                MilkProvider.splash()
             );
-
-        if (player.hasPermission(Permission.MILK)) {
-          bundleBuilder.addItem(PotionBuilder.ofType(Material.SPLASH_POTION)
-              .name(Component.text("Femboy Hooters Sauce").color(NamedTextColor.LIGHT_PURPLE))
-              .loreList(Component.text("It doesn't smell very good..").color(NamedTextColor.GRAY))
-              .addFlag(ItemFlag.HIDE_POTION_EFFECTS)
-              .color(Color.WHITE)
-              .build());
-        }
 
         player.getInventory().addItem(bundleBuilder.build());
       }
