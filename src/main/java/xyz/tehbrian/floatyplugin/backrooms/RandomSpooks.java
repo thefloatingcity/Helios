@@ -5,6 +5,8 @@ import net.kyori.adventure.sound.Sound;
 import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
 import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.Ticks;
@@ -109,6 +111,24 @@ public final class RandomSpooks {
         scheduler.runTaskLater(this.plugin, () -> player.teleport(previous), 7);
       }
     }, 1, Ticks.in(Duration.ofSeconds(57)) - 7);
+
+    // deep boom sound plus blindness.
+    scheduler.runTaskTimer(this.plugin, () -> {
+      final World backrooms = this.worldService.getWorld(Realm.BACKROOMS);
+      for (final Player player : backrooms.getPlayers()) {
+        if (RANDOM.nextFloat() > 0.13F) {
+          continue;
+        }
+
+        player.playSound(Sound.sound(
+            org.bukkit.Sound.ENTITY_ELDER_GUARDIAN_DEATH,
+            Sound.Source.MASTER,
+            100,
+            RANDOM.nextFloat(0.5F, 0.65F)
+        ));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 30, 1, true, true, false));
+      }
+    }, 1, Ticks.in(Duration.ofMinutes(2)) - 17);
   }
 
 }
