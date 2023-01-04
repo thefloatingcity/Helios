@@ -4,7 +4,6 @@ import org.bukkit.Axis;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.Orientable;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.generator.WorldInfo;
@@ -46,9 +45,7 @@ public final class BackroomsGenerator extends ChunkGenerator {
       final int chunkX, final int middleY, final int chunkZ,
       final ChunkData chunkData
   ) {
-    chunkData.setBlock(chunkX, middleY + 3, chunkZ, Palette.LAMP_GLASS);
-    chunkData.setBlock(chunkX, middleY + 4, chunkZ, Palette.LAMP);
-    chunkData.setBlock(chunkX, middleY + 4, chunkZ, Palette.LAMP_DATA);
+    chunkData.setBlock(chunkX, middleY + 3, chunkZ, Palette.LAMP);
   }
 
   @Override
@@ -80,15 +77,17 @@ public final class BackroomsGenerator extends ChunkGenerator {
     WorldUtil.setRegionInclusive(0, middleY + 3, 0, 15, middleY + 3, 15, Palette.CEILING, chunkData);
 
     // lights.
-    setLight(3, middleY, 3, chunkData);
-    setLight(3, middleY, 11, chunkData);
-    setLight(11, middleY, 3, chunkData);
-    setLight(11, middleY, 11, chunkData);
+    setLight(3, middleY, 4, chunkData);
+    setLight(4, middleY, 4, chunkData);
 
-    setLight(7, middleY, 7, chunkData);
-    setLight(7, middleY, 15, chunkData);
-    setLight(15, middleY, 7, chunkData);
-    setLight(15, middleY, 15, chunkData);
+    setLight(11, middleY, 4, chunkData);
+    setLight(12, middleY, 4, chunkData);
+
+    setLight(3, middleY, 12, chunkData);
+    setLight(4, middleY, 12, chunkData);
+
+    setLight(11, middleY, 12, chunkData);
+    setLight(12, middleY, 12, chunkData);
 
     // set main area to air before walls are placed.
     WorldUtil.setRegionInclusive(0, middleY - 2, 0, 15, middleY + 2, 15, Material.AIR, chunkData);
@@ -171,13 +170,10 @@ public final class BackroomsGenerator extends ChunkGenerator {
     public static final Material FLOOR = Material.STRIPPED_BIRCH_LOG;
     public static final Orientable FLOOR_DATA = (Orientable) FLOOR.createBlockData();
 
-    public static final Material LAMP = Material.REDSTONE_LAMP;
-    public static final Lightable LAMP_DATA = (Lightable) LAMP.createBlockData();
-    public static final Material LAMP_GLASS = Material.LIGHT_GRAY_STAINED_GLASS;
+    public static final Material LAMP = Material.OCHRE_FROGLIGHT;
 
     static {
       FLOOR_DATA.setAxis(Axis.X);
-      LAMP_DATA.setLit(true);
     }
 
     private Palette() {
