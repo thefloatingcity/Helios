@@ -6,31 +6,36 @@ import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
+import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.NodePath;
-import xyz.tehbrian.floatyplugin.LuckPermsService;
+import xyz.tehbrian.floatyplugin.FloatyPlugin;
 import xyz.tehbrian.floatyplugin.Permission;
 import xyz.tehbrian.floatyplugin.config.BookDeserializer;
 import xyz.tehbrian.floatyplugin.config.BooksConfig;
+import xyz.tehbrian.floatyplugin.config.ConfigConfig;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
 public final class RulesCommand extends PaperCloudCommand<CommandSender> {
 
+  private final FloatyPlugin floatyPlugin;
   private final BooksConfig booksConfig;
-  private final LuckPermsService luckPermsService;
   private final LangConfig langConfig;
+  private final ConfigConfig configConfig;
 
   @Inject
   public RulesCommand(
+      final FloatyPlugin floatyPlugin,
       final BooksConfig booksConfig,
-      final LuckPermsService luckPermsService,
-      final LangConfig langConfig
+      final LangConfig langConfig,
+      final ConfigConfig configConfig
   ) {
+    this.floatyPlugin = floatyPlugin;
     this.booksConfig = booksConfig;
-    this.luckPermsService = luckPermsService;
     this.langConfig = langConfig;
+    this.configConfig = configConfig;
   }
 
   @Override
@@ -41,7 +46,7 @@ public final class RulesCommand extends PaperCloudCommand<CommandSender> {
     final var page = main
         .argument(IntegerArgument.<CommandSender>builder("page")
             .withMin(1)
-            .withMax(BookDeserializer.pageCount(this.bookNode())) // FIXME: won't work with plugin reload
+            .withMax(BookDeserializer.pageCount(this.bookNode())) // FIXME: won't work with plugin reload.
             .asOptionalWithDefault(1)
             .build())
         .handler(c -> c.getSender().sendMessage(
@@ -55,7 +60,17 @@ public final class RulesCommand extends PaperCloudCommand<CommandSender> {
           if (sender.hasPermission(Permission.BUILD_MADLANDS)) {
             sender.sendMessage(this.langConfig.c(NodePath.path("rules", "already_accepted")));
           } else {
-            this.luckPermsService.promoteInTrack(sender, "player");
+            // yes, we're going to send a command as the console to promote the
+            // player instead of programmatically doing it with the LuckPerms API.
+            // if you feel extreme grievance about this, feel free to hire me to
+            // remedy this grave issue. my rate is $150/hr.
+            if (this.configConfig.data().madlandsEnabled()) {
+              // /lp user <player> parent settrack player boarding
+              this.setPlayerParent(sender, "boarding");
+            } else {
+              // /lp user <player> parent settrack player passenger
+              this.setPlayerParent(sender, "passenger");
+            }
             sender.sendMessage(this.langConfig.c(NodePath.path("rules", "accept")));
           }
         });
@@ -67,6 +82,15 @@ public final class RulesCommand extends PaperCloudCommand<CommandSender> {
 
   private CommentedConfigurationNode bookNode() {
     return this.booksConfig.rootNode().node("rules");
+  }
+
+  private void setPlayerParent(final Player player, final String parentName) {
+    this.executeCommand("lp user %s parent settrack player %s".formatted(player.getName(), parentName));
+  }
+
+  private void executeCommand(final String command) {
+    final Server server = this.floatyPlugin.getServer();
+    server.dispatchCommand(server.getConsoleSender(), command);
   }
 
 }

@@ -29,7 +29,8 @@ public final class ConfigConfig extends AbstractDataConfig<HoconConfigurateWrapp
   @ConfigSerializable
   public record Data(PokeForce pokeForce,
                      String resourcePackUrl,
-                     String resourcePackHash) {
+                     String resourcePackHash,
+                     boolean madlandsEnabled) {
 
     @ConfigSerializable
     public record PokeForce(double minY, double maxY, double minXZ, double maxXZ) {
