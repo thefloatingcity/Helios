@@ -66,10 +66,10 @@ public final class RulesCommand extends PaperCloudCommand<CommandSender> {
             // remedy this grave issue. my rate is $150/hr.
             if (this.configConfig.data().madlandsEnabled()) {
               // /lp user <player> parent settrack player boarding
-              this.setPlayerParent(sender, "boarding");
+              this.setPlayerParent(sender, "mad");
             } else {
               // /lp user <player> parent settrack player passenger
-              this.setPlayerParent(sender, "passenger");
+              this.setPlayerParent(sender, "boarding");
             }
             sender.sendMessage(this.langConfig.c(NodePath.path("rules", "accept")));
           }

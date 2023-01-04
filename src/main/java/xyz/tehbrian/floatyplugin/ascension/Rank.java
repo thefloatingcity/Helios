@@ -6,12 +6,14 @@ import java.time.Duration;
 import java.util.Locale;
 
 public enum Rank {
-  BOARDING(null),
-  PASSENGER(null),
-  NAVIGATOR(Duration.ofHours(1)),
-  PILOT(Duration.ofHours(5)),
-  CAPTAIN(Duration.ofHours(25)),
-  ASTRONAUT(Duration.ofHours(75));
+  GROUNDED(null),
+  MAD(null),      // /rules accept if madlands enabled.
+  BOARDING(null), // /rules accept if madlands disabled, otherwise, manual.
+  PASSENGER(Duration.ofHours(1)),
+  NAVIGATOR(Duration.ofHours(10)),
+  PILOT(Duration.ofHours(30)),
+  CAPTAIN(Duration.ofHours(75)),
+  ASTRONAUT(Duration.ofHours(150));
 
   private final @Nullable Duration playtimeRequired;
 
