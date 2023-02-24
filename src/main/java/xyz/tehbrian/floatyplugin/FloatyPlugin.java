@@ -34,7 +34,7 @@ import xyz.tehbrian.floatyplugin.milk.MilkCommand;
 import xyz.tehbrian.floatyplugin.milk.MilkListener;
 import xyz.tehbrian.floatyplugin.piano.PianoCommand;
 import xyz.tehbrian.floatyplugin.piano.PianoPlayListener;
-import xyz.tehbrian.floatyplugin.realm.AntiBuildListener;
+import xyz.tehbrian.floatyplugin.realm.WorldProtectionListener;
 import xyz.tehbrian.floatyplugin.realm.FirstJoinListener;
 import xyz.tehbrian.floatyplugin.realm.MadlandsMoverListener;
 import xyz.tehbrian.floatyplugin.realm.RespawnListener;
@@ -148,7 +148,7 @@ public final class FloatyPlugin extends TehPlugin {
 
   private void setupListeners() {
     registerListeners(
-        this.injector.getInstance(AntiBuildListener.class),
+        this.injector.getInstance(WorldProtectionListener.class),
         this.injector.getInstance(ChatListener.class),
         this.injector.getInstance(DamageListener.class),
         this.injector.getInstance(FirstJoinListener.class),

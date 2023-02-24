@@ -24,12 +24,15 @@ import org.spongepowered.configurate.NodePath;
 import xyz.tehbrian.floatyplugin.Permission;
 import xyz.tehbrian.floatyplugin.config.LangConfig;
 
-public final class AntiBuildListener implements Listener {
+/**
+ * Prevents players from building in worlds if they lack the relevant permission.
+ */
+public final class WorldProtectionListener implements Listener {
 
   private final LangConfig langConfig;
 
   @Inject
-  public AntiBuildListener(
+  public WorldProtectionListener(
       final LangConfig langConfig
   ) {
     this.langConfig = langConfig;
@@ -37,79 +40,83 @@ public final class AntiBuildListener implements Listener {
 
   @EventHandler(priority = EventPriority.LOW)
   public void onBlockPlace(final BlockPlaceEvent event) {
-    this.onAntiBuild(event, event.getPlayer());
+    this.handle(event, event.getPlayer());
   }
 
   @EventHandler(priority = EventPriority.LOW)
   public void onBlockBreak(final BlockBreakEvent event) {
-    this.onAntiBuild(event, event.getPlayer());
+    this.handle(event, event.getPlayer());
   }
 
   @EventHandler(priority = EventPriority.LOW)
   public void onHangingPlace(final HangingPlaceEvent event) {
     if (event.getPlayer() != null) {
-      this.onAntiBuild(event, event.getPlayer());
+      this.handle(event, event.getPlayer());
     }
   }
 
   @EventHandler(priority = EventPriority.LOW)
   public void onHangingBreak(final HangingBreakByEntityEvent event) {
     if (event.getRemover() instanceof Player player) {
-      this.onAntiBuild(event, player);
+      this.handle(event, player);
     }
   }
 
   @EventHandler(priority = EventPriority.LOW)
   public void onBucketFill(final PlayerBucketFillEvent event) {
-    this.onAntiBuild(event);
+    this.handle(event);
   }
 
   @EventHandler(priority = EventPriority.LOW)
   public void onBucketEmpty(final PlayerBucketEmptyEvent event) {
-    this.onAntiBuild(event);
+    this.handle(event);
   }
 
   @EventHandler(priority = EventPriority.LOW)
   public void onItemPickup(final PlayerAttemptPickupItemEvent event) {
-    this.onAntiBuild(event, false);
+    this.handle(event, false);
   }
 
   @EventHandler(priority = EventPriority.LOW)
   public void onItemDrop(final PlayerDropItemEvent event) {
-    this.onAntiBuild(event, false);
+    this.handle(event, false);
   }
 
   @EventHandler(priority = EventPriority.LOW)
   public void onInteract(final PlayerInteractEvent event) {
-    this.onAntiBuild(event, event.getAction() != Action.PHYSICAL);
+    this.handle(event, event.getAction() != Action.PHYSICAL);
   }
 
   @EventHandler(priority = EventPriority.LOW)
   public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {
     if (event.getDamager() instanceof Player player) {
-      this.onAntiBuild(event, player);
+      this.handle(event, player);
     }
   }
 
   @EventHandler(priority = EventPriority.LOW)
   public void onArmorStandManipulate(final PlayerArmorStandManipulateEvent event) {
-    this.onAntiBuild(event);
+    this.handle(event);
   }
 
   @EventHandler(priority = EventPriority.LOW)
   public void onInteractEntity(final PlayerInteractEntityEvent event) {
-    this.onAntiBuild(event);
+    this.handle(event);
   }
 
-  private <T extends PlayerEvent & Cancellable> void onAntiBuild(final T event, final boolean sendMessage) {
-    this.onAntiBuild(event, event.getPlayer(), sendMessage);
+  private <T extends PlayerEvent & Cancellable> void handle(final T event, final boolean sendMessage) {
+    this.handle(event, event.getPlayer(), sendMessage);
   }
 
-  private <T extends PlayerEvent & Cancellable> void onAntiBuild(final T event) {
-    this.onAntiBuild(event, true);
+  private <T extends Cancellable> void handle(final T event, final Player player) {
+    this.handle(event, player, true);
   }
 
-  private <T extends Cancellable> void onAntiBuild(final T event, final Player player, final boolean sendMessage) {
+  private <T extends PlayerEvent & Cancellable> void handle(final T event) {
+    this.handle(event, true);
+  }
+
+  private <T extends Cancellable> void handle(final T event, final Player player, final boolean sendMessage) {
     final var permission = switch (Realm.from(player.getWorld())) {
       case MADLANDS -> Permission.BUILD_MADLANDS;
       case OVERWORLD -> Permission.BUILD_OVERWORLD;
@@ -124,10 +131,6 @@ public final class AntiBuildListener implements Listener {
       }
       event.setCancelled(true);
     }
-  }
-
-  private <T extends Cancellable> void onAntiBuild(final T event, final Player player) {
-    this.onAntiBuild(event, player, true);
   }
 
 }
