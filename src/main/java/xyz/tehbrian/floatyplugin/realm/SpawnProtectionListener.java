@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -122,6 +123,18 @@ public final class SpawnProtectionListener implements Listener {
         event.setCancelled(true);
         return;
       }
+    }
+  }
+
+  /**
+   * Prevents water, lava, and dragon eggs from getting into spawn.
+   *
+   * @param event the event
+   */
+  @EventHandler
+  public void onBlockFromTo(final BlockFromToEvent event) {
+    if (this.isWithinWorldSpawn(event.getToBlock().getLocation())) {
+      event.setCancelled(true);
     }
   }
 
