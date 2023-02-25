@@ -2,6 +2,7 @@ package xyz.tehbrian.floatyplugin.realm;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
@@ -94,16 +95,29 @@ public final class SpawnProtectionListener implements Listener {
   @EventHandler(priority = EventPriority.LOW)
   public void onPistonPush(final BlockPistonExtendEvent event) {
     for (final var block : event.getBlocks()) {
-      if (this.isWithinWorldSpawn(block.getLocation())) {
+      // if new position is within spawn, cancel event.
+      final Location current = block.getLocation();
+      final Location predicted = this.applyDirection(current, event.getDirection());
+      if (this.isWithinWorldSpawn(predicted)) {
         event.setCancelled(true);
         return;
       }
     }
   }
 
+  private Location applyDirection(final Location location, final BlockFace direction) {
+    return new Location(
+        location.getWorld(),
+        location.getX() + direction.getModX(),
+        location.getY() + direction.getModY(),
+        location.getZ() + direction.getModZ()
+    );
+  }
+
   @EventHandler(priority = EventPriority.LOW)
   public void onPistonPull(final BlockPistonRetractEvent event) {
     for (final var block : event.getBlocks()) {
+      // if position is within spawn, cancel event.
       if (this.isWithinWorldSpawn(block.getLocation())) {
         event.setCancelled(true);
         return;
