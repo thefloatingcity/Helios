@@ -64,7 +64,7 @@ public final class TransportationListener implements Listener {
       player.setGameMode(GameMode.ADVENTURE);
       player.setFireTicks(100);
       player.getWorld().strikeLightning(player.getLocation());
-      player.sendMessage(this.langConfig.c(NodePath.path("no_spectator")));
+      player.sendMessage(this.langConfig.c(NodePath.path("no-spectator")));
     }
   }
 
@@ -105,7 +105,7 @@ public final class TransportationListener implements Listener {
       final Vehicle vehicle = event.getVehicle();
       vehicle.getWorld().createExplosion(vehicle, 2, true, false);
       vehicle.remove();
-      player.sendMessage(this.langConfig.c(NodePath.path("no_vehicle")));
+      player.sendMessage(this.langConfig.c(NodePath.path("no-vehicle")));
     } else {
       event.setCancelled(true);
     }
@@ -182,15 +182,15 @@ public final class TransportationListener implements Listener {
     final User user = this.userService.getUser(player);
     final var netherBlindnessCount = user.netherBlindnessCount();
     switch (netherBlindnessCount) {
-      case 0, 2, 5, 10 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "1")));
-      case 20 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "2")));
-      case 30 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "3")));
-      case 40 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "4")));
-      case 50 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "5")));
-      case 60 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "6")));
-      case 70 -> player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "7")));
+      case 0, 2, 5, 10 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "1")));
+      case 20 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "2")));
+      case 30 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "3")));
+      case 40 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "4")));
+      case 50 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "5")));
+      case 60 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "6")));
+      case 70 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "7")));
       case 90 -> {
-        player.sendMessage(this.langConfig.c(NodePath.path("no_sprint", "8")));
+        player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "8")));
 
         final BundleBuilder bundleBuilder = BundleBuilder.ofBundle()
             .name(Component.text("Nether Watcher's Gift").color(NamedTextColor.RED))

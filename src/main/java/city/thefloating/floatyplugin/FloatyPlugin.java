@@ -121,7 +121,7 @@ public final class FloatyPlugin extends TehPlugin {
     this.saveResourceSilently("config.conf");
     this.saveResourceSilently("emotes.conf");
     this.saveResourceSilently("lang.conf");
-    this.saveResourceSilently("piano_notes.conf");
+    this.saveResourceSilently("piano-notes.conf");
 
     final List<Config> configsToLoad = List.of(
         this.injector.getInstance(BooksConfig.class),

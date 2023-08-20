@@ -114,7 +114,7 @@ public final class PianoCommand extends PaperCloudCommand<CommandSender> {
 
           this.userService.getUser(sender).piano().instrument(inst);
           sender.sendMessage(this.langConfig.c(
-              NodePath.path("piano", "instrument_change"),
+              NodePath.path("piano", "instrument-change"),
               Placeholder.unparsed("instrument", inst.toString())
           ));
         });
@@ -132,7 +132,7 @@ public final class PianoCommand extends PaperCloudCommand<CommandSender> {
   }
 
   public CommentedConfigurationNode getBookNode() {
-    return this.booksConfig.rootNode().node("piano_manual");
+    return this.booksConfig.rootNode().node("piano-manual");
   }
 
 }

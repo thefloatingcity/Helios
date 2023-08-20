@@ -46,7 +46,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
 
           if (c.<Player>getOptional("player").isPresent()) {
             sender.getServer().sendMessage(this.langConfig.c(
-                NodePath.path("act", "zap_other"),
+                NodePath.path("act", "zap-other"),
                 TagResolver.resolver(
                     Placeholder.component("issuer", sender.displayName()),
                     Placeholder.component("target", target.displayName())
@@ -54,7 +54,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
             ));
           } else {
             sender.getServer().sendMessage(this.langConfig.c(
-                NodePath.path("act", "zap_self"),
+                NodePath.path("act", "zap-self"),
                 TagResolver.resolver(
                     Placeholder.component("issuer", sender.displayName())
                 )
@@ -87,7 +87,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
 
           if (c.<Player>getOptional("player").isPresent()) {
             sender.getServer().sendMessage(this.langConfig.c(
-                NodePath.path("act", "poke_other"),
+                NodePath.path("act", "poke-other"),
                 TagResolver.resolver(
                     Placeholder.component("issuer", sender.displayName()),
                     Placeholder.component("target", target.displayName())
@@ -95,7 +95,7 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
             ));
           } else {
             sender.getServer().sendMessage(this.langConfig.c(
-                NodePath.path("act", "poke_self"),
+                NodePath.path("act", "poke-self"),
                 TagResolver.resolver(
                     Placeholder.component("issuer", sender.displayName())
                 )

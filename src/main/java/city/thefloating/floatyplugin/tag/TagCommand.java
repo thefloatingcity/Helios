@@ -35,7 +35,7 @@ public final class TagCommand extends PaperCloudCommand<CommandSender> {
           final Player sender = (Player) c.getSender();
           if (this.tagGame.togglePlaying(sender)) {
             if (this.tagGame.players().size() <= 1) {
-              sender.sendMessage(this.langConfig.c(NodePath.path("tag", "join_first")));
+              sender.sendMessage(this.langConfig.c(NodePath.path("tag", "join-first")));
               this.tagGame.it(sender);
             } else {
               sender.sendMessage(this.langConfig.c(NodePath.path("tag", "join")));
@@ -48,9 +48,9 @@ public final class TagCommand extends PaperCloudCommand<CommandSender> {
     final var ntb = main.literal("ntb", ArgumentDescription.of("Toggles no tag backs."))
         .handler(c -> {
           if (this.tagGame.toggleNoTagBacks()) {
-            c.getSender().sendMessage(this.langConfig.c(NodePath.path("tag", "no_tag_backs_enabled")));
+            c.getSender().sendMessage(this.langConfig.c(NodePath.path("tag", "no-tag-backs-enabled")));
           } else {
-            c.getSender().sendMessage(this.langConfig.c(NodePath.path("tag", "no_tag_backs_disabled")));
+            c.getSender().sendMessage(this.langConfig.c(NodePath.path("tag", "no-tag-backs-disabled")));
           }
         });
 

@@ -25,7 +25,7 @@ public final class BookDeserializer {
     Component finalComponent = Component.empty();
 
     finalComponent = finalComponent.append(MiniMessage.miniMessage().deserialize(
-        book.node("multistart").getString() + book.node("page_header").getString(),
+        book.node("multistart").getString() + book.node("page-header").getString(),
         TagResolver.resolver(
             Placeholder.unparsed("title", Objects.requireNonNull(page.node("title").getString())),
             Placeholder.unparsed("page", pageNumber.toString()),

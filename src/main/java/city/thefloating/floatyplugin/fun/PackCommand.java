@@ -35,7 +35,7 @@ public final class PackCommand extends PaperCloudCommand<CommandSender> {
               this.configConfig.data().resourcePackUrl(),
               this.configConfig.data().resourcePackHash()
           );
-          sender.sendMessage(this.langConfig.c(NodePath.path("resource_pack", "sending")));
+          sender.sendMessage(this.langConfig.c(NodePath.path("resource-pack", "sending")));
         });
 
     commandManager.command(main);

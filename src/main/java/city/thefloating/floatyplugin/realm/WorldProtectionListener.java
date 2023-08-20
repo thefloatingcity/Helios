@@ -127,7 +127,7 @@ public final class WorldProtectionListener implements Listener {
 
     if (!player.hasPermission(permission)) {
       if (sendMessage) {
-        player.sendMessage(this.langConfig.c(NodePath.path("no_build")));
+        player.sendMessage(this.langConfig.c(NodePath.path("no-build")));
       }
       event.setCancelled(true);
     }

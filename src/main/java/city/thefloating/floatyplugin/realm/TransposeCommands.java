@@ -66,7 +66,7 @@ public final class TransposeCommands extends PaperCloudCommand<CommandSender> {
   private void tryTranspose(final Player player, final Realm destination) {
     final Realm current = Realm.from(player.getWorld());
     if (current == destination) {
-      player.sendMessage(this.langConfig.c(NodePath.path("transpose", "already_there")));
+      player.sendMessage(this.langConfig.c(NodePath.path("transpose", "already-there")));
       return;
     }
 

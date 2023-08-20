@@ -53,12 +53,12 @@ public final class JoinQuitDisplayListener implements Listener {
       ));
     } else {
       event.joinMessage(this.langConfig.c(
-          NodePath.path("join_new"),
+          NodePath.path("join-new"),
           Placeholder.component("player", player.displayName())
       ));
 
       player.sendMessage(this.langConfig.c(
-          NodePath.path("motd_new"),
+          NodePath.path("motd-new"),
           Placeholder.component("player", player.displayName())
       ));
     }

@@ -32,7 +32,7 @@ public final class PianoMenuProvider {
 
   public Inventory generate() {
     final var rootNode = Objects.requireNonNull(this.pianoNotesConfig.rootNode());
-    final var pianoNotesNode = rootNode.node("piano_notes");
+    final var pianoNotesNode = rootNode.node("piano-notes");
 
     final String name = Objects.requireNonNull(pianoNotesNode.node("name").getString());
     final var inventory = Bukkit.createInventory(
@@ -50,7 +50,7 @@ public final class PianoMenuProvider {
 
   public List<ItemStack> getCollection(final NoteCollection collection) {
     final var rootNode = Objects.requireNonNull(this.pianoNotesConfig.rootNode());
-    final var pianoNotesNode = Objects.requireNonNull(rootNode.node("piano_notes"));
+    final var pianoNotesNode = Objects.requireNonNull(rootNode.node("piano-notes"));
     final var itemsNode = Objects.requireNonNull(pianoNotesNode.node("items"));
 
     final List<ItemStack> items = new ArrayList<>();

@@ -20,7 +20,7 @@ public final class ServerPingListener implements Listener {
 
   @EventHandler
   public void onServerPing(final PaperServerListPingEvent e) {
-    e.motd(this.langConfig.c(NodePath.path("server_motd")));
+    e.motd(this.langConfig.c(NodePath.path("server-motd")));
   }
 
 }

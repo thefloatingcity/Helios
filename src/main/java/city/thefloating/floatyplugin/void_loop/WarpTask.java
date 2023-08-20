@@ -59,7 +59,7 @@ public final class WarpTask {
               () -> {
                 player.showTitle(Title.title(
                     this.langConfig.c(NodePath.path("warp", "max")),
-                    this.langConfig.c(NodePath.path("warp", "max_sub")),
+                    this.langConfig.c(NodePath.path("warp", "max-sub")),
                     INSTANT_IN_TIMES
                 ));
 

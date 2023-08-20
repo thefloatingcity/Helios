@@ -116,7 +116,7 @@ public final class FunCommands extends PaperCloudCommand<CommandSender> {
                 .getSender()
                 .getServer()
                 .sendMessage(this.langConfig.c(
-                    NodePath.path("fun", "sue_extra"),
+                    NodePath.path("fun", "sue-extra"),
                     TagResolver.resolver(
                         Placeholder.unparsed("player", c.getSender().getName()),
                         Placeholder.unparsed("text", text)

@@ -79,7 +79,7 @@ public final class TagGame {
     if (player.equals(this.it())) {
       if (this.playing.iterator().hasNext()) {
         this.it(this.playing.iterator().next());
-        this.it().sendMessage(this.langConfig.c(NodePath.path("tag", "now_it_because_leave")));
+        this.it().sendMessage(this.langConfig.c(NodePath.path("tag", "now-it-because-leave")));
       } else {
         this.it(null);
       }

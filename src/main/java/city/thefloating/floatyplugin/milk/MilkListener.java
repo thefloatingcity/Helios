@@ -42,7 +42,7 @@ public final class MilkListener implements Listener {
       if (Realm.from(player.getWorld()) == Realm.NETHER
           && player.isSprinting()) {
         player.setHealth(0.0D);
-        player.sendMessage(this.langConfig.c(NodePath.path("no_sprint_potion")));
+        player.sendMessage(this.langConfig.c(NodePath.path("no-sprint-potion")));
         return;
       }
 

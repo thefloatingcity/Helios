@@ -81,9 +81,9 @@ public final class PortalUseTask {
     switch (realm) {
       case MADLANDS -> {
         if (player.hasPermission(Permission.WORLD_NETHER)) {
-          this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "wrong_world")));
+          this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "wrong-world")));
         } else {
-          this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "no_permission")));
+          this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "no-permission")));
         }
       }
       case BACKROOMS -> this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "backrooms")));
@@ -100,7 +100,7 @@ public final class PortalUseTask {
         if (player.hasPermission(Permission.WORLD_END)) {
           this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "wrong_world")));
         } else {
-          this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "no_permission")));
+          this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "no-permission")));
         }
       }
       case BACKROOMS -> this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "backrooms")));

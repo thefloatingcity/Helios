@@ -135,7 +135,7 @@ public final class ChatListener implements Listener {
 
   private Component chatFormat(final Component component, final Component sourceDisplayName) {
     return this.langConfig.c(
-        NodePath.path("chat_format"),
+        NodePath.path("chat-format"),
         TagResolver.resolver(
             Placeholder.component("sender", sourceDisplayName),
             Placeholder.component("message", component)

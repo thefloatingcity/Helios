@@ -63,16 +63,16 @@ public final class TagListener implements Listener {
         && this.tagGame.isPlaying(victim)
         && damager.equals(this.tagGame.it())) {
       if (this.tagGame.noTagBacks() && victim.equals(this.tagGame.lastIt())) {
-        damager.sendMessage(this.langConfig.c(NodePath.path("tag", "no_tag_backs")));
+        damager.sendMessage(this.langConfig.c(NodePath.path("tag", "no-tag-backs")));
         damager.playSound(damager.getEyeLocation(), Sound.ITEM_SHIELD_BREAK, 1, 0.9F);
         return;
       }
 
       this.tagGame.it(victim);
-      victim.sendMessage(this.langConfig.c(NodePath.path("tag", "now_it")));
+      victim.sendMessage(this.langConfig.c(NodePath.path("tag", "now-it")));
       victim.playSound(victim.getEyeLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5F);
       damager.sendMessage(this.langConfig.c(
-          NodePath.path("tag", "tagged_player"),
+          NodePath.path("tag", "tagged-player"),
           Placeholder.component("player", victim.displayName())
       ));
       damager.playSound(damager.getEyeLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 0.7F);
@@ -89,7 +89,7 @@ public final class TagListener implements Listener {
     if (this.tagGame.isPlaying(event.getPlayer())
         && event.getNewGameMode() != GameMode.ADVENTURE) {
       event.setCancelled(true);
-      event.getPlayer().sendMessage(this.langConfig.c(NodePath.path("tag", "adventure_only")));
+      event.getPlayer().sendMessage(this.langConfig.c(NodePath.path("tag", "adventure-only")));
     }
   }
 

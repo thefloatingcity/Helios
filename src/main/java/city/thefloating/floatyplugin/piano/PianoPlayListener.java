@@ -52,7 +52,7 @@ public final class PianoPlayListener implements Listener {
         || !player.hasPermission(Permission.PIANO)
         || event.getClickedInventory() == null
         || !event.getView().title().equals(Format.miniMessage(
-        this.pianoNotesConfig.rootNode().node("piano_notes", "name").getString()))) {
+        this.pianoNotesConfig.rootNode().node("piano-notes", "name").getString()))) {
       return;
     }
 

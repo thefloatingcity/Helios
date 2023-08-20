@@ -58,7 +58,7 @@ public final class RulesCommand extends PaperCloudCommand<CommandSender> {
         .handler(c -> {
           final Player sender = (Player) c.getSender();
           if (sender.hasPermission(Permission.BUILD_MADLANDS)) {
-            sender.sendMessage(this.langConfig.c(NodePath.path("rules", "already_accepted")));
+            sender.sendMessage(this.langConfig.c(NodePath.path("rules", "already-accepted")));
           } else {
             // yes, we're going to send a command as the console to promote the
             // player instead of programmatically doing it with the LuckPerms API.
