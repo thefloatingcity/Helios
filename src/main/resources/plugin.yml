@@ -5,7 +5,7 @@ website: https://github.com/thefloatingcity/FloatyPlugin
 
 version: ${version}
 main: city.thefloating.floatyplugin.FloatyPlugin
-api-version: 1.19
+api-version: 1.20
 
 depend: [ LuckPerms ]
 load: STARTUP

@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-  compileOnly("io.papermc.paper:paper-api:1.19.3-R0.1-SNAPSHOT")
+  compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
   compileOnly("net.luckperms:api:5.4")
 
   implementation("broccolai.corn:corn-minecraft-paper:3.2.0")
@@ -57,6 +57,6 @@ tasks {
   }
 
   runServer {
-    minecraftVersion("1.19.3")
+    minecraftVersion("1.20.1")
   }
 }
