@@ -4,7 +4,7 @@ authors: [ TehBrian ]
 website: https://github.com/thefloatingcity/FloatyPlugin
 
 version: ${version}
-main: xyz.tehbrian.floatyplugin.FloatyPlugin
+main: city.thefloating.floatyplugin.FloatyPlugin
 api-version: 1.19
 
 depend: [ LuckPerms ]
