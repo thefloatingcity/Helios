@@ -1,11 +1,16 @@
 package city.thefloating.floatyplugin.server;
 
+import city.thefloating.floatyplugin.Format;
+import city.thefloating.floatyplugin.Permission;
+import city.thefloating.floatyplugin.config.EmotesConfig;
+import city.thefloating.floatyplugin.config.LangConfig;
 import com.google.inject.Inject;
 import io.papermc.paper.event.player.AsyncChatDecorateEvent;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.Sound;
@@ -15,10 +20,6 @@ import org.bukkit.event.Listener;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.NodePath;
-import city.thefloating.floatyplugin.Format;
-import city.thefloating.floatyplugin.Permission;
-import city.thefloating.floatyplugin.config.EmotesConfig;
-import city.thefloating.floatyplugin.config.LangConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ public final class ChatListener implements Listener {
       1000,
       2
   );
+  private static final TextColor GREENTEXT_COLOR = TextColor.fromHexString("#789922");
 
   private final EmotesConfig emotesConfig;
   private final LangConfig langConfig;
@@ -59,6 +61,7 @@ public final class ChatListener implements Listener {
     event.result(this.colorCodes(event.result(), source));
     event.result(this.colorPingedPlayers(event.result(), source));
     event.result(this.replaceEmotes(event.result()));
+    event.result(this.greentext(event.result())); // greentext last to overwrite all other colors.
   }
 
   @EventHandler
@@ -75,6 +78,13 @@ public final class ChatListener implements Listener {
   private Component colorCodes(final Component component, final Player source) {
     if (source.hasPermission(Permission.CHAT_COLOR)) {
       return Format.legacyWithUrls(component);
+    }
+    return component;
+  }
+
+  private Component greentext(final Component component) {
+    if (Format.plain(component).startsWith(">") && !Format.plain(component).startsWith("> ")) {
+      return component.color(GREENTEXT_COLOR);
     }
     return component;
   }
