@@ -1,7 +1,10 @@
 package city.thefloating.floatyplugin.void_loop;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
+import city.thefloating.floatyplugin.Ticks;
+import city.thefloating.floatyplugin.config.LangConfig;
 import city.thefloating.floatyplugin.realm.Realm;
+import city.thefloating.floatyplugin.realm.Transposer;
 import city.thefloating.floatyplugin.realm.WorldService;
 import com.google.inject.Inject;
 import net.kyori.adventure.text.Component;
@@ -12,12 +15,13 @@ import org.bukkit.Server;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.spongepowered.configurate.NodePath;
-import city.thefloating.floatyplugin.Ticks;
-import city.thefloating.floatyplugin.config.LangConfig;
 
 import java.time.Duration;
+import java.util.Random;
 
 public final class WarpTask {
 
@@ -32,36 +36,58 @@ public final class WarpTask {
       Duration.ofSeconds(1)
   );
 
+  private static final Random RANDOM = new Random();
+
   private final FloatyPlugin plugin;
   private final WorldService worldService;
   private final LangConfig langConfig;
+  private final Transposer transposer;
 
   @Inject
   public WarpTask(
       final FloatyPlugin plugin,
       final WorldService worldService,
-      final LangConfig langConfig
+      final LangConfig langConfig,
+      final Transposer transposer
   ) {
     this.plugin = plugin;
     this.worldService = worldService;
     this.langConfig = langConfig;
+    this.transposer = transposer;
   }
 
   private void warpPlayer(final Player player) {
-    final Location spawn = this.worldService.getSpawnPoint(Realm.from(player.getWorld()));
+    // random chance to noclip into the backrooms. 10% chance.
+    if (RANDOM.nextFloat() > 0.9) {
+      final Location nextLocation = this.transposer.getNextLocation(player, Realm.BACKROOMS);
+      this.transposer.transpose(player, Realm.BACKROOMS);
 
-    player.showTitle(Title.title(
-        this.langConfig.c(NodePath.path("warp", "max")),
-        this.langConfig.c(NodePath.path("warp", "max-sub")),
-        INSTANT_IN_TIMES
-    ));
+      player.addPotionEffect(new PotionEffect(
+          PotionEffectType.BLINDNESS,
+          Ticks.inT(Duration.ofSeconds(3)),
+          10,
+          true,
+          false,
+          false
+      ));
+      player.getWorld().spawnParticle(Particle.SMOKE_LARGE, nextLocation, 40, 2, 2, 2);
+      player.playSound(nextLocation, Sound.BLOCK_PORTAL_TRAVEL, SoundCategory.MASTER, 4, 1);
+    } else {
+      final Location spawn = this.worldService.getSpawnPoint(Realm.from(player.getWorld()));
 
-    player.setFallDistance(0);
-    player.teleport(spawn);
+      player.showTitle(Title.title(
+          this.langConfig.c(NodePath.path("warp", "max")),
+          this.langConfig.c(NodePath.path("warp", "max-sub")),
+          INSTANT_IN_TIMES
+      ));
 
-    player.getWorld().strikeLightningEffect(spawn);
-    player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, spawn, 1);
-    player.getWorld().playSound(spawn, Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 4, 1);
+      player.setFallDistance(0);
+      player.teleport(spawn);
+
+      player.getWorld().strikeLightningEffect(spawn);
+      player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, spawn, 1);
+      player.getWorld().playSound(spawn, Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 4, 1);
+    }
   }
 
   public void start() {

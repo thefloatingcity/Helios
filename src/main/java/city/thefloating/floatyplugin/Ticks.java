@@ -11,4 +11,11 @@ public final class Ticks {
     return duration.toSeconds() * 20;
   }
 
+  /**
+   * Casts {@link #in} to int.
+   */
+  public static int inT(final Duration duration) {
+    return (int) (duration.toSeconds() * 20);
+  }
+
 }
