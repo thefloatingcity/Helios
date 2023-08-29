@@ -1,12 +1,12 @@
 package city.thefloating.floatyplugin.realm;
 
+import city.thefloating.floatyplugin.FloatyPlugin;
 import com.google.inject.Inject;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
-import city.thefloating.floatyplugin.FloatyPlugin;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
@@ -32,11 +32,23 @@ public final class Transposer {
     final Realm current = Realm.from(player.getWorld());
     this.setPreviousLocation(player, current);
 
-    player.teleport(Objects.requireNonNullElseGet(
-        this.getPreviousLocation(player, destination),
-        () -> this.worldService.getSpawnPoint(destination)
-    ));
+    player.teleport(getNextLocation(player, destination));
     player.setFallDistance(0);
+  }
+
+  /**
+   * Get the location that a player would be teleported to if they were transposed
+   * via {@link #transpose} to the provided realm.
+   *
+   * @param player the player
+   * @param realm  the realm
+   * @return the location that the player would be teleported to on transpose
+   */
+  public Location getNextLocation(final Player player, final Realm realm) {
+    return Objects.requireNonNullElseGet(
+        this.getPreviousLocation(player, realm),
+        () -> this.worldService.getSpawnPoint(realm)
+    );
   }
 
   private @Nullable Location getPreviousLocation(final Player player, final Realm realm) {
