@@ -47,6 +47,23 @@ public final class WarpTask {
     this.langConfig = langConfig;
   }
 
+  private void warpPlayer(final Player player) {
+    final Location spawn = this.worldService.getSpawnPoint(Realm.from(player.getWorld()));
+
+    player.showTitle(Title.title(
+        this.langConfig.c(NodePath.path("warp", "max")),
+        this.langConfig.c(NodePath.path("warp", "max-sub")),
+        INSTANT_IN_TIMES
+    ));
+
+    player.setFallDistance(0);
+    player.teleport(spawn);
+
+    player.getWorld().strikeLightningEffect(spawn);
+    player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, spawn, 1);
+    player.getWorld().playSound(spawn, Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 4, 1);
+  }
+
   public void start() {
     final Server server = this.plugin.getServer();
     final BukkitScheduler scheduler = server.getScheduler();
@@ -55,30 +72,7 @@ public final class WarpTask {
       for (final Player player : server.getOnlinePlayers()) {
         final float fallDistance = player.getFallDistance();
         if (fallDistance >= 4000) {
-          scheduler.scheduleSyncDelayedTask(this.plugin,
-              () -> {
-                player.showTitle(Title.title(
-                    this.langConfig.c(NodePath.path("warp", "max")),
-                    this.langConfig.c(NodePath.path("warp", "max-sub")),
-                    INSTANT_IN_TIMES
-                ));
-
-                final Location spawn = this.worldService.getSpawnPoint(Realm.from(player.getWorld()));
-
-                player.setFallDistance(0);
-                player.teleport(spawn);
-
-                player.getWorld().strikeLightningEffect(spawn);
-                player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, spawn, 1);
-                player.getWorld().playSound(
-                    spawn,
-                    Sound.ENTITY_GENERIC_EXPLODE,
-                    SoundCategory.MASTER,
-                    4,
-                    1
-                );
-              }, 5
-          );
+          scheduler.scheduleSyncDelayedTask(this.plugin, () -> warpPlayer(player), 5);
         } else if (fallDistance >= 3800) {
           player.showTitle(Title.title(
               Component.empty(),
