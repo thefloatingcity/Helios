@@ -1,5 +1,6 @@
 package city.thefloating.floatyplugin.fun;
 
+import city.thefloating.floatyplugin.Permission;
 import city.thefloating.floatyplugin.config.ConfigConfig;
 import city.thefloating.floatyplugin.config.LangConfig;
 import cloud.commandframework.bukkit.parsers.PlayerArgument;
@@ -13,7 +14,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import org.spongepowered.configurate.NodePath;
-import city.thefloating.floatyplugin.Permission;
 
 import java.util.Random;
 

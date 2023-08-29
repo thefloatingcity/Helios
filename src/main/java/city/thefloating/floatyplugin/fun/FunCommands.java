@@ -1,5 +1,6 @@
 package city.thefloating.floatyplugin.fun;
 
+import city.thefloating.floatyplugin.Permission;
 import city.thefloating.floatyplugin.config.LangConfig;
 import cloud.commandframework.arguments.standard.StringArgument;
 import cloud.commandframework.meta.CommandMeta;
@@ -12,7 +13,6 @@ import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.spongepowered.configurate.NodePath;
-import city.thefloating.floatyplugin.Permission;
 
 import java.util.ArrayList;
 import java.util.List;

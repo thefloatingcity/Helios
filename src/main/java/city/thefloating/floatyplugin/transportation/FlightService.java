@@ -1,10 +1,10 @@
 package city.thefloating.floatyplugin.transportation;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
-import com.google.inject.Inject;
-import org.bukkit.entity.Player;
 import city.thefloating.floatyplugin.Permission;
 import city.thefloating.floatyplugin.user.UserService;
+import com.google.inject.Inject;
+import org.bukkit.entity.Player;
 
 /**
  * Checks the players' flight.

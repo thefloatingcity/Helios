@@ -1,6 +1,8 @@
 package city.thefloating.floatyplugin.server;
 
+import city.thefloating.floatyplugin.DurationFormatter;
 import city.thefloating.floatyplugin.FloatyPlugin;
+import city.thefloating.floatyplugin.config.LangConfig;
 import com.google.inject.Inject;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Color;
@@ -13,8 +15,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.spongepowered.configurate.NodePath;
-import city.thefloating.floatyplugin.DurationFormatter;
-import city.thefloating.floatyplugin.config.LangConfig;
 
 import java.time.Duration;
 import java.util.Calendar;

@@ -1,6 +1,8 @@
 package city.thefloating.floatyplugin.staff;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
+import city.thefloating.floatyplugin.Permission;
+import city.thefloating.floatyplugin.config.LangConfig;
 import cloud.commandframework.ArgumentDescription;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
@@ -8,8 +10,6 @@ import com.google.inject.Inject;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
 import org.spongepowered.configurate.NodePath;
-import city.thefloating.floatyplugin.Permission;
-import city.thefloating.floatyplugin.config.LangConfig;
 
 public final class FloatyPluginCommand extends PaperCloudCommand<CommandSender> {
 

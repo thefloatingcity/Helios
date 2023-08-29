@@ -2,6 +2,7 @@ package city.thefloating.floatyplugin.ascension;
 
 import city.thefloating.floatyplugin.DurationFormatter;
 import city.thefloating.floatyplugin.LuckPermsService;
+import city.thefloating.floatyplugin.config.LangConfig;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
@@ -12,7 +13,6 @@ import net.luckperms.api.model.group.Group;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.spongepowered.configurate.NodePath;
-import city.thefloating.floatyplugin.config.LangConfig;
 
 import java.util.concurrent.TimeUnit;
 

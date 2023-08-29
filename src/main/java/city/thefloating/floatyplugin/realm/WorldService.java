@@ -1,5 +1,6 @@
 package city.thefloating.floatyplugin.realm;
 
+import city.thefloating.floatyplugin.backrooms.BackroomsGenerator;
 import com.google.inject.Inject;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
@@ -11,7 +12,6 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.Logger;
-import city.thefloating.floatyplugin.backrooms.BackroomsGenerator;
 
 /**
  * Handles the creation of abstract realms into concrete worlds.

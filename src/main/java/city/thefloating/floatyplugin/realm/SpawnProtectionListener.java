@@ -1,5 +1,6 @@
 package city.thefloating.floatyplugin.realm;
 
+import city.thefloating.floatyplugin.Permission;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -23,7 +24,6 @@ import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import city.thefloating.floatyplugin.Permission;
 
 /**
  * Prevents players from building in world spawns if they lack the relevant permission.

@@ -1,12 +1,12 @@
 package city.thefloating.floatyplugin.config;
 
+import city.thefloating.floatyplugin.Format;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.serialize.SerializationException;
-import city.thefloating.floatyplugin.Format;
 
 import java.util.List;
 import java.util.Objects;

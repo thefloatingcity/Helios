@@ -1,12 +1,12 @@
 package city.thefloating.floatyplugin.staff;
 
+import city.thefloating.floatyplugin.Format;
+import city.thefloating.floatyplugin.Permission;
 import cloud.commandframework.arguments.standard.StringArgument;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
-import city.thefloating.floatyplugin.Format;
-import city.thefloating.floatyplugin.Permission;
 
 public final class BroadcastCommand extends PaperCloudCommand<CommandSender> {
 

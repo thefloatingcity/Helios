@@ -1,6 +1,7 @@
 package city.thefloating.floatyplugin.ascension;
 
 import city.thefloating.floatyplugin.DurationFormatter;
+import city.thefloating.floatyplugin.config.LangConfig;
 import cloud.commandframework.bukkit.parsers.PlayerArgument;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
@@ -11,7 +12,6 @@ import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.spongepowered.configurate.NodePath;
-import city.thefloating.floatyplugin.config.LangConfig;
 
 import java.util.concurrent.TimeUnit;
 

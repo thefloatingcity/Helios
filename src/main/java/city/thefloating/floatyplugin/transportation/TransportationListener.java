@@ -4,7 +4,11 @@ import broccolai.corn.paper.item.PaperItemBuilder;
 import broccolai.corn.paper.item.special.BookBuilder;
 import broccolai.corn.paper.item.special.BundleBuilder;
 import city.thefloating.floatyplugin.FloatyPlugin;
+import city.thefloating.floatyplugin.config.LangConfig;
+import city.thefloating.floatyplugin.milk.MilkProvider;
 import city.thefloating.floatyplugin.realm.Realm;
+import city.thefloating.floatyplugin.user.User;
+import city.thefloating.floatyplugin.user.UserService;
 import com.google.inject.Inject;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -29,10 +33,6 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.spongepowered.configurate.NodePath;
-import city.thefloating.floatyplugin.config.LangConfig;
-import city.thefloating.floatyplugin.milk.MilkProvider;
-import city.thefloating.floatyplugin.user.User;
-import city.thefloating.floatyplugin.user.UserService;
 
 public final class TransportationListener implements Listener {
 

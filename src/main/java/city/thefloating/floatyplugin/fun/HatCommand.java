@@ -1,5 +1,6 @@
 package city.thefloating.floatyplugin.fun;
 
+import city.thefloating.floatyplugin.Permission;
 import city.thefloating.floatyplugin.config.LangConfig;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
@@ -11,7 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.spongepowered.configurate.NodePath;
-import city.thefloating.floatyplugin.Permission;
 
 public final class HatCommand extends PaperCloudCommand<CommandSender> {
 

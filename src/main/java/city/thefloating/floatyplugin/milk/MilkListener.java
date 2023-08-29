@@ -1,5 +1,6 @@
 package city.thefloating.floatyplugin.milk;
 
+import city.thefloating.floatyplugin.config.LangConfig;
 import city.thefloating.floatyplugin.realm.Realm;
 import com.google.inject.Inject;
 import org.bukkit.entity.Player;
@@ -10,7 +11,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.NodePath;
-import city.thefloating.floatyplugin.config.LangConfig;
 
 public final class MilkListener implements Listener {
 

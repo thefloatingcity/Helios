@@ -1,15 +1,15 @@
 package city.thefloating.floatyplugin.fun;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
+import city.thefloating.floatyplugin.realm.Habitat;
+import city.thefloating.floatyplugin.user.User;
+import city.thefloating.floatyplugin.user.UserService;
 import com.google.inject.Inject;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.sound.SoundStop;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
-import city.thefloating.floatyplugin.realm.Habitat;
-import city.thefloating.floatyplugin.user.User;
-import city.thefloating.floatyplugin.user.UserService;
 
 public final class ElevatorMusicTask {
 

@@ -1,5 +1,9 @@
 package city.thefloating.floatyplugin.piano;
 
+import city.thefloating.floatyplugin.Format;
+import city.thefloating.floatyplugin.Permission;
+import city.thefloating.floatyplugin.config.PianoNotesConfig;
+import city.thefloating.floatyplugin.user.UserService;
 import com.google.inject.Inject;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
@@ -10,10 +14,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import city.thefloating.floatyplugin.Format;
-import city.thefloating.floatyplugin.Permission;
-import city.thefloating.floatyplugin.config.PianoNotesConfig;
-import city.thefloating.floatyplugin.user.UserService;
 
 public final class PianoPlayListener implements Listener {
 

@@ -1,5 +1,7 @@
 package city.thefloating.floatyplugin.realm;
 
+import city.thefloating.floatyplugin.Permission;
+import city.thefloating.floatyplugin.config.LangConfig;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
@@ -7,8 +9,6 @@ import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.spongepowered.configurate.NodePath;
-import city.thefloating.floatyplugin.Permission;
-import city.thefloating.floatyplugin.config.LangConfig;
 
 public final class TransposeCommands extends PaperCloudCommand<CommandSender> {
 

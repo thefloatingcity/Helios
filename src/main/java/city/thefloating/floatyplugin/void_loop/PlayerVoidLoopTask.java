@@ -1,13 +1,13 @@
 package city.thefloating.floatyplugin.void_loop;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
+import city.thefloating.floatyplugin.Ticks;
+import city.thefloating.floatyplugin.realm.Habitat;
 import com.google.inject.Inject;
 import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
-import city.thefloating.floatyplugin.Ticks;
-import city.thefloating.floatyplugin.realm.Habitat;
 
 import java.time.Duration;
 

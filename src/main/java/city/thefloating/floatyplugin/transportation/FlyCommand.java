@@ -1,5 +1,8 @@
 package city.thefloating.floatyplugin.transportation;
 
+import city.thefloating.floatyplugin.Permission;
+import city.thefloating.floatyplugin.config.LangConfig;
+import city.thefloating.floatyplugin.user.UserService;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
@@ -7,9 +10,6 @@ import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.spongepowered.configurate.NodePath;
-import city.thefloating.floatyplugin.Permission;
-import city.thefloating.floatyplugin.config.LangConfig;
-import city.thefloating.floatyplugin.user.UserService;
 
 public final class FlyCommand extends PaperCloudCommand<CommandSender> {
 

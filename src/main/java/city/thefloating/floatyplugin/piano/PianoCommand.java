@@ -1,6 +1,11 @@
 package city.thefloating.floatyplugin.piano;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
+import city.thefloating.floatyplugin.Permission;
+import city.thefloating.floatyplugin.config.BookDeserializer;
+import city.thefloating.floatyplugin.config.BooksConfig;
+import city.thefloating.floatyplugin.config.LangConfig;
+import city.thefloating.floatyplugin.user.UserService;
 import cloud.commandframework.ArgumentDescription;
 import cloud.commandframework.arguments.standard.EnumArgument;
 import cloud.commandframework.arguments.standard.IntegerArgument;
@@ -15,11 +20,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.NodePath;
-import city.thefloating.floatyplugin.Permission;
-import city.thefloating.floatyplugin.config.BookDeserializer;
-import city.thefloating.floatyplugin.config.BooksConfig;
-import city.thefloating.floatyplugin.config.LangConfig;
-import city.thefloating.floatyplugin.user.UserService;
 
 import java.util.List;
 

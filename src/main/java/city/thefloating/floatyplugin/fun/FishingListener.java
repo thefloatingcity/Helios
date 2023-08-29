@@ -1,6 +1,7 @@
 package city.thefloating.floatyplugin.fun;
 
 import broccolai.corn.paper.item.PaperItemBuilder;
+import city.thefloating.floatyplugin.realm.Habitat;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
@@ -8,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
-import city.thefloating.floatyplugin.realm.Habitat;
 
 public final class FishingListener implements Listener {
 

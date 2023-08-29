@@ -1,7 +1,7 @@
 package city.thefloating.floatyplugin.void_loop;
 
-import org.bukkit.event.Listener;
 import city.thefloating.floatyplugin.realm.Habitat;
+import org.bukkit.event.Listener;
 
 /**
  * Provides the positions at which the void loop will engage for each habitat.

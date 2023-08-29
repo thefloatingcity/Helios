@@ -1,5 +1,7 @@
 package city.thefloating.floatyplugin.piano;
 
+import city.thefloating.floatyplugin.Format;
+import city.thefloating.floatyplugin.config.PianoNotesConfig;
 import com.google.inject.Inject;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -8,8 +10,6 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.spongepowered.configurate.CommentedConfigurationNode;
-import city.thefloating.floatyplugin.Format;
-import city.thefloating.floatyplugin.config.PianoNotesConfig;
 
 import java.util.ArrayList;
 import java.util.Arrays;

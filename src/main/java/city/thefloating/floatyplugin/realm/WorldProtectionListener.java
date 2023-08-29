@@ -1,5 +1,7 @@
 package city.thefloating.floatyplugin.realm;
 
+import city.thefloating.floatyplugin.Permission;
+import city.thefloating.floatyplugin.config.LangConfig;
 import com.google.inject.Inject;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
@@ -21,8 +23,6 @@ import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.spongepowered.configurate.NodePath;
-import city.thefloating.floatyplugin.Permission;
-import city.thefloating.floatyplugin.config.LangConfig;
 
 /**
  * Prevents players from building in worlds if they lack the relevant permission.

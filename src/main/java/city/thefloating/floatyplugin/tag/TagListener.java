@@ -1,5 +1,7 @@
 package city.thefloating.floatyplugin.tag;
 
+import city.thefloating.floatyplugin.config.LangConfig;
+import city.thefloating.floatyplugin.realm.Realm;
 import com.google.inject.Inject;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.GameMode;
@@ -13,8 +15,6 @@ import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffectType;
 import org.spongepowered.configurate.NodePath;
-import city.thefloating.floatyplugin.config.LangConfig;
-import city.thefloating.floatyplugin.realm.Realm;
 
 public final class TagListener implements Listener {
 

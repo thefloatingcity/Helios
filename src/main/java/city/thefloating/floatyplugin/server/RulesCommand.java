@@ -1,6 +1,11 @@
 package city.thefloating.floatyplugin.server;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
+import city.thefloating.floatyplugin.Permission;
+import city.thefloating.floatyplugin.config.BookDeserializer;
+import city.thefloating.floatyplugin.config.BooksConfig;
+import city.thefloating.floatyplugin.config.ConfigConfig;
+import city.thefloating.floatyplugin.config.LangConfig;
 import cloud.commandframework.ArgumentDescription;
 import cloud.commandframework.arguments.standard.IntegerArgument;
 import cloud.commandframework.meta.CommandMeta;
@@ -12,11 +17,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.NodePath;
-import city.thefloating.floatyplugin.Permission;
-import city.thefloating.floatyplugin.config.BookDeserializer;
-import city.thefloating.floatyplugin.config.BooksConfig;
-import city.thefloating.floatyplugin.config.ConfigConfig;
-import city.thefloating.floatyplugin.config.LangConfig;
 
 public final class RulesCommand extends PaperCloudCommand<CommandSender> {
 

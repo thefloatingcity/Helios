@@ -1,6 +1,8 @@
 package city.thefloating.floatyplugin.backrooms;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
+import city.thefloating.floatyplugin.Ticks;
+import city.thefloating.floatyplugin.realm.Realm;
 import city.thefloating.floatyplugin.realm.WorldService;
 import com.google.inject.Inject;
 import net.kyori.adventure.sound.Sound;
@@ -10,8 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
-import city.thefloating.floatyplugin.Ticks;
-import city.thefloating.floatyplugin.realm.Realm;
 
 import java.time.Duration;
 import java.time.Instant;

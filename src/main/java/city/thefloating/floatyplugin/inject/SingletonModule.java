@@ -1,17 +1,17 @@
 package city.thefloating.floatyplugin.inject;
 
 import city.thefloating.floatyplugin.LuckPermsService;
-import city.thefloating.floatyplugin.config.ConfigConfig;
-import city.thefloating.floatyplugin.realm.Transposer;
-import city.thefloating.floatyplugin.realm.WorldService;
-import city.thefloating.floatyplugin.transportation.FlightService;
-import com.google.inject.AbstractModule;
 import city.thefloating.floatyplugin.config.BooksConfig;
+import city.thefloating.floatyplugin.config.ConfigConfig;
 import city.thefloating.floatyplugin.config.EmotesConfig;
 import city.thefloating.floatyplugin.config.LangConfig;
 import city.thefloating.floatyplugin.config.PianoNotesConfig;
+import city.thefloating.floatyplugin.realm.Transposer;
+import city.thefloating.floatyplugin.realm.WorldService;
 import city.thefloating.floatyplugin.tag.TagGame;
+import city.thefloating.floatyplugin.transportation.FlightService;
 import city.thefloating.floatyplugin.user.UserService;
+import com.google.inject.AbstractModule;
 
 public final class SingletonModule extends AbstractModule {
 

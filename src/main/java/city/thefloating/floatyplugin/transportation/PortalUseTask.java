@@ -1,6 +1,8 @@
 package city.thefloating.floatyplugin.transportation;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
+import city.thefloating.floatyplugin.Permission;
+import city.thefloating.floatyplugin.config.LangConfig;
 import city.thefloating.floatyplugin.realm.Realm;
 import city.thefloating.floatyplugin.realm.WorldService;
 import com.google.inject.Inject;
@@ -9,8 +11,6 @@ import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.spongepowered.configurate.NodePath;
-import city.thefloating.floatyplugin.Permission;
-import city.thefloating.floatyplugin.config.LangConfig;
 
 import java.time.Duration;
 import java.time.Instant;

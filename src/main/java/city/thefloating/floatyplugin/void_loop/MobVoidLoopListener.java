@@ -1,6 +1,7 @@
 package city.thefloating.floatyplugin.void_loop;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
+import city.thefloating.floatyplugin.realm.Habitat;
 import com.google.inject.Inject;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -8,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
-import city.thefloating.floatyplugin.realm.Habitat;
 
 /**
  * Offers a cheap, low-engage only void loop for non-player entities. This is
