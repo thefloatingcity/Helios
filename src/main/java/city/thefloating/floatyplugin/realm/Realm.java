@@ -20,11 +20,6 @@ public enum Realm {
     this.habitat = habitat;
   }
 
-  @Override
-  public String toString() {
-    return this.name().toLowerCase(Locale.ROOT);
-  }
-
   public static Realm from(final World world) {
     return switch (world.getName()) {
       case "madlands" -> Realm.MADLANDS;
@@ -34,6 +29,11 @@ public enum Realm {
       case "backrooms" -> Realm.BACKROOMS;
       default -> throw new RuntimeException("Could not find realm for world `" + world.getName() + "`.");
     };
+  }
+
+  @Override
+  public String toString() {
+    return this.name().toLowerCase(Locale.ROOT);
   }
 
   public Habitat habitat() {

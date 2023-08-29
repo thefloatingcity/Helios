@@ -48,6 +48,28 @@ public final class BackroomsGenerator extends ChunkGenerator {
     chunkData.setBlock(chunkX, middleY + 3, chunkZ, Palette.LAMP);
   }
 
+  private static boolean hasHitWall(final int x, final int z) {
+    return x < 0 || x > 15 || z < 0 || z > 15;
+  }
+
+  private static Direction randomDirection() {
+    return Direction.values()[new Random().nextInt(Direction.values().length)];
+  }
+
+  /**
+   * Returns a random direction that is not the current direction.
+   *
+   * @param current the banned direction
+   * @return a new, random direction
+   */
+  private static Direction randomDirectionNot(final Direction current) {
+    final List<Direction> available = Arrays.stream(Direction.values())
+        .filter(d -> d != current) // filter out the current one.
+        .toList();
+    assert available.size() == 3; // four directions with one omitted.
+    return available.get(new Random().nextInt(available.size()));
+  }
+
   @Override
   public Location getFixedSpawnLocation(final @NotNull World world, final @NotNull Random random) {
     return new Location(world, 0.0, WorldUtil.middleY(world) - 2, 0.0);
@@ -132,28 +154,6 @@ public final class BackroomsGenerator extends ChunkGenerator {
         directionLength += 1;
       }
     }
-  }
-
-  private static boolean hasHitWall(final int x, final int z) {
-    return x < 0 || x > 15 || z < 0 || z > 15;
-  }
-
-  private static Direction randomDirection() {
-    return Direction.values()[new Random().nextInt(Direction.values().length)];
-  }
-
-  /**
-   * Returns a random direction that is not the current direction.
-   *
-   * @param current the banned direction
-   * @return a new, random direction
-   */
-  private static Direction randomDirectionNot(final Direction current) {
-    final List<Direction> available = Arrays.stream(Direction.values())
-        .filter(d -> d != current) // filter out the current one.
-        .toList();
-    assert available.size() == 3; // four directions with one omitted.
-    return available.get(new Random().nextInt(available.size()));
   }
 
   /**

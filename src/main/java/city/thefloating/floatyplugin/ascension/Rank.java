@@ -21,6 +21,14 @@ public enum Rank {
     this.playtimeRequired = playtimeRequired;
   }
 
+  public static Rank from(final String name) {
+    try {
+      return Rank.valueOf(name.toUpperCase(Locale.ROOT));
+    } catch (final IllegalArgumentException e) {
+      throw new IllegalStateException("Unknown rank: " + name);
+    }
+  }
+
   /**
    * Gets the time required to ascend to this rank. If null, the rank is not
    * attainable through time and must be gotten through alternative methods.
@@ -29,14 +37,6 @@ public enum Rank {
    */
   public @Nullable Duration playtimeRequired() {
     return this.playtimeRequired;
-  }
-
-  public static Rank from(final String name) {
-    try {
-      return Rank.valueOf(name.toUpperCase(Locale.ROOT));
-    } catch (final IllegalArgumentException e) {
-      throw new IllegalStateException("Unknown rank: " + name);
-    }
   }
 
 }
