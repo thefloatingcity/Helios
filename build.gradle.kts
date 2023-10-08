@@ -49,11 +49,25 @@ tasks {
     archiveClassifier.set("")
 
     val libsPackage = "${project.group}.${project.name}.libs"
-    relocate("broccolai.corn", "$libsPackage.corn")
-    relocate("cloud.commandframework", "$libsPackage.cloud")
-    relocate("com.google.inject", "$libsPackage.guice")
-    relocate("dev.tehbrian.tehlib", "$libsPackage.tehlib")
-    relocate("org.spongepowered.configurate", "$libsPackage.configurate")
+    fun moveToLibs(vararg patterns: String) {
+      for (pattern in patterns) {
+        relocate(pattern, "$libsPackage.$pattern")
+      }
+    }
+
+    moveToLibs(
+      "broccolai.corn",
+      "cloud.commandframework",
+      "com.typesafe",
+      "com.google",
+      "dev.tehbrian.tehlib",
+      "io.leangen",
+      "jakarta.inject",
+      "javax.annotation",
+      "org.aopalliance",
+      "org.checkerframework",
+      "org.spongepowered",
+    )
   }
 
   runServer {

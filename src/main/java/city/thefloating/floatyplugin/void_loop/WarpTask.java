@@ -98,7 +98,7 @@ public final class WarpTask {
       for (final Player player : server.getOnlinePlayers()) {
         final float fallDistance = player.getFallDistance();
         if (fallDistance >= 4000) {
-          scheduler.scheduleSyncDelayedTask(this.plugin, () -> warpPlayer(player), 5);
+          scheduler.scheduleSyncDelayedTask(this.plugin, () -> this.warpPlayer(player), 5);
         } else if (fallDistance >= 3800) {
           player.showTitle(Title.title(
               Component.empty(),

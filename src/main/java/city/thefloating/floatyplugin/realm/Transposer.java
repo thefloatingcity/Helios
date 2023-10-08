@@ -32,7 +32,7 @@ public final class Transposer {
     final Realm current = Realm.from(player.getWorld());
     this.setPreviousLocation(player, current);
 
-    player.teleport(getNextLocation(player, destination));
+    player.teleport(this.getNextLocation(player, destination));
     player.setFallDistance(0);
   }
 
