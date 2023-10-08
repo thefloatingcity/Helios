@@ -2,7 +2,7 @@ package city.thefloating.floatyplugin.transportation;
 
 import city.thefloating.floatyplugin.Permission;
 import city.thefloating.floatyplugin.config.LangConfig;
-import city.thefloating.floatyplugin.user.UserService;
+import city.thefloating.floatyplugin.soul.Charon;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
@@ -12,17 +12,17 @@ import org.spongepowered.configurate.NodePath;
 
 public final class FlyCommand {
 
-  private final UserService userService;
+  private final Charon charon;
   private final LangConfig langConfig;
   private final FlightService flightService;
 
   @Inject
   public FlyCommand(
-      final UserService userService,
+      final Charon charon,
       final LangConfig langConfig,
       final FlightService flightService
   ) {
-    this.userService = userService;
+    this.charon = charon;
     this.langConfig = langConfig;
     this.flightService = flightService;
   }
@@ -34,7 +34,7 @@ public final class FlyCommand {
         .senderType(Player.class)
         .handler(c -> {
           final Player sender = (Player) c.getSender();
-          if (this.userService.getUser(sender).toggleFlyBypassEnabled()) {
+          if (this.charon.getSoul(sender).toggleFlyBypassEnabled()) {
             sender.sendMessage(this.langConfig.c(NodePath.path("fly", "enabled")));
             this.flightService.enableFlight(sender);
           } else {

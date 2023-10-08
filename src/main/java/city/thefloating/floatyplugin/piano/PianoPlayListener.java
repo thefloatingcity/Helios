@@ -3,7 +3,7 @@ package city.thefloating.floatyplugin.piano;
 import city.thefloating.floatyplugin.Format;
 import city.thefloating.floatyplugin.Permission;
 import city.thefloating.floatyplugin.config.PianoNotesConfig;
-import city.thefloating.floatyplugin.user.UserService;
+import city.thefloating.floatyplugin.soul.Charon;
 import com.google.inject.Inject;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
@@ -17,17 +17,17 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 public final class PianoPlayListener implements Listener {
 
-  private final UserService userService;
+  private final Charon charon;
   private final PianoNotesConfig pianoNotesConfig;
   private final PianoNoteItems pianoNoteItems;
 
   @Inject
   public PianoPlayListener(
-      final UserService userService,
+      final Charon charon,
       final PianoNotesConfig pianoNotesConfig,
       final PianoNoteItems pianoNoteItems
   ) {
-    this.userService = userService;
+    this.charon = charon;
     this.pianoNotesConfig = pianoNotesConfig;
     this.pianoNoteItems = pianoNoteItems;
   }
@@ -36,7 +36,7 @@ public final class PianoPlayListener implements Listener {
   public void onItemHeld(final PlayerItemHeldEvent event) {
     final Player player = event.getPlayer();
     if (!player.hasPermission(Permission.PIANO)
-        || !this.userService.getUser(player).piano().enabled()) {
+        || !this.charon.getSoul(player).piano().enabled()) {
       return;
     }
 
@@ -83,7 +83,7 @@ public final class PianoPlayListener implements Listener {
 
     player.getWorld().playSound(
         player.getEyeLocation(),
-        this.userService.getUser(player).piano().instrument().sound(),
+        this.charon.getSoul(player).piano().instrument().sound(),
         SoundCategory.MASTER,
         3,
         pitch

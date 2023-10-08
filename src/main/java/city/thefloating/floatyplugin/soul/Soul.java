@@ -1,20 +1,25 @@
-package city.thefloating.floatyplugin.user;
+package city.thefloating.floatyplugin.soul;
 
 import city.thefloating.floatyplugin.piano.Instrument;
 
 import java.util.UUID;
 
-public final class User {
+public final class Soul {
 
   private final UUID uuid;
 
-  private final Piano piano = new Piano(false, Instrument.HARP);
   private boolean flyBypassEnabled = false;
   private int netherBlindnessCount = 0;
   private boolean elevatorMusicPlaying = false;
 
-  public User(final UUID uuid) {
+  private final Piano piano = new Piano(false, Instrument.HARP);
+
+  public Soul(final UUID uuid) {
     this.uuid = uuid;
+  }
+
+  public UUID getUuid() {
+    return this.uuid;
   }
 
   public boolean flyBypassEnabled() {

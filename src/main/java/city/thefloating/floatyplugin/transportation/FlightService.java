@@ -2,7 +2,7 @@ package city.thefloating.floatyplugin.transportation;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
 import city.thefloating.floatyplugin.Permission;
-import city.thefloating.floatyplugin.user.UserService;
+import city.thefloating.floatyplugin.soul.Charon;
 import com.google.inject.Inject;
 import org.bukkit.entity.Player;
 
@@ -11,15 +11,15 @@ import org.bukkit.entity.Player;
  */
 public final class FlightService {
 
-  private final UserService userService;
+  private final Charon charon;
   private final FloatyPlugin plugin;
 
   @Inject
   public FlightService(
-      final UserService userService,
+      final Charon charon,
       final FloatyPlugin plugin
   ) {
-    this.userService = userService;
+    this.charon = charon;
     this.plugin = plugin;
   }
 
@@ -32,7 +32,7 @@ public final class FlightService {
   }
 
   public boolean canFly(final Player player) {
-    return player.hasPermission(Permission.FLY) && this.userService.getUser(player).flyBypassEnabled();
+    return player.hasPermission(Permission.FLY) && this.charon.getSoul(player).flyBypassEnabled();
   }
 
   public void enableFlight(final Player player) {

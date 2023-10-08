@@ -2,8 +2,8 @@ package city.thefloating.floatyplugin.fun;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
 import city.thefloating.floatyplugin.realm.Habitat;
-import city.thefloating.floatyplugin.user.User;
-import city.thefloating.floatyplugin.user.UserService;
+import city.thefloating.floatyplugin.soul.Charon;
+import city.thefloating.floatyplugin.soul.Soul;
 import com.google.inject.Inject;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
@@ -20,15 +20,15 @@ public final class ElevatorMusicTask {
   private static final SoundStop SOUND_STOP = SoundStop.named(ELEVATOR_MUSIC);
 
   private final FloatyPlugin plugin;
-  private final UserService userService;
+  private final Charon charon;
 
   @Inject
   public ElevatorMusicTask(
       final FloatyPlugin plugin,
-      final UserService userService
+      final Charon charon
   ) {
     this.plugin = plugin;
-    this.userService = userService;
+    this.charon = charon;
   }
 
   public void start() {
@@ -39,16 +39,16 @@ public final class ElevatorMusicTask {
           continue;
         }
 
-        final User user = this.userService.getUser(player);
+        final Soul soul = this.charon.getSoul(player);
         if (player.getFallDistance() > FALL_DISTANCE_TO_ACTIVATE) {
-          if (!user.elevatorMusicPlaying()) {
+          if (!soul.elevatorMusicPlaying()) {
             player.playSound(SOUND);
-            user.elevatorMusicPlaying(true);
+            soul.elevatorMusicPlaying(true);
           }
         } else {
-          if (user.elevatorMusicPlaying()) {
+          if (soul.elevatorMusicPlaying()) {
             player.stopSound(SOUND_STOP);
-            user.elevatorMusicPlaying(false);
+            soul.elevatorMusicPlaying(false);
           }
         }
       }

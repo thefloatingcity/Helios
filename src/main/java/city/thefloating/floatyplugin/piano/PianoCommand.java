@@ -5,7 +5,7 @@ import city.thefloating.floatyplugin.Permission;
 import city.thefloating.floatyplugin.config.BookDeserializer;
 import city.thefloating.floatyplugin.config.BooksConfig;
 import city.thefloating.floatyplugin.config.LangConfig;
-import city.thefloating.floatyplugin.user.UserService;
+import city.thefloating.floatyplugin.soul.Charon;
 import cloud.commandframework.ArgumentDescription;
 import cloud.commandframework.arguments.standard.EnumArgument;
 import cloud.commandframework.arguments.standard.IntegerArgument;
@@ -25,7 +25,7 @@ import java.util.List;
 public final class PianoCommand {
 
   private final FloatyPlugin plugin;
-  private final UserService userService;
+  private final Charon charon;
   private final PianoMenuProvider pianoMenuProvider;
   private final BooksConfig booksConfig;
   private final LangConfig langConfig;
@@ -33,13 +33,13 @@ public final class PianoCommand {
   @Inject
   public PianoCommand(
       final FloatyPlugin plugin,
-      final UserService userService,
+      final Charon charon,
       final PianoMenuProvider pianoMenuProvider,
       final BooksConfig booksConfig,
       final LangConfig langConfig
   ) {
     this.plugin = plugin;
-    this.userService = userService;
+    this.charon = charon;
     this.pianoMenuProvider = pianoMenuProvider;
     this.booksConfig = booksConfig;
     this.langConfig = langConfig;
@@ -67,7 +67,7 @@ public final class PianoCommand {
         .senderType(Player.class)
         .handler(c -> {
           final Player sender = (Player) c.getSender();
-          if (this.userService.getUser(sender).piano().toggleEnabled()) {
+          if (this.charon.getSoul(sender).piano().toggleEnabled()) {
             sender.sendMessage(this.langConfig.c(NodePath.path("piano", "enabled")));
           } else {
             sender.sendMessage(this.langConfig.c(NodePath.path("piano", "disabled")));
@@ -110,7 +110,7 @@ public final class PianoCommand {
           final Instrument inst = c.get("instrument");
           final Player sender = (Player) c.getSender();
 
-          this.userService.getUser(sender).piano().instrument(inst);
+          this.charon.getSoul(sender).piano().instrument(inst);
           sender.sendMessage(this.langConfig.c(
               NodePath.path("piano", "instrument-change"),
               Placeholder.unparsed("instrument", inst.toString())

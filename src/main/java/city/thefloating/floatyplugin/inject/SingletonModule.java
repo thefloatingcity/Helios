@@ -8,9 +8,9 @@ import city.thefloating.floatyplugin.config.LangConfig;
 import city.thefloating.floatyplugin.config.PianoNotesConfig;
 import city.thefloating.floatyplugin.realm.Transposer;
 import city.thefloating.floatyplugin.realm.WorldService;
+import city.thefloating.floatyplugin.soul.Charon;
 import city.thefloating.floatyplugin.tag.TagGame;
 import city.thefloating.floatyplugin.transportation.FlightService;
-import city.thefloating.floatyplugin.user.UserService;
 import com.google.inject.AbstractModule;
 
 public final class SingletonModule extends AbstractModule {
@@ -20,7 +20,7 @@ public final class SingletonModule extends AbstractModule {
     this.bind(FlightService.class).asEagerSingleton();
     this.bind(LuckPermsService.class).asEagerSingleton();
     this.bind(TagGame.class).asEagerSingleton();
-    this.bind(UserService.class).asEagerSingleton();
+    this.bind(Charon.class).asEagerSingleton();
     this.bind(WorldService.class).asEagerSingleton();
     this.bind(Transposer.class).asEagerSingleton();
 

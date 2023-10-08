@@ -7,8 +7,8 @@ import city.thefloating.floatyplugin.FloatyPlugin;
 import city.thefloating.floatyplugin.config.LangConfig;
 import city.thefloating.floatyplugin.milk.MilkProvider;
 import city.thefloating.floatyplugin.realm.Realm;
-import city.thefloating.floatyplugin.user.User;
-import city.thefloating.floatyplugin.user.UserService;
+import city.thefloating.floatyplugin.soul.Charon;
+import city.thefloating.floatyplugin.soul.Soul;
 import com.google.inject.Inject;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -38,17 +38,17 @@ public final class TransportationListener implements Listener {
 
   private final LangConfig langConfig;
   private final FloatyPlugin plugin;
-  private final UserService userService;
+  private final Charon charon;
 
   @Inject
   public TransportationListener(
       final LangConfig langConfig,
       final FloatyPlugin plugin,
-      final UserService userService
+      final Charon charon
   ) {
     this.langConfig = langConfig;
     this.plugin = plugin;
-    this.userService = userService;
+    this.charon = charon;
   }
 
   /**
@@ -179,8 +179,8 @@ public final class TransportationListener implements Listener {
     player.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, () -> player.setSprinting(false), 5);
 
     // nether watcher time!
-    final User user = this.userService.getUser(player);
-    final var netherBlindnessCount = user.netherBlindnessCount();
+    final Soul soul = this.charon.getSoul(player);
+    final var netherBlindnessCount = soul.netherBlindnessCount();
     switch (netherBlindnessCount) {
       case 0, 2, 5, 10 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "1")));
       case 20 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "2")));
@@ -226,7 +226,7 @@ public final class TransportationListener implements Listener {
       }
     }
 
-    user.netherBlindnessCount(netherBlindnessCount + 1);
+    soul.netherBlindnessCount(netherBlindnessCount + 1);
 
     // add some gnarly effects. blindness is important to prevent client-side sprint activation.
     player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 4, true, false, false));
