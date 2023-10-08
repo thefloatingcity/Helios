@@ -57,8 +57,8 @@ public final class WarpTask {
   }
 
   private void warpPlayer(final Player player) {
-    // random chance to noclip into the backrooms. 10% chance.
-    if (RANDOM.nextFloat() > 0.9) {
+    // random chance to noclip into the backrooms. 30% chance.
+    if (RANDOM.nextFloat() > 0.7) {
       final Location nextLocation = this.transposer.getNextLocation(player, Realm.BACKROOMS);
       this.transposer.transpose(player, Realm.BACKROOMS);
 

@@ -1,10 +1,9 @@
 package city.thefloating.floatyplugin.realm;
 
+import com.google.inject.Inject;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
-
-import javax.inject.Inject;
 
 public class RespawnListener implements Listener {
 
