@@ -5,12 +5,10 @@ import city.thefloating.floatyplugin.Permission;
 import cloud.commandframework.arguments.standard.StringArgument;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
-import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
 
-public final class BroadcastCommand extends PaperCloudCommand<CommandSender> {
+public final class BroadcastCommand {
 
-  @Override
   public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("broadcast")
         .meta(CommandMeta.DESCRIPTION, "Broadcast a message to the server.")

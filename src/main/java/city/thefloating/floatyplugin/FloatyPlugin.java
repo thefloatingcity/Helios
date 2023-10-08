@@ -49,6 +49,7 @@ import city.thefloating.floatyplugin.void_loop.DamageListener;
 import city.thefloating.floatyplugin.void_loop.MobVoidLoopListener;
 import city.thefloating.floatyplugin.void_loop.PlayerVoidLoopTask;
 import city.thefloating.floatyplugin.void_loop.WarpTask;
+import cloud.commandframework.execution.CommandExecutionCoordinator;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -59,15 +60,18 @@ import org.bukkit.generator.ChunkGenerator;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
 import org.spongepowered.configurate.ConfigurateException;
 
 import java.util.List;
+import java.util.function.Function;
 
+/**
+ * The main class for the FloatyPlugin plugin.
+ */
 public final class FloatyPlugin extends TehPlugin {
 
+  private @MonotonicNonNull PaperCommandManager<CommandSender> commandManager;
   private @MonotonicNonNull Injector injector;
-  private @MonotonicNonNull Logger logger;
 
   @Override
   public void onEnable() {
@@ -77,16 +81,15 @@ public final class FloatyPlugin extends TehPlugin {
           new SingletonModule()
       );
     } catch (final Exception e) {
-      this.getSLF4JLogger().error("Something went wrong while creating the Guice injector.");
-      this.getSLF4JLogger().error("Printing stack trace, please send this to the developers:", e);
+      this.getSLF4JLogger().error("An error occurred while creating the Guice injector.");
+      this.getSLF4JLogger().error("Disabling plugin.");
       this.disableSelf();
+      this.getSLF4JLogger().error("Printing stack trace. Please send this to the developers:", e);
       return;
     }
 
-    this.logger = this.injector.getInstance(Logger.class);
-
     if (!this.injector.getInstance(LuckPermsService.class).load()) {
-      this.logger.error("LuckPerms dependency not found. Disabling plugin.");
+      this.getSLF4JLogger().error("LuckPerms dependency not found. Disabling plugin.");
       this.disableSelf();
       return;
     }
@@ -95,14 +98,12 @@ public final class FloatyPlugin extends TehPlugin {
       this.disableSelf();
       return;
     }
-
-    if (!this.setupCommands()) {
+    if (!this.initCommands()) {
       this.disableSelf();
       return;
     }
-
-    this.setupListeners();
-    this.setupTasks();
+    this.initListeners();
+    this.initTasks();
 
     // world creation must occur as a delayed init task.
     this.getServer().getScheduler().runTask(this, () -> this.injector.getInstance(WorldService.class).init());
@@ -114,7 +115,12 @@ public final class FloatyPlugin extends TehPlugin {
   }
 
   /**
-   * @return whether it was successful
+   * Loads the plugin's configuration.
+   * <p>
+   * If there is an error while loading a config file, the exception is logged
+   * and the file is skipped.
+   *
+   * @return whether all config files were successfully loaded
    */
   public boolean loadConfiguration() {
     this.saveResourceSilently("books.conf");
@@ -131,22 +137,69 @@ public final class FloatyPlugin extends TehPlugin {
         this.injector.getInstance(PianoNotesConfig.class)
     );
 
+    boolean wasSuccessful = true;
     for (final Config config : configsToLoad) {
       try {
         config.load();
       } catch (final ConfigurateException e) {
-        this.logger.error("Exception caught during config load for {}", config.configurateWrapper().filePath());
-        this.logger.error("Please check your config.");
-        this.logger.error("Printing stack trace:", e);
-        return false;
+        this.getSLF4JLogger().error(
+            "An error occurred while loading config file {}. Please ensure that the file is valid.",
+            config.configurateWrapper().filePath()
+        );
+        this.getSLF4JLogger().error("Printing stack trace:", e);
+        wasSuccessful = false;
       }
     }
 
-    this.logger.info("Successfully loaded configuration.");
+    if (wasSuccessful) {
+      this.getSLF4JLogger().info("Successfully loaded configuration.");
+    }
+    return wasSuccessful;
+  }
+
+  /**
+   * @return whether it was successful
+   */
+  private boolean initCommands() {
+    if (this.commandManager != null) {
+      throw new IllegalStateException("The CommandManager is already instantiated.");
+    }
+
+    try {
+      this.commandManager = new PaperCommandManager<>(
+          this,
+          CommandExecutionCoordinator.simpleCoordinator(),
+          Function.identity(),
+          Function.identity()
+      );
+    } catch (final Exception e) {
+      this.getSLF4JLogger().error("Failed to create the CommandManager.");
+      this.getSLF4JLogger().error("Printing stack trace, please send this to the developers:", e);
+      return false;
+    }
+
+    this.injector.getInstance(ActCommands.class).register(this.commandManager);
+    this.injector.getInstance(AscendCommand.class).register(this.commandManager);
+    this.injector.getInstance(BroadcastCommand.class).register(this.commandManager);
+    this.injector.getInstance(DiscordCommand.class).register(this.commandManager);
+    this.injector.getInstance(FloatyPluginCommand.class).register(this.commandManager);
+    this.injector.getInstance(FlyCommand.class).register(this.commandManager);
+    this.injector.getInstance(FunCommands.class).register(this.commandManager);
+    this.injector.getInstance(GameModeCommands.class).register(this.commandManager);
+    this.injector.getInstance(HatCommand.class).register(this.commandManager);
+    this.injector.getInstance(MilkCommand.class).register(this.commandManager);
+    this.injector.getInstance(PackCommand.class).register(this.commandManager);
+    this.injector.getInstance(PianoCommand.class).register(this.commandManager);
+    this.injector.getInstance(PlaytimeCommand.class).register(this.commandManager);
+    this.injector.getInstance(RulesCommand.class).register(this.commandManager);
+    this.injector.getInstance(TagCommand.class).register(this.commandManager);
+    this.injector.getInstance(TransposeCommands.class).register(this.commandManager);
+    this.injector.getInstance(VoteCommand.class).register(this.commandManager);
+
     return true;
   }
 
-  private void setupListeners() {
+  private void initListeners() {
     registerListeners(
         this.injector.getInstance(WorldProtectionListener.class),
         this.injector.getInstance(ChatListener.class),
@@ -169,47 +222,7 @@ public final class FloatyPlugin extends TehPlugin {
     );
   }
 
-  /**
-   * @return whether it was successful
-   */
-  private boolean setupCommands() {
-    final CommandService commandService = this.injector.getInstance(CommandService.class);
-    try {
-      commandService.init();
-    } catch (final Exception e) {
-      this.getSLF4JLogger().error("Failed to create the CommandManager.");
-      this.getSLF4JLogger().error("Printing stack trace, please send this to the developers:", e);
-      return false;
-    }
-
-    final @Nullable PaperCommandManager<CommandSender> commandManager = commandService.get();
-    if (commandManager == null) {
-      this.getSLF4JLogger().error("The CommandService was null after initialization!");
-      return false;
-    }
-
-    this.injector.getInstance(ActCommands.class).register(commandManager);
-    this.injector.getInstance(AscendCommand.class).register(commandManager);
-    this.injector.getInstance(BroadcastCommand.class).register(commandManager);
-    this.injector.getInstance(DiscordCommand.class).register(commandManager);
-    this.injector.getInstance(FloatyPluginCommand.class).register(commandManager);
-    this.injector.getInstance(FlyCommand.class).register(commandManager);
-    this.injector.getInstance(FunCommands.class).register(commandManager);
-    this.injector.getInstance(GameModeCommands.class).register(commandManager);
-    this.injector.getInstance(HatCommand.class).register(commandManager);
-    this.injector.getInstance(MilkCommand.class).register(commandManager);
-    this.injector.getInstance(PackCommand.class).register(commandManager);
-    this.injector.getInstance(PianoCommand.class).register(commandManager);
-    this.injector.getInstance(PlaytimeCommand.class).register(commandManager);
-    this.injector.getInstance(RulesCommand.class).register(commandManager);
-    this.injector.getInstance(TagCommand.class).register(commandManager);
-    this.injector.getInstance(TransposeCommands.class).register(commandManager);
-    this.injector.getInstance(VoteCommand.class).register(commandManager);
-
-    return true;
-  }
-
-  private void setupTasks() {
+  private void initTasks() {
     this.injector.getInstance(ElevatorMusicTask.class).start();
     this.injector.getInstance(PlayerVoidLoopTask.class).start();
     this.injector.getInstance(PortalUseTask.class).start();

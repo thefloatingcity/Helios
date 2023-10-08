@@ -5,12 +5,11 @@ import city.thefloating.floatyplugin.config.LangConfig;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
-import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.spongepowered.configurate.NodePath;
 
-public final class TransposeCommands extends PaperCloudCommand<CommandSender> {
+public final class TransposeCommands {
 
   private final LangConfig langConfig;
   private final Transposer transposer;
@@ -24,7 +23,6 @@ public final class TransposeCommands extends PaperCloudCommand<CommandSender> {
     this.transposer = transposer;
   }
 
-  @Override
   public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var madlands = commandManager.commandBuilder("madlands")
         .meta(CommandMeta.DESCRIPTION, "Transpose to the madlands.")

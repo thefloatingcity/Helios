@@ -6,7 +6,6 @@ import cloud.commandframework.arguments.standard.StringArgument;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
-import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.Server;
@@ -17,7 +16,7 @@ import org.spongepowered.configurate.NodePath;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class FunCommands extends PaperCloudCommand<CommandSender> {
+public final class FunCommands {
 
   private final LangConfig langConfig;
 
@@ -28,7 +27,6 @@ public final class FunCommands extends PaperCloudCommand<CommandSender> {
     this.langConfig = langConfig;
   }
 
-  @Override
   public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var stringWithPlayerSuggestionsArgument = StringArgument
         .<CommandSender>builder("text")

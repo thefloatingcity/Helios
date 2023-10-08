@@ -7,7 +7,6 @@ import cloud.commandframework.bukkit.parsers.PlayerArgument;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
-import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.command.CommandSender;
@@ -17,7 +16,7 @@ import org.spongepowered.configurate.NodePath;
 
 import java.util.Random;
 
-public final class ActCommands extends PaperCloudCommand<CommandSender> {
+public final class ActCommands {
 
   private final LangConfig langConfig;
   private final ConfigConfig configConfig;
@@ -31,7 +30,6 @@ public final class ActCommands extends PaperCloudCommand<CommandSender> {
     this.configConfig = configConfig;
   }
 
-  @Override
   public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var zap = commandManager.commandBuilder("zap")
         .senderType(Player.class)

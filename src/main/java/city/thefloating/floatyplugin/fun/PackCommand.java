@@ -5,12 +5,11 @@ import city.thefloating.floatyplugin.config.LangConfig;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
-import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.spongepowered.configurate.NodePath;
 
-public final class PackCommand extends PaperCloudCommand<CommandSender> {
+public final class PackCommand {
 
   private final LangConfig langConfig;
   private final ConfigConfig configConfig;
@@ -24,7 +23,6 @@ public final class PackCommand extends PaperCloudCommand<CommandSender> {
     this.configConfig = configConfig;
   }
 
-  @Override
   public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("pack")
         .senderType(Player.class)

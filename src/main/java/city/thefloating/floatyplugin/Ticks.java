@@ -9,6 +9,7 @@ public final class Ticks {
 
   /**
    * Converts a duration to ticks.
+   *
    * @param duration the duration
    * @return the duration in ticks
    */
@@ -18,6 +19,7 @@ public final class Ticks {
 
   /**
    * Converts a duration to ticks. Casts {@link #in} to int.
+   *
    * @param duration the duration
    * @return the duration in ticks
    */

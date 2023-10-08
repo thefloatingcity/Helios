@@ -6,7 +6,6 @@ import city.thefloating.floatyplugin.config.LangConfig;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
-import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.luckperms.api.model.group.Group;
@@ -16,7 +15,7 @@ import org.spongepowered.configurate.NodePath;
 
 import java.util.concurrent.TimeUnit;
 
-public final class AscendCommand extends PaperCloudCommand<CommandSender> {
+public final class AscendCommand {
 
   private final LangConfig langConfig;
   private final LuckPermsService luckPermsService;
@@ -30,7 +29,6 @@ public final class AscendCommand extends PaperCloudCommand<CommandSender> {
     this.luckPermsService = luckPermsService;
   }
 
-  @Override
   public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("ascend")
         .meta(CommandMeta.DESCRIPTION, "Arise to a higher level.")

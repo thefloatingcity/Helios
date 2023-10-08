@@ -1,11 +1,12 @@
 package city.thefloating.floatyplugin.user;
 
 import city.thefloating.floatyplugin.piano.Instrument;
-import dev.tehbrian.tehlib.paper.user.PaperUser;
 
 import java.util.UUID;
 
-public final class User extends PaperUser {
+public final class User {
+
+  private final UUID uuid;
 
   private final Piano piano = new Piano(false, Instrument.HARP);
   private boolean flyBypassEnabled = false;
@@ -13,7 +14,7 @@ public final class User extends PaperUser {
   private boolean elevatorMusicPlaying = false;
 
   public User(final UUID uuid) {
-    super(uuid);
+    this.uuid = uuid;
   }
 
   public boolean flyBypassEnabled() {

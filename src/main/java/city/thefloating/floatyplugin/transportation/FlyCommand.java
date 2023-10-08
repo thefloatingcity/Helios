@@ -6,12 +6,11 @@ import city.thefloating.floatyplugin.user.UserService;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
-import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.spongepowered.configurate.NodePath;
 
-public final class FlyCommand extends PaperCloudCommand<CommandSender> {
+public final class FlyCommand {
 
   private final UserService userService;
   private final LangConfig langConfig;
@@ -28,7 +27,6 @@ public final class FlyCommand extends PaperCloudCommand<CommandSender> {
     this.flightService = flightService;
   }
 
-  @Override
   public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("fly")
         .meta(CommandMeta.DESCRIPTION, "Bends the space-time continuum.")

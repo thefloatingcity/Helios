@@ -6,7 +6,6 @@ import cloud.commandframework.bukkit.parsers.PlayerArgument;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
-import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.command.CommandSender;
@@ -15,7 +14,7 @@ import org.spongepowered.configurate.NodePath;
 
 import java.util.concurrent.TimeUnit;
 
-public final class PlaytimeCommand extends PaperCloudCommand<CommandSender> {
+public final class PlaytimeCommand {
 
   private final LangConfig langConfig;
 
@@ -26,7 +25,6 @@ public final class PlaytimeCommand extends PaperCloudCommand<CommandSender> {
     this.langConfig = langConfig;
   }
 
-  @Override
   public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("playtime")
         .meta(CommandMeta.DESCRIPTION, "Check how long you've played.")

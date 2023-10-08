@@ -4,11 +4,10 @@ import city.thefloating.floatyplugin.config.LangConfig;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
-import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
 import org.spongepowered.configurate.NodePath;
 
-public final class VoteCommand extends PaperCloudCommand<CommandSender> {
+public final class VoteCommand {
 
   private final LangConfig langConfig;
 
@@ -17,7 +16,6 @@ public final class VoteCommand extends PaperCloudCommand<CommandSender> {
     this.langConfig = langConfig;
   }
 
-  @Override
   public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("vote")
         .meta(CommandMeta.DESCRIPTION, "Show a list of voting sites.")

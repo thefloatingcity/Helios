@@ -7,11 +7,10 @@ import cloud.commandframework.ArgumentDescription;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
-import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.command.CommandSender;
 import org.spongepowered.configurate.NodePath;
 
-public final class FloatyPluginCommand extends PaperCloudCommand<CommandSender> {
+public final class FloatyPluginCommand {
 
   private final FloatyPlugin plugin;
   private final LangConfig langConfig;
@@ -25,7 +24,6 @@ public final class FloatyPluginCommand extends PaperCloudCommand<CommandSender> 
     this.langConfig = langConfig;
   }
 
-  @Override
   public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("floatyplugin")
         .meta(CommandMeta.DESCRIPTION, "Core commands for FloatyPlugin.");

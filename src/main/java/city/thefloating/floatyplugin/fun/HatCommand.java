@@ -5,7 +5,6 @@ import city.thefloating.floatyplugin.config.LangConfig;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
-import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -13,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.spongepowered.configurate.NodePath;
 
-public final class HatCommand extends PaperCloudCommand<CommandSender> {
+public final class HatCommand {
 
   private final LangConfig langConfig;
 
@@ -24,7 +23,6 @@ public final class HatCommand extends PaperCloudCommand<CommandSender> {
     this.langConfig = langConfig;
   }
 
-  @Override
   public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("hat")
         .meta(CommandMeta.DESCRIPTION, "Put fancy things on your head!")

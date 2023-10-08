@@ -6,13 +6,12 @@ import cloud.commandframework.arguments.standard.EnumArgument;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
-import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.spongepowered.configurate.NodePath;
 
-public final class TagCommand extends PaperCloudCommand<CommandSender> {
+public final class TagCommand {
 
   private final LangConfig langConfig;
   private final TagGame tagGame;
@@ -26,7 +25,6 @@ public final class TagCommand extends PaperCloudCommand<CommandSender> {
     this.tagGame = tagGame;
   }
 
-  @Override
   public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("tag")
         .meta(CommandMeta.DESCRIPTION, "Joins/leaves the game of tag.")

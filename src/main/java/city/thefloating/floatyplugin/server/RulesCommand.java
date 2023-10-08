@@ -11,14 +11,13 @@ import cloud.commandframework.arguments.standard.IntegerArgument;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
-import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.NodePath;
 
-public final class RulesCommand extends PaperCloudCommand<CommandSender> {
+public final class RulesCommand {
 
   private final FloatyPlugin floatyPlugin;
   private final BooksConfig booksConfig;
@@ -38,7 +37,6 @@ public final class RulesCommand extends PaperCloudCommand<CommandSender> {
     this.configConfig = configConfig;
   }
 
-  @Override
   public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("rules")
         .meta(CommandMeta.DESCRIPTION, "The rules for the server.");

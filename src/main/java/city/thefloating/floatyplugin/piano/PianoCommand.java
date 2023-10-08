@@ -12,7 +12,6 @@ import cloud.commandframework.arguments.standard.IntegerArgument;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
-import dev.tehbrian.tehlib.paper.cloud.PaperCloudCommand;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
@@ -23,7 +22,7 @@ import org.spongepowered.configurate.NodePath;
 
 import java.util.List;
 
-public final class PianoCommand extends PaperCloudCommand<CommandSender> {
+public final class PianoCommand {
 
   private final FloatyPlugin plugin;
   private final UserService userService;
@@ -46,7 +45,6 @@ public final class PianoCommand extends PaperCloudCommand<CommandSender> {
     this.langConfig = langConfig;
   }
 
-  @Override
   public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var main = commandManager.commandBuilder("piano")
         .meta(CommandMeta.DESCRIPTION, "A fancy playable piano.")
