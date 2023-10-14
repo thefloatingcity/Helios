@@ -1,4 +1,4 @@
-package city.thefloating.floatyplugin.void_loop;
+package city.thefloating.floatyplugin.loop;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
 import city.thefloating.floatyplugin.realm.Habitat;

@@ -1,4 +1,4 @@
-package city.thefloating.floatyplugin.void_loop;
+package city.thefloating.floatyplugin.loop;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
