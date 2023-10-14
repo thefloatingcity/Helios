@@ -19,6 +19,10 @@ import city.thefloating.floatyplugin.fun.PackCommand;
 import city.thefloating.floatyplugin.fun.RainMusicListener;
 import city.thefloating.floatyplugin.inject.PluginModule;
 import city.thefloating.floatyplugin.inject.SingletonModule;
+import city.thefloating.floatyplugin.loop.DamageListener;
+import city.thefloating.floatyplugin.loop.MobVoidLoopListener;
+import city.thefloating.floatyplugin.loop.PlayerVoidLoopTask;
+import city.thefloating.floatyplugin.loop.WarpTask;
 import city.thefloating.floatyplugin.milk.MilkCommand;
 import city.thefloating.floatyplugin.milk.MilkListener;
 import city.thefloating.floatyplugin.nextbot.Nate;
@@ -32,14 +36,15 @@ import city.thefloating.floatyplugin.realm.TransposeCommands;
 import city.thefloating.floatyplugin.realm.VoidGenerator;
 import city.thefloating.floatyplugin.realm.WorldProtectionListener;
 import city.thefloating.floatyplugin.realm.WorldService;
+import city.thefloating.floatyplugin.server.BroadcastCommand;
 import city.thefloating.floatyplugin.server.ChatListener;
 import city.thefloating.floatyplugin.server.DiscordCommand;
+import city.thefloating.floatyplugin.server.FloatyPluginCommand;
+import city.thefloating.floatyplugin.server.GameModeCommands;
 import city.thefloating.floatyplugin.server.JoinQuitListener;
 import city.thefloating.floatyplugin.server.RulesCommand;
 import city.thefloating.floatyplugin.server.ServerPingListener;
 import city.thefloating.floatyplugin.server.VoteCommand;
-import city.thefloating.floatyplugin.staff.BroadcastCommand;
-import city.thefloating.floatyplugin.staff.FloatyPluginCommand;
 import city.thefloating.floatyplugin.tag.TagCommand;
 import city.thefloating.floatyplugin.tag.TagListener;
 import city.thefloating.floatyplugin.transportation.FlightListener;
@@ -47,10 +52,6 @@ import city.thefloating.floatyplugin.transportation.FlyCommand;
 import city.thefloating.floatyplugin.transportation.PortalUseTask;
 import city.thefloating.floatyplugin.transportation.TransportationListener;
 import city.thefloating.floatyplugin.transportation.TransportationTask;
-import city.thefloating.floatyplugin.loop.DamageListener;
-import city.thefloating.floatyplugin.loop.MobVoidLoopListener;
-import city.thefloating.floatyplugin.loop.PlayerVoidLoopTask;
-import city.thefloating.floatyplugin.loop.WarpTask;
 import cloud.commandframework.execution.CommandExecutionCoordinator;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Guice;
@@ -222,8 +223,8 @@ public final class FloatyPlugin extends TehPlugin {
         this.injector.getInstance(SpaceBreakListener.class),
         this.injector.getInstance(SpawnProtectionListener.class),
         this.injector.getInstance(TagListener.class),
-        this.injector.getInstance(TransportationListener.class)
-        this.injector.getInstance(WorldProtectionListener.class),
+        this.injector.getInstance(TransportationListener.class),
+        this.injector.getInstance(WorldProtectionListener.class)
     );
   }
 

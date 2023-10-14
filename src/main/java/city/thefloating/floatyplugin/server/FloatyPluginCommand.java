@@ -1,4 +1,4 @@
-package city.thefloating.floatyplugin.staff;
+package city.thefloating.floatyplugin.server;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
 import city.thefloating.floatyplugin.Permission;

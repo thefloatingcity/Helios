@@ -1,12 +1,12 @@
 package city.thefloating.floatyplugin.inject;
 
 import city.thefloating.floatyplugin.LuckPermsService;
-import city.thefloating.floatyplugin.nextbot.Nate;
 import city.thefloating.floatyplugin.config.BooksConfig;
 import city.thefloating.floatyplugin.config.ConfigConfig;
 import city.thefloating.floatyplugin.config.EmotesConfig;
 import city.thefloating.floatyplugin.config.LangConfig;
 import city.thefloating.floatyplugin.config.PianoNotesConfig;
+import city.thefloating.floatyplugin.nextbot.Nate;
 import city.thefloating.floatyplugin.realm.Transposer;
 import city.thefloating.floatyplugin.realm.WorldService;
 import city.thefloating.floatyplugin.soul.Charon;

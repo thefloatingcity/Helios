@@ -1,5 +1,6 @@
-package city.thefloating.floatyplugin;
+package city.thefloating.floatyplugin.server;
 
+import city.thefloating.floatyplugin.Permission;
 import city.thefloating.floatyplugin.config.LangConfig;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
