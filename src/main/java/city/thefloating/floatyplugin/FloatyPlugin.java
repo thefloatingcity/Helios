@@ -12,6 +12,7 @@ import city.thefloating.floatyplugin.config.PianoNotesConfig;
 import city.thefloating.floatyplugin.fun.ActCommands;
 import city.thefloating.floatyplugin.fun.ElevatorMusicTask;
 import city.thefloating.floatyplugin.fun.FishingListener;
+import city.thefloating.floatyplugin.fun.FlingerListener;
 import city.thefloating.floatyplugin.fun.FunCommands;
 import city.thefloating.floatyplugin.fun.HatCommand;
 import city.thefloating.floatyplugin.fun.PackCommand;
@@ -215,6 +216,7 @@ public final class FloatyPlugin extends TehPlugin {
         this.injector.getInstance(RainMusicListener.class),
         this.injector.getInstance(RespawnListener.class),
         this.injector.getInstance(ServerPingListener.class),
+        this.injector.getInstance(FlingerListener.class),
         this.injector.getInstance(SpaceBreakListener.class),
         this.injector.getInstance(SpawnProtectionListener.class),
         this.injector.getInstance(TagListener.class),
