@@ -1,6 +1,7 @@
 package city.thefloating.floatyplugin.inject;
 
 import city.thefloating.floatyplugin.LuckPermsService;
+import city.thefloating.floatyplugin.nextbot.Nate;
 import city.thefloating.floatyplugin.config.BooksConfig;
 import city.thefloating.floatyplugin.config.ConfigConfig;
 import city.thefloating.floatyplugin.config.EmotesConfig;
@@ -23,6 +24,7 @@ public final class SingletonModule extends AbstractModule {
     this.bind(Charon.class).asEagerSingleton();
     this.bind(WorldService.class).asEagerSingleton();
     this.bind(Transposer.class).asEagerSingleton();
+    this.bind(Nate.class).asEagerSingleton();
 
     // configs.
     this.bind(BooksConfig.class).asEagerSingleton();

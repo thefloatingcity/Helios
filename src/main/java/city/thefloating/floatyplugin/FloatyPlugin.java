@@ -21,6 +21,8 @@ import city.thefloating.floatyplugin.inject.PluginModule;
 import city.thefloating.floatyplugin.inject.SingletonModule;
 import city.thefloating.floatyplugin.milk.MilkCommand;
 import city.thefloating.floatyplugin.milk.MilkListener;
+import city.thefloating.floatyplugin.nextbot.Nate;
+import city.thefloating.floatyplugin.nextbot.ObungaCommand;
 import city.thefloating.floatyplugin.piano.PianoCommand;
 import city.thefloating.floatyplugin.piano.PianoPlayListener;
 import city.thefloating.floatyplugin.realm.FirstJoinListener;
@@ -112,6 +114,7 @@ public final class FloatyPlugin extends TehPlugin {
 
   @Override
   public void onDisable() {
+    this.injector.getInstance(Nate.class).killNextbots();
     this.getServer().getScheduler().cancelTasks(this);
   }
 
@@ -189,6 +192,7 @@ public final class FloatyPlugin extends TehPlugin {
     this.injector.getInstance(GameModeCommands.class).register(this.commandManager);
     this.injector.getInstance(HatCommand.class).register(this.commandManager);
     this.injector.getInstance(MilkCommand.class).register(this.commandManager);
+    this.injector.getInstance(ObungaCommand.class).register(this.commandManager);
     this.injector.getInstance(PackCommand.class).register(this.commandManager);
     this.injector.getInstance(PianoCommand.class).register(this.commandManager);
     this.injector.getInstance(PlaytimeCommand.class).register(this.commandManager);
@@ -212,6 +216,7 @@ public final class FloatyPlugin extends TehPlugin {
         this.injector.getInstance(MadlandsMoverListener.class),
         this.injector.getInstance(MilkListener.class),
         this.injector.getInstance(MobVoidLoopListener.class),
+        this.injector.getInstance(Nate.class),
         this.injector.getInstance(PianoPlayListener.class),
         this.injector.getInstance(RainMusicListener.class),
         this.injector.getInstance(RespawnListener.class),
