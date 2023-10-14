@@ -9,19 +9,23 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
+import java.util.Random;
+
 public final class RainMusicListener implements Listener {
 
-  private static final Key RAIN_MUSIC = Key.key("floating", "music.april_showers");
-  private static final Sound SOUND = Sound.sound(RAIN_MUSIC, Sound.Source.MUSIC, 1, 1);
-  private static final SoundStop SOUND_STOP = SoundStop.named(RAIN_MUSIC);
+  private static final Random RANDOM = new Random();
+
+  private static final Key MUSIC_KEY = Key.key("floating", "music.april_showers");
+  private static final Sound MUSIC = Sound.sound(MUSIC_KEY, Sound.Source.MUSIC, 1, 1);
+  private static final SoundStop MUSIC_STOP = SoundStop.named(MUSIC_KEY);
 
   @EventHandler
   public void onWeatherChange(final WeatherChangeEvent event) {
     final ForwardingAudience worldPlayers = Audience.audience(event.getWorld().getPlayers());
-    if (event.toWeatherState()) {
-      worldPlayers.playSound(SOUND);
+    if (event.toWeatherState() && RANDOM.nextFloat() <= 0.2) { // 20% chance.
+      worldPlayers.playSound(MUSIC);
     } else {
-      worldPlayers.stopSound(SOUND_STOP);
+      worldPlayers.stopSound(MUSIC_STOP);
     }
   }
 

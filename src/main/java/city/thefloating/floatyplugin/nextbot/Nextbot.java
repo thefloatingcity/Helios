@@ -70,7 +70,7 @@ public final class Nextbot {
   public static final class Attributes {
 
     private final String iconChar;
-    private final Sound musicStart;
+    private final Sound music;
     private final SoundStop musicStop;
 
     public Attributes(
@@ -78,7 +78,7 @@ public final class Nextbot {
         final Key musicKey
     ) {
       this.iconChar = iconChar;
-      this.musicStart = Sound.sound(musicKey, Sound.Source.HOSTILE, 1F, 1);
+      this.music = Sound.sound(musicKey, Sound.Source.HOSTILE, 1F, 1);
       this.musicStop = SoundStop.namedOnSource(musicKey, Sound.Source.HOSTILE);
     }
 
@@ -86,8 +86,8 @@ public final class Nextbot {
       return this.iconChar;
     }
 
-    public Sound musicStart() {
-      return this.musicStart;
+    public Sound music() {
+      return this.music;
     }
 
     public SoundStop musicStop() {

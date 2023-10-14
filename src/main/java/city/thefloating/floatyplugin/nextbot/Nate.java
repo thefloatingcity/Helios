@@ -233,7 +233,7 @@ public final class Nate implements Listener {
               nextbot.activeMusic().remove(player);
             } else if (!nextbot.activeMusic().contains(player)) {
               ic.getWorld().playSound(
-                  nextbot.attr().musicStart(),
+                  nextbot.attr().music(),
                   ic // play sound from icon so that we can set pathfinder (fox) to silent.
               );
               nextbot.activeMusic().add(player);
