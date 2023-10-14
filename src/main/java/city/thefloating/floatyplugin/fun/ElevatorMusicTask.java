@@ -9,6 +9,7 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.sound.SoundStop;
 import org.bukkit.Server;
+import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 
 public final class ElevatorMusicTask {
@@ -42,6 +43,7 @@ public final class ElevatorMusicTask {
         final Soul soul = this.charon.getSoul(player);
         if (player.getFallDistance() > MIN_FALL_DIST) {
           if (!soul.elevatorMusicPlaying()) {
+            player.stopSound(SoundCategory.MUSIC);
             player.playSound(MUSIC);
             soul.elevatorMusicPlaying(true);
           }

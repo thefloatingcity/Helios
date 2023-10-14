@@ -5,10 +5,13 @@ import net.kyori.adventure.audience.ForwardingAudience;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.sound.SoundStop;
+import org.bukkit.SoundCategory;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
+import java.util.List;
 import java.util.Random;
 
 public final class RainMusicListener implements Listener {
@@ -21,11 +24,15 @@ public final class RainMusicListener implements Listener {
 
   @EventHandler
   public void onWeatherChange(final WeatherChangeEvent event) {
-    final ForwardingAudience worldPlayers = Audience.audience(event.getWorld().getPlayers());
+    final List<Player> playersList = event.getWorld().getPlayers();
+    final ForwardingAudience playersAudience = Audience.audience(playersList);
     if (event.toWeatherState() && RANDOM.nextFloat() <= 0.2) { // 20% chance.
-      worldPlayers.playSound(MUSIC);
+      for (final Player player : playersList) {
+        player.stopSound(SoundCategory.MUSIC);
+      }
+      playersAudience.playSound(MUSIC);
     } else {
-      worldPlayers.stopSound(MUSIC_STOP);
+      playersAudience.stopSound(MUSIC_STOP);
     }
   }
 
