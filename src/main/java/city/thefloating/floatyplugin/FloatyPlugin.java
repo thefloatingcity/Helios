@@ -19,9 +19,8 @@ import city.thefloating.floatyplugin.fun.PackCommand;
 import city.thefloating.floatyplugin.fun.RainMusicListener;
 import city.thefloating.floatyplugin.inject.PluginModule;
 import city.thefloating.floatyplugin.inject.SingletonModule;
-import city.thefloating.floatyplugin.loop.DamageListener;
-import city.thefloating.floatyplugin.loop.MobVoidLoopListener;
 import city.thefloating.floatyplugin.loop.PlayerVoidLoopTask;
+import city.thefloating.floatyplugin.loop.VoidDamageListener;
 import city.thefloating.floatyplugin.loop.WarpTask;
 import city.thefloating.floatyplugin.milk.MilkCommand;
 import city.thefloating.floatyplugin.milk.MilkListener;
@@ -207,14 +206,13 @@ public final class FloatyPlugin extends TehPlugin {
   private void initListeners() {
     registerListeners(
         this.injector.getInstance(ChatListener.class),
-        this.injector.getInstance(DamageListener.class),
         this.injector.getInstance(FishingListener.class),
         this.injector.getInstance(FlightListener.class),
         this.injector.getInstance(FlingerListener.class),
         this.injector.getInstance(JoinQuitListener.class),
         this.injector.getInstance(MadlandsMoverListener.class),
         this.injector.getInstance(MilkListener.class),
-        this.injector.getInstance(MobVoidLoopListener.class),
+        this.injector.getInstance(VoidDamageListener.class),
         this.injector.getInstance(Nate.class),
         this.injector.getInstance(PianoPlayListener.class),
         this.injector.getInstance(RainMusicListener.class),

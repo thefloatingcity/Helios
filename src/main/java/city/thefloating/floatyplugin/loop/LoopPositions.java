@@ -6,9 +6,9 @@ import org.bukkit.event.Listener;
 /**
  * Provides the positions at which the void loop will engage for each habitat.
  */
-public final class VoidLoopPositions implements Listener {
+public final class LoopPositions implements Listener {
 
-  private VoidLoopPositions() {
+  private LoopPositions() {
   }
 
   // trouble understanding? no worries, I got you. here's a drawing.
