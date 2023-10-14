@@ -46,6 +46,11 @@ public final class JoinQuitListener implements Listener {
   public void onJoin(final PlayerJoinEvent event) {
     final Player player = event.getPlayer();
 
+    player.setResourcePack(
+        this.configConfig.data().resourcePackUrl(),
+        this.configConfig.data().resourcePackHash()
+    );
+
     player.sendMessage(this.langConfig.c(NodePath.path("banner")));
 
     if (player.hasPlayedBefore()) {
