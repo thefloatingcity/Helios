@@ -2,7 +2,10 @@ package city.thefloating.floatyplugin.server;
 
 import city.thefloating.floatyplugin.DurationFormatter;
 import city.thefloating.floatyplugin.FloatyPlugin;
+import city.thefloating.floatyplugin.config.ConfigConfig;
 import city.thefloating.floatyplugin.config.LangConfig;
+import city.thefloating.floatyplugin.realm.Realm;
+import city.thefloating.floatyplugin.realm.WorldService;
 import com.google.inject.Inject;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Color;
@@ -19,18 +22,24 @@ import org.spongepowered.configurate.NodePath;
 import java.time.Duration;
 import java.util.Calendar;
 
-public final class JoinQuitDisplayListener implements Listener {
+public final class JoinQuitListener implements Listener {
 
   private final FloatyPlugin plugin;
   private final LangConfig langConfig;
+  private final ConfigConfig configConfig;
+  private final WorldService worldService;
 
   @Inject
-  public JoinQuitDisplayListener(
+  public JoinQuitListener(
       final FloatyPlugin plugin,
-      final LangConfig langConfig
+      final LangConfig langConfig,
+      final ConfigConfig configConfig,
+      final WorldService worldService
   ) {
     this.plugin = plugin;
     this.langConfig = langConfig;
+    this.configConfig = configConfig;
+    this.worldService = worldService;
   }
 
   @EventHandler
@@ -45,13 +54,20 @@ public final class JoinQuitDisplayListener implements Listener {
           Placeholder.component("player", player.displayName())
       ));
 
-      final Duration timeSinceLastPlayed = Duration.ofMillis(
-          Calendar.getInstance().getTimeInMillis() - player.getLastPlayed());
+      final Duration sinceLastPlayed = Duration.ofMillis(
+          Calendar.getInstance().getTimeInMillis() - player.getLastPlayed()
+      );
       player.sendMessage(this.langConfig.c(
           NodePath.path("motd"),
-          Placeholder.unparsed("last", DurationFormatter.fancifyTime(timeSinceLastPlayed))
+          Placeholder.unparsed("last", DurationFormatter.fancifyTime(sinceLastPlayed))
       ));
     } else {
+      if (this.configConfig.data().madlandsEnabled()) {
+        event.getPlayer().teleport(this.worldService.getSpawnPoint(Realm.MADLANDS));
+      } else {
+        event.getPlayer().teleport(this.worldService.getSpawnPoint(Realm.OVERWORLD));
+      }
+
       event.joinMessage(this.langConfig.c(
           NodePath.path("join-new"),
           Placeholder.component("player", player.displayName())

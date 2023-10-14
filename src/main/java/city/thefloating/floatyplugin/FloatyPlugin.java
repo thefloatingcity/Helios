@@ -25,7 +25,6 @@ import city.thefloating.floatyplugin.nextbot.Nate;
 import city.thefloating.floatyplugin.nextbot.ObungaCommand;
 import city.thefloating.floatyplugin.piano.PianoCommand;
 import city.thefloating.floatyplugin.piano.PianoPlayListener;
-import city.thefloating.floatyplugin.realm.FirstJoinListener;
 import city.thefloating.floatyplugin.realm.MadlandsMoverListener;
 import city.thefloating.floatyplugin.realm.RespawnListener;
 import city.thefloating.floatyplugin.realm.SpawnProtectionListener;
@@ -35,7 +34,7 @@ import city.thefloating.floatyplugin.realm.WorldProtectionListener;
 import city.thefloating.floatyplugin.realm.WorldService;
 import city.thefloating.floatyplugin.server.ChatListener;
 import city.thefloating.floatyplugin.server.DiscordCommand;
-import city.thefloating.floatyplugin.server.JoinQuitDisplayListener;
+import city.thefloating.floatyplugin.server.JoinQuitListener;
 import city.thefloating.floatyplugin.server.RulesCommand;
 import city.thefloating.floatyplugin.server.ServerPingListener;
 import city.thefloating.floatyplugin.server.VoteCommand;
@@ -206,13 +205,12 @@ public final class FloatyPlugin extends TehPlugin {
 
   private void initListeners() {
     registerListeners(
-        this.injector.getInstance(WorldProtectionListener.class),
         this.injector.getInstance(ChatListener.class),
         this.injector.getInstance(DamageListener.class),
-        this.injector.getInstance(FirstJoinListener.class),
         this.injector.getInstance(FishingListener.class),
         this.injector.getInstance(FlightListener.class),
-        this.injector.getInstance(JoinQuitDisplayListener.class),
+        this.injector.getInstance(FlingerListener.class),
+        this.injector.getInstance(JoinQuitListener.class),
         this.injector.getInstance(MadlandsMoverListener.class),
         this.injector.getInstance(MilkListener.class),
         this.injector.getInstance(MobVoidLoopListener.class),
@@ -221,11 +219,11 @@ public final class FloatyPlugin extends TehPlugin {
         this.injector.getInstance(RainMusicListener.class),
         this.injector.getInstance(RespawnListener.class),
         this.injector.getInstance(ServerPingListener.class),
-        this.injector.getInstance(FlingerListener.class),
         this.injector.getInstance(SpaceBreakListener.class),
         this.injector.getInstance(SpawnProtectionListener.class),
         this.injector.getInstance(TagListener.class),
         this.injector.getInstance(TransportationListener.class)
+        this.injector.getInstance(WorldProtectionListener.class),
     );
   }
 
