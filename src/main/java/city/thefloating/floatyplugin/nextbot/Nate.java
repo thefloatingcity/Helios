@@ -86,11 +86,11 @@ public final class Nate implements Listener {
     }
   }
 
-  public void summonObunga(final Location loc) {
-    this.createNextbot(new Nextbot.Attributes("띂", Key.key("floating", "music.ussr_anthem.mono")), loc);
+  public void createNextbot(final Nextbot.Type type, final Location loc) {
+    this.createNextbot(type.attributes(), loc);
   }
 
-  public void createNextbot(final Nextbot.Attributes attributes, final Location loc) {
+  private void createNextbot(final Nextbot.Attributes attributes, final Location loc) {
     final AreaEffectCloud icon = (AreaEffectCloud) loc.getWorld().spawnEntity(
         loc, EntityType.AREA_EFFECT_CLOUD,
         CreatureSpawnEvent.SpawnReason.COMMAND,

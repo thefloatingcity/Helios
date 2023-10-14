@@ -96,4 +96,18 @@ public final class Nextbot {
 
   }
 
+  public enum Type {
+    OBUNGA(new Attributes("띂", Key.key("floating", "music.ussr_anthem.mono")));
+
+    private final Attributes attributes;
+
+    Type(final Attributes attributes) {
+      this.attributes = attributes;
+    }
+
+    public Attributes attributes() {
+      return this.attributes;
+    }
+  }
+
 }

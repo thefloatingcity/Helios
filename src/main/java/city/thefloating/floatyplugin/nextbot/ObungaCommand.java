@@ -22,7 +22,7 @@ public final class ObungaCommand {
         .senderType(Player.class)
         .handler(c -> {
           final var sender = (Player) c.getSender();
-          this.nate.summonObunga(sender.getLocation());
+          this.nate.createNextbot(Nextbot.Type.OBUNGA, sender.getLocation());
         });
 
     commandManager.command(obunga);
