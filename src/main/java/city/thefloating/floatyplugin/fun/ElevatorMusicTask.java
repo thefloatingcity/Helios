@@ -13,11 +13,11 @@ import org.bukkit.entity.Player;
 
 public final class ElevatorMusicTask {
 
-  private static final int FALL_DISTANCE_TO_ACTIVATE = 150;
+  private static final int MIN_FALL_DIST = 1300;
 
-  private static final Key ELEVATOR_MUSIC = Key.key("floating", "music.elevator");
-  private static final Sound SOUND = Sound.sound(ELEVATOR_MUSIC, Sound.Source.MUSIC, 1, 1);
-  private static final SoundStop SOUND_STOP = SoundStop.named(ELEVATOR_MUSIC);
+  private static final Key MUSIC_KEY = Key.key("floating", "music.elevator");
+  private static final Sound MUSIC = Sound.sound(MUSIC_KEY, Sound.Source.MUSIC, 1, 1);
+  private static final SoundStop MUSIC_STOP = SoundStop.named(MUSIC_KEY);
 
   private final FloatyPlugin plugin;
   private final Charon charon;
@@ -40,14 +40,14 @@ public final class ElevatorMusicTask {
         }
 
         final Soul soul = this.charon.getSoul(player);
-        if (player.getFallDistance() > FALL_DISTANCE_TO_ACTIVATE) {
+        if (player.getFallDistance() > MIN_FALL_DIST) {
           if (!soul.elevatorMusicPlaying()) {
-            player.playSound(SOUND);
+            player.playSound(MUSIC);
             soul.elevatorMusicPlaying(true);
           }
         } else {
           if (soul.elevatorMusicPlaying()) {
-            player.stopSound(SOUND_STOP);
+            player.stopSound(MUSIC_STOP);
             soul.elevatorMusicPlaying(false);
           }
         }
