@@ -1,10 +1,9 @@
 package city.thefloating.floatyplugin.nextbot;
 
 import cloud.commandframework.paper.PaperCommandManager;
+import com.google.inject.Inject;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import javax.inject.Inject;
 
 public final class ObungaCommand {
 

@@ -2,7 +2,6 @@ package city.thefloating.floatyplugin.nextbot;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
 import com.google.inject.Inject;
-import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -121,10 +120,18 @@ public final class Nate implements Listener {
     this.nextbots.add(nextbot);
   }
 
-  private static final double MEASURE_MIN = 0.012;
-  private static final double MEASURE_MAX = 0.034;
-  private static final double TARGET_MIN = 0.9;
-  private static final double TARGET_MAX = 1.5;
+  // nextbot speed constants for variable acceleration.
+  private static final double NBS_MEASURE_MIN = 0.012;
+  private static final double NBS_MEASURE_MAX = 0.036;
+  private static final double NBS_TARGET_MIN = 0.9;
+  private static final double NBS_TARGET_MAX = 1.5;
+
+  // player speed constants for speed boost when being chased.
+  private static final double PS_MIN_DIST = 20;
+  private static final double PS_MIN_DIST_SQR = (int) Math.pow(PS_MIN_DIST, 2);
+  private static final double PS_MIN_ZERO = 1.1;
+  private static final double PS_MIN_ONE = 1.3;
+  private static final double PS_MIN_TWO = 1.4;
 
   /**
    * The rough maximum value of velocity.lengthSquared() when not moving.
@@ -160,21 +167,38 @@ public final class Nate implements Listener {
                 }
 
                 final double speed;
-                if (velLen <= MEASURE_MIN) {
-                  speed = TARGET_MIN;
-                } else if (velLen >= MEASURE_MAX) {
-                  speed = TARGET_MAX;
+                if (velLen <= NBS_MEASURE_MIN) {
+                  speed = NBS_TARGET_MIN;
+                } else if (velLen >= NBS_MEASURE_MAX) {
+                  speed = NBS_TARGET_MAX;
                 } else {
                   // https://stats.stackexchange.com/questions/281162/scale-a-number-between-a-range
-                  speed = (((velLen - MEASURE_MIN) / (MEASURE_MAX - MEASURE_MIN)) * (TARGET_MAX - TARGET_MIN)) + TARGET_MIN;
+                  speed = (
+                      ((velLen - NBS_MEASURE_MIN) / (NBS_MEASURE_MAX - NBS_MEASURE_MIN))
+                          * (NBS_TARGET_MAX - NBS_TARGET_MIN)
+                  ) + NBS_TARGET_MIN;
                 }
 
                 pf.getPathfinder().moveTo(this.requestLaggedLocation(target), speed);
+
+                if (nextbot.pf().getLocation().distanceSquared(target.getLocation()) < PS_MIN_DIST_SQR) {
+                  if (speed >= PS_MIN_TWO) {
+                    givePlayerRunningSpeed(target, 2);
+                  } else if (speed >= PS_MIN_ONE) {
+                    givePlayerRunningSpeed(target, 1);
+                  } else if (speed >= PS_MIN_ZERO) {
+                    givePlayerRunningSpeed(target, 0);
+                  }
+                }
               });
         },
         60,
         4
     );
+  }
+
+  private static void givePlayerRunningSpeed(final Player player, final int amplifier) {
+    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 30, amplifier, true, false, false));
   }
 
   private static final int LAG_AMOUNT = 60;
@@ -189,8 +213,8 @@ public final class Nate implements Listener {
     return this.laggedLocation.getOrDefault(player.getUniqueId(), player.getLocation());
   }
 
-  private static final int MUSIC_CUTOFF_DISTANCE = 40;
-  private static final int MUSIC_CUTOFF_DISTANCE_SQUARED = (int) Math.pow(MUSIC_CUTOFF_DISTANCE, 2);
+  private static final int MUSIC_CUTOFF_DIST = 40;
+  private static final int MUSIC_CUTOFF_DIST_SQR = (int) Math.pow(MUSIC_CUTOFF_DIST, 2);
 
   private void startMusicTask(final Nextbot nextbot) {
     final var pf = nextbot.pf();
@@ -204,7 +228,7 @@ public final class Nate implements Listener {
           }
 
           pf.getWorld().getNearbyPlayers(pf.getLocation(), 128).forEach(player -> {
-            if (pf.getLocation().distanceSquared(player.getLocation()) > MUSIC_CUTOFF_DISTANCE_SQUARED) {
+            if (pf.getLocation().distanceSquared(player.getLocation()) > MUSIC_CUTOFF_DIST_SQR) {
               player.stopSound(nextbot.attr().musicStop());
               nextbot.activeMusic().remove(player);
             } else if (!nextbot.activeMusic().contains(player)) {
