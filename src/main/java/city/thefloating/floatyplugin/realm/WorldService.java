@@ -57,9 +57,9 @@ public final class WorldService {
       };
 
       this.plugin.getServer().createWorld(WorldCreator.ofKey(key)
-          // prevent black horizon.
+          // lower black horizon in overworld worlds.
           // FLAT worlds turn black below Y-60; NORMAL worlds turn black below Y60.
-          .type(WorldType.NORMAL)
+          .type(WorldType.FLAT)
           .environment(realm.habitat().environment())
           .generator(generator)
       );
