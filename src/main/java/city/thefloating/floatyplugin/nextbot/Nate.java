@@ -1,6 +1,8 @@
 package city.thefloating.floatyplugin.nextbot;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
+import city.thefloating.floatyplugin.Ticks;
+import com.destroystokyo.paper.event.player.PlayerPostRespawnEvent;
 import com.google.inject.Inject;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
@@ -16,6 +18,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
@@ -57,6 +61,33 @@ public final class Nate implements Listener {
       nextbot.pf().remove();
     }
     this.nextbots.clear();
+  }
+
+  @EventHandler
+  public void onPlayerRespawn(final PlayerPostRespawnEvent event) {
+    this.removeFromActiveMusic(event.getPlayer());
+  }
+
+  @EventHandler
+  public void onPlayerChangedWorld(final PlayerChangedWorldEvent event) {
+    this.removeFromActiveMusic(event.getPlayer());
+  }
+
+  @EventHandler
+  public void onPlayerQuit(final PlayerQuitEvent event) {
+    this.removeFromActiveMusic(event.getPlayer());
+  }
+
+  private void removeFromActiveMusic(final Player player) {
+    this.floatyPlugin.getServer().getScheduler().runTaskLater(
+        this.floatyPlugin,
+        () -> {
+          for (final Nextbot nextbot : this.nextbots) {
+            nextbot.startedMusic().remove(player);
+          }
+        },
+        Ticks.in(Duration.ofSeconds(2))
+    );
   }
 
   @EventHandler(priority = EventPriority.HIGH) // to avoid conflicting with void loop.
@@ -213,9 +244,6 @@ public final class Nate implements Listener {
     return this.laggedLocation.getOrDefault(player.getUniqueId(), player.getLocation());
   }
 
-  private static final int MUSIC_CUTOFF_DIST = 40;
-  private static final int MUSIC_CUTOFF_DIST_SQR = (int) Math.pow(MUSIC_CUTOFF_DIST, 2);
-
   private void startMusicTask(final Nextbot nextbot) {
     final var pf = nextbot.pf();
     final var ic = nextbot.ic();
@@ -227,17 +255,19 @@ public final class Nate implements Listener {
             return;
           }
 
-          pf.getWorld().getNearbyPlayers(pf.getLocation(), 128).forEach(player -> {
-            if (pf.getLocation().distanceSquared(player.getLocation()) > MUSIC_CUTOFF_DIST_SQR) {
-              player.stopSound(nextbot.attr().musicStop());
-              nextbot.activeMusic().remove(player);
-            } else if (!nextbot.activeMusic().contains(player)) {
-              ic.getWorld().playSound(
-                  nextbot.attr().music(),
-                  ic // play sound from icon so that we can set pathfinder (fox) to silent.
-              );
-              nextbot.activeMusic().add(player);
+          pf.getWorld().getNearbyPlayers(pf.getLocation(), 32).forEach(player -> {
+            if (nextbot.startedMusic().containsKey(player)
+                && Duration.between(nextbot.startedMusic().get(player), Instant.now())
+                .compareTo(nextbot.attr().musicLength()) < 0) {
+              // current time that song has been played is less than song length.
+              return;
             }
+
+            // stop previous music.
+            player.stopSound(nextbot.attr().musicStop());
+            // play sound from icon so that we can set pathfinder (fox) to silent.
+            player.playSound(nextbot.attr().music(), ic);
+            nextbot.startedMusic().put(player, Instant.now());
           });
         },
         1,

@@ -8,9 +8,10 @@ import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nullable;
+import java.time.Duration;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public final class Nextbot {
 
@@ -19,7 +20,7 @@ public final class Nextbot {
   private final Nextbot.Attributes attributes;
 
   private Instant lastJump = null;
-  private final List<Player> activeMusic = new ArrayList<>();
+  private final Map<Player, Instant> startedMusic = new HashMap<>();
 
   public Nextbot(
       final Mob pathfinder,
@@ -55,8 +56,8 @@ public final class Nextbot {
     this.lastJump = lastJump;
   }
 
-  public List<Player> activeMusic() {
-    return this.activeMusic;
+  public Map<Player, Instant> startedMusic() {
+    return this.startedMusic;
   }
 
   public Nextbot.Attributes attributes() {
@@ -72,14 +73,17 @@ public final class Nextbot {
     private final String iconChar;
     private final Sound music;
     private final SoundStop musicStop;
+    private final Duration musicLength;
 
     public Attributes(
         final String iconChar,
-        final Key musicKey
+        final Key musicKey,
+        final Duration musicLength
     ) {
       this.iconChar = iconChar;
       this.music = Sound.sound(musicKey, Sound.Source.HOSTILE, 1F, 1);
       this.musicStop = SoundStop.namedOnSource(musicKey, Sound.Source.HOSTILE);
+      this.musicLength = musicLength.plus(Duration.ofSeconds(1)); // just some padding.
     }
 
     public String iconChar() {
@@ -94,10 +98,14 @@ public final class Nextbot {
       return this.musicStop;
     }
 
+    public Duration musicLength() {
+      return this.musicLength;
+    }
+
   }
 
   public enum Type {
-    OBUNGA(new Attributes("띂", Key.key("floating", "music.ussr_anthem.mono")));
+    OBUNGA(new Attributes("띂", Key.key("floating", "music.ussr_anthem.mono"), Duration.ofSeconds(223)));
 
     private final Attributes attributes;
 
