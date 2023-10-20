@@ -18,6 +18,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.PlayerLeashEntityEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
@@ -61,6 +62,20 @@ public final class Nate implements Listener {
       nextbot.pf().remove();
     }
     this.nextbots.clear();
+  }
+
+  /**
+   * Prevent fox from being leashed.
+   *
+   * @param event the event
+   */
+  @EventHandler
+  public void onLeash(final PlayerLeashEntityEvent event) {
+    for (final Nextbot nextbot : this.nextbots) {
+      if (event.getEntity().equals(nextbot.pf())) {
+        event.setCancelled(true);
+      }
+    }
   }
 
   @EventHandler
