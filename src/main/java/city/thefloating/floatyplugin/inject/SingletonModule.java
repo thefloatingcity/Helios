@@ -12,6 +12,7 @@ import city.thefloating.floatyplugin.realm.WorldService;
 import city.thefloating.floatyplugin.soul.Charon;
 import city.thefloating.floatyplugin.tag.TagGame;
 import city.thefloating.floatyplugin.transportation.FlightService;
+import city.thefloating.floatyplugin.transportation.PortalListener;
 import com.google.inject.AbstractModule;
 
 public final class SingletonModule extends AbstractModule {
@@ -25,6 +26,7 @@ public final class SingletonModule extends AbstractModule {
     this.bind(WorldService.class).asEagerSingleton();
     this.bind(Transposer.class).asEagerSingleton();
     this.bind(Nate.class).asEagerSingleton();
+    this.bind(PortalListener.class).asEagerSingleton();
 
     // configs.
     this.bind(BooksConfig.class).asEagerSingleton();

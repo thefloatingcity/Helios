@@ -48,7 +48,7 @@ import city.thefloating.floatyplugin.tag.TagCommand;
 import city.thefloating.floatyplugin.tag.TagListener;
 import city.thefloating.floatyplugin.transportation.FlightListener;
 import city.thefloating.floatyplugin.transportation.FlyCommand;
-import city.thefloating.floatyplugin.transportation.PortalUseTask;
+import city.thefloating.floatyplugin.transportation.PortalListener;
 import city.thefloating.floatyplugin.transportation.TransportationListener;
 import city.thefloating.floatyplugin.transportation.TransportationTask;
 import cloud.commandframework.execution.CommandExecutionCoordinator;
@@ -221,6 +221,7 @@ public final class FloatyPlugin extends TehPlugin {
         this.injector.getInstance(SpaceBreakListener.class),
         this.injector.getInstance(SpawnProtectionListener.class),
         this.injector.getInstance(TagListener.class),
+        this.injector.getInstance(PortalListener.class),
         this.injector.getInstance(TransportationListener.class),
         this.injector.getInstance(WorldProtectionListener.class)
     );
@@ -229,7 +230,6 @@ public final class FloatyPlugin extends TehPlugin {
   private void initTasks() {
     this.injector.getInstance(ElevatorMusicTask.class).start();
     this.injector.getInstance(PlayerVoidLoopTask.class).start();
-    this.injector.getInstance(PortalUseTask.class).start();
     this.injector.getInstance(RandomSpooks.class).start();
     this.injector.getInstance(TransportationTask.class).start();
     this.injector.getInstance(WarpTask.class).start();

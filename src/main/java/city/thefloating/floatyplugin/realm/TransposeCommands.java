@@ -2,6 +2,7 @@ package city.thefloating.floatyplugin.realm;
 
 import city.thefloating.floatyplugin.Permission;
 import city.thefloating.floatyplugin.config.LangConfig;
+import city.thefloating.floatyplugin.transportation.PortalListener;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.inject.Inject;
@@ -13,14 +14,17 @@ public final class TransposeCommands {
 
   private final LangConfig langConfig;
   private final Transposer transposer;
+  private final PortalListener portalListener;
 
   @Inject
   public TransposeCommands(
       final LangConfig langConfig,
-      final Transposer transposer
+      final Transposer transposer,
+      final PortalListener portalListener
   ) {
     this.langConfig = langConfig;
     this.transposer = transposer;
+    this.portalListener = portalListener;
   }
 
   public void register(final PaperCommandManager<CommandSender> commandManager) {
@@ -67,7 +71,8 @@ public final class TransposeCommands {
       player.sendMessage(this.langConfig.c(NodePath.path("transpose", "already-there")));
       return;
     }
-
+    // prevent players from instantly teleporting back if they were previously in a portal.
+    this.portalListener.attemptPortal(player);
     this.transposer.transpose(player, destination);
   }
 
