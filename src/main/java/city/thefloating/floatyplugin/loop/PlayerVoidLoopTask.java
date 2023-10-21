@@ -7,7 +7,6 @@ import com.google.inject.Inject;
 import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitScheduler;
 
 import java.time.Duration;
 
@@ -24,8 +23,7 @@ public final class PlayerVoidLoopTask {
 
   public void start() {
     final Server server = this.plugin.getServer();
-    final BukkitScheduler scheduler = server.getScheduler();
-    scheduler.scheduleSyncRepeatingTask(this.plugin, () -> {
+    server.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
         final Location loc = player.getLocation();
         final Habitat habitat = Habitat.of(player.getWorld());

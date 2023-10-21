@@ -1,8 +1,6 @@
 package city.thefloating.floatyplugin.loop;
 
-import city.thefloating.floatyplugin.FloatyPlugin;
 import city.thefloating.floatyplugin.realm.Habitat;
-import com.google.inject.Inject;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -18,15 +16,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
  */
 public final class VoidDamageListener implements Listener {
 
-  private final FloatyPlugin plugin;
-
-  @Inject
-  public VoidDamageListener(
-      final FloatyPlugin plugin
-  ) {
-    this.plugin = plugin;
-  }
-
   @EventHandler
   public void onVoidDamage(final EntityDamageEvent event) {
     if (event.getCause() == EntityDamageEvent.DamageCause.VOID) {
@@ -39,12 +28,18 @@ public final class VoidDamageListener implements Listener {
       return;
     }
 
+    if (entity.getFallDistance() > 50.000) {
+      // lore-wise, they burnt up due to friction.
+      // practically, they're probably abandoned.
+      entity.remove();
+      return;
+    }
+
     final Location loc = entity.getLocation();
     final Habitat habitat = Habitat.of(entity.getWorld());
     if (loc.getY() > LoopPositions.lowEngage(habitat)) {
       return;
     }
-
     loc.setY(LoopPositions.lowTo(habitat));
     Teleport.relative(entity, loc);
   }

@@ -58,7 +58,7 @@ public final class WarpTask {
 
   private void warpPlayer(final Player player) {
     // random chance to noclip into the backrooms. 30% chance.
-    if (RANDOM.nextFloat() > 0.7) {
+    if (RANDOM.nextFloat() < 0.3) {
       final Location nextLocation = this.transposer.getNextLocation(player, Realm.BACKROOMS);
       this.transposer.transpose(player, Realm.BACKROOMS);
 
@@ -93,7 +93,6 @@ public final class WarpTask {
   public void start() {
     final Server server = this.plugin.getServer();
     final BukkitScheduler scheduler = server.getScheduler();
-
     scheduler.scheduleSyncRepeatingTask(this.plugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
         final float fallDistance = player.getFallDistance();
