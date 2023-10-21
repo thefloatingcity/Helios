@@ -116,6 +116,38 @@ public final class RandomSpooks {
         player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 30, 1, true, true, false));
       }
     }, 1, Ticks.in(Duration.ofSeconds(123)) - 17);
+
+    // spawn nextbot.
+    scheduler.scheduleSyncRepeatingTask(this.plugin, () -> {
+      for (final Player player : this.worldService.getWorld(Realm.BACKROOMS).getPlayers()) {
+        if (RANDOM.nextFloat() > 0.05F) {
+          continue;
+        }
+
+        for (int dist = 24; dist < 33; dist++) {
+          final var locPX = player.getLocation().add(new Vector(dist, 0, 0));
+          if (locPX.getBlock().getType() == Material.AIR) {
+            this.nate.createNextbot(Nextbot.Type.OBUNGA, locPX);
+            return;
+          }
+          final var locNX = player.getLocation().add(new Vector(-dist, 0, 0));
+          if (locNX.getBlock().getType() == Material.AIR) {
+            this.nate.createNextbot(Nextbot.Type.OBUNGA, locNX);
+            return;
+          }
+          final var locPZ = player.getLocation().add(new Vector(0, 0, dist));
+          if (locPZ.getBlock().getType() == Material.AIR) {
+            this.nate.createNextbot(Nextbot.Type.OBUNGA, locPZ);
+            return;
+          }
+          final var locNZ = player.getLocation().add(new Vector(0, 0, -dist));
+          if (locNZ.getBlock().getType() == Material.AIR) {
+            this.nate.createNextbot(Nextbot.Type.OBUNGA, locNZ);
+            return;
+          }
+        }
+      }
+    }, 1, Ticks.in(Duration.ofSeconds(497)) - 5);
   }
 
 }
