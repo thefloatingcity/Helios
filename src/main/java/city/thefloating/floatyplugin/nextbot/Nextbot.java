@@ -81,8 +81,8 @@ public final class Nextbot {
         final Duration musicLength
     ) {
       this.iconChar = iconChar;
-      this.music = Sound.sound(musicKey, Sound.Source.HOSTILE, 1F, 1);
-      this.musicStop = SoundStop.namedOnSource(musicKey, Sound.Source.HOSTILE);
+      this.music = Sound.sound(musicKey, Sound.Source.MASTER, 1F, 1);
+      this.musicStop = SoundStop.namedOnSource(musicKey, Sound.Source.MASTER);
       this.musicLength = musicLength.plus(Duration.ofSeconds(1)); // just some padding.
     }
 
