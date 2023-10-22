@@ -66,8 +66,6 @@ public final class Nate implements Listener {
 
   /**
    * Prevent fox from being leashed.
-   *
-   * @param event the event
    */
   @EventHandler
   public void onLeash(final PlayerLeashEntityEvent event) {

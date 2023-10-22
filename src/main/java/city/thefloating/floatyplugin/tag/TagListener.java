@@ -33,8 +33,6 @@ public final class TagListener implements Listener {
   /**
    * Prevents potion effects other than damage resistance and saturation during tag.
    * (Grants an exception for blindness in the nether.)
-   *
-   * @param event the event
    */
   @EventHandler
   public void onPotionEffect(final EntityPotionEffectEvent event) {
@@ -81,8 +79,6 @@ public final class TagListener implements Listener {
 
   /**
    * Prevents game modes other than adventure mode during tag.
-   *
-   * @param event the event
    */
   @EventHandler
   public void onGameModeChange(final PlayerGameModeChangeEvent event) {

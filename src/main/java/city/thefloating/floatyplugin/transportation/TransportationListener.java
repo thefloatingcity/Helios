@@ -54,7 +54,7 @@ public final class TransportationListener implements Listener {
   /**
    * Prevents spectator mode.
    *
-   * @param event the event
+   * @param event
    */
   @EventHandler
   public void onModeToSpectator(final PlayerGameModeChangeEvent event) {
@@ -70,8 +70,6 @@ public final class TransportationListener implements Listener {
 
   /**
    * Prevents ender pearls and chorus fruit teleportation except in the end.
-   *
-   * @param event the event
    */
   @EventHandler
   public void onTeleport(final PlayerTeleportEvent event) {
@@ -92,8 +90,6 @@ public final class TransportationListener implements Listener {
 
   /**
    * Prevents vehicle usage in the nether.
-   *
-   * @param event the event
    */
   @EventHandler
   public void onVehicleEnter(final VehicleEnterEvent event) {
@@ -113,8 +109,6 @@ public final class TransportationListener implements Listener {
 
   /**
    * Prevents movement-enhancing potions in the nether.
-   *
-   * @param event the event
    */
   @EventHandler
   public void onPotionEffect(final EntityPotionEffectEvent event) {
@@ -137,8 +131,6 @@ public final class TransportationListener implements Listener {
 
   /**
    * Prevents elytra usage outside the end.
-   *
-   * @param event the event
    */
   @EventHandler
   public void onElytra(final EntityToggleGlideEvent event) {
@@ -162,8 +154,6 @@ public final class TransportationListener implements Listener {
 
   /**
    * Prevents sprinting in the nether. Additionally, handles the nether watcher.
-   *
-   * @param event the event
    */
   @EventHandler
   public void onSprint(final PlayerToggleSprintEvent event) {
@@ -239,8 +229,6 @@ public final class TransportationListener implements Listener {
 
   /**
    * Remove any leftover blindness that the player might've had from the nether.
-   *
-   * @param event the event
    */
   @EventHandler
   public void onWorldChange(final PlayerChangedWorldEvent event) {

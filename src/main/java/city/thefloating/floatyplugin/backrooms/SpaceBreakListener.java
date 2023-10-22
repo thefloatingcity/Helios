@@ -12,8 +12,6 @@ public final class SpaceBreakListener implements Listener {
 
   /**
    * Prevents breaking the blocks that hold the players captive.
-   *
-   * @param event the event
    */
   @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
   public void onSpaceBreak(final BlockBreakEvent event) {

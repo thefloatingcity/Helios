@@ -128,8 +128,6 @@ public final class SpawnProtectionListener implements Listener {
 
   /**
    * Prevents water, lava, and dragon eggs from getting into spawn.
-   *
-   * @param event the event
    */
   @EventHandler
   public void onBlockFromTo(final BlockFromToEvent event) {
