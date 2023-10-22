@@ -73,8 +73,15 @@ public final class WorldService {
       world.setGameRule(GameRule.DO_FIRE_TICK, false);
       world.setGameRule(GameRule.MOB_GRIEFING, false);
       world.setGameRule(GameRule.DO_VINES_SPREAD, false);
-      world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true);
       world.setGameRule(GameRule.DO_WEATHER_CYCLE, true);
+
+      if (realm == Realm.BACKROOMS) {
+        // eternal night in backrooms.
+        world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
+        world.setTime(18000); // midnight.
+      } else {
+        world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true);
+      }
 
       // no mob spawning! >:(
       world.setGameRule(GameRule.DO_MOB_SPAWNING, false);
