@@ -72,6 +72,9 @@ public final class WorldService {
       world.setGameRule(GameRule.SPAWN_RADIUS, 0);
       world.setGameRule(GameRule.DO_FIRE_TICK, false);
       world.setGameRule(GameRule.MOB_GRIEFING, false);
+      world.setGameRule(GameRule.DO_VINES_SPREAD, false);
+      world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true);
+      world.setGameRule(GameRule.DO_WEATHER_CYCLE, true);
 
       // no mob spawning! >:(
       world.setGameRule(GameRule.DO_MOB_SPAWNING, false);
