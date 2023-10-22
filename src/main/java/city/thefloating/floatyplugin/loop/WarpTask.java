@@ -96,9 +96,9 @@ public final class WarpTask {
     scheduler.scheduleSyncRepeatingTask(this.plugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
         final float fallDistance = player.getFallDistance();
-        if (fallDistance >= 4000) {
+        if (fallDistance >= 6000) {
           scheduler.scheduleSyncDelayedTask(this.plugin, () -> this.warpPlayer(player), 5);
-        } else if (fallDistance >= 3800) {
+        } else if (fallDistance >= 5800) {
           player.showTitle(Title.title(
               Component.empty(),
               this.langConfig.c(NodePath.path("warp", "fourth")),
@@ -111,7 +111,7 @@ public final class WarpTask {
                 () -> player.playSound(location, Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 2), i
             );
           }
-        } else if (fallDistance >= 3400) {
+        } else if (fallDistance >= 5400) {
           player.showTitle(Title.title(
               Component.empty(),
               this.langConfig.c(NodePath.path("warp", "third")),
@@ -124,7 +124,7 @@ public final class WarpTask {
                 () -> player.playSound(location, Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 1.6F), i
             );
           }
-        } else if (fallDistance >= 3000) {
+        } else if (fallDistance >= 5000) {
           player.showTitle(Title.title(
               Component.empty(),
               this.langConfig.c(NodePath.path("warp", "second")),
@@ -137,7 +137,7 @@ public final class WarpTask {
                 () -> player.playSound(location, Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 0.9F), i
             );
           }
-        } else if (fallDistance >= 2000) {
+        } else if (fallDistance >= 4000) {
           player.showTitle(Title.title(
               Component.empty(),
               this.langConfig.c(NodePath.path("warp", "first")),
