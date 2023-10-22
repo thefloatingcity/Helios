@@ -1,5 +1,6 @@
 package city.thefloating.floatyplugin.realm;
 
+import org.bukkit.Location;
 import org.bukkit.World;
 
 import java.util.Locale;
@@ -29,6 +30,10 @@ public enum Realm {
       case "backrooms" -> Realm.BACKROOMS;
       default -> throw new RuntimeException("Could not find realm for world `" + world.getName() + "`.");
     };
+  }
+
+  public static Realm from(final Location location) {
+    return from(location.getWorld());
   }
 
   @Override

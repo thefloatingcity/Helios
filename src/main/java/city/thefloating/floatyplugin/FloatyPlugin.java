@@ -29,7 +29,7 @@ import city.thefloating.floatyplugin.nextbot.ObungaCommand;
 import city.thefloating.floatyplugin.piano.PianoCommand;
 import city.thefloating.floatyplugin.piano.PianoPlayListener;
 import city.thefloating.floatyplugin.realm.MadlandsMoverListener;
-import city.thefloating.floatyplugin.realm.RespawnListener;
+import city.thefloating.floatyplugin.realm.SpawnPointListener;
 import city.thefloating.floatyplugin.realm.SpawnProtectionListener;
 import city.thefloating.floatyplugin.realm.TransposeCommands;
 import city.thefloating.floatyplugin.realm.VoidGenerator;
@@ -216,7 +216,7 @@ public final class FloatyPlugin extends TehPlugin {
         this.injector.getInstance(Nate.class),
         this.injector.getInstance(PianoPlayListener.class),
         this.injector.getInstance(RainMusicListener.class),
-        this.injector.getInstance(RespawnListener.class),
+        this.injector.getInstance(SpawnPointListener.class),
         this.injector.getInstance(ServerPingListener.class),
         this.injector.getInstance(SpaceBreakListener.class),
         this.injector.getInstance(SpawnProtectionListener.class),
