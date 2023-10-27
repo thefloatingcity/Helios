@@ -78,7 +78,7 @@ public final class SpawnProtectionListener implements Listener {
 
   @EventHandler(priority = EventPriority.LOW)
   public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {
-    if (event.getDamager() instanceof Player player) {
+    if (event.getDamager() instanceof final Player player) {
       this.handle(event, player, event.getEntity().getLocation());
     }
   }
@@ -151,8 +151,11 @@ public final class SpawnProtectionListener implements Listener {
   }
 
   private boolean isWithinWorldSpawn(final Location location) {
-    final Location worldSpawn = location.getWorld().getSpawnLocation();
-    return location.distanceSquared(worldSpawn) < SPAWN_PROTECTION_RADIUS_SQUARED;
+    final Location loc1 = location.clone();
+    loc1.setY(0);
+    final Location loc2 = location.getWorld().getSpawnLocation();
+    loc2.setY(0);
+    return loc1.distanceSquared(loc2) < SPAWN_PROTECTION_RADIUS_SQUARED;
   }
 
 }
