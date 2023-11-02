@@ -220,7 +220,11 @@ public final class TransportationListener implements Listener {
 
     // add some gnarly effects. blindness is important to prevent client-side sprint activation.
     player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 4, true, false, false));
-    player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1000000000, 1, true, false, false));
+    player.addPotionEffect(new PotionEffect(
+        PotionEffectType.BLINDNESS,
+        PotionEffect.INFINITE_DURATION,
+        1, true, false, false
+    ));
     player.playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_DAMAGE, SoundCategory.MASTER, 100, 0);
     player.playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_DEATH, SoundCategory.MASTER, 100, 0);
     player.playSound(player.getLocation(), Sound.AMBIENT_WARPED_FOREST_MOOD, SoundCategory.MASTER, 100, 1);

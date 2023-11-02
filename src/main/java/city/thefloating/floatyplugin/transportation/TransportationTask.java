@@ -41,7 +41,11 @@ public final class TransportationTask {
         if (realm == Realm.NETHER) {
           // catch any players who bypassed the sprint listener somehow.
           if (player.isSprinting()) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1000000000, 1, true, false, false));
+            player.addPotionEffect(new PotionEffect(
+                PotionEffectType.BLINDNESS,
+                PotionEffect.INFINITE_DURATION,
+                1, true, false, false
+            ));
             player.setSprinting(false);
           }
 

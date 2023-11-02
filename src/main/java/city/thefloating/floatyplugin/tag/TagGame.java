@@ -65,8 +65,16 @@ public final class TagGame {
     removeAllPotionEffects(player);
     this.setGlowing(player);
 
-    player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, 100000, 100, true, false));
-    player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100000, 100, true, false));
+    player.addPotionEffect(new PotionEffect(
+        PotionEffectType.SATURATION,
+        PotionEffect.INFINITE_DURATION,
+        100, true, false, false
+    ));
+    player.addPotionEffect(new PotionEffect(
+        PotionEffectType.DAMAGE_RESISTANCE,
+        PotionEffect.INFINITE_DURATION,
+        100, true, false, false
+    ));
   }
 
   public void removePlayer(final Player player) {
