@@ -125,7 +125,7 @@ public final class TransportationListener implements Listener {
         || type.equals(PotionEffectType.LEVITATION)) {
       event.setCancelled(true);
       player.setGameMode(GameMode.SURVIVAL);
-      player.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 10000, 100, false, true, true));
+      player.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 160, 100, false, true, true));
     }
   }
 
