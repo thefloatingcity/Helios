@@ -1,5 +1,6 @@
 package city.thefloating.floatyplugin.fun;
 
+import city.thefloating.floatyplugin.realm.Habitat;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -20,6 +21,8 @@ import java.util.UUID;
 
 public final class FlingerListener implements Listener {
 
+  private static final float MIN_PITCH = 0.5F;
+  private static final float MAX_PITCH = 2F;
   private static final Duration COOLDOWN_DURATION = Duration.ofMillis(700);
 
   private final Map<UUID, Integer> heat = new HashMap<>();
@@ -108,7 +111,13 @@ public final class FlingerListener implements Listener {
   }
 
   private float getPitch(final Player player) {
-    return Math.min(2F, 0.5F + (0.05F * this.getHeat(player.getUniqueId())));
+    final float increaseBy;
+    if (Habitat.of(player.getWorld()) == Habitat.RED) {
+      increaseBy = 1;
+    } else {
+      increaseBy = 0.1F;
+    }
+    return Math.min(MAX_PITCH, MIN_PITCH + (increaseBy * this.getHeat(player.getUniqueId())));
   }
 
   private int getHeat(final UUID uuid) {
