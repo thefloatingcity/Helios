@@ -36,7 +36,7 @@ public final class PdcLocStore {
     return this.getLocation(owner.getPersistentDataContainer(), locKey);
   }
 
-  public @Nullable WorldlessLocation getLocation(final PersistentDataContainer owner, final NamespacedKey locKey) {
+  private @Nullable WorldlessLocation getLocation(final PersistentDataContainer owner, final NamespacedKey locKey) {
     if (!owner.has(locKey)) {
       return null;
     }
@@ -58,22 +58,30 @@ public final class PdcLocStore {
     return new WorldlessLocation(x, y, z, yaw, pitch);
   }
 
-  public void setLocation(final Player owner, final NamespacedKey locKey, final Location loc) {
+  public void setLocation(final Player owner, final NamespacedKey locKey, final @Nullable Location loc) {
     this.setLocation(owner.getPersistentDataContainer(), locKey, loc);
   }
 
-  public void setLocation(final PersistentDataContainer owner, final NamespacedKey locKey, final Location loc) {
+  private void setLocation(final PersistentDataContainer owner, final NamespacedKey locKey, final @Nullable Location loc) {
     final PersistentDataContainer locData = owner.getAdapterContext().newPersistentDataContainer();
     this.setLocation(locData, loc);
     owner.set(locKey, PersistentDataType.TAG_CONTAINER, locData);
   }
 
-  private void setLocation(final PersistentDataContainer locPdc, final Location loc) {
-    locPdc.set(this.key("x"), PersistentDataType.DOUBLE, loc.getX());
-    locPdc.set(this.key("y"), PersistentDataType.DOUBLE, loc.getY());
-    locPdc.set(this.key("z"), PersistentDataType.DOUBLE, loc.getZ());
-    locPdc.set(this.key("yaw"), PersistentDataType.FLOAT, loc.getYaw());
-    locPdc.set(this.key("pitch"), PersistentDataType.FLOAT, loc.getPitch());
+  private void setLocation(final PersistentDataContainer locPdc, final @Nullable Location loc) {
+    if (loc != null) {
+      locPdc.set(this.key("x"), PersistentDataType.DOUBLE, loc.getX());
+      locPdc.set(this.key("y"), PersistentDataType.DOUBLE, loc.getY());
+      locPdc.set(this.key("z"), PersistentDataType.DOUBLE, loc.getZ());
+      locPdc.set(this.key("yaw"), PersistentDataType.FLOAT, loc.getYaw());
+      locPdc.set(this.key("pitch"), PersistentDataType.FLOAT, loc.getPitch());
+    } else {
+      locPdc.remove(this.key("x"));
+      locPdc.remove(this.key("y"));
+      locPdc.remove(this.key("z"));
+      locPdc.remove(this.key("yaw"));
+      locPdc.remove(this.key("pitch"));
+    }
   }
 
 }

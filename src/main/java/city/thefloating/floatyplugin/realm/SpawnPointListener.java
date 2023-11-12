@@ -1,5 +1,7 @@
 package city.thefloating.floatyplugin.realm;
 
+import com.destroystokyo.paper.MaterialTags;
+import com.destroystokyo.paper.event.player.PlayerPostRespawnEvent;
 import com.destroystokyo.paper.event.player.PlayerSetSpawnEvent;
 import com.google.inject.Inject;
 import io.papermc.paper.event.player.PlayerDeepSleepEvent;
@@ -21,9 +23,12 @@ import org.bukkit.potion.PotionEffectType;
 
 import javax.annotation.Nullable;
 import java.time.Duration;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class SpawnPointListener implements Listener {
+
+  private final List<Player> bedJustDestroyed = new ArrayList<>();
 
   private final WorldService worldService;
   private final PdcLocStore pdcLocStore;
@@ -44,10 +49,37 @@ public final class SpawnPointListener implements Listener {
   public void onRespawn(final PlayerRespawnEvent event) {
     final Player player = event.getPlayer();
     final Realm current = Realm.from(player.getWorld());
-    event.setRespawnLocation(Objects.requireNonNullElseGet(
-        this.getSpawn(player, current),
-        () -> this.worldService.getSpawnPoint(current)
-    ));
+    final @Nullable Location spawn = this.getSpawn(player, current);
+
+    if (spawn == null) {
+      event.setRespawnLocation(this.worldService.getSpawnPoint(current));
+    } else if (!MaterialTags.BEDS.isTagged(spawn.getBlock())) {
+      // bed was destroyed. reset player's spawn.
+      this.removeSpawn(player, current);
+      event.setRespawnLocation(this.worldService.getSpawnPoint(current));
+      // location-based effects.
+      this.bedJustDestroyed.add(player);
+    } else {
+      event.setRespawnLocation(spawn);
+    }
+  }
+
+  /**
+   * Handles effects that happen post-respawn.
+   */
+  @EventHandler
+  public void onPostRespawn(final PlayerPostRespawnEvent event) {
+    final Player player = event.getPlayer();
+    if (this.bedJustDestroyed.contains(player)) {
+      this.bedJustDestroyed.remove(player);
+      player.showTitle(Title.title(
+          Component.text("your bed was destroyed").color(NamedTextColor.RED),
+          Component.text("you're back at spawn").color(NamedTextColor.GRAY),
+          Title.Times.times(Duration.ofMillis(500), Duration.ofSeconds(5), Duration.ofSeconds(1))
+      ));
+      player.playSound(Sound.sound(org.bukkit.Sound.ENTITY_TURTLE_EGG_BREAK, Sound.Source.MASTER, 1F, 0.7F));
+      player.playSound(Sound.sound(org.bukkit.Sound.BLOCK_IRON_DOOR_CLOSE, Sound.Source.MASTER, 1F, 0.7F));
+    }
   }
 
   /**
@@ -57,14 +89,13 @@ public final class SpawnPointListener implements Listener {
   public void onDeepSleep(final PlayerDeepSleepEvent event) {
     final Player player = event.getPlayer();
     player.showTitle(Title.title(
-            Component.text("spawn point set").color(NamedTextColor.LIGHT_PURPLE),
-            Component.text()
-                .append(Component.text("for the ").color(NamedTextColor.GRAY))
-                .append(Component.text(Realm.from(player.getWorld()).toString()).color(NamedTextColor.GOLD))
-                .build(),
-            Title.Times.times(Duration.ofMillis(500), Duration.ofSeconds(5), Duration.ofSeconds(1))
-        )
-    );
+        Component.text("spawn point set").color(NamedTextColor.LIGHT_PURPLE),
+        Component.text()
+            .append(Component.text("for the ").color(NamedTextColor.GRAY))
+            .append(Component.text(Realm.from(player.getWorld()).toString()).color(NamedTextColor.GOLD))
+            .build(),
+        Title.Times.times(Duration.ofMillis(500), Duration.ofSeconds(5), Duration.ofSeconds(1))
+    ));
     player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 160, 1, true, false, false));
     player.playSound(Sound.sound(org.bukkit.Sound.BLOCK_RESPAWN_ANCHOR_SET_SPAWN, Sound.Source.MASTER, 1F, 1.3F));
     this.setSpawn(player, player.getLocation());
@@ -87,6 +118,14 @@ public final class SpawnPointListener implements Listener {
   public void onBedEnter(final PlayerBedEnterEvent event) {
     if (event.getBedEnterResult() == PlayerBedEnterEvent.BedEnterResult.NOT_POSSIBLE_HERE) {
       event.setUseBed(Event.Result.ALLOW);
+    }
+
+    if (event.useBed() == Event.Result.DEFAULT || event.useBed() == Event.Result.ALLOW) {
+      event.getPlayer().showTitle(Title.title(
+          Component.empty(),
+          Component.text(".. stay in bed to set your spawn point").color(NamedTextColor.DARK_GRAY),
+          Title.Times.times(Duration.ofMillis(500), Duration.ofSeconds(5), Duration.ofSeconds(1))
+      ));
     }
   }
 
@@ -117,6 +156,10 @@ public final class SpawnPointListener implements Listener {
 
   private void setSpawn(final Player player, final Location location) {
     this.pdcLocStore.setLocation(player, this.spawnKey(Realm.from(location)), location);
+  }
+
+  private void removeSpawn(final Player player, final Realm realm) {
+    this.pdcLocStore.setLocation(player, this.spawnKey(realm), null);
   }
 
   private NamespacedKey spawnKey(final Realm realm) {
