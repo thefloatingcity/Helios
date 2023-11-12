@@ -18,6 +18,7 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Vehicle;
 import org.bukkit.event.EventHandler;
@@ -34,6 +35,9 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.spongepowered.configurate.NodePath;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public final class TransportationListener implements Listener {
 
@@ -100,6 +104,12 @@ public final class TransportationListener implements Listener {
 
     if (event.getEntered() instanceof Player player) {
       final Vehicle vehicle = event.getVehicle();
+
+      if (vehicle.getType() == EntityType.ARROW) {
+        // allow sitting in the nether. (chairs plugin uses arrow vehicles.)
+        return;
+      }
+
       vehicle.getWorld().createExplosion(vehicle, 2, true, false);
       vehicle.remove();
       player.sendMessage(this.langConfig.c(NodePath.path("no-vehicle")));

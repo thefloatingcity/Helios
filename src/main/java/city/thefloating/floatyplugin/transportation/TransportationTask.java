@@ -4,6 +4,7 @@ import city.thefloating.floatyplugin.FloatyPlugin;
 import city.thefloating.floatyplugin.realm.Realm;
 import com.google.inject.Inject;
 import org.bukkit.Server;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -50,7 +51,10 @@ public final class TransportationTask {
           }
 
           // catch any players who bypassed the vehicle listener somehow.
-          player.leaveVehicle();
+          if (player.getVehicle() != null && player.getVehicle().getType() != EntityType.ARROW) {
+            // arrow for chairs.
+            player.leaveVehicle();
+          }
 
           // block-specific functionality.
           switch (player.getLocation().add(0, -0.8, 0).getBlock().getType()) {
