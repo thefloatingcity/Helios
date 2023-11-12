@@ -6,6 +6,7 @@ import broccolai.corn.paper.item.special.BundleBuilder;
 import city.thefloating.floatyplugin.FloatyPlugin;
 import city.thefloating.floatyplugin.config.LangConfig;
 import city.thefloating.floatyplugin.milk.MilkProvider;
+import city.thefloating.floatyplugin.realm.Habitat;
 import city.thefloating.floatyplugin.realm.Realm;
 import city.thefloating.floatyplugin.soul.Charon;
 import city.thefloating.floatyplugin.soul.Soul;
@@ -119,10 +120,7 @@ public final class TransportationListener implements Listener {
     }
 
     final PotionEffectType type = event.getNewEffect().getType();
-    if (type.equals(PotionEffectType.SPEED)
-        || type.equals(PotionEffectType.JUMP)
-        || type.equals(PotionEffectType.SLOW_FALLING)
-        || type.equals(PotionEffectType.LEVITATION)) {
+    if (BANNED_EFFECTS.contains(type)) {
       event.setCancelled(true);
       player.setGameMode(GameMode.SURVIVAL);
       player.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 160, 100, false, true, true));
@@ -231,12 +229,30 @@ public final class TransportationListener implements Listener {
 
   }
 
-  /**
-   * Remove any leftover blindness that the player might've had from the nether.
-   */
+  private static final List<PotionEffectType> BANNED_EFFECTS = List.of(
+      PotionEffectType.SPEED,
+      PotionEffectType.JUMP,
+      PotionEffectType.SLOW_FALLING,
+      PotionEffectType.LEVITATION
+  );
+
   @EventHandler
   public void onWorldChange(final PlayerChangedWorldEvent event) {
-    event.getPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
+    // remove leftover blindness from the nether.
+    final Player player = event.getPlayer();
+    final @Nullable PotionEffect blindness = player.getPotionEffect(PotionEffectType.BLINDNESS);
+    if (blindness != null && blindness.isInfinite()) {
+      player.removePotionEffect(PotionEffectType.BLINDNESS);
+    }
+
+    // remove banned effects when going into nether.
+    if (Habitat.of(event.getPlayer().getWorld()) == Habitat.RED) {
+      for (final PotionEffectType type : BANNED_EFFECTS) {
+        if (player.hasPotionEffect(type)) {
+          player.removePotionEffect(type);
+        }
+      }
+    }
   }
 
 }
