@@ -15,8 +15,6 @@ import org.bukkit.Server;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.spongepowered.configurate.NodePath;
 
@@ -57,21 +55,9 @@ public final class WarpTask {
   }
 
   private void warpPlayer(final Player player) {
-    // random chance to noclip into the backrooms. 30% chance.
-    if (RANDOM.nextFloat() < 0.3) {
-      final Location nextLocation = this.transposer.getNextLocation(player, Realm.BACKROOMS);
-      this.transposer.transpose(player, Realm.BACKROOMS);
-
-      player.addPotionEffect(new PotionEffect(
-          PotionEffectType.BLINDNESS,
-          Ticks.inT(Duration.ofSeconds(3)),
-          10,
-          true,
-          false,
-          false
-      ));
-      player.getWorld().spawnParticle(Particle.SMOKE_LARGE, nextLocation, 40, 2, 2, 2);
-      player.playSound(nextLocation, Sound.BLOCK_PORTAL_TRAVEL, SoundCategory.MASTER, 4, 1);
+    // random chance to noclip into the backrooms. 15% chance.
+    if (RANDOM.nextFloat() < 0.15) {
+      this.transposer.noclipIntoBackrooms(player);
     } else {
       final Location spawn = this.worldService.ornateSpawn(Realm.from(player.getWorld()));
 

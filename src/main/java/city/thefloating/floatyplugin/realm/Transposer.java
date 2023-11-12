@@ -1,11 +1,18 @@
 package city.thefloating.floatyplugin.realm;
 
+import city.thefloating.floatyplugin.Ticks;
 import com.google.inject.Inject;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import javax.annotation.Nullable;
+import java.time.Duration;
 import java.util.Objects;
 
 /**
@@ -31,6 +38,25 @@ public final class Transposer {
 
     player.teleport(this.getNextLocation(player, destination));
     player.setFallDistance(0);
+  }
+
+  /**
+   * Transpose player to backrooms with special effects.
+   */
+  public void noclipIntoBackrooms(final Player player) {
+    final Location nextLocation = this.getNextLocation(player, Realm.BACKROOMS);
+    this.transpose(player, Realm.BACKROOMS);
+
+    player.addPotionEffect(new PotionEffect(
+        PotionEffectType.BLINDNESS,
+        Ticks.inT(Duration.ofSeconds(3)),
+        10,
+        true,
+        false,
+        false
+    ));
+    player.getWorld().spawnParticle(Particle.SMOKE_LARGE, nextLocation, 40, 2, 2, 2);
+    player.playSound(nextLocation, Sound.BLOCK_PORTAL_TRAVEL, SoundCategory.MASTER, 4, 1);
   }
 
   /**
