@@ -101,14 +101,14 @@ public final class WorldService {
     }
   }
 
-  public Location getSpawnPoint(final Realm realm) {
-    final var spawn = this.getOrigin(realm);
+  public Location ornateSpawn(final Realm realm) {
+    final var spawn = this.worldSpawn(realm);
     spawn.add(0, 0, -3);
     spawn.setPitch(3);
     return spawn;
   }
 
-  private Location getOrigin(final Realm realm) {
+  private Location worldSpawn(final Realm realm) {
     return this.getWorld(realm).getSpawnLocation().add(0.5, 0, 0.5);
   }
 

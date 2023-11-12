@@ -68,9 +68,9 @@ public final class JoinQuitListener implements Listener {
       ));
     } else {
       if (this.configConfig.data().madlandsEnabled()) {
-        event.getPlayer().teleport(this.worldService.getSpawnPoint(Realm.MADLANDS));
+        event.getPlayer().teleport(this.worldService.ornateSpawn(Realm.MADLANDS));
       } else {
-        event.getPlayer().teleport(this.worldService.getSpawnPoint(Realm.OVERWORLD));
+        event.getPlayer().teleport(this.worldService.ornateSpawn(Realm.OVERWORLD));
       }
 
       event.joinMessage(this.langConfig.c(

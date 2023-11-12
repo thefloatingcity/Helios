@@ -73,7 +73,7 @@ public final class WarpTask {
       player.getWorld().spawnParticle(Particle.SMOKE_LARGE, nextLocation, 40, 2, 2, 2);
       player.playSound(nextLocation, Sound.BLOCK_PORTAL_TRAVEL, SoundCategory.MASTER, 4, 1);
     } else {
-      final Location spawn = this.worldService.getSpawnPoint(Realm.from(player.getWorld()));
+      final Location spawn = this.worldService.ornateSpawn(Realm.from(player.getWorld()));
 
       player.showTitle(Title.title(
           this.langConfig.c(NodePath.path("warp", "max")),

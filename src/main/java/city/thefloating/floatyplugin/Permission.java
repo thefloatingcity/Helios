@@ -12,7 +12,7 @@ public final class Permission {
   public static final String BUILD_END = BUILD + ".end";
   public static final String BUILD_BACKROOMS = BUILD + ".backrooms";
 
-  // build in a world's spawn.
+  // build within world spawn.
   // purposefully heterogeneous to prevent `floatyplugin.build.*` allowing building in spawn.
   public static final String BUILD_SPAWN = ROOT + ".build-spawn";
 

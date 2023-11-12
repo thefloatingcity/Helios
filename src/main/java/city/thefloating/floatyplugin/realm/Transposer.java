@@ -44,7 +44,7 @@ public final class Transposer {
   public Location getNextLocation(final Player player, final Realm realm) {
     return Objects.requireNonNullElseGet(
         this.getPreviousLocation(player, realm),
-        () -> this.worldService.getSpawnPoint(realm)
+        () -> this.worldService.ornateSpawn(realm)
     );
   }
 

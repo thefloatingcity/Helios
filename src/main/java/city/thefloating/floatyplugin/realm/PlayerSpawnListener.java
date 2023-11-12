@@ -27,7 +27,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class SpawnPointListener implements Listener {
+public final class PlayerSpawnListener implements Listener {
 
   private final List<Player> bedDestroyed = new ArrayList<>();
   private final List<Player> bedObstructed = new ArrayList<>();
@@ -36,7 +36,7 @@ public final class SpawnPointListener implements Listener {
   private final PdcLocStore pdcLocStore;
 
   @Inject
-  public SpawnPointListener(
+  public PlayerSpawnListener(
       final WorldService worldService,
       final PdcLocStore pdcLocStore
   ) {
@@ -51,18 +51,18 @@ public final class SpawnPointListener implements Listener {
   public void onRespawn(final PlayerRespawnEvent event) {
     final Player player = event.getPlayer();
     final Realm realm = Realm.from(player.getWorld());
-    final @Nullable Location playerSpawn = this.getSpawn(player, realm);
+    final @Nullable Location playerSpawn = this.getPlayerSpawn(player, realm);
 
     if (playerSpawn == null) {
       // player hasn't set spawn yet.
-      event.setRespawnLocation(this.worldService.getSpawnPoint(realm));
+      event.setRespawnLocation(this.worldService.ornateSpawn(realm));
       return;
     }
 
     if (!MaterialTags.BEDS.isTagged(playerSpawn.getBlock())) {
       // bed destroyed. reset player's spawn.
-      event.setRespawnLocation(this.worldService.getSpawnPoint(realm));
-      this.removeSpawn(player, realm);
+      event.setRespawnLocation(this.worldService.ornateSpawn(realm));
+      this.removePlayerSpawn(player, realm);
       this.bedDestroyed.add(player);
       return;
     }
@@ -78,7 +78,7 @@ public final class SpawnPointListener implements Listener {
     if (playerOnBedBox.overlaps(bedLoc.clone().add(0, 1, 0).getBlock().getBoundingBox())
         || playerOnBedBox.overlaps(bedLoc.clone().add(0, 2, 0).getBlock().getBoundingBox())) {
       // bed obstructed. don't reset player's home, but spawn them at world spawn.
-      event.setRespawnLocation(this.worldService.getSpawnPoint(realm));
+      event.setRespawnLocation(this.worldService.ornateSpawn(realm));
       this.bedObstructed.add(player);
       return;
     }
@@ -133,7 +133,7 @@ public final class SpawnPointListener implements Listener {
     ));
     player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 160, 1, true, false, false));
     player.playSound(Sound.sound(org.bukkit.Sound.BLOCK_RESPAWN_ANCHOR_SET_SPAWN, Sound.Source.MASTER, 1F, 1.3F));
-    this.setSpawn(player, player.getLocation());
+    this.setPlayerSpawn(player, player.getLocation());
   }
 
   /**
@@ -173,11 +173,11 @@ public final class SpawnPointListener implements Listener {
     event.setLocation(null);
     if (event.getCause() == PlayerSetSpawnEvent.Cause.COMMAND
         || event.getCause() == PlayerSetSpawnEvent.Cause.PLUGIN) {
-      this.setSpawn(event.getPlayer(), event.getLocation());
+      this.setPlayerSpawn(event.getPlayer(), event.getLocation());
     }
   }
 
-  private @Nullable Location getSpawn(final Player player, final Realm realm) {
+  private @Nullable Location getPlayerSpawn(final Player player, final Realm realm) {
     final PdcLocStore.WorldlessLocation wLoc = this.pdcLocStore.getLocation(player, this.spawnKey(realm));
     if (wLoc == null) {
       return null;
@@ -189,11 +189,11 @@ public final class SpawnPointListener implements Listener {
     );
   }
 
-  private void setSpawn(final Player player, final Location location) {
+  private void setPlayerSpawn(final Player player, final Location location) {
     this.pdcLocStore.setLocation(player, this.spawnKey(Realm.from(location)), location);
   }
 
-  private void removeSpawn(final Player player, final Realm realm) {
+  private void removePlayerSpawn(final Player player, final Realm realm) {
     this.pdcLocStore.setLocation(player, this.spawnKey(realm), null);
   }
 

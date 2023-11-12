@@ -29,7 +29,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * Prevents players from building in world spawns if they lack the relevant permission.
  * Also prevents pistons from modifying world spawn.
  */
-public final class SpawnProtectionListener implements Listener {
+public final class WorldSpawnProtectionListener implements Listener {
 
   public static final int SPAWN_PROTECTION_RADIUS = 8;
   public static final int SPAWN_PROTECTION_RADIUS_SQUARED = SPAWN_PROTECTION_RADIUS * SPAWN_PROTECTION_RADIUS;
