@@ -19,6 +19,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Sends players to the correct realms upon entering a portal.
@@ -32,6 +33,8 @@ import java.util.Map;
 public final class PortalListener implements Listener {
 
   private static final Duration MESSAGE_COOLDOWN = Duration.ofSeconds(15);
+
+  private static final Random RANDOM = new Random();
 
   private final Map<Player, Instant> lastMessageTime = new HashMap<>();
   private final Map<Player, Integer> lastPortalAttempt = new HashMap<>();
@@ -96,8 +99,8 @@ public final class PortalListener implements Listener {
         }
       }
       case BACKROOMS -> this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "backrooms")));
-      case NETHER -> this.transposer.transpose(player, Realm.OVERWORLD);
-      default -> this.transposer.transpose(player, Realm.NETHER);
+      case NETHER -> this.fuzzyTranspose(player, Realm.OVERWORLD);
+      default -> this.fuzzyTranspose(player, Realm.NETHER);
     }
   }
 
@@ -111,8 +114,23 @@ public final class PortalListener implements Listener {
         }
       }
       case BACKROOMS -> this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "backrooms")));
-      case END -> this.transposer.transpose(player, Realm.OVERWORLD);
-      default -> this.transposer.transpose(player, Realm.END);
+      case END -> this.fuzzyTranspose(player, Realm.OVERWORLD);
+      default -> this.fuzzyTranspose(player, Realm.END);
+    }
+  }
+
+  /**
+   * Transpose player with random chance to transpose to the backrooms.
+   *
+   * @param player the player to transpose
+   * @param realm  the realm to possibly transpose player to
+   */
+  private void fuzzyTranspose(final Player player, final Realm realm) {
+    // random chance to noclip into the backrooms. 5% chance.
+    if (RANDOM.nextFloat() < 0.05) {
+      this.transposer.noclipIntoBackrooms(player);
+    } else {
+      this.transposer.transpose(player, realm);
     }
   }
 
