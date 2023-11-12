@@ -20,6 +20,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.BoundingBox;
 
 import javax.annotation.Nullable;
 import java.time.Duration;
@@ -28,7 +29,8 @@ import java.util.List;
 
 public final class SpawnPointListener implements Listener {
 
-  private final List<Player> bedJustDestroyed = new ArrayList<>();
+  private final List<Player> bedDestroyed = new ArrayList<>();
+  private final List<Player> bedObstructed = new ArrayList<>();
 
   private final WorldService worldService;
   private final PdcLocStore pdcLocStore;
@@ -48,20 +50,41 @@ public final class SpawnPointListener implements Listener {
   @EventHandler
   public void onRespawn(final PlayerRespawnEvent event) {
     final Player player = event.getPlayer();
-    final Realm current = Realm.from(player.getWorld());
-    final @Nullable Location spawn = this.getSpawn(player, current);
+    final Realm realm = Realm.from(player.getWorld());
+    final @Nullable Location playerSpawn = this.getSpawn(player, realm);
 
-    if (spawn == null) {
-      event.setRespawnLocation(this.worldService.getSpawnPoint(current));
-    } else if (!MaterialTags.BEDS.isTagged(spawn.getBlock())) {
-      // bed was destroyed. reset player's spawn.
-      this.removeSpawn(player, current);
-      event.setRespawnLocation(this.worldService.getSpawnPoint(current));
-      // location-based effects.
-      this.bedJustDestroyed.add(player);
-    } else {
-      event.setRespawnLocation(spawn);
+    if (playerSpawn == null) {
+      // player hasn't set spawn yet.
+      event.setRespawnLocation(this.worldService.getSpawnPoint(realm));
+      return;
     }
+
+    if (!MaterialTags.BEDS.isTagged(playerSpawn.getBlock())) {
+      // bed destroyed. reset player's spawn.
+      event.setRespawnLocation(this.worldService.getSpawnPoint(realm));
+      this.removeSpawn(player, realm);
+      this.bedDestroyed.add(player);
+      return;
+    }
+
+    Location bedLoc = playerSpawn.getBlock().getLocation();
+    BoundingBox playerBox = player.getBoundingBox();
+    BoundingBox playerOnBedBox = BoundingBox.of(
+        bedLoc.clone().add(0.5, 0.56250, 0.5).add(0, playerBox.getHeight() / 2, 0),
+        playerBox.getWidthX() / 2,
+        playerBox.getHeight() / 2,
+        playerBox.getWidthZ() / 2
+    );
+    if (playerOnBedBox.overlaps(bedLoc.clone().add(0, 1, 0).getBlock().getBoundingBox())
+        || playerOnBedBox.overlaps(bedLoc.clone().add(0, 2, 0).getBlock().getBoundingBox())) {
+      // bed obstructed. don't reset player's home, but spawn them at world spawn.
+      event.setRespawnLocation(this.worldService.getSpawnPoint(realm));
+      this.bedObstructed.add(player);
+      return;
+    }
+
+    // player spawn is good. :)
+    event.setRespawnLocation(playerSpawn);
   }
 
   /**
@@ -70,15 +93,27 @@ public final class SpawnPointListener implements Listener {
   @EventHandler
   public void onPostRespawn(final PlayerPostRespawnEvent event) {
     final Player player = event.getPlayer();
-    if (this.bedJustDestroyed.contains(player)) {
-      this.bedJustDestroyed.remove(player);
+
+    if (this.bedDestroyed.contains(player)) {
+      this.bedDestroyed.remove(player);
       player.showTitle(Title.title(
           Component.text("your bed was destroyed").color(NamedTextColor.RED),
-          Component.text("you're back at spawn").color(NamedTextColor.GRAY),
+          Component.text("you're back at world spawn").color(NamedTextColor.GRAY),
           Title.Times.times(Duration.ofMillis(500), Duration.ofSeconds(5), Duration.ofSeconds(1))
       ));
       player.playSound(Sound.sound(org.bukkit.Sound.ENTITY_TURTLE_EGG_BREAK, Sound.Source.MASTER, 1F, 0.7F));
       player.playSound(Sound.sound(org.bukkit.Sound.BLOCK_IRON_DOOR_CLOSE, Sound.Source.MASTER, 1F, 0.7F));
+    }
+
+    if (this.bedObstructed.contains(player)) {
+      this.bedObstructed.remove(player);
+      player.showTitle(Title.title(
+          Component.text("your bed is obstructed").color(NamedTextColor.GOLD),
+          Component.text("you'll respawn at world spawn until it's fixed").color(NamedTextColor.GRAY),
+          Title.Times.times(Duration.ofMillis(500), Duration.ofSeconds(5), Duration.ofSeconds(1))
+      ));
+      player.playSound(Sound.sound(org.bukkit.Sound.ENTITY_PLAYER_HURT, Sound.Source.MASTER, 1F, 0.8F));
+      player.playSound(Sound.sound(org.bukkit.Sound.BLOCK_IRON_DOOR_CLOSE, Sound.Source.MASTER, 1F, 0.9F));
     }
   }
 
@@ -120,7 +155,7 @@ public final class SpawnPointListener implements Listener {
       event.setUseBed(Event.Result.ALLOW);
     }
 
-    if (event.useBed() == Event.Result.DEFAULT || event.useBed() == Event.Result.ALLOW) {
+    if (event.useBed() == Event.Result.ALLOW || event.getBedEnterResult() == PlayerBedEnterEvent.BedEnterResult.OK) {
       event.getPlayer().showTitle(Title.title(
           Component.empty(),
           Component.text(".. stay in bed to set your spawn point").color(NamedTextColor.DARK_GRAY),
