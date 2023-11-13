@@ -2,7 +2,6 @@ package city.thefloating.floatyplugin.realm;
 
 import city.thefloating.floatyplugin.config.ConfigConfig;
 import com.google.inject.Inject;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,20 +9,20 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 /**
  * If the madlands is disabled, this listener will teleport all players who join
- * the server in the madlands to the overworld with the same coordinates.
+ * the server in the madlands to the overworld.
  */
 public final class MadlandsMoverListener implements Listener {
 
-  private final WorldService worldService;
   private final ConfigConfig configConfig;
+  private final Transposer transposer;
 
   @Inject
   public MadlandsMoverListener(
-      final WorldService worldService,
-      final ConfigConfig configConfig
+      final ConfigConfig configConfig,
+      final Transposer transposer
   ) {
-    this.worldService = worldService;
     this.configConfig = configConfig;
+    this.transposer = transposer;
   }
 
   @EventHandler
@@ -33,13 +32,11 @@ public final class MadlandsMoverListener implements Listener {
     }
 
     final Player player = event.getPlayer();
-    final Location pLoc = player.getLocation();
-    if (Realm.from(pLoc.getWorld()) != Realm.MADLANDS) {
+    if (Realm.from(player.getWorld()) != Realm.MADLANDS) {
       return;
     }
 
-    pLoc.setWorld(this.worldService.getWorld(Realm.OVERWORLD));
-    player.teleport(pLoc);
+    this.transposer.transpose(player, Realm.OVERWORLD);
   }
 
 }
