@@ -10,7 +10,7 @@ import city.thefloating.floatyplugin.config.EmotesConfig;
 import city.thefloating.floatyplugin.config.LangConfig;
 import city.thefloating.floatyplugin.config.PianoNotesConfig;
 import city.thefloating.floatyplugin.fun.ActCommands;
-import city.thefloating.floatyplugin.fun.ElevatorMusicTask;
+import city.thefloating.floatyplugin.fun.ElevatorMusicJockey;
 import city.thefloating.floatyplugin.fun.FishingListener;
 import city.thefloating.floatyplugin.fun.FlingerListener;
 import city.thefloating.floatyplugin.fun.FunCommands;
@@ -228,7 +228,7 @@ public final class FloatyPlugin extends TehPlugin {
   }
 
   private void initTasks() {
-    this.injector.getInstance(ElevatorMusicTask.class).start();
+    this.injector.getInstance(ElevatorMusicJockey.class).start();
     this.injector.getInstance(PlayerVoidLoopTask.class).start();
     this.injector.getInstance(RandomSpooks.class).start();
     this.injector.getInstance(TransportationTask.class).start();

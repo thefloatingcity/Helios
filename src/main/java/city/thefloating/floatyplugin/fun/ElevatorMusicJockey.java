@@ -12,7 +12,7 @@ import org.bukkit.Server;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 
-public final class ElevatorMusicTask {
+public final class ElevatorMusicJockey {
 
   private static final int MIN_FALL_DIST = 1300;
 
@@ -24,7 +24,7 @@ public final class ElevatorMusicTask {
   private final Charon charon;
 
   @Inject
-  public ElevatorMusicTask(
+  public ElevatorMusicJockey(
       final FloatyPlugin plugin,
       final Charon charon
   ) {
@@ -34,27 +34,30 @@ public final class ElevatorMusicTask {
 
   public void start() {
     final Server server = this.plugin.getServer();
-    server.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> {
+    server.getScheduler().runTaskTimer(this.plugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
         if (Habitat.of(player.getWorld()) != Habitat.WHITE) {
           continue;
         }
-
-        final Soul soul = this.charon.getSoul(player);
-        if (player.getFallDistance() > MIN_FALL_DIST) {
-          if (!soul.elevatorMusicPlaying()) {
-            player.stopSound(SoundCategory.MUSIC);
-            player.playSound(MUSIC);
-            soul.elevatorMusicPlaying(true);
-          }
-        } else {
-          if (soul.elevatorMusicPlaying()) {
-            player.stopSound(MUSIC_STOP);
-            soul.elevatorMusicPlaying(false);
-          }
-        }
+        this.refresh(player);
       }
     }, 1, 20);
+  }
+
+  private void refresh(final Player player) {
+    final Soul soul = this.charon.getSoul(player);
+    if (player.getFallDistance() >= MIN_FALL_DIST) {
+      if (!soul.elevatorMusicPlaying()) {
+        player.stopSound(SoundCategory.MUSIC);
+        player.playSound(MUSIC);
+        soul.elevatorMusicPlaying(true);
+      }
+    } else {
+      if (soul.elevatorMusicPlaying()) {
+        player.stopSound(MUSIC_STOP);
+        soul.elevatorMusicPlaying(false);
+      }
+    }
   }
 
 }

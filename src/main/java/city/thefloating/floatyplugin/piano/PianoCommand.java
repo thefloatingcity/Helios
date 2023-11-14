@@ -86,7 +86,7 @@ public final class PianoCommand {
           var delay = 0;
           final List<ItemStack> noteItems = this.pianoMenuProvider.getCollection(noteCollection);
           for (final ItemStack item : noteItems.subList(0, Math.min(max, noteItems.size()))) {
-            sender.getServer().getScheduler().scheduleSyncDelayedTask(
+            sender.getServer().getScheduler().runTaskLater(
                 this.plugin,
                 () -> {
                   final var unaddedItem = sender.getInventory().addItem(item).get(0);

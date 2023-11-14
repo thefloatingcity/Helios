@@ -26,7 +26,7 @@ public final class TransportationTask {
   public void start() {
     final Server server = this.plugin.getServer();
 
-    server.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> {
+    server.getScheduler().runTaskTimer(this.plugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
         final Realm realm = Realm.from((player.getWorld()));
 

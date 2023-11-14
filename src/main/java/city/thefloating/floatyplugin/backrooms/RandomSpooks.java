@@ -44,7 +44,7 @@ public final class RandomSpooks {
     final BukkitScheduler scheduler = server.getScheduler();
 
     // slowed down cave noises.
-    scheduler.scheduleSyncRepeatingTask(this.plugin, () -> {
+    scheduler.runTaskTimer(this.plugin, () -> {
       for (final Player player : this.worldService.getWorld(Realm.BACKROOMS).getPlayers()) {
         if (RANDOM.nextFloat() > 0.2F) {
           continue;
@@ -55,7 +55,7 @@ public final class RandomSpooks {
     }, 1, Ticks.in(Duration.ofSeconds(29)) - 3);
 
     // high-pitched noise and jitter camera.
-    scheduler.scheduleSyncRepeatingTask(this.plugin, () -> {
+    scheduler.runTaskTimer(this.plugin, () -> {
       for (final Player player : this.worldService.getWorld(Realm.BACKROOMS).getPlayers()) {
         if (RANDOM.nextFloat() > 0.05F) {
           continue;
@@ -80,7 +80,7 @@ public final class RandomSpooks {
     }, 1, Ticks.in(Duration.ofSeconds(6)) - 4);
 
     // temporary teleport to black area and low-pitched noise.
-    scheduler.scheduleSyncRepeatingTask(this.plugin, () -> {
+    scheduler.runTaskTimer(this.plugin, () -> {
       for (final Player player : this.worldService.getWorld(Realm.BACKROOMS).getPlayers()) {
         if (RANDOM.nextFloat() > 0.1F) {
           continue;
@@ -101,7 +101,7 @@ public final class RandomSpooks {
     }, 1, Ticks.in(Duration.ofSeconds(57)) - 7);
 
     // deep boom noise plus blindness.
-    scheduler.scheduleSyncRepeatingTask(this.plugin, () -> {
+    scheduler.runTaskTimer(this.plugin, () -> {
       for (final Player player : this.worldService.getWorld(Realm.BACKROOMS).getPlayers()) {
         if (RANDOM.nextFloat() > 0.15F) {
           continue;
@@ -118,7 +118,7 @@ public final class RandomSpooks {
     }, 1, Ticks.in(Duration.ofSeconds(123)) - 17);
 
     // spawn nextbot.
-    scheduler.scheduleSyncRepeatingTask(this.plugin, () -> {
+    scheduler.runTaskTimer(this.plugin, () -> {
       for (final Player player : this.worldService.getWorld(Realm.BACKROOMS).getPlayers()) {
         if (RANDOM.nextFloat() > 0.05F) {
           continue;

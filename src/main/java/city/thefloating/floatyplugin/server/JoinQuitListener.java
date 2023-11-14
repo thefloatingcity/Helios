@@ -84,7 +84,7 @@ public final class JoinQuitListener implements Listener {
       ));
     }
 
-    player.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin,
+    player.getServer().getScheduler().runTaskLater(this.plugin,
         () -> {
           final Firework firework = player.getWorld().spawn(player.getLocation().add(0, 2, 0), Firework.class);
           final FireworkMeta fireworkMeta = firework.getFireworkMeta();

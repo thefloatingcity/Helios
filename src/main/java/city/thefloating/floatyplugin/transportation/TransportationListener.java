@@ -174,7 +174,7 @@ public final class TransportationListener implements Listener {
     player.setSprinting(false);
 
     // stop their sprint again in a few ticks to catch any glitchiness.
-    player.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, () -> player.setSprinting(false), 5);
+    player.getServer().getScheduler().runTaskLater(this.plugin, () -> player.setSprinting(false), 5);
 
     // nether watcher time!
     final Soul soul = this.charon.getSoul(player);

@@ -23,7 +23,7 @@ public final class PlayerVoidLoopTask {
 
   public void start() {
     final Server server = this.plugin.getServer();
-    server.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> {
+    server.getScheduler().runTaskTimer(this.plugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
         final Location loc = player.getLocation();
         final Habitat habitat = Habitat.of(player.getWorld());
@@ -35,7 +35,7 @@ public final class PlayerVoidLoopTask {
           Teleport.relative(player, loc);
         }
       }
-    }, 0, Ticks.in(Duration.ofSeconds(1)));
+    }, 1, Ticks.in(Duration.ofSeconds(1)));
   }
 
 }

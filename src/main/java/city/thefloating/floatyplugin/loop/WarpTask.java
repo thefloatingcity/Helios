@@ -79,11 +79,11 @@ public final class WarpTask {
   public void start() {
     final Server server = this.plugin.getServer();
     final BukkitScheduler scheduler = server.getScheduler();
-    scheduler.scheduleSyncRepeatingTask(this.plugin, () -> {
+    scheduler.runTaskTimer(this.plugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
         final float fallDistance = player.getFallDistance();
         if (fallDistance >= 6000) {
-          scheduler.scheduleSyncDelayedTask(this.plugin, () -> this.warpPlayer(player), 5);
+          scheduler.runTaskLater(this.plugin, () -> this.warpPlayer(player), 5);
         } else if (fallDistance >= 5800) {
           player.showTitle(Title.title(
               Component.empty(),
@@ -93,7 +93,7 @@ public final class WarpTask {
 
           final Location location = player.getLocation();
           for (int i = 0; i < 100; i = i + 2) {
-            scheduler.scheduleSyncDelayedTask(this.plugin,
+            scheduler.runTaskLater(this.plugin,
                 () -> player.playSound(location, Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 2), i
             );
           }
@@ -106,7 +106,7 @@ public final class WarpTask {
 
           final Location location = player.getLocation();
           for (int i = 0; i < 100; i = i + 5) {
-            scheduler.scheduleSyncDelayedTask(this.plugin,
+            scheduler.runTaskLater(this.plugin,
                 () -> player.playSound(location, Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 1.6F), i
             );
           }
@@ -119,7 +119,7 @@ public final class WarpTask {
 
           final Location location = player.getLocation();
           for (int i = 0; i < 100; i = i + 10) {
-            scheduler.scheduleSyncDelayedTask(this.plugin,
+            scheduler.runTaskLater(this.plugin,
                 () -> player.playSound(location, Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 0.9F), i
             );
           }
@@ -132,7 +132,7 @@ public final class WarpTask {
 
           final Location location = player.getLocation();
           for (int i = 0; i < 100; i = i + 20) {
-            scheduler.scheduleSyncDelayedTask(this.plugin,
+            scheduler.runTaskLater(this.plugin,
                 () -> player.playSound(location, Sound.BLOCK_NOTE_BLOCK_PLING, 1000, 0.5F), i
             );
           }
