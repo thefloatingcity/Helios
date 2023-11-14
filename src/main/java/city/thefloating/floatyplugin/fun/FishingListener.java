@@ -31,8 +31,7 @@ public final class FishingListener implements Listener {
           .loreList(
               Component.text("\"It's just.. floating there.\"").color(NamedTextColor.WHITE),
               Component.empty(),
-              Component.text("Give this fish to a certain place").color(NamedTextColor.GRAY),
-              Component.text("to acquire your reward.").color(NamedTextColor.GRAY)
+              Component.text("This fish seems important.").color(NamedTextColor.GRAY)
           )
           .build());
       case RED -> player.getInventory().addItem(PaperItemBuilder.ofType(Material.TROPICAL_FISH)
@@ -40,17 +39,15 @@ public final class FishingListener implements Listener {
           .loreList(
               Component.text("Likes to set things ablaze.").color(NamedTextColor.WHITE),
               Component.empty(),
-              Component.text("Give this fish to a certain place").color(NamedTextColor.GRAY),
-              Component.text("to acquire your reward.").color(NamedTextColor.GRAY)
+              Component.text("This fish seems important.").color(NamedTextColor.GRAY)
           )
           .build());
       case BLACK -> player.getInventory().addItem(PaperItemBuilder.ofType(Material.SALMON)
-          .name(Component.text("Void Fish").color(NamedTextColor.DARK_PURPLE))
+          .name(Component.text("Abyss Fish").color(NamedTextColor.DARK_PURPLE))
           .loreList(
               Component.text("Has a mystical, purple-ish aura.").color(NamedTextColor.WHITE),
               Component.empty(),
-              Component.text("Give this fish to a certain place").color(NamedTextColor.GRAY),
-              Component.text("to acquire your reward.").color(NamedTextColor.GRAY)
+              Component.text("This fish seems important.").color(NamedTextColor.GRAY)
           )
           .build());
       default -> player.getInventory().addItem(PaperItemBuilder.ofType(Material.PUFFERFISH)
