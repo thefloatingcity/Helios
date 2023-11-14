@@ -5,6 +5,7 @@ import city.thefloating.floatyplugin.realm.Habitat;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
+import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,9 +14,13 @@ import org.bukkit.event.player.PlayerFishEvent;
 public final class FishingListener implements Listener {
 
   @EventHandler
-  public void onFishInVoid(final PlayerFishEvent event) {
-    if (event.getState() != PlayerFishEvent.State.REEL_IN
-        || !(event.getHook().getLocation().getY() < -15)) {
+  public void onVoidFish(final PlayerFishEvent event) {
+    if (event.getState() != PlayerFishEvent.State.REEL_IN) {
+      return;
+    }
+
+    final FishHook hook = event.getHook();
+    if (!(hook.getY() < hook.getWorld().getMinHeight())) { // below world.
       return;
     }
 
