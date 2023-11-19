@@ -75,7 +75,6 @@ public final class TransportationListener implements Listener {
       player.setGameMode(GameMode.ADVENTURE);
       player.setFireTicks(100);
       player.getWorld().strikeLightning(player.getLocation());
-      player.sendMessage(this.langConfig.c(NodePath.path("no-spectator")));
     }
   }
 
