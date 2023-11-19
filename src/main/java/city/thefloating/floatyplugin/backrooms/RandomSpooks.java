@@ -1,6 +1,7 @@
 package city.thefloating.floatyplugin.backrooms;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
+import city.thefloating.floatyplugin.PotEff;
 import city.thefloating.floatyplugin.Ticks;
 import city.thefloating.floatyplugin.nextbot.Nate;
 import city.thefloating.floatyplugin.nextbot.Nextbot;
@@ -11,7 +12,6 @@ import net.kyori.adventure.sound.Sound;
 import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.Vector;
@@ -113,7 +113,7 @@ public final class RandomSpooks {
             100,
             RANDOM.nextFloat(0.5F, 0.65F)
         ));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 30, 1, true, true, false));
+        player.addPotionEffect(PotEff.hidden(PotionEffectType.BLINDNESS, 30, 1));
       }
     }, 1, Ticks.in(Duration.ofSeconds(123)) - 17);
 

@@ -21,13 +21,6 @@ public final class PdcLocStore {
     this.plugin = plugin;
   }
 
-  public record WorldlessLocation(
-      double x, double y, double z,
-      float yaw, float pitch
-  ) {
-
-  }
-
   public NamespacedKey key(final String key) {
     return new NamespacedKey(this.plugin, key);
   }
@@ -62,7 +55,11 @@ public final class PdcLocStore {
     this.setLocation(owner.getPersistentDataContainer(), locKey, loc);
   }
 
-  private void setLocation(final PersistentDataContainer owner, final NamespacedKey locKey, final @Nullable Location loc) {
+  private void setLocation(
+      final PersistentDataContainer owner,
+      final NamespacedKey locKey,
+      final @Nullable Location loc
+  ) {
     final PersistentDataContainer locData = owner.getAdapterContext().newPersistentDataContainer();
     this.setLocation(locData, loc);
     owner.set(locKey, PersistentDataType.TAG_CONTAINER, locData);
@@ -82,6 +79,13 @@ public final class PdcLocStore {
       locPdc.remove(this.key("yaw"));
       locPdc.remove(this.key("pitch"));
     }
+  }
+
+  public record WorldlessLocation(
+      double x, double y, double z,
+      float yaw, float pitch
+  ) {
+
   }
 
 }

@@ -1,6 +1,7 @@
 package city.thefloating.floatyplugin.nextbot;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
+import city.thefloating.floatyplugin.PotEff;
 import city.thefloating.floatyplugin.Ticks;
 import com.destroystokyo.paper.event.player.PlayerPostRespawnEvent;
 import com.google.inject.Inject;
@@ -312,11 +313,7 @@ public final class Nate implements Listener {
   }
 
   private void jump(final Nextbot nextbot, final int amplifier) {
-    final PotionEffect jump = new PotionEffect(
-        PotionEffectType.JUMP,
-        5, amplifier,
-        true, false
-    );
+    final PotionEffect jump = PotEff.hidden(PotionEffectType.JUMP, 5, amplifier);
     nextbot.pf().addPotionEffect(jump);
     nextbot.pf().setJumping(true);
   }

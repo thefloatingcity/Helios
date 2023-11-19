@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 
 /**
- * Prevents flight.
+ * Checks flight on some important events.
  */
 public final class FlightListener implements Listener {
 

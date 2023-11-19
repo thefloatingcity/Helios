@@ -1,5 +1,6 @@
 package city.thefloating.floatyplugin.realm;
 
+import city.thefloating.floatyplugin.PotEff;
 import com.destroystokyo.paper.MaterialTags;
 import com.destroystokyo.paper.event.player.PlayerPostRespawnEvent;
 import com.destroystokyo.paper.event.player.PlayerSetSpawnEvent;
@@ -18,7 +19,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.world.TimeSkipEvent;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.BoundingBox;
 
@@ -131,7 +131,7 @@ public final class PlayerSpawnListener implements Listener {
             .build(),
         Title.Times.times(Duration.ofMillis(500), Duration.ofSeconds(5), Duration.ofSeconds(1))
     ));
-    player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 160, 1, true, false, false));
+    player.addPotionEffect(PotEff.hidden(PotionEffectType.CONFUSION, 160, 1));
     player.playSound(Sound.sound(org.bukkit.Sound.BLOCK_RESPAWN_ANCHOR_SET_SPAWN, Sound.Source.MASTER, 1F, 1.3F));
     this.setPlayerSpawn(player, player.getLocation());
   }
@@ -147,7 +147,7 @@ public final class PlayerSpawnListener implements Listener {
   }
 
   /**
-   * Allows beds in the nether and end.
+   * Allows beds in the nether and the end.
    */
   @EventHandler
   public void onBedEnter(final PlayerBedEnterEvent event) {

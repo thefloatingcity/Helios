@@ -30,9 +30,9 @@ public final class MilkListener implements Listener {
       return;
     }
 
-    if (newEffect.getType().equals(PotionEffectType.DOLPHINS_GRACE)
-        && newEffect.getAmplifier() == 5
-        && event.getEntity() instanceof Player player) {
+    if (newEffect.getType() == MilkProvider.MILK_EFFECT
+        && newEffect.getAmplifier() == MilkProvider.MILK_AMPLIFIER
+        && event.getEntity() instanceof final Player player) {
       event.setCancelled(true);
       player.removePotionEffect(PotionEffectType.DOLPHINS_GRACE);
 

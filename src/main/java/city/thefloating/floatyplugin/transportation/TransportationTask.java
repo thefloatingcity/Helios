@@ -58,11 +58,11 @@ public final class TransportationTask {
 
           // block-specific functionality.
           switch (player.getLocation().add(0, -0.8, 0).getBlock().getType()) {
-            // ice doesn't work to speed up player.
+            // ice blocks slow down player.
             case ICE, PACKED_ICE, BLUE_ICE, FROSTED_ICE -> player.addPotionEffect(new PotionEffect(
                 PotionEffectType.SLOW, 40, 3, true, false, false
             ));
-            // soul sand and soul soil stops the player.
+            // soul blocks stop the player.
             case SOUL_SAND, SOUL_SOIL -> player.addPotionEffect(new PotionEffect(
                 PotionEffectType.SLOW, 40, 120, true, false, false
             ));

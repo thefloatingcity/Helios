@@ -1,16 +1,19 @@
 package city.thefloating.floatyplugin.milk;
 
 import broccolai.corn.paper.item.special.PotionBuilder;
+import city.thefloating.floatyplugin.PotEff;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public final class MilkProvider {
+
+  public static final PotionEffectType MILK_EFFECT = PotionEffectType.DOLPHINS_GRACE;
+  public static final int MILK_AMPLIFIER = 5;
 
   private MilkProvider() {
   }
@@ -35,8 +38,8 @@ public final class MilkProvider {
             Component.empty(),
             Component.text("Bottled at your local femboy hooters.").color(NamedTextColor.GRAY)
         )
-        .addCustomEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 100, 5), true)
-        .addFlag(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_POTION_EFFECTS)
+        .addCustomEffect(PotEff.hidden(MILK_EFFECT, 100, MILK_AMPLIFIER), true)
+        .addFlag(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ITEM_SPECIFICS)
         .color(Color.WHITE);
   }
 
