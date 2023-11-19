@@ -32,7 +32,8 @@ public final class TagListener implements Listener {
 
   /**
    * Prevents potion effects other than damage resistance and saturation during tag.
-   * (Grants an exception for blindness in the nether.)
+   * <p>
+   * Grants an exception for blindness in the nether.
    */
   @EventHandler
   public void onPotionEffect(final EntityPotionEffectEvent event) {
@@ -53,6 +54,9 @@ public final class TagListener implements Listener {
     }
   }
 
+  /**
+   * Handles "it" transfer.
+   */
   @EventHandler
   public void onPunch(final EntityDamageByEntityEvent event) {
     if (event.getDamager() instanceof Player damager

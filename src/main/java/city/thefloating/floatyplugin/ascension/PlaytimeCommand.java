@@ -1,6 +1,6 @@
 package city.thefloating.floatyplugin.ascension;
 
-import city.thefloating.floatyplugin.DurationFormatter;
+import city.thefloating.floatyplugin.DurationFormat;
 import city.thefloating.floatyplugin.config.LangConfig;
 import cloud.commandframework.bukkit.parsers.PlayerArgument;
 import cloud.commandframework.meta.CommandMeta;
@@ -38,9 +38,9 @@ public final class PlaytimeCommand {
               TagResolver.resolver(
                   Placeholder.unparsed(
                       "time_in_hours",
-                      DurationFormatter.fancifyTime(Playtime.getTimePlayed(target), TimeUnit.HOURS)
+                      DurationFormat.fancifyTime(Playtime.getTimePlayed(target), TimeUnit.HOURS)
                   ),
-                  Placeholder.unparsed("time", DurationFormatter.fancifyTime(Playtime.getTimePlayed(target))),
+                  Placeholder.unparsed("time", DurationFormat.fancifyTime(Playtime.getTimePlayed(target))),
                   Placeholder.unparsed("player", target.getName())
               )
           )), () -> sender.sendMessage(this.langConfig.c(
@@ -48,9 +48,9 @@ public final class PlaytimeCommand {
               TagResolver.resolver(
                   Placeholder.unparsed(
                       "time_in_hours",
-                      DurationFormatter.fancifyTime(Playtime.getTimePlayed(sender), TimeUnit.HOURS)
+                      DurationFormat.fancifyTime(Playtime.getTimePlayed(sender), TimeUnit.HOURS)
                   ),
-                  Placeholder.unparsed("time", DurationFormatter.fancifyTime(Playtime.getTimePlayed(sender)))
+                  Placeholder.unparsed("time", DurationFormat.fancifyTime(Playtime.getTimePlayed(sender)))
               )
           )));
         });

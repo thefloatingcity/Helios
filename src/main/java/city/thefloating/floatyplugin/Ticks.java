@@ -24,7 +24,7 @@ public final class Ticks {
    * @return the duration in ticks
    */
   public static int inT(final Duration duration) {
-    return (int) (duration.toSeconds() * 20);
+    return (int) in(duration);
   }
 
 }

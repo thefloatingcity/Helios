@@ -1,6 +1,6 @@
 package city.thefloating.floatyplugin.piano;
 
-import city.thefloating.floatyplugin.Format;
+import city.thefloating.floatyplugin.ChatFormat;
 import city.thefloating.floatyplugin.Permission;
 import city.thefloating.floatyplugin.config.PianoNotesConfig;
 import city.thefloating.floatyplugin.soul.Charon;
@@ -51,7 +51,7 @@ public final class PianoPlayListener implements Listener {
     if (!(event.getWhoClicked() instanceof Player player)
         || !player.hasPermission(Permission.PIANO)
         || event.getClickedInventory() == null
-        || !event.getView().title().equals(Format.miniMessage(
+        || !event.getView().title().equals(ChatFormat.miniMessage(
         this.pianoNotesConfig.rootNode().node("piano-notes", "name").getString()))) {
       return;
     }

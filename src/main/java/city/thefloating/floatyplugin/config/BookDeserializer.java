@@ -1,6 +1,6 @@
 package city.thefloating.floatyplugin.config;
 
-import city.thefloating.floatyplugin.Format;
+import city.thefloating.floatyplugin.ChatFormat;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -38,7 +38,7 @@ public final class BookDeserializer {
       for (final String line : Objects.requireNonNull(page.node("content").getList(String.class))) {
         finalComponent = finalComponent
             .append(Component.newline())
-            .append(Format.miniMessage(multi + line));
+            .append(ChatFormat.miniMessage(multi + line));
       }
     } catch (final SerializationException e) {
       return Component.empty();

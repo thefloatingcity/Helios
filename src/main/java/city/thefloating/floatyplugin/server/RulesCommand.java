@@ -55,7 +55,7 @@ public final class RulesCommand {
         .senderType(Player.class)
         .handler(c -> {
           final Player sender = (Player) c.getSender();
-          if (sender.hasPermission(Permission.BUILD_MADLANDS)) {
+          if (sender.hasPermission(Permission.REALM_MADLANDS)) {
             sender.sendMessage(this.langConfig.c(NodePath.path("rules", "already-accepted")));
           } else {
             // yes, we're going to send a command as the console to promote the

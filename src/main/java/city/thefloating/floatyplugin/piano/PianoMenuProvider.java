@@ -1,6 +1,6 @@
 package city.thefloating.floatyplugin.piano;
 
-import city.thefloating.floatyplugin.Format;
+import city.thefloating.floatyplugin.ChatFormat;
 import city.thefloating.floatyplugin.config.PianoNotesConfig;
 import com.google.inject.Inject;
 import net.kyori.adventure.text.Component;
@@ -38,7 +38,7 @@ public final class PianoMenuProvider {
     final var inventory = Bukkit.createInventory(
         null,
         InventoryType.CHEST,
-        Format.miniMessage(name)
+        ChatFormat.miniMessage(name)
     );
 
     for (final ItemStack item : this.getCollection(NoteCollection.ALL)) {
@@ -60,7 +60,7 @@ public final class PianoMenuProvider {
       final var itemNode = Objects.requireNonNull(itemNodes.get(i));
 
       final Material material = Material.valueOf(Objects.requireNonNull(itemNode.node("material").getString()));
-      final Component name = Format.miniMessage(Objects.requireNonNull(itemNode.node("name").getString()));
+      final Component name = ChatFormat.miniMessage(Objects.requireNonNull(itemNode.node("name").getString()));
       final float pitch = itemNode.node("pitch").getFloat();
 
       items.add(this.pianoNoteItems.createItem(material, name, pitch));

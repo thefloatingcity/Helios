@@ -4,25 +4,16 @@ public final class Permission {
 
   public static final String ROOT = "floatyplugin";
 
-  // build in a world.
-  public static final String BUILD = ROOT + ".build";
-  public static final String BUILD_MADLANDS = BUILD + ".madlands";
-  public static final String BUILD_OVERWORLD = BUILD + ".overworld";
-  public static final String BUILD_NETHER = BUILD + ".nether";
-  public static final String BUILD_END = BUILD + ".end";
-  public static final String BUILD_BACKROOMS = BUILD + ".backrooms";
-
-  // build within world spawn.
-  // purposefully heterogeneous to prevent `floatyplugin.build.*` allowing building in spawn.
+  // build within a world's spawn.
   public static final String BUILD_SPAWN = ROOT + ".build-spawn";
 
-  // go to a world.
-  public static final String WORLD = ROOT + ".world";
-  public static final String WORLD_MADLANDS = WORLD + ".madlands";
-  public static final String WORLD_OVERWORLD = WORLD + ".overworld";
-  public static final String WORLD_NETHER = WORLD + ".nether";
-  public static final String WORLD_END = WORLD + ".end";
-  public static final String WORLD_BACKROOMS = WORLD + ".backrooms";
+  // build in or transpose to a world.
+  public static final String REALM = ROOT + ".realm";
+  public static final String REALM_MADLANDS = REALM + ".madlands";
+  public static final String REALM_OVERWORLD = REALM + ".overworld";
+  public static final String REALM_NETHER = REALM + ".nether";
+  public static final String REALM_END = REALM + ".end";
+  public static final String REALM_BACKROOMS = REALM + ".backrooms";
 
   public static final String MILK = ROOT + ".milk";
   public static final String FLY = ROOT + ".fly";

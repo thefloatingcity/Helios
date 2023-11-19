@@ -1,6 +1,6 @@
 package city.thefloating.floatyplugin.server;
 
-import city.thefloating.floatyplugin.DurationFormatter;
+import city.thefloating.floatyplugin.DurationFormat;
 import city.thefloating.floatyplugin.FloatyPlugin;
 import city.thefloating.floatyplugin.config.ConfigConfig;
 import city.thefloating.floatyplugin.config.LangConfig;
@@ -64,7 +64,7 @@ public final class JoinQuitListener implements Listener {
       );
       player.sendMessage(this.langConfig.c(
           NodePath.path("motd"),
-          Placeholder.unparsed("last", DurationFormatter.fancifyTime(sinceLastPlayed))
+          Placeholder.unparsed("last", DurationFormat.fancifyTime(sinceLastPlayed))
       ));
     } else {
       if (this.configConfig.data().madlandsEnabled()) {

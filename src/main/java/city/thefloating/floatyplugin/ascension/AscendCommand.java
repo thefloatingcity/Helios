@@ -1,6 +1,6 @@
 package city.thefloating.floatyplugin.ascension;
 
-import city.thefloating.floatyplugin.DurationFormatter;
+import city.thefloating.floatyplugin.DurationFormat;
 import city.thefloating.floatyplugin.LuckPermsService;
 import city.thefloating.floatyplugin.config.LangConfig;
 import cloud.commandframework.meta.CommandMeta;
@@ -57,7 +57,7 @@ public final class AscendCommand {
               return;
             }
 
-            final String fancyTime = DurationFormatter.fancifyTime(timeRequired, TimeUnit.HOURS);
+            final String fancyTime = DurationFormat.fancifyTime(timeRequired, TimeUnit.HOURS);
             sender.sendMessage(this.langConfig.c(
                 NodePath.path("ascend", "ineligible"),
                 TagResolver.resolver(

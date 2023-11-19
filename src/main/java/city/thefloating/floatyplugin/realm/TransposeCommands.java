@@ -30,31 +30,31 @@ public final class TransposeCommands {
   public void register(final PaperCommandManager<CommandSender> commandManager) {
     final var madlands = commandManager.commandBuilder("madlands")
         .meta(CommandMeta.DESCRIPTION, "Transpose to the madlands.")
-        .permission(Permission.WORLD_MADLANDS)
+        .permission(Permission.REALM_MADLANDS)
         .senderType(Player.class)
         .handler(c -> this.tryTranspose((Player) c.getSender(), Realm.MADLANDS));
 
     final var overworld = commandManager.commandBuilder("overworld")
         .meta(CommandMeta.DESCRIPTION, "Transpose to the overworld.")
-        .permission(Permission.WORLD_OVERWORLD)
+        .permission(Permission.REALM_OVERWORLD)
         .senderType(Player.class)
         .handler(c -> this.tryTranspose((Player) c.getSender(), Realm.OVERWORLD));
 
     final var nether = commandManager.commandBuilder("nether")
         .meta(CommandMeta.DESCRIPTION, "Transpose to the nether.")
-        .permission(Permission.WORLD_NETHER)
+        .permission(Permission.REALM_NETHER)
         .senderType(Player.class)
         .handler(c -> this.tryTranspose((Player) c.getSender(), Realm.NETHER));
 
     final var end = commandManager.commandBuilder("end")
         .meta(CommandMeta.DESCRIPTION, "Transpose to the end.")
-        .permission(Permission.WORLD_END)
+        .permission(Permission.REALM_END)
         .senderType(Player.class)
         .handler(c -> this.tryTranspose((Player) c.getSender(), Realm.END));
 
     final var backrooms = commandManager.commandBuilder("backrooms")
         .meta(CommandMeta.DESCRIPTION, "Transpose to the backrooms.")
-        .permission(Permission.WORLD_BACKROOMS)
+        .permission(Permission.REALM_BACKROOMS)
         .senderType(Player.class)
         .handler(c -> this.tryTranspose((Player) c.getSender(), Realm.BACKROOMS));
 

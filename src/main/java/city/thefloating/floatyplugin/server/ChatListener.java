@@ -1,6 +1,6 @@
 package city.thefloating.floatyplugin.server;
 
-import city.thefloating.floatyplugin.Format;
+import city.thefloating.floatyplugin.ChatFormat;
 import city.thefloating.floatyplugin.Permission;
 import city.thefloating.floatyplugin.config.EmotesConfig;
 import city.thefloating.floatyplugin.config.LangConfig;
@@ -77,13 +77,13 @@ public final class ChatListener implements Listener {
 
   private Component colorCodes(final Component component, final Player source) {
     if (source.hasPermission(Permission.CHAT_COLOR)) {
-      return Format.legacyWithUrls(component);
+      return ChatFormat.legacyWithUrls(component);
     }
     return component;
   }
 
   private Component greentext(final Component component) {
-    if (Format.plain(component).startsWith(">") && !Format.plain(component).startsWith("> ")) {
+    if (ChatFormat.plain(component).startsWith(">") && !ChatFormat.plain(component).startsWith("> ")) {
       return component.color(GREENTEXT_COLOR);
     }
     return component;
@@ -94,7 +94,7 @@ public final class ChatListener implements Listener {
 
     for (final Player player : this.getPingedPlayers(component, source)) {
       result = result.replaceText(TextReplacementConfig.builder()
-          .match(Pattern.compile(Format.plain(player.displayName()), Pattern.CASE_INSENSITIVE))
+          .match(Pattern.compile(ChatFormat.plain(player.displayName()), Pattern.CASE_INSENSITIVE))
           .replacement((m, b) -> Component.text(m.group(0)).color(NamedTextColor.GOLD))
           .build());
     }
@@ -116,8 +116,8 @@ public final class ChatListener implements Listener {
         continue;
       }
 
-      final String playerName = Format.plain(onlinePlayer.displayName());
-      if (this.containsIgnoreCase(Format.plain(component), playerName)) {
+      final String playerName = ChatFormat.plain(onlinePlayer.displayName());
+      if (this.containsIgnoreCase(ChatFormat.plain(component), playerName)) {
         list.add(onlinePlayer);
       }
     }
@@ -136,7 +136,7 @@ public final class ChatListener implements Listener {
     for (final Map.Entry<Object, CommentedConfigurationNode> entry : emotes.childrenMap().entrySet()) {
       result = result.replaceText(TextReplacementConfig.builder()
           .match("(" + entry.getKey() + ")")
-          .replacement(Format.miniMessage(Objects.requireNonNull(entry.getValue().getString())))
+          .replacement(ChatFormat.miniMessage(Objects.requireNonNull(entry.getValue().getString())))
           .build());
     }
 

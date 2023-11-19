@@ -5,7 +5,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 
-public final class Format {
+public final class ChatFormat {
 
   public static final LegacyComponentSerializer LEGACY_WITH_URLS = LegacyComponentSerializer
       .builder()
@@ -16,7 +16,7 @@ public final class Format {
   public static final PlainTextComponentSerializer PLAIN = PlainTextComponentSerializer.plainText();
   public static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
 
-  private Format() {
+  private ChatFormat() {
   }
 
   public static Component legacyWithUrls(final Component component) {

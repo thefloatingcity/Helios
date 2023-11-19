@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-public final class DurationFormatter {
+public final class DurationFormat {
 
   private static final float MILLIS_IN_SECOND = 1000;
   private static final float MILLIS_IN_MINUTE = MILLIS_IN_SECOND * 60;
@@ -13,7 +13,7 @@ public final class DurationFormatter {
 
   private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.##");
 
-  private DurationFormatter() {
+  private DurationFormat() {
   }
 
   public static String fancifyTime(final Duration duration) {
