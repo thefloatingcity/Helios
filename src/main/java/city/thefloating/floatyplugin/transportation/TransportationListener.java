@@ -4,9 +4,10 @@ import broccolai.corn.paper.item.PaperItemBuilder;
 import broccolai.corn.paper.item.special.BookBuilder;
 import broccolai.corn.paper.item.special.BundleBuilder;
 import city.thefloating.floatyplugin.FloatyPlugin;
+import city.thefloating.floatyplugin.PotEff;
 import city.thefloating.floatyplugin.config.LangConfig;
 import city.thefloating.floatyplugin.milk.MilkProvider;
-import city.thefloating.floatyplugin.realm.Habitat;
+import city.thefloating.floatyplugin.realm.Milieu;
 import city.thefloating.floatyplugin.realm.Realm;
 import city.thefloating.floatyplugin.soul.Charon;
 import city.thefloating.floatyplugin.soul.Soul;
@@ -41,6 +42,13 @@ import java.util.List;
 
 public final class TransportationListener implements Listener {
 
+  private static final List<PotionEffectType> ONEROUS_BANNED_EFFECTS = List.of(
+      PotionEffectType.SPEED,
+      PotionEffectType.JUMP,
+      PotionEffectType.SLOW_FALLING,
+      PotionEffectType.LEVITATION
+  );
+
   private final LangConfig langConfig;
   private final FloatyPlugin plugin;
   private final Charon charon;
@@ -58,14 +66,12 @@ public final class TransportationListener implements Listener {
 
   /**
    * Prevents spectator mode.
-   *
-   * @param event
    */
   @EventHandler
   public void onModeToSpectator(final PlayerGameModeChangeEvent event) {
-    final var player = event.getPlayer();
     if (event.getNewGameMode() == GameMode.SPECTATOR) {
       event.setCancelled(true);
+      final var player = event.getPlayer();
       player.setGameMode(GameMode.ADVENTURE);
       player.setFireTicks(100);
       player.getWorld().strikeLightning(player.getLocation());
@@ -74,7 +80,7 @@ public final class TransportationListener implements Listener {
   }
 
   /**
-   * Prevents ender pearls and chorus fruit teleportation except in the end.
+   * Prevents ender pearls and chorus fruit teleportation except in docile realms.
    */
   @EventHandler
   public void onTeleport(final PlayerTeleportEvent event) {
@@ -85,7 +91,7 @@ public final class TransportationListener implements Listener {
     }
 
     // allow teleportation in the end.
-    if (Realm.from(event.getPlayer().getWorld()) == Realm.END) {
+    if (Milieu.of(event.getPlayer()) == Milieu.DOCILE) {
       return;
     }
 
@@ -94,15 +100,15 @@ public final class TransportationListener implements Listener {
   }
 
   /**
-   * Prevents vehicle usage in the nether.
+   * Prevents vehicle usage in onerous realms.
    */
   @EventHandler
   public void onVehicleEnter(final VehicleEnterEvent event) {
-    if (Realm.from(event.getEntered().getWorld()) != Realm.NETHER) {
+    if (Milieu.of(event.getEntered()) != Milieu.ONEROUS) {
       return;
     }
 
-    if (event.getEntered() instanceof Player player) {
+    if (event.getEntered() instanceof final Player player) {
       final Vehicle vehicle = event.getVehicle();
 
       if (vehicle.getType() == EntityType.ARROW) {
@@ -119,38 +125,57 @@ public final class TransportationListener implements Listener {
   }
 
   /**
-   * Prevents movement-enhancing potions in the nether.
+   * Prevents movement-enhancing potions in onerous realms.
    */
   @EventHandler
   public void onPotionEffect(final EntityPotionEffectEvent event) {
-    if (!(event.getEntity() instanceof Player player)
-        || Realm.from(player.getWorld()) != Realm.NETHER
+    if (!(event.getEntity() instanceof final Player player)
+        || Milieu.of(player) != Milieu.ONEROUS
         || event.getNewEffect() == null) {
       return;
     }
 
     final PotionEffectType type = event.getNewEffect().getType();
-    if (BANNED_EFFECTS.contains(type)) {
+    if (ONEROUS_BANNED_EFFECTS.contains(type)) {
       event.setCancelled(true);
-      player.setGameMode(GameMode.SURVIVAL);
-      player.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 160, 100, false, true, true));
+      player.setGameMode(GameMode.ADVENTURE);
+      player.addPotionEffect(PotEff.visible(PotionEffectType.WITHER, 160, 100));
     }
   }
 
   /**
-   * Prevents elytra usage outside the end.
+   * Remove leftover or banned effects.
+   */
+  @EventHandler
+  public void onWorldChange(final PlayerChangedWorldEvent event) {
+    final Player player = event.getPlayer();
+
+    // remove leftover blindness from the nether.
+    final @Nullable PotionEffect blindness = player.getPotionEffect(PotionEffectType.BLINDNESS);
+    if (blindness != null && blindness.isInfinite()) {
+      player.removePotionEffect(PotionEffectType.BLINDNESS);
+    }
+
+    // remove banned effects when going into nether.
+    if (Milieu.of(player) == Milieu.ONEROUS) {
+      for (final PotionEffectType type : ONEROUS_BANNED_EFFECTS) {
+        player.removePotionEffect(type);
+      }
+    }
+  }
+
+  /**
+   * Prevents elytra usage outside docile realms.
    */
   @EventHandler
   public void onElytra(final EntityToggleGlideEvent event) {
-    if (Realm.from(event.getEntity().getWorld()) == Realm.END
-        || !event.isGliding()
-        || !(event.getEntity() instanceof Player player)) {
+    if (!(event.getEntity() instanceof final Player player)
+        || Milieu.of(player) == Milieu.DOCILE
+        || !event.isGliding()) {
       return;
     }
 
     player.setGliding(false);
-
-    // play a cracking noise.
     player.playSound(player.getLocation(), Sound.ENTITY_TURTLE_EGG_CRACK, SoundCategory.MASTER, 100, 2);
 
     // remove their elytra.
@@ -161,107 +186,75 @@ public final class TransportationListener implements Listener {
   }
 
   /**
-   * Prevents sprinting in the nether. Additionally, handles the nether watcher.
+   * Prevents sprinting in onerous realms. Additionally, handles the nether watcher.
    */
   @EventHandler
   public void onSprint(final PlayerToggleSprintEvent event) {
     final Player player = event.getPlayer();
-    if (Realm.from(player.getWorld()) != Realm.NETHER
-        || !event.isSprinting()) {
+    if (Milieu.of(player) != Milieu.ONEROUS || !event.isSprinting()) {
       return;
     }
 
     player.setSprinting(false);
-
     // stop their sprint again in a few ticks to catch any glitchiness.
     player.getServer().getScheduler().runTaskLater(this.plugin, () -> player.setSprinting(false), 5);
 
-    // nether watcher time!
-    final Soul soul = this.charon.getSoul(player);
-    final var netherBlindnessCount = soul.netherBlindnessCount();
-    switch (netherBlindnessCount) {
-      case 0, 2, 5, 10 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "1")));
-      case 20 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "2")));
-      case 30 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "3")));
-      case 40 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "4")));
-      case 50 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "5")));
-      case 60 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "6")));
-      case 70 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "7")));
-      case 90 -> {
-        player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "8")));
-
-        final BundleBuilder bundleBuilder = BundleBuilder.ofBundle()
-            .name(Component.text("Nether Watcher's Gift").color(NamedTextColor.RED))
-            .loreList(Component.text("Maybe you should open it.").color(NamedTextColor.GRAY))
-            .addItem(
-                BookBuilder.ofType(Material.WRITTEN_BOOK)
-                    .title(Component.text("A Letter"))
-                    .author(Component.text("The Nether Watcher"))
-                    .addPage(Component
-                        .text("listen, i appreciate ya givin' me company,"
-                            + " but holy frik, the whole point of the nether is *not* to sprint,"
-                            + " yet you somehow managed to do it upwards of 50 times!??"
-                            + " 'ave ya got somethin' wrong in the head??? love ya, but frik off")
-                        .color(NamedTextColor.DARK_GRAY))
-                    .build(),
-                PaperItemBuilder.ofType(Material.SLIME_BALL)
-                    .name(Component.text("Ball of Slime"))
-                    .loreList(Component.text("It's uh.. a ball of slime.").color(NamedTextColor.GRAY))
-                    .build(),
-                PaperItemBuilder.ofType(Material.GOLD_NUGGET)
-                    .name(Component.text("Gold Medal"))
-                    .loreList(
-                        Component.text("There's an inscription on").color(NamedTextColor.GRAY),
-                        Component.text("the back. It says \"#1 Idiot\".").color(NamedTextColor.GRAY)
-                    )
-                    .build(),
-                MilkProvider.splash()
-            );
-
-        player.getInventory().addItem(bundleBuilder.build());
-      }
-      default -> {
-      }
-    }
-
-    soul.netherBlindnessCount(netherBlindnessCount + 1);
-
-    // add some gnarly effects. blindness is important to prevent client-side sprint activation.
-    player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 4, true, false, false));
-    player.addPotionEffect(new PotionEffect(
-        PotionEffectType.BLINDNESS,
-        PotionEffect.INFINITE_DURATION,
-        1, true, false, false
-    ));
-    player.playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_DAMAGE, SoundCategory.MASTER, 100, 0);
-    player.playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_DEATH, SoundCategory.MASTER, 100, 0);
+    // add gnarly effects. blindness prevents client-side sprint activation.
+    player.addPotionEffect(PotEff.hidden(PotionEffectType.SLOW, 100, 4));
+    player.addPotionEffect(PotEff.hidden(PotionEffectType.BLINDNESS, PotEff.INF, 1));
+    player.playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_DAMAGE, SoundCategory.MASTER, 100, 0.5F);
+    player.playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_DEATH, SoundCategory.MASTER, 100, 0.5F);
     player.playSound(player.getLocation(), Sound.AMBIENT_WARPED_FOREST_MOOD, SoundCategory.MASTER, 100, 1);
 
-  }
+    if (Realm.of(player) == Realm.NETHER) {
+      // nether watcher time!
+      final Soul soul = this.charon.getSoul(player);
+      switch (soul.netherSprintCount()) {
+        case 0, 2, 5, 10 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "1")));
+        case 20 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "2")));
+        case 30 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "3")));
+        case 40 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "4")));
+        case 50 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "5")));
+        case 60 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "6")));
+        case 70 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "7")));
+        case 90 -> {
+          player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "8")));
 
-  private static final List<PotionEffectType> BANNED_EFFECTS = List.of(
-      PotionEffectType.SPEED,
-      PotionEffectType.JUMP,
-      PotionEffectType.SLOW_FALLING,
-      PotionEffectType.LEVITATION
-  );
+          final BundleBuilder bundleBuilder = BundleBuilder.ofBundle()
+              .name(Component.text("Nether Watcher's Gift").color(NamedTextColor.RED))
+              .loreList(Component.text("Maybe you should open it.").color(NamedTextColor.GRAY))
+              .addItem(
+                  BookBuilder.ofType(Material.WRITTEN_BOOK)
+                      .title(Component.text("A Letter"))
+                      .author(Component.text("The Nether Watcher"))
+                      .addPage(Component
+                          .text("listen, i appreciate ya givin' me company,"
+                              + " but holy frik, the whole point of the nether is *not* to sprint,"
+                              + " yet you somehow managed to do it upwards of 50 times!??"
+                              + " 'ave ya got somethin' wrong in the head??? love ya, but frik off")
+                          .color(NamedTextColor.DARK_GRAY))
+                      .build(),
+                  PaperItemBuilder.ofType(Material.SLIME_BALL)
+                      .name(Component.text("Ball of Slime"))
+                      .loreList(Component.text("It's uh.. a ball of slime.").color(NamedTextColor.GRAY))
+                      .build(),
+                  PaperItemBuilder.ofType(Material.GOLD_NUGGET)
+                      .name(Component.text("Gold Medal"))
+                      .loreList(
+                          Component.text("There's an inscription on").color(NamedTextColor.GRAY),
+                          Component.text("the back. It says \"#1 Idiot\".").color(NamedTextColor.GRAY)
+                      )
+                      .build(),
+                  MilkProvider.splash()
+              );
 
-  @EventHandler
-  public void onWorldChange(final PlayerChangedWorldEvent event) {
-    // remove leftover blindness from the nether.
-    final Player player = event.getPlayer();
-    final @Nullable PotionEffect blindness = player.getPotionEffect(PotionEffectType.BLINDNESS);
-    if (blindness != null && blindness.isInfinite()) {
-      player.removePotionEffect(PotionEffectType.BLINDNESS);
-    }
-
-    // remove banned effects when going into nether.
-    if (Habitat.of(event.getPlayer().getWorld()) == Habitat.RED) {
-      for (final PotionEffectType type : BANNED_EFFECTS) {
-        if (player.hasPotionEffect(type)) {
-          player.removePotionEffect(type);
+          player.getInventory().addItem(bundleBuilder.build());
+        }
+        default -> {
         }
       }
+
+      soul.netherSprintCount(soul.netherSprintCount() + 1);
     }
   }
 

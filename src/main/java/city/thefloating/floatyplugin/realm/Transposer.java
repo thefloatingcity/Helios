@@ -1,6 +1,6 @@
 package city.thefloating.floatyplugin.realm;
 
-import city.thefloating.floatyplugin.Ticks;
+import city.thefloating.floatyplugin.PotEff;
 import com.google.inject.Inject;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
@@ -8,11 +8,9 @@ import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import javax.annotation.Nullable;
-import java.time.Duration;
 import java.util.Objects;
 
 /**
@@ -33,7 +31,7 @@ public final class Transposer {
   }
 
   public void transpose(final Player player, final Realm destination) {
-    final Realm current = Realm.from(player.getWorld());
+    final Realm current = Realm.of(player);
     this.setPreviousLocation(player, current);
 
     player.teleport(this.getNextLocation(player, destination));

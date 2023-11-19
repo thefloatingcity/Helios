@@ -1,11 +1,14 @@
 package city.thefloating.floatyplugin.realm;
 
+import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
 
 /**
- * The looks that a Minecraft world can have. Essentially
- * {@link org.bukkit.World.Environment} but with different names to avoid
- * name conflicts with {@link Realm}.
+ * The looks that a Minecraft world can have.
+ * <p>
+ * Essentially {@link org.bukkit.World.Environment} but with different names
+ * to avoid conflicts with {@link Realm}.
  */
 public enum Habitat {
   WHITE,
@@ -22,6 +25,14 @@ public enum Habitat {
 
   public static Habitat of(final World world) {
     return from(world.getEnvironment());
+  }
+
+  public static Habitat of(final Location location) {
+    return of(location.getWorld());
+  }
+
+  public static Habitat of(final Entity entity) {
+    return of(entity.getWorld());
   }
 
   public World.Environment environment() {

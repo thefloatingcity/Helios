@@ -68,6 +68,20 @@ public final class Nextbot {
     return this.attributes();
   }
 
+  public enum Type {
+    OBUNGA(new Attributes("띂", Key.key("floating", "music.ussr_anthem.mono"), Duration.ofSeconds(223)));
+
+    private final Attributes attributes;
+
+    Type(final Attributes attributes) {
+      this.attributes = attributes;
+    }
+
+    public Attributes attributes() {
+      return this.attributes;
+    }
+  }
+
   public static final class Attributes {
 
     private final String iconChar;
@@ -102,20 +116,6 @@ public final class Nextbot {
       return this.musicLength;
     }
 
-  }
-
-  public enum Type {
-    OBUNGA(new Attributes("띂", Key.key("floating", "music.ussr_anthem.mono"), Duration.ofSeconds(223)));
-
-    private final Attributes attributes;
-
-    Type(final Attributes attributes) {
-      this.attributes = attributes;
-    }
-
-    public Attributes attributes() {
-      return this.attributes;
-    }
   }
 
 }

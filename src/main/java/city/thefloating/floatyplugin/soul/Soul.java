@@ -35,11 +35,11 @@ public final class Soul {
     return this.flyBypassEnabled();
   }
 
-  public int netherBlindnessCount() {
+  public int netherSprintCount() {
     return this.netherBlindnessCount;
   }
 
-  public void netherBlindnessCount(final int netherBlindnessCount) {
+  public void netherSprintCount(final int netherBlindnessCount) {
     this.netherBlindnessCount = netherBlindnessCount;
   }
 

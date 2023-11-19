@@ -1,5 +1,6 @@
 package city.thefloating.floatyplugin.tag;
 
+import city.thefloating.floatyplugin.PotEff;
 import city.thefloating.floatyplugin.config.LangConfig;
 import com.google.inject.Inject;
 import org.bukkit.GameMode;
@@ -65,16 +66,8 @@ public final class TagGame {
     removeAllPotionEffects(player);
     this.setGlowing(player);
 
-    player.addPotionEffect(new PotionEffect(
-        PotionEffectType.SATURATION,
-        PotionEffect.INFINITE_DURATION,
-        100, true, false, false
-    ));
-    player.addPotionEffect(new PotionEffect(
-        PotionEffectType.DAMAGE_RESISTANCE,
-        PotionEffect.INFINITE_DURATION,
-        100, true, false, false
-    ));
+    player.addPotionEffect(PotEff.hidden(PotionEffectType.SATURATION, PotEff.INF, 100));
+    player.addPotionEffect(PotEff.hidden(PotionEffectType.DAMAGE_RESISTANCE, PotEff.INF, 100));
   }
 
   public void removePlayer(final Player player) {

@@ -26,7 +26,7 @@ public final class PlayerVoidLoopTask {
     server.getScheduler().runTaskTimer(this.plugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
         final Location loc = player.getLocation();
-        final Habitat habitat = Habitat.of(player.getWorld());
+        final Habitat habitat = Habitat.of(player);
         if (loc.getY() <= LoopPositions.lowEngage(habitat)) { // they're too low.
           loc.setY(LoopPositions.lowTo(habitat));
           Teleport.relative(player, loc);

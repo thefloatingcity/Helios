@@ -75,14 +75,6 @@ public final class WorldService {
       world.setGameRule(GameRule.DO_VINES_SPREAD, false);
       world.setGameRule(GameRule.DO_WEATHER_CYCLE, true);
 
-      if (realm == Realm.BACKROOMS) {
-        // eternal night in backrooms.
-        world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
-        world.setTime(18000); // midnight.
-      } else {
-        world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true);
-      }
-
       // no mob spawning! >:(
       world.setGameRule(GameRule.DO_MOB_SPAWNING, false);
       world.setGameRule(GameRule.DO_PATROL_SPAWNING, false);
@@ -91,7 +83,15 @@ public final class WorldService {
       world.setGameRule(GameRule.DO_INSOMNIA, false);
       world.setGameRule(GameRule.DISABLE_RAIDS, true);
 
-      if (realm == Realm.NETHER) {
+      if (realm.milieu() == Milieu.SPOOKY) {
+        // eternal night in backrooms.
+        world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
+        world.setTime(18000); // midnight.
+      } else {
+        world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true);
+      }
+
+      if (realm.milieu() == Milieu.ONEROUS) {
         world.setGameRule(GameRule.REDUCED_DEBUG_INFO, true);
         world.setGameRule(GameRule.KEEP_INVENTORY, false);
       } else {

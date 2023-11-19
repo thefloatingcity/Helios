@@ -1,7 +1,7 @@
 package city.thefloating.floatyplugin.tag;
 
 import city.thefloating.floatyplugin.config.LangConfig;
-import city.thefloating.floatyplugin.realm.Realm;
+import city.thefloating.floatyplugin.realm.Milieu;
 import com.google.inject.Inject;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.GameMode;
@@ -33,23 +33,23 @@ public final class TagListener implements Listener {
   /**
    * Prevents potion effects other than damage resistance and saturation during tag.
    * <p>
-   * Grants an exception for blindness in the nether.
+   * Grants an exception for blindness in onerous realms.
    */
   @EventHandler
   public void onPotionEffect(final EntityPotionEffectEvent event) {
-    if (!(event.getEntity() instanceof Player player)
+    if (!(event.getEntity() instanceof final Player player)
         || !this.tagGame.isPlaying(player)
         || event.getNewEffect() == null) {
       return;
     }
 
-    if (event.getNewEffect().getType().equals(PotionEffectType.BLINDNESS)
-        && Realm.from(event.getEntity().getWorld()) == Realm.NETHER) {
+    if (event.getNewEffect().getType() == PotionEffectType.BLINDNESS
+        && Milieu.of(player) == Milieu.ONEROUS) {
       return;
     }
 
-    if (!(event.getNewEffect().getType().equals(PotionEffectType.DAMAGE_RESISTANCE))
-        && !(event.getNewEffect().getType().equals(PotionEffectType.SATURATION))) {
+    if (event.getNewEffect().getType() != PotionEffectType.DAMAGE_RESISTANCE
+        && event.getNewEffect().getType() != PotionEffectType.SATURATION) {
       event.setCancelled(true);
     }
   }

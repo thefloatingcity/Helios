@@ -50,7 +50,7 @@ public final class PlayerSpawnListener implements Listener {
   @EventHandler
   public void onRespawn(final PlayerRespawnEvent event) {
     final Player player = event.getPlayer();
-    final Realm realm = Realm.from(player.getWorld());
+    final Realm realm = Realm.of(player);
     final @Nullable Location playerSpawn = this.getPlayerSpawn(player, realm);
 
     if (playerSpawn == null) {
@@ -127,7 +127,7 @@ public final class PlayerSpawnListener implements Listener {
         Component.text("spawn point set").color(NamedTextColor.LIGHT_PURPLE),
         Component.text()
             .append(Component.text("for the ").color(NamedTextColor.GRAY))
-            .append(Component.text(Realm.from(player.getWorld()).toString()).color(NamedTextColor.GOLD))
+            .append(Component.text(Realm.of(player).toString()).color(NamedTextColor.GOLD))
             .build(),
         Title.Times.times(Duration.ofMillis(500), Duration.ofSeconds(5), Duration.ofSeconds(1))
     ));
@@ -190,7 +190,7 @@ public final class PlayerSpawnListener implements Listener {
   }
 
   private void setPlayerSpawn(final Player player, final Location location) {
-    this.pdcLocStore.setLocation(player, this.spawnKey(Realm.from(location)), location);
+    this.pdcLocStore.setLocation(player, this.spawnKey(Realm.of(location)), location);
   }
 
   private void removePlayerSpawn(final Player player, final Realm realm) {

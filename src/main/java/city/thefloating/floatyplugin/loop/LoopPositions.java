@@ -5,6 +5,9 @@ import org.bukkit.event.Listener;
 
 /**
  * Provides the positions at which the void loop will engage for each habitat.
+ * <p>
+ * These positions are a function of the habitat due to the habitats' different
+ * fog distances/visual block cutoffs.
  */
 public final class LoopPositions implements Listener {
 

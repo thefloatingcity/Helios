@@ -1,7 +1,7 @@
 package city.thefloating.floatyplugin.fun;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
-import city.thefloating.floatyplugin.realm.Habitat;
+import city.thefloating.floatyplugin.realm.Milieu;
 import city.thefloating.floatyplugin.soul.Charon;
 import city.thefloating.floatyplugin.soul.Soul;
 import com.google.inject.Inject;
@@ -36,7 +36,7 @@ public final class ElevatorMusicJockey {
     final Server server = this.plugin.getServer();
     server.getScheduler().runTaskTimer(this.plugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
-        if (Habitat.of(player.getWorld()) != Habitat.WHITE) {
+        if (Milieu.of(player) != Milieu.CANON) {
           continue;
         }
         this.refresh(player);

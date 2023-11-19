@@ -66,7 +66,7 @@ public final class TransposeCommands {
   }
 
   private void tryTranspose(final Player player, final Realm destination) {
-    final Realm current = Realm.from(player.getWorld());
+    final Realm current = Realm.of(player);
     if (current == destination) {
       player.sendMessage(this.langConfig.c(NodePath.path("transpose", "already-there")));
       return;

@@ -2,22 +2,27 @@ package city.thefloating.floatyplugin.realm;
 
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
 
 import java.util.Locale;
 
 /**
  * The "worlds" that exist in The Floating City.
+ * <p>
+ * Each realm is tied to a distinct Minecraft world.
  */
 public enum Realm {
-  MADLANDS(Habitat.WHITE),
-  OVERWORLD(Habitat.WHITE),
-  NETHER(Habitat.RED),
-  END(Habitat.BLACK),
-  BACKROOMS(Habitat.WHITE);
+  MADLANDS(Milieu.CANON, Habitat.WHITE), // standard for griefers.
+  OVERWORLD(Milieu.CANON, Habitat.WHITE), // standard.
+  NETHER(Milieu.ONEROUS, Habitat.RED), // hellishly difficult.
+  END(Milieu.DOCILE, Habitat.BLACK), // carefree. allows elytras and ender pearls.
+  BACKROOMS(Milieu.SPOOKY, Habitat.WHITE); // spooky.
 
+  private final Milieu milieu;
   private final Habitat habitat;
 
-  Realm(final Habitat habitat) {
+  Realm(final Milieu milieu, final Habitat habitat) {
+    this.milieu = milieu;
     this.habitat = habitat;
   }
 
@@ -32,13 +37,21 @@ public enum Realm {
     };
   }
 
-  public static Realm from(final Location location) {
+  public static Realm of(final Location location) {
     return from(location.getWorld());
+  }
+
+  public static Realm of(final Entity entity) {
+    return from(entity.getWorld());
   }
 
   @Override
   public String toString() {
     return this.name().toLowerCase(Locale.ROOT);
+  }
+
+  public Milieu milieu() {
+    return this.milieu;
   }
 
   public Habitat habitat() {

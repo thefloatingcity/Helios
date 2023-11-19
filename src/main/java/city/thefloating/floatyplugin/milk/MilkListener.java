@@ -1,7 +1,7 @@
 package city.thefloating.floatyplugin.milk;
 
 import city.thefloating.floatyplugin.config.LangConfig;
-import city.thefloating.floatyplugin.realm.Realm;
+import city.thefloating.floatyplugin.realm.Milieu;
 import com.google.inject.Inject;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -34,13 +34,12 @@ public final class MilkListener implements Listener {
         && newEffect.getAmplifier() == MilkProvider.MILK_AMPLIFIER
         && event.getEntity() instanceof final Player player) {
       event.setCancelled(true);
-      player.removePotionEffect(PotionEffectType.DOLPHINS_GRACE);
+      player.removePotionEffect(MilkProvider.MILK_EFFECT);
 
       // if potion effects are cleared the same tick a player starts sprinting,
       // it can allow them to sprint in the nether by bypassing blindness.
       // we prevent that by killing them. :)
-      if (Realm.from(player.getWorld()) == Realm.NETHER
-          && player.isSprinting()) {
+      if (Milieu.of(player) == Milieu.ONEROUS && player.isSprinting()) {
         player.setHealth(0.0D);
         player.sendMessage(this.langConfig.c(NodePath.path("no-sprint-potion")));
         return;

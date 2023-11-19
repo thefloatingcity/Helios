@@ -32,7 +32,7 @@ public final class MadlandsMoverListener implements Listener {
     }
 
     final Player player = event.getPlayer();
-    if (Realm.from(player.getWorld()) != Realm.MADLANDS) {
+    if (Realm.of(player) != Realm.MADLANDS) {
       return;
     }
 

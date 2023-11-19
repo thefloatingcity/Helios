@@ -90,7 +90,7 @@ public final class PortalListener implements Listener {
   }
 
   private void onNetherPortal(final Player player) {
-    switch (Realm.from(player.getWorld())) {
+    switch (Realm.of(player)) {
       case MADLANDS -> {
         if (player.hasPermission(Permission.REALM_NETHER)) {
           this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "wrong-world")));
@@ -105,7 +105,7 @@ public final class PortalListener implements Listener {
   }
 
   private void onEndPortal(final Player player) {
-    switch (Realm.from(player.getWorld())) {
+    switch (Realm.of(player)) {
       case MADLANDS -> {
         if (player.hasPermission(Permission.REALM_END)) {
           this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "wrong-world")));

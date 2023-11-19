@@ -36,7 +36,7 @@ public final class VoidDamageListener implements Listener {
     }
 
     final Location loc = entity.getLocation();
-    final Habitat habitat = Habitat.of(entity.getWorld());
+    final Habitat habitat = Habitat.of(entity);
     if (loc.getY() > LoopPositions.lowEngage(habitat)) {
       return;
     }

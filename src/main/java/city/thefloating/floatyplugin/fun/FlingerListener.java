@@ -1,6 +1,6 @@
 package city.thefloating.floatyplugin.fun;
 
-import city.thefloating.floatyplugin.realm.Habitat;
+import city.thefloating.floatyplugin.realm.Milieu;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -112,7 +112,7 @@ public final class FlingerListener implements Listener {
 
   private float getPitch(final Player player) {
     final float increaseBy;
-    if (Habitat.of(player.getWorld()) == Habitat.RED) {
+    if (Milieu.of(player) == Milieu.ONEROUS) {
       increaseBy = 1;
     } else {
       increaseBy = 0.1F;

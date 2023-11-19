@@ -59,7 +59,7 @@ public final class WarpTask {
     if (RANDOM.nextFloat() < 0.15) {
       this.transposer.noclipIntoBackrooms(player);
     } else {
-      final Location spawn = this.worldService.ornateSpawn(Realm.from(player.getWorld()));
+      final Location spawn = this.worldService.ornateSpawn(Realm.of(player));
 
       player.showTitle(Title.title(
           this.langConfig.c(NodePath.path("warp", "max")),

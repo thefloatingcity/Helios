@@ -1,6 +1,8 @@
 package city.thefloating.floatyplugin.transportation;
 
 import city.thefloating.floatyplugin.FloatyPlugin;
+import city.thefloating.floatyplugin.PotEff;
+import city.thefloating.floatyplugin.realm.Milieu;
 import city.thefloating.floatyplugin.realm.Realm;
 import com.google.inject.Inject;
 import org.bukkit.Server;
@@ -25,34 +27,31 @@ public final class TransportationTask {
 
   public void start() {
     final Server server = this.plugin.getServer();
-
     server.getScheduler().runTaskTimer(this.plugin, () -> {
       for (final Player player : server.getOnlinePlayers()) {
-        final Realm realm = Realm.from((player.getWorld()));
+        final Realm realm = Realm.of(player);
+        final Milieu milieu = realm.milieu();
 
         // no flight anywhere.
         this.flightService.checkFlight(player);
 
         // elytra only in the end.
-        if (realm != Realm.END) {
+        if (milieu != Milieu.DOCILE) {
           player.setGliding(false);
         }
 
-        // nether-specific stuff.
-        if (realm == Realm.NETHER) {
-          // catch any players who bypassed the sprint listener somehow.
+        // nether-specific behavior.
+        if (milieu == Milieu.ONEROUS) {
+          // catch players who bypassed the sprint listener.
           if (player.isSprinting()) {
-            player.addPotionEffect(new PotionEffect(
-                PotionEffectType.BLINDNESS,
-                PotionEffect.INFINITE_DURATION,
-                1, true, false, false
-            ));
+            player.addPotionEffect(PotEff.hidden(PotionEffectType.BLINDNESS, PotEff.INF, 1));
             player.setSprinting(false);
           }
 
-          // catch any players who bypassed the vehicle listener somehow.
-          if (player.getVehicle() != null && player.getVehicle().getType() != EntityType.ARROW) {
-            // arrow for chairs.
+          // catch players who bypassed the vehicle listener.
+          if (player.getVehicle() != null
+              && player.getVehicle().getType() != EntityType.ARROW // allow arrow chairs.
+          ) {
             player.leaveVehicle();
           }
 
