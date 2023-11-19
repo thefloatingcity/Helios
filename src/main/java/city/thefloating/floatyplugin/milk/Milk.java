@@ -10,12 +10,12 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
-public final class MilkProvider {
+public final class Milk {
 
-  public static final PotionEffectType MILK_EFFECT = PotionEffectType.DOLPHINS_GRACE;
-  public static final int MILK_AMPLIFIER = 5;
+  public static final PotionEffectType EFFECT = PotionEffectType.DOLPHINS_GRACE;
+  public static final int AMPLIFIER = 5;
 
-  private MilkProvider() {
+  private Milk() {
   }
 
   public static ItemStack regular() {
@@ -38,7 +38,7 @@ public final class MilkProvider {
             Component.empty(),
             Component.text("Bottled at your local femboy hooters.").color(NamedTextColor.GRAY)
         )
-        .addCustomEffect(PotEff.hidden(MILK_EFFECT, 100, MILK_AMPLIFIER), true)
+        .addCustomEffect(PotEff.hidden(EFFECT, 100, AMPLIFIER), true)
         .addFlag(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ITEM_SPECIFICS)
         .color(Color.WHITE);
   }

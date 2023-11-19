@@ -15,7 +15,7 @@ public final class MilkCommand {
         .senderType(Player.class)
         .handler(c -> {
           final var sender = (Player) c.getSender();
-          sender.getInventory().addItem(MilkProvider.regular());
+          sender.getInventory().addItem(Milk.regular());
         });
 
     commandManager.command(main);

@@ -6,7 +6,7 @@ import broccolai.corn.paper.item.special.BundleBuilder;
 import city.thefloating.floatyplugin.FloatyPlugin;
 import city.thefloating.floatyplugin.PotEff;
 import city.thefloating.floatyplugin.config.LangConfig;
-import city.thefloating.floatyplugin.milk.MilkProvider;
+import city.thefloating.floatyplugin.milk.Milk;
 import city.thefloating.floatyplugin.realm.Milieu;
 import city.thefloating.floatyplugin.realm.Realm;
 import city.thefloating.floatyplugin.soul.Charon;
@@ -244,7 +244,7 @@ public final class TransportationListener implements Listener {
                           Component.text("the back. It says \"#1 Idiot\".").color(NamedTextColor.GRAY)
                       )
                       .build(),
-                  MilkProvider.splash()
+                  Milk.splash()
               );
 
           player.getInventory().addItem(bundleBuilder.build());

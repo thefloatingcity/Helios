@@ -8,7 +8,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.NodePath;
 
@@ -30,11 +29,11 @@ public final class MilkListener implements Listener {
       return;
     }
 
-    if (newEffect.getType() == MilkProvider.MILK_EFFECT
-        && newEffect.getAmplifier() == MilkProvider.MILK_AMPLIFIER
+    if (newEffect.getType() == Milk.EFFECT
+        && newEffect.getAmplifier() == Milk.AMPLIFIER
         && event.getEntity() instanceof final Player player) {
       event.setCancelled(true);
-      player.removePotionEffect(MilkProvider.MILK_EFFECT);
+      player.removePotionEffect(Milk.EFFECT);
 
       // if potion effects are cleared the same tick a player starts sprinting,
       // it can allow them to sprint in the nether by bypassing blindness.
