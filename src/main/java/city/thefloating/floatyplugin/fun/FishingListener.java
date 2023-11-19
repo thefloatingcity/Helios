@@ -1,7 +1,7 @@
 package city.thefloating.floatyplugin.fun;
 
 import broccolai.corn.paper.item.PaperItemBuilder;
-import city.thefloating.floatyplugin.realm.Habitat;
+import city.thefloating.floatyplugin.realm.Realm;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
@@ -25,8 +25,8 @@ public final class FishingListener implements Listener {
     }
 
     final Player player = event.getPlayer();
-    switch (Habitat.of(player.getWorld())) {
-      case WHITE -> player.getInventory().addItem(PaperItemBuilder.ofType(Material.COD)
+    switch (Realm.of(player)) {
+      case OVERWORLD -> player.getInventory().addItem(PaperItemBuilder.ofType(Material.COD)
           .name(Component.text("Floaty Fish").color(NamedTextColor.AQUA))
           .loreList(
               Component.text("\"It's just.. floating there.\"").color(NamedTextColor.WHITE),
@@ -34,7 +34,7 @@ public final class FishingListener implements Listener {
               Component.text("This fish seems important.").color(NamedTextColor.GRAY)
           )
           .build());
-      case RED -> player.getInventory().addItem(PaperItemBuilder.ofType(Material.TROPICAL_FISH)
+      case NETHER -> player.getInventory().addItem(PaperItemBuilder.ofType(Material.TROPICAL_FISH)
           .name(Component.text("Fiery Fish").color(NamedTextColor.RED))
           .loreList(
               Component.text("Likes to set things ablaze.").color(NamedTextColor.WHITE),
@@ -42,7 +42,7 @@ public final class FishingListener implements Listener {
               Component.text("This fish seems important.").color(NamedTextColor.GRAY)
           )
           .build());
-      case BLACK -> player.getInventory().addItem(PaperItemBuilder.ofType(Material.SALMON)
+      case END -> player.getInventory().addItem(PaperItemBuilder.ofType(Material.SALMON)
           .name(Component.text("Abyss Fish").color(NamedTextColor.DARK_PURPLE))
           .loreList(
               Component.text("Has a mystical, purple-ish aura.").color(NamedTextColor.WHITE),
