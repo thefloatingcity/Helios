@@ -4,7 +4,9 @@ import org.bukkit.Axis;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Biome;
 import org.bukkit.block.data.Orientable;
+import org.bukkit.generator.BiomeProvider;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.generator.WorldInfo;
 import org.jetbrains.annotations.NotNull;
@@ -16,6 +18,8 @@ import java.util.Random;
 public final class BackroomsGenerator extends ChunkGenerator {
 
   private static final int MIN_LENGTH_TO_CHANGE_DIRECTIONS = 3;
+
+  private final BackroomsBiomeProvider backroomsBiomeProvider = new BackroomsBiomeProvider();
 
   private static void setWall(
       final int chunkX, final int middleY, final int chunkZ,
@@ -154,6 +158,27 @@ public final class BackroomsGenerator extends ChunkGenerator {
         directionLength += 1;
       }
     }
+  }
+
+  @Override
+  public BiomeProvider getDefaultBiomeProvider(@NotNull final WorldInfo worldInfo) {
+    return this.backroomsBiomeProvider;
+  }
+
+  public static final class BackroomsBiomeProvider extends BiomeProvider {
+
+    public static final List<Biome> BIOMES = List.of(Biome.THE_VOID);
+
+    @Override
+    public @NotNull Biome getBiome(@NotNull final WorldInfo worldInfo, final int x, final int y, final int z) {
+      return Biome.THE_VOID;
+    }
+
+    @Override
+    public @NotNull List<Biome> getBiomes(@NotNull final WorldInfo worldInfo) {
+      return BIOMES;
+    }
+
   }
 
   /**
