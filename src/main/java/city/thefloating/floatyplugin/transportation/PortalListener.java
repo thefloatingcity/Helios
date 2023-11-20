@@ -93,12 +93,12 @@ public final class PortalListener implements Listener {
     switch (Realm.of(player)) {
       case MADLANDS -> {
         if (player.hasPermission(Permission.REALM_NETHER)) {
-          this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "wrong-world")));
+          this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "in-madlands")));
         } else {
-          this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "no-permission")));
+          this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "in-madlands-no-permission")));
         }
       }
-      case BACKROOMS -> this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "backrooms")));
+      case BACKROOMS -> this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "in-backrooms")));
       case NETHER -> this.fuzzyTranspose(player, Realm.OVERWORLD);
       default -> this.fuzzyTranspose(player, Realm.NETHER);
     }
@@ -108,12 +108,12 @@ public final class PortalListener implements Listener {
     switch (Realm.of(player)) {
       case MADLANDS -> {
         if (player.hasPermission(Permission.REALM_END)) {
-          this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "wrong-world")));
+          this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "in-madlands")));
         } else {
-          this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "no-permission")));
+          this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "in-madlands-no-permission")));
         }
       }
-      case BACKROOMS -> this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "backrooms")));
+      case BACKROOMS -> this.sendRateLimitedMessage(player, this.langConfig.c(NodePath.path("portal", "in-backrooms")));
       case END -> this.fuzzyTranspose(player, Realm.OVERWORLD);
       default -> this.fuzzyTranspose(player, Realm.END);
     }
