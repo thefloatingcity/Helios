@@ -32,7 +32,7 @@ public final class FlightService {
   }
 
   public boolean canFly(final Player player) {
-    return player.hasPermission(Permission.FLY) && this.charon.getSoul(player).flyBypassEnabled();
+    return player.hasPermission(Permission.FLY) && this.charon.grab(player).flyBypassEnabled();
   }
 
   public void enableFlight(final Player player) {

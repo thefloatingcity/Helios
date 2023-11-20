@@ -45,7 +45,7 @@ public final class ElevatorMusicJockey {
   }
 
   private void refresh(final Player player) {
-    final Soul soul = this.charon.getSoul(player);
+    final Soul soul = this.charon.grab(player);
     if (player.getFallDistance() >= MIN_FALL_DIST) {
       if (!soul.elevatorMusicPlaying()) {
         player.stopSound(SoundCategory.MUSIC);

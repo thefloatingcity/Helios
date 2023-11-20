@@ -10,6 +10,7 @@ import city.thefloating.floatyplugin.nextbot.Nate;
 import city.thefloating.floatyplugin.realm.Transposer;
 import city.thefloating.floatyplugin.realm.WorldService;
 import city.thefloating.floatyplugin.soul.Charon;
+import city.thefloating.floatyplugin.soul.Otzar;
 import city.thefloating.floatyplugin.tag.TagGame;
 import city.thefloating.floatyplugin.transportation.FlightService;
 import city.thefloating.floatyplugin.transportation.PortalListener;
@@ -27,13 +28,12 @@ public final class SingletonModule extends AbstractModule {
     this.bind(Transposer.class).asEagerSingleton();
     this.bind(Nate.class).asEagerSingleton();
     this.bind(PortalListener.class).asEagerSingleton();
-
-    // configs.
     this.bind(BooksConfig.class).asEagerSingleton();
     this.bind(ConfigConfig.class).asEagerSingleton();
     this.bind(EmotesConfig.class).asEagerSingleton();
     this.bind(PianoNotesConfig.class).asEagerSingleton();
     this.bind(LangConfig.class).asEagerSingleton();
+    this.bind(Otzar.class).asEagerSingleton();
   }
 
 }

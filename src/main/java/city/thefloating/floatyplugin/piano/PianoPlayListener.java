@@ -36,7 +36,7 @@ public final class PianoPlayListener implements Listener {
   public void onItemHeld(final PlayerItemHeldEvent event) {
     final Player player = event.getPlayer();
     if (!player.hasPermission(Permission.PIANO)
-        || !this.charon.getSoul(player).piano().enabled()) {
+        || !this.charon.grab(player).piano().enabled()) {
       return;
     }
 
@@ -83,7 +83,7 @@ public final class PianoPlayListener implements Listener {
 
     player.getWorld().playSound(
         player.getEyeLocation(),
-        this.charon.getSoul(player).piano().instrument().sound(),
+        this.charon.grab(player).piano().instrument().sound(),
         SoundCategory.MASTER,
         3,
         pitch

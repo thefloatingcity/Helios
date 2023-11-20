@@ -34,7 +34,7 @@ public final class FlyCommand {
         .senderType(Player.class)
         .handler(c -> {
           final Player sender = (Player) c.getSender();
-          if (this.charon.getSoul(sender).toggleFlyBypassEnabled()) {
+          if (this.charon.grab(sender).toggleFlyBypassEnabled()) {
             sender.sendMessage(this.langConfig.c(NodePath.path("fly", "enabled")));
             this.flightService.enableFlight(sender);
           } else {

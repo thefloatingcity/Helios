@@ -44,6 +44,8 @@ import city.thefloating.floatyplugin.server.JoinQuitListener;
 import city.thefloating.floatyplugin.server.RulesCommand;
 import city.thefloating.floatyplugin.server.ServerPingListener;
 import city.thefloating.floatyplugin.server.VoteCommand;
+import city.thefloating.floatyplugin.soul.Charon;
+import city.thefloating.floatyplugin.soul.Otzar;
 import city.thefloating.floatyplugin.tag.TagCommand;
 import city.thefloating.floatyplugin.tag.TagListener;
 import city.thefloating.floatyplugin.transportation.FlightListener;
@@ -114,6 +116,17 @@ public final class FloatyPlugin extends TehPlugin {
   @Override
   public void onDisable() {
     this.injector.getInstance(Nate.class).killNextbots();
+
+    try {
+      this.injector.getInstance(Charon.class).save();
+    } catch (final ConfigurateException e) {
+      this.getSLF4JLogger().error(
+          "An error occurred while saving config file {}. Please ensure that the file is valid.",
+          this.injector.getInstance(Otzar.class).configurateWrapper().filePath()
+      );
+      this.getSLF4JLogger().error("Printing stack trace:", e);
+    }
+
     this.getServer().getScheduler().cancelTasks(this);
   }
 
@@ -133,6 +146,7 @@ public final class FloatyPlugin extends TehPlugin {
     this.saveResourceSilently("piano-notes.conf");
 
     final List<Config> configsToLoad = List.of(
+        this.injector.getInstance(Otzar.class),
         this.injector.getInstance(BooksConfig.class),
         this.injector.getInstance(ConfigConfig.class),
         this.injector.getInstance(EmotesConfig.class),
@@ -177,7 +191,7 @@ public final class FloatyPlugin extends TehPlugin {
       );
     } catch (final Exception e) {
       this.getSLF4JLogger().error("Failed to create the CommandManager.");
-      this.getSLF4JLogger().error("Printing stack trace, please send this to the developers:", e);
+      this.getSLF4JLogger().error("Printing stack trace. Please send this to the developers:", e);
       return false;
     }
 

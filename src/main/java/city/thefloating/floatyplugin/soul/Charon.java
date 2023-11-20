@@ -1,6 +1,8 @@
 package city.thefloating.floatyplugin.soul;
 
+import com.google.inject.Inject;
 import org.bukkit.entity.Player;
+import org.spongepowered.configurate.ConfigurateException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,14 +13,36 @@ import java.util.UUID;
  */
 public final class Charon {
 
-  private final Map<UUID, Soul> soulMap = new HashMap<>();
+  private final Otzar otzar;
 
-  public Soul getSoul(final UUID uuid) {
-    return this.soulMap.computeIfAbsent(uuid, Soul::new);
+  private final Map<UUID, Soul> souls = new HashMap<>();
+
+  @Inject
+  public Charon(final Otzar otzar) {
+    this.otzar = otzar;
   }
 
-  public Soul getSoul(final Player player) {
-    return this.getSoul(player.getUniqueId());
+  public Soul grab(final UUID uuid) {
+    return this.souls.computeIfAbsent(uuid, (u) -> {
+      final var soul = new Soul(uuid);
+      if (this.otzar.spirits().containsKey(uuid)) {
+        final var spirit = this.otzar.spirits().get(uuid);
+        soul.netherInfractions(spirit.netherInfractions());
+      }
+      return soul;
+    });
+  }
+
+  public Soul grab(final Player player) {
+    return this.grab(player.getUniqueId());
+  }
+
+  public void save() throws ConfigurateException {
+    for (final var soul : this.souls.values()) {
+      final var spirit = new Otzar.Data.Spirit(soul.netherInfractions());
+      this.otzar.spirits().put(soul.getUuid(), spirit);
+    }
+    this.otzar.save();
   }
 
 }

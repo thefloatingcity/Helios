@@ -9,7 +9,7 @@ public final class Soul {
   private final UUID uuid;
 
   private boolean flyBypassEnabled = false;
-  private int netherBlindnessCount = 0;
+  private int netherInfractions = 0;
   private boolean elevatorMusicPlaying = false;
 
   private final Piano piano = new Piano(false, Instrument.HARP);
@@ -35,12 +35,12 @@ public final class Soul {
     return this.flyBypassEnabled();
   }
 
-  public int netherSprintCount() {
-    return this.netherBlindnessCount;
+  public int netherInfractions() {
+    return this.netherInfractions;
   }
 
-  public void netherSprintCount(final int netherBlindnessCount) {
-    this.netherBlindnessCount = netherBlindnessCount;
+  public void netherInfractions(final int netherBlindnessCount) {
+    this.netherInfractions = netherBlindnessCount;
   }
 
   public boolean elevatorMusicPlaying() {

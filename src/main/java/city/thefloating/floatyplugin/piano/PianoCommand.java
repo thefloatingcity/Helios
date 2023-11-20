@@ -67,7 +67,7 @@ public final class PianoCommand {
         .senderType(Player.class)
         .handler(c -> {
           final Player sender = (Player) c.getSender();
-          if (this.charon.getSoul(sender).piano().toggleEnabled()) {
+          if (this.charon.grab(sender).piano().toggleEnabled()) {
             sender.sendMessage(this.langConfig.c(NodePath.path("piano", "enabled")));
           } else {
             sender.sendMessage(this.langConfig.c(NodePath.path("piano", "disabled")));
@@ -110,7 +110,7 @@ public final class PianoCommand {
           final Instrument inst = c.get("instrument");
           final Player sender = (Player) c.getSender();
 
-          this.charon.getSoul(sender).piano().instrument(inst);
+          this.charon.grab(sender).piano().instrument(inst);
           sender.sendMessage(this.langConfig.c(
               NodePath.path("piano", "instrument-change"),
               Placeholder.unparsed("instrument", inst.toString())

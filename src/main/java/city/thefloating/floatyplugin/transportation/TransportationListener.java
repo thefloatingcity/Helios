@@ -207,16 +207,19 @@ public final class TransportationListener implements Listener {
 
     if (Realm.of(player) == Realm.NETHER) {
       // nether watcher time!
-      final Soul soul = this.charon.getSoul(player);
-      switch (soul.netherSprintCount()) {
-        case 0, 2, 5, 10 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "1")));
-        case 20 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "2")));
-        case 30 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "3")));
-        case 40 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "4")));
-        case 50 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "5")));
-        case 60 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "6")));
-        case 70 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "7")));
-        case 90 -> {
+      final Soul soul = this.charon.grab(player);
+
+      soul.netherInfractions(soul.netherInfractions() + 1);
+
+      switch (soul.netherInfractions()) {
+        case 1, 2, 3, 5, 8, 10, 15, 20, 25 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "1")));
+        case 30 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "2")));
+        case 40 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "3")));
+        case 50 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "4")));
+        case 60 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "5")));
+        case 70 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "6")));
+        case 80 -> player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "7")));
+        case 100 -> {
           player.sendMessage(this.langConfig.c(NodePath.path("no-sprint", "8")));
 
           final BundleBuilder bundleBuilder = BundleBuilder.ofBundle()
@@ -229,7 +232,7 @@ public final class TransportationListener implements Listener {
                       .addPage(Component.text("""
                           listen. i appreciate you giving me company,
                           but holy shit. the whole point of the nether is *not* to sprint,
-                          yet you somehow managed to do it upwards of 50 times!?
+                          yet you somehow managed to do it a hundred times!?
                           have you got something wrong in the head? take this, and fuck off.
                           """).color(NamedTextColor.DARK_GRAY))
                       .addPage(Component.text("""
@@ -258,8 +261,6 @@ public final class TransportationListener implements Listener {
         default -> {
         }
       }
-
-      soul.netherSprintCount(soul.netherSprintCount() + 1);
     }
   }
 
