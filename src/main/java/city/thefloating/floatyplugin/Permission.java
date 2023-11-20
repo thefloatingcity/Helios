@@ -7,7 +7,7 @@ public final class Permission {
   // build within a world's spawn.
   public static final String BUILD_SPAWN = ROOT + ".build-spawn";
 
-  // build in or transpose to a world.
+  // build in or transpose to a realm.
   public static final String REALM = ROOT + ".realm";
   public static final String REALM_MADLANDS = REALM + ".madlands";
   public static final String REALM_OVERWORLD = REALM + ".overworld";
