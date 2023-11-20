@@ -29,7 +29,7 @@ public final class MilkListener implements Listener {
       return;
     }
 
-    if (newEffect.getType() == Milk.EFFECT
+    if (newEffect.getType().equals(Milk.EFFECT)
         && newEffect.getAmplifier() == Milk.AMPLIFIER
         && event.getEntity() instanceof final Player player) {
       event.setCancelled(true);

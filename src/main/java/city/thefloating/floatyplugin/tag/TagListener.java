@@ -43,7 +43,7 @@ public final class TagListener implements Listener {
       return;
     }
 
-    if (event.getNewEffect().getType() == PotionEffectType.BLINDNESS
+    if (event.getNewEffect().getType().equals(PotionEffectType.BLINDNESS)
         && Milieu.of(player) == Milieu.ONEROUS) {
       return;
     }
