@@ -125,10 +125,7 @@ public final class PlayerSpawnListener implements Listener {
     final Player player = event.getPlayer();
     player.showTitle(Title.title(
         Component.text("spawn point set").color(NamedTextColor.LIGHT_PURPLE),
-        Component.text()
-            .append(Component.text("for the ").color(NamedTextColor.GRAY))
-            .append(Component.text(Realm.of(player).toString()).color(NamedTextColor.GOLD))
-            .build(),
+        Component.text("for the " + Realm.of(player).toString()).color(NamedTextColor.GRAY),
         Title.Times.times(Duration.ofMillis(500), Duration.ofSeconds(5), Duration.ofSeconds(1))
     ));
     player.addPotionEffect(PotEff.hidden(PotionEffectType.CONFUSION, 160, 1));
@@ -158,7 +155,7 @@ public final class PlayerSpawnListener implements Listener {
     if (event.useBed() == Event.Result.ALLOW || event.getBedEnterResult() == PlayerBedEnterEvent.BedEnterResult.OK) {
       event.getPlayer().showTitle(Title.title(
           Component.empty(),
-          Component.text(".. stay in bed to set your spawn point").color(NamedTextColor.DARK_GRAY),
+          Component.text("sleep to set your spawn point").color(NamedTextColor.DARK_GRAY),
           Title.Times.times(Duration.ofMillis(500), Duration.ofSeconds(5), Duration.ofSeconds(1))
       ));
     }
