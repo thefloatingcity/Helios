@@ -226,16 +226,22 @@ public final class TransportationListener implements Listener {
                   BookBuilder.ofType(Material.WRITTEN_BOOK)
                       .title(Component.text("A Letter"))
                       .author(Component.text("The Nether Watcher"))
-                      .addPage(Component
-                          .text("listen, i appreciate ya givin' me company,"
-                              + " but holy frik, the whole point of the nether is *not* to sprint,"
-                              + " yet you somehow managed to do it upwards of 50 times!??"
-                              + " 'ave ya got somethin' wrong in the head??? love ya, but frik off")
-                          .color(NamedTextColor.DARK_GRAY))
+                      .addPage(Component.text("""
+                          listen. i appreciate you giving me company,
+                          but holy shit. the whole point of the nether is *not* to sprint,
+                          yet you somehow managed to do it upwards of 50 times!?
+                          have you got something wrong in the head? take this, and fuck off.
+                          """).color(NamedTextColor.DARK_GRAY))
+                      .addPage(Component.text("""
+
+                          ..
+
+                          still love you, tho.
+                          """).color(NamedTextColor.DARK_GRAY))
                       .build(),
                   PaperItemBuilder.ofType(Material.SLIME_BALL)
                       .name(Component.text("Ball of Slime"))
-                      .loreList(Component.text("It's uh.. a ball of slime.").color(NamedTextColor.GRAY))
+                      .loreList(Component.text("It's.. uh, a ball of slime.").color(NamedTextColor.GRAY))
                       .build(),
                   PaperItemBuilder.ofType(Material.GOLD_NUGGET)
                       .name(Component.text("Gold Medal"))
