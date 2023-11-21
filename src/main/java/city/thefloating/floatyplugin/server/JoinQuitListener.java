@@ -16,6 +16,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerResourcePackStatusEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.spongepowered.configurate.NodePath;
 
@@ -40,6 +41,15 @@ public final class JoinQuitListener implements Listener {
     this.langConfig = langConfig;
     this.configConfig = configConfig;
     this.worldService = worldService;
+  }
+
+  @EventHandler
+  public void onPack(final PlayerResourcePackStatusEvent event) {
+    if (event.getStatus() == PlayerResourcePackStatusEvent.Status.DECLINED) {
+      event.getPlayer().kick(this.langConfig.c(NodePath.path("resource-pack", "decline-kick")));
+    } else if (event.getStatus() == PlayerResourcePackStatusEvent.Status.FAILED_DOWNLOAD) {
+      event.getPlayer().kick(this.langConfig.c(NodePath.path("resource-pack", "fail-kick")));
+    }
   }
 
   @EventHandler
