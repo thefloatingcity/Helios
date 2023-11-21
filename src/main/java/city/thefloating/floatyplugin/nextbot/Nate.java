@@ -51,6 +51,7 @@ public final class Nate implements Listener {
     this.floatyPlugin = floatyPlugin;
   }
 
+  //<editor-fold desc="creation and deletion">
   private void killNextbot(final Nextbot nextbot) {
     nextbot.pf().getPassengers().forEach(Entity::remove); // remove text.
     nextbot.pf().remove();
@@ -63,71 +64,6 @@ public final class Nate implements Listener {
       nextbot.pf().remove();
     }
     this.nextbots.clear();
-  }
-
-  /**
-   * Prevent fox from being leashed.
-   */
-  @EventHandler
-  public void onLeash(final PlayerLeashEntityEvent event) {
-    for (final Nextbot nextbot : this.nextbots) {
-      if (event.getEntity().equals(nextbot.pf())) {
-        event.setCancelled(true);
-      }
-    }
-  }
-
-  @EventHandler
-  public void onPlayerRespawn(final PlayerPostRespawnEvent event) {
-    this.removeFromActiveMusic(event.getPlayer());
-  }
-
-  @EventHandler
-  public void onPlayerChangedWorld(final PlayerChangedWorldEvent event) {
-    this.removeFromActiveMusic(event.getPlayer());
-  }
-
-  @EventHandler
-  public void onPlayerQuit(final PlayerQuitEvent event) {
-    this.removeFromActiveMusic(event.getPlayer());
-  }
-
-  private void removeFromActiveMusic(final Player player) {
-    this.floatyPlugin.getServer().getScheduler().runTaskLater(
-        this.floatyPlugin,
-        () -> {
-          for (final Nextbot nextbot : this.nextbots) {
-            nextbot.startedMusic().remove(player);
-          }
-        },
-        Ticks.in(Duration.ofSeconds(2))
-    );
-  }
-
-  @EventHandler(priority = EventPriority.HIGH) // to avoid conflicting with void loop.
-  public void onDamage(final EntityDamageEvent event) {
-    for (final Nextbot nextbot : clone(this.nextbots)) {
-      if (!nextbot.pf().equals(event.getEntity())) {
-        continue;
-      }
-
-      if (event.getCause() == EntityDamageEvent.DamageCause.KILL) {
-        this.killNextbot(nextbot);
-      } else {
-        event.setCancelled(true);
-      }
-    }
-  }
-
-  @EventHandler
-  public void onDismount(final EntityDismountEvent event) {
-    for (final Nextbot nextbot : clone(this.nextbots)) {
-      if (!nextbot.pf().equals(event.getDismounted())) {
-        continue;
-      }
-
-      this.killNextbot(nextbot);
-    }
   }
 
   public void createNextbot(final Nextbot.Type type, final Location loc) {
@@ -165,7 +101,53 @@ public final class Nate implements Listener {
     this.startMusicTask(nextbot);
     this.nextbots.add(nextbot);
   }
+  //</editor-fold>
 
+  //<editor-fold desc="nextbot-specific listeners (for deletion)">
+
+  /**
+   * Prevent fox from being leashed.
+   */
+  @EventHandler
+  public void onLeash(final PlayerLeashEntityEvent event) {
+    for (final Nextbot nextbot : this.nextbots) {
+      if (!event.getEntity().equals(nextbot.pf())) {
+        continue;
+      }
+
+      event.setCancelled(true);
+      nextbot.pf().setLeashHolder(null);
+    }
+  }
+
+  @EventHandler(priority = EventPriority.HIGH) // to avoid conflicting with void loop.
+  public void onDamage(final EntityDamageEvent event) {
+    for (final Nextbot nextbot : clone(this.nextbots)) {
+      if (!event.getEntity().equals(nextbot.pf())) {
+        continue;
+      }
+
+      if (event.getCause() == EntityDamageEvent.DamageCause.KILL) {
+        this.killNextbot(nextbot);
+      } else {
+        event.setCancelled(true);
+      }
+    }
+  }
+
+  @EventHandler
+  public void onDismount(final EntityDismountEvent event) {
+    for (final Nextbot nextbot : clone(this.nextbots)) {
+      if (!event.getDismounted().equals(nextbot.pf())) {
+        continue;
+      }
+
+      this.killNextbot(nextbot);
+    }
+  }
+  //</editor-fold>
+
+  //<editor-fold desc="chasing">
   // nextbot speed constants for variable acceleration.
   private static final double NBS_MEASURE_MIN = 0.012;
   private static final double NBS_MEASURE_MAX = 0.036;
@@ -246,7 +228,9 @@ public final class Nate implements Listener {
   private static void givePlayerRunningSpeed(final Player player, final int amplifier) {
     player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 30, amplifier, true, false, false));
   }
+  //</editor-fold>
 
+  //<editor-fold desc="lagged location">
   private static final int LAG_AMOUNT = 60;
   private final Map<UUID, Location> laggedLocation = new HashMap<>();
 
@@ -258,7 +242,40 @@ public final class Nate implements Listener {
     );
     return this.laggedLocation.getOrDefault(player.getUniqueId(), player.getLocation());
   }
+  //</editor-fold>
 
+  //<editor-fold desc="jump">
+  private void jump(final Nextbot nextbot, final int amplifier) {
+    final PotionEffect jump = PotEff.hidden(PotionEffectType.JUMP, 5, amplifier);
+    nextbot.pf().addPotionEffect(jump);
+    nextbot.pf().setJumping(true);
+  }
+
+  private static final Duration JUMP_COOLDOWN = Duration.ofSeconds(4);
+
+  /**
+   * Calls {@link #jump(Nextbot, int)} but also juggles the cooldown.
+   *
+   * @param nextbot   the nextbot to make jump
+   * @param amplifier the amplifier of the jump effect
+   */
+  private void chilledJump(final Nextbot nextbot, final int amplifier) {
+    final Instant lastJump = nextbot.lastJump();
+    if (lastJump == null) {
+      this.jump(nextbot, amplifier);
+      nextbot.lastJump(Instant.now());
+      return;
+    }
+
+    final var sinceLastJump = Duration.between(lastJump, Instant.now());
+    if (sinceLastJump.compareTo(JUMP_COOLDOWN) > 0) {
+      this.jump(nextbot, amplifier);
+      nextbot.lastJump(Instant.now());
+    }
+  }
+  //</editor-fold>
+
+  //<editor-fold desc="music">
   private void startMusicTask(final Nextbot nextbot) {
     final var pf = nextbot.pf();
     final var ic = nextbot.ic();
@@ -290,34 +307,33 @@ public final class Nate implements Listener {
     );
   }
 
-  private static final Duration JUMP_COOLDOWN = Duration.ofSeconds(4);
-
-  /**
-   * Calls {@link #jump(Nextbot, int)} but also juggles the cooldown.
-   *
-   * @param nextbot   the nextbot to make jump
-   * @param amplifier the amplifier of the jump effect
-   */
-  private void chilledJump(final Nextbot nextbot, final int amplifier) {
-    final Instant lastJump = nextbot.lastJump();
-    if (lastJump == null) {
-      this.jump(nextbot, amplifier);
-      nextbot.lastJump(Instant.now());
-      return;
-    }
-
-    final var sinceLastJump = Duration.between(lastJump, Instant.now());
-    if (sinceLastJump.compareTo(JUMP_COOLDOWN) > 0) {
-      this.jump(nextbot, amplifier);
-      nextbot.lastJump(Instant.now());
-    }
+  @EventHandler
+  public void onPlayerRespawn(final PlayerPostRespawnEvent event) {
+    this.removeFromActiveMusic(event.getPlayer());
   }
 
-  private void jump(final Nextbot nextbot, final int amplifier) {
-    final PotionEffect jump = PotEff.hidden(PotionEffectType.JUMP, 5, amplifier);
-    nextbot.pf().addPotionEffect(jump);
-    nextbot.pf().setJumping(true);
+  @EventHandler
+  public void onPlayerChangedWorld(final PlayerChangedWorldEvent event) {
+    this.removeFromActiveMusic(event.getPlayer());
   }
+
+  @EventHandler
+  public void onPlayerQuit(final PlayerQuitEvent event) {
+    this.removeFromActiveMusic(event.getPlayer());
+  }
+
+  private void removeFromActiveMusic(final Player player) {
+    this.floatyPlugin.getServer().getScheduler().runTaskLater(
+        this.floatyPlugin,
+        () -> {
+          for (final Nextbot nextbot : this.nextbots) {
+            nextbot.startedMusic().remove(player);
+          }
+        },
+        Ticks.in(Duration.ofSeconds(2))
+    );
+  }
+  //</editor-fold>
 
   private static <T> List<T> clone(final List<T> list) {
     return new ArrayList<>(list);
