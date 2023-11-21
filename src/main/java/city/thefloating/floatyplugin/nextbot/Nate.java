@@ -157,6 +157,7 @@ public final class Nate implements Listener {
           self.setCanPickupItems(false);
           self.getEquipment().clear(); // foxes have a chance to spawn with something in their mouth.
           self.addPassenger(icon);
+          self.setRemoveWhenFarAway(false);
         }
     );
     final Nextbot nextbot = new Nextbot(pathfinder, icon, attributes);
