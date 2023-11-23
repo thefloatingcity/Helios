@@ -69,7 +69,17 @@ public final class Nextbot {
   }
 
   public enum Type {
-    OBUNGA(new Attributes(Character.toString(0xF101), Key.key("floating", "nextbot.obunga"), Duration.ofSeconds(223)));
+    OBUNGA(new Attributes(Character.toString(0xF101), Key.key("floating", "nextbot.obunga"), Duration.ofSeconds(223))),
+    C0(new Attributes(Character.toString(0xF200), Key.key("floating", "nextbot.c0"), Duration.ofSeconds(17))),
+    C1(new Attributes(Character.toString(0xF201), Key.key("floating", "nextbot.c1"), Duration.ofSeconds(139))),
+    C2(new Attributes(Character.toString(0xF202), Key.key("floating", "nextbot.c2"), Duration.ofSeconds(320))),
+    C3(new Attributes(Character.toString(0xF203), Key.key("floating", "nextbot.c3"), Duration.ofSeconds(177))),
+    C4(new Attributes(Character.toString(0xF204), Key.key("floating", "nextbot.c4"), Duration.ofSeconds(40))),
+    C5(new Attributes(Character.toString(0xF205), Key.key("floating", "nextbot.c5"), Duration.ofSeconds(80))),
+    C6(new Attributes(Character.toString(0xF206), Key.key("floating", "nextbot.c6"), Duration.ofSeconds(61))),
+    C7(new Attributes(Character.toString(0xF207), Key.key("floating", "nextbot.c7"), Duration.ofSeconds(83))),
+    C8(new Attributes(Character.toString(0xF208), Key.key("floating", "nextbot.c8"), Duration.ofSeconds(124))),
+    C9(new Attributes(Character.toString(0xF209), Key.key("floating", "nextbot.c9"), Duration.ofSeconds(204)));
 
     private final Attributes attributes;
 
