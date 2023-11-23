@@ -69,7 +69,7 @@ public final class Nextbot {
   }
 
   public enum Type {
-    OBUNGA(new Attributes("띂", Key.key("floating", "music.ussr_anthem.mono"), Duration.ofSeconds(223)));
+    OBUNGA(new Attributes(Character.toString(0xF101), Key.key("floating", "nextbot.obunga"), Duration.ofSeconds(223)));
 
     private final Attributes attributes;
 
