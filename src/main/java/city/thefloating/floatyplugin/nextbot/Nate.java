@@ -31,6 +31,7 @@ import org.spigotmc.event.entity.EntityDismountEvent;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -277,34 +278,64 @@ public final class Nate implements Listener {
   //</editor-fold>
 
   //<editor-fold desc="music">
+  /**
+   * Players within this radius will have their music started.
+   */
+  private static final int START_RADIUS = 32;
+  /**
+   * Players outside this radius will have their music stopped.
+   * <p>
+   * This was <b>not</b> added to restart music. That is only an unfortunate
+   * side effect. This was added to deal with sound from emitters permanently
+   * stopping outside a certain radius. I observed that behavior, but it doesn't
+   * seem to be documented anywhere.
+   * <p>
+   * This number seems to be the magic number for the entities that nextbots use.
+   */
+  private static final int STOP_RADIUS = 64;
+
+  private Collection<Player> playersInsideRadius(final Location location, final int radius) {
+    return location.getWorld().getNearbyPlayers(location, radius);
+  }
+
+  private Collection<Player> playersOutsideRadius(final Location location, final int radius) {
+    final List<Player> players = new ArrayList<>(location.getWorld().getPlayers());
+    for (final Player player : this.playersInsideRadius(location, radius)) {
+      players.remove(player);
+    }
+    return players;
+  }
+
   private void startMusicTask(final Nextbot nextbot) {
     final var pf = nextbot.pf();
-    final var ic = nextbot.ic();
     this.floatyPlugin.getServer().getScheduler().runTaskTimer(
         this.floatyPlugin,
-        t -> {
+        task -> {
           if (pf.isDead()) {
-            t.cancel();
+            task.cancel();
             return;
           }
 
-          pf.getWorld().getNearbyPlayers(pf.getLocation(), 32).forEach(player -> {
-            if (nextbot.startedMusic().containsKey(player)
-                && Duration.between(nextbot.startedMusic().get(player), Instant.now())
-                .compareTo(nextbot.attr().musicLength()) < 0) {
-              // current time that song has been played is less than song length.
+          this.playersInsideRadius(pf.getLocation(), START_RADIUS).forEach(p -> {
+            // don't re-play music if we think that music is already playing.
+            if (nextbot.musicPlaying(p)) {
               return;
             }
 
-            // stop previous music.
-            player.stopSound(nextbot.attr().musicStop());
-            // play sound from icon so that we can set pathfinder (fox) to silent.
-            player.playSound(nextbot.attr().music(), ic);
-            nextbot.startedMusic().put(player, Instant.now());
+            // stop any possible leftover music.
+            // this unfortunately means that nextbots of the same type will
+            // override other nextbots' music.
+            p.stopSound(nextbot.attr().musicStop());
+            // play music from icon so that pathfinder (fox) can be silent.
+            p.playSound(nextbot.attr().music(), nextbot.ic());
+            nextbot.startedMusic().put(p, Instant.now());
           });
-        },
-        1,
-        20
+
+          this.playersOutsideRadius(pf.getLocation(), STOP_RADIUS).forEach(p -> {
+            p.stopSound(nextbot.attr().musicStop());
+            nextbot.startedMusic().remove(p);
+          });
+        }, 1, 20
     );
   }
 

@@ -60,6 +60,13 @@ public final class Nextbot {
     return this.startedMusic;
   }
 
+  public boolean musicPlaying(final Player player) {
+    // duration that song has been playing for player is less than song length.
+    return this.startedMusic().containsKey(player)
+        && Duration.between(this.startedMusic().get(player), Instant.now())
+        .compareTo(this.attr().musicLength()) < 0;
+  }
+
   public Nextbot.Attributes attributes() {
     return this.attributes;
   }
