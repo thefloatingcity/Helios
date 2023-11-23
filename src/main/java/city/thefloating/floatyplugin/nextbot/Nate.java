@@ -59,7 +59,7 @@ public final class Nate implements Listener {
   }
 
   public void killNextbots() {
-    for (final Nextbot nextbot : this.nextbots) {
+    for (final Nextbot nextbot : clone(this.nextbots)) {
       nextbot.pf().getPassengers().forEach(Entity::remove); // remove text.
       nextbot.pf().remove();
     }
