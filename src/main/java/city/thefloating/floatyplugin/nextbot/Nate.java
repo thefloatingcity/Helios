@@ -21,6 +21,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerLeashEntityEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -309,28 +310,39 @@ public final class Nate implements Listener {
 
   @EventHandler
   public void onPlayerRespawn(final PlayerPostRespawnEvent event) {
-    this.removeFromActiveMusic(event.getPlayer());
+    this.removeFromAllMusicLater(event.getPlayer());
   }
 
   @EventHandler
   public void onPlayerChangedWorld(final PlayerChangedWorldEvent event) {
-    this.removeFromActiveMusic(event.getPlayer());
+    this.removeFromAllMusicLater(event.getPlayer());
   }
 
   @EventHandler
   public void onPlayerQuit(final PlayerQuitEvent event) {
-    this.removeFromActiveMusic(event.getPlayer());
+    this.removeFromAllMusicLater(event.getPlayer());
   }
 
-  private void removeFromActiveMusic(final Player player) {
+  @EventHandler
+  public void onPlayerJoin(final PlayerJoinEvent event) {
+    this.removeFromAllMusicLater(event.getPlayer());
+  }
+
+  private void removeFromAllMusic(final Player player) {
+    for (final Nextbot nextbot : this.nextbots) {
+      nextbot.startedMusic().remove(player);
+    }
+  }
+
+  private void removeFromAllMusicLater(final Player player) {
+    this.removeFromAllMusicLater(player, Duration.ofSeconds(2));
+  }
+
+  private void removeFromAllMusicLater(final Player player, final Duration delay) {
     this.floatyPlugin.getServer().getScheduler().runTaskLater(
         this.floatyPlugin,
-        () -> {
-          for (final Nextbot nextbot : this.nextbots) {
-            nextbot.startedMusic().remove(player);
-          }
-        },
-        Ticks.in(Duration.ofSeconds(2))
+        () -> this.removeFromAllMusic(player),
+        Ticks.in(delay)
     );
   }
   //</editor-fold>
