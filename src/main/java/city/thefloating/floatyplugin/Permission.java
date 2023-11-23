@@ -23,6 +23,7 @@ public final class Permission {
   public static final String HAT = ROOT + ".hat";
   public static final String PIANO = ROOT + ".piano";
   public static final String CHAT_COLOR = ROOT + ".chat-color";
+  public static final String NEXTBOT = ROOT + ".nextbot";
 
   public static final String ACT = ROOT + ".act";
   public static final String ZAP = ACT + ".zap";

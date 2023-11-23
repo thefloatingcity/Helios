@@ -25,7 +25,7 @@ import city.thefloating.floatyplugin.loop.WarpTask;
 import city.thefloating.floatyplugin.milk.MilkCommand;
 import city.thefloating.floatyplugin.milk.MilkListener;
 import city.thefloating.floatyplugin.nextbot.Nate;
-import city.thefloating.floatyplugin.nextbot.ObungaCommand;
+import city.thefloating.floatyplugin.nextbot.NextbotCommand;
 import city.thefloating.floatyplugin.piano.PianoCommand;
 import city.thefloating.floatyplugin.piano.PianoPlayListener;
 import city.thefloating.floatyplugin.realm.MadlandsMoverListener;
@@ -205,7 +205,7 @@ public final class FloatyPlugin extends TehPlugin {
     this.injector.getInstance(GameModeCommands.class).register(this.commandManager);
     this.injector.getInstance(HatCommand.class).register(this.commandManager);
     this.injector.getInstance(MilkCommand.class).register(this.commandManager);
-    this.injector.getInstance(ObungaCommand.class).register(this.commandManager);
+    this.injector.getInstance(NextbotCommand.class).register(this.commandManager);
     this.injector.getInstance(PackCommand.class).register(this.commandManager);
     this.injector.getInstance(PianoCommand.class).register(this.commandManager);
     this.injector.getInstance(PlaytimeCommand.class).register(this.commandManager);
