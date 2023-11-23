@@ -8,7 +8,6 @@ import com.google.inject.Inject;
 import org.bukkit.Server;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public final class TransportationTask {
@@ -58,13 +57,11 @@ public final class TransportationTask {
           // block-specific functionality.
           switch (player.getLocation().add(0, -0.8, 0).getBlock().getType()) {
             // ice blocks slow down player.
-            case ICE, PACKED_ICE, BLUE_ICE, FROSTED_ICE -> player.addPotionEffect(new PotionEffect(
-                PotionEffectType.SLOW, 40, 3, true, false, false
-            ));
+            case ICE, PACKED_ICE, BLUE_ICE, FROSTED_ICE -> player.addPotionEffect(
+                PotEff.hidden(PotionEffectType.SLOW, 40, 3));
             // soul blocks stop the player.
-            case SOUL_SAND, SOUL_SOIL -> player.addPotionEffect(new PotionEffect(
-                PotionEffectType.SLOW, 40, 120, true, false, false
-            ));
+            case SOUL_SAND, SOUL_SOIL -> player.addPotionEffect(
+                PotEff.hidden(PotionEffectType.SLOW, 40, 120));
             default -> {
             }
           }

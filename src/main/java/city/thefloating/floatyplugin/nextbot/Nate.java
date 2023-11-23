@@ -23,7 +23,6 @@ import org.bukkit.event.entity.PlayerLeashEntityEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 import org.spigotmc.event.entity.EntityDismountEvent;
@@ -228,7 +227,7 @@ public final class Nate implements Listener {
   }
 
   private static void givePlayerRunningSpeed(final Player player, final int amplifier) {
-    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 30, amplifier, true, false, false));
+    player.addPotionEffect(PotEff.hidden(PotionEffectType.SPEED, 30, amplifier));
   }
   //</editor-fold>
 
@@ -248,8 +247,7 @@ public final class Nate implements Listener {
 
   //<editor-fold desc="jump">
   private void jump(final Nextbot nextbot, final int amplifier) {
-    final PotionEffect jump = PotEff.hidden(PotionEffectType.JUMP, 5, amplifier);
-    nextbot.pf().addPotionEffect(jump);
+    nextbot.pf().addPotionEffect(PotEff.hidden(PotionEffectType.JUMP, 5, amplifier));
     nextbot.pf().setJumping(true);
   }
 
