@@ -20,8 +20,12 @@ import org.bukkit.event.player.PlayerResourcePackStatusEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.spongepowered.configurate.NodePath;
 
+import java.net.URI;
 import java.time.Duration;
 import java.util.Calendar;
+
+import static net.kyori.adventure.resource.ResourcePackInfo.resourcePackInfo;
+import static net.kyori.adventure.resource.ResourcePackRequest.resourcePackRequest;
 
 public final class JoinQuitListener implements Listener {
 
@@ -56,9 +60,12 @@ public final class JoinQuitListener implements Listener {
   public void onJoin(final PlayerJoinEvent event) {
     final Player player = event.getPlayer();
 
-    player.setResourcePack(
-        this.configConfig.data().resourcePackUrl(),
-        this.configConfig.data().resourcePackHash()
+    player.sendResourcePacks(resourcePackRequest()
+        .required(true)
+        .packs(resourcePackInfo()
+            .uri(URI.create(this.configConfig.data().resourcePackUrl()))
+            .hash(this.configConfig.data().resourcePackHash())
+        )
     );
 
     player.sendMessage(this.langConfig.c(NodePath.path("banner")));
