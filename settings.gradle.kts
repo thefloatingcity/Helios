@@ -1,1 +1,1 @@
-rootProject.name = "floatyplugin"
+rootProject.name = "helios"

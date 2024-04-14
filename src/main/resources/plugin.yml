@@ -1,10 +1,10 @@
-name: FloatyPlugin
+name: Helios
 description: ${description}
 authors: [ TehBrian ]
-website: https://github.com/thefloatingcity/FloatyPlugin
+website: https://github.com/thefloatingcity/Helios
 
 version: ${version}
-main: city.thefloating.floatyplugin.FloatyPlugin
+main: city.thefloating.helios.Helios
 api-version: 1.20
 
 depend: [ LuckPerms ]

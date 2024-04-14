@@ -42,7 +42,7 @@ tasks {
   }
 
   jar {
-    archiveBaseName.set("FloatyPlugin")
+    archiveBaseName.set("Helios")
   }
 
   shadowJar {
