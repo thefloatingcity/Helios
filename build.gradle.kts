@@ -1,7 +1,6 @@
 plugins {
   id("java")
   id("com.github.johnrengelman.shadow") version "8.1.1"
-  id("xyz.jpenilla.run-paper") version "2.2.2"
   id("net.kyori.indra.checkstyle") version "3.1.3"
   id("com.github.ben-manes.versions") version "0.51.0"
 }
@@ -69,9 +68,5 @@ tasks {
       "org.checkerframework",
       "org.spongepowered",
     )
-  }
-
-  runServer {
-    minecraftVersion("1.20.2")
   }
 }
