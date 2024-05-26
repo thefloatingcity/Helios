@@ -25,7 +25,6 @@ public final class Otzar extends AbstractDataConfig<HoconConfigurateWrapper, Otz
   public Otzar(final @Named("dataFolder") Path dataFolder) {
     super(new HoconConfigurateWrapper(dataFolder.resolve("otzar.conf"), HoconConfigurationLoader.builder()
         .path(dataFolder.resolve("otzar.conf"))
-        .defaultOptions(opts -> opts.implicitInitialization(true))
         .build()));
   }
 
@@ -48,7 +47,7 @@ public final class Otzar extends AbstractDataConfig<HoconConfigurateWrapper, Otz
   public record Data(Map<UUID, Spirit> spirits) {
 
     @ConfigSerializable
-    public record Spirit(int netherInfractions) {
+    public record Spirit(Integer netherInfractions) {
 
     }
 

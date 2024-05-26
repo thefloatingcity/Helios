@@ -23,11 +23,13 @@ public final class Charon {
   }
 
   public Soul grab(final UUID uuid) {
-    return this.souls.computeIfAbsent(uuid, (u) -> {
+    return this.souls.computeIfAbsent(uuid, u -> {
       final var soul = new Soul(uuid);
       if (this.otzar.spirits().containsKey(uuid)) {
         final var spirit = this.otzar.spirits().get(uuid);
-        soul.netherInfractions(spirit.netherInfractions());
+        if (spirit.netherInfractions() != null) {
+          soul.netherInfractions(spirit.netherInfractions());
+        }
       }
       return soul;
     });
