@@ -28,7 +28,7 @@ public final class VoidDamageListener implements Listener {
       return;
     }
 
-    if (entity.getFallDistance() > 50.000) {
+    if (entity.getFallDistance() > 10_000) {
       // lore-wise, they burnt up due to friction.
       // practically, they're probably abandoned.
       entity.remove();
