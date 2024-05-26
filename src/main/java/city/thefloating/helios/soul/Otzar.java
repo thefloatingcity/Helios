@@ -47,7 +47,8 @@ public final class Otzar extends AbstractDataConfig<HoconConfigurateWrapper, Otz
   public record Data(Map<UUID, Spirit> spirits) {
 
     @ConfigSerializable
-    public record Spirit(Integer netherInfractions) {
+    public record Spirit(Integer netherInfractions,
+                         Boolean markdown) {
 
     }
 

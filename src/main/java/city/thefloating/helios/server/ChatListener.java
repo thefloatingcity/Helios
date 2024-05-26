@@ -4,6 +4,7 @@ import city.thefloating.helios.ChatFormat;
 import city.thefloating.helios.Permission;
 import city.thefloating.helios.config.EmotesConfig;
 import city.thefloating.helios.config.LangConfig;
+import city.thefloating.helios.soul.Charon;
 import com.google.inject.Inject;
 import io.papermc.paper.event.player.AsyncChatDecorateEvent;
 import io.papermc.paper.event.player.AsyncChatEvent;
@@ -11,6 +12,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.Sound;
@@ -32,14 +34,17 @@ public final class ChatListener implements Listener {
 
   private final EmotesConfig emotesConfig;
   private final LangConfig langConfig;
+  private final Charon charon;
 
   @Inject
   public ChatListener(
       final EmotesConfig emotesConfig,
-      final LangConfig langConfig
+      final LangConfig langConfig,
+      final Charon charon
   ) {
     this.emotesConfig = emotesConfig;
     this.langConfig = langConfig;
+    this.charon = charon;
   }
 
   @EventHandler
@@ -51,6 +56,7 @@ public final class ChatListener implements Listener {
     }
 
     event.result(this.colorCodes(event.result(), source));
+    event.result(this.markdown(event.result(), source));
     event.result(this.colorPingedPlayers(event.result(), source));
     event.result(this.replaceEmotes(event.result()));
     event.result(this.greentext(event.result())); // greentext last to overwrite all other colors.
@@ -82,6 +88,31 @@ public final class ChatListener implements Listener {
       return component.color(GREENTEXT_COLOR);
     }
     return component;
+  }
+
+  private static final Pattern BOLD_PATTERN = Pattern.compile("\\*\\*(.*)\\*\\*");
+  private static final Pattern ITALIC_PATTERN = Pattern.compile("\\*(.*?)\\*");
+  private static final Pattern UNDERLINED_PATTERN = Pattern.compile("__(.*)__");
+  private static final Pattern STRIKETHROUGH_PATTERN = Pattern.compile("~~(.*)~~");
+
+  private Component markdown(final Component component, final Player source) {
+    if (!this.charon.grab(source).markdown()) {
+      return component;
+    }
+
+    return component
+        .replaceText(t -> t
+            .match(BOLD_PATTERN)
+            .replacement((m, b) -> Component.text(m.group(1)).decorate(TextDecoration.BOLD)))
+        .replaceText(t -> t
+            .match(ITALIC_PATTERN)
+            .replacement((m, b) -> Component.text(m.group(1)).decorate(TextDecoration.ITALIC)))
+        .replaceText(t -> t
+            .match(UNDERLINED_PATTERN)
+            .replacement((m, b) -> Component.text(m.group(1)).decorate(TextDecoration.UNDERLINED)))
+        .replaceText(t -> t
+            .match(STRIKETHROUGH_PATTERN)
+            .replacement((m, b) -> Component.text(m.group(1)).decorate(TextDecoration.STRIKETHROUGH)));
   }
 
   private Component colorPingedPlayers(final Component component, final Player source) {

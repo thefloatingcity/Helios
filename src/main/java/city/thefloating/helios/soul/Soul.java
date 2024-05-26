@@ -10,6 +10,7 @@ public final class Soul {
 
   private boolean flyBypassEnabled = false;
   private int netherInfractions = 0;
+  private boolean markdown = true;
   private boolean elevatorMusicPlaying = false;
 
   private final Piano piano = new Piano(false, Instrument.HARP);
@@ -41,6 +42,19 @@ public final class Soul {
 
   public void netherInfractions(final int netherBlindnessCount) {
     this.netherInfractions = netherBlindnessCount;
+  }
+
+  public boolean markdown() {
+    return this.markdown;
+  }
+
+  public void markdown(final boolean markdown) {
+    this.markdown = markdown;
+  }
+
+  public boolean toggleMarkdown() {
+    this.markdown(!this.markdown());
+    return this.markdown();
   }
 
   public boolean elevatorMusicPlaying() {

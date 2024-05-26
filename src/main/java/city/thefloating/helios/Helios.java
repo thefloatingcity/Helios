@@ -41,6 +41,7 @@ import city.thefloating.helios.server.DiscordCommand;
 import city.thefloating.helios.server.HeliosCommand;
 import city.thefloating.helios.server.GameModeCommands;
 import city.thefloating.helios.server.JoinQuitListener;
+import city.thefloating.helios.server.MarkdownCommand;
 import city.thefloating.helios.server.RulesCommand;
 import city.thefloating.helios.server.ServerPingListener;
 import city.thefloating.helios.server.VoteCommand;
@@ -205,6 +206,7 @@ public final class Helios extends TehPlugin {
     this.injector.getInstance(GameModeCommands.class).register(this.commandManager);
     this.injector.getInstance(HatCommand.class).register(this.commandManager);
     this.injector.getInstance(MilkCommand.class).register(this.commandManager);
+    this.injector.getInstance(MarkdownCommand.class).register(this.commandManager);
     this.injector.getInstance(NextbotCommand.class).register(this.commandManager);
     this.injector.getInstance(PackCommand.class).register(this.commandManager);
     this.injector.getInstance(PianoCommand.class).register(this.commandManager);
