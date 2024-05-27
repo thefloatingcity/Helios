@@ -67,9 +67,9 @@ public final class PlayerSpawnListener implements Listener {
       return;
     }
 
-    Location bedLoc = playerSpawn.getBlock().getLocation();
-    BoundingBox playerBox = player.getBoundingBox();
-    BoundingBox playerOnBedBox = BoundingBox.of(
+    final Location bedLoc = playerSpawn.getBlock().getLocation();
+    final BoundingBox playerBox = player.getBoundingBox();
+    final BoundingBox playerOnBedBox = BoundingBox.of(
         bedLoc.clone().add(0.5, 0.56250, 0.5).add(0, playerBox.getHeight() / 2, 0),
         playerBox.getWidthX() / 2,
         playerBox.getHeight() / 2,

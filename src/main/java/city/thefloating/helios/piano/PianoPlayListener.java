@@ -48,7 +48,7 @@ public final class PianoPlayListener implements Listener {
 
   @EventHandler
   public void onInventoryClick(final InventoryClickEvent event) {
-    if (!(event.getWhoClicked() instanceof Player player)
+    if (!(event.getWhoClicked() instanceof final Player player)
         || !player.hasPermission(Permission.PIANO)
         || event.getClickedInventory() == null
         || !event.getView().title().equals(ChatFormat.miniMessage(

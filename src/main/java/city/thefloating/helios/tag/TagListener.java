@@ -59,8 +59,8 @@ public final class TagListener implements Listener {
    */
   @EventHandler
   public void onPunch(final EntityDamageByEntityEvent event) {
-    if (event.getDamager() instanceof Player damager
-        && event.getEntity() instanceof Player victim
+    if (event.getDamager() instanceof final Player damager
+        && event.getEntity() instanceof final Player victim
         && this.tagGame.isPlaying(damager)
         && this.tagGame.isPlaying(victim)
         && damager.equals(this.tagGame.it())) {

@@ -57,7 +57,7 @@ public final class WorldProtectionListener implements Listener {
 
   @EventHandler(priority = EventPriority.LOW)
   public void onHangingBreak(final HangingBreakByEntityEvent event) {
-    if (event.getRemover() instanceof Player player) {
+    if (event.getRemover() instanceof final Player player) {
       this.handle(event, player);
     }
   }
@@ -89,7 +89,7 @@ public final class WorldProtectionListener implements Listener {
 
   @EventHandler(priority = EventPriority.LOW)
   public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {
-    if (event.getDamager() instanceof Player player) {
+    if (event.getDamager() instanceof final Player player) {
       this.handle(event, player);
     }
   }
